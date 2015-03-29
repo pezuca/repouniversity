@@ -24,10 +24,8 @@ public class AlumnoService {
 	@Autowired
 	private AlumnoDAO alumnoDao;
 
-	public List<Curso> getCursosForAlumno(Integer personaId) {
-		Persona persona = personaService.getById(personaId);
-
-		Alumno alumno = alumnoDao.findAlumnoByPersonaId(persona.getId());
+	public List<Curso> getCursosForAlumno(Long personaId) {
+		Alumno alumno = alumnoDao.findAlumnoByPersonaId(personaId);
 		return new ArrayList<Curso>(alumno.getCursos());
 	}
 

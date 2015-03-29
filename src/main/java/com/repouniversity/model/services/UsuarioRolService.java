@@ -9,11 +9,11 @@ import com.repouniversity.model.entity.UsuarioRol;
 @Service
 public class UsuarioRolService {
 
-	@Autowired
-	private UsuarioRolDAO usuarioRolDao;
+    @Autowired
+    private UsuarioRolDAO usuarioRolDao;
 
-	public UsuarioRol getUsuarioById(Integer usuarioId) {
-		return usuarioRolDao.findByIdSafe(usuarioId);
-	}
+    public UsuarioRol getUsuarioById(Long usuarioId) {
+        return usuarioRolDao.findById(usuarioId);
+    }
 
 }

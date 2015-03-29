@@ -7,7 +7,7 @@ import com.repouniversity.model.entity.Alumno;
 import com.repouniversity.model.entity.Grupo;
 
 @Repository
-public class GrupoDAOImpl extends GenericDAOImpl<Grupo, Integer> implements
+public class GrupoDAOImpl extends GenericDAOImplOld<Grupo, Integer> implements
 		GrupoDAO {
 
 	protected GrupoDAOImpl() {

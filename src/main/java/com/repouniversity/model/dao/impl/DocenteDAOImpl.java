@@ -6,7 +6,7 @@ import com.repouniversity.model.dao.DocenteDAO;
 import com.repouniversity.model.entity.Docente;
 
 @Repository
-public class DocenteDAOImpl extends GenericDAOImpl<Docente, Integer> implements
+public class DocenteDAOImpl extends GenericDAOImplOld<Docente, Integer> implements
 		DocenteDAO {
 
 	protected DocenteDAOImpl() {

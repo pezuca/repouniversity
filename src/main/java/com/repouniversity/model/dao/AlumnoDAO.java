@@ -3,10 +3,10 @@ package com.repouniversity.model.dao;
 import com.repouniversity.model.entity.Alumno;
 import com.repouniversity.model.entity.Docente;
 
-public interface AlumnoDAO extends GenericDAO<Alumno, Integer> {
+public interface AlumnoDAO {
 
-	Alumno findAlumnoByPersonaId(Integer personaId);
+    Alumno findAlumnoByPersonaId(Integer personaId);
 
-	Docente findDocenteByPersonaId(Integer personaId);
+    Docente findDocenteByPersonaId(Integer personaId);
 
 }

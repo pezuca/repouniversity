@@ -12,12 +12,11 @@ import com.repouniversity.model.services.PersonaService;
 public class AdministradorController {
 
 	@Autowired
-	PersonaService personaService;
+	public PersonaService personaService;
 
 	@RequestMapping(value = "admin/verPersonas", method = { RequestMethod.GET })
 	public ModelAndView getPersonas() {
 
-		return new ModelAndView("verPersonasAdmin").addObject(
-				"listaDatosPersona", personaService.getAllDatosPersona());
+		return new ModelAndView("verPersonasAdmin");
 	}
 }

@@ -1,156 +1,70 @@
 package com.repouniversity.model.entity;
 
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Transient;
+import com.repouniversity.model.dao.IdentifiedObject;
 
-import org.springframework.format.annotation.DateTimeFormat;
+public class Curso implements Comparable<Curso>, IdentifiedObject {
 
-@Entity
-@Table(name = "curso")
-public class Curso implements Comparable<Curso> {
+    private static final long serialVersionUID = 7521064031034129065L;
+    
+    private Long id;
+    private String nombre;
+    private String codigo;
+    private String descripcion;
+    private boolean activo;
+    private Date fechasys;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_curso")
-	private Integer id;
+    public Long getId() {
+        return id;
+    }
 
-	@Column(name = "nombre")
-	private String nombre;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	@Column(name = "codigo")
-	private String codigo;
+    public String getNombre() {
+        return nombre;
+    }
 
-	@Column(name = "descripcion")
-	private String descripcion;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	@Column(name = "activo")
-	private boolean activo;
+    public String getCodigo() {
+        return codigo;
+    }
 
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Column(name = "fecsys")
-	private Date fechasys;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
 
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "cursos", cascade = CascadeType.ALL)
-	private Set<Alumno> alumnos;
+    public String getDescripcion() {
+        return descripcion;
+    }
 
-	// @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	// @JoinTable(name = "alumno_curso", joinColumns = { @JoinColumn(name =
-	// "alumno_id_alumno", nullable = false, updatable = false) },
-	// inverseJoinColumns = { @JoinColumn(name = "curso_id_curso", nullable =
-	// false, updatable = false) })
-	// private Set<Alumno> alumnos;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "curso")
-	private Set<CursoMateria> cursosMaterias;
+    public boolean isActivo() {
+        return activo;
+    }
 
-	// @OneToMany(fetch = FetchType.EAGER, mappedBy = "curso")
-	@Transient
-	private List<Notificacion> notificaciones;
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "alumno_curso", joinColumns = { @JoinColumn(name = "alumno_id_alumno", nullable = false, updatable = true) }, inverseJoinColumns = { @JoinColumn(name = "grupo_id_grupo", nullable = false, updatable = true) })
-	private Set<Grupo> grupos;
+    public Date getFechasys() {
+        return fechasys;
+    }
 
-	public Set<Grupo> getGrupos() {
-		return grupos;
-	}
+    public void setFechasys(Date fechasys) {
+        this.fechasys = fechasys;
+    }
 
-	public void setGrupos(Set<Grupo> grupos) {
-		this.grupos = grupos;
-	}
-
-	public Set<Alumno> getAlumnos() {
-		return alumnos;
-	}
-
-	public void setAlumnos(Set<Alumno> alumnos) {
-		this.alumnos = alumnos;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	public boolean isActivo() {
-		return activo;
-	}
-
-	public void setActivo(boolean activo) {
-		this.activo = activo;
-	}
-
-	public Date getFechasys() {
-		return fechasys;
-	}
-
-	public void setFechasys(Date fechasys) {
-		this.fechasys = fechasys;
-	}
-
-	public Set<CursoMateria> getCursosMaterias() {
-		return cursosMaterias;
-	}
-
-	public void setCursosMaterias(Set<CursoMateria> cursosMaterias) {
-		this.cursosMaterias = cursosMaterias;
-	}
-
-	public List<Notificacion> getNotificaciones() {
-		return notificaciones;
-	}
-
-	public void setNotificaciones(List<Notificacion> notificaciones) {
-		this.notificaciones = notificaciones;
-	}
-
-	@Override
-	public int compareTo(Curso o) {
-		return this.id.compareTo(o.id);
-	}
+    @Override
+    public int compareTo(Curso o) {
+        return this.id.compareTo(o.id);
+    }
 }

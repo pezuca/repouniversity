@@ -39,7 +39,7 @@ public class UsuarioController {
 	@RequestMapping(value = "usuario/misdatos/update", method = RequestMethod.POST)
 	public ModelAndView updateInformation(
 			HttpServletRequest request,
-			@RequestParam(value = "id", required = true) Integer id,
+			@RequestParam(value = "id", required = true) Long id,
 			@RequestParam(value = "nombre", required = true) String nombre,
 			@RequestParam(value = "apellido", required = true) String apellido,
 			@RequestParam(value = "mail", required = true) String mail,

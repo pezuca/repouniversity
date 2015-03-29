@@ -11,7 +11,7 @@ import com.repouniversity.model.dao.NotificacionDAO;
 import com.repouniversity.model.entity.Notificacion;
 
 @Repository
-public class NotificacionDAOImpl extends GenericDAOImpl<Notificacion, Integer>
+public class NotificacionDAOImpl extends GenericDAOImplOld<Notificacion, Integer>
 		implements NotificacionDAO {
 
 	protected NotificacionDAOImpl() {

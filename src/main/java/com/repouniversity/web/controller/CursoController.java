@@ -54,8 +54,7 @@ public class CursoController {
 	public ModelAndView sendAlumnoCursos(HttpServletRequest request,
 			@ModelAttribute("login") UsuarioRol usuario) {
 
-		List<Curso> cursos = alumnoService.getCursosForAlumno(usuario
-				.getPersona().getId());
+		List<Curso> cursos = cursoService.getCursosForAlumno(usuario.getIdAluDoc());
 
 		return new ModelAndView("cursos").addObject("cursos", cursos);
 	}

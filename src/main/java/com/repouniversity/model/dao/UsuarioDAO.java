@@ -6,7 +6,7 @@ import com.repouniversity.model.entity.Usuario;
 /**
  * @author Federico Tray
  */
-public interface UsuarioDAO extends GenericDAO<Usuario, Integer> {
+public interface UsuarioDAO extends GenericDAO<Usuario> {
 
     /**
      * Retrieve user based on username and password
