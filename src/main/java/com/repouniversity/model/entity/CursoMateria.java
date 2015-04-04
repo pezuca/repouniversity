@@ -1,86 +1,89 @@
 package com.repouniversity.model.entity;
 
-import java.util.Set;
+import com.repouniversity.model.dao.IdentifiedObject;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+public class CursoMateria implements IdentifiedObject {
+    private static final long serialVersionUID = -634119785139383757L;
+    
+    private Long id;
+    private boolean activo;
+    private Docente docente;
+    private Long idCurso;
+    private String codigoCurso;
+    private String descripcionCurso;
+    private Long idMateria;
+    private String nombreMateria;
+    private Long tipoNotificacion;
 
-@Entity
-@Table(name = "curso_materia")
-public class CursoMateria {
+    public Long getId() {
+        return id;
+    }
 
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_curso_materia")
-	private Integer id;
-	
-	@Column(name = "activo")
-	private boolean activo;
-	
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "cursosMaterias")
-	private Set<Docente> docente;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_curso", nullable = false)
-	private Curso curso;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_materia", nullable = false)
-	private Materia materia;
-	
-	public Materia getMateria() {
-		return materia;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setMateria(Materia materia) {
-		this.materia = materia;
-	}
+    public boolean isActivo() {
+        return activo;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public Docente getDocente() {
+        return docente;
+    }
 
-	public boolean isActivo() {
-		return activo;
-	}
+    public void setDocente(Docente docente) {
+        this.docente = docente;
+    }
 
-	public void setActivo(boolean activo) {
-		this.activo = activo;
-	}
+    public Long getIdCurso() {
+        return idCurso;
+    }
 
-	public Set<Docente> getDocente() {
-		return docente;
-	}
+    public void setIdCurso(Long idCurso) {
+        this.idCurso = idCurso;
+    }
 
-	public void setDocente(Set<Docente> docente) {
-		this.docente = docente;
-	}
+    public String getCodigoCurso() {
+        return codigoCurso;
+    }
 
-	public Curso getCurso() {
-		return curso;
-	}
+    public void setCodigoCurso(String codigoCurso) {
+        this.codigoCurso = codigoCurso;
+    }
 
-	public void setCurso(Curso curso) {
-		this.curso = curso;
-	}
-//
-//	public Materia getMateria() {
-//		return materia;
-//	}
-//
-//	public void setMateria(Materia materia) {
-//		this.materia = materia;
-//	}
+    public String getDescripcionCurso() {
+        return descripcionCurso;
+    }
+
+    public void setDescripcionCurso(String descripcionCurso) {
+        this.descripcionCurso = descripcionCurso;
+    }
+
+    public Long getIdMateria() {
+        return idMateria;
+    }
+
+    public void setIdMateria(Long idMateria) {
+        this.idMateria = idMateria;
+    }
+
+    public String getNombreMateria() {
+        return nombreMateria;
+    }
+
+    public void setNombreMateria(String nombreMateria) {
+        this.nombreMateria = nombreMateria;
+    }
+
+    public Long getTipoNotificacion() {
+        return tipoNotificacion;
+    }
+
+    public void setTipoNotificacion(Long tipoNotificacion) {
+        this.tipoNotificacion = tipoNotificacion;
+    }
 }

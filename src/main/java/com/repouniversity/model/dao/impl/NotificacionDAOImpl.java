@@ -1,33 +1,107 @@
 package com.repouniversity.model.dao.impl;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.criterion.CriteriaSpecification;
-import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.repouniversity.model.dao.NotificacionDAO;
+import com.repouniversity.model.dao.query.InsertSQLStatement;
+import com.repouniversity.model.dao.query.SQLStatement;
+import com.repouniversity.model.dao.rowmapper.NotificacionRowMapper;
 import com.repouniversity.model.entity.Notificacion;
 
 @Repository
-public class NotificacionDAOImpl extends GenericDAOImplOld<Notificacion, Integer>
-		implements NotificacionDAO {
+public class NotificacionDAOImpl extends GenericDAOImpl<Notificacion> implements NotificacionDAO {
 
-	protected NotificacionDAOImpl() {
-		super(Notificacion.class);
-	}
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
-	public List<Notificacion> getNotificacionesSinConfirmar(Integer cursoId) {
-		Criteria criteria = getCurrentSession().createCriteria(
-				Notificacion.class);
-		criteria.add(Restrictions.eq("curso.id", cursoId));
-		criteria.add(Restrictions.not(Restrictions.eq("tipo.id", 3)));
-		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+    public List<Notificacion> getNotificacionesSinConfirmar(final Long cursoId) {
+        StringBuilder sql = new StringBuilder();
 
-		List<Notificacion> notificaciones = (List<Notificacion>) criteria
-				.list();
+        sql.append("SELECT * FROM notificacion n WHERE n.tiponotificacion <> 3 AND n.idcurso = ?");
 
-		return notificaciones;
-	}
+        List<Notificacion> list = doQuery(new SQLStatement(sql.toString()) {
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+                ps.setLong(1, cursoId);
+            }
+
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+        }, new NotificacionRowMapper(), "getNotificacionesSinConfirmar: " + cursoId);
+
+        if (list.isEmpty()) {
+            return new ArrayList<Notificacion>();
+        }
+
+        return list;
+    }
+
+    @Override
+    protected Class<Notificacion> getEntityClass() {
+        return Notificacion.class;
+    }
+
+    @Override
+    protected String getTableName() {
+        return "notificacion";
+    }
+
+    @Override
+    protected Notificacion extractEntityFromResultSet(ResultSet rs, int line) throws SQLException {
+        return (new NotificacionRowMapper()).mapRow(rs, line);
+    }
+
+    @Override
+    protected InsertSQLStatement buildInsertSQLStatement(final Notificacion t) {
+        return new InsertSQLStatement("INSERT INTO notificacion (tiponotificacion, idcurso, iddocente, idalumno) values (?, ?, ?, ?)") {
+
+            @Override
+            public void doAfterInsert(Long id) {
+            }
+
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+                ps.setLong(1, t.getTipoId());
+                ps.setLong(2, t.getCursoId());
+                ps.setLong(3, t.getDocenteId());
+                ps.setLong(4, t.getAlumnoId());
+            }
+
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+        };
+    }
+
+    @Override
+    protected SQLStatement buildUpdateSQLStatement(final Notificacion t) {
+        return new SQLStatement("UPDATE curso SET tiponotificacion = ?, idcurso = ?, iddocente = ?, idalumno = ? WHERE id = ?") {
+
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+                ps.setLong(1, t.getTipoId());
+                ps.setLong(2, t.getCursoId());
+                ps.setLong(3, t.getDocenteId());
+                ps.setLong(4, t.getAlumnoId());
+            }
+
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+        };
+    }
+
+    @Override
+    protected String getColumnIdName() {
+        return "idnotificacion";
+    }
 }

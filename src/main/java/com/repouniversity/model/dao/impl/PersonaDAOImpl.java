@@ -41,7 +41,7 @@ public class PersonaDAOImpl extends GenericDAOImpl<Persona> implements
 
     @Override
     protected InsertSQLStatement buildInsertSQLStatement(final Persona t) {
-        return new InsertSQLStatement("INSERT INTO persona (id_perdona, nombre, apellido, mail, activo, fecsys) values (?, ?, ?, ?, ?, now())") {
+        return new InsertSQLStatement("INSERT INTO persona (nombre, apellido, mail, activo, fecsys) values (?, ?, ?, ?, now())") {
 
             @Override
             public void doAfterInsert(Long id) {
@@ -49,11 +49,10 @@ public class PersonaDAOImpl extends GenericDAOImpl<Persona> implements
 
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
-                ps.setLong(1, t.getId());
-                ps.setString(2, t.getNombre());
-                ps.setString(3, t.getApellido());
-                ps.setString(4, t.getMail());
-                ps.setBoolean(5, t.isActivo());
+                ps.setString(1, t.getNombre());
+                ps.setString(2, t.getApellido());
+                ps.setString(3, t.getMail());
+                ps.setBoolean(4, t.isActivo());
             }
 
             @Override
@@ -63,9 +62,26 @@ public class PersonaDAOImpl extends GenericDAOImpl<Persona> implements
     }
 
     @Override
-    protected SQLStatement buildUpdateSQLStatement(Persona t) {
-        return null;
+    protected SQLStatement buildUpdateSQLStatement(final Persona t) {
+        return new SQLStatement("UPDATE persona SET nombre = ?, apellido = ?, mail = ?, activo = ?, fecsys = now()  WHERE id_persona = ?") {
+
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+                ps.setString(1, t.getNombre());
+                ps.setString(2, t.getApellido());
+                ps.setString(3, t.getMail());
+                ps.setBoolean(4, t.isActivo());
+                ps.setLong(5, t.getId());
+            }
+
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+        };
     }
 
-	
+    @Override
+    protected String getColumnIdName() {
+        return "id_persona";
+    }
 }

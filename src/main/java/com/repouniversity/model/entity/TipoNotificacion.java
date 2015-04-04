@@ -1,37 +1,29 @@
 package com.repouniversity.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.repouniversity.model.dao.IdentifiedObject;
 
-@Entity
-@Table(name = "tiponotificacion")
-public class TipoNotificacion {
+public class TipoNotificacion implements IdentifiedObject {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idTipoNotificacion")
-	private Integer id;
+    private static final long serialVersionUID = -3544861412467290103L;
+    
+    private Long id;
+    private String descripcion;
+    
+    public Long getId() {
+        return id;
+    }
 
-	@Column(name = "descripcion")
-	private String descripcion;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public String getDescripcion() {
+        return descripcion;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 
-	public String getDescripcion() {
-		return descripcion;
-	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
 }

@@ -15,7 +15,7 @@ public class TipoNotificacionService {
 	@Autowired
 	private TipoNotificacionDAO tipoNotificacionDao;
 	
-	public TipoNotificacion getTipoNotificacionById(Integer tipoNotificacionId) {
+	public TipoNotificacion getTipoNotificacionById(Long tipoNotificacionId) {
 		return tipoNotificacionDao.findById(tipoNotificacionId);
 	}
 }

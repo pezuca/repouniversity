@@ -99,9 +99,6 @@
 <!-- 	</bean> -->
 
 
-	<import resource="spring/spring-mvc-config.xml"/>
-	
-	
 	
 	
 	
@@ -123,4 +120,6 @@
 	</bean>
 
 	<tx:annotation-driven transaction-manager="txManager" />
+	
+	<import resource="spring/spring-mvc-config.xml"/>
 </beans>

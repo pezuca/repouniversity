@@ -9,6 +9,7 @@ import com.repouniversity.model.dao.PersonaDAO;
 import com.repouniversity.model.entity.Persona;
 
 @Service
+@Transactional
 public class PersonaService {
 
     @Autowired

@@ -1,5 +1,6 @@
 package com.repouniversity.model.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -8,43 +9,67 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.repouniversity.model.dao.NotificacionDAO;
-import com.repouniversity.model.entity.Alumno;
-import com.repouniversity.model.entity.Curso;
-import com.repouniversity.model.entity.Docente;
 import com.repouniversity.model.entity.Notificacion;
+import com.repouniversity.model.entity.to.NotificacionTO;
 
 @Service
 @Transactional
 public class NotificacionService {
 
-	@Autowired
-	private NotificacionDAO notificacionDao;
-	
-	@Autowired
-	private TipoNotificacionService tipoNotificacionService;
+    @Autowired
+    private NotificacionDAO notificacionDao;
 
-	public void insertarNotificacion(Alumno alumno, Curso curso, Docente docente, Integer tipoNotificacion) {
-		Notificacion nuevaNoti = new Notificacion();
-		nuevaNoti.setAlumno(alumno);
-		nuevaNoti.setCurso(curso);
-		nuevaNoti.setDocente(docente);
-		// Id de notificacion tipo 3 es solicitud confirmada
-		nuevaNoti.setTipo(tipoNotificacionService.getTipoNotificacionById(tipoNotificacion));
-		
-		notificacionDao.saveOrUpdate(nuevaNoti);
-	}
+    @Autowired
+    private TipoNotificacionService tipoNotificacionService;
 
-	public Notificacion getByID(Integer notificacionId) {
-		return notificacionDao.findById(notificacionId);
-	}
+    @Autowired
+    private AlumnoService alumnoService;
 
-	public void remove(Notificacion noti) {
-		// TODO Auto-generated method stub
-		notificacionDao.delete(noti);
-	}
+    @Autowired
+    private DocenteService docenteService;
 
-	public List<Notificacion> getNotificacionPorCurso(Integer id) {
-		return notificacionDao.getNotificacionesSinConfirmar(id);
-	}
+    @Autowired
+    private CursoService cursoService;
 
+    public void insertarNotificacion(Long alumnoId, Long cursoId, Long docenteId, Long tipoNotificacion) {
+        Notificacion nuevaNoti = new Notificacion();
+        nuevaNoti.setAlumnoId(alumnoId);
+        nuevaNoti.setCursoId(cursoId);
+        nuevaNoti.setDocenteId(docenteId);
+        // Id de notificacion tipo 3 es solicitud confirmada
+        nuevaNoti.setTipoId(tipoNotificacion);
+
+        notificacionDao.insert(nuevaNoti);
+    }
+
+    public Notificacion getById(Long notificacionId) {
+        return notificacionDao.findById(notificacionId);
+    }
+
+    public void remove(Notificacion noti) {
+        notificacionDao.delete(noti);
+    }
+
+    public List<NotificacionTO> getNotificacionPorCurso(Long id) {
+        List<Notificacion> rawNotificacionList = notificacionDao.getNotificacionesSinConfirmar(id);
+        List<NotificacionTO> notificacionList = new ArrayList<NotificacionTO>();
+
+        for (Notificacion notificacion : rawNotificacionList) {
+            notificacionList.add(buildNotificacion(notificacion));
+        }
+
+        return notificacionList;
+    }
+
+    private NotificacionTO buildNotificacion(Notificacion notificacion) {
+        NotificacionTO noti = new NotificacionTO();
+        
+        noti.setAlumno(alumnoService.getAlumnoById(notificacion.getAlumnoId()));
+        noti.setDocente(docenteService.getById(notificacion.getDocenteId()));
+        noti.setCurso(cursoService.getById(notificacion.getCursoId()));
+        noti.setTipo(tipoNotificacionService.getTipoNotificacionById(notificacion.getTipoId()));
+        noti.setId(notificacion.getId());
+        
+        return noti;
+    }
 }

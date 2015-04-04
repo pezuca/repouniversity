@@ -1,20 +1,9 @@
 package com.repouniversity.web.controller;
 
-import java.util.Set;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.repouniversity.model.entity.Alumno;
-import com.repouniversity.model.entity.Curso;
-import com.repouniversity.model.entity.Notificacion;
 import com.repouniversity.model.services.AlumnoService;
 import com.repouniversity.model.services.CursoService;
 import com.repouniversity.model.services.DocenteService;

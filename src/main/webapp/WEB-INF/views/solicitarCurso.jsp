@@ -36,11 +36,11 @@
 			$("#clientTable_length").remove();
 		});
 		
-		function clickSolicitud(cursoId, alumnoId, tipoNotif) {
+		function clickSolicitud(cursoId, alumnoId, docenteId, tipoNotif) {
 			$.ajax({
 				  type: "POST",
 				  url: "/repouniversity/alumno/solicitarCurso",
-				  data: {"cursoId" : cursoId, "alumnoId" : alumnoId, "tipoNotif" : tipoNotif},
+				  data: {"cursoId" : cursoId, "alumnoId" : alumnoId, "docenteId" : docenteId, "tipoNotif" : tipoNotif},
 				  success: function(){
 					  alert("Good!")
 				  }
@@ -61,17 +61,19 @@
 				<c:forEach items="${cursosMaterias}" var="cursoMat"
 					varStatus="status">
 					<tr class="even">
-						<td>${cursoMat.curso.codigo}</td>
-						<td>${cursoMat.materia.nombre}</td>
-						<td>${cursoMat.curso.descripcion}</td>
+						<td>${cursoMat.codigoCurso}</td>
+						<td>${cursoMat.nombreMateria}</td>
+						<td>${cursoMat.descripcionCurso}</td>
+						<td>${cursoMat.docente.persona.nombre} ${cursoMat.docente.persona.apellido}</td>
 						<td>
-							<c:forEach items="${cursoMat.docente}" var="docente"
-									varStatus="statusDoc">
-								${docente.persona.nombre}
-							</c:forEach>
-						</td>
-						<td>
-							<button class="btn btn-primary" onclick="clickSolicitud(${cursoMat.curso.id}, ${userLog.idAluDoc}, 1)">Solicitar</button>
+							<c:choose>
+								<c:when test="${cursoMat.tipoNotificacion != 1}">
+									<button class="btn btn-info btn-circle" type="button" onclick="clickSolicitud(${cursoMat.idCurso}, ${userLog.idAluDoc}, ${cursoMat.docente.id}, 1)"><i class="fa fa-check"></i></button>
+								</c:when>
+								<c:otherwise>
+									<button disabled="disabled" class="btn btn-default btn-circle" type="button"><i class="fa fa-check"></i></button>
+								</c:otherwise>
+							</c:choose>
 						</td>
 					</tr>
 				</c:forEach>

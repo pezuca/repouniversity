@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import com.repouniversity.model.dao.UsuarioDAO;
 import com.repouniversity.model.entity.Persona;
 import com.repouniversity.model.entity.Usuario;
+import com.repouniversity.model.entity.to.UsuarioTO;
 
 @Service
+@Transactional
 public class UsuarioService {
 
     @Autowired
@@ -49,7 +51,21 @@ public class UsuarioService {
         return false;
     }
 
-    public Usuario getUserById(Long usuarioId) {
-        return usuarioDAO.findById(usuarioId);
+    public UsuarioTO getUserById(Long usuarioId) {
+        Usuario usuario = usuarioDAO.findById(usuarioId);
+        
+        return buildUsuario(usuario);
+    }
+
+    private UsuarioTO buildUsuario(Usuario usuario) {
+        UsuarioTO usuarioTo = new UsuarioTO();
+        
+        usuarioTo.setId(usuario.getId());
+        usuarioTo.setUser(usuario.getUser());
+        usuarioTo.setFechasys(usuario.getFechasys());
+        usuarioTo.setActivo(usuario.isActivo());
+        usuarioTo.setPersona(personaService.findById(usuario.getId()));
+
+        return usuarioTo;
     }
 }

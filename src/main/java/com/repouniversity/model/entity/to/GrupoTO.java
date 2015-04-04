@@ -1,16 +1,17 @@
-package com.repouniversity.model.entity;
+package com.repouniversity.model.entity.to;
 
 import java.util.Date;
+import java.util.List;
 
-import com.repouniversity.model.dao.IdentifiedObject;
+import com.repouniversity.model.entity.Curso;
 
-public class Grupo implements IdentifiedObject {
-    private static final long serialVersionUID = -3439720520984277716L;
-    
+public class GrupoTO {
     private Long id;
     private String nombre;
     private boolean activo;
     private Date fechasys;
+    private List<AlumnoTO> alumnos;
+    private List<Curso> cursos;
 
     public Long getId() {
         return id;
@@ -42,5 +43,21 @@ public class Grupo implements IdentifiedObject {
 
     public void setFechasys(Date fechasys) {
         this.fechasys = fechasys;
+    }
+
+    public List<AlumnoTO> getAlumnos() {
+        return alumnos;
+    }
+
+    public void setAlumnos(List<AlumnoTO> alumnos) {
+        this.alumnos = alumnos;
+    }
+
+    public List<Curso> getCursos() {
+        return cursos;
+    }
+
+    public void setCursos(List<Curso> cursos) {
+        this.cursos = cursos;
     }
 }

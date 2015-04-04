@@ -55,6 +55,8 @@ public abstract class GenericDAOImpl<E extends IdentifiedObject> implements Gene
     protected abstract InsertSQLStatement buildInsertSQLStatement(final E t);
 
     protected abstract SQLStatement buildUpdateSQLStatement(final E t);
+    
+    protected abstract String getColumnIdName();
 
     @PostConstruct
     public void init() {
@@ -73,14 +75,6 @@ public abstract class GenericDAOImpl<E extends IdentifiedObject> implements Gene
 
     protected String getDatabaseName() {
         return databaseName;
-    }
-
-    /**
-     * Returns the name of the id column. Overrides if needed.
-     * @return
-     */
-    protected String getColumnIdName() {
-        return FIELD_ID;
     }
 
     protected final Long extractId(KeyHolder keyHolder) {
@@ -102,9 +96,7 @@ public abstract class GenericDAOImpl<E extends IdentifiedObject> implements Gene
             return Collections.emptyList();
         }
 
-        List<Long> ids = Arrays.asList(keys);
-        final List<Long> idsToFind = new ArrayList<Long>(ids.size());
-
+        final List<Long> ids = Arrays.asList(keys);
         List<E> queryList = new ArrayList<E>();
 
         if (!ids.isEmpty()) {
@@ -113,10 +105,10 @@ public abstract class GenericDAOImpl<E extends IdentifiedObject> implements Gene
                 @Override
                 public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                     PreparedStatement ps = connection.prepareStatement("SELECT DISTINCT * FROM " + getTableName() + " WHERE " + getColumnIdName() + " IN ("
-                            + getQuestionMarks(idsToFind) + ") AND DELETED = FALSE");
+                            + getQuestionMarks(ids) + ")");
 
-                    for (int i = 0; i < idsToFind.size(); i++) {
-                        ps.setLong(i + 1, idsToFind.get(i));
+                    for (int i = 0; i < ids.size(); i++) {
+                        ps.setLong(i + 1, ids.get(i));
                     }
 
                     return ps;
@@ -206,7 +198,7 @@ public abstract class GenericDAOImpl<E extends IdentifiedObject> implements Gene
 
                 @Override
                 public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                    PreparedStatement ps = connection.prepareStatement("UPDATE " + getTableName() + " SET deleted = TRUE, deleted_time = NOW() WHERE id = ?");
+                    PreparedStatement ps = connection.prepareStatement("DELETE FROM " + getTableName() + " WHERE " + getColumnIdName() + " = ?");
                     ps.setLong(1, t.getId());
                     return ps;
                 }

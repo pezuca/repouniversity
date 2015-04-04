@@ -1,84 +1,53 @@
 package com.repouniversity.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import com.repouniversity.model.dao.IdentifiedObject;
 
-@Entity
-@Table(name = "notificacion")
-public class Notificacion {
+public class Notificacion implements IdentifiedObject {
+    private static final long serialVersionUID = 3077206151936980423L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idnotificacion")
-	private Integer id;
+    private Long id;
+    private Long tipoId;
+    private Long cursoId;
+    private Long alumnoId;
+    private Long docenteId;
 
-	@OneToOne
-	@JoinColumn(name = "tiponotificacion")
-	private TipoNotificacion tipo;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "idcurso", nullable = false)
-	private Curso curso;
-	
-//	@Column(name = "idcurso")
-//	private Integer curso;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "idalumno", nullable = true)
-	private Alumno alumno;
-	
-//	@Column(name = "idalumno")
-//	private Integer alumno;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "iddocente", nullable = true)
-	private Docente docente;
+    public Long getId() {
+        return id;
+    }
 
-	public Alumno getAlumno() {
-		return alumno;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setAlumno(Alumno alumno) {
-		this.alumno = alumno;
-	}
+    public Long getTipoId() {
+        return tipoId;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public void setTipoId(Long tipoId) {
+        this.tipoId = tipoId;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public Long getCursoId() {
+        return cursoId;
+    }
 
-	public TipoNotificacion getTipo() {
-		return tipo;
-	}
+    public void setCursoId(Long cursoId) {
+        this.cursoId = cursoId;
+    }
 
-	public void setTipo(TipoNotificacion tipo) {
-		this.tipo = tipo;
-	}
+    public Long getAlumnoId() {
+        return alumnoId;
+    }
 
-	public Curso getCurso() {
-		return curso;
-	}
+    public void setAlumnoId(Long alumnoId) {
+        this.alumnoId = alumnoId;
+    }
 
-	public void setCurso(Curso curso) {
-		this.curso = curso;
-	}
+    public Long getDocenteId() {
+        return docenteId;
+    }
 
-	public Docente getDocente() {
-		return docente;
-	}
-
-	public void setDocente(Docente docente) {
-		this.docente = docente;
-	}
+    public void setDocenteId(Long docenteId) {
+        this.docenteId = docenteId;
+    }
 }

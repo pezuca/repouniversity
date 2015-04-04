@@ -21,46 +21,36 @@ import com.repouniversity.model.services.TipoNotificacionService;
 @SessionAttributes("login")
 public class NotificacionController {
 
-	@Autowired
-	private CursoService cursoService;
+    @Autowired
+    private CursoService cursoService;
 
-	@Autowired
-	private DocenteService docenteService;
+    @Autowired
+    private DocenteService docenteService;
 
-	@Autowired
-	private NotificacionService notificacionService;
+    @Autowired
+    private NotificacionService notificacionService;
 
-	@Autowired
-	private TipoNotificacionService tipoNotificacionService;
+    @Autowired
+    private TipoNotificacionService tipoNotificacionService;
 
-	@Autowired
-	private AlumnoService alumnoService;
+    @Autowired
+    private AlumnoService alumnoService;
 
-	@RequestMapping(value = "notificacion/confirmaaltancurso", method = { RequestMethod.POST })
-	@ResponseBody
-	public void confirmAltaCursoAjax(
-			HttpServletRequest request,
-			@RequestParam(value = "notificacionId", required = true) Integer notificacionId) {
-		Notificacion noti = notificacionService.getByID(notificacionId);
+    @RequestMapping(value = "notificacion/confirmaaltancurso", method = {RequestMethod.POST})
+    @ResponseBody
+    public void confirmAltaCursoAjax(HttpServletRequest request, @RequestParam(value = "notificacionId", required = true) Long notificacionId) {
 
-		cursoService.registrarAlumnoACurso(noti.getCurso(), noti.getAlumno());
+        Notificacion noti = notificacionService.getById(notificacionId);
+        cursoService.registrarAlumnoACurso(noti);
+    }
 
-		notificacionService.insertarNotificacion(noti.getAlumno(),
-				noti.getCurso(), noti.getDocente(), 3);
+    @RequestMapping(value = "alumno/solicitarCurso", method = {RequestMethod.POST})
+    @ResponseBody
+    public void solicitarCursoAjax(@RequestParam(value = "cursoId", required = true) Long cursoId,
+            @RequestParam(value = "alumnoId", required = true) Long alumnoId, @RequestParam(value = "docenteId", required = true) Long docenteId,
+            @RequestParam(value = "tipoNotif", required = true) Long tipoNotificacion) {
 
-		notificacionService.remove(noti);
-	}
-
-	@RequestMapping(value = "alumno/solicitarCurso", method = { RequestMethod.POST })
-	@ResponseBody
-	public void solicitarCursoAjax(
-			@RequestParam(value = "cursoId", required = true) Integer cursoId,
-			@RequestParam(value = "alumnoId", required = true) Integer alumnoId,
-			@RequestParam(value = "tipoNotif", required = true) Integer tipoNotificacion) {
-
-		
-		notificacionService.insertarNotificacion(alumnoService.getAlumnoById(alumnoId),
-				cursoService.getCursoById(cursoId), null, tipoNotificacion);
-	}
+        notificacionService.insertarNotificacion(alumnoId, cursoId, docenteId, tipoNotificacion);
+    }
 
 }

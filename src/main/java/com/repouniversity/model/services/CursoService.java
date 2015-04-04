@@ -1,8 +1,6 @@
 package com.repouniversity.model.services;
 
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import javax.transaction.Transactional;
 
@@ -10,11 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.repouniversity.model.dao.CursoDAO;
-import com.repouniversity.model.dao.CursoMateriaDAO;
-import com.repouniversity.model.entity.Alumno;
 import com.repouniversity.model.entity.Curso;
 import com.repouniversity.model.entity.CursoMateria;
-import com.repouniversity.model.entity.Grupo;
+import com.repouniversity.model.entity.Notificacion;
 
 @Service
 @Transactional
@@ -24,92 +20,58 @@ public class CursoService {
     private CursoDAO cursoDao;
 
     @Autowired
-    private CursoMateriaDAO cursoMateriaDao;
-
-    @Autowired
     private AlumnoService alumnoService;
+    
+    @Autowired
+    private DocenteService docenteService;
 
     @Autowired
     private GrupoService grupoService;
+    
+    @Autowired
+    private NotificacionService notificacionService;
 
     public List<Curso> getAll() {
-        return cursoDao.getAll();
+        return cursoDao.findAll();
     }
 
-    public Curso getCursoById(Integer cursoId) {
+    public Curso getById(Long cursoId) {
         return cursoDao.findById(cursoId);
     }
 
-    public List<CursoMateria> getAllCursoMateria() {
-        return cursoMateriaDao.getAll();
-    }
-
-    public List<CursoMateria> getCursosMateriaDisponiblesParaAlumno(Integer alumnoId) {
-        List<CursoMateria> cursos = cursoMateriaDao.getAll();
-        Set<Curso> cursosAlu = alumnoService.getAlumnoById(alumnoId).getCursos();
-
-        for (Curso curso : cursosAlu) {
-            for (CursoMateria cursoMat : cursos) {
-                if (curso.getId() == cursoMat.getCurso().getId()) {
-                    cursos.remove(cursoMat);
-                    break;
-                }
-            }
+    public List<CursoMateria> getCursosMateriaDisponiblesParaAlumno(Long alumnoId) {
+        List<CursoMateria> cursoMateriaList = cursoDao.findCursosMateriaDisponiblesParaAlumno(alumnoId);
+        
+        for (CursoMateria cursoMateria : cursoMateriaList) {
+            cursoMateria.setDocente(docenteService.getByCursoMateriaId(cursoMateria.getId()));
         }
-
-        return cursos;
+        
+        return cursoMateriaList;
     }
 
-    public void saveOrUpdate(Curso curso) {
-        cursoDao.saveOrUpdate(curso);
+    public void save(Curso curso) {
+        cursoDao.insert(curso);
     }
 
-    public void registrarAlumnoACurso(Curso curso, Alumno alumno) {
-        // Alumno alumno = alumnoService.getAlumnoById(alumno);
-
-        curso.getAlumnos().add(alumno);
-        alumno.getCursos().add(curso);
-
-        alumnoService.saveOrUpdate(alumno);
-
-        saveOrUpdate(curso);
-    }
-
-    public void crearGrupo(Integer cursoId, List<Alumno> alumnos, String nombre) {
-        Grupo grupo = new Grupo();
-
-        grupo.setAlumnos(new TreeSet<Alumno>(alumnos));
-        grupo.setNombre(nombre);
-        grupo.setActivo(true);
-        grupo.setCursos(new TreeSet<Curso>());
-
-        Curso cursoo = getCursoById(cursoId);
-
-        grupo.getCursos().add(cursoo);
-        grupoService.saveOrUpdate(grupo);
-
-        cursoo.getGrupos().add(grupo);
-
-        for (Alumno alumno : alumnos) {
-            alumno.getGrupos().add(grupo);
-
-            Curso cursoRemove = null;
-            for (Curso curso : alumno.getCursos()) {
-                if (curso.getId().equals(cursoId)) {
-                    cursoRemove = curso;
-                }
-            }
-
-            alumno.getCursos().remove(cursoRemove);
-            alumno.getCursos().add(cursoo);
-
-            alumnoService.saveOrUpdate(alumno);
-        }
-
-        saveOrUpdate(cursoo);
+    public void registrarAlumnoACurso(Notificacion noti) {
+        cursoDao.saveAlumnoCursoGrupo(noti.getAlumnoId(), noti.getCursoId(), 0L);
+        
+        notificacionService.insertarNotificacion(noti.getAlumnoId(), noti.getCursoId(), noti.getDocenteId(), 3L);
+        
+        notificacionService.remove(noti);
     }
 
     public List<Curso> getCursosForAlumno(Long idAluDoc) {
         return cursoDao.findCursosForAlumnoId(idAluDoc);
+    }
+    
+    public List<CursoMateria> getCursosMateriaDisponiblesParaDocente(Long idAluDoc) {
+        List<CursoMateria> cursoMateriaList = cursoDao.findCursosForDocenteId(idAluDoc);
+        
+        for (CursoMateria cursoMateria : cursoMateriaList) {
+            cursoMateria.setDocente(docenteService.getByCursoMateriaId(cursoMateria.getId()));
+        }
+        
+        return cursoDao.findCursosForDocenteId(idAluDoc);
     }
 }
