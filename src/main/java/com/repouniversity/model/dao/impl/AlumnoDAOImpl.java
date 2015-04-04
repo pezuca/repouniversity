@@ -1,32 +1,149 @@
 package com.repouniversity.model.dao.impl;
 
+
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Repository;
 
 import com.repouniversity.model.dao.AlumnoDAO;
+import com.repouniversity.model.dao.query.InsertSQLStatement;
+import com.repouniversity.model.dao.query.SQLStatement;
+import com.repouniversity.model.dao.rowmapper.AlumnoRowMapper;
 import com.repouniversity.model.entity.Alumno;
 import com.repouniversity.model.entity.Docente;
+import com.repouniversity.model.entity.Grupo;
+import com.repouniversity.model.entity.Notificacion;
 
 @Repository
-public class AlumnoDAOImpl extends GenericDAOImpl<Alumno, Integer> implements
-		AlumnoDAO {
+public class AlumnoDAOImpl extends GenericDAOImpl<Alumno> implements AlumnoDAO {
+    
+    protected static final String TABLE_NAME = "alumno";
 
-	protected AlumnoDAOImpl() {
-		super(Alumno.class);
-	}
+    @Override
+    public Alumno findAlumnoByPersonaId(Integer personaId) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public Alumno findAlumnoByPersonaId(Integer personaId) {
-		Alumno alumno = (Alumno) getCurrentSession()
-				.createQuery("FROM Alumno a WHERE a.persona.id = :personaId")
-				.setInteger("personaId", personaId).uniqueResult();
-		return alumno;
-	}
+    @Override
+    public Docente findDocenteByPersonaId(Integer personaId) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public Docente findDocenteByPersonaId(Integer personaId) {
-		Docente docente = (Docente) getCurrentSession()
-				.createQuery("FROM Docente d WHERE d.persona.id = :personaId")
-				.setInteger("personaId", personaId).uniqueResult();
-		return docente;
-	}
+    @Override
+    protected Class<Alumno> getEntityClass() {
+        return Alumno.class;
+    }
+
+    @Override
+    protected String getTableName() {
+        return TABLE_NAME;
+    }
+
+    @Override
+    protected Alumno extractEntityFromResultSet(ResultSet rs, int line) throws SQLException {
+        return (new AlumnoRowMapper()).mapRow(rs, line);
+    }
+
+    @Override
+    protected InsertSQLStatement buildInsertSQLStatement(final Alumno t) {
+        return new InsertSQLStatement("insert into alumno (id_perdona, Idcarrera, activo, fechasys) values (?, ?, ?, now())") {
+
+            @Override
+            public void doAfterInsert(Long id) {
+            }
+
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+                ps.setLong(1, t.getIdPersona());
+                ps.setLong(2, t.getIdCarrera());
+                ps.setBoolean(3, t.isActivo());
+            }
+
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+        };
+    }
+
+    @Override
+    protected SQLStatement buildUpdateSQLStatement(final Alumno t) {
+
+        return new SQLStatement("update alumno set id_persona = ?, Idcarrera = ?, activo = ?, fechasys = now()  where id = ?") {
+
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+                ps.setLong(1, t.getIdPersona());
+                ps.setLong(2, t.getIdCarrera());
+                ps.setBoolean(3, t.isActivo());
+            }
+
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+        };
+    }
+
+    @Override
+    public List<Alumno> findAlumnoForGrupo(final Long grupoId) {
+        StringBuilder sql = new StringBuilder();
+
+        sql.append("SELECT a.* FROM alumno a JOIN grupo_alumno_curso gac ON a.id_alumno = gac.alumno_curso_alumno_id_alumno ");
+        sql.append("WHERE gac.grupo_id_grupo = ?");
+
+        List<Alumno> list = doQuery(new SQLStatement(sql.toString()) {
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+                ps.setLong(1, grupoId);
+            }
+
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+        }, new AlumnoRowMapper(), "findAlumnoForGrupo: " + grupoId);
+
+        if (list.isEmpty()) {
+            return new ArrayList<Alumno>();
+        }
+
+        return list;
+    }
+
+    @Override
+    protected String getColumnIdName() {
+        return "id_alumno";
+    }
+
+    @Override
+    public List<Alumno> findAlumnoForCurso(final Long cursoId) {
+        StringBuilder sql = new StringBuilder();
+
+        sql.append("SELECT a.* FROM alumno a JOIN alumno_curso ac ON a.id_alumno = ac.alumno_id_alumno ");
+        sql.append("WHERE ac.curso_id_curso = ?");
+
+        List<Alumno> list = doQuery(new SQLStatement(sql.toString()) {
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+                ps.setLong(1, cursoId);
+            }
+
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+        }, new AlumnoRowMapper(), "findAlumnoForGrupo: " + cursoId);
+
+        if (list.isEmpty()) {
+            return null;
+        }
+
+        return list;
+    }
+
 }

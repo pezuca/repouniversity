@@ -1,99 +1,49 @@
 package com.repouniversity.model.entity;
 
 import java.util.Date;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import com.repouniversity.model.dao.IdentifiedObject;
 
-import org.springframework.format.annotation.DateTimeFormat;
+public class Docente implements IdentifiedObject {
+    private static final long serialVersionUID = 2211075012496640918L;
 
-@Entity
-@Table(name = "docente")
-public class Docente {
+    private Long id;
+    private Persona persona;
+    private boolean activo;
+    private Date fechasys;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_docente")
-	private Integer id;
+    // private Set<CursoMateria> cursosMaterias;
+    // private Set<Notificacion> notificaciones;
 
-	@OneToOne
-	@JoinColumn(name = "id_persona")
-	private Persona persona;
+    public Long getId() {
+        return id;
+    }
 
-	@Column(name = "activo")
-	private boolean activo;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Column(name = "fecsys")
-	private Date fechasys;
-	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "docente_curso_materia", joinColumns = { @JoinColumn(name = "id_docente", nullable = false, updatable = true) }, inverseJoinColumns = { @JoinColumn(name = "id_curso_materia", nullable = false, updatable = true) })
-	private Set<CursoMateria> cursosMaterias;
-	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "docente")
-	private Set<Notificacion> notificaciones;
-	
-	public Set<Notificacion> getNotificaciones() {
-		return notificaciones;
-	}
+    public Persona getPersona() {
+        return persona;
+    }
 
-	public void setNotificaciones(Set<Notificacion> notificaciones) {
-		this.notificaciones = notificaciones;
-	}
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public boolean isActivo() {
+        return activo;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
 
-	public Persona getPersona() {
-		return persona;
-	}
+    public Date getFechasys() {
+        return fechasys;
+    }
 
-	public void setPersona(Persona persona) {
-		this.persona = persona;
-	}
-
-	public boolean isActivo() {
-		return activo;
-	}
-
-	public void setActivo(boolean activo) {
-		this.activo = activo;
-	}
-
-	public Date getFechasys() {
-		return fechasys;
-	}
-
-	public void setFechasys(Date fechasys) {
-		this.fechasys = fechasys;
-	}
-
-	public Set<CursoMateria> getCursosMaterias() {
-		return cursosMaterias;
-	}
-
-	public void setCursosMaterias(Set<CursoMateria> cursosMaterias) {
-		this.cursosMaterias = cursosMaterias;
-	}
+    public void setFechasys(Date fechasys) {
+        this.fechasys = fechasys;
+    }
 }

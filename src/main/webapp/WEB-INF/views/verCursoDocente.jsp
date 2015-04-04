@@ -72,13 +72,12 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${curso.notificaciones}" var="notificacion"
-					varStatus="status">
+				<c:forEach items="${curso.notificaciones}" var="notificacion" varStatus="status">
 					<tr>
 						<td>${notificacion.tipo.descripcion}</td>
-						<td>${notificacion.alumno.persona.apellido}, ${notificacion.alumno.persona.nombre}</td>
-<!-- 						<td>Federico Selacome Paradela</td> -->
-						<td><button class="altaNotificacion btn btn-primary" onclick="altaEnCurso(${notificacion.id})">Confirmar</button>&nbsp;
+						<td>${notificacion.alumno.persona.nombre} ${notificacion.alumno.persona.apellido}</td>
+						<td>
+							<button class="altaNotificacion btn btn-primary" onclick="altaEnCurso(${notificacion.id})">Confirmar</button>&nbsp;
 							<button class="rechazoNotificacion btn btn-danger" onclick="rechazoAltaEnCurso(${notificacion.id})">Rechazar</button>
 						</td>
 					</tr>

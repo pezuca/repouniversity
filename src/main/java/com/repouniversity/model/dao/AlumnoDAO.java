@@ -1,12 +1,17 @@
 package com.repouniversity.model.dao;
 
+import java.util.List;
+
 import com.repouniversity.model.entity.Alumno;
 import com.repouniversity.model.entity.Docente;
 
-public interface AlumnoDAO extends GenericDAO<Alumno, Integer> {
+public interface AlumnoDAO extends GenericDAO<Alumno>{
 
-	Alumno findAlumnoByPersonaId(Integer personaId);
+    Alumno findAlumnoByPersonaId(Integer personaId);
 
-	Docente findDocenteByPersonaId(Integer personaId);
+    Docente findDocenteByPersonaId(Integer personaId);
 
+    List<Alumno> findAlumnoForGrupo(Long grupoId);
+
+    List<Alumno> findAlumnoForCurso(Long grupoId);
 }

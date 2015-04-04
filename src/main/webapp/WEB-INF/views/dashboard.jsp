@@ -11,7 +11,7 @@
 <script type="text/javascript" src="resources/js/application/dashboard.js"></script>
 </head>
 <body>
-
+	<c:set var="userLog" value="${sessionScope.login}"/>
 
 		<%@include file="../components/static-nav-bar.jsp"%>
 		

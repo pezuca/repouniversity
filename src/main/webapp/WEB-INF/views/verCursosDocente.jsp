@@ -23,7 +23,7 @@
 			</div>
 		</div>
 
-		<script>
+	<script>
 		$(document).ready(function() {
 			$('#clientTable').dataTable({
 				"processing" : false,
@@ -36,9 +36,6 @@
 	
 			$("#clientTable_length").remove();
 		});
-		
-		
-		}
 	</script>
 		<table id="cursosDocente" class="table table-striped hover">
 			<thead class="encabezado">
@@ -61,11 +58,11 @@
 						</c:otherwise>
 					</c:choose>
 
-					<td>${cursoMat.curso.codigo}</td>
-					<td>${cursoMat.materia.nombre}</td>
-					<td>${cursoMat.curso.descripcion}</td>
+					<td>${cursoMat.codigoCurso}</td>
+					<td>${cursoMat.nombreMateria}</td>
+					<td>${cursoMat.descripcionCurso}</td>
 					<td><a class="verCurso"
-						href="/repouniversity/docente/verCurso?cursoId=${cursoMat.curso.id}"><button class="btn btn-primary">Ver</button></a></td>
+						href="/repouniversity/docente/verCurso?cursoId=${cursoMat.idCurso}"><button class="btn btn-primary">Ver</button></a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

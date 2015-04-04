@@ -4,6 +4,6 @@ import java.util.List;
 
 import com.repouniversity.model.entity.Notificacion;
 
-public interface NotificacionDAO extends GenericDAO<Notificacion, Integer> {
-	public List<Notificacion> getNotificacionesSinConfirmar(Integer cursoId);
+public interface NotificacionDAO extends GenericDAO<Notificacion> {
+	public List<Notificacion> getNotificacionesSinConfirmar(Long cursoId);
 }

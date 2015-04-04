@@ -1,74 +1,53 @@
 package com.repouniversity.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import com.repouniversity.model.dao.IdentifiedObject;
 
-@Entity
-@Table(name = "roles")
-public class UsuarioRol {
+public class UsuarioRol implements IdentifiedObject {
+    private static final long serialVersionUID = -7615397803103201578L;
+    private Long id;
+    private Long idPersona;
+    private String nombreUsuario;
+    private String rol;
+    private Long idAluDoc;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_usuario")
-	private Integer id;
+    public Long getIdAluDoc() {
+        return idAluDoc;
+    }
 
-	@OneToOne
-	@JoinColumn(name = "id_persona")
-	private Persona persona;
+    public void setIdAluDoc(Long idAluDoc) {
+        this.idAluDoc = idAluDoc;
+    }
 
-	@Column(name = "user")
-	private String nombreUsuario;
+    public Long getId() {
+        return id;
+    }
 
-	@Column(name = "rol")
-	private String rol;
-	
-	@Column(name = "id_alu_doc")
-	private Integer idAluDoc;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public Integer getIdAluDoc() {
-		return idAluDoc;
-	}
+    public Long getIdPersona() {
+        return idPersona;
+    }
 
-	public void setIdAluDoc(Integer idAluDoc) {
-		this.idAluDoc = idAluDoc;
-	}
+    public void setIdPersona(Long persona) {
+        this.idPersona = persona;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
 
-	public Persona getPersona() {
-		return persona;
-	}
+    public String getRol() {
+        return rol;
+    }
 
-	public void setPersona(Persona persona) {
-		this.persona = persona;
-	}
-
-	public String getNombreUsuario() {
-		return nombreUsuario;
-	}
-
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
-	}
-
-	public String getRol() {
-		return rol;
-	}
-
-	public void setRol(String rol) {
-		this.rol = rol;
-	}
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
 
 }

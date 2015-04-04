@@ -1,6 +1,5 @@
 package com.repouniversity.model.dao;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,20 +8,20 @@ import java.util.List;
  * @param <E> Entity
  * @param <I> Id Object
  */
-public interface GenericDAO<E, I extends Serializable> {
+public interface GenericDAO<E> {
 
-    void saveOrUpdate(E e);
+    void update(E e);
+    
+    E insert(E e);
 
-    void delete(E e);
+    boolean delete(E e);
 
-    E findById(I id);
-
-    E findByIdSafe(I id);
+    E findById(Long id);
+    
+    List<E> findByIds(final Long... keys);
 
     /**
      * Retrieve all records from the data base. Like a "SELECT * FROM"
      */
-    List<E> getAll();
-    
-    List<E> getByIds(List<Integer> ids);
+    List<E> findAll();
 }

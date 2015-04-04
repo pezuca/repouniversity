@@ -2,88 +2,63 @@ package com.repouniversity.model.entity;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import com.repouniversity.model.dao.IdentifiedObject;
 
-import org.springframework.format.annotation.DateTimeFormat;
+public class Persona implements IdentifiedObject {
+    private static final long serialVersionUID = -5669163853610219297L;
+    
+    private Long id;
+    private String nombre;
+    private String apellido;
+    private String mail;
+    private boolean activo;
+    private Date fechasys;
 
-@Entity
-@Table(name = "persona")
-public class Persona {
+    public Long getId() {
+        return id;
+    }
 
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_persona")
-	private Integer id;
-	
-	@Column(name = "nombre")
-	private String nombre;
-	
-	@Column(name = "apellido")
-	private String apellido;
-	
-	@Column(name = "mail")
-	private String mail;
-	
-	@Column(name = "activo")
-	private boolean activo;
-	
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Column(name = "fecsys")
-	private Date fechasys;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    public String getApellido() {
+        return apellido;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
 
-	public String getApellido() {
-		return apellido;
-	}
+    public String getMail() {
+        return mail;
+    }
 
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
 
-	public String getMail() {
-		return mail;
-	}
+    public boolean isActivo() {
+        return activo;
+    }
 
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
 
-	public boolean isActivo() {
-		return activo;
-	}
+    public Date getFechasys() {
+        return fechasys;
+    }
 
-	public void setActivo(boolean activo) {
-		this.activo = activo;
-	}
-	
-	public Date getFechasys() {
-		return fechasys;
-	}
-
-	public void setFechasys(Date fechasys) {
-		this.fechasys = fechasys;
-	}
+    public void setFechasys(Date fechasys) {
+        this.fechasys = fechasys;
+    }
 }
