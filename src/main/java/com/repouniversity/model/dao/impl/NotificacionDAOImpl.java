@@ -25,7 +25,7 @@ public class NotificacionDAOImpl extends GenericDAOImpl<Notificacion> implements
     public List<Notificacion> getNotificacionesSinConfirmar(final Long cursoId) {
         StringBuilder sql = new StringBuilder();
 
-        sql.append("SELECT * FROM notificacion n WHERE n.tiponotificacion <> 3 AND n.idcurso = ?");
+        sql.append("SELECT * FROM notificacion n WHERE n.tiponotificacion = 1 AND n.idcurso = ?");
 
         List<Notificacion> list = doQuery(new SQLStatement(sql.toString()) {
             @Override

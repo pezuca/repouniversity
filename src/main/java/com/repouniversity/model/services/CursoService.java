@@ -60,6 +60,12 @@ public class CursoService {
         
         notificacionService.remove(noti);
     }
+    
+    public void rechazarAlumnoACurso(Notificacion noti) {
+        notificacionService.insertarNotificacion(noti.getAlumnoId(), noti.getCursoId(), noti.getDocenteId(), 4L);
+        
+        notificacionService.remove(noti);
+    }
 
     public List<Curso> getCursosForAlumno(Long idAluDoc) {
         return cursoDao.findCursosForAlumnoId(idAluDoc);

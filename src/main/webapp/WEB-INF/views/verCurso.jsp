@@ -51,11 +51,10 @@
 			});
 		}
 		
-		
 		function rechazoAltaEnCurso(notificacionId) {
 			$.ajax({
 				  type: "POST",
-				  url: "/repouniversity/notificion/rechazaaltancurso",
+				  url: "/repouniversity/notificacion/rechazaaltancurso",
 				  data: {"notificacionId" : notificacionId},
 				  success: function(){ 
 					  alert("Good!")
