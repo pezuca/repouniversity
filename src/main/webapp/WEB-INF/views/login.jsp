@@ -11,7 +11,19 @@
 
    
 
-<%@include file="../components/common-statics-imports.jsp" %>
+<%-- <%@include file="../components/common-statics-imports.jsp" %> --%>
+
+<script src="/repouniversity/resources/js/jquery-1.10.2.js"></script>
+<script type="text/javascript"
+	src="/repouniversity/resources/js/bootstrap.min.js" ></script>
+<link rel="stylesheet" type="text/css"
+	href="/repouniversity/resources/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" 
+	href="/repouniversity/resources/font-awesome/css/font-awesome.css" />
+<link rel="stylesheet" type="text/css" 
+	href="/repouniversity/resources/css/animate.css" />
+<link rel="stylesheet" type="text/css" 
+	href="/repouniversity/resources/css/style.css" />
 
 </head>
 

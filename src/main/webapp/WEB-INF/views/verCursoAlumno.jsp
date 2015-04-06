@@ -26,38 +26,28 @@
 	             <div class="col-lg-12">
 					<div class="usuarioInformation">
 						<div class="page-header">
-							<h1>Solicitud de inscripción a curso</h1>
+							<h1>Detalles curso ${curso.nombre}</h1>
+						</div>
+						<div class="page-header">
+							<h3>Notificaciones</h3>
 						</div>
 					</div>
 
-
-					<table id="clientTable" class="table table-striped hover">
+					<table id="cursosDocente" class="table table-striped hover">
 						<thead class="encabezado">
 							<tr>
-								<th>Codigo Mat</th>
-								<th>Materia</th>
-								<th>Descripcion</th>
-								<th>Docente</th>
-								<th></th>
+								<th>Tipo notificacion</th>
+								<th>Nombre alumno</th>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${cursosMaterias}" var="cursoMat"
-								varStatus="status">
-								<tr class="even">
-									<td>${cursoMat.codigoCurso}</td>
-									<td>${cursoMat.nombreMateria}</td>
-									<td>${cursoMat.descripcionCurso}</td>
-									<td>${cursoMat.docente.persona.nombre} ${cursoMat.docente.persona.apellido}</td>
+							<c:forEach items="${curso.notificaciones}" var="notificacion" varStatus="status">
+								<tr>
+									<td>${notificacion.tipo.descripcion}</td>
+									<td>${notificacion.alumno.persona.nombre} ${notificacion.alumno.persona.apellido}</td>
 									<td>
-										<c:choose>
-											<c:when test="${cursoMat.tipoNotificacion != 1}">
-												<button class="btn btn-info btn-circle" type="button" onclick="clickSolicitud(${cursoMat.idCurso}, ${userLog.idAluDoc}, ${cursoMat.docente.id}, 1)"><i class="fa fa-check"></i></button>
-											</c:when>
-											<c:otherwise>
-												<button disabled="disabled" class="btn btn-default btn-circle" type="button"><i class="fa fa-check"></i></button>
-											</c:otherwise>
-										</c:choose>
+										<button class="altaNotificacion btn btn-primary" onclick="altaEnCurso(${notificacion.id})">Confirmar</button>&nbsp;
+										<button class="rechazoNotificacion btn btn-danger" onclick="rechazoAltaEnCurso(${notificacion.id})">Rechazar</button>
 									</td>
 								</tr>
 							</c:forEach>
@@ -91,16 +81,28 @@
 			$("#clientTable_length").remove();
 		});
 		
-		function clickSolicitud(cursoId, alumnoId, docenteId, tipoNotif) {
+		function altaEnCurso(notificacionId) {
 			$.ajax({
 				  type: "POST",
-				  url: "/repouniversity/alumno/solicitarCurso",
-				  data: {"cursoId" : cursoId, "alumnoId" : alumnoId, "docenteId" : docenteId, "tipoNotif" : tipoNotif},
-				  success: function(){
+				  url: "/repouniversity/notificacion/confirmaaltancurso",
+				  data: {"notificacionId" : notificacionId},
+				  success: function(){ 
 					  alert("Good!")
 				  }
 			});
 		}
-	</script>	
+		
+		function rechazoAltaEnCurso(notificacionId) {
+			$.ajax({
+				  type: "POST",
+				  url: "/repouniversity/notificacion/rechazaaltancurso",
+				  data: {"notificacionId" : notificacionId},
+				  success: function(){ 
+					  alert("Good!")
+				  }
+			});
+		}
+	
+	</script>
 </body>
 </html>
