@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.repouniversity.model.entity.Usuario;
 import com.repouniversity.model.entity.UsuarioRol;
+import com.repouniversity.model.entity.to.UsuarioTO;
 import com.repouniversity.model.services.UsuarioRolService;
 import com.repouniversity.model.services.UsuarioService;
 import com.repouniversity.web.utils.HTTPSessionManagerUtil;
@@ -18,42 +19,33 @@ import com.repouniversity.web.utils.HTTPSessionManagerUtil;
 @Controller
 public class UsuarioController {
 
-	@Autowired
-	UsuarioService usuarioService;
+    @Autowired
+    UsuarioService usuarioService;
 
-	@Autowired
-	UsuarioRolService usuarioRolService;
+    @Autowired
+    UsuarioRolService usuarioRolService;
 
-	@RequestMapping(value = "usuario/misdatos", method = RequestMethod.GET)
-	public ModelAndView displayInformation(HttpServletRequest request) {
-		UsuarioRol usuarioRol = (UsuarioRol) HTTPSessionManagerUtil.getSessionAttribute(
-				request, "login");
-		
-		Usuario usuario = usuarioService.getUserById(usuarioRol.getId());
-		ModelAndView mav = new ModelAndView("misDatos").addObject("usuario",
-				usuario);
+    @RequestMapping(value = "usuario/misdatos", method = RequestMethod.GET)
+    public ModelAndView displayInformation(HttpServletRequest request) {
+        UsuarioRol usuarioRol = (UsuarioRol) HTTPSessionManagerUtil.getSessionAttribute(request, "login");
 
-		return mav;
-	}
+        UsuarioTO usuario = usuarioService.getUserById(usuarioRol.getId());
+        ModelAndView mav = new ModelAndView("misDatos").addObject("usuario", usuario);
 
-	@RequestMapping(value = "usuario/misdatos/update", method = RequestMethod.POST)
-	public ModelAndView updateInformation(
-			HttpServletRequest request,
-			@RequestParam(value = "id", required = true) Integer id,
-			@RequestParam(value = "nombre", required = true) String nombre,
-			@RequestParam(value = "apellido", required = true) String apellido,
-			@RequestParam(value = "mail", required = true) String mail,
-			@RequestParam(value = "newPassword", defaultValue = "") String newPassword,
-			@RequestParam(value = "repeatPassword", defaultValue = "") String repeatPassword) {
+        return mav;
+    }
 
-		Usuario usuario = usuarioService.updateUser(id, nombre, apellido, mail,
-				newPassword, repeatPassword);
+    @RequestMapping(value = "usuario/misdatos/update", method = RequestMethod.POST)
+    public ModelAndView updateInformation(HttpServletRequest request, @RequestParam(value = "id", required = true) Long id,
+            @RequestParam(value = "nombre", required = true) String nombre, @RequestParam(value = "apellido", required = true) String apellido,
+            @RequestParam(value = "mail", required = true) String mail, @RequestParam(value = "newPassword", defaultValue = "") String newPassword,
+            @RequestParam(value = "repeatPassword", defaultValue = "") String repeatPassword) {
 
-		UsuarioRol usuarioRol = usuarioRolService.getUsuarioById(usuario
-				.getId());
-		HTTPSessionManagerUtil
-				.setSessionAttribute(request, "login", usuarioRol);
+        Usuario usuario = usuarioService.updateUser(id, nombre, apellido, mail, newPassword, repeatPassword);
 
-		return new ModelAndView("redirect:/usuario/misdatos");
-	}
+        UsuarioRol usuarioRol = usuarioRolService.getUsuarioById(usuario.getId());
+        HTTPSessionManagerUtil.setSessionAttribute(request, "login", usuarioRol);
+
+        return new ModelAndView("redirect:/dashboard");
+    }
 }

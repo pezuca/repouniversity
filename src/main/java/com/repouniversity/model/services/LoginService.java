@@ -50,12 +50,6 @@ public class LoginService {
 			throw new LoginFailException("User or password are not correct.");
 		}
 
-//		VisibilityTypes userVisibility = VisibilityTypes.getByCode(user
-//				.getVisibilityCode());
-//		if (userVisibility != null) {
-//			result = userVisibility.getLoginRedirect().getUrl();
-//		}
-
 		UsuarioRol usuarioRol = usuarioRolService.getUsuarioById(user.getId());
 		HTTPSessionManagerUtil.setSessionAttribute(request,
 				HTTPSessionManagerUtil.ATTR_LOGIN, usuarioRol);

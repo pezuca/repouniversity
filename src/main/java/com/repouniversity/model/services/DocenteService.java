@@ -14,16 +14,18 @@ import com.repouniversity.model.entity.Docente;
 @Transactional
 public class DocenteService {
 
-	@Autowired
-	private DocenteDAO docenteDao;
-	
-	public List<Docente> getAll() {
-		return docenteDao.getAll();
-	}
+    @Autowired
+    private DocenteDAO docenteDao;
 
-	public Docente getById(Integer idAluDoc) {
-		
-		return docenteDao.findById(idAluDoc);
-		
-	}
+    public List<Docente> getAll() {
+        return docenteDao.findAll();
+    }
+
+    public Docente getById(Long idAluDoc) {
+        return docenteDao.findById(idAluDoc);
+    }
+
+    public Docente getByCursoMateriaId(Long id) {
+        return docenteDao.getByCursoMateriaId(id);
+    }
 }

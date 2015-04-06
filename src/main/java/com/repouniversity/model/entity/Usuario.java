@@ -2,91 +2,63 @@ package com.repouniversity.model.entity;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import com.repouniversity.model.dao.IdentifiedObject;
 
-import org.springframework.format.annotation.DateTimeFormat;
+public class Usuario implements IdentifiedObject {
 
-@Entity
-@Table(name = "usuario")
-public class Usuario {
+    private static final long serialVersionUID = 3355104975694628742L;
+    private Long id;
+    private String user;
+    private String pass;
+    private boolean activo;
+    private Long idPersona;
+    private Date fechasys;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_usuario")
-	private Integer id;
+    public Long getId() {
+        return id;
+    }
 
-	@Column(name = "user")
-	private String user;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	@Column(name = "pass")
-	private String pass;
+    public String getUser() {
+        return user;
+    }
 
-	@Column(name = "activo")
-	private boolean activo;
-	
-	@OneToOne
-	@JoinColumn(name = "id_persona")
-	private Persona persona;
+    public void setUser(String user) {
+        this.user = user;
+    }
 
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Column(name = "fecsys")
-	private Date fechasys;
-	
-	public Integer getId() {
-		return id;
-	}
+    public String getPass() {
+        return pass;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
 
-	public String getUser() {
-		return user;
-	}
+    public boolean isActivo() {
+        return activo;
+    }
 
-	public void setUser(String user) {
-		this.user = user;
-	}
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
 
-	public String getPass() {
-		return pass;
-	}
+    public Date getFechasys() {
+        return fechasys;
+    }
 
-	public void setPass(String pass) {
-		this.pass = pass;
-	}
+    public void setFechasys(Date fechasys) {
+        this.fechasys = fechasys;
+    }
 
-	public boolean isActivo() {
-		return activo;
-	}
+    public Long getIdPersona() {
+        return idPersona;
+    }
 
-	public void setActivo(boolean activo) {
-		this.activo = activo;
-	}
-	
-	public Date getFechasys() {
-		return fechasys;
-	}
-
-	public void setFechasys(Date fechasys) {
-		this.fechasys = fechasys;
-	}
-
-	public Persona getPersona() {
-		return persona;
-	}
-
-	public void setPersona(Persona persona) {
-		this.persona = persona;
-	}
+    public void setPersona(Long idPersona) {
+        this.idPersona = idPersona;
+    }
 }
