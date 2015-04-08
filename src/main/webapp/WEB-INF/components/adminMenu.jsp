@@ -27,10 +27,8 @@
 						Administrador</span></a></li>
 			<li class="${activeTab eq 'verCursos' ? 'active':''}"><a href="/repouniversity/admin/verCursos"><i
 					class="fa fa-home"></i> <span class="nav-label">Ver cursos</span></a></li>
-			<li class="${activeTab eq 'verPersonas' ? 'active':''}"><a href="/repouniversity/admin/verPersonas"><i
-					class="fa fa-home"></i> <span class="nav-label">Ver docentes</span></a></li>
-			<li class="${activeTab eq 'verAlumnos' ? 'active':''}"><a href="/repouniversity/admin/verAlumnos"><i
-					class="fa fa-home"></i> <span class="nav-label">Ver alumnos</span></a></li>
+			<li class="${activeTab eq 'verUsuarios' ? 'active':''}"><a href="/repouniversity/admin/verUsuarios"><i
+					class="fa fa-home"></i> <span class="nav-label">Ver usuarios</span></a></li>
 		</ul>
 	</div>
 </nav>

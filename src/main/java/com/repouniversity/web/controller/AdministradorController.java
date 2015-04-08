@@ -8,9 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.repouniversity.model.entity.to.AlumnoTO;
+import com.repouniversity.model.entity.to.UsuarioTO;
 import com.repouniversity.model.services.AlumnoService;
 import com.repouniversity.model.services.PersonaService;
+import com.repouniversity.model.services.UsuarioService;
 
 @Controller
 public class AdministradorController {
@@ -21,10 +22,13 @@ public class AdministradorController {
     @Autowired
     public AlumnoService alumnoService;
 
-    @RequestMapping(value = "admin/verAlumnos", method = {RequestMethod.GET})
+    @Autowired
+    public UsuarioService usuarioService;
+    
+    @RequestMapping(value = "admin/verUsuarios", method = {RequestMethod.GET})
     public ModelAndView getPersonas() {
         
-        List<AlumnoTO> listaAlumnos = alumnoService.getAll();
-        return new ModelAndView("verAlumnosAdmin").addObject("alumnos", listaAlumnos);
+        List<UsuarioTO> listaUsuarios = usuarioService.getAll();
+        return new ModelAndView("verUsuariosAdmin").addObject("usuarios", listaUsuarios);
     }
 }

@@ -1,5 +1,8 @@
 package com.repouniversity.model.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
@@ -20,6 +23,9 @@ public class UsuarioService {
     
     @Autowired
     private PersonaService personaService;
+    
+    @Autowired
+    private UsuarioRolService usuarioRolService;
 
     @Transactional
     public Usuario updateUser(Long id, String nombre, String apellido, String mail, String newPassword, String repeatPassword) {
@@ -65,7 +71,18 @@ public class UsuarioService {
         usuarioTo.setFechasys(usuario.getFechasys());
         usuarioTo.setActivo(usuario.isActivo());
         usuarioTo.setPersona(personaService.findById(usuario.getId()));
+        usuarioTo.setRol(usuarioRolService.getUsuarioById(usuario.getId()).getRol());
 
         return usuarioTo;
+    }
+
+    public List<UsuarioTO> getAll() {
+        List<UsuarioTO> usuarioList = new ArrayList<UsuarioTO>();
+        
+        for (Usuario usuario : usuarioDAO.findAll()) {
+            usuarioList.add(buildUsuario(usuario));
+        }
+        
+        return usuarioList;
     }
 }

@@ -49,7 +49,7 @@ public class CursoController {
 
         List<Curso> cursos = cursoService.getCursosForAlumno(usuario.getIdAluDoc());
 
-        return new ModelAndView("cursos").addObject("cursos", cursos);
+        return new ModelAndView("verCursosAlumno").addObject("cursos", cursos);
     }
 
     @RequestMapping(value = "alumno/verCursoDocente", method = {RequestMethod.GET})
@@ -57,7 +57,7 @@ public class CursoController {
         Curso curso = cursoService.getById(cursoId);
         curso.setNotificaciones(notificacionService.getNotificacionPorCurso(cursoId));
 
-        return new ModelAndView("verCurso").addObject("curso", curso);
+        return new ModelAndView("verCursoAlumno").addObject("curso", curso);
     }
 
     @RequestMapping(value = "alumno/solicitarCurso", method = {RequestMethod.GET})
