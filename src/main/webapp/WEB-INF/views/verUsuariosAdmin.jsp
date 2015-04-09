@@ -9,62 +9,13 @@
 	<meta charset="utf-8" />
 	<title>Repouniversity</title>
 	<%@include file="../components/common-statics-imports.jsp"%>
+	<script src="/repouniversity/resources/js/application/verUsuariosAdmin.js"></script>
 </head>
 <body class=" pace-done">
 	
 	<div id="wrapper">
 	<%@include file="../components/static-nav-bar.jsp"%>
 		<div id="page-wrapper" class="gray-bg dashbard-1">
-		<script>
-			$(document).ready(function() {
-				$('#listaPersonas').dataTable({
-					"processing" : false,
-					"serverSide" : false,
-					"paging" : false,
-					"language": {
-			            "lengthMenu": "Mostrar _MENU_ resultados por página",
-			            "zeroRecords": "No fueron encontrados resultados.",
-			            "info": "Pagina _PAGE_ of _PAGES_",
-			            "infoEmpty": "No hay resultados disponibles.",
-			            "infoFiltered": "(filtered from _MAX_ total records)",
-			            "search": "Búsqueda: "
-			        }
-				});
-	
-				$("#clientTable_length").remove();
-				
-				
-		    	$("#agregarAlumnoDialog").dialog({
-		    		resizable: false,
-		    		width:700,
-		    		modal: true,
-		    		autoOpen: false,
-		    		autoResize:true,
-		    		hide: {effect: "fade", duration: 800},
-		    		buttons: {
-		    			"Crear": function() {
-		    				
-		    				
-							setTimeout(function(){
-								$("#agregarAlumnoDialog").dialog("close");						
-							}, 2000);
-		    			},
-		    			Cancel: function() {
-		    				$(this).dialog("close");
-		    			}
-		    		},
-		    		open: function(event, ui) {
-
-		    		},
-		    		close: function(event, ui) {
-		    		}
-		    	});
-		    	
-		    	$("#agregarAlumnoButton").click(function() {
-		    		$("#agregarAlumnoDialog").dialog("open");
-		    	});
-			});
-		</script>
 		<%@include file="../components/search-nav-bar.jsp"%>
 	
 	 	<div class="wrapper wrapper-content animated fadeInRight">
@@ -123,22 +74,40 @@
 		<form id="nuevoAlumnoForm" action="nuevoAlumnoAdmin" method="post" class="form-horizontal">
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Nombre*:</label>
-                <div class="col-sm-10"><input type="text" class="form-control"></div>
+                <div class="col-sm-10"><input name="nombre" type="text" class="form-control"></div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Apellido*:</label>
-                <div class="col-sm-10"><input type="text" class="form-control"></div>
+                <div class="col-sm-10"><input name="apellido" type="text" class="form-control"></div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Mail*:</label>
-                <div class="col-sm-10"><input type="text" class="form-control"></div>
+                <div class="col-sm-10"><input name="mail" type="text" class="form-control"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Username*:</label>
+                <div class="col-sm-10"><input name="user" type="text" class="form-control"></div>
+            </div>
+			<div class="form-group">
+                <label class="col-sm-2 control-label">Contraseña*:</label>
+                <div class="col-sm-10"><input name="password" type="text" class="form-control"></div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Activo*:</label>
                 <div class="col-sm-10">
-                	<select class="form-control m-b" name="account">
+                	<select class="form-control m-b" name="activo">
                          <option value="true">Si</option>
                          <option value="true">No</option>
+                     </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Rol*:</label>
+                <div class="col-sm-10">
+                	<select class="form-control m-b" name="rol">
+                         <option value="alumno">Alumno</option>
+                         <option value="docente">Docente</option>
+                         <option value="adminitrador">Administrador</option>
                      </select>
                 </div>
             </div>

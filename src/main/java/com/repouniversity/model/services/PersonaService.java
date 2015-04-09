@@ -19,8 +19,11 @@ public class PersonaService {
         return personaDao.findById(personaId);
     }
 
-    @Transactional
     public void update(Persona persona) {
         personaDao.update(persona);
+    }
+    
+    public Persona save(Persona persona) {
+        return personaDao.insert(persona);
     }
 }

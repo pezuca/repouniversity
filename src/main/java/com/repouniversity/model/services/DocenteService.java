@@ -28,4 +28,8 @@ public class DocenteService {
     public Docente getByCursoMateriaId(Long id) {
         return docenteDao.getByCursoMateriaId(id);
     }
+    
+    public Docente save(Docente docente) {
+        return docenteDao.insert(docente);
+    }
 }
