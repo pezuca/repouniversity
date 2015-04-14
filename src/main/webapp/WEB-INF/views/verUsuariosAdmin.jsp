@@ -35,6 +35,7 @@
 								<th>Id</th>
 								<th>Nombre</th>
 								<th>Apellido</th>
+								<th>User name</th>
 								<th>Mail</th>
 								<th>Activo</th>
 								<th>Rol</th>
@@ -48,12 +49,13 @@
 									<td>${usuario.id}</td>
 									<td>${usuario.persona.nombre}</td>
 									<td>${usuario.persona.apellido}</td>
+									<td>${usuario.user}</td>
 									<td>${usuario.persona.mail}</td>
 									<td>${usuario.activo ? 'Si' : 'No'}</td>
 									<td>${usuario.rol}</td>
 									<td>
 										<a href="#"><button class="btn btn-primary btn-circle" type="button"><i class="fa fa-pencil"></i></button></a>
-										<a href="#"><button class="btn btn-danger btn-circle" type="button"><i class="fa fa-times"></i></button></a>
+										<a href="#" name="deleteUser" data-userId="${usuario.id}" ><button class="btn btn-danger btn-circle" type="button"><i class="fa fa-times"></i></button></a>
 									</td>
 								</tr>
 							</c:forEach>
@@ -107,11 +109,15 @@
                 	<select class="form-control m-b" name="rol">
                          <option value="alumno">Alumno</option>
                          <option value="docente">Docente</option>
-                         <option value="adminitrador">Administrador</option>
+                         <option value="administrador">Administrador</option>
                      </select>
                 </div>
             </div>
 		</form>
+	</div>
+	
+	<div id="deleteAlumnoDialog" title="Eliminar Usuario">
+		<p>¿Esta seguro que desea eliminar el usuario?</p>
 	</div>
 </body>
 </html>

@@ -26,4 +26,9 @@ public class PersonaService {
     public Persona save(Persona persona) {
         return personaDao.insert(persona);
     }
+
+    public void delete(Long personaId) {
+        Persona persona = personaDao.findById(personaId);
+        personaDao.delete(persona);
+    }
 }

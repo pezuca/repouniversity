@@ -1,13 +1,50 @@
 var usuariosAdmin = {
 	crearNuevoUsuarioAjax : function() {
 		$.ajax({
-			url: "admin/nuevoUsuario",
+			url: "nuevoUsuario",
 			type: "POST",
-			data: {
+			data: $("#nuevoAlumnoForm").serialize(),
+			success: function(data){
+				$.gritter.add({
+					text: 'La creacion del usuario fue exitosa.',
+					class_name: 'gritter-light'
+				});
 				
+				setTimeout(function(){
+					$("#agregarAlumnoDialog").dialog("close");						
+				}, 2000);					
 			},
-			success: function(result){
+			error: function(data) {
+				$("#nuevoAlumnoForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de crear el usuario, inténtelo mas tarde.</p></div>")
+				setTimeout(function(){
+					$("#agregarAlumnoDialog .infoDialog").hide(function(){
+						$(this).remove();
+					});
+				}, 3000);	
+			}
+		})
+	},
+	deleteUsuarioAjax : function(userId) {
+		$.ajax({
+			url: "eliminarUsuario",
+			type: "POST",
+			data: {"userId" : userId},
+			success: function(data){
+				$.gritter.add({
+					title: 'Eliminar usuario',
+					text: 'La eliminación del usuario fue exitosa.',
+					class_name: 'gritter-light'
+				});
 				
+				$("#listaPersonas").dataTable().row( $("#listaPersonas a[data-userId=" + userId + "]").parents('tr') ).remove().draw();
+				$("#deleteAlumnoDialog").dialog("close");						
+			},
+			error: function(data) {
+				$.gritter.add({
+					title: 'Eliminar usuario',
+					text: 'Hubo un problema al tratar de eliminar al usuario. Por favor inténtelo mas tarde.',
+					class_name: 'gritter-light'
+				});	
 			}
 		})
 	}
@@ -40,18 +77,15 @@ $(document).ready(function() {
 		hide: {effect: "fade", duration: 800},
 		buttons: {
 			"Crear": function() {
-				
-				
-				setTimeout(function(){
-					$("#agregarAlumnoDialog").dialog("close");						
-				}, 2000);
+				usuariosAdmin.crearNuevoUsuarioAjax();
 			},
 			Cancel: function() {
 				$(this).dialog("close");
 			}
 		},
 		open: function(event, ui) {
-
+			$(".infoDialog").remove();
+			$('#nuevoAlumnoForm').trigger("reset");
 		},
 		close: function(event, ui) {
 		}
@@ -59,5 +93,32 @@ $(document).ready(function() {
 	
 	$("#agregarAlumnoButton").click(function() {
 		$("#agregarAlumnoDialog").dialog("open");
+	});
+	
+	$("#deleteAlumnoDialog").dialog({
+		resizable: false,
+		width:400,
+		modal: true,
+		autoOpen: false,
+		autoResize:true,
+		hide: {effect: "fade", duration: 800},
+		buttons: {
+			"Eliminar": function() {
+				usuariosAdmin.deleteUsuarioAjax($("#deleteAlumnoDialog").data('userId'));
+			},
+			"Cancelar": function() {
+				$(this).dialog("close");
+			}
+		},
+		open: function(event, ui) {
+			$(".infoDialog").remove();
+			$('#nuevoAlumnoForm').trigger("reset");
+		},
+		close: function(event, ui) {
+		}
+	});
+	
+	$("a[name=deleteUser] button").click(function(){
+		$("#deleteAlumnoDialog").data('userId', $(this).parent().attr("data-userId")).dialog("open");
 	});
 });

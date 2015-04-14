@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.repouniversity.model.dao.DocenteDAO;
+import com.repouniversity.model.entity.Alumno;
 import com.repouniversity.model.entity.Docente;
 
 @Service
@@ -31,5 +32,10 @@ public class DocenteService {
     
     public Docente save(Docente docente) {
         return docenteDao.insert(docente);
+    }
+
+    public void delete(Long docenteId) {
+        Docente docente = docenteDao.findById(docenteId);
+        docenteDao.delete(docente);
     }
 }

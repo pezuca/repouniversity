@@ -14,6 +14,7 @@ import com.repouniversity.model.entity.Alumno;
 import com.repouniversity.model.entity.Docente;
 import com.repouniversity.model.entity.Persona;
 import com.repouniversity.model.entity.Usuario;
+import com.repouniversity.model.entity.UsuarioRol;
 import com.repouniversity.model.entity.to.UsuarioTO;
 
 @Service
@@ -105,13 +106,15 @@ public class UsuarioService {
 
     private UsuarioTO buildUsuario(Usuario usuario) {
         UsuarioTO usuarioTo = new UsuarioTO();
+        UsuarioRol usuarioRol = usuarioRolService.getUsuarioById(usuario.getId());
+        
         
         usuarioTo.setId(usuario.getId());
         usuarioTo.setUser(usuario.getUser());
         usuarioTo.setFechasys(usuario.getFechasys());
         usuarioTo.setActivo(usuario.isActivo());
-        usuarioTo.setPersona(personaService.findById(usuario.getId()));
-        usuarioTo.setRol(usuarioRolService.getUsuarioById(usuario.getId()).getRol());
+        usuarioTo.setPersona(personaService.findById(usuarioRol.getIdPersona()));
+        usuarioTo.setRol(usuarioRol.getRol());
 
         return usuarioTo;
     }
@@ -124,5 +127,22 @@ public class UsuarioService {
         }
         
         return usuarioList;
+    }
+
+    public void delete(Long userId) {
+        Usuario usuario = usuarioDAO.findById(userId);
+        usuarioDAO.delete(usuario);
+    }
+
+    public void completelyDeleteUsuario(UsuarioRol usuarioRol) {
+        if(usuarioRol.getRol().equalsIgnoreCase("alumno")) {
+            alumnoService.delete(usuarioRol.getIdAluDoc());
+        } else if(usuarioRol.getRol().equalsIgnoreCase("docente")) {
+            docenteService.delete(usuarioRol.getIdAluDoc());
+        }
+
+        delete(usuarioRol.getId());
+        
+        personaService.delete(usuarioRol.getIdPersona());
     }
 }

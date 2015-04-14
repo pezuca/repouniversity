@@ -53,6 +53,11 @@ public class AlumnoService {
     public void save(Alumno alumno) {
         alumnoDao.insert(alumno);
     }
+    
+    public void delete(Long alumnoId) {
+        Alumno alumno = alumnoDao.findById(alumnoId);
+        alumnoDao.delete(alumno);
+    }
 
     public List<AlumnoTO> getAlumnosByIds(Long[] listaAlumnoId) {
         List<AlumnoTO> alumnoToList = new ArrayList<AlumnoTO>();

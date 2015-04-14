@@ -62,6 +62,8 @@
 <!-- 			href="/repouniversity/resources/css/plugins/morris/morris-0.4.3.min.css" /> -->
 
 <!-- 			Notificaciones -->
-<!-- 		<link  rel="stylesheet" type="text/css"  -->
-<!-- 			href="/repouniversity/resources/js/plugins/gritter/jquery.gritter.css" /> -->
+		<script src="/repouniversity/resources/js/plugins/gritter/jquery.gritter.min.js"></script>
+		<link  rel="stylesheet" type="text/css" 
+			href="/repouniversity/resources/js/plugins/gritter/jquery.gritter.css" />
+			
 	
