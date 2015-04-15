@@ -23,21 +23,22 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioDAO usuarioDAO;
-    
+
     @Autowired
     private PersonaService personaService;
-    
+
     @Autowired
     private AlumnoService alumnoService;
-    
+
     @Autowired
     private DocenteService docenteService;
-    
+
     @Autowired
     private UsuarioRolService usuarioRolService;
 
     @Transactional
-    public Usuario updateUser(Long id, String nombre, String apellido, String mail, String newPassword, String repeatPassword) {
+    public Usuario updateUser(Long id, String nombre, String apellido, String mail, String user, String newPassword, String repeatPassword, Boolean activo,
+            String rol) {
 
         Usuario usuario = usuarioDAO.findById(id);
 
@@ -46,7 +47,7 @@ public class UsuarioService {
         }
 
         Persona persona = personaService.findById(usuario.getIdPersona());
-        
+
         persona.setNombre(nombre);
         persona.setApellido(apellido);
         persona.setMail(mail);
@@ -56,40 +57,39 @@ public class UsuarioService {
 
         return usuario;
     }
-    
-	@Transactional
-	public Usuario saveUser(String nombre, String apellido, String mail,
-			String user, String password, Boolean activo, String rol) {
 
-		Persona persona = new Persona();
-		persona.setNombre(nombre);
-		persona.setApellido(apellido);
-		persona.setMail(mail);
-		persona.setActivo(activo);
-		persona = personaService.save(persona);
-		
-		Usuario usuario = new Usuario();
-		usuario.setUser(user);
-		usuario.setPass(password);
-		usuario.setActivo(activo);
-		usuario.setPersona(persona.getId());
-		usuarioDAO.insert(usuario);
-		
-		if(rol.equalsIgnoreCase("alumno")) {
-			Alumno alumno = new Alumno();
-			alumno.setActivo(activo);
-			alumno.setIdPersona(persona.getId());
-			alumnoService.save(alumno);
-			
-		} else if(rol.equalsIgnoreCase("docente")) {
-			Docente docente = new Docente();
-			docente.setActivo(activo);
-			docente.setPersona(persona);
-			docenteService.save(docente);
-		}
-		
-		return usuario;
-	}
+    @Transactional
+    public Usuario saveUser(String nombre, String apellido, String mail, String user, String password, Boolean activo, String rol) {
+
+        Persona persona = new Persona();
+        persona.setNombre(nombre);
+        persona.setApellido(apellido);
+        persona.setMail(mail);
+        persona.setActivo(activo);
+        persona = personaService.save(persona);
+
+        Usuario usuario = new Usuario();
+        usuario.setUser(user);
+        usuario.setPass(password);
+        usuario.setActivo(activo);
+        usuario.setPersona(persona.getId());
+        usuarioDAO.insert(usuario);
+
+        if (rol.equalsIgnoreCase("alumno")) {
+            Alumno alumno = new Alumno();
+            alumno.setActivo(activo);
+            alumno.setIdPersona(persona.getId());
+            alumnoService.save(alumno);
+
+        } else if (rol.equalsIgnoreCase("docente")) {
+            Docente docente = new Docente();
+            docente.setActivo(activo);
+            docente.setPersona(persona);
+            docenteService.save(docente);
+        }
+
+        return usuario;
+    }
 
     private boolean checkChangePassword(String newPassword, String repeatPassword) {
 
@@ -102,15 +102,14 @@ public class UsuarioService {
 
     public UsuarioTO getUserById(Long usuarioId) {
         Usuario usuario = usuarioDAO.findById(usuarioId);
-        
+
         return buildUsuario(usuario);
     }
 
     private UsuarioTO buildUsuario(Usuario usuario) {
         UsuarioTO usuarioTo = new UsuarioTO();
         UsuarioRol usuarioRol = usuarioRolService.getUsuarioById(usuario.getId());
-        
-        
+
         usuarioTo.setId(usuario.getId());
         usuarioTo.setUser(usuario.getUser());
         usuarioTo.setFechasys(usuario.getFechasys());
@@ -123,11 +122,11 @@ public class UsuarioService {
 
     public List<UsuarioTO> getAll() {
         List<UsuarioTO> usuarioList = new ArrayList<UsuarioTO>();
-        
+
         for (Usuario usuario : usuarioDAO.findAll()) {
             usuarioList.add(buildUsuario(usuario));
         }
-        
+
         return usuarioList;
     }
 
@@ -137,14 +136,14 @@ public class UsuarioService {
     }
 
     public void completelyDeleteUsuario(UsuarioRol usuarioRol) {
-        if(usuarioRol.getRol().equalsIgnoreCase("alumno")) {
+        if (usuarioRol.getRol().equalsIgnoreCase("alumno")) {
             alumnoService.delete(usuarioRol.getIdAluDoc());
-        } else if(usuarioRol.getRol().equalsIgnoreCase("docente")) {
+        } else if (usuarioRol.getRol().equalsIgnoreCase("docente")) {
             docenteService.delete(usuarioRol.getIdAluDoc());
         }
 
         delete(usuarioRol.getId());
-        
+
         personaService.delete(usuarioRol.getIdPersona());
     }
 }

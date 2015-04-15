@@ -12,9 +12,6 @@ public class Docente implements IdentifiedObject {
     private boolean activo;
     private Date fechasys;
 
-    // private Set<CursoMateria> cursosMaterias;
-    // private Set<Notificacion> notificaciones;
-
     public Long getId() {
         return id;
     }

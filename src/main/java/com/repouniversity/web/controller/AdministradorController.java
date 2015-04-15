@@ -59,6 +59,16 @@ public class AdministradorController {
         
         return usuarioTo;
     }
+    
+    @RequestMapping(value = "admin/nuevoUsuario", method = {RequestMethod.POST})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public void editarUsuarioAjax(@RequestParam(value = "userId") Long userId, @RequestParam(value = "nombre") String nombre, @RequestParam(value = "apellido") String apellido,
+            @RequestParam(value = "mail") String mail, @RequestParam(value = "user") String user, @RequestParam(value = "password") String password,
+            @RequestParam(value = "activo") Boolean activo, @RequestParam(value = "rol") String rol) {
+
+        usuarioService.updateUser(userId, nombre, apellido, mail, user, password, password, activo, rol);
+    }
 
     @RequestMapping(value = "admin/eliminarUsuario", method = {RequestMethod.POST})
     @ResponseBody
