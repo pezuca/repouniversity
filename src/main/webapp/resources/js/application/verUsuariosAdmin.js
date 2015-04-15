@@ -10,6 +10,24 @@ var usuariosAdmin = {
 					class_name: 'gritter-light'
 				});
 				
+				
+				$("#listaPersonas").DataTable().row.add([
+				                                          data.id,
+				                                          data.persona.nombre,
+				                                          data.persona.apellido,
+				                                          data.user,
+				                                          data.persona.mail,
+				                                          data.activo == 'true' ? 'Si':'No',
+				                                          data.rol,
+				                                          "<a href='#' name='editUser' data-userid='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a>" + 
+				  										  "<a href='#' name='deleteUser' data-userid='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a>"
+				                                     ]).draw();
+				
+				//Agrego el evento de delete
+				$("a[name='deleteUser'][data-userid=" + data.id + "] button").click(function(){
+					$("#deleteAlumnoDialog").data('userId', $(this).parent().attr("data-userid")).dialog("open");
+				});
+				
 				$("#agregarAlumnoDialog").dialog("close");						
 			},
 			error: function(data) {
@@ -34,7 +52,7 @@ var usuariosAdmin = {
 					class_name: 'gritter-light'
 				});
 				
-				$("#listaPersonas").DataTable().row( $("#listaPersonas a[data-userId=" + userId + "]").parents('tr') ).remove().draw();
+				$("#listaPersonas").DataTable().row( $("#listaPersonas a[data-userid=" + userId + "]").parents('tr') ).remove().draw();
 				$("#deleteAlumnoDialog").dialog("close");						
 			},
 			error: function(data) {
@@ -77,7 +95,7 @@ $(document).ready(function() {
 			"Crear": function() {
 				usuariosAdmin.crearNuevoUsuarioAjax();
 			},
-			Cancel: function() {
+			"Cancelar": function() {
 				$(this).dialog("close");
 			}
 		},
@@ -91,6 +109,36 @@ $(document).ready(function() {
 	
 	$("#agregarAlumnoButton").click(function() {
 		$("#agregarAlumnoDialog").dialog("open");
+	});
+	
+	$("#editarAlumnoDialog").dialog({
+		resizable: false,
+		width:700,
+		modal: true,
+		autoOpen: false,
+		autoResize:true,
+		hide: {effect: "fade", duration: 300},
+		buttons: {
+			"Ok": function() {
+				usuariosAdmin.crearNuevoUsuarioAjax();
+			},
+			"Cancelar": function() {
+				$(this).dialog("close");
+			}
+		},
+		open: function(event, ui) {
+			$(".infoDialog").remove();
+			$('#editarAlumnoForm').trigger("reset");
+			
+			$('#editarAlumnoForm input[name=nombre]').val($("#editarAlumnoDialog").data('nombre'));
+			$('#editarAlumnoForm input[name=apellido]').val($("#editarAlumnoDialog").data('apellido'));
+			$('#editarAlumnoForm input[name=mail]').val($("#editarAlumnoDialog").data('mail'));
+			$('#editarAlumnoForm input[name=user]').val($("#editarAlumnoDialog").data('user'));
+			$('#editarAlumnoForm input[name=activo]').val($("#editarAlumnoDialog").data('activo'));
+			$('#editarAlumnoForm select[name=rol]').val($("#editarAlumnoDialog").data('rol'));
+		},
+		close: function(event, ui) {
+		}
 	});
 	
 	$("#deleteAlumnoDialog").dialog({
@@ -117,6 +165,17 @@ $(document).ready(function() {
 	});
 	
 	$("a[name=deleteUser] button").click(function(){
-		$("#deleteAlumnoDialog").data('userId', $(this).parent().attr("data-userId")).dialog("open");
+		$("#deleteAlumnoDialog").data('userId', $(this).parent().attr("data-userid")).dialog("open");
+	});
+	
+	$("a[name=editUser] button").click(function(){
+		$("#editarAlumnoDialog").data('userId', $(this).parent().attr("data-userid"))
+			.data('nombre', $(this).parents("tr").find("td").get(1).innerHTML)
+			.data('apellido', $(this).parents("tr").find("td").get(2).innerHTML)
+			.data('user', $(this).parents("tr").find("td").get(3).innerHTML)
+			.data('mail', $(this).parents("tr").find("td").get(4).innerHTML)
+			.data('activo', $(this).parents("tr").find("td").get(5).innerHTML)
+			.data('rol', $(this).parents("tr").find("td").get(6).innerHTML)
+			.dialog("open");
 	});
 });

@@ -54,7 +54,7 @@
 									<td>${usuario.activo ? 'Si' : 'No'}</td>
 									<td>${usuario.rol}</td>
 									<td>
-										<a href="#"><button class="btn btn-primary btn-circle" type="button"><i class="fa fa-pencil"></i></button></a>
+										<a href="#" name="editUser" data-userId="${usuario.id}"><button class="btn btn-primary btn-circle" type="button"><i class="fa fa-pencil"></i></button></a>
 										<a href="#" name="deleteUser" data-userId="${usuario.id}" ><button class="btn btn-danger btn-circle" type="button"><i class="fa fa-times"></i></button></a>
 									</td>
 								</tr>
@@ -73,7 +73,51 @@
 	
 <!-- 	Ventanas -->
 	<div id="agregarAlumnoDialog" title="Nuevo Usuario">
-		<form id="nuevoAlumnoForm" action="nuevoAlumnoAdmin" method="post" class="form-horizontal">
+		<form id="nuevoAlumnoForm" class="form-horizontal">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Nombre*:</label>
+                <div class="col-sm-10"><input name="nombre" type="text" class="form-control"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Apellido*:</label>
+                <div class="col-sm-10"><input name="apellido" type="text" class="form-control"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Mail*:</label>
+                <div class="col-sm-10"><input name="mail" type="text" class="form-control"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Username*:</label>
+                <div class="col-sm-10"><input name="user" type="text" class="form-control"></div>
+            </div>
+			<div class="form-group">
+                <label class="col-sm-2 control-label">Contraseña*:</label>
+                <div class="col-sm-10"><input name="password" type="text" class="form-control"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Activo*:</label>
+                <div class="col-sm-10">
+                	<select class="form-control m-b" name="activo">
+                         <option value="true">Si</option>
+                         <option value="true">No</option>
+                     </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Rol*:</label>
+                <div class="col-sm-10">
+                	<select class="form-control m-b" name="rol">
+                         <option value="alumno">Alumno</option>
+                         <option value="docente">Docente</option>
+                         <option value="administrador">Administrador</option>
+                     </select>
+                </div>
+            </div>
+		</form>
+	</div>
+	
+	<div id="editarAlumnoDialog" title="Editar Usuario">
+		<form id="editarAlumnoForm" class="form-horizontal">
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Nombre*:</label>
                 <div class="col-sm-10"><input name="nombre" type="text" class="form-control"></div>
