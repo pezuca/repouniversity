@@ -58,7 +58,7 @@ public class UsuarioService {
     }
     
 	@Transactional
-	public void saveUser(String nombre, String apellido, String mail,
+	public Usuario saveUser(String nombre, String apellido, String mail,
 			String user, String password, Boolean activo, String rol) {
 
 		Persona persona = new Persona();
@@ -87,6 +87,8 @@ public class UsuarioService {
 			docente.setPersona(persona);
 			docenteService.save(docente);
 		}
+		
+		return usuario;
 	}
 
     private boolean checkChangePassword(String newPassword, String repeatPassword) {

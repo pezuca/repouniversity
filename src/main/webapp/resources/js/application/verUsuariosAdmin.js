@@ -10,9 +10,7 @@ var usuariosAdmin = {
 					class_name: 'gritter-light'
 				});
 				
-				setTimeout(function(){
-					$("#agregarAlumnoDialog").dialog("close");						
-				}, 2000);					
+				$("#agregarAlumnoDialog").dialog("close");						
 			},
 			error: function(data) {
 				$("#nuevoAlumnoForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de crear el usuario, inténtelo mas tarde.</p></div>")
@@ -36,7 +34,7 @@ var usuariosAdmin = {
 					class_name: 'gritter-light'
 				});
 				
-				$("#listaPersonas").dataTable().row( $("#listaPersonas a[data-userId=" + userId + "]").parents('tr') ).remove().draw();
+				$("#listaPersonas").DataTable().row( $("#listaPersonas a[data-userId=" + userId + "]").parents('tr') ).remove().draw();
 				$("#deleteAlumnoDialog").dialog("close");						
 			},
 			error: function(data) {
@@ -51,7 +49,7 @@ var usuariosAdmin = {
 };
 
 $(document).ready(function() {
-	$('#listaPersonas').dataTable({
+	$('#listaPersonas').DataTable({
 		"processing" : false,
 		"serverSide" : false,
 		"paging" : false,
@@ -74,7 +72,7 @@ $(document).ready(function() {
 		modal: true,
 		autoOpen: false,
 		autoResize:true,
-		hide: {effect: "fade", duration: 800},
+		hide: {effect: "fade", duration: 300},
 		buttons: {
 			"Crear": function() {
 				usuariosAdmin.crearNuevoUsuarioAjax();
@@ -101,7 +99,7 @@ $(document).ready(function() {
 		modal: true,
 		autoOpen: false,
 		autoResize:true,
-		hide: {effect: "fade", duration: 800},
+		hide: {effect: "fade", duration: 300},
 		buttons: {
 			"Eliminar": function() {
 				usuariosAdmin.deleteUsuarioAjax($("#deleteAlumnoDialog").data('userId'));
