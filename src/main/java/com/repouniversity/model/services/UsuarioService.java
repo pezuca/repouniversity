@@ -3,11 +3,10 @@ package com.repouniversity.model.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.repouniversity.model.dao.UsuarioDAO;
 import com.repouniversity.model.entity.Alumno;
@@ -37,21 +36,22 @@ public class UsuarioService {
     private UsuarioRolService usuarioRolService;
 
     @Transactional
-    public Usuario updateUser(Long id, String nombre, String apellido, String mail, String user, String newPassword, String repeatPassword, Boolean activo,
-            String rol) {
+    public Usuario updateUser(Long id, String nombre, String apellido, String mail, String user, String newPassword, String repeatPassword, Boolean activo) {
 
         Usuario usuario = usuarioDAO.findById(id);
 
-        if (checkChangePassword(newPassword, repeatPassword)) {
+        if (newPassword != null && checkChangePassword(newPassword, repeatPassword)) {
             usuario.setPass(newPassword);
         }
-
+        usuario.setUser(user);
+        usuario.setActivo(activo);
+        
         Persona persona = personaService.findById(usuario.getIdPersona());
 
         persona.setNombre(nombre);
         persona.setApellido(apellido);
         persona.setMail(mail);
-
+        
         personaService.update(persona);
         usuarioDAO.update(usuario);
 

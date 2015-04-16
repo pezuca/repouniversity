@@ -99,7 +99,7 @@
                 <div class="col-sm-10">
                 	<select class="form-control m-b" name="activo">
                          <option value="true">Si</option>
-                         <option value="true">No</option>
+                         <option value="false">No</option>
                      </select>
                 </div>
             </div>
@@ -118,6 +118,7 @@
 	
 	<div id="editarAlumnoDialog" title="Editar Usuario">
 		<form id="editarAlumnoForm" class="form-horizontal">
+			<input name="userId" type="hidden">
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Nombre*:</label>
                 <div class="col-sm-10"><input name="nombre" type="text" class="form-control"></div>
@@ -143,14 +144,14 @@
                 <div class="col-sm-10">
                 	<select class="form-control m-b" name="activo">
                          <option value="true">Si</option>
-                         <option value="true">No</option>
+                         <option value="false">No</option>
                      </select>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Rol*:</label>
                 <div class="col-sm-10">
-                	<select class="form-control m-b" name="rol">
+                	<select class="form-control m-b" name="rol" disabled readonly>
                          <option value="alumno">Alumno</option>
                          <option value="docente">Docente</option>
                          <option value="administrador">Administrador</option>
