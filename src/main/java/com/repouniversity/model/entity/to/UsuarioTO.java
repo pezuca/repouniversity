@@ -12,6 +12,7 @@ public class UsuarioTO {
     private boolean activo;
     private Persona Persona;
     private Date fechasys;
+    private String rol;
 
     public Long getId() {
         return id;
@@ -59,5 +60,13 @@ public class UsuarioTO {
 
     public void setFechasys(Date fechasys) {
         this.fechasys = fechasys;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 }

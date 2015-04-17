@@ -3,6 +3,8 @@ package com.repouniversity.model.dao.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Repository;
 
 import com.repouniversity.model.dao.UsuarioRolDAO;
@@ -32,6 +34,7 @@ public class UsuarioRolDAOImpl extends GenericDAOImpl<UsuarioRol> implements Usu
 
         result.setId(rs.getLong("id_usuario"));
         result.setNombreUsuario(rs.getString("user"));
+        result.setIdPersona(rs.getLong("id_persona"));
         result.setIdAluDoc(rs.getLong("id_alu_doc"));
         result.setRol(rs.getString("rol"));
 

@@ -38,6 +38,7 @@
 	
 	    <!-- jQuery UI -->
 	    <script src="/repouniversity/resources/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+	    <link href="/repouniversity/resources/js/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet"></link>
 	
 	    <!-- Jvectormap -->
 	    <script src="/repouniversity/resources/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
@@ -61,6 +62,8 @@
 <!-- 			href="/repouniversity/resources/css/plugins/morris/morris-0.4.3.min.css" /> -->
 
 <!-- 			Notificaciones -->
-<!-- 		<link  rel="stylesheet" type="text/css"  -->
-<!-- 			href="/repouniversity/resources/js/plugins/gritter/jquery.gritter.css" /> -->
+		<script src="/repouniversity/resources/js/plugins/gritter/jquery.gritter.min.js"></script>
+		<link  rel="stylesheet" type="text/css" 
+			href="/repouniversity/resources/js/plugins/gritter/jquery.gritter.css" />
+			
 	

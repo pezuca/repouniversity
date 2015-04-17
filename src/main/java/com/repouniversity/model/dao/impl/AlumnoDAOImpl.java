@@ -8,7 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.collections.CollectionUtils;
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Repository;
 
 import com.repouniversity.model.dao.AlumnoDAO;
@@ -17,8 +18,6 @@ import com.repouniversity.model.dao.query.SQLStatement;
 import com.repouniversity.model.dao.rowmapper.AlumnoRowMapper;
 import com.repouniversity.model.entity.Alumno;
 import com.repouniversity.model.entity.Docente;
-import com.repouniversity.model.entity.Grupo;
-import com.repouniversity.model.entity.Notificacion;
 
 @Repository
 public class AlumnoDAOImpl extends GenericDAOImpl<Alumno> implements AlumnoDAO {
@@ -54,7 +53,7 @@ public class AlumnoDAOImpl extends GenericDAOImpl<Alumno> implements AlumnoDAO {
 
     @Override
     protected InsertSQLStatement buildInsertSQLStatement(final Alumno t) {
-        return new InsertSQLStatement("insert into alumno (id_perdona, Idcarrera, activo, fechasys) values (?, ?, ?, now())") {
+        return new InsertSQLStatement("insert into alumno (id_persona, Idcarrera, activo, fecsys) values (?, ?, ?, now())") {
 
             @Override
             public void doAfterInsert(Long id) {
@@ -63,7 +62,13 @@ public class AlumnoDAOImpl extends GenericDAOImpl<Alumno> implements AlumnoDAO {
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
                 ps.setLong(1, t.getIdPersona());
-                ps.setLong(2, t.getIdCarrera());
+                
+                Long carreraId = t.getIdCarrera();
+                if(carreraId != null) {
+                    ps.setLong(2, carreraId);
+                } else {
+                    ps.setLong(2, 1L);
+                }
                 ps.setBoolean(3, t.isActivo());
             }
 

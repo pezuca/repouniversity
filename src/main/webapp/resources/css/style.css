@@ -3611,3 +3611,21 @@ body.skin-3 {
     display: none;
   }
 }
+
+.errorDialog .infoPara, .infoDialog .infoPara {
+	padding: 5px 15px;
+}
+
+.infoDialog {
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	color: #fff;
+	background-color: #31b0d5;
+	border-color: #269abc;
+	margin: 10px 0px;
+}
+
+.ui-front {
+	z-index: 1050 !important;
+}
