@@ -25,7 +25,7 @@
 	                  <div class="ibox-title">
 	                      <h5>Lista de alumnos</h5>
 		                  <div class="ibox-tools" id="agregarAlumnoButton">
-	                          <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  Usuario</a>
+	                          <a href="#agregarAlumnoDialog" class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  Usuario</a>
 	                      </div>
 	                  </div>
 	                  <div class="ibox-content">
@@ -69,35 +69,33 @@
         
 		<%@include file="../components/footer.jsp"%>
 	</div>
-	</div>
-	
 <!-- 	Ventanas -->
-	<div id="agregarAlumnoDialog" title="Nuevo Usuario">
+	<div id="agregarAlumnoDialog" title="Nuevo Usuario" class="modal fade in">
 		<form id="nuevoAlumnoForm" class="form-horizontal">
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Nombre*:</label>
-                <div class="col-sm-10"><input name="nombre" type="text" class="form-control"></div>
+                <div class="col-sm-10"><input name="nombre" type="text" class="form-control" required="required"></div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Apellido*:</label>
-                <div class="col-sm-10"><input name="apellido" type="text" class="form-control"></div>
+                <div class="col-sm-10"><input name="apellido" type="text" class="form-control" required="required"></div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Mail*:</label>
-                <div class="col-sm-10"><input name="mail" type="text" class="form-control"></div>
+                <div class="col-sm-10"><input name="mail" type="text" class="form-control" required="required"></div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Username*:</label>
-                <div class="col-sm-10"><input name="user" type="text" class="form-control"></div>
+                <div class="col-sm-10"><input name="user" type="text" class="form-control" required="required"></div>
             </div>
 			<div class="form-group">
                 <label class="col-sm-2 control-label">Contraseña*:</label>
-                <div class="col-sm-10"><input name="password" type="text" class="form-control"></div>
+                <div class="col-sm-10"><input name="password" type="password" class="form-control" required="required"></div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Activo*:</label>
                 <div class="col-sm-10">
-                	<select class="form-control m-b" name="activo">
+                	<select class="form-control m-b" name="activo" required="required">
                          <option value="true">Si</option>
                          <option value="false">No</option>
                      </select>
@@ -106,7 +104,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">Rol*:</label>
                 <div class="col-sm-10">
-                	<select class="form-control m-b" name="rol">
+                	<select class="form-control m-b" name="rol" required="required">
                          <option value="alumno">Alumno</option>
                          <option value="docente">Docente</option>
                          <option value="administrador">Administrador</option>
@@ -121,28 +119,28 @@
 			<input name="userId" type="hidden">
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Nombre*:</label>
-                <div class="col-sm-10"><input name="nombre" type="text" class="form-control"></div>
+                <div class="col-sm-10"><input name="nombre" type="text" class="form-control" required="required"></div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Apellido*:</label>
-                <div class="col-sm-10"><input name="apellido" type="text" class="form-control"></div>
+                <div class="col-sm-10"><input name="apellido" type="text" class="form-control" required="required"></div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Mail*:</label>
-                <div class="col-sm-10"><input name="mail" type="text" class="form-control"></div>
+                <div class="col-sm-10"><input name="mail" type="text" class="form-control" required="required"></div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Username*:</label>
-                <div class="col-sm-10"><input name="user" type="text" class="form-control"></div>
+                <div class="col-sm-10"><input name="user" type="text" class="form-control" required="required"></div>
             </div>
 			<div class="form-group">
-                <label class="col-sm-2 control-label">Contraseña*:</label>
+                <label class="col-sm-2 control-label">Contraseña:</label>
                 <div class="col-sm-10"><input name="password" type="text" class="form-control"></div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Activo*:</label>
                 <div class="col-sm-10">
-                	<select class="form-control m-b" name="activo">
+                	<select class="form-control m-b" name="activo" required="required">
                          <option value="true">Si</option>
                          <option value="false">No</option>
                      </select>
@@ -164,5 +162,7 @@
 	<div id="deleteAlumnoDialog" title="Eliminar Usuario">
 		<p>¿Esta seguro que desea eliminar el usuario?</p>
 	</div>
+	</div>
+	
 </body>
 </html>

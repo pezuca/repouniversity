@@ -3625,3 +3625,7 @@ body.skin-3 {
 	border-color: #269abc;
 	margin: 10px 0px;
 }
+
+.ui-front {
+	z-index: 1050 !important;
+}

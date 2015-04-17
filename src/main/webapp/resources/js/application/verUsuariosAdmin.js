@@ -64,8 +64,6 @@ var usuariosAdmin = {
 					sticky: false
 				});
 				
-//				usuariosAdmin.generarAlerta("success", ".wrapper-content", "Los datos del usuario fueron editados exitosamente.");
-				
 				var celdas = $("#listaPersonas td a[data-userid=" + data.id + "]").parents("tr").find("td");
 				celdas.get(1).innerHTML = data.persona.nombre;
 				celdas.get(2).innerHTML = data.persona.apellido;
@@ -130,6 +128,21 @@ var usuariosAdmin = {
 		$(containerSelector).prepend("<div class='alert alert-" + tipo + " alert-dismissable'>" +
 				"<button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>" +
 				texto + "</div>");
+	},
+	validacionFormlario: function(formularioSelector) {
+		var elementos = $(formularioSelector).find("input[required], select[required]");
+		var flag = true;
+
+		elementos.each(function(index) {
+			if($(this).val() == '') {
+				$(this).parents(".form-group").addClass(" has-error");
+				flag = false;
+			} else {
+				$(this).parents(".form-group").removeClass("has-error");
+			}
+		});
+		
+		return flag;
 	}
 };
 
@@ -161,7 +174,9 @@ $(document).ready(function() {
 		show: {effect: "fade", duration: 300},
 		buttons: {
 			"Crear": function() {
-				usuariosAdmin.crearNuevoUsuarioAjax();
+				if(usuariosAdmin.validacionFormlario("#nuevoAlumnoForm")) {
+					usuariosAdmin.crearNuevoUsuarioAjax();
+				}
 			},
 			"Cancelar": function() {
 				$(this).dialog("close");
@@ -189,7 +204,9 @@ $(document).ready(function() {
 		hide: {effect: "fade", duration: 300},
 		buttons: {
 			"Ok": function() {
-				usuariosAdmin.editarUsuarioAjax();
+				if(usuariosAdmin.validacionFormlario("#editarAlumnoForm")) {
+					usuariosAdmin.editarUsuarioAjax();
+				}
 			},
 			"Cancelar": function() {
 				$(this).dialog("close");
