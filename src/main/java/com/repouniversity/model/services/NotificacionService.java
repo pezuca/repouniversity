@@ -3,10 +3,9 @@ package com.repouniversity.model.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.repouniversity.model.dao.NotificacionDAO;
 import com.repouniversity.model.entity.Notificacion;

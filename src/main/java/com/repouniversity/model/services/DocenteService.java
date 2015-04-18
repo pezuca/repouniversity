@@ -2,10 +2,9 @@ package com.repouniversity.model.services;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.repouniversity.model.dao.DocenteDAO;
 import com.repouniversity.model.entity.Docente;
@@ -27,5 +26,14 @@ public class DocenteService {
 
     public Docente getByCursoMateriaId(Long id) {
         return docenteDao.getByCursoMateriaId(id);
+    }
+    
+    public Docente save(Docente docente) {
+        return docenteDao.insert(docente);
+    }
+
+    public void delete(Long docenteId) {
+        Docente docente = docenteDao.findById(docenteId);
+        docenteDao.delete(docente);
     }
 }

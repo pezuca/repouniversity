@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Repository;
 
 import com.repouniversity.model.dao.DocenteDAO;
@@ -65,7 +67,7 @@ public class DocenteDAOImpl extends GenericDAOImpl<Docente> implements DocenteDA
 
     @Override
     protected InsertSQLStatement buildInsertSQLStatement(final Docente t) {
-        return new InsertSQLStatement("INSERT INTO docente (id_persona, activo, fechasys) values (?, ?, now())") {
+        return new InsertSQLStatement("INSERT INTO docente (id_persona, activo, fecsys) values (?, ?, now())") {
 
             @Override
             public void doAfterInsert(Long id) {
@@ -74,7 +76,7 @@ public class DocenteDAOImpl extends GenericDAOImpl<Docente> implements DocenteDA
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
                 ps.setLong(1, t.getPersona().getId());
-                ps.setBoolean(4, t.isActivo());
+                ps.setBoolean(2, t.isActivo());
             }
 
             @Override

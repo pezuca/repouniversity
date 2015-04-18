@@ -1,10 +1,10 @@
 package com.repouniversity.model.services;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.repouniversity.model.dao.UsuarioDAO;
 import com.repouniversity.model.dao.UsuarioRolDAO;

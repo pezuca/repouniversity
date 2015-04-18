@@ -2,10 +2,9 @@ package com.repouniversity.model.services;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.repouniversity.model.dao.CursoDAO;
 import com.repouniversity.model.entity.Curso;
@@ -57,6 +56,12 @@ public class CursoService {
         cursoDao.saveAlumnoCursoGrupo(noti.getAlumnoId(), noti.getCursoId(), 0L);
         
         notificacionService.insertarNotificacion(noti.getAlumnoId(), noti.getCursoId(), noti.getDocenteId(), 3L);
+        
+        notificacionService.remove(noti);
+    }
+    
+    public void rechazarAlumnoACurso(Notificacion noti) {
+        notificacionService.insertarNotificacion(noti.getAlumnoId(), noti.getCursoId(), noti.getDocenteId(), 4L);
         
         notificacionService.remove(noti);
     }
