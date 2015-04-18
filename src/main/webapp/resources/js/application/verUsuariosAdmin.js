@@ -185,6 +185,7 @@ $(document).ready(function() {
 		open: function(event, ui) {
 			$(".infoDialog").remove();
 			$('#nuevoAlumnoForm').trigger("reset");
+			$("#nuevoAlumnoForm").find(".form-group").removeClass("has-error");
 		},
 		close: function(event, ui) {
 		}
@@ -215,6 +216,7 @@ $(document).ready(function() {
 		open: function(event, ui) {
 			$(".infoDialog").remove();
 			$('#editarAlumnoForm').trigger("reset");
+			$("#editarAlumnoForm").find(".form-group").removeClass("has-error");
 			
 			$('#editarAlumnoForm input[name=userId]').val($("#editarAlumnoDialog").data('userId'));
 			$('#editarAlumnoForm input[name=nombre]').val($("#editarAlumnoDialog").data('nombre'));
