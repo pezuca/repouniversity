@@ -154,11 +154,9 @@ public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
     public List<CursoMateria> findCursosForDocenteId(final Long docenteId) {
         StringBuilder sql = new StringBuilder();
 
-        sql.append("SELECT DISTINCT '0' as tiponotificacion, cm.id_curso_materia, m.id_materia, m.nombre, c.id_curso, c.codigo, c.descripcion ");
-        sql.append("FROM materia m JOIN curso_materia cm ON cm.id_materia = m.id_materia ");
-        sql.append("JOIN curso c ON c.id_curso = cm.id_curso ");
-        sql.append("JOIN docente_curso_materia dcm ON dcm.id_curso_materia = cm.id_curso_materia ");
-        sql.append("WHERE dcm.id_docente = ?");
+        sql.append("SELECT DISTINCT '0' as tipo_notificacion, m.id_materia, m.nombre, c.id_curso, c.codigo, c.descripcion ");
+        sql.append("FROM curso c JOIN materia m ON c.id_materia = m.id_materia ");
+        sql.append("WHERE c.id_docente = ?");
 
         List<CursoMateria> list = doQuery(new SQLStatement(sql.toString()) {
             @Override

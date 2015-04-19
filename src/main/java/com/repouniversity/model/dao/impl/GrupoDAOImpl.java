@@ -6,8 +6,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -33,14 +31,12 @@ public class GrupoDAOImpl extends GenericDAOImpl<Grupo> implements GrupoDAO {
 
     @Override
     protected Class<Grupo> getEntityClass() {
-        // TODO Auto-generated method stub
-        return null;
+        return Grupo.class;
     }
 
     @Override
     protected String getTableName() {
-        // TODO Auto-generated method stub
-        return null;
+        return "grupo";
     }
 
     @Override
@@ -70,11 +66,9 @@ public class GrupoDAOImpl extends GenericDAOImpl<Grupo> implements GrupoDAO {
     public List<Grupo> findGruposByCurso(final Long cursoId) {
         StringBuilder sql = new StringBuilder();
 
-        sql.append("SELECT DISTINCT cm.id_curso_materia, m.id_materia, m.nombre, c.id_curso, c.codigo, c.descripcion ");
-        sql.append("FROM materia m JOIN curso_materia cm ON cm.id_materia = m.id_materia ");
-        sql.append("JOIN curso c ON c.id_curso = cm.id_curso ");
-        sql.append("JOIN docente_curso_materia dcm ON dcm.id_curso_materia = cm.id_curso_materia ");
-        sql.append("WHERE dcm.id_docente = ?");
+        sql.append("SELECT DISTINCT g.* ");
+        sql.append("FROM grupo g JOIN alumno_curso ac ON ac.id_grupo = g.id_grupo ");
+        sql.append("WHERE ac.id_curso = ?");
 
         List<Grupo> list = doQuery(new SQLStatement(sql.toString()) {
             @Override

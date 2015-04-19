@@ -5,14 +5,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.repouniversity.model.dao.NotificacionDAO;
 import com.repouniversity.model.entity.Notificacion;
 import com.repouniversity.model.entity.to.NotificacionTO;
 
 @Service
-@Transactional
 public class NotificacionService {
 
     @Autowired

@@ -13,13 +13,12 @@ public class CursoMateriaRowMapper implements RowMapper<CursoMateria> {
     public CursoMateria mapRow(ResultSet rs, int line) throws SQLException {
         CursoMateria cursoMateria = new CursoMateria();
         
-        cursoMateria.setId(rs.getLong("id_curso_materia"));
-        cursoMateria.setIdCurso(rs.getLong("id_curso"));
+        cursoMateria.setId(rs.getLong("id_curso"));
         cursoMateria.setCodigoCurso(rs.getString("codigo"));
         cursoMateria.setDescripcionCurso(rs.getString("descripcion"));
         cursoMateria.setIdMateria(rs.getLong("id_materia"));
         cursoMateria.setNombreMateria(rs.getString("nombre"));
-        cursoMateria.setTipoNotificacion(rs.getLong("tiponotificacion"));
+        cursoMateria.setTipoNotificacion(rs.getLong("tipo_notificacion"));
         
         return cursoMateria;
     }

@@ -12,7 +12,6 @@ import com.repouniversity.model.entity.Alumno;
 import com.repouniversity.model.entity.to.AlumnoTO;
 
 @Service
-@Transactional
 public class AlumnoService {
 
     @Autowired

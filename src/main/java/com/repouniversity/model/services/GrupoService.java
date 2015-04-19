@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.repouniversity.model.dao.CursoDAO;
 import com.repouniversity.model.dao.GrupoDAO;
@@ -12,7 +11,6 @@ import com.repouniversity.model.entity.Grupo;
 import com.repouniversity.model.entity.to.GrupoTO;
 
 @Service
-@Transactional
 public class GrupoService {
 
     @Autowired

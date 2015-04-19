@@ -55,7 +55,7 @@
 								<td>${cursoMat.nombreMateria}</td>
 								<td>${cursoMat.descripcionCurso}</td>
 								<td><a class="verCurso"
-									href="/repouniversity/docente/verCurso?cursoId=${cursoMat.idCurso}"><button class="btn btn-primary">Ver</button></a></td>
+									href="/repouniversity/docente/verCurso?cursoId=${cursoMat.id}"><button class="btn btn-primary">Ver</button></a></td>
 								</tr>
 							</c:forEach>
 						</tbody>

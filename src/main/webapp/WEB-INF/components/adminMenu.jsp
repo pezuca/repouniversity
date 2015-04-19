@@ -25,6 +25,8 @@
 			<li class="${activeTab eq 'dashboard' ? 'active':''}"><a href="/repouniversity/dashboard"><i
 					class="fa fa-home"></i> <span class="nav-label">Inicio |
 						Administrador</span></a></li>
+			<li class="${activeTab eq 'verMaterias' ? 'active':''}"><a href="/repouniversity/admin/verMaterias"><i
+					class="fa fa-home"></i> <span class="nav-label">Ver Materias</span></a></li>
 			<li class="${activeTab eq 'verCursos' ? 'active':''}"><a href="/repouniversity/admin/verCursos"><i
 					class="fa fa-home"></i> <span class="nav-label">Ver cursos</span></a></li>
 			<li class="${activeTab eq 'verUsuarios' ? 'active':''}"><a href="/repouniversity/admin/verUsuarios"><i
