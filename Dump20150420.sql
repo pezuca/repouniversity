@@ -104,10 +104,11 @@ CREATE TABLE `archivo` (
   KEY `fk_archivo_estado1` (`estado`),
   KEY `fk_archivo_persona1_idx` (`persona_id_persona`),
   KEY `FK_curso` (`id_curso`),
-  CONSTRAINT `FK_curso` FOREIGN KEY (`id_curso`) REFERENCES `curso` (`id_curso`),
+  CONSTRAINT `estado_fk` FOREIGN KEY (`estado`) REFERENCES `estado` (`id_estado`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_archivo_1` FOREIGN KEY (`id_tipo`) REFERENCES `archivo_tipo` (`id_tipo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_archivo_estado1` FOREIGN KEY (`estado`) REFERENCES `estado` (`id_estado`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_archivo_persona1` FOREIGN KEY (`persona_id_persona`) REFERENCES `persona` (`id_persona`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_archivo_persona1` FOREIGN KEY (`persona_id_persona`) REFERENCES `persona` (`id_persona`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_curso` FOREIGN KEY (`id_curso`) REFERENCES `curso` (`id_curso`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -119,37 +120,6 @@ LOCK TABLES `archivo` WRITE;
 /*!40000 ALTER TABLE `archivo` DISABLE KEYS */;
 INSERT INTO `archivo` VALUES (1,'practica Algebra','practica ejercicios del 1 a 20 ','0000-00-00','0000-00-00',1,'2014-04-15 14:21:04',1,1,'c:\\algebra.doc',31,3,NULL),(5,'Teoria nº 1 programción','Teoria de pilas y  colas','0000-00-00','0000-00-00',1,'2014-04-15 14:24:29',1,1,'c:\\prog.doc',32,4,NULL),(6,'Teoria nº 2 programción','Recursividad','0000-00-00','0000-00-00',1,'2014-04-15 14:33:11',1,1,'c:\\prog2.doc',32,4,NULL),(7,'practica Nº 2  Algebra ','practica ejercicios del 1 a 20 ','0000-00-00','0000-00-00',1,'2014-04-15 14:34:15',1,1,'c:\\algebra2.doc',32,5,NULL),(8,'practica Nº 3  Algebra ','practica ejercicios del 20 a 30 ','0000-00-00','0000-00-00',1,'2014-04-15 14:45:37',1,1,'c:\\algebra3.doc',32,5,NULL),(9,'practica Nº 3  Algebra ','practica ejercicios del 20 a 30 ','0000-00-00','0000-00-00',1,'2014-04-15 14:46:14',1,1,'c:\\algebra3.doc',31,3,NULL);
 /*!40000 ALTER TABLE `archivo` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `archivo_estados`
---
-
-DROP TABLE IF EXISTS `archivo_estados`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `archivo_estados` (
-  `id_archivo_estados` int(10) NOT NULL AUTO_INCREMENT,
-  `id_estado` int(10) NOT NULL,
-  `id_archivo` int(10) NOT NULL,
-  `activo` tinyint(1) NOT NULL DEFAULT '1',
-  `fecsys` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_archivo_estados`),
-  KEY `fk_estado_has_archivo_estado1` (`id_estado`),
-  KEY `fk_estado_has_archivo_archivo1` (`id_archivo`),
-  CONSTRAINT `fk_estado_has_archivo_archivo1` FOREIGN KEY (`id_archivo`) REFERENCES `archivo` (`id_archivo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_estado_has_archivo_estado1` FOREIGN KEY (`id_estado`) REFERENCES `estado` (`id_estado`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `archivo_estados`
---
-
-LOCK TABLES `archivo_estados` WRITE;
-/*!40000 ALTER TABLE `archivo_estados` DISABLE KEYS */;
-INSERT INTO `archivo_estados` VALUES (1,1,1,1,'2014-04-15 14:21:23');
-/*!40000 ALTER TABLE `archivo_estados` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -533,4 +503,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-18 16:18:05
+-- Dump completed on 2015-04-20  0:25:25
