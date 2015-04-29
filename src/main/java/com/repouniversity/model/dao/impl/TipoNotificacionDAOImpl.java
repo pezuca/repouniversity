@@ -24,7 +24,7 @@ public class TipoNotificacionDAOImpl extends GenericDAOImpl<TipoNotificacion> im
 
     @Override
     protected String getTableName() {
-        return "tiponotificacion";
+        return "tipo_notificacion";
     }
 
     @Override
@@ -34,7 +34,7 @@ public class TipoNotificacionDAOImpl extends GenericDAOImpl<TipoNotificacion> im
 
     @Override
     protected InsertSQLStatement buildInsertSQLStatement(final TipoNotificacion t) {
-        return new InsertSQLStatement("INSERT INTO tiponotificacion (idTipoNotificacion, descripcion) values (?, ?)") {
+        return new InsertSQLStatement("INSERT INTO tipo_notificacion (idTipoNotificacion, descripcion) values (?, ?)") {
 
             @Override
             public void doAfterInsert(Long id) {
@@ -54,7 +54,7 @@ public class TipoNotificacionDAOImpl extends GenericDAOImpl<TipoNotificacion> im
 
     @Override
     protected SQLStatement buildUpdateSQLStatement(final TipoNotificacion t) {
-        return new SQLStatement("UPDATE tiponotificacion SET descripcion = ? WHERE idTipoNotificacion = ?") {
+        return new SQLStatement("UPDATE tipo_notificacion SET descripcion = ? WHERE idTipoNotificacion = ?") {
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
                 ps.setString(1, t.getDescripcion());

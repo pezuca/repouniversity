@@ -76,7 +76,7 @@
                    <li class="divider"></li>
                    <li>
                        <div class="text-center link-block">
-                           <a href="notifications.html">
+                           <a href="alumno/notificaciones">
                                <strong>Ver todas las alertas</strong>
                                <i class="fa fa-angle-right"></i>
                            </a>

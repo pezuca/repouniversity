@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.repouniversity.model.dao.NotificacionDAO;
+import com.repouniversity.model.entity.Curso;
 import com.repouniversity.model.entity.Notificacion;
 import com.repouniversity.model.entity.to.NotificacionTO;
 
@@ -71,4 +72,20 @@ public class NotificacionService {
         
         return noti;
     }
+
+	public List<NotificacionTO> getNotificacionesForAlumno(Long idAluDoc) {
+		
+		List<Notificacion> notifi = notificacionDao.findNotificacionesForAlumnoId(idAluDoc);
+		
+		List<NotificacionTO> notificacionList = new ArrayList<NotificacionTO>();
+
+	        for (Notificacion notificacion : notifi) {
+	            notificacionList.add(buildNotificacion(notificacion));
+	        }
+
+	        return notificacionList;
+
+		
+		
+	}
 }
