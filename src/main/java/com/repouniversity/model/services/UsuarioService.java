@@ -17,7 +17,6 @@ import com.repouniversity.model.entity.UsuarioRol;
 import com.repouniversity.model.entity.to.UsuarioTO;
 
 @Service
-@Transactional
 public class UsuarioService {
 
     @Autowired
@@ -45,13 +44,13 @@ public class UsuarioService {
         }
         usuario.setUser(user);
         usuario.setActivo(activo);
-        
+
         Persona persona = personaService.findById(usuario.getIdPersona());
 
         persona.setNombre(nombre);
         persona.setApellido(apellido);
         persona.setMail(mail);
-        
+
         personaService.update(persona);
         usuarioDAO.update(usuario);
 
@@ -130,11 +129,12 @@ public class UsuarioService {
         return usuarioList;
     }
 
-    public void delete(Long userId) {
+    private void delete(Long userId) {
         Usuario usuario = usuarioDAO.findById(userId);
         usuarioDAO.delete(usuario);
     }
 
+    @Transactional
     public void completelyDeleteUsuario(UsuarioRol usuarioRol) {
         if (usuarioRol.getRol().equalsIgnoreCase("alumno")) {
             alumnoService.delete(usuarioRol.getIdAluDoc());

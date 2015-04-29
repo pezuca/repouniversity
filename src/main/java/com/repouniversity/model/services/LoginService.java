@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.repouniversity.model.dao.UsuarioDAO;
 import com.repouniversity.model.dao.UsuarioRolDAO;
@@ -20,7 +19,6 @@ import com.repouniversity.web.utils.HTTPSessionManagerUtil;
  *
  */
 @Service
-@Transactional
 public class LoginService {
 
 	@Autowired
