@@ -77,4 +77,8 @@ public class CursoService {
         
         return cursoMateriaList;
     }
+
+	public void completelyDeleteCurso(Curso curso) {
+		cursoDao.delete(curso);
+	}
 }

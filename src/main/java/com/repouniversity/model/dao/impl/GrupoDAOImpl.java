@@ -68,7 +68,8 @@ public class GrupoDAOImpl extends GenericDAOImpl<Grupo> implements GrupoDAO {
 
         sql.append("SELECT DISTINCT g.* ");
         sql.append("FROM grupo g JOIN alumno_curso ac ON ac.id_grupo = g.id_grupo ");
-        sql.append("WHERE ac.id_curso = ?");
+        sql.append("WHERE ac.id_curso = ? ");
+        sql.append("AND g.activo = 1");
 
         List<Grupo> list = doQuery(new SQLStatement(sql.toString()) {
             @Override

@@ -105,4 +105,11 @@ public class AdministradorController {
         
         usuarioService.completelyDeleteUsuario(usuarioRol);
     }
+    
+    @RequestMapping(value = "admin/eliminarCurso", method = {RequestMethod.POST})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public void deleteCursoAjax(@RequestParam(value = "cursoId") Long cursoId) {
+        cursoService.completelyDeleteCurso(cursoService.getById(cursoId));
+    }
 }

@@ -198,8 +198,9 @@ public abstract class GenericDAOImpl<E extends IdentifiedObject> implements Gene
 
                 @Override
                 public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                    PreparedStatement ps = connection.prepareStatement("DELETE FROM " + getTableName() + " WHERE " + getColumnIdName() + " = ?");
-                    ps.setLong(1, t.getId());
+                    PreparedStatement ps = connection.prepareStatement("UPDATE " + getTableName() + " SET activo = ? WHERE " + getColumnIdName() + "= ? ");
+                    ps.setBoolean(1, false);
+                    ps.setLong(2, t.getId());
                     return ps;
                 }
             });
@@ -213,7 +214,7 @@ public abstract class GenericDAOImpl<E extends IdentifiedObject> implements Gene
     @Override
     public List<E> findAll() {
 
-        List<Long> ids = jdbcTemplate.query("SELECT * FROM " + getTableName(), new LongRowMapper());
+        List<Long> ids = jdbcTemplate.query("SELECT * FROM " + getTableName() + " WHERE activo = 1", new LongRowMapper());
 
         return findByIds(ids.toArray(new Long[ids.size()]));
     }

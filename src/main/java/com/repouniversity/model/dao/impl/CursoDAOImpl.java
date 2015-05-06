@@ -8,8 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -35,7 +33,8 @@ public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
         StringBuilder sql = new StringBuilder();
 
         sql.append("SELECT c.* from curso c JOIN alumno_curso ac ON ac.curso_id_curso = c.id_curso ");
-        sql.append("WHERE ac.alumno_id_alumno = ?");
+        sql.append("WHERE ac.alumno_id_alumno = ? ");
+        sql.append("AND c.activo = 1");
 
         List<Curso> list = doQueryById(new SQLStatement(sql.toString()) {
             @Override
@@ -128,7 +127,8 @@ public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
         sql.append("JOIN curso c ON c.id_curso = cm.id_curso ");
         sql.append("JOIN docente_curso_materia dc on dc.id_curso_materia = c.id_curso ");
         sql.append("LEFT JOIN notificacion n ON (n.idcurso = c.id_curso AND n.iddocente = dc.id_docente AND n.tiponotificacion = 1 AND n.idalumno = ?) ");
-        sql.append("WHERE c.id_curso not in (select curso_id_curso from alumno_curso where alumno_id_alumno = ?)");
+        sql.append("WHERE c.id_curso not in (select curso_id_curso from alumno_curso where alumno_id_alumno = ?) ");
+        sql.append("AND c.activo = 1 AND m.activo = 1");
 
         List<CursoMateria> list = doQuery(new SQLStatement(sql.toString()) {
             @Override
@@ -157,6 +157,7 @@ public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
         sql.append("SELECT DISTINCT '0' as tipo_notificacion, m.id_materia, m.nombre, c.id_curso, c.codigo, c.descripcion ");
         sql.append("FROM curso c JOIN materia m ON c.id_materia = m.id_materia ");
         sql.append("WHERE c.id_docente = ?");
+        sql.append("AND c.activo = 1 AND m.activo = 1");
 
         List<CursoMateria> list = doQuery(new SQLStatement(sql.toString()) {
             @Override

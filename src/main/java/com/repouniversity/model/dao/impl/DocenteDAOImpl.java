@@ -22,7 +22,8 @@ public class DocenteDAOImpl extends GenericDAOImpl<Docente> implements DocenteDA
 
         sql.append("SELECT distinct d.*, p.* from docente d JOIN docente_curso_materia dcm ON d.id_docente = dcm.id_docente ");
         sql.append("JOIN persona p ON p.id_persona = d.id_persona ");
-        sql.append("WHERE dcm.id_curso_materia = ?");
+        sql.append("WHERE dcm.id_curso_materia =  ? ");
+        sql.append("AND d.activo = 1");
 
         List<Docente> list = doQuery(new SQLStatement(sql.toString()) {
             @Override

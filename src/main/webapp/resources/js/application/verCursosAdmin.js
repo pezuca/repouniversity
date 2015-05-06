@@ -1,4 +1,4 @@
-var usuariosAdmin = {
+var cursosAdmin = {
 	crearNuevoCursoAjax : function() {
 		$.ajax({
 			url: "nuevoUsuario",
@@ -102,7 +102,7 @@ var usuariosAdmin = {
 	},
 	deleteCursoAjax : function(cursoId) {
 		$.ajax({
-			url: "eliminarUsuario",
+			url: "eliminarCurso",
 			type: "POST",
 			data: {"cursoId" : cursoId},
 			success: function(data){
@@ -163,7 +163,6 @@ $(document).ready(function() {
 
 	$("#clientTable_length").remove();
 	
-	
 	$("#agregarCursoDialog").dialog({
 		resizable: false,
 		width:700,
@@ -174,8 +173,8 @@ $(document).ready(function() {
 		show: {effect: "fade", duration: 300},
 		buttons: {
 			"Crear": function() {
-				if(usuariosAdmin.validacionFormlario("#nuevoCursoForm")) {
-					usuariosAdmin.crearNuevoCursoAjax();
+				if(cursosAdmin.validacionFormlario("#nuevoCursoForm")) {
+					cursosAdmin.crearNuevoCursoAjax();
 				}
 			},
 			"Cancelar": function() {
@@ -201,8 +200,8 @@ $(document).ready(function() {
 		hide: {effect: "fade", duration: 300},
 		buttons: {
 			"Ok": function() {
-				if(usuariosAdmin.validacionFormlario("#editarCursoForm")) {
-					usuariosAdmin.editarUsuarioAjax();
+				if(cursosAdmin.validacionFormlario("#editarCursoForm")) {
+					cursosAdmin.editarUsuarioAjax();
 				}
 			},
 			"Cancelar": function() {
@@ -234,7 +233,7 @@ $(document).ready(function() {
 		hide: {effect: "fade", duration: 300},
 		buttons: {
 			"Eliminar": function() {
-				usuariosAdmin.deleteUsuarioAjax($("#deleteCursoDialog").data('cursoId'));
+				cursosAdmin.deleteCursoAjax($("#deleteCursoDialog").data('cursoId'));
 			},
 			"Cancelar": function() {
 				$(this).dialog("close");

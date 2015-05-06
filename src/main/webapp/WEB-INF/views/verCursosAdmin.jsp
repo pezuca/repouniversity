@@ -121,7 +121,7 @@
 	</div>
 	
 	<div id="deleteCursoDialog" title="Eliminar Curso">
-		<p>¿Esta seguro que desea eliminar el usuario?</p>
+		<p>¿Esta seguro que desea eliminar el curso?</p>
 	</div>
 	</div>
 	

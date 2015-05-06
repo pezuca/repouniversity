@@ -99,7 +99,8 @@ public class AlumnoDAOImpl extends GenericDAOImpl<Alumno> implements AlumnoDAO {
         StringBuilder sql = new StringBuilder();
 
         sql.append("SELECT a.* FROM alumno a JOIN grupo_alumno_curso gac ON a.id_alumno = gac.alumno_curso_alumno_id_alumno ");
-        sql.append("WHERE gac.grupo_id_grupo = ?");
+        sql.append("WHERE gac.grupo_id_grupo = ? ");
+        sql.append("AND a.activo = 1");
 
         List<Alumno> list = doQuery(new SQLStatement(sql.toString()) {
             @Override
@@ -129,7 +130,8 @@ public class AlumnoDAOImpl extends GenericDAOImpl<Alumno> implements AlumnoDAO {
         StringBuilder sql = new StringBuilder();
 
         sql.append("SELECT a.* FROM alumno a JOIN alumno_curso ac ON a.id_alumno = ac.id_alumno ");
-        sql.append("WHERE ac.id_curso = ?");
+        sql.append("WHERE ac.id_curso = ? ");
+        sql.append("AND a.activo = 1");
 
         List<Alumno> list = doQuery(new SQLStatement(sql.toString()) {
             @Override

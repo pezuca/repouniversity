@@ -6,8 +6,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -16,7 +14,6 @@ import com.repouniversity.model.dao.NotificacionDAO;
 import com.repouniversity.model.dao.query.InsertSQLStatement;
 import com.repouniversity.model.dao.query.SQLStatement;
 import com.repouniversity.model.dao.rowmapper.NotificacionRowMapper;
-import com.repouniversity.model.entity.Curso;
 import com.repouniversity.model.entity.Notificacion;
 
 @Repository
@@ -29,6 +26,7 @@ public class NotificacionDAOImpl extends GenericDAOImpl<Notificacion> implements
         StringBuilder sql = new StringBuilder();
 
         sql.append("SELECT * FROM notificacion n WHERE n.tiponotificacion = 1 AND n.idcurso = ?");
+        sql.append("AND n.activo = 1");
 
         List<Notificacion> list = doQuery(new SQLStatement(sql.toString()) {
             @Override
@@ -113,6 +111,7 @@ public class NotificacionDAOImpl extends GenericDAOImpl<Notificacion> implements
         StringBuilder sql = new StringBuilder();
 
         sql.append("SELECT * FROM notificacion n WHERE(n.tiponotificacion = 3 or n.tiponotificacion = 4) AND n.idalumno = ? ");
+        sql.append("AND n.activo = 1 ");
         sql.append("order by n.idnotificacion asc");
 
         List<Notificacion> list = doQuery(new SQLStatement(sql.toString()) {
