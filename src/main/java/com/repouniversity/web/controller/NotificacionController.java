@@ -76,9 +76,17 @@ public class NotificacionController {
 //    }
     
     @RequestMapping(value = "alumno/notificaciones", method = {RequestMethod.GET})
-    public ModelAndView lllistaNotificaciones(HttpServletRequest request, @ModelAttribute("login") UsuarioRol usuario) {
+    public ModelAndView listaNotificaciones(HttpServletRequest request, @ModelAttribute("login") UsuarioRol usuario) {
 
         List<NotificacionTO> Notificaciones = notificacionService.getNotificacionesForAlumno(usuario.getIdAluDoc());
+
+        return new ModelAndView("verNotificaciones").addObject("notificaciones", Notificaciones);
+    }
+    
+    @RequestMapping(value = "docente/notificaciones", method = {RequestMethod.GET})
+    public ModelAndView laListaNotificaciones(HttpServletRequest request, @ModelAttribute("login") UsuarioRol usuario) {
+
+        List<NotificacionTO> Notificaciones = notificacionService.getNotificacionesForDocente(usuario.getIdAluDoc());
 
         return new ModelAndView("verNotificaciones").addObject("notificaciones", Notificaciones);
     }

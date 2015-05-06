@@ -26,7 +26,7 @@
 	             <div class="col-lg-12">
 					<div class="usuarioInformation">
 						<div class="page-header">
-							<h1>Solicitud de inscripción a curso</h1>
+							<h1>Ver Notificaciones</h1>
 						</div>
 					</div>
 

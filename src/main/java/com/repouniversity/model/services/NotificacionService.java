@@ -84,6 +84,17 @@ public class NotificacionService {
 	        return notificacionList;
 
 		
-		
 	}
+
+	public List<NotificacionTO> getNotificacionesForDocente(Long idAluDoc) {
+		
+		List<Notificacion> notifi = notificacionDao.findNotificacionesForDocenteId(idAluDoc);
+		
+		List<NotificacionTO> notificacionList = new ArrayList<NotificacionTO>();
+
+	        for (Notificacion notificacion : notifi) {
+	            notificacionList.add(buildNotificacion(notificacion));
+	        }
+
+	        return notificacionList;	}
 }
