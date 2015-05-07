@@ -105,7 +105,7 @@ public abstract class GenericDAOImpl<E extends IdentifiedObject> implements Gene
                 @Override
                 public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                     PreparedStatement ps = connection.prepareStatement("SELECT DISTINCT * FROM " + getTableName() + " WHERE " + getColumnIdName() + " IN ("
-                            + getQuestionMarks(ids) + ")");
+                            + getQuestionMarks(ids) + ") AND activo = 1");
 
                     for (int i = 0; i < ids.size(); i++) {
                         ps.setLong(i + 1, ids.get(i));
