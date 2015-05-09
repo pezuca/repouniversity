@@ -18,7 +18,7 @@ public class CursoMateriaRowMapper implements RowMapper<CursoMateria> {
         cursoMateria.setDescripcionCurso(rs.getString("descripcion"));
         cursoMateria.setIdMateria(rs.getLong("id_materia"));
         cursoMateria.setNombreMateria(rs.getString("nombre"));
-        cursoMateria.setTipoNotificacion(rs.getLong("tipo_notificacion"));
+        cursoMateria.setTipoNotificacion(rs.getLong("tiponotificacion"));
         
         return cursoMateria;
     }

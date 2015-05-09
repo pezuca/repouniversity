@@ -17,24 +17,24 @@ import com.repouniversity.model.entity.Docente;
 public class DocenteDAOImpl extends GenericDAOImpl<Docente> implements DocenteDAO {
 
     @Override
-    public Docente getByCursoMateriaId(final Long cursoMateriaId) {
+    public Docente getByCursoMateriaId(final Long cursoId) {
         StringBuilder sql = new StringBuilder();
 
-        sql.append("SELECT distinct d.*, p.* from docente d JOIN docente_curso_materia dcm ON d.id_docente = dcm.id_docente ");
+        sql.append("SELECT distinct d.*, p.* from curso c JOIN docente d ON c.id_docente = c.id_docente ");
         sql.append("JOIN persona p ON p.id_persona = d.id_persona ");
-        sql.append("WHERE dcm.id_curso_materia =  ? ");
-        sql.append("AND d.activo = 1");
+        sql.append("WHERE c.id_curso =  ? ");
+        sql.append("AND d.activo = 1 AND p.activo = 1");
 
         List<Docente> list = doQuery(new SQLStatement(sql.toString()) {
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
-                ps.setLong(1, cursoMateriaId);
+                ps.setLong(1, cursoId);
             }
 
             @Override
             public void doAfterTransaction(int result) {
             }
-        }, new DocenteRowMapper(), "getByCursoMateriaId: " + cursoMateriaId);
+        }, new DocenteRowMapper(), "getByCursoMateriaId: " + cursoId);
 
         if (list.isEmpty()) {
             return null;

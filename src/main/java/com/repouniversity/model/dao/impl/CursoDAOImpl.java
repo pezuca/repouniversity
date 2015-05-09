@@ -122,14 +122,14 @@ public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
     public List<CursoMateria> findCursosMateriaDisponiblesParaAlumno(final Long alumnoId) {
         StringBuilder sql = new StringBuilder();
 
-        sql.append("SELECT DISTINCT n.tiponotificacion, cm.id_curso_materia, m.id_materia, m.nombre, c.id_curso, c.codigo, c.descripcion ");
-        sql.append("FROM materia m JOIN curso_materia cm ON cm.id_materia = m.id_materia ");
-        sql.append("JOIN curso c ON c.id_curso = cm.id_curso ");
-        sql.append("JOIN docente_curso_materia dc on dc.id_curso_materia = c.id_curso ");
-        sql.append("LEFT JOIN notificacion n ON (n.idcurso = c.id_curso AND n.iddocente = dc.id_docente AND n.tiponotificacion = 1 AND n.idalumno = ?) ");
-        sql.append("WHERE c.id_curso not in (select curso_id_curso from alumno_curso where alumno_id_alumno = ?) ");
+        sql.append("SELECT DISTINCT n.tiponotificacion, m.id_materia, m.nombre, c.id_curso, c.codigo, c.descripcion ");
+        sql.append("FROM curso c ");
+        sql.append("JOIN materia m ON m.id_materia = c.id_materia ");
+        sql.append("JOIN carrera_materia cm on cm.idmateria = m.id_materia ");
+        sql.append("LEFT JOIN notificacion n ON n.idcurso = c.id_curso AND tiponotificacion = 1 AND n.idalumno = ? ");
+        sql.append("WHERE c.id_curso not in (SELECT alumno_curso.id_curso from alumno_curso WHERE alumno_curso.id_alumno = ?) ");
         sql.append("AND c.activo = 1 AND m.activo = 1");
-
+        
         List<CursoMateria> list = doQuery(new SQLStatement(sql.toString()) {
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
@@ -147,7 +147,6 @@ public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
         }
 
         return list;
-        
     }
 
     @Override
@@ -156,7 +155,7 @@ public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
 
         sql.append("SELECT DISTINCT '0' as tipo_notificacion, m.id_materia, m.nombre, c.id_curso, c.codigo, c.descripcion ");
         sql.append("FROM curso c JOIN materia m ON c.id_materia = m.id_materia ");
-        sql.append("WHERE c.id_docente = ?");
+        sql.append("WHERE c.id_docente = ? ");
         sql.append("AND c.activo = 1 AND m.activo = 1");
 
         List<CursoMateria> list = doQuery(new SQLStatement(sql.toString()) {

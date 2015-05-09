@@ -52,7 +52,7 @@
 									<td>
 										<c:choose>
 											<c:when test="${cursoMat.tipoNotificacion != 1}">
-												<button class="btn btn-info btn-circle" type="button" onclick="clickSolicitud(${cursoMat.idCurso}, ${userLog.idAluDoc}, ${cursoMat.docente.id}, 1)"><i class="fa fa-check"></i></button>
+												<button class="btn btn-info btn-circle" type="button" onclick="clickSolicitud(${cursoMat.id}, ${userLog.idAluDoc}, ${cursoMat.docente.id}, 1)"><i class="fa fa-check"></i></button>
 											</c:when>
 											<c:otherwise>
 												<button disabled="disabled" class="btn btn-default btn-circle" type="button"><i class="fa fa-check"></i></button>
