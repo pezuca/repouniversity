@@ -61,4 +61,5 @@ public class Persona implements IdentifiedObject {
     public void setFechasys(Date fechasys) {
         this.fechasys = fechasys;
     }
+	
 }

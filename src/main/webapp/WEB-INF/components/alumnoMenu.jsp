@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
         <ul class="nav" id="side-menu">
@@ -30,7 +31,6 @@
                      <li><a href="/repouniversity/alumno/cursos">Ver cursos</a></li>
                      <li><a href="/repouniversity/alumno/solicitarCurso">Solicitar alta a un curso</a></li>              
                  </ul>
- 
              </li>
              <li ${activeTab eq 'administracion' ? 'active':''}>
                  <a href="index.html"><i class="fa fa-gears"></i> <span class="nav-label">Administración</span> <span class="fa arrow"></span></a>
@@ -38,6 +38,7 @@
 	                <li><a href="#">Ver mis archivos</a></li>
 					<li><a href="#">Ver mis grupos de TPs</a></li>
 					<li><a href="#">Ver mis notificaciones</a></li>            
+					<li><a href="/repouniversity/subirArchivo">Subir Archivo</a></li>
                  </ul>
              </li>
          </ul>

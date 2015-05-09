@@ -56,7 +56,18 @@ public class LoginController {
 
 		return new ModelAndView("redirect:" + redirectUrl);
 	}
+	
+	/**
+	 * @param request
+	 * @return Model and View for loginAnonimo
+	 */
+	@RequestMapping(value = "/loginAnonimo", method = { RequestMethod.GET })
+	public ModelAndView loginAnonimo(HttpServletRequest request)
+	{
+		return new ModelAndView("loginAnonimo");
+	}
 
+	
 	/**
 	 * @param request
 	 * @return Model and View for logout action

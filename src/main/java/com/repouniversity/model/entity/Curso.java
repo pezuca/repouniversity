@@ -97,4 +97,5 @@ public class Curso implements Comparable<Curso>, IdentifiedObject {
     public void setAlumnos(List<AlumnoTO> alumnos) {
         this.alumnos = alumnos;
     }
+
 }

@@ -9,5 +9,5 @@ public interface GrupoDAO extends GenericDAO<Grupo> {
 
     Alumno findAlumnoByGrupoId(Integer grupoId);
 
-    List<Grupo> findGruposByCurso(Long cursoId);
+    List<Grupo> findGruposByCurso(Long idGrupo);
 }
