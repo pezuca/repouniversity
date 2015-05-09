@@ -109,11 +109,12 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Nombre Grupo*:</label>
                 <div class="col-sm-10"><input name="nombre" type="text" class="form-control" required="required"></div>
+                <div class="col-sm-10"><input name="idcurso" type="hiden" class="form-control" required="required" value = "${curso.id}"></div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Lista de Alumnos*:</label>
                 <div class="col-sm-10">
-                	<table id="cursosGruposAlumnos" class="table table-striped hover">
+                	<table id="cursoGruposAlumnos" name = "cursoGruposAlumnos" class="table table-striped hover">
 						<thead class="encabezado">
 							<tr>
 								<th>Id</th>
@@ -126,7 +127,7 @@
 								<tr>
 									<td>${alumno.persona.id}</td>
 									<td>${alumno.persona.apellido}, ${alumno.persona.nombre}</td>
-									<td><input name="cbGrupo" type="checkbox" />
+									<td><input name="cbGrupo" type="checkbox" value="${alumno.persona.id}"/>
 									</td>
 								</tr>
 							</c:forEach>
