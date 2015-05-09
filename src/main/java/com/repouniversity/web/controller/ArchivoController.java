@@ -18,6 +18,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.repouniversity.model.entity.Archivo;
+import com.repouniversity.model.entity.Curso;
 import com.repouniversity.model.entity.UsuarioRol;
 import com.repouniversity.model.services.ArchivoService;
 import com.repouniversity.model.services.PersonaService;
@@ -54,24 +55,24 @@ public class ArchivoController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return new ModelAndView("repouniversity/dashboard");
+		return new ModelAndView("/");
 	}
 
 	private void grabarFicheroALocal(CommonsMultipartFile[] file,
 			String[] mytext, String descripcion, UsuarioRol usuario)
 			throws Exception {
-		String etiqueta = null;
+		StringBuffer etiqueta = new StringBuffer();
 
 		// AGREGO LAS ETIQUETAS AL CAMPO ETIQUETAS PARA LUEGO SUBIR A LA BASE
 		// ASOCIADAS AL ARCHIVO
 
 		for (int i = 0; i < mytext.length; i++) {
-			etiqueta = etiqueta + mytext[i] + ";";
+			etiqueta.append(mytext[i] + ";");
 		}
 
 		// AGREGO LOS ARCHIVOS Y LOS SUBO A LA CARPETA DEL SERVER.
 		for (int i = 0; i < file.length; i++) {
-			File localFile = new File("C:/workspace/repouniversity/Archivos/"
+			File localFile = new File("C:/Archivos/"
 					+ (new Date()).getTime() + file[i].getOriginalFilename());
 			FileOutputStream os = null;
 			try {
@@ -93,9 +94,12 @@ public class ArchivoController {
 
 				nuevoArchivo.setPersona(personaService.findById(usuario
 						.getIdPersona()));
-				// nuevoArchivo.setCurso();
-				nuevoArchivo.setTags(etiqueta);
+				nuevoArchivo.setTags(etiqueta.toString());
+				nuevoArchivo.setCurso(new Curso());
+				
+				nuevoArchivo.getCurso().setId(1L);
 				archivoService.subirArchivo(nuevoArchivo);
+				
 			} catch (Exception e) {
 				System.out.println(e);
 			} finally {

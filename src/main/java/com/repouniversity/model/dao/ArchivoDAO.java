@@ -2,7 +2,6 @@ package com.repouniversity.model.dao;
 
 import java.util.List;
 
-import com.repouniversity.model.dao.query.InsertSQLStatement;
 import com.repouniversity.model.entity.Archivo;
 
 public interface ArchivoDAO extends GenericDAO<Archivo>{
@@ -11,7 +10,7 @@ public interface ArchivoDAO extends GenericDAO<Archivo>{
 	
 	List <Archivo> findArchivoByMateria(String materia);
 	
-	List <Archivo> findArchivoByDocente(String string);
+	List <Archivo> findArchivoByDocente(String string);	
 
-	InsertSQLStatement subirArchivo(Archivo nuevoArchivo);
+	void subirArchivo(Archivo nuevoArchivo);
 }
