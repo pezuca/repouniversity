@@ -90,13 +90,13 @@ public class CursoController {
     }
 
     @RequestMapping(value = "docente/crearGrupo", method = {RequestMethod.GET})
-    public ModelAndView solicitarCursoAjax(@RequestParam(value = "curso", required = false) Long cursoId,
-            @RequestParam(value = "listaAlumnoId", required = false) Long[] listaAlumnoId,
-            @RequestParam(value = "nombreGrupo", required = false) String nombre) {
+    public ModelAndView crearGrupo(@RequestParam(value = "idcurso", required = false) Long idCurso,
+            @RequestParam(value = "cursosGruposAlumnos", required = false) Long[] listaAlumnoId,
+            @RequestParam(value = "nombre", required = false) String nombre) {
 
-        grupoService.crearGrupo(cursoId, listaAlumnoId, nombre);
+        grupoService.crearGrupo(idCurso, listaAlumnoId, nombre);
 
-        return new ModelAndView("verCursoDocente").addObject("curso", cursoService.getById(cursoId));
+        return new ModelAndView("verCursoDocente").addObject("curso", cursoService.getById(idCurso));
     }
 
     @RequestMapping(value = "docente/verGrupo", method = {RequestMethod.GET})

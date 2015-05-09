@@ -1,13 +1,13 @@
 var GruposAdmin = {
 	crearNuevoGrupoAjax : function() {
 		$.ajax({
-			url: "nuevoUsuario",
+			url: "/repouniversity/docente/crearGrupo",
 			type: "POST",
-			data: $("#nuevoAlumnoForm").serialize(),
+			data: $("#nuevoGrupoForm").serialize(),
 			success: function(data){
 				$.gritter.add({
-					title:'Usuario creado',
-					text: 'La creacion del usuario fue exitosa.',
+					title:'Grupo creado',
+					text: 'La creacion del Grupo fue exitosa.',
 					sticky: false
 				});
 				
@@ -43,7 +43,7 @@ var GruposAdmin = {
 				$("#crearGrupoDialog").dialog("close");						
 			},
 			error: function(data) {
-				$("#nuevoAlumnoForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de crear el usuario, inténtelo mas tarde.</p></div>")
+				$("#nuevoGrupoForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de crear el usuario, inténtelo mas tarde.</p></div>")
 				setTimeout(function(){
 					$("#crearGrupoDialog .infoDialog").hide(function(){
 						$(this).remove();
@@ -91,7 +91,7 @@ var GruposAdmin = {
 				$("#editarAlumnoDialog").dialog("close");						
 			},
 			error: function(data) {
-				$("#nuevoAlumnoForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de crear el usuario, inténtelo mas tarde.</p></div>")
+				$("#nuevoGrupoForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de crear el usuario, inténtelo mas tarde.</p></div>")
 				setTimeout(function(){
 					$("#crearGrupoDialog .infoDialog").hide(function(){
 						$(this).remove();
@@ -146,6 +146,7 @@ var GruposAdmin = {
 	}
 };
 
+
 $(document).ready(function() {
 	$('#listaPersonas').DataTable({
 		"processing" : false,
@@ -174,8 +175,8 @@ $(document).ready(function() {
 		show: {effect: "fade", duration: 300},
 		buttons: {
 			"Crear": function() {
-				if(usuariosAdmin.validacionFormlario("#nuevoAlumnoForm")) {
-					usuariosAdmin.crearNuevoUsuarioAjax();
+				if(GruposAdmin.validacionFormlario("#nuevoGrupoForm")) {
+					GruposAdmin.crearNuevoGrupoAjax();
 				}
 			},
 			"Cancelar": function() {
@@ -184,8 +185,8 @@ $(document).ready(function() {
 		},
 		open: function(event, ui) {
 			$(".infoDialog").remove();
-			$('#nuevoAlumnoForm').trigger("reset");
-			$("#nuevoAlumnoForm").find(".form-group").removeClass("has-error");
+			$('#nuevoGrupoForm').trigger("reset");
+			$("#nuevoGrupoForm").find(".form-group").removeClass("has-error");
 		},
 		close: function(event, ui) {
 		}
@@ -205,8 +206,8 @@ $(document).ready(function() {
 		hide: {effect: "fade", duration: 300},
 		buttons: {
 			"Ok": function() {
-				if(usuariosAdmin.validacionFormlario("#editarAlumnoForm")) {
-					usuariosAdmin.editarUsuarioAjax();
+				if(GruposAdmin.validacionFormlario("#editarAlumnoForm")) {
+					GruposAdmin.editarUsuarioAjax();
 				}
 			},
 			"Cancelar": function() {
@@ -240,7 +241,7 @@ $(document).ready(function() {
 		hide: {effect: "fade", duration: 300},
 		buttons: {
 			"Eliminar": function() {
-				usuariosAdmin.deleteUsuarioAjax($("#deleteAlumnoDialog").data('userId'));
+				GruposAdmin.deleteUsuarioAjax($("#deleteAlumnoDialog").data('userId'));
 			},
 			"Cancelar": function() {
 				$(this).dialog("close");
@@ -248,7 +249,7 @@ $(document).ready(function() {
 		},
 		open: function(event, ui) {
 			$(".infoDialog").remove();
-			$('#nuevoAlumnoForm').trigger("reset");
+			$('#nuevoGrupoForm').trigger("reset");
 		},
 		close: function(event, ui) {
 		}

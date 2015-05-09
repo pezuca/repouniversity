@@ -78,19 +78,19 @@
                        <div class="text-center link-block">
                            	<c:choose>
 								<c:when test="${login.rol == 'alumno'}">
-									<a href="alumno/notificaciones">
+									<a href="/repouniversity/alumno/notificaciones">
 		                               <strong>Ver todas las notificaciones</strong>
 		                               <i class="fa fa-angle-right"></i>
 		                           </a>
 								</c:when>
 								<c:when test="${login.rol == 'docente'}">
-									<a href="docente/notificaciones">
+									<a href="/repouniversity/docente/notificaciones">
 		                               <strong>Ver todas las notificaciones</strong>
 		                               <i class="fa fa-angle-right"></i>
 		                           </a>
 								</c:when>
 								<c:when test="${login.rol == 'administrador'}">
-									<a href="notificaciones.html">
+									<a href="/repouniversity/notificaciones.html">
 		                               <strong>Ver todas las notificaciones</strong>
 		                               <i class="fa fa-angle-right"></i>
 		                           </a>
