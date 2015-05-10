@@ -29,8 +29,8 @@
 	    <script src="/repouniversity/resources/js/plugins/flot/curvedLines.js"></script>
 	
 	    <!-- Peity -->
-	    <script src="/repouniversity/resources/js/plugins/peity/jquery.peity.min.js"></script>
-	    <script src="/repouniversity/resources/js/demo/peity-demo.js"></script>
+<!-- 	    <script src="/repouniversity/resources/js/plugins/peity/jquery.peity.min.js"></script> -->
+<!-- 	    <script src="/repouniversity/resources/js/demo/peity-demo.js"></script> -->
 	
 	    <!-- Custom and plugin javascript -->
 	    <script src="/repouniversity/resources/js/inspinia.js"></script>
@@ -41,18 +41,17 @@
 	    <link href="/repouniversity/resources/js/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet"></link>
 	
 	    <!-- Jvectormap -->
-	    <script src="/repouniversity/resources/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-	    <script src="/repouniversity/resources/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+<!-- 	    <script src="/repouniversity/resources/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script> -->
+<!-- 	    <script src="/repouniversity/resources/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script> -->
 	
 	    <!-- Sparkline -->
-	    <script src="/repouniversity/resources/js/plugins/sparkline/jquery.sparkline.min.js"></script>
+<!-- 	    <script src="/repouniversity/resources/js/plugins/sparkline/jquery.sparkline.min.js"></script> -->
 	
 	    <!-- Sparkline demo data  -->
-	    <script src="/repouniversity/resources/js/demo/sparkline-demo.js"></script>
+<!-- 	    <script src="/repouniversity/resources/js/demo/sparkline-demo.js"></script> -->
 	    
-	    <script src="/repouniversity/resources/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+<!-- 	    <script src="/repouniversity/resources/js/plugins/dataTables/dataTables.bootstrap.js"></script> -->
 	    <script src="/repouniversity/resources/js/plugins/dataTables/jquery.dataTables.js"></script>
-	    
 	    <!-- Data Tables -->
 	    <link href="/repouniversity/resources/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
 	    

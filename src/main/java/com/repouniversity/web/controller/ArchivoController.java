@@ -8,11 +8,14 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,6 +25,7 @@ import com.repouniversity.model.entity.Curso;
 import com.repouniversity.model.entity.UsuarioRol;
 import com.repouniversity.model.services.ArchivoService;
 import com.repouniversity.model.services.PersonaService;
+import com.repouniversity.web.exceptions.SubirArchivoException;
 
 @Controller
 @SessionAttributes("login")
@@ -43,7 +47,9 @@ public class ArchivoController {
 	}
 
 	@RequestMapping(value = "/subirArchivo", method = { RequestMethod.POST })
-	public ModelAndView guardaFichero(
+	@ResponseBody
+	@ResponseStatus(value = HttpStatus.OK)
+	public void guardaFichero(
 			HttpServletRequest request,
 			@RequestParam(value = "file[]") CommonsMultipartFile[] file,
 			@RequestParam(value = "mytext", required = false) String[] myText,
@@ -53,14 +59,13 @@ public class ArchivoController {
 		try {
 			grabarFicheroALocal(file, myText, descripcion, usuario);
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new SubirArchivoException(
+					"Ha ocurrido un error al intentar subir el archivo.", e);
 		}
-		return new ModelAndView("/");
 	}
 
 	private void grabarFicheroALocal(CommonsMultipartFile[] file,
-			String[] mytext, String descripcion, UsuarioRol usuario)
-			throws Exception {
+			String[] mytext, String descripcion, UsuarioRol usuario) {
 		StringBuffer etiqueta = new StringBuffer();
 
 		// AGREGO LAS ETIQUETAS AL CAMPO ETIQUETAS PARA LUEGO SUBIR A LA BASE
@@ -72,8 +77,8 @@ public class ArchivoController {
 
 		// AGREGO LOS ARCHIVOS Y LOS SUBO A LA CARPETA DEL SERVER.
 		for (int i = 0; i < file.length; i++) {
-			File localFile = new File("C:/Archivos/"
-					+ (new Date()).getTime() + file[i].getOriginalFilename());
+			File localFile = new File("C:/Archivos/" + (new Date()).getTime()
+					+ file[i].getOriginalFilename());
 			FileOutputStream os = null;
 			try {
 				// GUARDO LOS ARCHIVOS EN LA CARPETA
@@ -96,10 +101,10 @@ public class ArchivoController {
 						.getIdPersona()));
 				nuevoArchivo.setTags(etiqueta.toString());
 				nuevoArchivo.setCurso(new Curso());
-				
+
 				nuevoArchivo.getCurso().setId(1L);
 				archivoService.subirArchivo(nuevoArchivo);
-				
+
 			} catch (Exception e) {
 				System.out.println(e);
 			} finally {
