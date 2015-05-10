@@ -1,6 +1,7 @@
 package com.repouniversity.web.controller;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
@@ -30,6 +31,8 @@ import com.repouniversity.web.exceptions.SubirArchivoException;
 @Controller
 @SessionAttributes("login")
 public class ArchivoController {
+
+	private static final String UPLOAD_PATH = "c:/Archivos/";
 
 	@Autowired
 	private ArchivoService archivoService;
@@ -65,7 +68,7 @@ public class ArchivoController {
 	}
 
 	private void grabarFicheroALocal(CommonsMultipartFile[] file,
-			String[] mytext, String descripcion, UsuarioRol usuario) {
+			String[] mytext, String descripcion, UsuarioRol usuario) throws IOException {
 		StringBuffer etiqueta = new StringBuffer();
 
 		// AGREGO LAS ETIQUETAS AL CAMPO ETIQUETAS PARA LUEGO SUBIR A LA BASE
@@ -77,13 +80,13 @@ public class ArchivoController {
 
 		// AGREGO LOS ARCHIVOS Y LOS SUBO A LA CARPETA DEL SERVER.
 		for (int i = 0; i < file.length; i++) {
-			File localFile = new File("C:/Archivos/" + (new Date()).getTime()
+			File localFile = new File(UPLOAD_PATH + (new Date()).getTime()
 					+ file[i].getOriginalFilename());
 			FileOutputStream os = null;
+			// GUARDO LOS ARCHIVOS EN LA CARPETA
+			os = new FileOutputStream(localFile);
+			os.write(file[i].getBytes());
 			try {
-				// GUARDO LOS ARCHIVOS EN LA CARPETA
-				os = new FileOutputStream(localFile);
-				os.write(file[i].getBytes());
 
 				// AGEGO LAS ETIQUETAS AL ARCHIVO Y GUARDO EN LA BASE EL NOMBRE
 				// DEL ARCHIVO
@@ -105,8 +108,6 @@ public class ArchivoController {
 				nuevoArchivo.getCurso().setId(1L);
 				archivoService.subirArchivo(nuevoArchivo);
 
-			} catch (Exception e) {
-				System.out.println(e);
 			} finally {
 				if (os != null) {
 					try {
