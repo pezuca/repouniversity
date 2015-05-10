@@ -20,6 +20,7 @@ public class Curso implements Comparable<Curso>, IdentifiedObject {
     private List<NotificacionTO> notificaciones;
     private List<Grupo> grupos;
     private List<AlumnoTO> alumnos;
+    private Materia materia;
 
     public Long getId() {
         return id;
@@ -98,4 +99,11 @@ public class Curso implements Comparable<Curso>, IdentifiedObject {
         this.alumnos = alumnos;
     }
 
+    public Materia getMateria() {
+        return materia;
+    }
+
+    public void setMateria(Materia materia) {
+        this.materia = materia;
+    }
 }

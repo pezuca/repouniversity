@@ -13,6 +13,7 @@
 <%@include file="../components/common-statics-imports.jsp"%>
 
 <script type="text/javascript" src="resources/js/application/dashboard.js"></script>
+<script src="/repouniversity/resources/js/application/verCursoDocente.js"></script>
 </head>
 <body class=" pace-done">
 	<div id="wrapper">
@@ -28,6 +29,7 @@
 						<div class="page-header">
 							<h1>Detalles curso ${curso.nombre}</h1>
 						</div>
+						
 						<div class="page-header">
 							<h3>Notificaciones</h3>
 						</div>
@@ -60,7 +62,12 @@
 							</tr>
 						</tfoot>
 					</table>
-					<button class="altaNotificacion btn btn-primary" onclick="altaEnCurso(${notificacion.id})">Crear Grupo</button>&nbsp;
+					<div class="ibox-title">
+	                      <h5>Grupos</h5>
+		                  <div class="ibox-tools" id="crearGrupoButton">
+	                          <a href="#crearGrupoButton" class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  Grupo</a>
+	                      </div>
+	                </div>
 					<table id="cursosGrupos" class="table table-striped hover">
 						<thead class="encabezado">
 							<tr>
@@ -92,7 +99,22 @@
 							</tr>
 						</tfoot>
 					</table>
-					<table id="cursosGruposAlumnos" class="table table-striped hover">
+					
+				</div>
+	        </div>
+		</div>
+		<!-- 	Ventanas -->
+	<div id="crearGrupoDialog" title="Nuevo Grupo" class="modal fade in">
+		<form id="nuevoGrupoForm" class="form-horizontal">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Nombre Grupo*:</label>
+                <div class="col-sm-10"><input name="nombre" type="text" class="form-control" required="required"></div>
+                <div class="col-sm-10"><input name="idcurso" type="hiden" class="form-control" required="required" value = "${curso.id}"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Lista de Alumnos*:</label>
+                <div class="col-sm-10">
+                	<table id="cursoGruposAlumnos" name = "cursoGruposAlumnos" class="table table-striped hover">
 						<thead class="encabezado">
 							<tr>
 								<th>Id</th>
@@ -105,7 +127,7 @@
 								<tr>
 									<td>${alumno.persona.id}</td>
 									<td>${alumno.persona.apellido}, ${alumno.persona.nombre}</td>
-									<td><input name="cbGrupo" type="checkbox" />
+									<td><input name="cbGrupo" type="checkbox" value="${alumno.persona.id}"/>
 									</td>
 								</tr>
 							</c:forEach>
@@ -118,10 +140,10 @@
 							</tr>
 						</tfoot>
 					</table>
-				</div>
-	        </div>
-		</div>
-		
+                </div>
+            </div>
+		</form>
+	</div>
 		<%@include file="../components/footer.jsp"%>
 	</div>
 	<script>

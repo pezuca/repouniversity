@@ -25,7 +25,8 @@ public class NotificacionDAOImpl extends GenericDAOImpl<Notificacion> implements
     public List<Notificacion> getNotificacionesSinConfirmar(final Long cursoId) {
         StringBuilder sql = new StringBuilder();
 
-        sql.append("SELECT * FROM notificacion n WHERE n.tiponotificacion = 1 AND n.idcurso = ?");
+        sql.append("SELECT * FROM notificacion n WHERE n.tiponotificacion = 1 AND n.idcurso = ? ");
+        sql.append("AND n.activo = 1");
 
         List<Notificacion> list = doQuery(new SQLStatement(sql.toString()) {
             @Override
@@ -104,4 +105,57 @@ public class NotificacionDAOImpl extends GenericDAOImpl<Notificacion> implements
     protected String getColumnIdName() {
         return "idnotificacion";
     }
+    
+    @Override
+    public List<Notificacion> findNotificacionesForAlumnoId(final Long idAluDoc) {
+        StringBuilder sql = new StringBuilder();
+
+        sql.append("SELECT * FROM notificacion n WHERE(n.tiponotificacion = 3 or n.tiponotificacion = 4) AND n.idalumno = ? ");
+        sql.append("AND n.activo = 1 ");
+        sql.append("order by n.idnotificacion asc");
+
+        List<Notificacion> list = doQuery(new SQLStatement(sql.toString()) {
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+                ps.setLong(1, idAluDoc);
+            }
+
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+        }, new NotificacionRowMapper(), "findNotificacionesForAlumnoId: " + idAluDoc);
+        
+        if (list.isEmpty()) {
+            return null;
+        }
+
+        return list;
+    }
+    @Override
+    public List<Notificacion> findNotificacionesForDocenteId(final Long idAluDoc) {
+        StringBuilder sql = new StringBuilder();
+
+        sql.append("SELECT * FROM notificacion n WHERE(n.tiponotificacion = 1 or n.tiponotificacion = 2) AND n.iddocente = ? ");
+        sql.append("order by n.idnotificacion asc");
+
+        List<Notificacion> list = doQuery(new SQLStatement(sql.toString()) {
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+                ps.setLong(1, idAluDoc);
+            }
+
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+        }, new NotificacionRowMapper(), "findNotificacionesForDocenteId: " + idAluDoc);
+        
+        if (list.isEmpty()) {
+            return null;
+        }
+
+        return list;
+    }
+    
+    
+    
 }

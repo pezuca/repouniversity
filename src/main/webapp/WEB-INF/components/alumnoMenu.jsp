@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
         <ul class="nav" id="side-menu">
@@ -37,7 +36,7 @@
                  <ul class="nav nav-second-level">
 	                <li><a href="#">Ver mis archivos</a></li>
 					<li><a href="#">Ver mis grupos de TPs</a></li>
-					<li><a href="#">Ver mis notificaciones</a></li>            
+					<li><a href="/repouniversity/alumno/notificaciones">Ver mis notificaciones</a></li>        
 					<li><a href="/repouniversity/subirArchivo">Subir Archivo</a></li>
                  </ul>
              </li>

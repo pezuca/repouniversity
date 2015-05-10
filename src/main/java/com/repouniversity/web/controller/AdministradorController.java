@@ -12,11 +12,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.repouniversity.model.entity.Curso;
+import com.repouniversity.model.entity.Materia;
 import com.repouniversity.model.entity.Usuario;
 import com.repouniversity.model.entity.UsuarioRol;
 import com.repouniversity.model.entity.to.UsuarioTO;
 import com.repouniversity.model.services.AlumnoService;
+import com.repouniversity.model.services.CursoService;
 import com.repouniversity.model.services.DocenteService;
+import com.repouniversity.model.services.MateriaService;
 import com.repouniversity.model.services.PersonaService;
 import com.repouniversity.model.services.UsuarioRolService;
 import com.repouniversity.model.services.UsuarioService;
@@ -38,12 +42,32 @@ public class AdministradorController {
     
     @Autowired
     public UsuarioRolService usuarioRolService;
+    
+    @Autowired
+    public CursoService cursoService;
+    
+    @Autowired
+    public MateriaService materiaService;
 
     @RequestMapping(value = "admin/verUsuarios", method = {RequestMethod.GET})
-    public ModelAndView getPersonas() {
+    public ModelAndView getUsuarios() {
 
         List<UsuarioTO> listaUsuarios = usuarioService.getAll();
         return new ModelAndView("verUsuariosAdmin").addObject("usuarios", listaUsuarios);
+    }
+    
+    @RequestMapping(value = "admin/verCursos", method = {RequestMethod.GET})
+    public ModelAndView getCursos() {
+
+        List<Curso> listaCurso = cursoService.getAll();
+        return new ModelAndView("verCursosAdmin").addObject("cursos", listaCurso);
+    }
+    
+    @RequestMapping(value = "admin/verMaterias", method = {RequestMethod.GET})
+    public ModelAndView getMaterias() {
+
+        List<Materia> listaMaterias = materiaService.getAll();
+        return new ModelAndView("verMateriasAdmin").addObject("materias", listaMaterias);
     }
 
     @RequestMapping(value = "admin/nuevoUsuario", method = {RequestMethod.POST})
@@ -80,5 +104,12 @@ public class AdministradorController {
         UsuarioRol usuarioRol = usuarioRolService.getUsuarioById(userId);
         
         usuarioService.completelyDeleteUsuario(usuarioRol);
+    }
+    
+    @RequestMapping(value = "admin/eliminarCurso", method = {RequestMethod.POST})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public void deleteCursoAjax(@RequestParam(value = "cursoId") Long cursoId) {
+        cursoService.completelyDeleteCurso(cursoService.getById(cursoId));
     }
 }

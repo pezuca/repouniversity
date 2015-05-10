@@ -5,14 +5,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.repouniversity.model.dao.NotificacionDAO;
 import com.repouniversity.model.entity.Notificacion;
 import com.repouniversity.model.entity.to.NotificacionTO;
 
 @Service
-@Transactional
 public class NotificacionService {
 
     @Autowired
@@ -71,4 +69,31 @@ public class NotificacionService {
         
         return noti;
     }
+
+	public List<NotificacionTO> getNotificacionesForAlumno(Long idAluDoc) {
+		
+		List<Notificacion> notifi = notificacionDao.findNotificacionesForAlumnoId(idAluDoc);
+		
+		List<NotificacionTO> notificacionList = new ArrayList<NotificacionTO>();
+
+	        for (Notificacion notificacion : notifi) {
+	            notificacionList.add(buildNotificacion(notificacion));
+	        }
+
+	        return notificacionList;
+
+		
+	}
+
+	public List<NotificacionTO> getNotificacionesForDocente(Long idAluDoc) {
+		
+		List<Notificacion> notifi = notificacionDao.findNotificacionesForDocenteId(idAluDoc);
+		
+		List<NotificacionTO> notificacionList = new ArrayList<NotificacionTO>();
+
+	        for (Notificacion notificacion : notifi) {
+	            notificacionList.add(buildNotificacion(notificacion));
+	        }
+
+	        return notificacionList;	}
 }

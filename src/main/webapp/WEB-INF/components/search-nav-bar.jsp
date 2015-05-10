@@ -76,10 +76,27 @@
                    <li class="divider"></li>
                    <li>
                        <div class="text-center link-block">
-                           <a href="notifications.html">
-                               <strong>Ver todas las alertas</strong>
-                               <i class="fa fa-angle-right"></i>
-                           </a>
+                           	<c:choose>
+								<c:when test="${login.rol == 'alumno'}">
+									<a href="/repouniversity/alumno/notificaciones">
+		                               <strong>Ver todas las notificaciones</strong>
+		                               <i class="fa fa-angle-right"></i>
+		                           </a>
+								</c:when>
+								<c:when test="${login.rol == 'docente'}">
+									<a href="/repouniversity/docente/notificaciones">
+		                               <strong>Ver todas las notificaciones</strong>
+		                               <i class="fa fa-angle-right"></i>
+		                           </a>
+								</c:when>
+								<c:when test="${login.rol == 'administrador'}">
+									<a href="/repouniversity/notificaciones.html">
+		                               <strong>Ver todas las notificaciones</strong>
+		                               <i class="fa fa-angle-right"></i>
+		                           </a>
+								</c:when>
+							</c:choose>
+                           
                        </div>
                    </li>
                </ul>

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.repouniversity.model.dao.CursoDAO;
 import com.repouniversity.model.entity.Curso;
@@ -12,7 +11,6 @@ import com.repouniversity.model.entity.CursoMateria;
 import com.repouniversity.model.entity.Notificacion;
 
 @Service
-@Transactional
 public class CursoService {
 
     @Autowired
@@ -74,9 +72,13 @@ public class CursoService {
         List<CursoMateria> cursoMateriaList = cursoDao.findCursosForDocenteId(idAluDoc);
         
         for (CursoMateria cursoMateria : cursoMateriaList) {
-            cursoMateria.setDocente(docenteService.getByCursoMateriaId(cursoMateria.getId()));
+            cursoMateria.setDocente(docenteService.getById(idAluDoc));
         }
         
-        return cursoDao.findCursosForDocenteId(idAluDoc);
+        return cursoMateriaList;
     }
+
+	public void completelyDeleteCurso(Curso curso) {
+		cursoDao.delete(curso);
+	}
 }

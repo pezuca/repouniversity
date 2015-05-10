@@ -1,16 +1,22 @@
 package com.repouniversity.web.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.repouniversity.model.entity.Notificacion;
+import com.repouniversity.model.entity.UsuarioRol;
+import com.repouniversity.model.entity.to.NotificacionTO;
 import com.repouniversity.model.services.AlumnoService;
 import com.repouniversity.model.services.CursoService;
 import com.repouniversity.model.services.DocenteService;
@@ -61,4 +67,27 @@ public class NotificacionController {
         notificacionService.insertarNotificacion(alumnoId, cursoId, docenteId, tipoNotificacion);
     }
 
+//    @RequestMapping(value = "alumno/notificaciones", method = {RequestMethod.GET})
+//    public ModelAndView listaNotificaciones(HttpServletRequest request, @ModelAttribute("login") UsuarioRol usuario) {
+//
+//        List<Notificacion> Notificaciones = notificacionService.getNotificacionesForAlumno(usuario.getIdAluDoc());
+//
+//        return new ModelAndView("verNotificaciones").addObject("notificaciones", Notificaciones);
+//    }
+    
+    @RequestMapping(value = "alumno/notificaciones", method = {RequestMethod.GET})
+    public ModelAndView listaNotificaciones(HttpServletRequest request, @ModelAttribute("login") UsuarioRol usuario) {
+
+        List<NotificacionTO> Notificaciones = notificacionService.getNotificacionesForAlumno(usuario.getIdAluDoc());
+
+        return new ModelAndView("verNotificaciones").addObject("notificaciones", Notificaciones);
+    }
+    
+    @RequestMapping(value = "docente/notificaciones", method = {RequestMethod.GET})
+    public ModelAndView laListaNotificaciones(HttpServletRequest request, @ModelAttribute("login") UsuarioRol usuario) {
+
+        List<NotificacionTO> Notificaciones = notificacionService.getNotificacionesForDocente(usuario.getIdAluDoc());
+
+        return new ModelAndView("verNotificaciones").addObject("notificaciones", Notificaciones);
+    }
 }

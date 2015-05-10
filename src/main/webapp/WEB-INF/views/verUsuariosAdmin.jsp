@@ -23,7 +23,7 @@
 	             <div class="col-lg-12">
 	              <div class="ibox float-e-margins">
 	                  <div class="ibox-title">
-	                      <h5>Lista de alumnos</h5>
+	                      <h5>Lista de usuarios</h5>
 		                  <div class="ibox-tools" id="agregarAlumnoButton">
 	                          <a href="#agregarAlumnoDialog" class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  Usuario</a>
 	                      </div>

@@ -3,7 +3,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:set var="activeTab" value="${'verCursoDocente'}" />
+<c:set var="activeTab" value="${'dashboard'}" />
 <c:set var="userLog" value="${sessionScope.login}"/>
 
 <html>
@@ -26,36 +26,28 @@
 	             <div class="col-lg-12">
 					<div class="usuarioInformation">
 						<div class="page-header">
-							<h1>Lista Cursos</h1>
+							<h1>Ver Notificaciones</h1>
 						</div>
 					</div>
-					
-					<table id="cursosDocente" class="table table-striped hover">
+
+
+					<table id="clientTable" class="table table-striped hover">
 						<thead class="encabezado">
 							<tr>
-								<th>Codigo Mat</th>
-								<th>Materia</th>
+								<th>idNotificacion</th>
 								<th>Descripcion</th>
-								<th></th>
+								<th>Curso</th>
+								
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${cursosMaterias}" var="cursoMat"
+							<c:forEach items="${notificaciones}" var="notificacion"
 								varStatus="status">
-								<c:choose>
-									<c:when test="${status.count mod 2 == 0}">
-										<tr class="even">
-									</c:when>
-									<c:otherwise>
-										<div class="odd">
-									</c:otherwise>
-								</c:choose>
-			
-								<td>${cursoMat.codigoCurso}</td>
-								<td>${cursoMat.nombreMateria}</td>
-								<td>${cursoMat.descripcionCurso}</td>
-								<td><a class="verCurso"
-									href="/repouniversity/docente/verCurso?cursoId=${cursoMat.id}"><button class="btn btn-primary">Ver</button></a></td>
+								<tr class="even">
+									<td>${notificacion.id}</td>
+									<td>${notificacion.tipo.descripcion}</td>
+									<td>${notificacion.curso.nombre}</td>
+									
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -72,8 +64,8 @@
 		</div>
 		
 		<%@include file="../components/footer.jsp"%>
+		</div>
 	</div>
-
 	<script>
 		$(document).ready(function() {
 			$('#clientTable').dataTable({
@@ -87,6 +79,8 @@
 	
 			$("#clientTable_length").remove();
 		});
-	</script>
+		
+	}
+	</script>	
 </body>
 </html>

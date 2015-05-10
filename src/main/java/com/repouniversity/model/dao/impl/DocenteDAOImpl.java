@@ -5,8 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.stereotype.Repository;
 
 import com.repouniversity.model.dao.DocenteDAO;
@@ -19,23 +17,24 @@ import com.repouniversity.model.entity.Docente;
 public class DocenteDAOImpl extends GenericDAOImpl<Docente> implements DocenteDAO {
 
     @Override
-    public Docente getByCursoMateriaId(final Long cursoMateriaId) {
+    public Docente getByCursoMateriaId(final Long cursoId) {
         StringBuilder sql = new StringBuilder();
 
-        sql.append("SELECT distinct d.*, p.* from docente d JOIN docente_curso_materia dcm ON d.id_docente = dcm.id_docente ");
+        sql.append("SELECT distinct d.*, p.* from curso c JOIN docente d ON c.id_docente = c.id_docente ");
         sql.append("JOIN persona p ON p.id_persona = d.id_persona ");
-        sql.append("WHERE dcm.id_curso_materia = ?");
+        sql.append("WHERE c.id_curso =  ? ");
+        sql.append("AND d.activo = 1 AND p.activo = 1");
 
         List<Docente> list = doQuery(new SQLStatement(sql.toString()) {
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
-                ps.setLong(1, cursoMateriaId);
+                ps.setLong(1, cursoId);
             }
 
             @Override
             public void doAfterTransaction(int result) {
             }
-        }, new DocenteRowMapper(), "getByCursoMateriaId: " + cursoMateriaId);
+        }, new DocenteRowMapper(), "getByCursoMateriaId: " + cursoId);
 
         if (list.isEmpty()) {
             return null;
@@ -87,12 +86,12 @@ public class DocenteDAOImpl extends GenericDAOImpl<Docente> implements DocenteDA
 
     @Override
     protected SQLStatement buildUpdateSQLStatement(final Docente t) {
-        return new SQLStatement("UPDATE docente SET id_persona = ?, activo = ?, fecsys = now()  WHERE id = ?") {
+        return new SQLStatement("UPDATE docente SET id_persona = ?, activo = ?, fecsys = now()  WHERE id_docente = ?") {
 
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
                 ps.setLong(1, t.getPersona().getId());
-                ps.setBoolean(4, t.isActivo());
+                ps.setBoolean(2, t.isActivo());
             }
 
             @Override

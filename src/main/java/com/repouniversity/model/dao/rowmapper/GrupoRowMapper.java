@@ -14,6 +14,9 @@ public class GrupoRowMapper implements RowMapper<Grupo> {
         Grupo grupo = new Grupo();
         
         grupo.setId(rs.getLong("id_grupo"));
+        grupo.setNombre(rs.getString("nombre"));
+        grupo.setActivo(rs.getBoolean("activo"));
+        grupo.setFechasys(rs.getDate("fecsys"));
         return grupo;
     }
 

@@ -8,7 +8,6 @@ public class CursoMateria implements IdentifiedObject {
     private Long id;
     private boolean activo;
     private Docente docente;
-    private Long idCurso;
     private String codigoCurso;
     private String descripcionCurso;
     private Long idMateria;
@@ -37,14 +36,6 @@ public class CursoMateria implements IdentifiedObject {
 
     public void setDocente(Docente docente) {
         this.docente = docente;
-    }
-
-    public Long getIdCurso() {
-        return idCurso;
-    }
-
-    public void setIdCurso(Long idCurso) {
-        this.idCurso = idCurso;
     }
 
     public String getCodigoCurso() {

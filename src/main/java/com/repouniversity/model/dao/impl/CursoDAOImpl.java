@@ -32,8 +32,9 @@ public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
     public List<Curso> findCursosForAlumnoId(final Long idAluDoc) {
         StringBuilder sql = new StringBuilder();
 
-        sql.append("SELECT c.* from curso c JOIN alumno_curso ac ON ac.curso_id_curso = c.id_curso ");
-        sql.append("WHERE ac.alumno_id_alumno = ?");
+        sql.append("SELECT c.* from curso c JOIN alumno_curso ac ON ac.id_curso = c.id_curso ");
+        sql.append("WHERE ac.id_alumno = ? ");
+        sql.append("AND c.activo = 1");
 
         List<Curso> list = doQueryById(new SQLStatement(sql.toString()) {
             @Override
@@ -121,13 +122,14 @@ public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
     public List<CursoMateria> findCursosMateriaDisponiblesParaAlumno(final Long alumnoId) {
         StringBuilder sql = new StringBuilder();
 
-        sql.append("SELECT DISTINCT n.tiponotificacion, cm.id_curso_materia, m.id_materia, m.nombre, c.id_curso, c.codigo, c.descripcion ");
-        sql.append("FROM materia m JOIN curso_materia cm ON cm.id_materia = m.id_materia ");
-        sql.append("JOIN curso c ON c.id_curso = cm.id_curso ");
-        sql.append("JOIN docente_curso_materia dc on dc.id_curso_materia = c.id_curso ");
-        sql.append("LEFT JOIN notificacion n ON (n.idcurso = c.id_curso AND n.iddocente = dc.id_docente AND n.tiponotificacion = 1 AND n.idalumno = ?) ");
-        sql.append("WHERE c.id_curso not in (select curso_id_curso from alumno_curso where alumno_id_alumno = ?)");
-
+        sql.append("SELECT DISTINCT n.tiponotificacion, m.id_materia, m.nombre, c.id_curso, c.codigo, c.descripcion ");
+        sql.append("FROM curso c ");
+        sql.append("JOIN materia m ON m.id_materia = c.id_materia ");
+        sql.append("JOIN carrera_materia cm on cm.idmateria = m.id_materia ");
+        sql.append("LEFT JOIN notificacion n ON n.idcurso = c.id_curso AND tiponotificacion = 1 AND n.idalumno = ? ");
+        sql.append("WHERE c.id_curso not in (SELECT alumno_curso.id_curso from alumno_curso WHERE alumno_curso.id_alumno = ?) ");
+        sql.append("AND c.activo = 1 AND m.activo = 1");
+        
         List<CursoMateria> list = doQuery(new SQLStatement(sql.toString()) {
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
@@ -145,18 +147,16 @@ public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
         }
 
         return list;
-        
     }
 
     @Override
     public List<CursoMateria> findCursosForDocenteId(final Long docenteId) {
         StringBuilder sql = new StringBuilder();
 
-        sql.append("SELECT DISTINCT '0' as tiponotificacion, cm.id_curso_materia, m.id_materia, m.nombre, c.id_curso, c.codigo, c.descripcion ");
-        sql.append("FROM materia m JOIN curso_materia cm ON cm.id_materia = m.id_materia ");
-        sql.append("JOIN curso c ON c.id_curso = cm.id_curso ");
-        sql.append("JOIN docente_curso_materia dcm ON dcm.id_curso_materia = cm.id_curso_materia ");
-        sql.append("WHERE dcm.id_docente = ?");
+        sql.append("SELECT DISTINCT '0' as tiponotificacion, m.id_materia, m.nombre, c.id_curso, c.codigo, c.descripcion ");
+        sql.append("FROM curso c JOIN materia m ON c.id_materia = m.id_materia ");
+        sql.append("WHERE c.id_docente = ? ");
+        sql.append("AND c.activo = 1 AND m.activo = 1");
 
         List<CursoMateria> list = doQuery(new SQLStatement(sql.toString()) {
             @Override
