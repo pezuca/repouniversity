@@ -75,8 +75,8 @@ public class GrupoService {
         return grupoTo;
     }
 
-    public List<Grupo> getGruposForCurso(Long cursoId) {
-        List<Grupo> grupos = grupoDao.findGruposByCurso(cursoId);
+    public List<Grupo> getGruposForCurso(Long idCurso) {
+        List<Grupo> grupos = grupoDao.findGruposByCurso(idCurso);
 //        List<GrupoTO> gruposTo = new ArrayList<GrupoTO>();
 //        
 //        for (Grupo grupo : grupos) {

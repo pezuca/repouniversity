@@ -13,11 +13,13 @@
  			<mvc:mapping path="/**" />
  			<mvc:exclude-mapping path="/**/login" />
  			<mvc:exclude-mapping path="/**/resources/**" />
+ 			<mvc:exclude-mapping path="/**/loginAnonimo/**" />
  			<bean class="com.repouniversity.web.interceptors.CheckSessionInterceptor" />
  		</mvc:interceptor>
  		<mvc:interceptor>
  			<mvc:mapping path="/**/login" />
  			<mvc:exclude-mapping path="/**/resources/**" />
+ 			<mvc:exclude-mapping path="/**/loginAnonimo/**" />
  			<bean class="com.repouniversity.web.interceptors.LoginInterceptor" />
  		</mvc:interceptor>
 	</mvc:interceptors>

@@ -52,8 +52,9 @@
                    <input name="password" type="password" class="form-control" placeholder="Contraseña" required />
                 </div>
                 
-                <button type="submit" class="btn btn-lg btn-primary btn-block">Entrar</button>
-
+                <button type="submit" class="btn btn-lg btn-primary btn-block" id="entrar">Entrar</button>
+				<br/><br/>
+				<a href="loginAnonimo">Ingreso sin Usuario</a><br/>
                 <a href="#"><small>¿Te olvidaste el password?</small></a>
                 <p class="text-muted text-center"><small>¿Sos nuevo en RepoUniversity?</small></p>
                 <a class="btn btn-sm btn-white btn-block" href="register.html">Crear Cuenta</a>

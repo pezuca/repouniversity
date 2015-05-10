@@ -2,78 +2,30 @@ package com.repouniversity.model.entity;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import com.repouniversity.model.dao.IdentifiedObject;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-@Entity
-@Table(name = "archivo")
-public class Archivo {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_alumno")
-	private Integer id;
-
-	@Column(name = "nombre")
+public class Archivo implements IdentifiedObject {
+	private static final long serialVersionUID = 1L;
+	
+	private Long id;
 	private String nombre;
-
-	@Column(name = "descripcion")
 	private String descripcion;
-
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Column(name = "fecha_despublicacion")
 	private Date fechaDespublicacion;
-
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Column(name = "fecha_publicacion")
 	private Date fechaPublicacion;
-
-	@OneToOne
-	@JoinColumn(name = "id_tipo")
 	private ArchivoTipo archivoTipo;
-
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Column(name = "fecsys")
 	private Date fechasys;
-
-	@Column(name = "activo")
 	private boolean activo;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "estado", nullable = false)
 	private Estado estado;
-
-	@Column(name = "path")
 	private String path;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_curso", nullable = false)
 	private Curso curso;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "persona_id_persona", nullable = false)
 	private Persona persona;
+	private String tags;
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -163,5 +115,14 @@ public class Archivo {
 
 	public void setPersona(Persona persona) {
 		this.persona = persona;
+	}
+
+	public String getTags() {
+		return tags;
+	}
+
+	public void setTags(String etiqueta) {
+		this.tags = etiqueta;
+
 	}
 }
