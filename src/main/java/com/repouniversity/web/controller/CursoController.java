@@ -89,7 +89,7 @@ public class CursoController {
         return new ModelAndView("verCursoDocente").addObject("curso", curso);
     }
 
-    @RequestMapping(value = "docente/crearGrupo", method = {RequestMethod.GET})
+    @RequestMapping(value = "docente/crearGrupo", method = {RequestMethod.POST})
     public ModelAndView crearGrupo(@RequestParam(value = "idcurso", required = false) Long idCurso,
             @RequestParam(value = "cursosGruposAlumnos", required = false) Long[] listaAlumnoId,
             @RequestParam(value = "nombre", required = false) String nombre) {

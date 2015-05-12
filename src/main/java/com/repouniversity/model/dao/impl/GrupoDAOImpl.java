@@ -16,6 +16,7 @@ import com.repouniversity.model.dao.query.SQLStatement;
 import com.repouniversity.model.dao.rowmapper.GrupoRowMapper;
 import com.repouniversity.model.entity.Alumno;
 import com.repouniversity.model.entity.Grupo;
+import com.repouniversity.model.entity.Notificacion;
 
 @Repository
 public class GrupoDAOImpl extends GenericDAOImpl<Grupo> implements GrupoDAO {
@@ -45,17 +46,6 @@ public class GrupoDAOImpl extends GenericDAOImpl<Grupo> implements GrupoDAO {
         return null;
     }
 
-    @Override
-    protected InsertSQLStatement buildInsertSQLStatement(Grupo t) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    protected SQLStatement buildUpdateSQLStatement(Grupo t) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 
     @Override
     protected String getColumnIdName() {
@@ -88,4 +78,41 @@ public class GrupoDAOImpl extends GenericDAOImpl<Grupo> implements GrupoDAO {
 
         return list;
     }
+    @Override
+    protected InsertSQLStatement buildInsertSQLStatement(final Grupo t) {
+        return new InsertSQLStatement("INSERT INTO grupo (nombre) values (?)") {
+
+            @Override
+            public void doAfterInsert(Long id) {
+            }
+
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+                ps.setString(1, t.getNombre());
+             
+            }
+
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+        };
+    }
+
+    @Override
+    protected SQLStatement buildUpdateSQLStatement(final Grupo t) {
+        return new SQLStatement("UPDATE grupo SET nombre = ?, activo = ?, fecsys = now() WHERE id = ?") {
+
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+                ps.setString(1, t.getNombre());
+                ps.setBoolean(2, t.isActivo());
+                ps.setLong(4, t.getId());
+            }
+
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+        };
+    }
+
 }
