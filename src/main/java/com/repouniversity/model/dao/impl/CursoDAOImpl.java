@@ -83,9 +83,9 @@ public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
                 ps.setString(1, t.getNombre());
                 ps.setString(2, t.getCodigo());
                 ps.setString(3, t.getDescripcion());
-                ps.setLong(3, t.getMateriaId());
-                ps.setLong(3, t.getDocenteId());
-                ps.setBoolean(4, t.isActivo());
+                ps.setLong(4, t.getMateriaId());
+                ps.setLong(5, t.getDocenteId());
+                ps.setBoolean(6, t.isActivo());
             }
 
             @Override
