@@ -15,7 +15,7 @@ import com.repouniversity.model.entity.Carrera;
 
 @Repository
 public class CarreraDAOImpl extends GenericDAOImpl<Carrera> implements CarreraDAO {
-    
+
     protected static final String TABLE_NAME = "carrera";
 
     @Override
@@ -35,7 +35,8 @@ public class CarreraDAOImpl extends GenericDAOImpl<Carrera> implements CarreraDA
 
     @Override
     protected InsertSQLStatement buildInsertSQLStatement(final Carrera t) {
-        return new InsertSQLStatement("insert into alumno (nombre) values (?)") {
+
+        return new InsertSQLStatement("insert into carrera (nombre, activo) values (?, 1)") {
 
             @Override
             public void doAfterInsert(Long id) {
@@ -55,12 +56,11 @@ public class CarreraDAOImpl extends GenericDAOImpl<Carrera> implements CarreraDA
     @Override
     protected SQLStatement buildUpdateSQLStatement(final Carrera t) {
 
-        return new SQLStatement("update alumno set nombre = ? where id = ?") {
-
+        return new SQLStatement("update alumno set nombre = ? where " + getColumnIdName() + "id = ?") {
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
                 ps.setString(1, t.getNombre());
-                ps.setLong(1, t.getId());
+                ps.setLong(2, t.getId());
             }
 
             @Override
@@ -92,7 +92,7 @@ public class CarreraDAOImpl extends GenericDAOImpl<Carrera> implements CarreraDA
             public void doAfterTransaction(int result) {
             }
         }, new CarreraRowMapper(), "findByCursoId: " + materiaId);
-        
+
         return list;
     }
 }

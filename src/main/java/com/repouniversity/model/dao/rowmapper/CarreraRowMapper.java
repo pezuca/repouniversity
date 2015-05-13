@@ -8,14 +8,16 @@ import org.springframework.jdbc.core.RowMapper;
 import com.repouniversity.model.entity.Carrera;
 
 public class CarreraRowMapper implements RowMapper<Carrera> {
-
+    
     @Override
     public Carrera mapRow(ResultSet rs, int line) throws SQLException {
-        Carrera carrera = new Carrera();
-        carrera.setId(rs.getLong("idcarrera"));
-        carrera.setNombre(rs.getString("nombre"));
+        Carrera result = new Carrera();
         
-        return carrera;
+        result.setId(rs.getLong("idcarrera"));
+        result.setNombre(rs.getString("nombre"));
+        result.setActivo(rs.getBoolean("activo"));
+        
+        return result;
     }
 
 }

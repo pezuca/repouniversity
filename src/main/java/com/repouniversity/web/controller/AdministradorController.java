@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.repouniversity.model.entity.Carrera;
 import com.repouniversity.model.entity.Curso;
 import com.repouniversity.model.entity.Materia;
 import com.repouniversity.model.entity.Usuario;
@@ -31,179 +32,157 @@ import com.repouniversity.model.services.UsuarioService;
 @Controller
 public class AdministradorController {
 
-	@Autowired
-	public PersonaService personaService;
+    @Autowired
+    public PersonaService personaService;
 
-	@Autowired
-	public AlumnoService alumnoService;
+    @Autowired
+    public AlumnoService alumnoService;
 
-	@Autowired
-	public DocenteService docenteService;
+    @Autowired
+    public DocenteService docenteService;
 
-	@Autowired
-	public UsuarioService usuarioService;
+    @Autowired
+    public UsuarioService usuarioService;
 
-	@Autowired
-	public UsuarioRolService usuarioRolService;
+    @Autowired
+    public UsuarioRolService usuarioRolService;
 
-	@Autowired
-	public CursoService cursoService;
+    @Autowired
+    public CursoService cursoService;
 
-	@Autowired
-	public MateriaService materiaService;
+    @Autowired
+    public MateriaService materiaService;
 
-	@Autowired
-	public CarreraService carreraService;
+    @Autowired
+    public CarreraService carreraService;
 
-	@RequestMapping(value = "admin/verUsuarios", method = { RequestMethod.GET })
-	public ModelAndView getUsuarios() {
+    @RequestMapping(value = "admin/verUsuarios", method = {RequestMethod.GET})
+    public ModelAndView getUsuarios() {
 
-		List<UsuarioTO> listaUsuarios = usuarioService.getAll();
-		return new ModelAndView("verUsuariosAdmin").addObject("usuarios",
-				listaUsuarios);
-	}
+        List<UsuarioTO> listaUsuarios = usuarioService.getAll();
+        return new ModelAndView("verUsuariosAdmin").addObject("usuarios", listaUsuarios);
+    }
 
-	@RequestMapping(value = "admin/verCursos", method = { RequestMethod.GET })
-	public ModelAndView getCursos() {
+    @RequestMapping(value = "admin/verCursos", method = {RequestMethod.GET})
+    public ModelAndView getCursos() {
 
-		List<CursoTO> listaCurso = cursoService.getAll();
-		List<DocenteTO> listaDocentes = docenteService.getAll();
-		List<Materia> listamaterias = materiaService.getAll();
+        List<CursoTO> listaCurso = cursoService.getAll();
+        List<DocenteTO> listaDocentes = docenteService.getAll();
+        List<Materia> listamaterias = materiaService.getAll();
 
-		return new ModelAndView("verCursosAdmin")
-				.addObject("cursos", listaCurso)
-				.addObject("docentes", listaDocentes)
-				.addObject("materias", listamaterias);
-	}
+        return new ModelAndView("verCursosAdmin").addObject("cursos", listaCurso).addObject("docentes", listaDocentes).addObject("materias", listamaterias);
+    }
 
-	@RequestMapping(value = "admin/verMaterias", method = { RequestMethod.GET })
-	public ModelAndView getMaterias() {
+    @RequestMapping(value = "admin/verMaterias", method = {RequestMethod.GET})
+    public ModelAndView getMaterias() {
 
-		List<Materia> listaMaterias = materiaService.getAll();
+        List<Materia> listaMaterias = materiaService.getAll();
 
-		return new ModelAndView("admin-panel/verMateriasAdmin").addObject(
-				"materias", listaMaterias);
-	}
+        return new ModelAndView("admin-panel/verMateriasAdmin").addObject("materias", listaMaterias);
+    }
 
-	/**
-	 * AMB de Usuarios
-	 */
-	@RequestMapping(value = "admin/nuevoUsuario", method = { RequestMethod.POST })
-	@ResponseBody
-	@ResponseStatus(value = HttpStatus.OK)
-	public UsuarioTO crearUsuarioAjax(
-			@RequestParam(value = "nombre") String nombre,
-			@RequestParam(value = "apellido") String apellido,
-			@RequestParam(value = "mail") String mail,
-			@RequestParam(value = "user") String user,
-			@RequestParam(value = "password") String password,
-			@RequestParam(value = "rol") String rol) {
+    @RequestMapping(value = "admin/verCarreras", method = {RequestMethod.GET})
+    public ModelAndView getCarreras() {
 
-		Usuario usuario = usuarioService.saveUser(nombre, apellido, mail, user,
-				password, rol);
+        List<Carrera> listaCarreras = carreraService.getAll();
+        return new ModelAndView("verCarrerasAdmin").addObject("carreras", listaCarreras);
+    }
 
-		UsuarioTO usuarioTo = usuarioService.getUserById(usuario.getId());
+    /**
+     * AMB de Usuarios
+     */
+    @RequestMapping(value = "admin/nuevoUsuario", method = {RequestMethod.POST})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public UsuarioTO crearUsuarioAjax(@RequestParam(value = "nombre") String nombre, @RequestParam(value = "apellido") String apellido,
+            @RequestParam(value = "mail") String mail, @RequestParam(value = "user") String user, @RequestParam(value = "password") String password,
+            @RequestParam(value = "rol") String rol) {
 
-		return usuarioTo;
-	}
+        Usuario usuario = usuarioService.saveUser(nombre, apellido, mail, user, password, rol);
 
-	@RequestMapping(value = "admin/editarUsuario", method = { RequestMethod.POST })
-	@ResponseBody
-	@ResponseStatus(value = HttpStatus.OK)
-	public UsuarioTO editarUsuarioAjax(
-			@RequestParam(value = "userId") Long userId,
-			@RequestParam(value = "nombre") String nombre,
-			@RequestParam(value = "apellido") String apellido,
-			@RequestParam(value = "mail") String mail,
-			@RequestParam(value = "user") String user,
-			@RequestParam(value = "password") String password) {
+        UsuarioTO usuarioTo = usuarioService.getUserById(usuario.getId());
 
-		Usuario usuario = usuarioService.updateUser(userId, nombre, apellido,
-				mail, user, password, password);
+        return usuarioTo;
+    }
 
-		UsuarioTO usuarioTo = usuarioService.getUserById(usuario.getId());
-		return usuarioTo;
-	}
+    @RequestMapping(value = "admin/editarUsuario", method = {RequestMethod.POST})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public UsuarioTO editarUsuarioAjax(@RequestParam(value = "userId") Long userId, @RequestParam(value = "nombre") String nombre,
+            @RequestParam(value = "apellido") String apellido, @RequestParam(value = "mail") String mail, @RequestParam(value = "user") String user,
+            @RequestParam(value = "password") String password) {
 
-	@RequestMapping(value = "admin/eliminarUsuario", method = { RequestMethod.POST })
-	@ResponseBody
-	@ResponseStatus(value = HttpStatus.OK)
-	public void deleteUsuarioAjax(@RequestParam(value = "userId") Long userId) {
-		UsuarioRol usuarioRol = usuarioRolService.getUsuarioById(userId);
+        Usuario usuario = usuarioService.updateUser(userId, nombre, apellido, mail, user, password, password);
 
-		usuarioService.completelyDeleteUsuario(usuarioRol);
-	}
+        UsuarioTO usuarioTo = usuarioService.getUserById(usuario.getId());
+        return usuarioTo;
+    }
 
-	/**
-	 * AMB de Materias
-	 */
-	@RequestMapping(value = "admin/nuevoMateria", method = { RequestMethod.POST })
-	@ResponseBody
-	@ResponseStatus(value = HttpStatus.OK)
-	public Materia crearMateriaAjax(
-			@RequestParam(value = "nombre") String nombre,
-			@RequestParam(value = "descripcion") String descripcion) {
+    @RequestMapping(value = "admin/eliminarUsuario", method = {RequestMethod.POST})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public void deleteUsuarioAjax(@RequestParam(value = "userId") Long userId) {
+        UsuarioRol usuarioRol = usuarioRolService.getUsuarioById(userId);
 
-		return materiaService.save(nombre, descripcion);
-	}
+        usuarioService.completelyDeleteUsuario(usuarioRol);
+    }
 
-	@RequestMapping(value = "admin/editarMateria", method = { RequestMethod.POST })
-	@ResponseBody
-	@ResponseStatus(value = HttpStatus.OK)
-	public Materia editarMateriaAjax(
-			@RequestParam(value = "materiaId") Long materiaId,
-			@RequestParam(value = "nombre") String nombre,
-			@RequestParam(value = "descripcion") String descripcion) {
+    /**
+     * AMB de Materias
+     */
+    @RequestMapping(value = "admin/nuevoMateria", method = {RequestMethod.POST})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public Materia crearMateriaAjax(@RequestParam(value = "nombre") String nombre, @RequestParam(value = "descripcion") String descripcion) {
 
-		return materiaService.update(materiaId, nombre, descripcion);
-	}
+        return materiaService.save(nombre, descripcion);
+    }
 
-	@RequestMapping(value = "admin/eliminarMateria", method = { RequestMethod.POST })
-	@ResponseBody
-	@ResponseStatus(value = HttpStatus.OK)
-	public void deleteMateriaAjax(
-			@RequestParam(value = "materiaId") Long materiaId) {
-		materiaService.delete(materiaId);
-	}
+    @RequestMapping(value = "admin/editarMateria", method = {RequestMethod.POST})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public Materia editarMateriaAjax(@RequestParam(value = "materiaId") Long materiaId, @RequestParam(value = "nombre") String nombre,
+            @RequestParam(value = "descripcion") String descripcion) {
 
-	/**
-	 * AMB de Cursos
-	 */
-	@RequestMapping(value = "admin/eliminarCurso", method = { RequestMethod.POST })
-	@ResponseBody
-	@ResponseStatus(value = HttpStatus.OK)
-	public void deleteCursoAjax(@RequestParam(value = "cursoId") Long cursoId) {
-		cursoService.delete(cursoId);
-	}
+        return materiaService.update(materiaId, nombre, descripcion);
+    }
 
-	@RequestMapping(value = "admin/nuevoCurso", method = { RequestMethod.POST })
-	@ResponseBody
-	@ResponseStatus(value = HttpStatus.OK)
-	public CursoTO crearCursoAjax(@RequestParam(value = "nombre") String nombre,
-			@RequestParam(value = "descripcion") String descripcion,
-			@RequestParam(value = "codigo") String codigo,
-			@RequestParam(value = "materia") Long materiaId,
-			@RequestParam(value = "docente") Long docenteId) {
-		
-		Curso curso = cursoService.save(nombre, descripcion, codigo, materiaId,
-				docenteId);
-		
-		return cursoService.buildCurso(curso);
-	}
+    @RequestMapping(value = "admin/eliminarMateria", method = {RequestMethod.POST})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public void deleteMateriaAjax(@RequestParam(value = "materiaId") Long materiaId) {
+        materiaService.delete(materiaId);
+    }
 
-	@RequestMapping(value = "admin/editarCurso", method = { RequestMethod.POST })
-	@ResponseBody
-	@ResponseStatus(value = HttpStatus.OK)
-	public CursoTO editarCursoAjax(
-			@RequestParam(value = "cursoId") Long cursoId,
-			@RequestParam(value = "nombre") String nombre,
-			@RequestParam(value = "descripcion") String descripcion,
-			@RequestParam(value = "codigo") String codigo,
-			@RequestParam(value = "materia") Long materiaId,
-			@RequestParam(value = "docente") Long docenteId) {
+    /**
+     * AMB de Cursos
+     */
+    @RequestMapping(value = "admin/eliminarCurso", method = {RequestMethod.POST})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public void deleteCursoAjax(@RequestParam(value = "cursoId") Long cursoId) {
+        cursoService.delete(cursoId);
+    }
 
-		Curso curso = cursoService.update(cursoId, nombre, descripcion, codigo,
-				materiaId, docenteId);
-		return cursoService.buildCurso(curso);
-	}
+    @RequestMapping(value = "admin/nuevoCurso", method = {RequestMethod.POST})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public CursoTO crearCursoAjax(@RequestParam(value = "nombre") String nombre, @RequestParam(value = "descripcion") String descripcion,
+            @RequestParam(value = "codigo") String codigo, @RequestParam(value = "materia") Long materiaId, @RequestParam(value = "docente") Long docenteId) {
+
+        Curso curso = cursoService.save(nombre, descripcion, codigo, materiaId, docenteId);
+
+        return cursoService.buildCurso(curso);
+    }
+
+    @RequestMapping(value = "admin/editarCurso", method = {RequestMethod.POST})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public CursoTO editarCursoAjax(@RequestParam(value = "cursoId") Long cursoId, @RequestParam(value = "nombre") String nombre,
+            @RequestParam(value = "descripcion") String descripcion, @RequestParam(value = "codigo") String codigo,
+            @RequestParam(value = "materia") Long materiaId, @RequestParam(value = "docente") Long docenteId) {
+
+        Curso curso = cursoService.update(cursoId, nombre, descripcion, codigo, materiaId, docenteId);
+        return cursoService.buildCurso(curso);
+    }
 }
