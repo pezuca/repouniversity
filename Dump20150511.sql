@@ -243,7 +243,7 @@ DROP TABLE IF EXISTS `docente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `docente` (
-  `id_docente` int(10) NOT NULL,
+  `id_docente` int(10) NOT NULL AUTO_INCREMENT,
   `id_persona` int(10) NOT NULL,
   `activo` tinyint(1) NOT NULL DEFAULT '1',
   `fecsys` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
