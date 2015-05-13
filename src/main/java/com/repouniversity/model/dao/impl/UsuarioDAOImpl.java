@@ -73,8 +73,7 @@ public class UsuarioDAOImpl extends GenericDAOImpl<Usuario> implements UsuarioDA
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
                 ps.setString(1, t.getUser());
                 ps.setString(2, t.getPass());
-                ps.setBoolean(3, t.isActivo());
-                ps.setLong(4, t.getIdPersona());
+                ps.setLong(3, t.getIdPersona());
             }
 
             @Override

@@ -48,8 +48,12 @@
 									<td>${curso.nombre}</td>
 									<td>${curso.codigo}</td>
 									<td>${curso.descripcion}</td>
-									<td>${curso.materia.nombre}</td>
-									<td>${curso.docente.persona.nombre}, ${curso.docente.persona.apellido}</td>
+									<td data-materiaId="${curso.materia.id}">${curso.materia.nombre}</td>
+									<td data-docenteId="${curso.docente.id}">
+										<c:if test="${curso.docente.activo == true}">
+											${curso.docente.persona.nombre}, ${curso.docente.persona.apellido}
+										</c:if>
+									</td>
 									<td>
 										<a href="#" name="editCurso" data-cursoId="${curso.id}"><button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Editar curso"><i class="fa fa-pencil"></i></button></a>
 										<a href="#" name="deleteCurso" data-cursoId="${curso.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar curso"><i class="fa fa-times"></i></button></a>
@@ -97,8 +101,8 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">Docente*:</label>
                 <div class="col-sm-10">
-                	<select name="materia" class="form-control" required="required">
-                		<option value="">Seleccione una materia</option>
+                	<select name="docente" class="form-control" required="required">
+                		<option value="">Seleccione un docente</option>
                 		
                 		<c:forEach items="${docentes}" var="docente" varStatus="status">
                 			<option value="${docente.id}">${docente.persona.nombre}, ${docente.persona.apellido}</option>
@@ -111,7 +115,7 @@
 	
 	<div id="editarCursoDialog" title="Editar Curso">
 		<form id="editarCursoForm" class="form-horizontal">
-			<input name="userId" type="hidden">
+			<input name="cursoId" type="hidden">
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Nombre*:</label>
                 <div class="col-sm-10"><input name="nombre" type="text" class="form-control" required="required"></div>
@@ -139,7 +143,7 @@
 			<div class="form-group">
                 <label class="col-sm-2 control-label">Docente*:</label>
                 <div class="col-sm-10">
-                	<select name="materia" class="form-control" required="required">
+                	<select name="docente" class="form-control" required="required">
                 		<option value="">Seleccione una materia</option>
                 		
                 		<c:forEach items="${docentes}" var="docente" varStatus="status">

@@ -32,6 +32,7 @@ public class DocenteService {
         for (Docente docente : docentes) {
             DocenteTO docenteTo = new DocenteTO();
             
+            docenteTo.setId(docente.getId());
             docenteTo.setActivo(docente.isActivo());
             docenteTo.setFechasys(docente.getFechasys());
             docenteTo.setPersona(personaService.findById(docente.getPersonaId()));
@@ -46,7 +47,7 @@ public class DocenteService {
     }
     
     public DocenteTO getCompleteById(Long idAluDoc) {
-        Docente docente = docenteDao.findById(idAluDoc);;
+        Docente docente = docenteDao.findById(idAluDoc);
         DocenteTO docenteTo = new DocenteTO();
         
         docenteTo.setId(docente.getId());

@@ -62,6 +62,8 @@ var cursosAdmin = {
 				celdas.get(1).innerHTML = data.nombre;
 				celdas.get(2).innerHTML = data.codigo;
 				celdas.get(3).innerHTML = data.descripcion;
+				celdas.get(4).innerHTML = data.materia.nombre;
+				celdas.get(5).innerHTML = data.docente.persona.nombre + ", " + data.docente.persona.apellido;
 				
 				//Agrego el evento de delete
 				$("a[name='deleteCurso'][data-cursoId=" + data.id + "] button").click(function(){
@@ -73,6 +75,8 @@ var cursosAdmin = {
 						.data('nombre', $(this).parents("tr").find("td").get(1).innerHTML)
 						.data('codigo', $(this).parents("tr").find("td").get(2).innerHTML)
 						.data('descripcion', $(this).parents("tr").find("td").get(3).innerHTML)
+						.data('materiaId', $(this).parents("tr").find("td[data-materiaId]").attr("data-materiaId"))
+						.data('docenteId', $(this).parents("tr").find("td[data-docenteId]").attr("data-docenteId"))
 						.dialog("open");
 				});
 				
@@ -200,11 +204,14 @@ $(document).ready(function() {
 			$(".infoDialog").remove();
 			$('#editarCursoForm').trigger("reset");
 			$("#editarCursoForm").find(".form-group").removeClass("has-error");
+			$("#editarCursoForm select option").removeAttr("selected");
 			
 			$('#editarCursoForm input[name=cursoId]').val($("#editarCursoDialog").data('cursoId'));
 			$('#editarCursoForm input[name=nombre]').val($("#editarCursoDialog").data('nombre'));
 			$('#editarCursoForm input[name=descripcion]').val($("#editarCursoDialog").data('descripcion'));
 			$('#editarCursoForm input[name=codigo]').val($("#editarCursoDialog").data('codigo'));
+			$("#editarCursoForm select[name=materia] option[value=" + $("#editarCursoDialog").data('materiaId') + "]").attr("selected", "selected");
+			$("#editarCursoForm select[name=docente] option[value=" + $("#editarCursoDialog").data('docenteId') + "]").attr("selected", "selected");
 		},
 		close: function(event, ui) {
 		}
@@ -248,6 +255,8 @@ $(document).ready(function() {
 			.data('nombre', $(this).parents("tr").find("td").get(1).innerHTML)
 			.data('descripcion', $(this).parents("tr").find("td").get(3).innerHTML)
 			.data('codigo', $(this).parents("tr").find("td").get(2).innerHTML)
+			.data('materiaId', $(this).parents("tr").find("td[data-materiaId]").attr("data-materiaId"))
+			.data('docenteId', $(this).parents("tr").find("td[data-docenteId]").attr("data-docenteId"))
 			.dialog("open");
 	});
 });

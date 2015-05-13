@@ -15,104 +15,133 @@ import com.repouniversity.model.entity.to.CursoTO;
 @Service
 public class CursoService {
 
-    @Autowired
-    private CursoDAO cursoDao;
+	@Autowired
+	private CursoDAO cursoDao;
 
-    @Autowired
-    private AlumnoService alumnoService;
+	@Autowired
+	private AlumnoService alumnoService;
 
-    @Autowired
-    private DocenteService docenteService;
+	@Autowired
+	private DocenteService docenteService;
 
-    @Autowired
-    private GrupoService grupoService;
-    
-    @Autowired
-    private MateriaService materiaService;
+	@Autowired
+	private GrupoService grupoService;
 
-    @Autowired
-    private NotificacionService notificacionService;
+	@Autowired
+	private MateriaService materiaService;
 
-    public List<CursoTO> getAll() {
-        List<Curso> cursos = cursoDao.findAll();
-        List<CursoTO> cursosTo = buildCursos(cursos);
-        
-        return cursosTo;
-    }
+	@Autowired
+	private NotificacionService notificacionService;
 
-    private List<CursoTO> buildCursos(List<Curso> cursos) {
-        List<CursoTO> cursosTo = new ArrayList<CursoTO>();
-        
-        for (Curso curso : cursos) {
-            CursoTO cursoTo = new CursoTO();
-            cursoTo.setNombre(curso.getNombre());
-            cursoTo.setDescripcion(curso.getDescripcion());
-            cursoTo.setCodigo(curso.getCodigo());
-            cursoTo.setFechasys(curso.getFechasys());
-            cursoTo.setDocente(docenteService.getCompleteById(curso.getDocenteId()));
-            cursoTo.setMateria(materiaService.getById(curso.getMateriaId()));
-            
-            cursosTo.add(cursoTo);
-        }
-        return cursosTo;
-    }
+	public List<CursoTO> getAll() {
+		List<Curso> cursos = cursoDao.findAll();
+		List<CursoTO> cursosTo = buildCursos(cursos);
 
-    public Curso getById(Long cursoId) {
-        return cursoDao.findById(cursoId);
-    }
+		return cursosTo;
+	}
 
-    public List<CursoMateria> getCursosMateriaDisponiblesParaAlumno(Long alumnoId) {
-        List<CursoMateria> cursoMateriaList = cursoDao.findCursosMateriaDisponiblesParaAlumno(alumnoId);
+	public List<CursoTO> buildCursos(List<Curso> cursos) {
+		List<CursoTO> cursosTo = new ArrayList<CursoTO>();
 
-        for (CursoMateria cursoMateria : cursoMateriaList) {
-            cursoMateria.setDocente(docenteService.getByCursoMateriaId(cursoMateria.getId()));
-        }
+		for (Curso curso : cursos) {
+			cursosTo.add(buildCurso(curso));
+		}
+		return cursosTo;
+	}
 
-        return cursoMateriaList;
-    }
+	public CursoTO buildCurso(Curso curso) {
+		CursoTO cursoTo = new CursoTO();
+		cursoTo.setId(curso.getId());
+		cursoTo.setNombre(curso.getNombre());
+		cursoTo.setDescripcion(curso.getDescripcion());
+		cursoTo.setCodigo(curso.getCodigo());
+		cursoTo.setFechasys(curso.getFechasys());
+		cursoTo.setDocente(docenteService.getCompleteById(curso.getDocenteId()));
+		cursoTo.setMateria(materiaService.getById(curso.getMateriaId()));
+		return cursoTo;
+	}
 
-    public void save(Curso curso) {
-        cursoDao.insert(curso);
-    }
+	public Curso getById(Long cursoId) {
+		return cursoDao.findById(cursoId);
+	}
 
-    public void registrarAlumnoACurso(Notificacion noti) {
-        cursoDao.saveAlumnoCursoGrupo(noti.getAlumnoId(), noti.getCursoId(), 0L);
+	public List<CursoMateria> getCursosMateriaDisponiblesParaAlumno(
+			Long alumnoId) {
+		List<CursoMateria> cursoMateriaList = cursoDao
+				.findCursosMateriaDisponiblesParaAlumno(alumnoId);
 
-        notificacionService.insertarNotificacion(noti.getAlumnoId(), noti.getCursoId(), noti.getDocenteId(), 3L);
+		for (CursoMateria cursoMateria : cursoMateriaList) {
+			cursoMateria.setDocente(docenteService
+					.getByCursoMateriaId(cursoMateria.getId()));
+		}
 
-        notificacionService.remove(noti);
-    }
+		return cursoMateriaList;
+	}
 
-    public void rechazarAlumnoACurso(Notificacion noti) {
-        notificacionService.insertarNotificacion(noti.getAlumnoId(), noti.getCursoId(), noti.getDocenteId(), 4L);
+	public void save(Curso curso) {
+		cursoDao.insert(curso);
+	}
 
-        notificacionService.remove(noti);
-    }
+	public void registrarAlumnoACurso(Notificacion noti) {
+		cursoDao.saveAlumnoCursoGrupo(noti.getAlumnoId(), noti.getCursoId(), 0L);
 
-    public List<Curso> getCursosForAlumno(Long idAluDoc) {
-        return cursoDao.findCursosForAlumnoId(idAluDoc);
-    }
+		notificacionService.insertarNotificacion(noti.getAlumnoId(),
+				noti.getCursoId(), noti.getDocenteId(), 3L);
 
-    public List<CursoMateria> getCursosMateriaDisponiblesParaDocente(Long idAluDoc) {
-        List<CursoMateria> cursoMateriaList = cursoDao.findCursosForDocenteId(idAluDoc);
+		notificacionService.remove(noti);
+	}
 
-        for (CursoMateria cursoMateria : cursoMateriaList) {
-            cursoMateria.setDocente(docenteService.getById(idAluDoc));
-        }
+	public void rechazarAlumnoACurso(Notificacion noti) {
+		notificacionService.insertarNotificacion(noti.getAlumnoId(),
+				noti.getCursoId(), noti.getDocenteId(), 4L);
 
-        return cursoMateriaList;
-    }
+		notificacionService.remove(noti);
+	}
 
-    public void delete(Long cursoId) {
-        cursoDao.delete(getById(cursoId));
-    }
+	public List<Curso> getCursosForAlumno(Long idAluDoc) {
+		return cursoDao.findCursosForAlumnoId(idAluDoc);
+	}
 
-    public Curso save(String nombre, String descripcion, String codigo) {
-        Curso curso = new Curso();
-        curso.setNombre(nombre);
-        curso.setDescripcion(descripcion);
-        curso.setCodigo(codigo);
-        
-        return cursoDao.insert(curso);
-    }
+	public List<CursoMateria> getCursosMateriaDisponiblesParaDocente(
+			Long idAluDoc) {
+		List<CursoMateria> cursoMateriaList = cursoDao
+				.findCursosForDocenteId(idAluDoc);
+
+		for (CursoMateria cursoMateria : cursoMateriaList) {
+			cursoMateria.setDocente(docenteService.getById(idAluDoc));
+		}
+
+		return cursoMateriaList;
+	}
+
+	public void delete(Long cursoId) {
+		cursoDao.delete(getById(cursoId));
+	}
+
+	public Curso save(String nombre, String descripcion, String codigo,
+			Long materiaId, Long docenteId) {
+		Curso curso = new Curso();
+		curso.setNombre(nombre);
+		curso.setDescripcion(descripcion);
+		curso.setCodigo(codigo);
+		curso.setMateriaId(materiaId);
+		curso.setDocenteId(docenteId);
+
+		return cursoDao.insert(curso);
+	}
+
+	public Curso update(Long cursoId, String nombre, String descripcion,
+			String codigo, Long materiaId, Long docenteId) {
+		Curso curso = cursoDao.findById(cursoId);
+
+		curso.setNombre(nombre);
+		curso.setDescripcion(descripcion);
+		curso.setCodigo(codigo);
+		curso.setMateriaId(materiaId);
+		curso.setDocenteId(docenteId);
+
+		cursoDao.update(curso);
+
+		return curso;
+	}
 }
