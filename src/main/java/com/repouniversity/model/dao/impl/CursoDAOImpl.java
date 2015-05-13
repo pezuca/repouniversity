@@ -173,11 +173,11 @@ public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
     }
     
     @Override
-    public void saveAlumnoCursoGrupo(final Long alumnoId, final Long cursoId, final Long grupoId) {
+    public void saveAlumnoCursoGrupo(final Long grupoId, final Long cursoId, final Long alumnoId) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
         final InsertSQLStatement sqlStatement = new InsertSQLStatement(
-                "INSERT INTO alumno_curso (alumno_id_alumno, curso_id_curso, grupo_id_grupo) values (?, ?, ?)") {
+                "INSERT INTO alumno_curso (id_alumno, id_curso, id_grupo) values (?, ?, ?)") {
             @Override
             public void doAfterInsert(Long id) {
             }

@@ -93,6 +93,7 @@ public class NotificacionDAOImpl extends GenericDAOImpl<Notificacion> implements
                 ps.setLong(2, t.getCursoId());
                 ps.setLong(3, t.getDocenteId());
                 ps.setLong(4, t.getAlumnoId());
+                ps.setLong(5, t.getId());
             }
 
             @Override
