@@ -144,7 +144,7 @@
                 <label class="col-sm-2 control-label">Docente*:</label>
                 <div class="col-sm-10">
                 	<select name="docente" class="form-control" required="required">
-                		<option value="">Seleccione una materia</option>
+                		<option value="">Seleccione un docente</option>
                 		
                 		<c:forEach items="${docentes}" var="docente" varStatus="status">
                 			<option value="${docente.id}">${docente.persona.nombre}, ${docente.persona.apellido}</option>
