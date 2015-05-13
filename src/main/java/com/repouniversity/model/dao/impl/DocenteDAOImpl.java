@@ -55,18 +55,12 @@ public class DocenteDAOImpl extends GenericDAOImpl<Docente> implements DocenteDA
 
     @Override
     protected Docente extractEntityFromResultSet(ResultSet rs, int line) throws SQLException {
-        Docente result = new Docente();
-
-        result.setId(rs.getLong("id_docente"));
-        result.setActivo(rs.getBoolean("activo"));
-        result.setFechasys(rs.getDate("fecsys"));
-
-        return result;
+        return new DocenteRowMapper().mapRow(rs, line);
     }
 
     @Override
     protected InsertSQLStatement buildInsertSQLStatement(final Docente t) {
-        return new InsertSQLStatement("INSERT INTO docente (id_persona, activo, fecsys) values (?, ?, now())") {
+        return new InsertSQLStatement("INSERT INTO docente (id_persona, activo, fecsys) values (?, 1, now())") {
 
             @Override
             public void doAfterInsert(Long id) {
@@ -74,8 +68,7 @@ public class DocenteDAOImpl extends GenericDAOImpl<Docente> implements DocenteDA
 
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
-                ps.setLong(1, t.getPersona().getId());
-                ps.setBoolean(2, t.isActivo());
+                ps.setLong(1, t.getPersonaId());
             }
 
             @Override
@@ -86,12 +79,12 @@ public class DocenteDAOImpl extends GenericDAOImpl<Docente> implements DocenteDA
 
     @Override
     protected SQLStatement buildUpdateSQLStatement(final Docente t) {
-        return new SQLStatement("UPDATE docente SET id_persona = ?, activo = ?, fecsys = now()  WHERE id_docente = ?") {
+        return new SQLStatement("UPDATE docente SET id_persona = ?, fecsys = now()  WHERE id_docente = ?") {
 
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
-                ps.setLong(1, t.getPersona().getId());
-                ps.setBoolean(2, t.isActivo());
+                ps.setLong(1, t.getPersonaId());
+                ps.setLong(2, t.getId());
             }
 
             @Override

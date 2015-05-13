@@ -1,7 +1,7 @@
 var materiasAdmin = {
 	crearNuevaMateriaAjax : function() {
 		$.ajax({
-			url: "nuevaMateria",
+			url: "/repouniversity/admin/nuevoMateria",
 			type: "POST",
 			data: $("#nuevoMateriaForm").serialize(),
 			success: function(data){
@@ -12,24 +12,23 @@ var materiasAdmin = {
 				});
 				
 				
-				$("#listaMaterias").DataTable().row.add([
+				table.row.add([
 				                                          data.id,
 				                                          data.nombre,
-				                                          data.activo == true ? 'Si':'No',
-				                                          data.carrera,
-				                                          "<a href='#' name='editMateria' data-MateriaId='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a>" + 
-				  										  "<a href='#' name='deleteMAteria' data-MateriaId='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a>"
+				                                          data.descripcion,
+				                                          "<a href='#' name='editMateria' data-materiaid='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a>" + 
+				  										  "<a href='#' name='deleteMateria' data-materiaid='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a>"
 				                                     ]).draw();
 				
 				//Agrego el evento de delete
-				$("a[name='deleteMateria'][data-materiaId=" + data.id + "] button").click(function(){
-					$("#deleteMateriaDialog").data('materiaId', $(this).parent().attr("data-materiaId")).dialog("open");
+				$("a[name='deleteMateria'][data-materiaid=" + data.id + "] button").click(function(){
+					$("#deleteMateriaDialog").data('materiaId', $(this).parent().attr("data-materiaid")).dialog("open");
 				});
 				
-				$("a[name=editMateria][data-materiaId=" + data.id + "] button").click(function(){
-					$("#editarMateriaDialog").data('materiaId', $(this).parent().attr("data-materiaId"))
+				$("a[name=editMateria][data-materiaid=" + data.id + "] button").click(function(){
+					$("#editarMateriaDialog").data('materiaId', $(this).parent().attr("data-materiaid"))
 						.data('nombre', $(this).parents("tr").find("td").get(1).innerHTML)
-						.data('carrera', $(this).parents("tr").find("td").get(2).innerHTML)
+						.data('descripcion', $(this).parents("tr").find("td").get(2).innerHTML)
 						.dialog("open");
 				});
 				
@@ -47,7 +46,7 @@ var materiasAdmin = {
 	},
 	editarMateriaAjax : function() {
 		$.ajax({
-			url: "editarMateria",
+			url: "/repouniversity/admin/editarMateria",
 			type: "POST",
 			data: $("#editarMateriaForm").serialize(),
 			success: function(data){
@@ -57,19 +56,19 @@ var materiasAdmin = {
 					sticky: false
 				});
 				
-				var celdas = $("#listaMaterias td a[data-materiaId=" + data.id + "]").parents("tr").find("td");
+				var celdas = $("#listaMaterias td a[data-materiaid=" + data.id + "]").parents("tr").find("td");
 				celdas.get(1).innerHTML = data.nombre;
-				celdas.get(2).innerHTML = data.carrera;
+				celdas.get(2).innerHTML = data.descripcion;
 				
 				//Agrego el evento de delete
-				$("a[name='deleteUser'][data-materiaId=" + data.id + "] button").click(function(){
-					$("#deleteMateriaDialog").data('materiaId', $(this).parent().attr("data-materiaId")).dialog("open");
+				$("a[name='deleteUser'][data-materiaid=" + data.id + "] button").click(function(){
+					$("#deleteMateriaDialog").data('materiaId', $(this).parent().attr("data-materiaid")).dialog("open");
 				});
 				
-				$("a[name=editUser][data-materiaId=" + data.id + "] button").click(function(){
-					$("#editarMateriaDialog").data('materiaId', $(this).parent().attr("data-materiaId"))
+				$("a[name=editUser][data-materiaid=" + data.id + "] button").click(function(){
+					$("#editarMateriaDialog").data('materiaId', $(this).parent().attr("data-materiaid"))
 						.data('nombre', $(this).parents("tr").find("td").get(1).innerHTML)
-						.data('carrera', $(this).parents("tr").find("td").get(2).innerHTML)
+						.data('descripcion', $(this).parents("tr").find("td").get(2).innerHTML)
 						.dialog("open");
 				});
 				
@@ -87,7 +86,7 @@ var materiasAdmin = {
 	},
 	deleteMateriaAjax : function(materiaId) {
 		$.ajax({
-			url: "eliminarUsuario",
+			url: "/repouniversity/admin/eliminarMateria",
 			type: "POST",
 			data: {"materiaId" : materiaId},
 			success: function(data){
@@ -97,7 +96,7 @@ var materiasAdmin = {
 					sticky: false
 				});
 				
-				$("#listaPersonas").DataTable().row( $("#listaPersonas a[data-materiaId=" + materiaId + "]").parents('tr') ).remove().draw();
+				table.row($("#listaMaterias a[data-materiaid=" + materiaId + "]").parents('tr')).remove().draw();
 				$("#deleteMateriaDialog").dialog("close");						
 			},
 			error: function(data) {
@@ -132,7 +131,7 @@ var materiasAdmin = {
 };
 
 $(document).ready(function() {
-	$('#listaPersonas').DataTable({
+	table = $('#listaMaterias').DataTable({
 		"processing" : false,
 		"serverSide" : false,
 		"paging" : false,
@@ -187,7 +186,7 @@ $(document).ready(function() {
 		buttons: {
 			"Ok": function() {
 				if(materiasAdmin.validacionFormlario("#editarMateriaForm")) {
-					materiasAdmin.editarUsuarioAjax();
+					materiasAdmin.editarMateriaAjax();
 				}
 			},
 			"Cancelar": function() {
@@ -201,7 +200,7 @@ $(document).ready(function() {
 			
 			$('#editarMateriaForm input[name=materiaId]').val($("#editarMateriaDialog").data('materiaId'));
 			$('#editarMateriaForm input[name=nombre]').val($("#editarMateriaDialog").data('nombre'));
-			$('#editarMateriaForm select[name=carrera]').val($("#editarMateriaDialog").data('carrera'));
+			$('#editarMateriaForm input[name=descripcion]').val($("#editarMateriaDialog").data('descripcion'));
 		},
 		close: function(event, ui) {
 		}
@@ -236,14 +235,14 @@ $(document).ready(function() {
 	});
 	
 	$("a[name=deleteMateria] button").click(function(){
-		$("#deleteMateriaDialog").data('materiaId', $(this).parent().attr("data-materiaId")).dialog("open");
+		$("#deleteMateriaDialog").data('materiaId', $(this).parent().attr("data-materiaid")).dialog("open");
 	});
 	
 	$("a[name=editMateria] button").click(function(){
-		$("#editarMateriaDialog").data('materiaId', $(this).parent().attr("data-materiaId"))
+		$("#editarMateriaDialog").data('materiaId', $(this).parent().attr("data-materiaid"))
 			.data('materiaId', $(this).parents("tr").find("td").get(0).innerHTML)
 			.data('nombre', $(this).parents("tr").find("td").get(1).innerHTML)
-			.data('carrera', $(this).parents("tr").find("td").get(2).innerHTML)
+			.data('descripcion', $(this).parents("tr").find("td").get(2).innerHTML)
 			.dialog("open");
 	});
 });

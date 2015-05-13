@@ -63,7 +63,7 @@ public class UsuarioDAOImpl extends GenericDAOImpl<Usuario> implements UsuarioDA
 
     @Override
     protected InsertSQLStatement buildInsertSQLStatement(final Usuario t) {
-        return new InsertSQLStatement("INSERT INTO usuario (user, pass, activo, fecsys, id_persona) values (?, ?, ?, now(), ?)") {
+        return new InsertSQLStatement("INSERT INTO usuario (user, pass, activo, fecsys, id_persona) values (?, ?, 1, now(), ?)") {
 
             @Override
             public void doAfterInsert(Long id) {
@@ -85,15 +85,14 @@ public class UsuarioDAOImpl extends GenericDAOImpl<Usuario> implements UsuarioDA
 
     @Override
     protected SQLStatement buildUpdateSQLStatement(final Usuario t) {
-        return new SQLStatement("UPDATE usuario SET user = ?, pass = ?, activo = ?, id_persona = ?, fecsys = now()  WHERE id_usuario = ?") {
+        return new SQLStatement("UPDATE usuario SET user = ?, pass = ?, id_persona = ?, fecsys = now()  WHERE id_usuario = ?") {
 
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
                 ps.setString(1, t.getUser());
                 ps.setString(2, t.getPass());
-                ps.setBoolean(3, t.isActivo());
-                ps.setLong(4, t.getIdPersona());
-                ps.setLong(5, t.getId());
+                ps.setLong(3, t.getIdPersona());
+                ps.setLong(4, t.getId());
             }
 
             @Override
@@ -104,7 +103,6 @@ public class UsuarioDAOImpl extends GenericDAOImpl<Usuario> implements UsuarioDA
 
     @Override
     protected String getColumnIdName() {
-        // TODO Auto-generated method stub
         return "id_usuario";
     }
 }

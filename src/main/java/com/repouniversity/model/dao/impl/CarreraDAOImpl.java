@@ -3,6 +3,7 @@ package com.repouniversity.model.dao.impl;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
@@ -71,5 +72,27 @@ public class CarreraDAOImpl extends GenericDAOImpl<Carrera> implements CarreraDA
     @Override
     protected String getColumnIdName() {
         return "idcarrera";
+    }
+
+    @Override
+    public List<Carrera> findByMateriaId(final Long materiaId) {
+        StringBuilder sql = new StringBuilder();
+
+        sql.append("SELECT c.* from carrera c JOIN carrera_materia cm ON cm.idcarrera = c.idcarrera ");
+        sql.append("WHERE ac.id_alumno = ? ");
+        sql.append("AND c.activo = 1");
+
+        List<Carrera> list = doQuery(new SQLStatement(sql.toString()) {
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+                ps.setLong(1, materiaId);
+            }
+
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+        }, new CarreraRowMapper(), "findByCursoId: " + materiaId);
+        
+        return list;
     }
 }

@@ -51,7 +51,7 @@ public class AlumnoDAOImpl extends GenericDAOImpl<Alumno> implements AlumnoDAO {
 
     @Override
     protected InsertSQLStatement buildInsertSQLStatement(final Alumno t) {
-        return new InsertSQLStatement("insert into alumno (id_persona, Idcarrera, activo, fecsys) values (?, ?, ?, now())") {
+        return new InsertSQLStatement("insert into alumno (id_persona, Idcarrera, activo, fecsys) values (?, ?, 1, now())") {
 
             @Override
             public void doAfterInsert(Long id) {
@@ -79,13 +79,13 @@ public class AlumnoDAOImpl extends GenericDAOImpl<Alumno> implements AlumnoDAO {
     @Override
     protected SQLStatement buildUpdateSQLStatement(final Alumno t) {
 
-        return new SQLStatement("update alumno set id_persona = ?, Idcarrera = ?, activo = ?, fechasys = now()  where id = ?") {
+        return new SQLStatement("update alumno set id_persona = ?, Idcarrera = ?, fechasys = now()  where id = ?") {
 
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
                 ps.setLong(1, t.getIdPersona());
                 ps.setLong(2, t.getIdCarrera());
-                ps.setBoolean(3, t.isActivo());
+                ps.setLong(3, t.getId());
             }
 
             @Override

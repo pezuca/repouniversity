@@ -73,6 +73,8 @@ public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
         result.setCodigo(rs.getString("codigo"));
         result.setDescripcion(rs.getString("descripcion"));
         result.setActivo(rs.getBoolean("activo"));
+        result.setDocenteId(rs.getLong("id_docente"));
+        result.setMateriaId(rs.getLong("id_materia"));
         result.setFechasys(rs.getDate("fecsys"));
 
         return result;
@@ -80,7 +82,7 @@ public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
 
     @Override
     protected InsertSQLStatement buildInsertSQLStatement(final Curso t) {
-        return new InsertSQLStatement("INSERT INTO curso (nombre, codigo, descripcion, activo, fechasys) values (?, ?, ?, ?, now())") {
+        return new InsertSQLStatement("INSERT INTO curso (nombre, codigo, descripcion, activo, fecsys) values (?, ?, ?, ?, now())") {
 
             @Override
             public void doAfterInsert(Long id) {
@@ -102,14 +104,14 @@ public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
 
     @Override
     protected SQLStatement buildUpdateSQLStatement(final Curso t) {
-        return new SQLStatement("UPDATE curso SET nombre = ?, codigo = ?, descripcion = ?, activo = ?, fecsys = now()  WHERE id = ?") {
+        return new SQLStatement("UPDATE curso SET nombre = ?, codigo = ?, descripcion = ?, activo = 1, fecsys = now()  WHERE id = ?") {
 
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
                 ps.setString(1, t.getNombre());
                 ps.setString(2, t.getCodigo());
                 ps.setString(3, t.getDescripcion());
-                ps.setBoolean(4, t.isActivo());
+                ps.setLong(4, t.getId());
             }
 
             @Override

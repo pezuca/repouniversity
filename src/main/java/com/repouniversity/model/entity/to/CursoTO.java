@@ -1,15 +1,12 @@
-package com.repouniversity.model.entity;
+package com.repouniversity.model.entity.to;
 
 import java.util.Date;
 import java.util.List;
 
-import com.repouniversity.model.dao.IdentifiedObject;
-import com.repouniversity.model.entity.to.AlumnoTO;
-import com.repouniversity.model.entity.to.NotificacionTO;
+import com.repouniversity.model.entity.Grupo;
+import com.repouniversity.model.entity.Materia;
 
-public class Curso implements Comparable<Curso>, IdentifiedObject {
-
-    private static final long serialVersionUID = 7521064031034129065L;
+public class CursoTO {
 
     private Long id;
     private String nombre;
@@ -20,8 +17,8 @@ public class Curso implements Comparable<Curso>, IdentifiedObject {
     private List<NotificacionTO> notificaciones;
     private List<Grupo> grupos;
     private List<AlumnoTO> alumnos;
-    private Long materiaId;
-    private Long docenteId;
+    private Materia materia;
+    private DocenteTO docente;
 
     public Long getId() {
         return id;
@@ -71,11 +68,6 @@ public class Curso implements Comparable<Curso>, IdentifiedObject {
         this.fechasys = fechasys;
     }
 
-    @Override
-    public int compareTo(Curso o) {
-        return this.id.compareTo(o.id);
-    }
-
     public List<NotificacionTO> getNotificaciones() {
         return notificaciones;
     }
@@ -100,19 +92,19 @@ public class Curso implements Comparable<Curso>, IdentifiedObject {
         this.alumnos = alumnos;
     }
 
-    public Long getMateriaId() {
-        return materiaId;
+    public Materia getMateria() {
+        return materia;
     }
 
-    public void setMateriaId(Long materiaId) {
-        this.materiaId = materiaId;
+    public void setMateria(Materia materia) {
+        this.materia = materia;
     }
 
-    public Long getDocenteId() {
-        return docenteId;
+    public DocenteTO getDocente() {
+        return docente;
     }
 
-    public void setDocenteId(Long docenteId) {
-        this.docenteId = docenteId;
+    public void setDocente(DocenteTO docente) {
+        this.docente = docente;
     }
 }

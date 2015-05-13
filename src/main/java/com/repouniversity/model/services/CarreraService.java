@@ -26,4 +26,8 @@ public class CarreraService {
     public List<Carrera> getAll() {
         return carreraDao.findAll();
     }
+
+    public List<Carrera> findByCursoId(Long cursoId) {
+        return carreraDao.findByMateriaId(cursoId);
+    }
 }

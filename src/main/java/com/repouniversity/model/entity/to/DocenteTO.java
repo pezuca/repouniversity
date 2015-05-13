@@ -1,14 +1,13 @@
-package com.repouniversity.model.entity;
+package com.repouniversity.model.entity.to;
 
 import java.util.Date;
 
-import com.repouniversity.model.dao.IdentifiedObject;
+import com.repouniversity.model.entity.Persona;
 
-public class Docente implements IdentifiedObject {
-    private static final long serialVersionUID = 2211075012496640918L;
+public class DocenteTO {
 
     private Long id;
-    private Long personaId;
+    private Persona persona;
     private boolean activo;
     private Date fechasys;
 
@@ -18,6 +17,14 @@ public class Docente implements IdentifiedObject {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Persona getPersona() {
+        return persona;
+    }
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
     }
 
     public boolean isActivo() {
@@ -34,13 +41,5 @@ public class Docente implements IdentifiedObject {
 
     public void setFechasys(Date fechasys) {
         this.fechasys = fechasys;
-    }
-
-    public Long getPersonaId() {
-        return personaId;
-    }
-
-    public void setPersonaId(Long personaId) {
-        this.personaId = personaId;
     }
 }
