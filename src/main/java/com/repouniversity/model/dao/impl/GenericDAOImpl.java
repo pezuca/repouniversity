@@ -298,10 +298,15 @@ public abstract class GenericDAOImpl<E extends IdentifiedObject> implements Gene
      * @return
      */
     protected List<E> doQueryById(final SQLStatement sql, String logMessage) {
-        List<Long> ids = jdbcTemplate.query(new DefaultPreparedStatementCreator(sql), new LongRowMapper());
+        List<Long> ids = getIdsFromQuery(sql);
 
         return findByIds(ids.toArray(new Long[ids.size()]));
     }
+
+	public List<Long> getIdsFromQuery(final SQLStatement sql) {
+		List<Long> ids = jdbcTemplate.query(new DefaultPreparedStatementCreator(sql), new LongRowMapper());
+		return ids;
+	}
 
     protected int doUpdate(final SQLStatement sql, String logMessage) {
         int result = jdbcTemplate.update(new DefaultPreparedStatementCreator(sql));

@@ -48,4 +48,8 @@ public class MateriaService {
         Materia materia = materiaDao.findById(materiaId);
         materiaDao.delete(materia);
     }
+
+	public List<Materia> findByIds(List<Long> materiaIds) {
+		return materiaDao.findByIds(materiaIds.toArray(new Long[materiaIds.size()]));
+	}
 }

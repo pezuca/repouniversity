@@ -1,5 +1,6 @@
 package com.repouniversity.web.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import com.repouniversity.model.entity.Curso;
 import com.repouniversity.model.entity.Materia;
 import com.repouniversity.model.entity.Usuario;
 import com.repouniversity.model.entity.UsuarioRol;
+import com.repouniversity.model.entity.to.CarreraTO;
 import com.repouniversity.model.entity.to.CursoTO;
 import com.repouniversity.model.entity.to.DocenteTO;
 import com.repouniversity.model.entity.to.UsuarioTO;
@@ -85,7 +87,7 @@ public class AdministradorController {
     public ModelAndView getCarreras() {
 
         List<Carrera> listaCarreras = carreraService.getAll();
-        return new ModelAndView("verCarrerasAdmin").addObject("carreras", listaCarreras);
+        return new ModelAndView("admin-panel/verCarrerasAdmin").addObject("carreras", listaCarreras);
     }
 
     /**
@@ -184,5 +186,40 @@ public class AdministradorController {
 
         Curso curso = cursoService.update(cursoId, nombre, descripcion, codigo, materiaId, docenteId);
         return cursoService.buildCurso(curso);
+    }
+    
+    /**
+     * AMB de Carreras
+     */
+    @RequestMapping(value = "admin/eliminarCarrera", method = {RequestMethod.POST})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public void deleteCarreraAjax(@RequestParam(value = "carreraId") Long carreraId) {
+        cursoService.delete(carreraId);
+    }
+
+    @RequestMapping(value = "admin/nuevoCarrera", method = {RequestMethod.POST})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public CarreraTO crearCarreraAjax(@RequestParam(value = "nombre") String nombre, @RequestParam(value = "materias") Long[] listaMaterias) {
+
+        Carrera carrera = carreraService.save(nombre);
+        
+        carreraService.asociarMateriasCarreras(carrera.getId(), Arrays.asList(listaMaterias));
+
+        return carreraService.buildCarrera(carrera);
+    }
+
+    @RequestMapping(value = "admin/editarCarrera", method = {RequestMethod.POST})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public CarreraTO editarCursoAjax(@RequestParam(value = "carreraId") Long carreraId, @RequestParam(value = "nombre") String nombre, @RequestParam(value = "materias") Long[] listaMaterias) {
+
+        Carrera carrera = carreraService.update(carreraId, nombre);
+        
+        carreraService.removerAsociacionesMaterias(carrera.getId());
+        carreraService.asociarMateriasCarreras(carrera.getId(), Arrays.asList(listaMaterias));
+        
+        return carreraService.buildCarrera(carrera);
     }
 }
