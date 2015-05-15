@@ -10,6 +10,7 @@
 <meta charset="utf-8" />
 <title>Repouniversity</title>
 <%@include file="../../components/common-statics-imports.jsp"%>
+<script src="/repouniversity/resources/js/plugins/chosen/chosen.jquery.js"></script>
 <script
 	src="/repouniversity/resources/js/application/admin-panel/verCarrerasAdmin.js"></script>
 </head>
@@ -91,6 +92,19 @@
 							required="required">
 					</div>
 				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Nombre*:</label>
+					<div class="col-sm-10">
+						<select data-placeholder="Elija una materia" name="materia" multiple class="chosen-select"
+							required="required" tabindex="-1">
+							<option value="">Select</option>
+							<c:forEach items="${materias}" var="materia" varStatus="status">
+								<option value="${materia.id}">${materia.nombre}</option>
+							</c:forEach>
+					</select>
+					</div>
+				</div>
+				
 			</form>
 		</div>
 

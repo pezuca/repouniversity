@@ -245,4 +245,6 @@ $(document).ready(function() {
 			.data('descripcion', $(this).parents("tr").find("td").get(2).innerHTML)
 			.dialog("open");
 	});
+	
+	$("select[name=materia]").chosen();
 });

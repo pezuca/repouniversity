@@ -87,7 +87,9 @@ public class AdministradorController {
     public ModelAndView getCarreras() {
 
         List<Carrera> listaCarreras = carreraService.getAll();
-        return new ModelAndView("admin-panel/verCarrerasAdmin").addObject("carreras", listaCarreras);
+        List<Materia> listaMaterias = materiaService.getAll();
+
+        return new ModelAndView("admin-panel/verCarrerasAdmin").addObject("carreras", listaCarreras).addObject("materias", listaMaterias);
     }
 
     /**
@@ -187,7 +189,7 @@ public class AdministradorController {
         Curso curso = cursoService.update(cursoId, nombre, descripcion, codigo, materiaId, docenteId);
         return cursoService.buildCurso(curso);
     }
-    
+
     /**
      * AMB de Carreras
      */
@@ -204,7 +206,7 @@ public class AdministradorController {
     public CarreraTO crearCarreraAjax(@RequestParam(value = "nombre") String nombre, @RequestParam(value = "materias") Long[] listaMaterias) {
 
         Carrera carrera = carreraService.save(nombre);
-        
+
         carreraService.asociarMateriasCarreras(carrera.getId(), Arrays.asList(listaMaterias));
 
         return carreraService.buildCarrera(carrera);
@@ -213,13 +215,14 @@ public class AdministradorController {
     @RequestMapping(value = "admin/editarCarrera", method = {RequestMethod.POST})
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
-    public CarreraTO editarCursoAjax(@RequestParam(value = "carreraId") Long carreraId, @RequestParam(value = "nombre") String nombre, @RequestParam(value = "materias") Long[] listaMaterias) {
+    public CarreraTO editarCursoAjax(@RequestParam(value = "carreraId") Long carreraId, @RequestParam(value = "nombre") String nombre,
+            @RequestParam(value = "materias") Long[] listaMaterias) {
 
         Carrera carrera = carreraService.update(carreraId, nombre);
-        
+
         carreraService.removerAsociacionesMaterias(carrera.getId());
         carreraService.asociarMateriasCarreras(carrera.getId(), Arrays.asList(listaMaterias));
-        
+
         return carreraService.buildCarrera(carrera);
     }
 }
