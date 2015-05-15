@@ -20,7 +20,7 @@ import com.repouniversity.model.entity.Materia;
 public class CarreraDAOImpl extends GenericDAOImpl<Carrera> implements CarreraDAO {
 
     protected static final String TABLE_NAME = "carrera";
-    
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -102,8 +102,8 @@ public class CarreraDAOImpl extends GenericDAOImpl<Carrera> implements CarreraDA
         return list;
     }
 
-	@Override
-	public List<Long> getMateriaIds(final Long carreraId) {
+    @Override
+    public List<Long> getMateriaIds(final Long carreraId) {
         StringBuilder sql = new StringBuilder();
 
         sql.append("SELECT cm.idmateria from carrera_materia cm ");
@@ -119,47 +119,47 @@ public class CarreraDAOImpl extends GenericDAOImpl<Carrera> implements CarreraDA
             public void doAfterTransaction(int result) {
             }
         };
-        
+
         List<Long> ids = getIdsFromQuery(sqlStatement);
 
         return ids;
-	}
+    }
 
-	@Override
-	public void removerAsociacionesMaterias(Long carreraId,
-			List<Long> materiasIds) {
-		
-		StringBuilder sql = new StringBuilder();
+    @Override
+    public void removerAsociacionesMaterias(Long carreraId, List<Long> materiasIds) {
+
+        StringBuilder sql = new StringBuilder();
         sql.append("DELETE FROM carrera_materia cm ");
         sql.append("WHERE (cm.idcarrera = ?) AND cm.idmateria IN (" + getQuestionMarks(materiasIds) + ")");
-        
+
         jdbcTemplate.update(sql.toString(), collectionToObjectArray(materiasIds));
-        
-	}
 
-	@Override
-	public void asociaciarMaterias(Long carreraId, List<Long> listaMaterias) {
-		
-		for (Long materiaId : listaMaterias) {
-			StringBuilder sql = new StringBuilder();
-			
-			sql.append("INSERT INTO carrera_materia (idcarrera, idmateria) ");
-			sql.append("VALUES (?, ?)");
-			
-	        SQLStatement sqlStatement = new SQLStatement(sql.toString()) {
-	            @Override
-	            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
-	                ps.setLong(1, carreraId);
-	                ps.setLong(1, materiaId);
-	            }
+    }
 
-	            @Override
-	            public void doAfterTransaction(int result) {
-	            }
-	        };
-	        
-	        jdbcTemplate.update(sql.toString(), sqlStatement);
-		}
-		
-	}
+    @Override
+    public void asociaciarMaterias(final Long carreraId, List<Long> listaMaterias) {
+
+        for (Long materiaId : listaMaterias) {
+            final Long matId = materiaId; 
+            StringBuilder sql = new StringBuilder();
+
+            sql.append("INSERT INTO carrera_materia (idcarrera, idmateria) ");
+            sql.append("VALUES (?, ?)");
+
+            SQLStatement sqlStatement = new SQLStatement(sql.toString()) {
+                @Override
+                public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+                    ps.setLong(1, carreraId);
+                    ps.setLong(1, matId);
+                }
+
+                @Override
+                public void doAfterTransaction(int result) {
+                }
+            };
+
+            jdbcTemplate.update(sql.toString(), sqlStatement);
+        }
+
+    }
 }
