@@ -1,49 +1,43 @@
 var cursosAdmin = {
 	crearNuevoCursoAjax : function() {
 		$.ajax({
-			url: "nuevoUsuario",
+			url: "/repouniversity/admin/nuevoCurso",
 			type: "POST",
 			data: $("#nuevoCursoForm").serialize(),
 			success: function(data){
 				$.gritter.add({
-					title:'Usuario creado',
-					text: 'La creacion del usuario fue exitosa.',
+					title:'Curso creado',
+					text: 'La creacion del curso fue exitosa.',
 					sticky: false
 				});
 				
 				
-				$("#listaPersonas").DataTable().row.add([
+				table.row.add([
 				                                          data.id,
-				                                          data.persona.nombre,
-				                                          data.persona.apellido,
-				                                          data.user,
-				                                          data.persona.mail,
-				                                          data.activo == true ? 'Si':'No',
-				                                          data.rol,
-				                                          "<a href='#' name='editUser' data-cursoId='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a>" + 
-				  										  "<a href='#' name='deleteUser' data-cursoId='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a>"
+				                                          data.nombre,
+				                                          data.codigo,
+				                                          data.descripcion,
+				                                          "<a href='#' name='editCurso' data-cursoId='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a>" + 
+				  										  "<a href='#' name='deleteCurso' data-cursoId='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a>"
 				                                     ]).draw();
 				
 				//Agrego el evento de delete
-				$("a[name='deleteUser'][data-cursoId=" + data.id + "] button").click(function(){
+				$("a[name='deleteCurso'][data-cursoId=" + data.id + "] button").click(function(){
 					$("#deleteCursoDialog").data('cursoId', $(this).parent().attr("data-cursoId")).dialog("open");
 				});
 				
-				$("a[name=editUser][data-cursoId=" + data.id + "] button").click(function(){
+				$("a[name=editCurso][data-cursoId=" + data.id + "] button").click(function(){
 					$("#editarCursoDialog").data('cursoId', $(this).parent().attr("data-cursoId"))
 						.data('nombre', $(this).parents("tr").find("td").get(1).innerHTML)
-						.data('apellido', $(this).parents("tr").find("td").get(2).innerHTML)
-						.data('user', $(this).parents("tr").find("td").get(3).innerHTML)
-						.data('mail', $(this).parents("tr").find("td").get(4).innerHTML)
-						.data('activo', $(this).parents("tr").find("td").get(5).innerHTML)
-						.data('rol', $(this).parents("tr").find("td").get(6).innerHTML)
+						.data('codigo', $(this).parents("tr").find("td").get(2).innerHTML)
+						.data('descripcion', $(this).parents("tr").find("td").get(3).innerHTML)
 						.dialog("open");
 				});
 				
 				$("#agregarCursoDialog").dialog("close");						
 			},
 			error: function(data) {
-				$("#nuevoCursoForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de crear el usuario, inténtelo mas tarde.</p></div>")
+				$("#nuevoCursoForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de crear el curso, inténtelo mas tarde.</p></div>")
 				setTimeout(function(){
 					$("#agregarCursoDialog .infoDialog").hide(function(){
 						$(this).remove();
@@ -54,44 +48,42 @@ var cursosAdmin = {
 	},
 	editarCursoAjax : function() {
 		$.ajax({
-			url: "editarUsuario",
+			url: "/repouniversity/admin/editarCurso",
 			type: "POST",
 			data: $("#editarCursoForm").serialize(),
 			success: function(data){
 				$.gritter.add({
-					title:'Usuario editado',
-					text: 'Los datos del usuario fueron editados exitosamente.',
+					title:'Curso editado',
+					text: 'Los datos del curso fueron editados exitosamente.',
 					sticky: false
 				});
 				
-				var celdas = $("#listaPersonas td a[data-cursoId=" + data.id + "]").parents("tr").find("td");
-				celdas.get(1).innerHTML = data.persona.nombre;
-				celdas.get(2).innerHTML = data.persona.apellido;
-				celdas.get(3).innerHTML = data.user;
-				celdas.get(4).innerHTML = data.persona.mail;
-				celdas.get(5).innerHTML = (data.activo == true ? 'Si':'No');
-				celdas.get(6).innerHTML = data.rol;
+				var celdas = $("#listaCursos td a[data-cursoId=" + data.id + "]").parents("tr").find("td");
+				celdas.get(1).innerHTML = data.nombre;
+				celdas.get(2).innerHTML = data.codigo;
+				celdas.get(3).innerHTML = data.descripcion;
+				celdas.get(4).innerHTML = data.materia.nombre;
+				celdas.get(5).innerHTML = data.docente.persona.nombre + ", " + data.docente.persona.apellido;
 				
 				//Agrego el evento de delete
-				$("a[name='deleteUser'][data-cursoId=" + data.id + "] button").click(function(){
+				$("a[name='deleteCurso'][data-cursoId=" + data.id + "] button").click(function(){
 					$("#deleteCursoDialog").data('cursoId', $(this).parent().attr("data-cursoId")).dialog("open");
 				});
 				
-				$("a[name=editUser][data-cursoId=" + data.id + "] button").click(function(){
+				$("a[name=editCurso][data-cursoId=" + data.id + "] button").click(function(){
 					$("#editarCursoDialog").data('cursoId', $(this).parent().attr("data-cursoId"))
 						.data('nombre', $(this).parents("tr").find("td").get(1).innerHTML)
-						.data('apellido', $(this).parents("tr").find("td").get(2).innerHTML)
-						.data('user', $(this).parents("tr").find("td").get(3).innerHTML)
-						.data('mail', $(this).parents("tr").find("td").get(4).innerHTML)
-						.data('activo', $(this).parents("tr").find("td").get(5).innerHTML)
-						.data('rol', $(this).parents("tr").find("td").get(6).innerHTML)
+						.data('codigo', $(this).parents("tr").find("td").get(2).innerHTML)
+						.data('descripcion', $(this).parents("tr").find("td").get(3).innerHTML)
+						.data('materiaId', $(this).parents("tr").find("td[data-materiaId]").attr("data-materiaId"))
+						.data('docenteId', $(this).parents("tr").find("td[data-docenteId]").attr("data-docenteId"))
 						.dialog("open");
 				});
 				
 				$("#editarCursoDialog").dialog("close");						
 			},
 			error: function(data) {
-				$("#nuevoCursoForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de crear el usuario, inténtelo mas tarde.</p></div>")
+				$("#nuevoCursoForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de editar el curso, inténtelo mas tarde.</p></div>")
 				setTimeout(function(){
 					$("#agregarCursoDialog .infoDialog").hide(function(){
 						$(this).remove();
@@ -102,23 +94,23 @@ var cursosAdmin = {
 	},
 	deleteCursoAjax : function(cursoId) {
 		$.ajax({
-			url: "eliminarCurso",
+			url: "/repouniversity/admin/eliminarCurso",
 			type: "POST",
 			data: {"cursoId" : cursoId},
 			success: function(data){
 				$.gritter.add({
-					title:'Usuario eliminado',
-					text: 'El usuario fue elimnado exitosamente.',
+					title:'Curso eliminado',
+					text: 'El curso fue elimnado exitosamente.',
 					sticky: false
 				});
 				
-				$("#listaPersonas").DataTable().row( $("#listaPersonas a[data-cursoId=" + cursoId + "]").parents('tr') ).remove().draw();
+				table.row( $("#listaCursos a[data-cursoId=" + cursoId + "]").parents('tr') ).remove().draw();
 				$("#deleteCursoDialog").dialog("close");						
 			},
 			error: function(data) {
 				$.gritter.add({
-					title: 'Eliminar usuario',
-					text: 'Hubo un problema al tratar de eliminar al usuario. Por favor inténtelo mas tarde.',
+					title: 'Eliminar curso',
+					text: 'Hubo un problema al tratar de eliminar el curso. Por favor inténtelo mas tarde.',
 					class_name: 'gritter-light'
 				});	
 			}
@@ -147,7 +139,7 @@ var cursosAdmin = {
 };
 
 $(document).ready(function() {
-	$('#listaPersonas').DataTable({
+	table = $('#listaCursos').DataTable({
 		"processing" : false,
 		"serverSide" : false,
 		"paging" : false,
@@ -201,7 +193,7 @@ $(document).ready(function() {
 		buttons: {
 			"Ok": function() {
 				if(cursosAdmin.validacionFormlario("#editarCursoForm")) {
-					cursosAdmin.editarUsuarioAjax();
+					cursosAdmin.editarCursoAjax();
 				}
 			},
 			"Cancelar": function() {
@@ -212,12 +204,14 @@ $(document).ready(function() {
 			$(".infoDialog").remove();
 			$('#editarCursoForm').trigger("reset");
 			$("#editarCursoForm").find(".form-group").removeClass("has-error");
+			$("#editarCursoForm select option").removeAttr("selected");
 			
 			$('#editarCursoForm input[name=cursoId]').val($("#editarCursoDialog").data('cursoId'));
 			$('#editarCursoForm input[name=nombre]').val($("#editarCursoDialog").data('nombre'));
-			$('#editarCursoForm input[name=codigo]').val($("#editarCursoDialog").data('codigo'));
 			$('#editarCursoForm input[name=descripcion]').val($("#editarCursoDialog").data('descripcion'));
-			$('#editarCursoForm input[name=activo]').val($("#editarCursoDialog").data('activo'));
+			$('#editarCursoForm input[name=codigo]').val($("#editarCursoDialog").data('codigo'));
+			$("#editarCursoForm select[name=materia] option[value=" + $("#editarCursoDialog").data('materiaId') + "]").attr("selected", "selected");
+			$("#editarCursoForm select[name=docente] option[value=" + $("#editarCursoDialog").data('docenteId') + "]").attr("selected", "selected");
 		},
 		close: function(event, ui) {
 		}
@@ -259,9 +253,10 @@ $(document).ready(function() {
 		$("#editarCursoDialog").data('cursoId', $(this).parent().attr("data-cursoId"))
 			.data('cursoId', $(this).parents("tr").find("td").get(0).innerHTML)
 			.data('nombre', $(this).parents("tr").find("td").get(1).innerHTML)
-			.data('codigo', $(this).parents("tr").find("td").get(2).innerHTML)
 			.data('descripcion', $(this).parents("tr").find("td").get(3).innerHTML)
-			.data('activo', $(this).parents("tr").find("td").get(4).innerHTML)
+			.data('codigo', $(this).parents("tr").find("td").get(2).innerHTML)
+			.data('materiaId', $(this).parents("tr").find("td[data-materiaId]").attr("data-materiaId"))
+			.data('docenteId', $(this).parents("tr").find("td[data-docenteId]").attr("data-docenteId"))
 			.dialog("open");
 	});
 });

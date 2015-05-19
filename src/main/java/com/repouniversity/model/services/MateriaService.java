@@ -13,6 +13,9 @@ public class MateriaService {
 
     @Autowired
     private MateriaDAO materiaDao;
+    
+    @Autowired
+    private CarreraService carreraService;
 
     public List<Materia> getAll() {
         return materiaDao.findAll();
@@ -22,12 +25,31 @@ public class MateriaService {
         return materiaDao.findById(idAluDoc);
     }
 
-    public Materia save(Materia materia) {
+    public Materia save(String nombre, String descripcion) {
+        Materia materia = new Materia();
+        materia.setNombre(nombre);
+        materia.setDescripcion(descripcion);
+        
         return materiaDao.insert(materia);
     }
 
+    public Materia update(Long materiaId, String nombre, String descripcion) {
+        Materia materia = materiaDao.findById(materiaId);
+        
+        materia.setNombre(nombre);
+        materia.setDescripcion(descripcion);
+        
+        materiaDao.update(materia);
+        
+        return materia;
+    }
+    
     public void delete(Long materiaId) {
         Materia materia = materiaDao.findById(materiaId);
         materiaDao.delete(materia);
     }
+
+	public List<Materia> findByIds(List<Long> materiaIds) {
+		return materiaDao.findByIds(materiaIds.toArray(new Long[materiaIds.size()]));
+	}
 }

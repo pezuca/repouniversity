@@ -35,7 +35,7 @@ public class UsuarioService {
     private UsuarioRolService usuarioRolService;
 
     @Transactional
-    public Usuario updateUser(Long id, String nombre, String apellido, String mail, String user, String newPassword, String repeatPassword, Boolean activo) {
+    public Usuario updateUser(Long id, String nombre, String apellido, String mail, String user, String newPassword, String repeatPassword) {
 
         Usuario usuario = usuarioDAO.findById(id);
 
@@ -43,7 +43,6 @@ public class UsuarioService {
             usuario.setPass(newPassword);
         }
         usuario.setUser(user);
-        usuario.setActivo(activo);
 
         Persona persona = personaService.findById(usuario.getIdPersona());
 
@@ -58,32 +57,28 @@ public class UsuarioService {
     }
 
     @Transactional
-    public Usuario saveUser(String nombre, String apellido, String mail, String user, String password, Boolean activo, String rol) {
+    public Usuario saveUser(String nombre, String apellido, String mail, String user, String password, String rol) {
 
         Persona persona = new Persona();
         persona.setNombre(nombre);
         persona.setApellido(apellido);
         persona.setMail(mail);
-        persona.setActivo(activo);
         persona = personaService.save(persona);
 
         Usuario usuario = new Usuario();
         usuario.setUser(user);
         usuario.setPass(password);
-        usuario.setActivo(activo);
         usuario.setPersona(persona.getId());
         usuarioDAO.insert(usuario);
 
         if (rol.equalsIgnoreCase("alumno")) {
             Alumno alumno = new Alumno();
-            alumno.setActivo(activo);
             alumno.setIdPersona(persona.getId());
             alumnoService.save(alumno);
 
         } else if (rol.equalsIgnoreCase("docente")) {
             Docente docente = new Docente();
-            docente.setActivo(activo);
-            docente.setPersona(persona);
+            docente.setPersonaId(persona.getId());
             docenteService.save(docente);
         }
 

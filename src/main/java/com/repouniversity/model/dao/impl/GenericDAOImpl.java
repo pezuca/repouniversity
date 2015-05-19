@@ -105,7 +105,7 @@ public abstract class GenericDAOImpl<E extends IdentifiedObject> implements Gene
                 @Override
                 public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                     PreparedStatement ps = connection.prepareStatement("SELECT DISTINCT * FROM " + getTableName() + " WHERE " + getColumnIdName() + " IN ("
-                            + getQuestionMarks(ids) + ") AND activo = 1");
+                            + getQuestionMarks(ids) + ")");
 
                     for (int i = 0; i < ids.size(); i++) {
                         ps.setLong(i + 1, ids.get(i));
@@ -298,10 +298,15 @@ public abstract class GenericDAOImpl<E extends IdentifiedObject> implements Gene
      * @return
      */
     protected List<E> doQueryById(final SQLStatement sql, String logMessage) {
-        List<Long> ids = jdbcTemplate.query(new DefaultPreparedStatementCreator(sql), new LongRowMapper());
+        List<Long> ids = getIdsFromQuery(sql);
 
         return findByIds(ids.toArray(new Long[ids.size()]));
     }
+
+	public List<Long> getIdsFromQuery(final SQLStatement sql) {
+		List<Long> ids = jdbcTemplate.query(new DefaultPreparedStatementCreator(sql), new LongRowMapper());
+		return ids;
+	}
 
     protected int doUpdate(final SQLStatement sql, String logMessage) {
         int result = jdbcTemplate.update(new DefaultPreparedStatementCreator(sql));

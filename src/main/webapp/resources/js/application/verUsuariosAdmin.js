@@ -12,13 +12,12 @@ var usuariosAdmin = {
 				});
 				
 				
-				$("#listaPersonas").DataTable().row.add([
+				table.row.add([
 				                                          data.id,
 				                                          data.persona.nombre,
 				                                          data.persona.apellido,
 				                                          data.user,
 				                                          data.persona.mail,
-				                                          data.activo == true ? 'Si':'No',
 				                                          data.rol,
 				                                          "<a href='#' name='editUser' data-userid='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a>" + 
 				  										  "<a href='#' name='deleteUser' data-userid='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a>"
@@ -35,8 +34,7 @@ var usuariosAdmin = {
 						.data('apellido', $(this).parents("tr").find("td").get(2).innerHTML)
 						.data('user', $(this).parents("tr").find("td").get(3).innerHTML)
 						.data('mail', $(this).parents("tr").find("td").get(4).innerHTML)
-						.data('activo', $(this).parents("tr").find("td").get(5).innerHTML)
-						.data('rol', $(this).parents("tr").find("td").get(6).innerHTML)
+						.data('rol', $(this).parents("tr").find("td").get(5).innerHTML)
 						.dialog("open");
 				});
 				
@@ -69,8 +67,7 @@ var usuariosAdmin = {
 				celdas.get(2).innerHTML = data.persona.apellido;
 				celdas.get(3).innerHTML = data.user;
 				celdas.get(4).innerHTML = data.persona.mail;
-				celdas.get(5).innerHTML = (data.activo == true ? 'Si':'No');
-				celdas.get(6).innerHTML = data.rol;
+				celdas.get(5).innerHTML = data.rol;
 				
 				//Agrego el evento de delete
 				$("a[name='deleteUser'][data-userid=" + data.id + "] button").click(function(){
@@ -83,8 +80,7 @@ var usuariosAdmin = {
 						.data('apellido', $(this).parents("tr").find("td").get(2).innerHTML)
 						.data('user', $(this).parents("tr").find("td").get(3).innerHTML)
 						.data('mail', $(this).parents("tr").find("td").get(4).innerHTML)
-						.data('activo', $(this).parents("tr").find("td").get(5).innerHTML)
-						.data('rol', $(this).parents("tr").find("td").get(6).innerHTML)
+						.data('rol', $(this).parents("tr").find("td").get(5).innerHTML)
 						.dialog("open");
 				});
 				
@@ -112,7 +108,7 @@ var usuariosAdmin = {
 					sticky: false
 				});
 				
-				$("#listaPersonas").DataTable().row( $("#listaPersonas a[data-userid=" + userId + "]").parents('tr') ).remove().draw();
+				table.row( $("#listaPersonas a[data-userid=" + userId + "]").parents('tr') ).remove().draw();
 				$("#deleteAlumnoDialog").dialog("close");						
 			},
 			error: function(data) {
@@ -147,7 +143,7 @@ var usuariosAdmin = {
 };
 
 $(document).ready(function() {
-	$('#listaPersonas').DataTable({
+	table = $('#listaPersonas').DataTable({
 		"processing" : false,
 		"serverSide" : false,
 		"paging" : false,
@@ -223,7 +219,6 @@ $(document).ready(function() {
 			$('#editarAlumnoForm input[name=apellido]').val($("#editarAlumnoDialog").data('apellido'));
 			$('#editarAlumnoForm input[name=mail]').val($("#editarAlumnoDialog").data('mail'));
 			$('#editarAlumnoForm input[name=user]').val($("#editarAlumnoDialog").data('user'));
-			$('#editarAlumnoForm input[name=activo]').val($("#editarAlumnoDialog").data('activo'));
 			$('#editarAlumnoForm select[name=rol]').val($("#editarAlumnoDialog").data('rol'));
 		},
 		close: function(event, ui) {
@@ -265,8 +260,7 @@ $(document).ready(function() {
 			.data('apellido', $(this).parents("tr").find("td").get(2).innerHTML)
 			.data('user', $(this).parents("tr").find("td").get(3).innerHTML)
 			.data('mail', $(this).parents("tr").find("td").get(4).innerHTML)
-			.data('activo', $(this).parents("tr").find("td").get(5).innerHTML)
-			.data('rol', $(this).parents("tr").find("td").get(6).innerHTML)
+			.data('rol', $(this).parents("tr").find("td").get(5).innerHTML)
 			.dialog("open");
 	});
 });

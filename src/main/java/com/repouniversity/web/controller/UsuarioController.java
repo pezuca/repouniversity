@@ -41,7 +41,7 @@ public class UsuarioController {
             @RequestParam(value = "mail", required = true) String mail, @RequestParam(value = "newPassword", defaultValue = "") String newPassword,
             @RequestParam(value = "repeatPassword", defaultValue = "") String repeatPassword) {
 
-        Usuario usuario = usuarioService.updateUser(id, nombre, apellido, mail, null, newPassword, repeatPassword, null);
+        Usuario usuario = usuarioService.updateUser(id, nombre, apellido, mail, null, newPassword, repeatPassword);
 
         UsuarioRol usuarioRol = usuarioRolService.getUsuarioById(usuario.getId());
         HTTPSessionManagerUtil.setSessionAttribute(request, "login", usuarioRol);
