@@ -1,10 +1,12 @@
 package com.repouniversity.model.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mysql.fabric.xmlrpc.base.Array;
 import com.repouniversity.model.dao.CarreraDAO;
 import com.repouniversity.model.entity.Carrera;
 import com.repouniversity.model.entity.Materia;
@@ -64,7 +66,6 @@ public class CarreraService {
 	}
 
 	public CarreraTO buildCarrera(Carrera carrera) {
-		// TODO Auto-generated method stub
 		List<Materia> materias = materiaService.findByIds(getMateriaIds(carrera.getId()));
 		
 		CarreraTO carreraTo = new CarreraTO();
@@ -74,4 +75,13 @@ public class CarreraService {
 		
 		return carreraTo;
 	}
+	
+    public List<CarreraTO> buildCarreras(List<Carrera> carreras) {
+        List<CarreraTO> carrerasTo = new ArrayList<CarreraTO>();
+        for (Carrera carrera : carreras) {
+            carrerasTo.add(buildCarrera(carrera));
+        }
+
+        return carrerasTo;
+    }
 }

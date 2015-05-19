@@ -11,6 +11,8 @@
 <title>Repouniversity</title>
 <%@include file="../../components/common-statics-imports.jsp"%>
 <script src="/repouniversity/resources/js/plugins/chosen/chosen.jquery.js"></script>
+<link rel="stylesheet" type="text/css" 
+			href="/repouniversity/resources/css/plugins/chosen/chosen.css" />
 <script
 	src="/repouniversity/resources/js/application/admin-panel/verCarrerasAdmin.js"></script>
 </head>
@@ -39,6 +41,7 @@
 										<tr>
 											<th>Id</th>
 											<th>Nombre</th>
+											<th>Materias</th>
 											<th></th>
 										</tr>
 									</thead>
@@ -48,6 +51,11 @@
 											<tr>
 												<td>${carrera.id}</td>
 												<td>${carrera.nombre}</td>
+												<td>
+													<c:forEach items="${carrera.materias}" var="materia" varStatus="status">
+														${materia.nombre}  |  
+													</c:forEach>
+												</td>
 												<td><a href="#" name="editCarrera"
 													data-carreraId="${carrera.id}"><button
 															class="btn btn-primary btn-circle" type="button">
@@ -79,6 +87,18 @@
 							required="required">
 					</div>
 				</div>
+				
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Materias*:</label>
+					<div class="col-sm-10">
+						<select data-placeholder="Elija una materia" name="materias" multiple class="chosen-select"
+							required="required" tabindex="-1">
+							<c:forEach items="${materias}" var="materia" varStatus="status">
+								<option value="${materia.id}">${materia.nombre}</option>
+							</c:forEach>
+					</select>
+					</div>
+				</div>
 			</form>
 		</div>
 
@@ -93,11 +113,10 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label">Nombre*:</label>
+					<label class="col-sm-2 control-label">Materias*:</label>
 					<div class="col-sm-10">
-						<select data-placeholder="Elija una materia" name="materia" multiple class="chosen-select"
+						<select data-placeholder="Elija una materia" name="materias" multiple class="chosen-select"
 							required="required" tabindex="-1">
-							<option value="">Select</option>
 							<c:forEach items="${materias}" var="materia" varStatus="status">
 								<option value="${materia.id}">${materia.nombre}</option>
 							</c:forEach>

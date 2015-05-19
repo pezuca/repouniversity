@@ -143,14 +143,14 @@ public class CarreraDAOImpl extends GenericDAOImpl<Carrera> implements CarreraDA
             final Long matId = materiaId; 
             StringBuilder sql = new StringBuilder();
 
-            sql.append("INSERT INTO carrera_materia (idcarrera, idmateria) ");
-            sql.append("VALUES (?, ?)");
+            sql.append("INSERT INTO carrera_materia (idmateria, idcarrera) ");
+            sql.append("VALUES (1, 1)");
 
             SQLStatement sqlStatement = new SQLStatement(sql.toString()) {
                 @Override
                 public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
-                    ps.setLong(1, carreraId);
-                    ps.setLong(1, matId);
+//                    ps.setInt(1, 1);
+//                    ps.setInt(2, 1);
                 }
 
                 @Override

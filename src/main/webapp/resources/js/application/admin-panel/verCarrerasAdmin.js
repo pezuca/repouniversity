@@ -151,6 +151,7 @@ $(document).ready(function() {
 	$("#agregarCarreraDialog").dialog({
 		resizable: false,
 		width:700,
+		height:300,
 		modal: true,
 		autoOpen: false,
 		autoResize:true,
@@ -178,6 +179,7 @@ $(document).ready(function() {
 	$("#editarCarreraDialog").dialog({
 		resizable: false,
 		width:700,
+		height:300,
 		modal: true,
 		autoOpen: false,
 		autoResize:true,
@@ -246,5 +248,5 @@ $(document).ready(function() {
 			.dialog("open");
 	});
 	
-	$("select[name=materia]").chosen();
+	$("select[name=materias]").chosen();
 });

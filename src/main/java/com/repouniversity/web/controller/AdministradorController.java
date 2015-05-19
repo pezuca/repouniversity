@@ -89,7 +89,8 @@ public class AdministradorController {
         List<Carrera> listaCarreras = carreraService.getAll();
         List<Materia> listaMaterias = materiaService.getAll();
 
-        return new ModelAndView("admin-panel/verCarrerasAdmin").addObject("carreras", listaCarreras).addObject("materias", listaMaterias);
+        return new ModelAndView("admin-panel/verCarrerasAdmin").addObject("carreras", carreraService.buildCarreras(listaCarreras)).addObject("materias",
+            listaMaterias);
     }
 
     /**
