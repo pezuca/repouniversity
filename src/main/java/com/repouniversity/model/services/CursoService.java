@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.repouniversity.model.dao.CursoDAO;
+import com.repouniversity.model.entity.Alumno;
 import com.repouniversity.model.entity.Curso;
 import com.repouniversity.model.entity.CursoMateria;
 import com.repouniversity.model.entity.Notificacion;
+import com.repouniversity.model.entity.to.AlumnoTO;
 
 @Service
 public class CursoService {
@@ -80,5 +82,12 @@ public class CursoService {
 
 	public void completelyDeleteCurso(Curso curso) {
 		cursoDao.delete(curso);
+	}
+
+	public List<AlumnoTO> ObtenerAlumnosSinGrupo(Long idCurso) {
+		// TODO Auto-generated method stub
+		List<Long> listaAlumnosid=  cursoDao.ObtenerAlumnosSinGrupo(idCurso);
+		
+		return alumnoService.getAlumnosByIds(listaAlumnosid);
 	}
 }

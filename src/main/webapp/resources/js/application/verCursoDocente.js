@@ -52,6 +52,55 @@ var GruposAdmin = {
 			}
 		})
 	},
+	obtenerAlumnosSinGrupoAjax : function() {
+		$.ajax({
+			url: "/repouniversity/curso/alumnoSinGrupo",
+			type: "GET",
+			data: $("#editarAlumnoForm").serialize(),
+			success: function(data){
+				$.gritter.add({
+					title:'Usuario editado',
+					text: 'Los datos del usuario fueron editados exitosamente.',
+					sticky: false
+				});
+				
+				var celdas = $("#listaPersonas td a[data-userid=" + data.id + "]").parents("tr").find("td");
+				celdas.get(1).innerHTML = data.persona.nombre;
+				celdas.get(2).innerHTML = data.persona.apellido;
+				celdas.get(3).innerHTML = data.user;
+				celdas.get(4).innerHTML = data.persona.mail;
+				celdas.get(5).innerHTML = (data.activo == true ? 'Si':'No');
+				celdas.get(6).innerHTML = data.rol;
+				
+				//Agrego el evento de delete
+				$("a[name='deleteUser'][data-userid=" + data.id + "] button").click(function(){
+					$("#deleteAlumnoDialog").data('userId', $(this).parent().attr("data-userid")).dialog("open");
+				});
+				
+				$("a[name=editUser][data-userid=" + data.id + "] button").click(function(){
+					$("#editarAlumnoDialog").data('userId', $(this).parent().attr("data-userid"))
+						.data('nombre', $(this).parents("tr").find("td").get(1).innerHTML)
+						.data('apellido', $(this).parents("tr").find("td").get(2).innerHTML)
+						.data('user', $(this).parents("tr").find("td").get(3).innerHTML)
+						.data('mail', $(this).parents("tr").find("td").get(4).innerHTML)
+						.data('activo', $(this).parents("tr").find("td").get(5).innerHTML)
+						.data('rol', $(this).parents("tr").find("td").get(6).innerHTML)
+						.dialog("open");
+				});
+				
+				$("#editarAlumnoDialog").dialog("close");						
+			},
+			error: function(data) {
+				$("#nuevoGrupoForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de crear el usuario, inténtelo mas tarde.</p></div>")
+				setTimeout(function(){
+					$("#crearGrupoDialog .infoDialog").hide(function(){
+						$(this).remove();
+					});
+				}, 3000);	
+			}
+		})
+	},
+
 	editarUsuarioAjax : function() {
 		$.ajax({
 			url: "editarUsuario",
