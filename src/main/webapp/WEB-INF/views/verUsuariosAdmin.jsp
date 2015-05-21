@@ -37,7 +37,6 @@
 								<th>Apellido</th>
 								<th>User name</th>
 								<th>Mail</th>
-								<th>Activo</th>
 								<th>Rol</th>
 								<th></th>
 							</tr>
@@ -51,7 +50,6 @@
 									<td>${usuario.persona.apellido}</td>
 									<td>${usuario.user}</td>
 									<td>${usuario.persona.mail}</td>
-									<td>${usuario.activo ? 'Si' : 'No'}</td>
 									<td>${usuario.rol}</td>
 									<td>
 										<a href="#" name="editUser" data-userId="${usuario.id}"><button class="btn btn-primary btn-circle" type="button"><i class="fa fa-pencil"></i></button></a>
@@ -93,15 +91,6 @@
                 <div class="col-sm-10"><input name="password" type="password" class="form-control" required="required"></div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Activo*:</label>
-                <div class="col-sm-10">
-                	<select class="form-control m-b" name="activo" required="required">
-                         <option value="true">Si</option>
-                         <option value="false">No</option>
-                     </select>
-                </div>
-            </div>
-            <div class="form-group">
                 <label class="col-sm-2 control-label">Rol*:</label>
                 <div class="col-sm-10">
                 	<select class="form-control m-b" name="rol" required="required">
@@ -136,15 +125,6 @@
 			<div class="form-group">
                 <label class="col-sm-2 control-label">Contraseña:</label>
                 <div class="col-sm-10"><input name="password" type="text" class="form-control"></div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Activo*:</label>
-                <div class="col-sm-10">
-                	<select class="form-control m-b" name="activo" required="required">
-                         <option value="true">Si</option>
-                         <option value="false">No</option>
-                     </select>
-                </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Rol*:</label>

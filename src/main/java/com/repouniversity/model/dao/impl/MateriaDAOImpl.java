@@ -32,7 +32,7 @@ public class MateriaDAOImpl extends GenericDAOImpl<Materia> implements MateriaDA
 
     @Override
     protected InsertSQLStatement buildInsertSQLStatement(final Materia t) {
-        return new InsertSQLStatement("INSERT INTO materia (nombre, descripcion, activo, fecsys) values (?, ?, ?, now())") {
+        return new InsertSQLStatement("INSERT INTO materia (nombre, descripcion, activo, fecsys) values (?, ?, 1, now())") {
 
             @Override
             public void doAfterInsert(Long id) {
@@ -42,7 +42,6 @@ public class MateriaDAOImpl extends GenericDAOImpl<Materia> implements MateriaDA
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
                 ps.setString(1, t.getNombre());
                 ps.setString(2, t.getDescripcion());
-                ps.setBoolean(3, t.isActivo());
             }
 
             @Override
@@ -53,13 +52,13 @@ public class MateriaDAOImpl extends GenericDAOImpl<Materia> implements MateriaDA
 
     @Override
     protected SQLStatement buildUpdateSQLStatement(final Materia t) {
-        return new SQLStatement("UPDATE materia SET nombre = ?, descripcion = ?, activo = ?, fecsys = now()  WHERE id_materia = ?") {
+        return new SQLStatement("UPDATE materia SET nombre = ?, descripcion = ?, fecsys = now()  WHERE " + getColumnIdName() + " = ?") {
 
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
                 ps.setString(1, t.getNombre());
                 ps.setString(2, t.getDescripcion());
-                ps.setBoolean(3, t.isActivo());
+                ps.setLong(3, t.getId());
             }
 
             @Override

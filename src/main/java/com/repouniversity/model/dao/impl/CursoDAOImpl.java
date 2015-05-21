@@ -19,7 +19,7 @@ import com.repouniversity.model.dao.CursoDAO;
 import com.repouniversity.model.dao.query.InsertSQLStatement;
 import com.repouniversity.model.dao.query.SQLStatement;
 import com.repouniversity.model.dao.rowmapper.CursoMateriaRowMapper;
-import com.repouniversity.model.dao.rowmapper.LongRowMapper;
+import com.repouniversity.model.dao.rowmapper.CursoRowMapper;
 import com.repouniversity.model.entity.Curso;
 import com.repouniversity.model.entity.CursoMateria;
 
@@ -67,21 +67,12 @@ public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
 
     @Override
     protected Curso extractEntityFromResultSet(ResultSet rs, int line) throws SQLException {
-        Curso result = new Curso();
-
-        result.setId(rs.getLong("id_curso"));
-        result.setNombre(rs.getString("nombre"));
-        result.setCodigo(rs.getString("codigo"));
-        result.setDescripcion(rs.getString("descripcion"));
-        result.setActivo(rs.getBoolean("activo"));
-        result.setFechasys(rs.getDate("fecsys"));
-
-        return result;
+        return new CursoRowMapper().mapRow(rs, line);
     }
 
     @Override
     protected InsertSQLStatement buildInsertSQLStatement(final Curso t) {
-        return new InsertSQLStatement("INSERT INTO curso (nombre, codigo, descripcion, activo, fechasys) values (?, ?, ?, ?, now())") {
+        return new InsertSQLStatement("INSERT INTO curso (nombre, codigo, descripcion, activo, id_materia, id_docente, fecsys) values (?, ?, ?, ?, ?, ?, now())") {
 
             @Override
             public void doAfterInsert(Long id) {
@@ -92,7 +83,9 @@ public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
                 ps.setString(1, t.getNombre());
                 ps.setString(2, t.getCodigo());
                 ps.setString(3, t.getDescripcion());
-                ps.setBoolean(4, t.isActivo());
+                ps.setLong(4, t.getMateriaId());
+                ps.setLong(5, t.getDocenteId());
+                ps.setBoolean(6, t.isActivo());
             }
 
             @Override
@@ -103,14 +96,16 @@ public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
 
     @Override
     protected SQLStatement buildUpdateSQLStatement(final Curso t) {
-        return new SQLStatement("UPDATE curso SET nombre = ?, codigo = ?, descripcion = ?, activo = ?, fecsys = now()  WHERE id = ?") {
+        return new SQLStatement("UPDATE curso SET nombre = ?, codigo = ?, descripcion = ?, id_materia = ?, id_docente = ?, fecsys = now()  WHERE " + getColumnIdName() + " = ?") {
 
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
                 ps.setString(1, t.getNombre());
                 ps.setString(2, t.getCodigo());
                 ps.setString(3, t.getDescripcion());
-                ps.setBoolean(4, t.isActivo());
+                ps.setLong(4, t.getMateriaId());
+                ps.setLong(5, t.getDocenteId());
+                ps.setLong(6, t.getId());
             }
 
             @Override
@@ -211,31 +206,4 @@ public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
     protected String getColumnIdName() {
         return "id_curso";
     }
-
-    @Override
-    
-    public List<Long> ObtenerAlumnosSinGrupo(final Long idCurso) {
-        StringBuilder sql = new StringBuilder();
-
-        sql.append("select id_alumno from alumno_curso where id_grupo = 1 and id_curso = ? ");
-
-        List<Long> list = doQuery(new SQLStatement(sql.toString()) {
-            @Override
-            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
-                ps.setLong(1, idCurso);
-            }
-
-            @Override
-            public void doAfterTransaction(int result) {
-            }
-        }, new LongRowMapper(), "ObtenerAlumnosSinGrupo: " + idCurso);
-
-        if (list.isEmpty()) {
-            return new ArrayList<Long>();
-        }
-
-        return list;
-    }
-
-  
 }

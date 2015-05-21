@@ -2,9 +2,9 @@ CREATE DATABASE  IF NOT EXISTS `repouniversity` /*!40100 DEFAULT CHARACTER SET u
 USE `repouniversity`;
 -- MySQL dump 10.13  Distrib 5.6.17, for Win32 (x86)
 --
--- Host: 127.0.0.1    Database: repouniversity
+-- Host: localhost    Database: repouniversity
 -- ------------------------------------------------------
--- Server version	5.6.20
+-- Server version	5.6.17
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -243,7 +243,7 @@ DROP TABLE IF EXISTS `docente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `docente` (
-  `id_docente` int(10) NOT NULL,
+  `id_docente` int(10) NOT NULL AUTO_INCREMENT,
   `id_persona` int(10) NOT NULL,
   `activo` tinyint(1) NOT NULL DEFAULT '1',
   `fecsys` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -313,7 +313,7 @@ CREATE TABLE `grupo` (
 
 LOCK TABLES `grupo` WRITE;
 /*!40000 ALTER TABLE `grupo` DISABLE KEYS */;
-INSERT INTO `grupo` VALUES (1,'Smart Solution',1,'2014-04-14 19:35:53'),(2,'Grupo 1001',1,'2014-04-14 19:58:47'),(3,'grupo1',1,'2014-11-30 16:11:22'),(4,'pepitos',1,'2015-01-18 21:17:08'),(5,'pepitos',1,'2015-01-18 21:32:18'),(6,'pepitos',1,'2015-01-18 21:41:03'),(7,'pepitos',1,'2015-01-18 22:01:45'),(8,'pepitos',1,'2015-01-18 22:08:08'),(9,'pepitos',1,'2015-01-18 22:10:08'),(10,'pepitos',1,'2015-01-18 22:17:38'),(11,'pepitos',1,'2015-01-18 22:35:57');
+INSERT INTO `grupo` VALUES (1,'Sin Grupo',1,'2014-04-14 19:35:53'),(2,'Grupo 1001',1,'2014-04-14 19:58:47'),(3,'grupo1',1,'2014-11-30 16:11:22'),(4,'pepitos',1,'2015-01-18 21:17:08'),(5,'pepitos',1,'2015-01-18 21:32:18'),(6,'pepitos',1,'2015-01-18 21:41:03'),(7,'pepitos',1,'2015-01-18 22:01:45'),(8,'pepitos',1,'2015-01-18 22:08:08'),(9,'pepitos',1,'2015-01-18 22:10:08'),(10,'pepitos',1,'2015-01-18 22:17:38'),(11,'pepitos',1,'2015-01-18 22:35:57');
 /*!40000 ALTER TABLE `grupo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -450,6 +450,38 @@ INSERT INTO `tipo_notificacion` VALUES (1,'Solicitud alta curso',1),(2,'Nuevo ar
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tp_grupo`
+--
+
+DROP TABLE IF EXISTS `tp_grupo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tp_grupo` (
+  `idtp_grupo` int(11) NOT NULL AUTO_INCREMENT,
+  `id_grupo` int(11) NOT NULL,
+  `id_archivo` int(11) NOT NULL,
+  `descripcion` varchar(100) DEFAULT NULL,
+  `fecsys` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `activo` int(11) DEFAULT '1',
+  PRIMARY KEY (`idtp_grupo`),
+  KEY `fk_grupo_tp_idx` (`id_grupo`),
+  KEY `fk_archivo_tp_idx` (`id_archivo`),
+  CONSTRAINT `fk_archivo_tp` FOREIGN KEY (`id_archivo`) REFERENCES `archivo` (`id_archivo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_grupo_tp` FOREIGN KEY (`id_grupo`) REFERENCES `grupo` (`id_grupo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tp_grupo`
+--
+
+LOCK TABLES `tp_grupo` WRITE;
+/*!40000 ALTER TABLE `tp_grupo` DISABLE KEYS */;
+INSERT INTO `tp_grupo` VALUES (1,2,1,'Entrega de tranajo practico del grupo smart solution','2015-05-16 20:37:42',1),(2,2,5,'Entrega del tp del grupo samrt solution ','2015-05-16 20:41:08',1),(3,3,6,'nada','2015-05-16 20:43:21',1);
+/*!40000 ALTER TABLE `tp_grupo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `usuario`
 --
 
@@ -508,4 +540,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-11 19:15:24
+-- Dump completed on 2015-05-16 17:53:56

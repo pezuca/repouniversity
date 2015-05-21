@@ -31,6 +31,8 @@
 					class="fa fa-home"></i> <span class="nav-label">Ver cursos</span></a></li>
 			<li class="${activeTab eq 'verUsuarios' ? 'active':''}"><a href="/repouniversity/admin/verUsuarios"><i
 					class="fa fa-home"></i> <span class="nav-label">Ver usuarios</span></a></li>
+			<li class="${activeTab eq 'verCarreras' ? 'active':''}"><a href="/repouniversity/admin/verCarreras"><i
+					class="fa fa-home"></i> <span class="nav-label">Ver carreras</span></a></li>
 		</ul>
 	</div>
 </nav>
