@@ -512,6 +512,38 @@ INSERT INTO `usuario` VALUES (1,'repo','repo',1,'2014-01-08 03:00:00',2),(2,'alu
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
+--
+-- Table structure for table `tp_entregas`
+--
+
+DROP TABLE IF EXISTS `tp_entregas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `repouniversity`.`tp_entregas` (
+  `idtp_entregas` INT NOT NULL AUTO_INCREMENT,
+  `idtp_grupo` INT NOT NULL,
+  `id_archivo` INT NOT NULL,
+  `descripcion` VARCHAR(100) NULL,
+  `nota` INT NULL,
+  `fecsys` TIMESTAMP NOT NULL,
+  `activo` BIT NOT NULL DEFAULT 1,
+  PRIMARY KEY (`idtp_entregas`),
+  INDEX `fk_tp_grupo_idx` (`idtp_grupo` ASC),
+  INDEX `fk_archivo_idx` (`id_archivo` ASC),
+  CONSTRAINT `fk_tp_grupo`
+    FOREIGN KEY (`idtp_grupo`)
+    REFERENCES `repouniversity`.`tp_grupo` (`idtp_grupo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_archivo`
+    FOREIGN KEY (`id_archivo`)
+    REFERENCES `repouniversity`.`archivo` (`id_archivo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+
 --
 -- Final view structure for view `roles`
 --

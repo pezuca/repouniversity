@@ -10,14 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.repouniversity.model.entity.Curso;
-import com.repouniversity.model.entity.Materia;
-import com.repouniversity.model.entity.Usuario;
-import com.repouniversity.model.entity.UsuarioRol;
 import com.repouniversity.model.entity.to.AlumnoTO;
-import com.repouniversity.model.entity.to.UsuarioTO;
 import com.repouniversity.model.services.AlumnoService;
 import com.repouniversity.model.services.CursoService;
 import com.repouniversity.model.services.DocenteService;
