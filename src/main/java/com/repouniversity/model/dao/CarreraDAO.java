@@ -8,9 +8,9 @@ public interface CarreraDAO extends GenericDAO<Carrera> {
 
     List<Carrera> findByMateriaId(Long cursoId);
 
-	List<Long> getMateriaIds(Long carreraId);
+    List<Long> getMateriaIds(Long carreraId);
 
-	void removerAsociacionesMaterias(Long carreraId, List<Long> materiasIds);
+    void removerAsociacionesMaterias(Long carreraId, List<Long> materiasIds);
 
-	void asociaciarMaterias(Long carreraId, List<Long> listaMaterias);
+//    void asociaciarMaterias(Long carreraId, List<Long> listaMaterias);
 }

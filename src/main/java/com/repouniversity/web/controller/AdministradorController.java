@@ -198,7 +198,7 @@ public class AdministradorController {
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteCarreraAjax(@RequestParam(value = "carreraId") Long carreraId) {
-        cursoService.delete(carreraId);
+        carreraService.delete(carreraId);
     }
 
     @RequestMapping(value = "admin/nuevoCarrera", method = {RequestMethod.POST})
