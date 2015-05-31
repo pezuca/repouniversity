@@ -20,6 +20,7 @@ import com.repouniversity.model.dao.query.InsertSQLStatement;
 import com.repouniversity.model.dao.query.SQLStatement;
 import com.repouniversity.model.dao.rowmapper.CursoMateriaRowMapper;
 import com.repouniversity.model.dao.rowmapper.CursoRowMapper;
+import com.repouniversity.model.dao.rowmapper.LongRowMapper;
 import com.repouniversity.model.entity.Curso;
 import com.repouniversity.model.entity.CursoMateria;
 
@@ -205,5 +206,29 @@ public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
     @Override
     protected String getColumnIdName() {
         return "id_curso";
+    }
+
+  @Override
+  public List<Long> ObtenerAlumnosSinGrupo(final Long idCurso) {
+        StringBuilder sql = new StringBuilder();
+
+        sql.append("select id_alumno from alumno_curso where id_grupo = 1 and id_curso = ? ");
+
+        List<Long> list = doQuery(new SQLStatement(sql.toString()) {
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+                ps.setLong(1, idCurso);
+            }
+
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+        }, new LongRowMapper(), "ObtenerAlumnosSinGrupo: " + idCurso);
+
+        if (list.isEmpty()) {
+            return new ArrayList<Long>();
+        }
+
+        return list;
     }
 }

@@ -10,6 +10,7 @@ import com.repouniversity.model.dao.CursoDAO;
 import com.repouniversity.model.entity.Curso;
 import com.repouniversity.model.entity.CursoMateria;
 import com.repouniversity.model.entity.Notificacion;
+import com.repouniversity.model.entity.to.AlumnoTO;
 import com.repouniversity.model.entity.to.CursoTO;
 
 @Service
@@ -143,5 +144,12 @@ public class CursoService {
 		cursoDao.update(curso);
 
 		return curso;
+	}
+
+	public List<AlumnoTO> ObtenerAlumnosSinGrupo(Long idCurso) {
+		// TODO Auto-generated method stub
+		List<Long> listaAlumnosid=  cursoDao.ObtenerAlumnosSinGrupo(idCurso);
+		
+		return alumnoService.getAlumnosByIds(listaAlumnosid);
 	}
 }

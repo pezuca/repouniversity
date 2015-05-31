@@ -56,9 +56,9 @@ public class AlumnoService {
         alumnoDao.delete(alumno);
     }
 
-    public List<AlumnoTO> getAlumnosByIds(Long[] listaAlumnoId) {
+    public List<AlumnoTO> getAlumnosByIds(List<Long> listaAlumnoId) {
         List<AlumnoTO> alumnoToList = new ArrayList<AlumnoTO>();
-        List<Alumno> alumnoList = alumnoDao.findByIds(listaAlumnoId);
+        List<Alumno> alumnoList = alumnoDao.findByIds((Long[]) listaAlumnoId.toArray());
         
         for (Alumno alumno : alumnoList) {
             alumnoToList.add(buildAlumno(alumno));

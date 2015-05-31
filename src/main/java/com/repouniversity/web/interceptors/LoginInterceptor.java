@@ -10,9 +10,7 @@ import com.repouniversity.web.enums.UrlsApplicationEmun;
 import com.repouniversity.web.utils.HTTPSessionManagerUtil;
 
 /**
- * @author Martin Medina - martin.medina@movile.com
- * @author Carlos Valdes - carlos.valdes@movile.com
- * @author Federico Tray - federico.triay@movile.com
+ * @author Federico Tray 
  */
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 

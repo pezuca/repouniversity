@@ -10,15 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.repouniversity.model.dao.GrupoDAO;
+import com.repouniversity.model.dao.TpGrupoDAO;
 import com.repouniversity.model.dao.query.InsertSQLStatement;
 import com.repouniversity.model.dao.query.SQLStatement;
 import com.repouniversity.model.dao.rowmapper.GrupoRowMapper;
 import com.repouniversity.model.entity.Alumno;
 import com.repouniversity.model.entity.Grupo;
+import com.repouniversity.model.entity.TpGrupo;
 
 @Repository
-public class GrupoDAOImpl extends GenericDAOImpl<Grupo> implements GrupoDAO {
+public class TpGrupoDAOImpl extends GenericDAOImpl<TpGrupo> implements TpGrupoDAO {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -30,21 +31,23 @@ public class GrupoDAOImpl extends GenericDAOImpl<Grupo> implements GrupoDAO {
     }
 
     @Override
-    protected Class<Grupo> getEntityClass() {
-        return Grupo.class;
+    protected Class<TpGrupo> getEntityClass() {
+        return TpGrupo.class;
     }
 
     @Override
     protected String getTableName() {
-        return "grupo";
+        return "tp_grupo";
     }
 
     @Override
-    protected Grupo extractEntityFromResultSet(ResultSet rs, int line) throws SQLException {
-    	Grupo result = new Grupo();
+    protected TpGrupo extractEntityFromResultSet(ResultSet rs, int line) throws SQLException {
+    	TpGrupo result = new TpGrupo();
          
-         result.setId(rs.getLong("id_grupo"));
-         result.setNombre(rs.getString("nombre"));
+         result.setId(rs.getLong("idtp_grupo"));
+         result.setIdArchivo(rs.getLong("id_archivo"));
+         result.setIdGrupo(rs.getLong("id_grupo"));
+         result.setDescripcion(rs.getString("descripcion"));
          result.setActivo(rs.getBoolean("activo"));
          result.setFechasys(rs.getDate("fecsys"));
          
@@ -54,7 +57,7 @@ public class GrupoDAOImpl extends GenericDAOImpl<Grupo> implements GrupoDAO {
 
     @Override
     protected String getColumnIdName() {
-        return "id_grupo";
+        return "idtp_grupo";
     }
 
     @Override
@@ -84,8 +87,8 @@ public class GrupoDAOImpl extends GenericDAOImpl<Grupo> implements GrupoDAO {
         return list;
     }
     @Override
-    protected InsertSQLStatement buildInsertSQLStatement(final Grupo t) {
-        return new InsertSQLStatement("INSERT INTO grupo (nombre) values (?)") {
+    protected InsertSQLStatement buildInsertSQLStatement(final TpGrupo t) {
+        return new InsertSQLStatement("INSERT INTO tp_grupo (id_grupo, id_archivo, descripcion) values (?, ?, ?)") {
 
             @Override
             public void doAfterInsert(Long id) {
@@ -93,8 +96,9 @@ public class GrupoDAOImpl extends GenericDAOImpl<Grupo> implements GrupoDAO {
 
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
-                ps.setString(1, t.getNombre());
-             
+                ps.setLong(1, t.getIdGrupo());
+                ps.setLong(2, t.getIdArchivo());
+                ps.setString(3, t.getDescripcion());
             }
 
             @Override
@@ -104,13 +108,15 @@ public class GrupoDAOImpl extends GenericDAOImpl<Grupo> implements GrupoDAO {
     }
 
     @Override
-    protected SQLStatement buildUpdateSQLStatement(final Grupo t) {
-        return new SQLStatement("UPDATE grupo SET nombre = ?, activo = ?, fecsys = now() WHERE id = ?") {
+    protected SQLStatement buildUpdateSQLStatement(final TpGrupo t) {
+        return new SQLStatement("UPDATE tp_grupo SET id_grupo = ?, id_archivo = ?, descripcion = ?, activo = ?, fecsys = now() WHERE idtp_grupo = ?") {
 
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
-                ps.setString(1, t.getNombre());
-                ps.setBoolean(2, t.isActivo());
+                ps.setLong(1, t.getIdGrupo());
+                ps.setLong(2, t.getIdArchivo());
+                ps.setString(3, t.getDescripcion());
+                ps.setBoolean(4, t.isActivo());
                 ps.setLong(4, t.getId());
             }
 

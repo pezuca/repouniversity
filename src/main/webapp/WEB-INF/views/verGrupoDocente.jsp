@@ -2,31 +2,147 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:set var="activeTab" value="${'verCursoDocente'}" />
+<c:set var="userLog" value="${sessionScope.login}"/>
+
 <html>
 <head>
 <meta charset="utf-8" />
 <title>Repouniversity</title>
 <%@include file="../components/common-statics-imports.jsp"%>
-<link rel="stylesheet" type="text/css"
-	href="/repouniversity/resources/css/jquery.dataTables_themeroller.css" />
-<link rel="stylesheet" type="text/css"
-	href="/repouniversity/resources/css/jquery.dataTables.min.css" />
+
+<script type="text/javascript" src="resources/js/application/dashboard.js"></script>
+<script src="/repouniversity/resources/js/application/verCursoDocente.js"></script>
 </head>
-<body>
+<body class=" pace-done">
 	<c:set var="userLog" value="${sessionScope.login}"/>
 	
-	<div class="container">
+	<div id="wrapper">
 		<%@include file="../components/static-nav-bar.jsp"%>
-		<div class="usuarioInformation">
-			<div class="page-header">
-				<h1>Detalles grupo ${grupo.nombre}</h1>
-			</div>
-			<div class="page-header">
-				<h3>Alumnos</h3>
-			</div>
+		<div id="page-wrapper" class="gray-bg dashbard-1">
+		
+		<%@include file="../components/search-nav-bar.jsp"%>
+		
+		<div class="wrapper wrapper-content animated fadeInRight">
+			<div class="row">
+	             <div class="col-lg-12">
+					<div class="usuarioInformation">
+						<div class="page-header">
+							<h1>Detalles grupo ${grupo.nombre}</h1>
+						</div>
+						
+						<div class="page-header">
+							<h3>Alumnos</h3>
+						</div>
+					</div>
+					
+					<table id="GruposAlumnos" class="table table-striped hover">
+						<thead class="encabezado">
+							<tr>
+								<th>Id</th>
+								<th>Alumno</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${grupo.alumnos}" var="alumno"
+								varStatus="status">
+								<tr>
+									<td>${alumno.persona.id}</td>
+									<td>${alumno.persona.apellido}, ${alumno.persona.nombre}</td>
+									
+								</tr>
+							</c:forEach>
+						</tbody>
+						<tfoot>
+							<tr class="head">
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+						</tfoot>
+					</table>
+					
+					<div class="ibox-title">
+	                      <h5>Trabajo Practicos</h5>
+		                  <div class="ibox-tools" id="crearGrupoButton">
+	                          <a href="#crearGrupoButton" class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  Grupo</a>
+	                      </div>
+	                </div>
+						<table id="GruposTP" class="table table-striped hover">
+							<thead class="encabezado">
+								<tr>
+									<th>Id</th>
+									<th>Numero TP</th>
+									<th>Archivo</th>
+									<th>Nota</th>
+									
+								</tr>
+							</thead>
+							<tbody>
+								
+									<tr>
+										<td>1</td>
+										<td>Trabajo Nro1</td>
+										<td>TPN1.DOC</td>
+										<td>8</td>
+										<td><button class="altaNotificacion btn btn-primary"><a href="/repouniversity/docente/verTrabajosPracticos?tpId=1"> Ver</a></button>&nbsp;</td>
+									</tr>
+							</tbody>
+							<tfoot>
+								<tr class="head">
+									<th></th>
+									<th></th>
+									<th></th>
+								</tr>
+							</tfoot>
+						</table>
+	        </div>
 		</div>
-
-		<script>
+		<!-- 	Ventanas -->
+	<div id="crearGrupoDialog" title="Nuevo Grupo" class="modal fade in">
+		<form id="nuevoGrupoForm" class="form-horizontal">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Nombre Grupo*:</label>
+                <div class="col-sm-10"><input name="nombre" type="text" class="form-control" required="required"></div>
+                <div class="col-sm-10"><input name="idcurso" type="hidden" class="form-control" required="required" value = "${curso.id}"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Lista de Alumnos*:</label>
+                <div class="col-sm-10">
+                	<table id="cursoGruposAlumnos" name = "" class="table table-striped hover">
+						<thead class="encabezado">
+							<tr>
+								<th>Id</th>
+								<th>Alumno</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${curso.alumnos}" var="alumno"
+								varStatus="status">
+								<tr>
+									<td>${alumno.id}</td>
+									<td>${alumno.persona.apellido}, ${alumno.persona.nombre}</td>
+									<td><input name="cursosGruposAlumnos" type="checkbox" value="${alumnoid}"/>
+									</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+						<tfoot>
+							<tr class="head">
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+						</tfoot>
+					</table>
+                </div>
+            </div>
+		</form>
+	</div>
+		<%@include file="../components/footer.jsp"%>
+	</div>
+	<script>
 		$(document).ready(function() {
 			$('#clientTable').dataTable({
 				"processing" : false,
@@ -51,72 +167,16 @@
 			});
 		}
 		
-		
 		function rechazoAltaEnCurso(notificacionId) {
 			$.ajax({
 				  type: "POST",
-				  url: "/repouniversity/notificion/rechazaaltancurso",
+				  url: "/repouniversity/notificacion/rechazaaltancurso",
 				  data: {"notificacionId" : notificacionId},
 				  success: function(){ 
 					  alert("Good!")
 				  }
 			});
 		}
-		
-		</script>
-		
-		<table id="GruposAlumnos" class="table table-striped hover">
-			<thead class="encabezado">
-				<tr>
-					<th>Id</th>
-					<th>Alumno</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${grupo.alumnos}" var="alumno"
-					varStatus="status">
-					<tr>
-						<td>${alumno.persona.id}</td>
-						<td>${alumno.persona.apellido}, ${alumno.persona.nombre}</td>
-						
-					</tr>
-				</c:forEach>
-			</tbody>
-			<tfoot>
-				<tr class="head">
-					<th></th>
-					<th></th>
-					<th></th>
-				</tr>
-			</tfoot>
-		</table>
-	<table id="GruposTP" class="table table-striped hover">
-			<thead class="encabezado">
-				<tr>
-					<th>Id</th>
-					<th>Numero TP</th>
-					<th>Archivo</th>
-					<th>Nota</th>
-				</tr>
-			</thead>
-			<tbody>
-				
-					<tr>
-						<td>1</td>
-						<td>Trabajo Nro1</td>
-						<td><button class="altaNotificacion btn btn-primary" onclick="altaEnCurso(${notificacion.id})">Ver</button>&nbsp;</td>
-						<td>8</td>
-					</tr>
-			</tbody>
-			<tfoot>
-				<tr class="head">
-					<th></th>
-					<th></th>
-					<th></th>
-				</tr>
-			</tfoot>
-		</table>
-	</div>
-	<%@include file="../components/footer.jsp"%>
+	</script>
 </body>
 </html>

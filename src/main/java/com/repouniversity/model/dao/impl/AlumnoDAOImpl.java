@@ -98,8 +98,8 @@ public class AlumnoDAOImpl extends GenericDAOImpl<Alumno> implements AlumnoDAO {
     public List<Alumno> findAlumnoForGrupo(final Long grupoId) {
         StringBuilder sql = new StringBuilder();
 
-        sql.append("SELECT a.* FROM alumno a JOIN grupo_alumno_curso gac ON a.id_alumno = gac.alumno_curso_alumno_id_alumno ");
-        sql.append("WHERE gac.grupo_id_grupo = ? ");
+        sql.append("SELECT a.* FROM alumno a JOIN alumno_curso gac ON a.id_alumno = gac.id_alumno ");
+        sql.append("WHERE gac.id_grupo = ? ");
         sql.append("AND a.activo = 1");
 
         List<Alumno> list = doQuery(new SQLStatement(sql.toString()) {
