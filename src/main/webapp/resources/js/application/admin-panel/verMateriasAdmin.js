@@ -75,7 +75,7 @@ var materiasAdmin = {
 				$("#editarMateriaDialog").dialog("close");						
 			},
 			error: function(data) {
-				$("#nuevaMateriaForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de crear el usuario, inténtelo mas tarde.</p></div>")
+				$("#nuevoMateriaForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de crear el usuario, inténtelo mas tarde.</p></div>")
 				setTimeout(function(){
 					$("#agregarMateriaDialog .infoDialog").hide(function(){
 						$(this).remove();
@@ -158,7 +158,7 @@ $(document).ready(function() {
 		show: {effect: "fade", duration: 300},
 		buttons: {
 			"Crear": function() {
-				if(materiasAdmin.validacionFormlario("#nuevaMateriaForm")) {
+				if(materiasAdmin.validacionFormlario("#nuevoMateriaForm")) {
 					materiasAdmin.crearNuevaMateriaAjax();
 				}
 			},
@@ -168,8 +168,8 @@ $(document).ready(function() {
 		},
 		open: function(event, ui) {
 			$(".infoDialog").remove();
-			$('#nuevaMateriaForm').trigger("reset");
-			$("#nuevaMateriaForm").find(".form-group").removeClass("has-error");
+			$('#nuevoMateriaForm').trigger("reset");
+			$("#nuevoMateriaForm").find(".form-group").removeClass("has-error");
 		},
 		close: function(event, ui) {
 		}
@@ -224,7 +224,7 @@ $(document).ready(function() {
 		},
 		open: function(event, ui) {
 			$(".infoDialog").remove();
-			$('#nuevaMateriaForm').trigger("reset");
+			$('#nuevoMateriaForm').trigger("reset");
 		},
 		close: function(event, ui) {
 		}
