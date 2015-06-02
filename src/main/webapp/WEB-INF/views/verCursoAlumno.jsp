@@ -54,7 +54,7 @@
 						</tbody>
 						<tfoot>
 							<tr class="head">
-								<th></th>
+								<th><button class="btn btn-success" type="button"><a href="/repouniversity/subirArchivo?cursoID=${curso.id}&personaID=${login.idPersona}" class="fa fa-upload"><i class="fa fa-upload"></i>&nbsp;&nbsp;<span class="fa fa-upload">Subir Archivo</span></a></button></th>
 								<th></th>
 								<th></th>
 							</tr>
@@ -91,7 +91,7 @@
 				  }
 			});
 		}
-		
+				
 		function rechazoAltaEnCurso(notificacionId) {
 			$.ajax({
 				  type: "POST",
@@ -102,7 +102,7 @@
 				  }
 			});
 		}
-	
+		
 	</script>
 </body>
 </html>

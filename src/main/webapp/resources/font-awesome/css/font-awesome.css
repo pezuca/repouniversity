@@ -1670,3 +1670,12 @@
 .fa-meanpath:before {
   content: "\f20c";
 }
+
+span.fa.fa-upload{
+	color: #FFFFFF;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+a.fa.fa.upload:HOVER{
+	color:#000000;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}

@@ -25,6 +25,7 @@ import com.repouniversity.model.services.CursoService;
 import com.repouniversity.model.services.DocenteService;
 import com.repouniversity.model.services.GrupoService;
 import com.repouniversity.model.services.NotificacionService;
+import com.repouniversity.model.services.PersonaService;
 import com.repouniversity.model.services.TipoNotificacionService;
 
 @Controller
@@ -52,7 +53,7 @@ public class CursoController {
         return new ModelAndView("verCursosAlumno").addObject("cursos", cursos);
     }
 
-    @RequestMapping(value = "alumno/verCursoDocente", method = {RequestMethod.GET})
+    @RequestMapping(value = "alumno/verCurso", method = {RequestMethod.GET})
     public ModelAndView verCurso(@RequestParam(value = "cursoId", required = true) Long cursoId) {
         Curso curso = cursoService.getById(cursoId);
         curso.setNotificaciones(notificacionService.getNotificacionPorCurso(cursoId));

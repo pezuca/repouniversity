@@ -11,7 +11,6 @@
 	<script src="/repouniversity/resources/js/plugins/dropzone/dropzone.js"></script>
 	<link href="/repouniversity/resources/css/plugins/dropzone/basic.css" rel="stylesheet">
 	<link href="/repouniversity/resources/css/plugins/dropzone/dropzone.css" rel="stylesheet">
-	
 	<script src="/repouniversity/resources/js/application/subirArchivo.js"></script>
 </head>
 <body class=" pace-done">
@@ -49,18 +48,24 @@
 			                        <div class="ibox float-e-margins">
 					                    <div class="ibox-content">
 					                        <form id="my-awesome-dropzone" class="dropzone dz-clickable" action="/repouniversity/subirArchivo" method="POST">
-					                            <div class="dropzone-previews"></div>
-					                            <button type="submit" class="btn btn-primary pull-right">Submit this form!</button>
-					                        	<div class="dz-default dz-message"><span>Drop files here to upload</span></div>
+					                            <div class="dropzone-previews">
+					                            	<button type="submit" class="btn btn-primary pull-right">Subir archivo</button>
+					                        		<div class="dz-default dz-message"><span>Haga Click o arrastre los archivos aqui</span>
+					                        		<input type="hidden" name="personaId" value="${personId}}"/>
+													<input type="hidden" name="cursoId" value="${cursoId}}"/> 
+													<input type="hidden" name="grupoId" value="${grupoId}}"/>
+					                        		</div>
+					                        	</div>
 					                        	<div class="input_fields_wrap">
-												    <div><input type="text" name="mytext">
+					                        		<div class="col-sm-10" style="padding-left: 0px;">
+												     	<input type="text" name="descripcion" placeholder="Descripcion" class="form-control m-b"/>
+				                                    </div>
+												    <div><input type="text" name="mytext[]" placeholder="Etiqueta">
 <!-- 												    	<button class="add_field_button" >Add More Fields</button> -->
 												    	<button class="btn btn-info btn-circle" type="button"><i class="fa fa-check" ></i></button>
 												    </div>
-												     <div class="col-sm-10">
-												     	<input type="text" name="descripcion" placeholder="Descripcion" class="form-control m-b"/>
-				                                    </div>
 												</div>
+												
 					                        </form>
 					                    </div>
 					                </div>

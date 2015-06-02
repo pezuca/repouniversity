@@ -12,8 +12,8 @@ public class ArchivoService {
 	@Autowired
 	private ArchivoDAO archivoDao;
 
-	public void subirArchivo(Archivo nuevoArchivo) {
-		archivoDao.subirArchivo(nuevoArchivo);
+	public Archivo subirArchivo(Archivo nuevoArchivo) {
+		return archivoDao.subirArchivo(nuevoArchivo);
 	}
 
 }
