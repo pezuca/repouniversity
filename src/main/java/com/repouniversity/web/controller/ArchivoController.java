@@ -1,9 +1,9 @@
 package com.repouniversity.web.controller;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +22,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.repouniversity.model.entity.Archivo;
-import com.repouniversity.model.entity.Curso;
 import com.repouniversity.model.entity.UsuarioRol;
 import com.repouniversity.model.services.ArchivoService;
 import com.repouniversity.model.services.PersonaService;
@@ -32,7 +31,7 @@ import com.repouniversity.web.exceptions.SubirArchivoException;
 @SessionAttributes("login")
 public class ArchivoController {
 
-	private static final String UPLOAD_PATH = "c:/Archivos/";
+	private static final String UPLOAD_PATH = "c:/workspace/repouniversity/Archivos";
 
 	@Autowired
 	private ArchivoService archivoService;
@@ -45,8 +44,12 @@ public class ArchivoController {
 	 * @return Model and View for loginAnonimo
 	 */
 	@RequestMapping(value = "/subirArchivo", method = { RequestMethod.GET })
-	public ModelAndView subirArchivo(HttpServletRequest request) {
-		return new ModelAndView("subirArchivo");
+	public ModelAndView subirArchivo(HttpServletRequest request,
+			@RequestParam(value = "cursoID", required = true, defaultValue="1") String cursoId,
+			@RequestParam(value = "personaID", required = true, defaultValue="1") String personaId,
+			@RequestParam(value = "grupoID", required = false, defaultValue="1") String grupoId
+			) {
+		return new ModelAndView("subirArchivo").addObject(cursoId,cursoId).addObject(personaId, personaId).addObject(grupoId, grupoId);
 	}
 
 	@RequestMapping(value = "/subirArchivo", method = { RequestMethod.POST })
@@ -57,18 +60,38 @@ public class ArchivoController {
 			@RequestParam(value = "file[]") CommonsMultipartFile[] file,
 			@RequestParam(value = "mytext", required = false) String[] myText,
 			@RequestParam(value = "descripcion", required = false) String descripcion,
+			@RequestParam(value = "personaId", required = true) Integer personaId,
+			@RequestParam(value = "cursoId", required = true) Integer cursoId,
+			@RequestParam(value = "grupoId", required = false, defaultValue="1") Integer grupoId,
 			@ModelAttribute("login") UsuarioRol usuario) {
 
 		try {
-			grabarFicheroALocal(file, myText, descripcion, usuario);
+			grabarFicheroALocal(file, myText, descripcion, personaId, cursoId, grupoId, usuario);
 		} catch (Exception e) {
 			throw new SubirArchivoException(
 					"Ha ocurrido un error al intentar subir el archivo.", e);
 		}
 	}
+	
+//	@RequestMapping(value = "/buscarArchivo", method = { RequestMethod.POST })
+//	@ResponseBody
+//	@ResponseStatus(value = HttpStatus.OK)
+//	public ModelAndView buscarFichero(
+//			HttpServletRequest request,
+//			@RequestParam(value = "parametroDeBusqueda") String parametro) {
+//			buscarFicheroLocal(parametro);
+//		
+//	}
+
+	private ArrayList buscarFicheroLocal(String archivo) {
+		ArrayList archivosEncontrados;
+		archivosEncontrados = new ArrayList();
+		return archivosEncontrados;
+		
+	}
 
 	private void grabarFicheroALocal(CommonsMultipartFile[] file,
-			String[] mytext, String descripcion, UsuarioRol usuario) throws IOException {
+			String[] mytext, String descripcion, Integer personaId, Integer cursoId, Integer grupoId, UsuarioRol usuario) throws IOException {
 		StringBuffer etiqueta = new StringBuffer();
 
 		// AGREGO LAS ETIQUETAS AL CAMPO ETIQUETAS PARA LUEGO SUBIR A LA BASE
@@ -99,15 +122,15 @@ public class ArchivoController {
 				nuevoArchivo.setFechasys(null);
 				nuevoArchivo.setEstado(null);
 				nuevoArchivo.setPath(localFile.getAbsolutePath());
-
-				nuevoArchivo.setPersona(personaService.findById(usuario
-						.getIdPersona()));
+				nuevoArchivo.setPersona(personaId);
 				nuevoArchivo.setTags(etiqueta.toString());
-				nuevoArchivo.setCurso(new Curso());
-
-				nuevoArchivo.getCurso().setId(1L);
-				archivoService.subirArchivo(nuevoArchivo);
-
+				nuevoArchivo.setCurso(cursoId);
+				nuevoArchivo.getCurso();
+				Archivo archivoUpdated = archivoService.subirArchivo(nuevoArchivo);
+				
+//				if(grupoId != Integer.parseInt("1")){
+//					tpGrupoService.agregarArchivoTp(grupoId, archivoUpdated.getId);
+//				}
 			} finally {
 				if (os != null) {
 					try {
@@ -120,4 +143,5 @@ public class ArchivoController {
 		}
 
 	}
+
 }

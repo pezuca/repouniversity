@@ -37,8 +37,7 @@
 	                <li><a href="#">Ver mis archivos</a></li>
 					<li><a href="#">Ver mis grupos de TPs</a></li>
 					<li><a href="/repouniversity/alumno/notificaciones">Ver mis notificaciones</a></li>        
-					<li><a href="/repouniversity/subirArchivo">Subir Archivo</a></li>
-                 </ul>
+				</ul>
              </li>
          </ul>
      </div>

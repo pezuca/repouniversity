@@ -1595,6 +1595,7 @@ pre code {
   }
   .col-sm-10 {
     width: 83.33333333%;
+    padding-left: 0px;
   }
   .col-sm-9 {
     width: 75%;

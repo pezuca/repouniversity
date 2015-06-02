@@ -12,5 +12,5 @@ public interface ArchivoDAO extends GenericDAO<Archivo>{
 	
 	List <Archivo> findArchivoByDocente(String string);	
 
-	void subirArchivo(Archivo nuevoArchivo);
+	Archivo subirArchivo(Archivo nuevoArchivo);
 }
