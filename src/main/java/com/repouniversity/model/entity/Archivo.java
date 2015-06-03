@@ -17,9 +17,10 @@ public class Archivo implements IdentifiedObject {
 	private boolean activo;
 	private Estado estado;
 	private String path;
-	private Curso curso;
-	private Persona persona;
+	private Integer curso;
+	private Integer persona;
 	private String tags;
+	private Integer grupo;
 
 	public Long getId() {
 		return id;
@@ -101,19 +102,19 @@ public class Archivo implements IdentifiedObject {
 		this.path = path;
 	}
 
-	public Curso getCurso() {
+	public Integer getCurso() {
 		return curso;
 	}
 
-	public void setCurso(Curso curso) {
+	public void setCurso(Integer curso) {
 		this.curso = curso;
 	}
 
-	public Persona getPersona() {
+	public Integer getPersona() {
 		return persona;
 	}
 
-	public void setPersona(Persona persona) {
+	public void setPersona(Integer persona) {
 		this.persona = persona;
 	}
 
@@ -124,5 +125,10 @@ public class Archivo implements IdentifiedObject {
 	public void setTags(String etiqueta) {
 		this.tags = etiqueta;
 
+	}
+
+	public void setGrupo(Integer grupoId) {
+		this.grupo = grupoId;
+		
 	}
 }

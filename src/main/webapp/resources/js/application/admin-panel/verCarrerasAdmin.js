@@ -11,14 +11,20 @@ var carrerasAdmin = {
 					sticky: false
 				});
 				
+				var materias = "";
+				for (var int = 0; int < data.materias.length; int++) {
+					var element = data.materias[int];
+					materias = materias + element.nombre + "  |  ";
+				}
+				materias = materias.trim().substring(0, materias.length - 4)
 				
 				table.row.add([
-				                                          data.id,
-				                                          data.nombre,
-				                                          data.descripcion,
-				                                          "<a href='#' name='editCarrera' data-carreraid='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a>" + 
-				  										  "<a href='#' name='deleteCarrera' data-carreraid='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a>"
-				                                     ]).draw();
+                      data.id,
+                      data.nombre,
+                      materias,
+                      "<a href='#' name='editCarrera' data-carreraid='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a>" + 
+					  "<a href='#' name='deleteCarrera' data-carreraid='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a>"
+                 ]).draw();
 				
 				//Agrego el evento de delete
 				$("a[name='deleteCarrera'][data-carreraid=" + data.id + "] button").click(function(){
@@ -28,7 +34,7 @@ var carrerasAdmin = {
 				$("a[name=editCarrera][data-carreraid=" + data.id + "] button").click(function(){
 					$("#editarCarreraDialog").data('carreraId', $(this).parent().attr("data-carreraid"))
 						.data('nombre', $(this).parents("tr").find("td").get(1).innerHTML)
-						.data('descripcion', $(this).parents("tr").find("td").get(2).innerHTML)
+						.data('materias', $(this).parents("tr").find("td").get(2).innerHTML)
 						.dialog("open");
 				});
 				
@@ -58,17 +64,25 @@ var carrerasAdmin = {
 				
 				var celdas = $("#listaCarreras td a[data-carreraid=" + data.id + "]").parents("tr").find("td");
 				celdas.get(1).innerHTML = data.nombre;
-				celdas.get(2).innerHTML = data.descripcion;
+				
+				var materias = "";
+				for (var int = 0; int < data.materias.length; int++) {
+					var element = data.materias[int];
+					materias = materias + element.nombre + "  |  ";
+				}
+				materias = materias.trim().substring(0, materias.length - 4)
+				
+				celdas.get(2).innerHTML = materias;
 				
 				//Agrego el evento de delete
-				$("a[name='deleteUser'][data-carreraid=" + data.id + "] button").click(function(){
+				$("a[name='deleteCarrera'][data-carreraid=" + data.id + "] button").click(function(){
 					$("#deleteCarreraDialog").data('carreraId', $(this).parent().attr("data-carreraid")).dialog("open");
 				});
 				
-				$("a[name=editUser][data-carreraid=" + data.id + "] button").click(function(){
+				$("a[name=editCarrera][data-carreraid=" + data.id + "] button").click(function(){
 					$("#editarCarreraDialog").data('carreraId', $(this).parent().attr("data-carreraid"))
 						.data('nombre', $(this).parents("tr").find("td").get(1).innerHTML)
-						.data('descripcion', $(this).parents("tr").find("td").get(2).innerHTML)
+						.data('materias', $(this).parents("tr").find("td").get(2).innerHTML)
 						.dialog("open");
 				});
 				
@@ -91,8 +105,8 @@ var carrerasAdmin = {
 			data: {"carreraId" : carreraId},
 			success: function(data){
 				$.gritter.add({
-					title:'Usuario eliminado',
-					text: 'El usuario fue elimnado exitosamente.',
+					title:'Carrera eliminada',
+					text: 'La carrera fue elimnada exitosamente.',
 					sticky: false
 				});
 				
@@ -142,7 +156,13 @@ $(document).ready(function() {
             "infoEmpty": "No hay resultados disponibles.",
             "infoFiltered": "(filtered from _MAX_ total records)",
             "search": "Búsqueda: "
-        }
+        },
+        "columnDefs": [
+                       {"width": "5%", "targets": 0},
+                       {"width": "20%", "targets": 1},
+                       {"width": "60%", "targets": 2},
+                       {"width": "15%", "targets": 3}
+                      ]
 	});
 
 	$("#clientTable_length").remove();
@@ -151,7 +171,7 @@ $(document).ready(function() {
 	$("#agregarCarreraDialog").dialog({
 		resizable: false,
 		width:700,
-		height:300,
+		height:500,
 		modal: true,
 		autoOpen: false,
 		autoResize:true,
@@ -179,7 +199,7 @@ $(document).ready(function() {
 	$("#editarCarreraDialog").dialog({
 		resizable: false,
 		width:700,
-		height:300,
+		height:500,
 		modal: true,
 		autoOpen: false,
 		autoResize:true,
@@ -202,7 +222,21 @@ $(document).ready(function() {
 			
 			$('#editarCarreraForm input[name=carreraId]').val($("#editarCarreraDialog").data('carreraId'));
 			$('#editarCarreraForm input[name=nombre]').val($("#editarCarreraDialog").data('nombre'));
-			$('#editarCarreraForm input[name=descripcion]').val($("#editarCarreraDialog").data('descripcion'));
+			
+			var materias = $("#editarCarreraDialog").data('materias').split("|");
+			var arrayMat = [];
+			
+			for (var int = 0; int < materias.length; int++) {
+				var element = materias[int];
+				$('#editarCarreraForm select[name=materias] option').each(function(index){
+					if($(this).text() == element.trim()) {
+						arrayMat.push($(this).val());
+					}
+				});
+			}
+			
+			$('#editarCarreraForm select[name=materias]').val(arrayMat);
+			$('#editarCarreraForm select[name=materias]').trigger("chosen:updated");
 		},
 		close: function(event, ui) {
 		}
@@ -244,9 +278,9 @@ $(document).ready(function() {
 		$("#editarCarreraDialog").data('carreraId', $(this).parent().attr("data-carreraid"))
 			.data('carreraId', $(this).parents("tr").find("td").get(0).innerHTML)
 			.data('nombre', $(this).parents("tr").find("td").get(1).innerHTML)
-			.data('descripcion', $(this).parents("tr").find("td").get(2).innerHTML)
+			.data('materias', $(this).parents("tr").find("td").get(2).innerHTML)
 			.dialog("open");
 	});
 	
-	$("select[name=materias]").chosen();
+	$("select[name=materias]").chosen({no_results_text:'No hay resultados para: '});
 });

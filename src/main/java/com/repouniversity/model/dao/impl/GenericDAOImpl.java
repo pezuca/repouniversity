@@ -184,11 +184,6 @@ public abstract class GenericDAOImpl<E extends IdentifiedObject> implements Gene
         }
     }
 
-    private class Constraint {
-        String tableName;
-        String columnName;
-    }
-
     @Override
     public boolean delete(final E t) {
         try {

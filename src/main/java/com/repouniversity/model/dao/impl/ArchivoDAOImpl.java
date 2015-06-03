@@ -27,7 +27,7 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public void subirArchivo(final Archivo a) {
+	public Archivo subirArchivo(final Archivo a) {
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 
 		final InsertSQLStatement sqlStatement = buildInsertSQLStatement(a);
@@ -43,6 +43,14 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements
 				return ps;
 			}
 		}, keyHolder);
+		
+        Long id = extractId(keyHolder);
+
+        a.setId(id);
+
+        sqlStatement.doAfterInsert(id);
+
+        return a;
 	}
 
 	@Override
@@ -60,8 +68,8 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements
 				ps.setString(1, a.getNombre());
 				ps.setString(2, a.getDescripcion());
 				ps.setString(3, a.getPath());
-				ps.setLong(4, a.getPersona().getId());
-				ps.setLong(5, a.getCurso().getId());
+				ps.setLong(4, a.getPersona());
+				ps.setLong(5, a.getCurso());
 				ps.setString(6, a.getTags());
 			}
 
