@@ -66,7 +66,7 @@
 					<div class="ibox-title">
 	                      <h5>Trabajo Practicos</h5>
 		                  <div class="ibox-tools" id="crearGrupoButton">
-	                          <a href="#crearGrupoButton" class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  Grupo</a>
+	                          <a href="#crearGrupoButton" class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  TP</a>
 	                      </div>
 	                </div>
 	                <table id="GruposTP" class="table table-striped hover">

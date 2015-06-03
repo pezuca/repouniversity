@@ -5,17 +5,13 @@ import java.util.List;
 
 import com.repouniversity.model.entity.Curso;
 
-public class TpGrupoTO {
+public class TpEntregaTO {
     private Long id;
     private String descripcion;
     private boolean activo;
     private Date fechasys;
-    //private GrupoTO grupo;
-    private long grupo;
+    private long tpgrupo;
     private long archivo;
-    private long nota;
-    private List<TpEntregaTO> tpEntrega;
-    
 
     public Long getId() {
         return id;
@@ -49,12 +45,12 @@ public class TpGrupoTO {
         this.fechasys = fechasys;
     }
 
-    public long getGrupo() {
-        return grupo;
+    public long getTpGrupo() {
+        return tpgrupo;
     }
 
-    public void setGrupo(long grupo) {
-        this.grupo = grupo;
+    public void setTpGrupo(long tpgrupo) {
+        this.tpgrupo = tpgrupo;
     }
 
     public Long getArchivo() {
@@ -65,20 +61,5 @@ public class TpGrupoTO {
         this.archivo = archivo;
     }
     
-    public Long getNota() {
-        return nota;
-    }
-
-    public void setNota(Long nota) {
-        this.nota = nota;
-    }
-    
-    public List<TpEntregaTO> getTpEntrega() {
-        return tpEntrega;
-    }
-
-    public void setTpEntrega(List<TpEntregaTO> tpEntrega) {
-        this.tpEntrega = tpEntrega;
-    }
    
 }

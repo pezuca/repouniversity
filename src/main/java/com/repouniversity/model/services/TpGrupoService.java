@@ -27,6 +27,8 @@ public class TpGrupoService {
     
     @Autowired
     private GrupoService grupoService;
+    @Autowired
+    private TpEntregaService tpEntregaService;
 
     public Grupo save(Grupo grupo) {
         return grupoDao.insert(grupo);
@@ -66,6 +68,7 @@ public class TpGrupoService {
         tpGrupoTo.setGrupo(tpGrupo.getIdGrupo());
         tpGrupoTo.setArchivo(tpGrupo.getIdArchivo());
         tpGrupoTo.setNota(tpGrupo.getNota());
+        tpGrupoTo.setTpEntrega(tpEntregaService.getTpEntregaForTpGrupo(tpGrupo.getId()));
         return tpGrupoTo;
     }
 
