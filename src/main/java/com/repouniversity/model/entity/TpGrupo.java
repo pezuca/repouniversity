@@ -11,6 +11,7 @@ public class TpGrupo implements IdentifiedObject {
     private Long idgrupo;
     private Long idarchivo;
     private String descripcion;
+    private Long nota;
     private boolean activo;
     private Date fechasys;
 
@@ -46,6 +47,14 @@ public class TpGrupo implements IdentifiedObject {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+    public Long getNota() {
+        return nota;
+    }
+
+    public void setNota(Long nota) {
+        this.nota = nota;
+    }
+   
 
     public boolean isActivo() {
         return activo;

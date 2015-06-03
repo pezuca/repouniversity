@@ -13,7 +13,9 @@ import org.springframework.stereotype.Repository;
 import com.repouniversity.model.dao.TpGrupoDAO;
 import com.repouniversity.model.dao.query.InsertSQLStatement;
 import com.repouniversity.model.dao.query.SQLStatement;
+import com.repouniversity.model.dao.rowmapper.AlumnoRowMapper;
 import com.repouniversity.model.dao.rowmapper.GrupoRowMapper;
+import com.repouniversity.model.dao.rowmapper.TpGrupoRowMapper;
 import com.repouniversity.model.entity.Alumno;
 import com.repouniversity.model.entity.Grupo;
 import com.repouniversity.model.entity.TpGrupo;
@@ -23,12 +25,6 @@ public class TpGrupoDAOImpl extends GenericDAOImpl<TpGrupo> implements TpGrupoDA
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
-    @Override
-    public Alumno findAlumnoByGrupoId(Integer grupoId) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 
     @Override
     protected Class<TpGrupo> getEntityClass() {
@@ -48,6 +44,7 @@ public class TpGrupoDAOImpl extends GenericDAOImpl<TpGrupo> implements TpGrupoDA
          result.setIdArchivo(rs.getLong("id_archivo"));
          result.setIdGrupo(rs.getLong("id_grupo"));
          result.setDescripcion(rs.getString("descripcion"));
+         result.setNota(rs.getLong("nota"));
          result.setActivo(rs.getBoolean("activo"));
          result.setFechasys(rs.getDate("fecsys"));
          
@@ -61,34 +58,35 @@ public class TpGrupoDAOImpl extends GenericDAOImpl<TpGrupo> implements TpGrupoDA
     }
 
     @Override
-    public List<Grupo> findGruposByCurso(final Long cursoId) {
+    public List<TpGrupo> findTpGrupoForGrupo(final Long grupoId) {
         StringBuilder sql = new StringBuilder();
 
-        sql.append("SELECT DISTINCT g.* ");
-        sql.append("FROM grupo g JOIN alumno_curso ac ON ac.id_grupo = g.id_grupo ");
-        sql.append("WHERE ac.id_curso = ? ");
-        sql.append("AND g.activo = 1");
+        sql.append("SELECT * FROM tp_grupo ");
+        sql.append("WHERE id_grupo = ? ");
+        sql.append("AND activo = 1");
 
-        List<Grupo> list = doQuery(new SQLStatement(sql.toString()) {
+        List<TpGrupo> list = doQuery(new SQLStatement(sql.toString()) {
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
-                ps.setLong(1, cursoId);
+                ps.setLong(1, grupoId);
             }
 
             @Override
             public void doAfterTransaction(int result) {
             }
-        }, new GrupoRowMapper(), "findCursosForDocenteId: " + cursoId);
+        }, new TpGrupoRowMapper(), "findTpGrupoForGrupo: " + grupoId);
 
         if (list.isEmpty()) {
-            return new ArrayList<Grupo>();
+            return new ArrayList<TpGrupo>();
         }
 
         return list;
     }
-    @Override
+    
+    
+      @Override
     protected InsertSQLStatement buildInsertSQLStatement(final TpGrupo t) {
-        return new InsertSQLStatement("INSERT INTO tp_grupo (id_grupo, id_archivo, descripcion) values (?, ?, ?)") {
+        return new InsertSQLStatement("INSERT INTO tp_grupo (id_grupo, id_archivo, descripcion, nota) values (?, ?, ?, ?)") {
 
             @Override
             public void doAfterInsert(Long id) {
@@ -99,6 +97,7 @@ public class TpGrupoDAOImpl extends GenericDAOImpl<TpGrupo> implements TpGrupoDA
                 ps.setLong(1, t.getIdGrupo());
                 ps.setLong(2, t.getIdArchivo());
                 ps.setString(3, t.getDescripcion());
+                ps.setLong(4, t.getNota());
             }
 
             @Override
@@ -109,15 +108,16 @@ public class TpGrupoDAOImpl extends GenericDAOImpl<TpGrupo> implements TpGrupoDA
 
     @Override
     protected SQLStatement buildUpdateSQLStatement(final TpGrupo t) {
-        return new SQLStatement("UPDATE tp_grupo SET id_grupo = ?, id_archivo = ?, descripcion = ?, activo = ?, fecsys = now() WHERE idtp_grupo = ?") {
+        return new SQLStatement("UPDATE tp_grupo SET id_grupo = ?, id_archivo = ?, descripcion = ?, nota = ?, activo = ?, fecsys = now() WHERE idtp_grupo = ?") {
 
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
                 ps.setLong(1, t.getIdGrupo());
                 ps.setLong(2, t.getIdArchivo());
                 ps.setString(3, t.getDescripcion());
-                ps.setBoolean(4, t.isActivo());
-                ps.setLong(4, t.getId());
+                ps.setLong(4, t.getNota());
+                ps.setBoolean(5, t.isActivo());
+                ps.setLong(6, t.getId());
             }
 
             @Override

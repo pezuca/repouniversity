@@ -23,6 +23,10 @@ public class GrupoService {
     @Autowired
     private AlumnoService alumnoService;
 
+    @Autowired
+    private TpGrupoService tpGrupoService;
+    
+    
     public Grupo save(Grupo grupo) {
         return grupoDao.insert(grupo);
     }
@@ -72,6 +76,7 @@ public class GrupoService {
         grupoTo.setActivo(grupo.isActivo());
         grupoTo.setFechasys(grupo.getFechasys());
         grupoTo.setAlumnos(alumnoService.getAlumnosForGrupo(grupo.getId()));
+        grupoTo.setTpGrupo(tpGrupoService.getTpGrupoForGrupo(grupo.getId()));
         return grupoTo;
     }
 

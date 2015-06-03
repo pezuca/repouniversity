@@ -29,7 +29,7 @@
 	             <div class="col-lg-12">
 					<div class="usuarioInformation">
 						<div class="page-header">
-							<h1>Grupo ${tpgrupo.grupo.nombre}</h1>
+							<h1>Grupo ${tpgrupo.grupo}</h1>
 						</div>
 						
 						<div class="page-header">

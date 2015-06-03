@@ -69,35 +69,37 @@
 	                          <a href="#crearGrupoButton" class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  Grupo</a>
 	                      </div>
 	                </div>
-						<table id="GruposTP" class="table table-striped hover">
-							<thead class="encabezado">
+	                <table id="GruposTP" class="table table-striped hover">
+						<thead class="encabezado">
+							<tr>
+								<th>Id</th>
+								<th>Descripcion</th>
+								<th>Archivo</th>
+								<th>Nota</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${grupo.tpGrupo}" var="tpgrupo"
+								varStatus="status">
 								<tr>
-									<th>Id</th>
-									<th>Numero TP</th>
-									<th>Archivo</th>
-									<th>Nota</th>
-									
+									<td>${tpgrupo.id}</td>
+									<td>${tpgrupo.descripcion}</td>
+									<td>${tpgrupo.archivo}</td>
+									<td>${tpgrupo.nota}</td>
+									<td><button class="altaNotificacion btn btn-primary"><a href="/repouniversity/docente/verTrabajosPracticos?tpId=${tpgrupo.id}"> Ver</a></button>&nbsp;</td>
 								</tr>
-							</thead>
-							<tbody>
-								
-									<tr>
-										<td>1</td>
-										<td>Trabajo Nro1</td>
-										<td>TPN1.DOC</td>
-										<td>8</td>
-										<td><button class="altaNotificacion btn btn-primary"><a href="/repouniversity/docente/verTrabajosPracticos?tpId=1"> Ver</a></button>&nbsp;</td>
-									</tr>
-							</tbody>
-							<tfoot>
-								<tr class="head">
-									<th></th>
-									<th></th>
-									<th></th>
-								</tr>
-							</tfoot>
-						</table>
-	        </div>
+							</c:forEach>
+						</tbody>
+						<tfoot>
+							<tr class="head">
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+						</tfoot>
+					</table>
+					
+			 </div>
 		</div>
 		<!-- 	Ventanas -->
 	<div id="crearGrupoDialog" title="Nuevo Grupo" class="modal fade in">

@@ -10,8 +10,10 @@ public class TpGrupoTO {
     private String descripcion;
     private boolean activo;
     private Date fechasys;
-    private GrupoTO grupo;
-    private long idarchivo;
+    //private GrupoTO grupo;
+    private long grupo;
+    private long archivo;
+    private long nota;
 
     public Long getId() {
         return id;
@@ -45,19 +47,28 @@ public class TpGrupoTO {
         this.fechasys = fechasys;
     }
 
-    public GrupoTO getGrupo() {
+    public long getGrupo() {
         return grupo;
     }
 
-    public void setGrupo(GrupoTO grupo) {
+    public void setGrupo(long grupo) {
         this.grupo = grupo;
     }
 
     public Long getArchivo() {
-        return idarchivo;
+        return archivo;
     }
 
-    public void setArchivo(Long idarchivo) {
-        this.idarchivo = idarchivo;
+    public void setArchivo(Long archivo) {
+        this.archivo = archivo;
     }
+    
+    public Long getNota() {
+        return nota;
+    }
+
+    public void setNota(Long nota) {
+        this.nota = nota;
+    }
+   
 }
