@@ -13,11 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.repouniversity.model.dao.TpGrupoDAO;
 import com.repouniversity.model.dao.query.InsertSQLStatement;
 import com.repouniversity.model.dao.query.SQLStatement;
-import com.repouniversity.model.dao.rowmapper.AlumnoRowMapper;
-import com.repouniversity.model.dao.rowmapper.GrupoRowMapper;
 import com.repouniversity.model.dao.rowmapper.TpGrupoRowMapper;
-import com.repouniversity.model.entity.Alumno;
-import com.repouniversity.model.entity.Grupo;
 import com.repouniversity.model.entity.TpGrupo;
 
 @Repository
@@ -83,8 +79,6 @@ public class TpGrupoDAOImpl extends GenericDAOImpl<TpGrupo> implements TpGrupoDA
         return list;
     }
     
-    
-      @Override
     protected InsertSQLStatement buildInsertSQLStatement(final TpGrupo t) {
         return new InsertSQLStatement("INSERT INTO tp_grupo (id_grupo, id_archivo, descripcion, nota) values (?, ?, ?, ?)") {
 
