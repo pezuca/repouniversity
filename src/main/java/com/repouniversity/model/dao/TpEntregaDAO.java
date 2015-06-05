@@ -4,11 +4,12 @@ import java.util.List;
 
 import com.repouniversity.model.entity.Alumno;
 import com.repouniversity.model.entity.Grupo;
+import com.repouniversity.model.entity.TpEntrega;
 import com.repouniversity.model.entity.TpGrupo;
 
-public interface TpGrupoDAO extends GenericDAO<TpGrupo> {
+public interface TpEntregaDAO extends GenericDAO<TpEntrega> {
 
-	List<TpGrupo> findTpGrupoForGrupo(Long grupoid);
+	List<TpEntrega> findTpEntregaForTpGrupo(Long tpgrupoid);
 
 
 }

@@ -12,7 +12,8 @@ public class GrupoTO {
     private Date fechasys;
     private List<AlumnoTO> alumnos;
     private List<Curso> cursos;
-
+    private List<TpGrupoTO> tpGrupo;
+    
     public Long getId() {
         return id;
     }
@@ -59,5 +60,13 @@ public class GrupoTO {
 
     public void setCursos(List<Curso> cursos) {
         this.cursos = cursos;
+    }
+    
+    public List<TpGrupoTO> getTpGrupo() {
+        return tpGrupo;
+    }
+
+    public void setTpGrupo(List<TpGrupoTO> tpGrupo) {
+        this.tpGrupo = tpGrupo;
     }
 }

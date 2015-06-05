@@ -461,6 +461,7 @@ CREATE TABLE `tp_grupo` (
   `id_grupo` int(11) NOT NULL,
   `id_archivo` int(11) NOT NULL,
   `descripcion` varchar(100) DEFAULT NULL,
+  `nota` INT NULL,
   `fecsys` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `activo` int(11) DEFAULT '1',
   PRIMARY KEY (`idtp_grupo`),
@@ -477,7 +478,7 @@ CREATE TABLE `tp_grupo` (
 
 LOCK TABLES `tp_grupo` WRITE;
 /*!40000 ALTER TABLE `tp_grupo` DISABLE KEYS */;
-INSERT INTO `tp_grupo` VALUES (1,2,1,'Entrega de tranajo practico del grupo smart solution','2015-05-16 20:37:42',1),(2,2,5,'Entrega del tp del grupo samrt solution ','2015-05-16 20:41:08',1),(3,3,6,'nada','2015-05-16 20:43:21',1);
+INSERT INTO `tp_grupo` VALUES (1,2,1,'Entrega de tranajo practico del grupo smart solution', NULL, '2015-05-16 20:37:42', 1),(2,2,5,'Entrega del tp del grupo samrt solution ', NULL, '2015-05-16 20:41:08', 1),(3,3,6,'nada', NULL, '2015-05-16 20:43:21', 1);
 /*!40000 ALTER TABLE `tp_grupo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -517,18 +518,17 @@ UNLOCK TABLES;
 -- Table structure for table `tp_entregas`
 --
 
-DROP TABLE IF EXISTS `tp_entregas`;
+DROP TABLE IF EXISTS `tp_entrega`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `repouniversity`.`tp_entregas` (
-  `idtp_entregas` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE `repouniversity`.`tp_entrega` (
+  `idtp_entrega` INT NOT NULL AUTO_INCREMENT,
   `idtp_grupo` INT NOT NULL,
   `id_archivo` INT NOT NULL,
   `descripcion` VARCHAR(100) NULL,
-  `nota` INT NULL,
   `fecsys` TIMESTAMP NOT NULL,
   `activo` BIT NOT NULL DEFAULT 1,
-  PRIMARY KEY (`idtp_entregas`),
+  PRIMARY KEY (`idtp_entrega`),
   INDEX `fk_tp_grupo_idx` (`idtp_grupo` ASC),
   INDEX `fk_archivo_idx` (`id_archivo` ASC),
   CONSTRAINT `fk_tp_grupo`

@@ -29,14 +29,46 @@
 	             <div class="col-lg-12">
 					<div class="usuarioInformation">
 						<div class="page-header">
-							<h1>Grupo ${tpgrupo.grupo.nombre}</h1>
+							<h1>Grupo ${tpgrupo.grupo}</h1>
 						</div>
 						
 						<div class="page-header">
 							<h3>Detalles TP ${tpgrupo.descripcion}</h3>
 						</div>
 					</div>
-					
+					<div class="ibox-title">
+	                      <h5>Entregas</h5>
+		                  <div class="ibox-tools" id="crearGrupoButton">
+	                          <a href="#crearGrupoButton" class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  Entrega</a>
+	                      </div>
+	                </div>
+	                <table id="EntregaTP" class="table table-striped hover">
+						<thead class="encabezado">
+							<tr>
+								<th>Id</th>
+								<th>Descripcion</th>
+								<th>Archivo</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${tpgrupo.tpEntrega}" var="tpentrega"
+								varStatus="status">
+								<tr>
+									<td>${tpentrega.id}</td>
+									<td>${tpentrega.descripcion}</td>
+									<td>${tpentrega.archivo}</td>
+									<td><button class="altaNotificacion btn btn-primary"><a href="/repouniversity/docente/verTrabajosPracticos?tpId=${tpentrega.id}"> Ver</a></button>&nbsp;</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+						<tfoot>
+							<tr class="head">
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+						</tfoot>
+					</table>
 				  </div>	
 	        </div>
 		</div>

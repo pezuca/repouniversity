@@ -4,14 +4,13 @@ import java.util.Date;
 
 import com.repouniversity.model.dao.IdentifiedObject;
 
-public class TpGrupo implements IdentifiedObject {
+public class TpEntrega implements IdentifiedObject {
     private static final long serialVersionUID = -3439720520984277716L;
     
     private Long id;
-    private Long idgrupo;
+    private Long idtpgrupo;
     private Long idarchivo;
     private String descripcion;
-    private Long nota;
     private boolean activo;
     private Date fechasys;
 
@@ -24,12 +23,12 @@ public class TpGrupo implements IdentifiedObject {
         this.id = id;
     }
    
-    public Long getIdGrupo() {
-        return idgrupo;
+    public Long getIdTpGrupo() {
+        return idtpgrupo;
     }
 
-    public void setIdGrupo(Long idgrupo) {
-        this.idgrupo = idgrupo;
+    public void setIdTpGrupo(Long idtpgrupo) {
+        this.idtpgrupo = idtpgrupo;
     }
     
     public Long getIdArchivo() {
@@ -47,14 +46,6 @@ public class TpGrupo implements IdentifiedObject {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    public Long getNota() {
-        return nota;
-    }
-
-    public void setNota(Long nota) {
-        this.nota = nota;
-    }
-   
 
     public boolean isActivo() {
         return activo;
