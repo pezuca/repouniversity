@@ -19,7 +19,7 @@ $(document).ready(function () {
 		autoQueue: false,
 		previewsContainer: "#previews",
 		clickable: ".fileinput-button",
-		acceptedFiles: "image/jpg,image/jpeg,image/png,image/gif",
+		acceptedFiles: "image/*,application/*",
 		dictFileTooBig: "File is too big ({{filesize}}KB). Max filesize: {{maxFilesize}}KB."
 	});
 
