@@ -51,13 +51,13 @@
 					<div class="table table-striped" class="files" id="previews">
 						<div id="template" class="file-row">
 							<!-- This is used as the file preview template -->
-							<div>
+							<div class="col-sm-2">
 								<span class="preview"><img data-dz-thumbnail /></span>
 							</div>
-							<div>
+							<div class="col-sm-7">
 								<p class="name" data-dz-name></p>
 							</div>
-							<div>
+							<div class="col-sm-2">
 								<p class="size" data-dz-size></p>
 								<div class="progress progress-striped active" role="progressbar"
 									aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
@@ -65,7 +65,7 @@
 										style="width: 0%;" data-dz-uploadprogress></div>
 								</div>
 							</div>
-							<div>
+							<div class="col-sm-1">
 								<button class="btn btn-primary btn-circle start hidden">
 									<i class="fa fa-times"></i>
 								</button>

@@ -8,6 +8,7 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -56,12 +57,12 @@ public class ArchivoController {
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
     public Archivo guardaFichero(HttpServletRequest request, @RequestParam(value = "file") CommonsMultipartFile[] file,
-            @RequestParam(value = "mytext", required = false) String[] myText, @RequestParam(value = "descripcion", required = false) String descripcion,
+            @RequestParam(value = "tags", required = false) String[] tags, @RequestParam(value = "descripcion", required = false) String descripcion,
             @RequestParam(value = "cursoId", required = true) Integer cursoId,
             @RequestParam(value = "grupoId", required = false, defaultValue = "1") Integer grupoId, @ModelAttribute("login") UsuarioRol usuario) {
 
         try {
-            return grabarFicheroALocal(file, myText, descripcion, cursoId, grupoId, usuario);
+            return grabarFicheroALocal(file, tags, descripcion, cursoId, grupoId, usuario);
         } catch (Exception e) {
             throw new SubirArchivoException("Ha ocurrido un error al intentar subir el archivo.", e);
         }
@@ -84,7 +85,7 @@ public class ArchivoController {
 
     }
 
-    private Archivo grabarFicheroALocal(CommonsMultipartFile[] file, String[] mytext, String descripcion, Integer cursoId, Integer grupoId, UsuarioRol usuario)
+    private Archivo grabarFicheroALocal(CommonsMultipartFile[] file, String[] tags, String descripcion, Integer cursoId, Integer grupoId, UsuarioRol usuario)
             throws IOException {
         StringBuffer etiqueta = new StringBuffer();
         Archivo archivoUpdated = null;
@@ -92,9 +93,11 @@ public class ArchivoController {
         // AGREGO LAS ETIQUETAS AL CAMPO ETIQUETAS PARA LUEGO SUBIR A LA BASE
         // ASOCIADAS AL ARCHIVO
 
-        if (mytext != null) {
-            for (int i = 0; i < mytext.length; i++) {
-                etiqueta.append(mytext[i] + ";");
+        if (tags != null) {
+            for (int i = 0; i < tags.length; i++) {
+                if(StringUtils.isNoneBlank(tags[i])) {
+                    etiqueta.append(tags[i] + ";");
+                }
             }
         }
 

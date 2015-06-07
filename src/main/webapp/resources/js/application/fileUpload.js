@@ -27,9 +27,11 @@ $(document).ready(function () {
 		file.previewElement.querySelector(".start").onclick = function() { myDropzone.enqueueFile(file); };
 		$("#previews p.name").each(function(){
 			if($(this).text() == file.name) {
-				$(this).before("<input type='text' name='title-" + file.name.substring(0,file.name.lastIndexOf(".")) 
+				$(this).before("<div class='form-group'><input type='text' name='title-" + file.name.substring(0,file.name.lastIndexOf(".")) 
 						+ "' value='" + file.name.substring(0,file.name.lastIndexOf(".")) 
-						+ "' class='form-control' required />");
+						+ "' class='form-control' required /><span class='help-block m-b-none'>Breve descripción del archivo</span></div>");
+				$(this).before("<div class='form-group'><input type='text' name='tags-" + file.name.substring(0,file.name.lastIndexOf(".")) 
+						+ "' class='form-control' required /><span class='help-block m-b-none'>Coloque los diferentes temas separados por coma (,)</span></div>");
 				$(this).remove();
 			}
 		});
@@ -45,6 +47,7 @@ $(document).ready(function () {
 		file.previewElement.querySelector(".start").setAttribute("disabled", "disabled");
 		
 		var inputTitle = $("input[name='title-" + file.name.substring(0,file.name.lastIndexOf(".")) + "']:not([data-value])").first();
+		var inputTags = $("input[name='tags-" + file.name.substring(0,file.name.lastIndexOf(".")) + "']:not([data-value])").first();
 		
 		if(inputTitle.val() != '') {
 			formData.append("descripcion", inputTitle.val());
@@ -53,6 +56,8 @@ $(document).ready(function () {
 			formData.append("descripcion", file.name.substring(0,file.name.lastIndexOf(".")));
 			inputTitle.attr("data-value", file.name.substring(0,file.name.lastIndexOf(".")));
 		}
+		
+		formData.append("tags", inputTags.val().split(","));
 	});
 
 	myDropzone.on("queuecomplete", function(progress) {
@@ -65,16 +70,20 @@ $(document).ready(function () {
 
 	myDropzone.on("success", function(file, data, message) {
 		var input = $("input[name='title-" + file.name.substring(0,file.name.lastIndexOf(".")) + "'][data-value='" + data.descripcion + "']:not([readonly=readonly])").first();
-
-		input.after("<p class='text-success'>" + "El archivo se cargó correctamente" + "</p>");		
+		var inputTags = $("input[name='tags-" + file.name.substring(0,file.name.lastIndexOf(".")) + "']:not([readonly=readonly])").first();
+		
+		input.parents(".file-row").find("span.preview").append("<p class='text-success'>" + "El archivo se cargó correctamente" + "</p>");
 		input.attr("readonly", "readonly");
+		inputTags.attr("readonly", "readonly");
 	});
 	
 	myDropzone.on("error", function(file, message, data) {
 		var input = $("input[name='title-" + file.name.substring(0,file.name.lastIndexOf(".")) + "']:not([readonly=readonly])").first();
+		var inputTags = $("input[name='tags-" + file.name.substring(0,file.name.lastIndexOf(".")) + "']:not([readonly=readonly])").first();
 
-		input.after("<p class='text-error'>Ha ocurrido un error. Por favor intentelo mas tarde</p>");
+		input.parents(".file-row").find("span.preview").append("<p class='text-error'>Ha ocurrido un error. Por favor intentelo mas tarde</p>");
 		input.attr("readonly", "readonly");
+		inputTags.attr("readonly", "readonly");
 	});
 
 	document.querySelector("#actions .start").onclick = function() {
