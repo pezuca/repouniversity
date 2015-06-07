@@ -12,7 +12,7 @@
 <title>Repouniversity</title>
 <%@include file="../components/common-statics-imports.jsp"%>
 
-<script type="text/javascript" src="resources/js/application/dashboard.js"></script>
+<script type="text/javascript" src="/repouniversity/resources/js/application/dashboard.js"></script>
 </head>
 <body class=" pace-done">
 	<div id="wrapper">
@@ -54,7 +54,7 @@
 						</tbody>
 						<tfoot>
 							<tr class="head">
-								<th><button class="btn btn-success" type="button"><a href="/repouniversity/subirArchivo?cursoID=${curso.id}&personaID=${login.idPersona}" class="fa fa-upload"><i class="fa fa-upload"></i>&nbsp;&nbsp;<span class="fa fa-upload">Subir Archivo</span></a></button></th>
+								<th><a data-toggle="modal" href="#fileUpload" class="btn btn-success"><i class="fa fa-upload"></i> Subir Archivo</a></th>
 								<th></th>
 								<th></th>
 							</tr>
@@ -63,7 +63,6 @@
 				</div>
 	        </div>
 		</div>
-		
 		<%@include file="../components/footer.jsp"%>
 		</div>
 	</div>
@@ -104,5 +103,10 @@
 		}
 		
 	</script>
+	<div id="hiddenInputs" class="hidden">
+		<input type="hidden" name="personaId" value="${userLog.idPersona}"/>
+		<input type="hidden" name="cursoId" value="${curso.id}"/>
+	</div>
+	<%@include file="../components/fileUpload.jsp"%>
 </body>
 </html>
