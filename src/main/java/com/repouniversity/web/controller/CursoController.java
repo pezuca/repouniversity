@@ -25,7 +25,6 @@ import com.repouniversity.model.services.CursoService;
 import com.repouniversity.model.services.DocenteService;
 import com.repouniversity.model.services.GrupoService;
 import com.repouniversity.model.services.NotificacionService;
-import com.repouniversity.model.services.PersonaService;
 import com.repouniversity.model.services.TipoNotificacionService;
 
 @Controller

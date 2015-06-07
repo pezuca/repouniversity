@@ -1,0 +1,70 @@
+div.table {
+	display: table;
+	margin: 10px 0px 10px 0px;
+}
+
+div.table .file-row {
+	display: table-row;
+}
+
+div.table .file-row>div {
+	display: table-cell;
+	vertical-align: top;
+	border-top: 1px solid #ddd;
+	padding: 8px;
+}
+
+div.table .file-row:nth-child(odd) {
+	background: #f9f9f9;
+}
+
+#total-progress {
+	opacity: 0;
+	transition: opacity 0.3s linear;
+}
+
+#previews .file-row.dz-success .progress {
+	opacity: 0;
+	transition: opacity 0.3s linear;
+}
+
+#previews .file-row .delete {
+	display: none;
+}
+
+#previews .file-row.dz-success .start, #previews .file-row.dz-success .cancel
+	{
+	display: none;
+}
+
+#previews .file-row.dz-success .delete {
+	display: block;
+}
+
+.form-control {
+	display: block;
+	width: 80%;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow
+		ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out
+		.15s;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.progress {
+	margin: 15px 0px !important;
+}
+
+#fileUpload .modal-dialog {
+	width: 750px;
+}
