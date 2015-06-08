@@ -30,23 +30,37 @@ public class TpGrupoService {
     @Autowired
     private TpEntregaService tpEntregaService;
 
-    public Grupo save(Grupo grupo) {
-        return grupoDao.insert(grupo);
+    public TpGrupo save(TpGrupo tpGrupo) {
+        return tpGrupoDao.insert(tpGrupo);
     }
 
-    public void crearGrupo(Long cursoId, Long[] alumnos, String nombre) {
-        Grupo grupo = new Grupo();
+    public void nuevoTp(String descripcion, Long archivoId, Long nota) {
+        
+    	TpGrupo tpGrupo = new TpGrupo();
 
-        grupo.setNombre(nombre);
-        grupo.setActivo(true);
-
-        grupo = save(grupo);
+    	tpGrupo.setDescripcion(descripcion);
+    	tpGrupo.setIdArchivo(archivoId);
+    	tpGrupo.setNota(nota);
+    	tpGrupo.setActivo(true);
+    	
+    	tpGrupo = save(tpGrupo);
 
       //  saveGrupoAlumnoCurso(grupo.getId(), cursoId, alumnos);
     }
 
    
-   
+	public void editarTp(String descripcion, Long archivoId, Long nota, Boolean activo) {
+		// TODO Auto-generated method stub
+		TpGrupo tpGrupo = new TpGrupo();
+
+    	tpGrupo.setDescripcion(descripcion);
+    	tpGrupo.setIdArchivo(archivoId);
+    	tpGrupo.setNota(nota);
+    	tpGrupo.setActivo(activo);
+    	
+    	tpGrupoDao.update(tpGrupo);
+
+	}
 
     public TpGrupoTO getTpGrupoById(Long tpGrupoId) {
     	TpGrupo tpGrupo = tpGrupoDao.findById(tpGrupoId);
@@ -84,4 +98,8 @@ public class TpGrupoService {
         
         return tpGrupoToList;
 	}
+
+
+
+
 }

@@ -1,184 +1,137 @@
-<!DOCTYPE html>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<c:set var="activeTab" value="${'verCursoDocente'}" />
-<c:set var="userLog" value="${sessionScope.login}"/>
-
 <html>
 <head>
-<meta charset="utf-8" />
-<title>Repouniversity</title>
-<%@include file="../components/common-statics-imports.jsp"%>
-
-<script type="text/javascript" src="resources/js/application/dashboard.js"></script>
-<script src="/repouniversity/resources/js/application/verCursoDocente.js"></script>
+	<meta charset="utf-8" />
+	<title>Repouniversity</title>
+	<%@include file="../components/common-statics-imports.jsp"%>
+	<script src="/repouniversity/resources/js/application/verGrupoDocente.js"></script>
 </head>
 <body class=" pace-done">
-	<c:set var="userLog" value="${sessionScope.login}"/>
 	
 	<div id="wrapper">
-		<%@include file="../components/static-nav-bar.jsp"%>
+	<%@include file="../components/static-nav-bar.jsp"%>
 		<div id="page-wrapper" class="gray-bg dashbard-1">
-		
 		<%@include file="../components/search-nav-bar.jsp"%>
-		
-		<div class="wrapper wrapper-content animated fadeInRight">
-			<div class="row">
+	
+	 	<div class="wrapper wrapper-content animated fadeInRight">
+	         <div class="row">
 	             <div class="col-lg-12">
-					<div class="usuarioInformation">
-						<div class="page-header">
-							<h1>Detalles grupo ${grupo.nombre}</h1>
+	              <div class="ibox float-e-margins">
+						<div class="GrupoInformation">
+							<div class="page-header">
+								<h1>Detalles grupo ${grupo.nombre}</h1>
+							</div>
+							
+							<div class="page-header">
+								<h3>Alumnos</h3>
+							</div>
 						</div>
-						
-						<div class="page-header">
-							<h3>Alumnos</h3>
-						</div>
-					</div>
-					
-					<table id="GruposAlumnos" class="table table-striped hover">
-						<thead class="encabezado">
-							<tr>
-								<th>Id</th>
-								<th>Alumno</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${grupo.alumnos}" var="alumno"
-								varStatus="status">
+						<table id="GruposAlumnos" class="table table-striped hover">
+							<thead class="encabezado">
 								<tr>
-									<td>${alumno.persona.id}</td>
-									<td>${alumno.persona.apellido}, ${alumno.persona.nombre}</td>
-									
+									<th>Id</th>
+									<th>Alumno</th>
 								</tr>
-							</c:forEach>
-						</tbody>
-						<tfoot>
-							<tr class="head">
-								<th></th>
-								<th></th>
-								<th></th>
-							</tr>
-						</tfoot>
-					</table>
-					
-					<div class="ibox-title">
+							</thead>
+							<tbody>
+								<c:forEach items="${grupo.alumnos}" var="alumno"
+									varStatus="status">
+									<tr>
+										<td>${alumno.persona.id}</td>
+										<td>${alumno.persona.apellido}, ${alumno.persona.nombre}</td>
+										
+									</tr>
+								</c:forEach>
+							</tbody>
+							<tfoot>
+								<tr class="head">
+									<th></th>
+									<th></th>
+									<th></th>
+								</tr>
+							</tfoot>
+						</table>
+	                  <div class="ibox-title">
 	                      <h5>Trabajo Practicos</h5>
-		                  <div class="ibox-tools" id="crearGrupoButton">
-	                          <a href="#crearGrupoButton" class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  TP</a>
+		                  <div class="ibox-tools" id="agregarTpButton">
+	                          <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  TP</a>
 	                      </div>
-	                </div>
-	                <table id="GruposTP" class="table table-striped hover">
-						<thead class="encabezado">
+	                  </div>
+	                  <div class="ibox-content">
+	                  	<table id="GruposTP" class="table table-striped table-hover" >
+	                  		<thead class="encabezado">
 							<tr>
 								<th>Id</th>
 								<th>Descripcion</th>
 								<th>Archivo</th>
 								<th>Nota</th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${grupo.tpGrupo}" var="tpgrupo"
-								varStatus="status">
+							<c:forEach items="${grupo.tpGrupo}" var="tpgrupo" varStatus="status">
 								<tr>
 									<td>${tpgrupo.id}</td>
 									<td>${tpgrupo.descripcion}</td>
 									<td>${tpgrupo.archivo}</td>
 									<td>${tpgrupo.nota}</td>
-									<td><button class="altaNotificacion btn btn-primary"><a href="/repouniversity/docente/verTrabajosPracticos?tpId=${tpgrupo.id}"> Ver</a></button>&nbsp;</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-						<tfoot>
-							<tr class="head">
-								<th></th>
-								<th></th>
-								<th></th>
-							</tr>
-						</tfoot>
-					</table>
-					
-			 </div>
-		</div>
-		<!-- 	Ventanas -->
-	<div id="crearGrupoDialog" title="Nuevo Grupo" class="modal fade in">
-		<form id="nuevoGrupoForm" class="form-horizontal">
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Nombre Grupo*:</label>
-                <div class="col-sm-10"><input name="nombre" type="text" class="form-control" required="required"></div>
-                <div class="col-sm-10"><input name="idcurso" type="hidden" class="form-control" required="required" value = "${curso.id}"></div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Lista de Alumnos*:</label>
-                <div class="col-sm-10">
-                	<table id="cursoGruposAlumnos" name = "" class="table table-striped hover">
-						<thead class="encabezado">
-							<tr>
-								<th>Id</th>
-								<th>Alumno</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${curso.alumnos}" var="alumno"
-								varStatus="status">
-								<tr>
-									<td>${alumno.id}</td>
-									<td>${alumno.persona.apellido}, ${alumno.persona.nombre}</td>
-									<td><input name="cursosGruposAlumnos" type="checkbox" value="${alumnoid}"/>
+									<td>
+										<a href="#" name="editTp" data-tpgrupoId="${tpgrupo.id}"><button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Editar TP"><i class="fa fa-pencil"></i></button></a>
+										<a href="#" name="deleteTp" data-tpgrupoId="${tpgrupo.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar TP"><i class="fa fa-times"></i></button></a>
+										<a href="/repouniversity/docente/verTrabajosPracticos?tpId=${tpgrupo.id}" name="Ver" data-tpgrupoId="${tpgrupo.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver TP"><i class="fa fa-codepen"></i></button></a>
 									</td>
 								</tr>
 							</c:forEach>
 						</tbody>
-						<tfoot>
-							<tr class="head">
-								<th></th>
-								<th></th>
-								<th></th>
-							</tr>
-						</tfoot>
-					</table>
-                </div>
-            </div>
-		</form>
-	</div>
+	                  	</table>
+	                  </div>
+	              </div>
+	      		</div>
+	         </div>
+	     </div>
+        
 		<%@include file="../components/footer.jsp"%>
 	</div>
-	<script>
-		$(document).ready(function() {
-			$('#clientTable').dataTable({
-				"processing" : false,
-				"serverSide" : false,
-				"paging": false,
-				"language": {
-		            "search": "Búsqueda"
-		        }
-			});
+<!-- 	Ventanas -->
+	<div id="agregarTpDialog" title="Nuevo TP">
+		<form id="nuevoTpForm" class="form-horizontal">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Descripcion*:</label>
+                <div class="col-sm-10"><input name="descripcion" type="text" class="form-control" required="required"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Archivo*:</label>
+                <div class="col-sm-10"><input name="archivo" type="text" class="form-control" required="required"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Nota:</label>
+                <div class="col-sm-10"><input name="nota" type="text" class="form-control" required="required"></div>
+            </div>
+           
+		</form>
+	</div>
 	
-			$("#clientTable_length").remove();
-		});
-		
-		function altaEnCurso(notificacionId) {
-			$.ajax({
-				  type: "POST",
-				  url: "/repouniversity/notificacion/confirmaaltancurso",
-				  data: {"notificacionId" : notificacionId},
-				  success: function(){ 
-					  alert("Good!")
-				  }
-			});
-		}
-		
-		function rechazoAltaEnCurso(notificacionId) {
-			$.ajax({
-				  type: "POST",
-				  url: "/repouniversity/notificacion/rechazaaltancurso",
-				  data: {"notificacionId" : notificacionId},
-				  success: function(){ 
-					  alert("Good!")
-				  }
-			});
-		}
-	</script>
+	<div id="editarTpDialog" title="Editar TP">
+		<form id="editarTpForm" class="form-horizontal">
+			<input name="cursoId" type="hidden">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Descripcion*:</label>
+                <div class="col-sm-10"><input name="descripcion" type="text" class="form-control" required="required"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Archivo*:</label>
+                <div class="col-sm-10"><input name="archivo" type="text" class="form-control" required="required"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Nota:</label>
+                <div class="col-sm-10"><input name="nota" type="text" class="form-control" required="required"></div>
+            </div>
+        </form>
+	</div>
+	
+	<div id="deleteTpDialog" title="Eliminar TP">
+		<p>¿Esta seguro que desea eliminar el Trabajo Practico?</p>
+	</div>
+	</div>
+	
 </body>
 </html>
