@@ -17,9 +17,9 @@ var tpAdmin = {
 				                                          data.descripcion,
 				                                          data.archivo,
 				                                          data.nota,
-				                                          "<a href='#' name='editTp' data-cursoId='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a> " + 
-				  										  "<a href='#' name='deleteTp' data-cursoId='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a> " +
-				  										  "<a href='/repouniversity/docente/verTrabajosPracticos?tpId=" + data.id + "' name='Ver' data-tpgrupoId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Ver TP'><i class='fa fa-codepen'></i></button></a>"
+				                                          "<a href='#' name='editTp' data-tpgrupoId='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a> " + 
+				  										  "<a href='#' name='deleteTp' data-tpgrupoId='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a> " +
+				  										  "<a href='/repouniversity/grupo/verTrabajosPracticos?tpGrupoId=" + data.id + "' name='Ver' data-tpgrupoId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Ver TP'><i class='fa fa-codepen'></i></button></a>"
 				                                     ]).draw();
 				
 				//Agrego el evento de delete
@@ -27,7 +27,7 @@ var tpAdmin = {
 					$("#deleteTpDialog").data('tpId', $(this).parent().attr("data-tpgrupoId")).dialog("open");
 				});
 				
-				$("a[name=editTp][data-cursoId=" + data.id + "] button").click(function(){
+				$("a[name=editTp][data-tpgrupoId=" + data.id + "] button").click(function(){
 					$("#editarTpDialog").data('tpId', $(this).parent().attr("data-tpgrupoId"))
 						.data('descripcion', $(this).parents("tr").find("td").get(1).innerHTML)
 						.data('archivo', $(this).parents("tr").find("td").get(2).innerHTML)

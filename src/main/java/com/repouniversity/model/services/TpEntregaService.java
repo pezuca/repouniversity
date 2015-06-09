@@ -31,21 +31,41 @@ public class TpEntregaService {
     @Autowired
     private GrupoService grupoService;
 
-    public Grupo save(Grupo grupo) {
-        return grupoDao.insert(grupo);
+    public TpEntrega save(TpEntrega tpEntrega) {
+        return tpEntregaDao.insert(tpEntrega);
     }
 
-    public void crearGrupo(Long cursoId, Long[] alumnos, String nombre) {
-        Grupo grupo = new Grupo();
+    public TpEntregaTO nuevoEntregaTp(Long tpGrupoId, String descripcion, Long archivoId) {
+        
+    	TpEntrega tpEntrega = new TpEntrega();
+    	tpEntrega.setIdTpGrupo(tpGrupoId);
+    	tpEntrega.setDescripcion(descripcion);
+    	tpEntrega.setIdArchivo(archivoId);
+       	tpEntrega.setActivo(true);
+    	
+    	tpEntrega = save(tpEntrega);
+    	return buildTpEntrega(tpEntrega);
 
-        grupo.setNombre(nombre);
-        grupo.setActivo(true);
-
-        grupo = save(grupo);
-
-      //  saveGrupoAlumnoCurso(grupo.getId(), cursoId, alumnos);
     }
 
+   
+    public TpEntregaTO editarEntregaTp(Long tpGrupoId, Long tpEntregaId, String descripcion, Long archivoId) {
+		// TODO Auto-generated method stub
+    	TpEntrega tpEntrega = new TpEntrega();
+
+    	tpEntrega.setIdTpGrupo(tpGrupoId);
+    	tpEntrega.setId(tpEntregaId);
+    	tpEntrega.setDescripcion(descripcion);
+    	tpEntrega.setIdArchivo(archivoId);
+    	tpEntrega.setActivo(true);
+    	tpEntregaDao.update(tpEntrega);
+    	
+    	return buildTpEntrega(tpEntrega);
+	}
+	public void eliminarEntregaTp(Long tpEntregaId) {
+		// TODO Auto-generated method stub
+		tpEntregaDao.delete(tpEntregaDao.findById(tpEntregaId));
+	}
    
    
 
@@ -84,4 +104,7 @@ public class TpEntregaService {
         
         return tpEntregaToList;
 	}
+
+
+
 }
