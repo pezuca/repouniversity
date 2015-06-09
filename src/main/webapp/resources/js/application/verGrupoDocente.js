@@ -3,7 +3,7 @@ var tpAdmin = {
 		$.ajax({
 			url: "/repouniversity/grupo/nuevoTp",
 			type: "POST",
-			data: $("#nuevoTPForm").serialize(),
+			data: $("#nuevoTpForm").serialize(),
 			success: function(data){
 				$.gritter.add({
 					title:'TP creado',
@@ -14,15 +14,16 @@ var tpAdmin = {
 				
 				table.row.add([
 				                                          data.id,
-				                                          data.nombre,
-				                                          data.codigo,
 				                                          data.descripcion,
-				                                          "<a href='#' name='editCurso' data-cursoId='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a>" + 
-				  										  "<a href='#' name='deleteCurso' data-cursoId='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a>"
+				                                          data.archivo,
+				                                          data.nota,
+				                                          "<a href='#' name='editTp' data-cursoId='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a> " + 
+				  										  "<a href='#' name='deleteTp' data-cursoId='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a> " +
+				  										  "<a href='/repouniversity/docente/verTrabajosPracticos?tpId=" + data.id + "' name='Ver' data-tpgrupoId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Ver TP'><i class='fa fa-codepen'></i></button></a>"
 				                                     ]).draw();
 				
 				//Agrego el evento de delete
-				$("a[name='deleteCurso'][data-cursoId=" + data.id + "] button").click(function(){
+				$("a[name='deleteTp'][data-cursoId=" + data.id + "] button").click(function(){
 					$("#deleteTpDialog").data('cursoId', $(this).parent().attr("data-cursoId")).dialog("open");
 				});
 				
@@ -58,32 +59,29 @@ var tpAdmin = {
 					sticky: false
 				});
 				
-				var celdas = $("#listaCursos td a[data-cursoId=" + data.id + "]").parents("tr").find("td");
-				celdas.get(1).innerHTML = data.nombre;
-				celdas.get(2).innerHTML = data.codigo;
-				celdas.get(3).innerHTML = data.descripcion;
-				celdas.get(4).innerHTML = data.materia.nombre;
-				celdas.get(5).innerHTML = data.docente.persona.nombre + ", " + data.docente.persona.apellido;
-				
+				var celdas = $("#GruposTP td a[data-tpgrupoId=" + data.id + "]").parents("tr").find("td");
+				celdas.get(1).innerHTML = data.id;
+				celdas.get(2).innerHTML = data.descripcion;
+				celdas.get(3).innerHTML = data.archivo;
+				celdas.get(4).innerHTML = data.nota;
+								
 				//Agrego el evento de delete
-				$("a[name='deleteCurso'][data-cursoId=" + data.id + "] button").click(function(){
-					$("#deleteTpDialog").data('cursoId', $(this).parent().attr("data-cursoId")).dialog("open");
+				$("a[name='deleteTp'][data-tpgrupoId=" + data.id + "] button").click(function(){
+					$("#deleteTpDialog").data('tpId', $(this).parent().attr("data-tpgrupoId")).dialog("open");
 				});
 				
-				$("a[name=editCurso][data-cursoId=" + data.id + "] button").click(function(){
-					$("#editarTpDialog").data('cursoId', $(this).parent().attr("data-cursoId"))
-						.data('nombre', $(this).parents("tr").find("td").get(1).innerHTML)
-						.data('codigo', $(this).parents("tr").find("td").get(2).innerHTML)
-						.data('descripcion', $(this).parents("tr").find("td").get(3).innerHTML)
-						.data('materiaId', $(this).parents("tr").find("td[data-materiaId]").attr("data-materiaId"))
-						.data('docenteId', $(this).parents("tr").find("td[data-docenteId]").attr("data-docenteId"))
+				$("a[name=editTp][data-tpgrupoId=" + data.id + "] button").click(function(){
+					$("#editarTpDialog").data('tpId', data.id)
+						.data('descripcion', $(this).parents("tr").find("td").get(2).innerHTML)
+						.data('archivo', $(this).parents("tr").find("td").get(3).innerHTML)
+						.data('nota', $(this).parents("tr").find("td").get(4).innerHTML)
 						.dialog("open");
 				});
 				
 				$("#editarTpDialog").dialog("close");						
 			},
 			error: function(data) {
-				$("#nuevoTpForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de editar el curso, inténtelo mas tarde.</p></div>")
+				$("#nuevoTpForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de editar el Trabajo Practico, inténtelo mas tarde.</p></div>")
 				setTimeout(function(){
 					$("#agregarTpDialog .infoDialog").hide(function(){
 						$(this).remove();
@@ -139,7 +137,7 @@ var tpAdmin = {
 };
 
 $(document).ready(function() {
-	table = $('#listaCursos').DataTable({
+	table = $('#GruposTP').DataTable({
 		"processing" : false,
 		"serverSide" : false,
 		"paging" : false,
@@ -206,12 +204,11 @@ $(document).ready(function() {
 			$("#editarTpForm").find(".form-group").removeClass("has-error");
 			$("#editarTpForm select option").removeAttr("selected");
 			
-			$('#editarTpForm input[name=cursoId]').val($("#editarTpDialog").data('cursoId'));
-			$('#editarTpForm input[name=nombre]').val($("#editarTpDialog").data('nombre'));
+			$('#editarTpForm input[name=tpId]').val($("#editarTpDialog").data('tpId'));
 			$('#editarTpForm input[name=descripcion]').val($("#editarTpDialog").data('descripcion'));
-			$('#editarTpForm input[name=codigo]').val($("#editarTpDialog").data('codigo'));
-			$("#editarTpForm select[name=materia] option[value=" + $("#editarTpDialog").data('materiaId') + "]").attr("selected", "selected");
-			$("#editarTpForm select[name=docente] option[value=" + $("#editarTpDialog").data('docenteId') + "]").attr("selected", "selected");
+			$('#editarTpForm input[name=archivoId]').val($("#editarTpDialog").data('archivo'));
+			$('#editarTpForm input[name=nota]').val($("#editarTpDialog").data('nota'));
+			
 		},
 		close: function(event, ui) {
 		}
@@ -246,17 +243,15 @@ $(document).ready(function() {
 	});
 	
 	$("a[name=deleteCurso] button").click(function(){
-		$("#deleteTpDialog").data('cursoId', $(this).parent().attr("data-cursoId")).dialog("open");
+		$("#deleteTpDialog").data('cursoId', $(this).parent().attr("data-tpgrupoId")).dialog("open");
 	});
 	
 	$("a[name=editTp] button").click(function(){
-		$("#editarTpDialog").data('cursoId', $(this).parent().attr("data-cursoId"))
-			.data('cursoId', $(this).parents("tr").find("td").get(0).innerHTML)
-			.data('nombre', $(this).parents("tr").find("td").get(1).innerHTML)
-			.data('descripcion', $(this).parents("tr").find("td").get(3).innerHTML)
-			.data('codigo', $(this).parents("tr").find("td").get(2).innerHTML)
-			.data('materiaId', $(this).parents("tr").find("td[data-materiaId]").attr("data-materiaId"))
-			.data('docenteId', $(this).parents("tr").find("td[data-docenteId]").attr("data-docenteId"))
+		$("#editarTpDialog").data('tpId', $(this).parent().attr("data-tpgrupoId"))
+			.data('tpId', $(this).parents("tr").find("td").get(0).innerHTML)
+			.data('descripcion', $(this).parents("tr").find("td").get(1).innerHTML)
+			.data('archivo', $(this).parents("tr").find("td").get(2).innerHTML)
+			.data('nota', $(this).parents("tr").find("td").get(3).innerHTML)
 			.dialog("open");
 	});
 });

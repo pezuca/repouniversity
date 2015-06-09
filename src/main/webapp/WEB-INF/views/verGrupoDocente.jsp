@@ -94,13 +94,14 @@
 <!-- 	Ventanas -->
 	<div id="agregarTpDialog" title="Nuevo TP">
 		<form id="nuevoTpForm" class="form-horizontal">
+			<input name="grupoId" type="hidden" class="form-control" value="${param.grupoId}">
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Descripcion*:</label>
                 <div class="col-sm-10"><input name="descripcion" type="text" class="form-control" required="required"></div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Archivo*:</label>
-                <div class="col-sm-10"><input name="archivo" type="text" class="form-control" required="required"></div>
+                <div class="col-sm-10"><input name="archivoId" type="text" class="form-control" required="required"></div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Nota:</label>
@@ -112,14 +113,15 @@
 	
 	<div id="editarTpDialog" title="Editar TP">
 		<form id="editarTpForm" class="form-horizontal">
-			<input name="cursoId" type="hidden">
+			<input name="grupoId" type="hidden" class="form-control" value="${param.grupoId}">
+			<input name="tpId" type="hidden" class="form-control" value="">
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Descripcion*:</label>
                 <div class="col-sm-10"><input name="descripcion" type="text" class="form-control" required="required"></div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Archivo*:</label>
-                <div class="col-sm-10"><input name="archivo" type="text" class="form-control" required="required"></div>
+                <div class="col-sm-10"><input name="archivoId" type="text" class="form-control" required="required"></div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Nota:</label>

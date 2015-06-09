@@ -34,32 +34,35 @@ public class TpGrupoService {
         return tpGrupoDao.insert(tpGrupo);
     }
 
-    public void nuevoTp(String descripcion, Long archivoId, Long nota) {
+    public TpGrupoTO nuevoTp(Long grupoId, String descripcion, Long archivoId, Long nota) {
         
     	TpGrupo tpGrupo = new TpGrupo();
-
+    	tpGrupo.setIdGrupo(grupoId);
     	tpGrupo.setDescripcion(descripcion);
     	tpGrupo.setIdArchivo(archivoId);
     	tpGrupo.setNota(nota);
     	tpGrupo.setActivo(true);
     	
     	tpGrupo = save(tpGrupo);
+    	return buildTpGrupo(tpGrupo);
 
       //  saveGrupoAlumnoCurso(grupo.getId(), cursoId, alumnos);
     }
 
    
-	public void editarTp(String descripcion, Long archivoId, Long nota, Boolean activo) {
+	public TpGrupoTO editarTp(Long grupoId, Long tpId, String descripcion, Long archivoId, Long nota) {
 		// TODO Auto-generated method stub
 		TpGrupo tpGrupo = new TpGrupo();
 
+		tpGrupo.setIdGrupo(grupoId);
+		tpGrupo.setId(tpId);
     	tpGrupo.setDescripcion(descripcion);
     	tpGrupo.setIdArchivo(archivoId);
     	tpGrupo.setNota(nota);
-    	tpGrupo.setActivo(activo);
-    	
+    	tpGrupo.setActivo(true);
     	tpGrupoDao.update(tpGrupo);
-
+    	
+    	return buildTpGrupo(tpGrupo);
 	}
 
     public TpGrupoTO getTpGrupoById(Long tpGrupoId) {
