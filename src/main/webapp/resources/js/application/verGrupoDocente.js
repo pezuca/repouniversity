@@ -23,15 +23,15 @@ var tpAdmin = {
 				                                     ]).draw();
 				
 				//Agrego el evento de delete
-				$("a[name='deleteTp'][data-cursoId=" + data.id + "] button").click(function(){
-					$("#deleteTpDialog").data('cursoId', $(this).parent().attr("data-cursoId")).dialog("open");
+				$("a[name='deleteTp'][data-tpgrupoId=" + data.id + "] button").click(function(){
+					$("#deleteTpDialog").data('tpId', $(this).parent().attr("data-tpgrupoId")).dialog("open");
 				});
 				
-				$("a[name=editCurso][data-cursoId=" + data.id + "] button").click(function(){
-					$("#editarTpDialog").data('cursoId', $(this).parent().attr("data-cursoId"))
-						.data('nombre', $(this).parents("tr").find("td").get(1).innerHTML)
-						.data('codigo', $(this).parents("tr").find("td").get(2).innerHTML)
-						.data('descripcion', $(this).parents("tr").find("td").get(3).innerHTML)
+				$("a[name=editTp][data-cursoId=" + data.id + "] button").click(function(){
+					$("#editarTpDialog").data('tpId', $(this).parent().attr("data-tpgrupoId"))
+						.data('descripcion', $(this).parents("tr").find("td").get(1).innerHTML)
+						.data('archivo', $(this).parents("tr").find("td").get(2).innerHTML)
+						.data('nota', $(this).parents("tr").find("td").get(3).innerHTML)
 						.dialog("open");
 				});
 				
@@ -60,10 +60,10 @@ var tpAdmin = {
 				});
 				
 				var celdas = $("#GruposTP td a[data-tpgrupoId=" + data.id + "]").parents("tr").find("td");
-				celdas.get(1).innerHTML = data.id;
-				celdas.get(2).innerHTML = data.descripcion;
-				celdas.get(3).innerHTML = data.archivo;
-				celdas.get(4).innerHTML = data.nota;
+				celdas.get(0).innerHTML = data.id;
+				celdas.get(1).innerHTML = data.descripcion;
+				celdas.get(2).innerHTML = data.archivo;
+				celdas.get(3).innerHTML = data.nota;
 								
 				//Agrego el evento de delete
 				$("a[name='deleteTp'][data-tpgrupoId=" + data.id + "] button").click(function(){
@@ -72,9 +72,9 @@ var tpAdmin = {
 				
 				$("a[name=editTp][data-tpgrupoId=" + data.id + "] button").click(function(){
 					$("#editarTpDialog").data('tpId', data.id)
-						.data('descripcion', $(this).parents("tr").find("td").get(2).innerHTML)
-						.data('archivo', $(this).parents("tr").find("td").get(3).innerHTML)
-						.data('nota', $(this).parents("tr").find("td").get(4).innerHTML)
+						.data('descripcion', $(this).parents("tr").find("td").get(1).innerHTML)
+						.data('archivo', $(this).parents("tr").find("td").get(2).innerHTML)
+						.data('nota', $(this).parents("tr").find("td").get(3).innerHTML)
 						.dialog("open");
 				});
 				
@@ -90,11 +90,11 @@ var tpAdmin = {
 			}
 		})
 	},
-	deleteCursoAjax : function(tpGrupoId) {
+	deleteTpAjax : function(tpId) {
 		$.ajax({
-			url: "/repouniversity/admin/eliminarCurso",
+			url: "/repouniversity/grupo/eliminarTp",
 			type: "POST",
-			data: {"tpGrupoId" : tpGrupoId},
+			data: {"tpId" : tpId},
 			success: function(data){
 				$.gritter.add({
 					title:'Tp eliminado',
@@ -102,7 +102,7 @@ var tpAdmin = {
 					sticky: false
 				});
 				
-				table.row( $("#listaCursos a[data-cursoId=" + cursoId + "]").parents('tr') ).remove().draw();
+				table.row( $("#GruposTP a[data-tpgrupoId=" + tpId + "]").parents('tr') ).remove().draw();
 				$("#deleteTpDialog").dialog("close");						
 			},
 			error: function(data) {
@@ -224,7 +224,7 @@ $(document).ready(function() {
 		hide: {effect: "fade", duration: 300},
 		buttons: {
 			"Eliminar": function() {
-				tpAdmin.deleteCursoAjax($("#deleteTpDialog").data('cursoId'));
+				tpAdmin.deleteTpAjax($("#deleteTpDialog").data('tpId'));
 			},
 			"Cancelar": function() {
 				$(this).dialog("close");
@@ -242,8 +242,8 @@ $(document).ready(function() {
 		$("#agregarTpDialog").dialog("open");
 	});
 	
-	$("a[name=deleteCurso] button").click(function(){
-		$("#deleteTpDialog").data('cursoId', $(this).parent().attr("data-tpgrupoId")).dialog("open");
+	$("a[name=deleteTp] button").click(function(){
+		$("#deleteTpDialog").data('tpId', $(this).parent().attr("data-tpgrupoId")).dialog("open");
 	});
 	
 	$("a[name=editTp] button").click(function(){

@@ -64,7 +64,11 @@ public class TpGrupoService {
     	
     	return buildTpGrupo(tpGrupo);
 	}
-
+	public void eliminarTp(Long tpId) {
+		// TODO Auto-generated method stub
+		tpGrupoDao.delete(tpGrupoDao.findById(tpId));
+	}
+	
     public TpGrupoTO getTpGrupoById(Long tpGrupoId) {
     	TpGrupo tpGrupo = tpGrupoDao.findById(tpGrupoId);
         
@@ -101,6 +105,8 @@ public class TpGrupoService {
         
         return tpGrupoToList;
 	}
+
+
 
 
 

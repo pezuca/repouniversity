@@ -1,11 +1,13 @@
 package com.repouniversity.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.repouniversity.model.entity.to.TpGrupoTO;
@@ -37,6 +39,7 @@ public class TpGrupoController {
 	
 	@RequestMapping(value = "grupo/nuevoTp", method = { RequestMethod.POST })
 	@ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
 	public TpGrupoTO nuevoTpAjax(
 			@RequestParam(value = "grupoId", required = true) Long grupoId,
 			@RequestParam(value = "descripcion", required = true) String descripcion,
@@ -49,6 +52,7 @@ public class TpGrupoController {
 	}
 	@RequestMapping(value = "grupo/editarTp", method = { RequestMethod.POST })
 	@ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
 	public TpGrupoTO editarTpAjax(
 			@RequestParam(value = "grupoId", required = true) Long grupoId,
 			@RequestParam(value = "tpId", required = true) Long tpId,
@@ -61,6 +65,16 @@ public class TpGrupoController {
 
 	}
 	
+	@RequestMapping(value = "grupo/eliminarTp", method = { RequestMethod.POST })
+	@ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+	public void eliminarTpAjax(
+			@RequestParam(value = "tpId", required = true) Long tpId) {
 
+		tpGrupoService.eliminarTp(tpId);
+		
+
+	}
+	
 
 }
