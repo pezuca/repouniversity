@@ -34,7 +34,7 @@ import com.repouniversity.web.exceptions.SubirArchivoException;
 public class ArchivoController {
 
     @Value("${system.fileUpload.location}")
-    private static final String UPLOAD_PATH = "/home/federico/Documents/repouniversity/archivos/";
+    private String UPLOAD_PATH = "";
 
     @Autowired
     private ArchivoService archivoService;
