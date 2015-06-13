@@ -99,4 +99,16 @@ public class AlumnoService {
         
         return alumnoToList;
     }
+    
+    public List<AlumnoTO> getAlumnosForCursoSinGrupo(Long cursoId) {
+        List<AlumnoTO> alumnoToList = new ArrayList<AlumnoTO>();
+        List<Alumno> alumnoList = alumnoDao.findAlumnosForCursoSinGrupo(cursoId);
+        
+        for (Alumno alumno : alumnoList) {
+            alumnoToList.add(buildAlumno(alumno));
+        }
+        
+        return alumnoToList;
+    }
+    
 }

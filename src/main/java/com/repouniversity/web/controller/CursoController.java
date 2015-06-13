@@ -84,15 +84,19 @@ public class CursoController {
         curso.setGrupos(grupos);
         
         List<AlumnoTO> alumnos = alumnoService.getAlumnosForCurso(curso.getId());
+        
+        List<AlumnoTO> alumnosSinGrupo = alumnoService.getAlumnosForCursoSinGrupo(curso.getId());
+        
         curso.setAlumnos(alumnos);
+        curso.setAlumnosSinGrupo(alumnosSinGrupo);
 
         return new ModelAndView("verCursoDocente").addObject("curso", curso);
     }
 
     @RequestMapping(value = "docente/crearGrupo", method = {RequestMethod.POST})
-    public ModelAndView crearGrupo(@RequestParam(value = "idcurso", required = false) Long idCurso,
-            @RequestParam(value = "cursosGruposAlumnos", required = false) Long[] listaAlumnoId,
-            @RequestParam(value = "nombre", required = false) String nombre) {
+    public ModelAndView crearGrupo(@RequestParam(value = "idcurso", required = true) Long idCurso,
+            @RequestParam(value = "alumnosIds", required = true) Long[] listaAlumnoId,
+            @RequestParam(value = "nombre", required = true) String nombre) {
 
         grupoService.crearGrupo(idCurso, listaAlumnoId, nombre);
 

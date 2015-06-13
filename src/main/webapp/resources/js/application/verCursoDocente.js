@@ -11,18 +11,17 @@ var GruposAdmin = {
 					sticky: false
 				});
 				
-				
 				$("#listaPersonas").DataTable().row.add([
-				                                          data.id,
-				                                          data.persona.nombre,
-				                                          data.persona.apellido,
-				                                          data.user,
-				                                          data.persona.mail,
-				                                          data.activo == true ? 'Si':'No',
-				                                          data.rol,
-				                                          "<a href='#' name='editUser' data-userid='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a>" + 
-				  										  "<a href='#' name='deleteUser' data-userid='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a>"
-				                                     ]).draw();
+                      data.id,
+                      data.persona.nombre,
+                      data.persona.apellido,
+                      data.user,
+                      data.persona.mail,
+                      data.activo == true ? 'Si':'No',
+                      data.rol,
+                      "<a href='#' name='editUser' data-userid='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a>" + 
+					  "<a href='#' name='deleteUser' data-userid='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a>"
+                 ]).draw();
 				
 				//Agrego el evento de delete
 				$("a[name='deleteUser'][data-userid=" + data.id + "] button").click(function(){
@@ -197,7 +196,7 @@ var GruposAdmin = {
 
 
 $(document).ready(function() {
-	$('#listaPersonas').DataTable({
+	gruposTable = $('#cursosGrupos').DataTable({
 		"processing" : false,
 		"serverSide" : false,
 		"paging" : false,
@@ -208,11 +207,35 @@ $(document).ready(function() {
             "infoEmpty": "No hay resultados disponibles.",
             "infoFiltered": "(filtered from _MAX_ total records)",
             "search": "Búsqueda: "
-        }
+        },
+        "columnDefs": [
+                       {"width": "35%", "targets": 0},
+                       {"width": "40%", "targets": 1},
+                       {"width": "25%", "targets": 2},
+                      ]
 	});
-
-	$("#clientTable_length").remove();
+	$("#cursosGruposTable_length").remove();
 	
+	notificacionesTable = $('#notificaciones').DataTable({
+		"processing" : false,
+		"serverSide" : false,
+		"paging" : false,
+		"language": {
+            "lengthMenu": "Mostrar _MENU_ resultados por página",
+            "zeroRecords": "No fueron encontrados resultados.",
+            "info": "Pagina _PAGE_ of _PAGES_",
+            "infoEmpty": "No hay resultados disponibles.",
+            "infoFiltered": "(filtered from _MAX_ total records)",
+            "search": "Búsqueda: "
+        },
+        "columnDefs": [
+                       {"width": "35%", "targets": 0},
+                       {"width": "40%", "targets": 1},
+                       {"width": "25%", "targets": 2},
+                      ]
+	});
+	$("#notificacionesTable_length").remove();
+
 	
 	$("#crearGrupoDialog").dialog({
 		resizable: false,
@@ -319,4 +342,6 @@ $(document).ready(function() {
 			.data('rol', $(this).parents("tr").find("td").get(6).innerHTML)
 			.dialog("open");
 	});
+	
+	$("select[name=alumnosIds]").chosen({no_results_text:'No hay resultados para: '});
 });

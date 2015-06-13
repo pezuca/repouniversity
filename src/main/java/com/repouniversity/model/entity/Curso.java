@@ -22,6 +22,7 @@ public class Curso implements Comparable<Curso>, IdentifiedObject {
     private List<AlumnoTO> alumnos;
     private Long materiaId;
     private Long docenteId;
+    private List<AlumnoTO> alumnosSinGrupo;
 
     public Long getId() {
         return id;
@@ -114,5 +115,14 @@ public class Curso implements Comparable<Curso>, IdentifiedObject {
 
     public void setDocenteId(Long docenteId) {
         this.docenteId = docenteId;
+    }
+
+    public void setAlumnosSinGrupo(List<AlumnoTO> alumnosSinGrupo) {
+        this.alumnosSinGrupo = alumnosSinGrupo;
+        
+    }
+    
+    public List<AlumnoTO> getAlumnosSinGrupo() {
+        return alumnosSinGrupo;
     }
 }

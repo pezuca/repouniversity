@@ -96,7 +96,7 @@
 							<c:forEach items="${materias}" var="materia" varStatus="status">
 								<option value="${materia.id}">${materia.nombre}</option>
 							</c:forEach>
-					</select>
+						</select>
 					</div>
 				</div>
 			</form>

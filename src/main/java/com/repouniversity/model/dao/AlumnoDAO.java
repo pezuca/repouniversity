@@ -14,4 +14,6 @@ public interface AlumnoDAO extends GenericDAO<Alumno>{
     List<Alumno> findAlumnoForGrupo(Long grupoId);
 
     List<Alumno> findAlumnoForCurso(Long grupoId);
+    
+    List<Alumno> findAlumnosForCursoSinGrupo(final Long cursoId);
 }

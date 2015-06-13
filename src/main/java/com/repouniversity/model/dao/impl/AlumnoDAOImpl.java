@@ -150,5 +150,27 @@ public class AlumnoDAOImpl extends GenericDAOImpl<Alumno> implements AlumnoDAO {
 
         return list;
     }
+    
+    @Override
+    public List<Alumno> findAlumnosForCursoSinGrupo(final Long cursoId) {
+        StringBuilder sql = new StringBuilder();
+
+        sql.append("SELECT a.* FROM alumno a JOIN alumno_curso ac ON a.id_alumno = ac.id_alumno ");
+        sql.append("WHERE ac.id_curso = ? AND ac.id_grupo = 1 ");
+        sql.append("AND a.activo = 1");
+
+        List<Alumno> list = doQuery(new SQLStatement(sql.toString()) {
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+                ps.setLong(1, cursoId);
+            }
+
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+        }, new AlumnoRowMapper(), "findAlumnosForCursoSinGrupo: " + cursoId);
+
+        return list;
+    }
 
 }

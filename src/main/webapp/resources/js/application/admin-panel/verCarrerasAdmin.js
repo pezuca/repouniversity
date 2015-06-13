@@ -165,7 +165,9 @@ $(document).ready(function() {
                       ]
 	});
 
-	$("#clientTable_length").remove();
+	$("#listaCarrerasTable_length").remove();
+	$("#listaCarreras_info").remove();
+	
 	
 	
 	$("#agregarCarreraDialog").dialog({
