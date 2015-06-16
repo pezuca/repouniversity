@@ -58,8 +58,8 @@ public class ArchivoController {
     @ResponseStatus(value = HttpStatus.OK)
     public Archivo guardaFichero(HttpServletRequest request, @RequestParam(value = "file") CommonsMultipartFile[] file,
             @RequestParam(value = "tags", required = false) String[] tags, @RequestParam(value = "descripcion", required = false) String descripcion,
-            @RequestParam(value = "cursoId", required = true) Integer cursoId,
-            @RequestParam(value = "grupoId", required = false, defaultValue = "1") Integer grupoId, @ModelAttribute("login") UsuarioRol usuario) {
+            @RequestParam(value = "cursoId", required = true) Long cursoId,
+            @RequestParam(value = "grupoId", required = false, defaultValue = "1") Long grupoId, @ModelAttribute("login") UsuarioRol usuario) {
 
         try {
             return grabarFicheroALocal(file, tags, descripcion, cursoId, grupoId, usuario);
@@ -85,7 +85,7 @@ public class ArchivoController {
 
     }
 
-    private Archivo grabarFicheroALocal(CommonsMultipartFile[] file, String[] tags, String descripcion, Integer cursoId, Integer grupoId, UsuarioRol usuario)
+    private Archivo grabarFicheroALocal(CommonsMultipartFile[] file, String[] tags, String descripcion, Long cursoId, Long grupoId, UsuarioRol usuario)
             throws IOException {
         StringBuffer etiqueta = new StringBuffer();
         Archivo archivoUpdated = null;
@@ -121,7 +121,7 @@ public class ArchivoController {
                 nuevoArchivo.setFechasys(null);
                 nuevoArchivo.setEstado(null);
                 nuevoArchivo.setPath(localFile.getAbsolutePath());
-                nuevoArchivo.setPersona(Integer.parseInt(usuario.getIdPersona().toString()));
+                nuevoArchivo.setPersona(usuario.getIdPersona());
                 nuevoArchivo.setTags(etiqueta.toString());
                 nuevoArchivo.setCurso(cursoId);
                 nuevoArchivo.getCurso();
