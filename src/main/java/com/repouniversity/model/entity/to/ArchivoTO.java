@@ -1,12 +1,13 @@
-package com.repouniversity.model.entity;
+package com.repouniversity.model.entity.to;
 
 import java.util.Date;
 
-import com.repouniversity.model.dao.IdentifiedObject;
+import com.repouniversity.model.entity.ArchivoTipo;
+import com.repouniversity.model.entity.Estado;
+import com.repouniversity.model.entity.Persona;
 
-public class Archivo implements IdentifiedObject {
-	private static final long serialVersionUID = 1L;
-	
+public class ArchivoTO {
+
 	private Long id;
 	private String nombre;
 	private String descripcion;
@@ -128,6 +129,7 @@ public class Archivo implements IdentifiedObject {
 	}
 	public Long getGrupo() {
 		return grupo;
+		
 	}
 	public void setGrupo(Long grupoId) {
 		this.grupo = grupoId;

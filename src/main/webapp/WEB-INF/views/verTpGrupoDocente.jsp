@@ -18,7 +18,7 @@
 	              <div class="ibox float-e-margins">
 						<div class="GrupoInformation">
 							<div class="page-header">
-								<h1>Grupo ${tpgrupo.grupo}</h1>
+								<h1>Grupo ${tpgrupo.grupoNombre}</h1>
 							</div>
 							
 							<div class="page-header">
@@ -46,7 +46,7 @@
 								<tr>
 									<td>${tpentrega.id}</td>
 									<td>${tpentrega.descripcion}</td>
-									<td>${tpentrega.archivo}</td>
+									<td>${tpentrega.archivoNombre}</td>
 									<td>
 										<a href="#" name="editEntregaTp" data-tpentregaId="${tpentrega.id}"><button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Editar EntregaTP"><i class="fa fa-pencil"></i></button></a>
 										<a href="#" name="deleteEntregaTp" data-tpentregaId="${tpentrega.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar EntregaTP"><i class="fa fa-times"></i></button></a>

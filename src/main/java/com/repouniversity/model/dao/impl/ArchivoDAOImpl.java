@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,18 @@ import com.repouniversity.model.entity.Archivo;
 public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements
 		ArchivoDAO {
 
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    @Override
+    protected Class<Archivo> getEntityClass() {
+        return Archivo.class;
+    }
+
+    @Override
+    protected String getTableName() {
+        return "archivo";
+    }
 
 	@Override
 	public Archivo subirArchivo(final Archivo a) {
@@ -109,23 +120,28 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements
 		return null;
 	}
 
-	@Override
-	protected Class<Archivo> getEntityClass() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected String getTableName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	protected Archivo extractEntityFromResultSet(ResultSet rs, int line)
 			throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Archivo result = new Archivo();
+        
+        result.setId(rs.getLong("id_archivo"));
+        result.setArchivoTipo(rs.getLong("id_tipo"));
+        result.setCurso(rs.getLong("id_Curso"));
+        result.setDescripcion(rs.getString("descripcion"));
+        result.setNombre(rs.getString("nombre"));
+        result.setActivo(rs.getBoolean("activo"));
+        result.setFechasys(rs.getDate("fecsys"));
+        result.setPersona(rs.getLong("persona_id_persona"));
+       // result.setFechaDespublicacion(rs.getDate("fecha_despublicacion"));
+       // result.setFechaPublicacion(rs.getDate("fecha_publicacion"));
+        result.setEstado(rs.getLong("estado"));
+        result.setPath(rs.getString("path"));
+        result.setTags(rs.getString("tags"));
+      //  result.setGrupo(rs.getLong("grupo"));
+
+        return result;
 	}
 
 	@Override
@@ -136,8 +152,7 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements
 
 	@Override
 	protected String getColumnIdName() {
-		// TODO Auto-generated method stub
-		return null;
+		return "id_archivo";
 	}
 
 }

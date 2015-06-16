@@ -72,7 +72,7 @@
 								<tr>
 									<td>${tpgrupo.id}</td>
 									<td>${tpgrupo.descripcion}</td>
-									<td>${tpgrupo.archivo}</td>
+									<td>${tpgrupo.archivo} ${tpgrupo.archivoNombre}</td>
 									<td>${tpgrupo.nota}</td>
 									<td>
 										<a href="#" name="editTp" data-tpgrupoId="${tpgrupo.id}"><button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Editar TP"><i class="fa fa-pencil"></i></button></a>

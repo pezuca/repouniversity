@@ -12,7 +12,11 @@ public class TpGrupoTO {
     private Date fechasys;
     //private GrupoTO grupo;
     private long grupo;
+    private String grupoNombre;
     private long archivo;
+    private String archivoNombre;
+    private String archivoDescripcion;
+    private String archivoPath;
     private long nota;
     private List<TpEntregaTO> tpEntrega;
     
@@ -25,6 +29,36 @@ public class TpGrupoTO {
         this.id = id;
     }
 
+    public String getGrupoNombre() {
+        return grupoNombre;
+    }
+
+    public void setGrupoNombre(String grupoNombre) {
+        this.grupoNombre = grupoNombre;
+    }
+    
+    public String getArchivoNombre() {
+        return archivoNombre;
+    }
+
+    public void setArchivoNombre(String archivoNombre) {
+        this.archivoNombre = archivoNombre;
+    }
+    public String getArchivoDescripcion() {
+        return archivoDescripcion;
+    }
+
+    public void setArchivoDescripcion(String archivoDescripcion) {
+        this.archivoDescripcion = archivoDescripcion;
+    }
+    public String getArchivoPath() {
+        return archivoPath;
+    }
+
+    public void setArchivoPath(String archivoPath) {
+        this.archivoPath = archivoPath;
+    }
+
     public String getDescripcion() {
         return descripcion;
     }
@@ -32,7 +66,6 @@ public class TpGrupoTO {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
     public boolean isActivo() {
         return activo;
     }

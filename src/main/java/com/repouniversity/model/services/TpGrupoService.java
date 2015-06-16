@@ -8,10 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.repouniversity.model.dao.GrupoDAO;
 import com.repouniversity.model.dao.TpGrupoDAO;
-import com.repouniversity.model.entity.Alumno;
-import com.repouniversity.model.entity.Grupo;
 import com.repouniversity.model.entity.TpGrupo;
-import com.repouniversity.model.entity.to.AlumnoTO;
 import com.repouniversity.model.entity.to.TpGrupoTO;
 
 @Service
@@ -30,6 +27,9 @@ public class TpGrupoService {
     @Autowired
     private TpEntregaService tpEntregaService;
 
+    @Autowired
+    private ArchivoService archivoService;
+    
     public TpGrupo save(TpGrupo tpGrupo) {
         return tpGrupoDao.insert(tpGrupo);
     }
@@ -85,10 +85,15 @@ public class TpGrupoService {
         tpGrupoTo.setDescripcion(tpGrupo.getDescripcion());
         tpGrupoTo.setActivo(tpGrupo.isActivo());
         tpGrupoTo.setFechasys(tpGrupo.getFechasys());
-        //tpGrupoTo.setGrupo(grupoService.getGrupoById(tpGrupo.getIdGrupo()));
+      //tpGrupoTo.setGrupo(grupoService.getGrupoById(tpGrupo.getIdGrupo()));
         tpGrupoTo.setGrupo(tpGrupo.getIdGrupo());
+       // tpGrupoTo.setGrupoNombre(grupoService.getGrupoById(tpGrupo.getIdGrupo()).getNombre());
+        tpGrupoTo.setGrupoNombre("aa");
         tpGrupoTo.setArchivo(tpGrupo.getIdArchivo());
-        tpGrupoTo.setNota(tpGrupo.getNota());
+		tpGrupoTo.setArchivoNombre(archivoService.getArchivoById(tpGrupo.getIdArchivo()).getNombre());
+		tpGrupoTo.setArchivoDescripcion(archivoService.getArchivoById(tpGrupo.getIdArchivo()).getDescripcion());
+		tpGrupoTo.setArchivoPath(archivoService.getArchivoById(tpGrupo.getIdArchivo()).getPath());
+		tpGrupoTo.setNota(tpGrupo.getNota());
         tpGrupoTo.setTpEntrega(tpEntregaService.getTpEntregaForTpGrupo(tpGrupo.getId()));
         return tpGrupoTo;
     }
