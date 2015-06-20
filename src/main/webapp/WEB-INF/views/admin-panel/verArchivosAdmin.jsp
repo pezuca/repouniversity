@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="activeTab" value="${'verCarreras'}" />
+<c:set var="activeTab" value="${'verArchivos'}" />
 <c:set var="userLog" value="${sessionScope.login}" />
 
 <html>
@@ -47,7 +47,7 @@
 											<tr>
 												<td>${archivo.id}</td>
 												<td>${archivo.nombre}</td>
-												<td>${archivo.nombre}</td>
+												<td>${archivo.descripcion}</td>
 												<td><a href="#" name="editCarrera"
 													data-carreraId="${carrera.id}"><button
 															class="btn btn-primary btn-circle" type="button">
