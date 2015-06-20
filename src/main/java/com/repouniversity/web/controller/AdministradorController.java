@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.repouniversity.model.entity.Archivo;
 import com.repouniversity.model.entity.Carrera;
 import com.repouniversity.model.entity.Curso;
 import com.repouniversity.model.entity.Materia;
@@ -23,6 +24,7 @@ import com.repouniversity.model.entity.to.CursoTO;
 import com.repouniversity.model.entity.to.DocenteTO;
 import com.repouniversity.model.entity.to.UsuarioTO;
 import com.repouniversity.model.services.AlumnoService;
+import com.repouniversity.model.services.ArchivoService;
 import com.repouniversity.model.services.CarreraService;
 import com.repouniversity.model.services.CursoService;
 import com.repouniversity.model.services.DocenteService;
@@ -57,6 +59,9 @@ public class AdministradorController {
 
     @Autowired
     public CarreraService carreraService;
+    
+    @Autowired
+    public ArchivoService archivoService;
 
     @RequestMapping(value = "admin/verUsuarios", method = {RequestMethod.GET})
     public ModelAndView getUsuarios() {
@@ -91,6 +96,14 @@ public class AdministradorController {
 
         return new ModelAndView("admin-panel/verCarrerasAdmin").addObject("carreras", carreraService.buildCarreras(listaCarreras)).addObject("materias",
             listaMaterias);
+    }
+    
+    @RequestMapping(value = "admin/verArchivos", method = {RequestMethod.GET})
+    public ModelAndView getArchivos() {
+
+        List<Archivo> listaArchivos = archivoService.getAll();
+
+        return new ModelAndView("admin-panel/verArchivosAdmin").addObject("archivos", listaArchivos);
     }
 
     /**

@@ -33,8 +33,8 @@ import com.repouniversity.web.exceptions.SubirArchivoException;
 @SessionAttributes("login")
 public class ArchivoController {
 
-    @Value("${system.fileUpload.location}")
-    private String UPLOAD_PATH;
+//    @Value("${system.fileUpload.location}")
+    private String UPLOAD_PATH = "/home/federico/Documents/repouniversity/archivos";
 
     @Autowired
     private ArchivoService archivoService;
