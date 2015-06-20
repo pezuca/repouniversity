@@ -14,6 +14,7 @@ import com.repouniversity.model.dao.GrupoDAO;
 import com.repouniversity.model.dao.query.InsertSQLStatement;
 import com.repouniversity.model.dao.query.SQLStatement;
 import com.repouniversity.model.dao.rowmapper.GrupoRowMapper;
+import com.repouniversity.model.dao.rowmapper.LongRowMapper;
 import com.repouniversity.model.entity.Alumno;
 import com.repouniversity.model.entity.Grupo;
 
@@ -119,7 +120,12 @@ public class GrupoDAOImpl extends GenericDAOImpl<Grupo> implements GrupoDAO {
             }
         };
     }
-    
+    @Override
+    public long findIdCursoForGrupo(long grupoId) {
+        
+        long id = jdbcTemplate.queryForLong("select id_curso from alumno_curso where id_grupo = " + grupoId + " LIMIT 1");
 
 
+        return id;
+    }
 }

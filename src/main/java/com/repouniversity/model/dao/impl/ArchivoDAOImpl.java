@@ -134,8 +134,8 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements
         result.setActivo(rs.getBoolean("activo"));
         result.setFechasys(rs.getDate("fecsys"));
         result.setPersona(rs.getLong("persona_id_persona"));
-       // result.setFechaDespublicacion(rs.getDate("fecha_despublicacion"));
-       // result.setFechaPublicacion(rs.getDate("fecha_publicacion"));
+        result.setFechaDespublicacion(rs.getDate("fecha_despublicacion"));
+        result.setFechaPublicacion(rs.getDate("fecha_publicacion"));
         result.setEstado(rs.getLong("estado"));
         result.setPath(rs.getString("path"));
         result.setTags(rs.getString("tags"));

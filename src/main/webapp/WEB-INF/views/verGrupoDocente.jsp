@@ -4,6 +4,15 @@
 	<title>Repouniversity</title>
 	<%@include file="../components/common-statics-imports.jsp"%>
 	<script src="/repouniversity/resources/js/application/verGrupoDocente.js"></script>
+	
+	
+		<script src="/repouniversity/resources/js/plugins/dropzone/dropzone.js"></script>
+	<link href="/repouniversity/resources/css/plugins/dropzone/basic.css" rel="stylesheet">
+	<link href="/repouniversity/resources/css/plugins/dropzone/dropzone.css" rel="stylesheet">
+<!-- 	<script src="/repouniversity/resources/js/application/subirArchivo.js"></script> -->
+	<script src="/repouniversity/resources/js/application/fileUpload.js"></script>
+	<link rel="stylesheet" href="/repouniversity/resources/css/fileUpload.css">
+
 </head>
 <body class=" pace-done">
 	
@@ -94,6 +103,7 @@
 <!-- 	Ventanas -->
 	<div id="agregarTpDialog" title="Nuevo TP">
 		<form id="nuevoTpForm" class="form-horizontal">
+			<input name="archivoId" type="text">
 			<input name="grupoId" type="hidden" class="form-control" value="${param.grupoId}">
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Descripcion*:</label>
@@ -101,7 +111,8 @@
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Archivo*:</label>
-                <div class="col-sm-10"><input name="archivoId" type="text" class="form-control" required="required"></div>
+                <input name="file" type="file">	
+	            <div class="col-sm-10"></div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Nota:</label>
@@ -134,6 +145,18 @@
 		<p>¿Esta seguro que desea eliminar el Trabajo Practico?</p>
 	</div>
 	</div>
+	
+	<div id="hiddenInputs" class="hidden">
+		<input type="hidden" name="personaId" value="${userLog.idPersona}"/>
+		<input type="hidden" name="cursoId" value="${grupo.idCurso}"/>
+	</div>
+
+	<script>
+		$(document).ready(function(){
+			myDropzoneOptions.parallelUploads = 1;
+			myDropzoneOptions.maxFiles = 1;
+		});
+	</script>
 	
 </body>
 </html>

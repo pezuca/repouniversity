@@ -68,6 +68,10 @@ public class GrupoService {
         return grupoTo;
     }
 
+    public Long getIdCursoForGrupo (long idGrupo){
+    	
+    	return grupoDao.findIdCursoForGrupo(idGrupo);
+    }
     private GrupoTO buildGrupo(Grupo grupo) {
         GrupoTO grupoTo = new GrupoTO();
 
@@ -77,6 +81,7 @@ public class GrupoService {
         grupoTo.setFechasys(grupo.getFechasys());
         grupoTo.setAlumnos(alumnoService.getAlumnosForGrupo(grupo.getId()));
         grupoTo.setTpGrupo(tpGrupoService.getTpGrupoForGrupo(grupo.getId()));
+        grupoTo.setIdCurso(getIdCursoForGrupo(grupo.getId()));
         return grupoTo;
     }
 
