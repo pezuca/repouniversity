@@ -5,132 +5,132 @@ import java.util.Date;
 import com.repouniversity.model.dao.IdentifiedObject;
 
 public class Archivo implements IdentifiedObject {
-	private static final long serialVersionUID = 1L;
-	
-	private Long id;
-	private String nombre;
-	private String descripcion;
-	private Date fechaDespublicacion;
-	private Date fechaPublicacion;
-	private Long archivoTipo;
-	private Date fechasys;
-	private boolean activo;
-	private Long estado;
-	private String path;
-	private Long curso;
-	private Long persona;
-	private String tags;
-	private Long grupo;
+    private static final long serialVersionUID = 1L;
 
-	public Long getId() {
-		return id;
-	}
+    private Long id;
+    private String nombre;
+    private String descripcion;
+    private Date fechaDespublicacion;
+    private Date fechaPublicacion;
+    private Long archivoTipo;
+    private Date fechasys;
+    private boolean activo;
+    private Long estado;
+    private String path;
+    private Long curso;
+    private Long persona;
+    private String tags;
+    private Long grupo;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public String getDescripcion() {
-		return descripcion;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
+    public String getDescripcion() {
+        return descripcion;
+    }
 
-	public Date getFechaDespublicacion() {
-		return fechaDespublicacion;
-	}
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 
-	public void setFechaDespublicacion(Date fechaDespublicacion) {
-		this.fechaDespublicacion = fechaDespublicacion;
-	}
+    public Date getFechaDespublicacion() {
+        return fechaDespublicacion;
+    }
 
-	public Date getFechaPublicacion() {
-		return fechaPublicacion;
-	}
+    public void setFechaDespublicacion(Date fechaDespublicacion) {
+        this.fechaDespublicacion = fechaDespublicacion;
+    }
 
-	public void setFechaPublicacion(Date fechaPublicacion) {
-		this.fechaPublicacion = fechaPublicacion;
-	}
+    public Date getFechaPublicacion() {
+        return fechaPublicacion;
+    }
 
-	public Long getArchivoTipo() {
-		return archivoTipo;
-	}
+    public void setFechaPublicacion(Date fechaPublicacion) {
+        this.fechaPublicacion = fechaPublicacion;
+    }
 
-	public void setArchivoTipo(Long archivoTipo) {
-		this.archivoTipo = archivoTipo;
-	}
+    public Long getArchivoTipo() {
+        return archivoTipo;
+    }
 
-	public Date getFechasys() {
-		return fechasys;
-	}
+    public void setArchivoTipo(Long archivoTipo) {
+        this.archivoTipo = archivoTipo;
+    }
 
-	public void setFechasys(Date fechasys) {
-		this.fechasys = fechasys;
-	}
+    public Date getFechasys() {
+        return fechasys;
+    }
 
-	public boolean isActivo() {
-		return activo;
-	}
+    public void setFechasys(Date fechasys) {
+        this.fechasys = fechasys;
+    }
 
-	public void setActivo(boolean activo) {
-		this.activo = activo;
-	}
+    public boolean isActivo() {
+        return activo;
+    }
 
-	public Long getEstado() {
-		return estado;
-	}
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
 
-	public void setEstado(Long estado) {
-		this.estado = estado;
-	}
+    public Long getEstado() {
+        return estado;
+    }
 
-	public String getPath() {
-		return path;
-	}
+    public void setEstado(Long estado) {
+        this.estado = estado;
+    }
 
-	public void setPath(String path) {
-		this.path = path;
-	}
+    public String getPath() {
+        return path;
+    }
 
-	public Long getCurso() {
-		return curso;
-	}
+    public void setPath(String path) {
+        this.path = path;
+    }
 
-	public void setCurso(Long curso) {
-		this.curso = curso;
-	}
+    public Long getCurso() {
+        return curso;
+    }
 
-	public Long getPersona() {
-		return persona;
-	}
+    public void setCurso(Long curso) {
+        this.curso = curso;
+    }
 
-	public void setPersona(Long persona) {
-		this.persona = persona;
-	}
+    public Long getPersona() {
+        return persona;
+    }
 
-	public String getTags() {
-		return tags;
-	}
+    public void setPersona(Long persona) {
+        this.persona = persona;
+    }
+    
+    public String getTags() {
+        return tags;
+    }
 
-	public void setTags(String etiqueta) {
-		this.tags = etiqueta;
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
 
-	}
-	public Long getGrupo() {
-		return grupo;
-	}
-	public void setGrupo(Long grupoId) {
-		this.grupo = grupoId;
-		
-	}
+    public Long getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(Long grupo) {
+        this.grupo = grupo;
+    }
 }

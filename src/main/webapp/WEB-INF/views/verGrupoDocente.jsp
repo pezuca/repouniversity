@@ -103,7 +103,6 @@
 <!-- 	Ventanas -->
 	<div id="agregarTpDialog" title="Nuevo TP">
 		<form id="nuevoTpForm" class="form-horizontal">
-			<input name="archivoId" type="text">
 			<input name="grupoId" type="hidden" class="form-control" value="${param.grupoId}">
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Descripcion*:</label>
@@ -111,8 +110,7 @@
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Archivo*:</label>
-                <input name="file" type="file">	
-	            <div class="col-sm-10"></div>
+                <input name="file" type="file" required="required">	
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Nota:</label>

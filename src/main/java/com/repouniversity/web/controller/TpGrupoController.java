@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.repouniversity.model.entity.to.TpGrupoTO;
 import com.repouniversity.model.services.AlumnoService;
+import com.repouniversity.model.services.ArchivoService;
 import com.repouniversity.model.services.CursoService;
 import com.repouniversity.model.services.DocenteService;
 import com.repouniversity.model.services.GrupoService;
@@ -39,6 +40,8 @@ public class TpGrupoController {
 	@Autowired
 	private AlumnoService alumnoService;
 
+	@Autowired
+	private ArchivoService archivoService;
 	
 	@RequestMapping(value = "grupo/nuevoTp", method = { RequestMethod.POST })
 	@ResponseBody
@@ -49,6 +52,7 @@ public class TpGrupoController {
 			@RequestParam(value = "archivoId", required = true) Long archivoId,
 			@RequestParam(value = "nota", required = true) Long nota) {
 
+		
 		return tpGrupoService.nuevoTp(grupoId, descripcion, archivoId, nota);
 		
 
