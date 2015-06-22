@@ -1,14 +1,19 @@
 package com.repouniversity.model.services;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.repouniversity.model.dao.GrupoDAO;
 import com.repouniversity.model.dao.TpGrupoDAO;
+import com.repouniversity.model.entity.Archivo;
 import com.repouniversity.model.entity.TpGrupo;
+import com.repouniversity.model.entity.UsuarioRol;
 import com.repouniversity.model.entity.to.TpGrupoTO;
 
 @Service
@@ -34,13 +39,21 @@ public class TpGrupoService {
         return tpGrupoDao.insert(tpGrupo);
     }
 
-    public TpGrupoTO nuevoTp(Long grupoId, String descripcion, Long archivoId, Long nota) {
+    public TpGrupoTO nuevoTp(Long grupoId, String descripcion, CommonsMultipartFile[] file, Long cursoId,  UsuarioRol usuario) throws IOException {
+    	
+    	//CommonsMultipartFile[]
+    	String[] tags = null;
+    			
+    	List<Archivo> nuevoArchivo = archivoService.parseArchivo(file, tags, descripcion, cursoId, grupoId, usuario);
         
+    	List<Archivo> elArchivo = archivoService.subirArchivo(nuevoArchivo);
+        
+	
     	TpGrupo tpGrupo = new TpGrupo();
     	tpGrupo.setIdGrupo(grupoId);
     	tpGrupo.setDescripcion(descripcion);
-    	tpGrupo.setIdArchivo(archivoId);
-    	tpGrupo.setNota(nota);
+    	//tpGrupo.setIdArchivo(elArchivo.get(0).getId());
+    //	tpGrupo.setNota(0);
     	tpGrupo.setActivo(true);
     	
     	tpGrupo = save(tpGrupo);

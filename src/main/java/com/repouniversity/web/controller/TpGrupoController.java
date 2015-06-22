@@ -1,18 +1,26 @@
 package com.repouniversity.web.controller;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.repouniversity.model.entity.UsuarioRol;
 import com.repouniversity.model.entity.to.TpGrupoTO;
 import com.repouniversity.model.services.AlumnoService;
 import com.repouniversity.model.services.ArchivoService;
@@ -49,11 +57,18 @@ public class TpGrupoController {
 	public TpGrupoTO nuevoTpAjax(
 			@RequestParam(value = "grupoId", required = true) Long grupoId,
 			@RequestParam(value = "descripcion", required = true) String descripcion,
-			@RequestParam(value = "archivoId", required = true) Long archivoId,
-			@RequestParam(value = "nota", required = true) Long nota) {
-
+			@RequestParam(value = "file", required = false) CommonsMultipartFile[] file,
+			@RequestParam(value = "cursoId", required = true) Long cursoId, 
+			@ModelAttribute("login") UsuarioRol usuario) throws IOException {
 		
-		return tpGrupoService.nuevoTp(grupoId, descripcion, archivoId, nota);
+		//abria q convertir el file a commons multi file para que funcione bien
+		//    DiskFileItem fileItem = new DiskFileItem("file", "text/plain", false, file.getName(), (int) file.length() , file.getParentFile());
+		 //   fileItem.getOutputStream();
+		  //  CommonsMultipartFile multipartFile = new CommonsMultipartFile();
+		   // multipartFile[0].
+		    //(fileItem);
+				
+		return tpGrupoService.nuevoTp(grupoId, descripcion, file, cursoId, usuario);
 		
 
 	}

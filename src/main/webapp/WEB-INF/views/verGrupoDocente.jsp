@@ -104,6 +104,7 @@
 	<div id="agregarTpDialog" title="Nuevo TP">
 		<form id="nuevoTpForm" class="form-horizontal">
 			<input name="grupoId" type="hidden" class="form-control" value="${param.grupoId}">
+			<input name="cursoId" type="hidden" class="form-control" value="${grupo.idCurso}"/>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Descripcion*:</label>
                 <div class="col-sm-10"><input name="descripcion" type="text" class="form-control" required="required"></div>
@@ -111,11 +112,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">Archivo*:</label>
                 <input name="file" type="file" required="required">	
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Nota:</label>
-                <div class="col-sm-10"><input name="nota" type="text" class="form-control" required="required"></div>
-            </div>
+            </div> 
            
 		</form>
 	</div>
