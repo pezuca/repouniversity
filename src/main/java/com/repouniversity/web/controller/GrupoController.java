@@ -3,13 +3,17 @@ package com.repouniversity.web.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.repouniversity.model.entity.to.GrupoTO;
 import com.repouniversity.model.entity.to.TpGrupoTO;
 import com.repouniversity.model.services.AlumnoService;
 import com.repouniversity.model.services.CursoService;
@@ -54,6 +58,16 @@ public class GrupoController {
 	        TpGrupoTO tpgrupo = tpGrupoService.getTpGrupoById(tpId);
 
 	        return new ModelAndView("verTpGrupoDocente").addObject("tpgrupo", tpgrupo);
+	    }
+
+	  @RequestMapping(value = "grupo/agregarAlumnos", method = {RequestMethod.POST})
+		@ResponseBody
+	    @ResponseStatus(value = HttpStatus.OK)
+	  public GrupoTO agregarAlumnosGrupo(@RequestParam(value = "idGrupo", required = true) Long idGrupo,
+	            @RequestParam(value = "alumnosIds", required = true) Long[] listaAlumnoId) {
+
+	        return grupoService.agregarAlumnosGrupo(idGrupo, listaAlumnoId);
+     
 	    }
 
 }

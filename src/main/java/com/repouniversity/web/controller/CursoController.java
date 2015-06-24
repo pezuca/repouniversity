@@ -106,6 +106,10 @@ public class CursoController {
     @RequestMapping(value = "docente/verGrupo", method = {RequestMethod.GET})
     public ModelAndView verGrupoDocente(HttpServletRequest request, @RequestParam("grupoId") Long grupoId) {
         GrupoTO grupo = grupoService.getGrupoById(grupoId);
+        
+        List<AlumnoTO> alumnosSinGrupo = alumnoService.getAlumnosForCursoSinGrupo(grupo.getIdCurso());
+          
+        grupo.setAlumnosSinGrupo(alumnosSinGrupo);
 
         return new ModelAndView("verGrupoDocente").addObject("grupo", grupo);
     }

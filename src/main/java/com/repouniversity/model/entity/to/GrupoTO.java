@@ -14,6 +14,7 @@ public class GrupoTO {
     //private List<Curso> cursos;
     private Long idCurso;
     private List<TpGrupoTO> tpGrupo;
+    private List<AlumnoTO> alumnosSinGrupo;
     
     public Long getId() {
         return id;
@@ -69,5 +70,14 @@ public class GrupoTO {
 
     public void setTpGrupo(List<TpGrupoTO> tpGrupo) {
         this.tpGrupo = tpGrupo;
+    }
+
+    public void setAlumnosSinGrupo(List<AlumnoTO> alumnosSinGrupo) {
+        this.alumnosSinGrupo = alumnosSinGrupo;
+        
+    }
+    
+    public List<AlumnoTO> getAlumnosSinGrupo() {
+        return alumnosSinGrupo;
     }
 }

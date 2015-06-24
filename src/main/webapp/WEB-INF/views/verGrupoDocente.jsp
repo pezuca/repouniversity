@@ -4,7 +4,7 @@
 	<title>Repouniversity</title>
 	<%@include file="../components/common-statics-imports.jsp"%>
 	<script src="/repouniversity/resources/js/application/verGrupoDocente.js"></script>
-	
+	<script src="/repouniversity/resources/js/application/verGrupoDocenteAlumnos.js"></script>
 	
 		<script src="/repouniversity/resources/js/plugins/dropzone/dropzone.js"></script>
 	<link href="/repouniversity/resources/css/plugins/dropzone/basic.css" rel="stylesheet">
@@ -30,35 +30,35 @@
 								<h1>Detalles grupo ${grupo.nombre}</h1>
 							</div>
 							
-							<div class="page-header">
-								<h3>Alumnos</h3>
-							</div>
 						</div>
-						<table id="GruposAlumnos" class="table table-striped hover">
-							<thead class="encabezado">
+						
+	                  <div class="ibox-title">
+	                      <h5>Alumnos</h5>
+		                  <div class="ibox-tools" id="agregarAlumnoButton">
+	                          <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  Alumno</a>
+	                      </div>
+	                  </div>
+	                  <div class="ibox-content">
+	                  	<table id="GruposAlumnos" class="table table-striped table-hover" >
+	                  		<thead class="encabezado">
+							<tr>
+								<th>Id</th>
+								<th>Alumno</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${grupo.alumnos}" var="alumno" varStatus="status">
 								<tr>
-									<th>Id</th>
-									<th>Alumno</th>
+									<td>${alumno.persona.id}</td>
+									<td>${alumno.persona.apellido}, ${alumno.persona.nombre}</td>
+									<td>
+										<a href="#" name="deleteTp" data-tpgrupoId="${tpgrupo.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar TP"><i class="fa fa-times"></i></button></a>
+									</td>
 								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${grupo.alumnos}" var="alumno"
-									varStatus="status">
-									<tr>
-										<td>${alumno.persona.id}</td>
-										<td>${alumno.persona.apellido}, ${alumno.persona.nombre}</td>
-										
-									</tr>
-								</c:forEach>
-							</tbody>
-							<tfoot>
-								<tr class="head">
-									<th></th>
-									<th></th>
-									<th></th>
-								</tr>
-							</tfoot>
-						</table>
+							</c:forEach>
+						</tbody>
+	                  	</table>
+	                  </div>
 	                  <div class="ibox-title">
 	                      <h5>Trabajo Practicos</h5>
 		                  <div class="ibox-tools" id="agregarTpButton">
@@ -139,6 +139,30 @@
 	<div id="deleteTpDialog" title="Eliminar TP">
 		<p>¿Esta seguro que desea eliminar el Trabajo Practico?</p>
 	</div>
+	
+	
+	<div id="agregarAlumnoDialog" title="Nuevo Alumno">
+		<form id="nuevoAlumnoForm" class="form-horizontal">
+			<div class="col-sm-10">
+				<input name="grupoId" type="hidden" class="form-control" value="${param.grupoId}">
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Lista de Alumnos*:</label>
+				<div class="col-sm-10">
+					<select data-placeholder="Elija un alumno" name="alumnosIds"
+							multiple class="chosen-select" required="required"
+							tabindex="-1">
+						<c:forEach items="${grupo.alumnosSinGrupo}" var="alumno"
+									varStatus="status">
+							<option value="${alumno.id}">${alumno.persona.apellido},
+										${alumno.persona.nombre}</option>
+						</c:forEach>
+					</select>
+				</div>
+			</div>
+		</form>
+	</div>
+			
 	</div>
 	
 	<div id="hiddenInputs" class="hidden">

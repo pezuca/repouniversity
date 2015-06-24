@@ -141,7 +141,7 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Lista de Alumnos*:</label>
 							<div class="col-sm-10">
-								<select data-placeholder="Elija una materia" name="alumnosIds"
+								<select data-placeholder="Elija un alumno" name="alumnosIds"
 									multiple class="chosen-select" required="required"
 									tabindex="-1">
 									<c:forEach items="${curso.alumnosSinGrupo}" var="alumno"
