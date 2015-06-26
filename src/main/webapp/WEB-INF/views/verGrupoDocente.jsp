@@ -35,6 +35,7 @@
 	                  <div class="ibox-title">
 	                      <h5>Alumnos</h5>
 		                  <div class="ibox-tools" id="agregarAlumnoButton">
+		                  <div class="ibox-tools" id="agregarTpButton">
 	                          <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  Alumno</a>
 	                      </div>
 	                  </div>
@@ -135,17 +136,10 @@
             </div>
         </form>
 	</div>
-	
-	<div id="deleteTpDialog" title="Eliminar TP">
-		<p>¿Esta seguro que desea eliminar el Trabajo Practico?</p>
-	</div>
-	
-	
 	<div id="agregarAlumnoDialog" title="Nuevo Alumno">
 		<form id="nuevoAlumnoForm" class="form-horizontal">
-			<div class="col-sm-10">
-				<input name="grupoId" type="hidden" class="form-control" value="${param.grupoId}">
-			</div>
+			
+			<input name="grupoId" type="hidden" class="form-control" value="${param.grupoId}">
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Lista de Alumnos*:</label>
 				<div class="col-sm-10">
@@ -162,12 +156,19 @@
 			</div>
 		</form>
 	</div>
+	
+	<div id="deleteTpDialog" title="Eliminar TP">
+		<p>¿Esta seguro que desea eliminar el Trabajo Practico?</p>
+	</div>
+	
+	
+
 			
 	</div>
 	
 	<div id="hiddenInputs" class="hidden">
 		<input type="hidden" name="personaId" value="${userLog.idPersona}"/>
-		<input type="hidden" name="cursoId" value="${grupo.idCurso}"/>
+		<input type="hidden" name="cursoId" value="${grupo.idCurso}."/>
 	</div>
 
 	<script>
