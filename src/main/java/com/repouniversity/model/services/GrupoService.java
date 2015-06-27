@@ -9,6 +9,7 @@ import com.repouniversity.model.dao.CursoDAO;
 import com.repouniversity.model.dao.GrupoDAO;
 import com.repouniversity.model.entity.Grupo;
 import com.repouniversity.model.entity.to.GrupoTO;
+import com.repouniversity.model.entity.to.TpGrupoTO;
 
 @Service
 public class GrupoService {
@@ -95,4 +96,12 @@ public class GrupoService {
         
         return grupos;
     }
+
+	public GrupoTO agregarAlumnosGrupo(Long idGrupo, Long[] listaAlumnoId) {
+		// TODO Auto-generated method stub
+				
+		saveGrupoAlumnoCurso(idGrupo, getGrupoById(idGrupo).getIdCurso(), listaAlumnoId);
+				
+		return getGrupoById(idGrupo);
+	}
 }
