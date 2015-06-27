@@ -63,11 +63,22 @@ public class GrupoController {
 	  @RequestMapping(value = "grupo/agregarAlumnos", method = {RequestMethod.POST})
 		@ResponseBody
 	    @ResponseStatus(value = HttpStatus.OK)
-	  public GrupoTO agregarAlumnosGrupo(@RequestParam(value = "idGrupo", required = true) Long idGrupo,
+	  public GrupoTO agregarAlumnosGrupo(@RequestParam(value = "grupoId", required = true) Long grupoId,
 	            @RequestParam(value = "alumnosIds", required = true) Long[] listaAlumnoId) {
 
-	        return grupoService.agregarAlumnosGrupo(idGrupo, listaAlumnoId);
+	        return grupoService.agregarAlumnosGrupo(grupoId, listaAlumnoId);
      
-	    }
+	   }
+		@RequestMapping(value = "grupo/eliminarAlumno", method = { RequestMethod.POST })
+		@ResponseBody
+	    @ResponseStatus(value = HttpStatus.OK)
+		public void eliminarAlumnoAjax(
+				@RequestParam(value = "alumnoId", required = true) Long alumnoId,
+				@RequestParam(value = "cursoId", required = true) Long cursoId) {
+
+			grupoService.eliminarAlumno(alumnoId, cursoId);
+			
+
+		}
 
 }

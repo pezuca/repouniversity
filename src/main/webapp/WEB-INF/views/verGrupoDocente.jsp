@@ -4,14 +4,14 @@
 	<title>Repouniversity</title>
 	<%@include file="../components/common-statics-imports.jsp"%>
 	<script src="/repouniversity/resources/js/application/verGrupoDocente.js"></script>
-	<script src="/repouniversity/resources/js/application/verGrupoDocenteAlumnos.js"></script>
-	
-		<script src="/repouniversity/resources/js/plugins/dropzone/dropzone.js"></script>
+	<script src="/repouniversity/resources/js/plugins/dropzone/dropzone.js"></script>
 	<link href="/repouniversity/resources/css/plugins/dropzone/basic.css" rel="stylesheet">
 	<link href="/repouniversity/resources/css/plugins/dropzone/dropzone.css" rel="stylesheet">
 <!-- 	<script src="/repouniversity/resources/js/application/subirArchivo.js"></script> -->
 	<script src="/repouniversity/resources/js/application/fileUpload.js"></script>
 	<link rel="stylesheet" href="/repouniversity/resources/css/fileUpload.css">
+	<script src="/repouniversity/resources/js/plugins/chosen/chosen.jquery.js"></script>
+<link rel="stylesheet" type="text/css" href="/repouniversity/resources/css/plugins/chosen/chosen.css" />
 
 </head>
 <body class=" pace-done">
@@ -35,8 +35,7 @@
 	                  <div class="ibox-title">
 	                      <h5>Alumnos</h5>
 		                  <div class="ibox-tools" id="agregarAlumnoButton">
-		                  <div class="ibox-tools" id="agregarTpButton">
-	                          <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  Alumno</a>
+		                       <a class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  Alumno</a>
 	                      </div>
 	                  </div>
 	                  <div class="ibox-content">
@@ -45,15 +44,16 @@
 							<tr>
 								<th>Id</th>
 								<th>Alumno</th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach items="${grupo.alumnos}" var="alumno" varStatus="status">
 								<tr>
-									<td>${alumno.persona.id}</td>
+									<td>${alumno.id}</td>
 									<td>${alumno.persona.apellido}, ${alumno.persona.nombre}</td>
 									<td>
-										<a href="#" name="deleteTp" data-tpgrupoId="${tpgrupo.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar TP"><i class="fa fa-times"></i></button></a>
+										<a name="deleteAlumno" data-alumnoId="${alumno.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar Alumno"><i class="fa fa-times"></i></button></a>
 									</td>
 								</tr>
 							</c:forEach>
@@ -63,7 +63,7 @@
 	                  <div class="ibox-title">
 	                      <h5>Trabajo Practicos</h5>
 		                  <div class="ibox-tools" id="agregarTpButton">
-	                          <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  TP</a>
+	                          <a class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  TP</a>
 	                      </div>
 	                  </div>
 	                  <div class="ibox-content">
@@ -160,7 +160,9 @@
 	<div id="deleteTpDialog" title="Eliminar TP">
 		<p>¿Esta seguro que desea eliminar el Trabajo Practico?</p>
 	</div>
-	
+	<div id="deleteAlumnoDialog" title="Eliminar Alumno">
+		<p>¿Esta seguro que desea eliminar el Alumno?</p>
+	</div>
 	
 
 			

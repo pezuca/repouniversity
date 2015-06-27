@@ -104,4 +104,9 @@ public class GrupoService {
 				
 		return getGrupoById(idGrupo);
 	}
+
+	public void eliminarAlumno(Long alumnoId, Long cursoId) {
+		// TODO Auto-generated method stub
+		cursoDao.saveAlumnoCursoGrupo(1L, cursoId, alumnoId);
+	}
 }

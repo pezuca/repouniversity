@@ -178,15 +178,15 @@ public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
         final InsertSQLStatement sqlStatement = new InsertSQLStatement(
-                "INSERT INTO alumno_curso (id_alumno, id_curso, id_grupo) values (?, ?, ?)") {
+                "UPDATE alumno_curso set id_grupo = ? where id_alumno = ? and id_curso = ?") {
             @Override
             public void doAfterInsert(Long id) {
             }
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
-                ps.setLong(1, alumnoId);
-                ps.setLong(2, cursoId);
-                ps.setLong(3, grupoId);
+                ps.setLong(1, grupoId);
+                ps.setLong(2, alumnoId);
+                ps.setLong(3, cursoId);
             }
             @Override
             public void doAfterTransaction(int result) {
