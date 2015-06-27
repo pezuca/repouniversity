@@ -55,10 +55,10 @@ public class TpGrupoController {
 	@ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
 	public TpGrupoTO nuevoTpAjax(
-			@RequestParam(value = "grupoId", required = true) Long grupoId,
-			@RequestParam(value = "descripcion", required = true) String descripcion,
+			@RequestParam(value = "grupoId", required = false) Long grupoId,
+			@RequestParam(value = "descripcion", required = false) String descripcion,
 			@RequestParam(value = "file", required = false) CommonsMultipartFile[] file,
-			@RequestParam(value = "cursoId", required = true) Long cursoId, 
+			@RequestParam(value = "cursoId", required = false) Long cursoId, 
 			@ModelAttribute("login") UsuarioRol usuario) throws IOException {
 		
 		//abria q convertir el file a commons multi file para que funcione bien

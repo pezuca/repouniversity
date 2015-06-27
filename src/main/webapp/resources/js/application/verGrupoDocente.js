@@ -1,14 +1,17 @@
 var tpAdmin = {
 	crearNuevoTpAjax : function() {
 
-		var data = new FormData();
+		var dataFiles = new FormData($("#nuevoTpForm")[0]);
 
-		jQuery.each(jQuery('input[name=file]')[0].files, function(i, file) { data.append('file', file); });
+		
+		$.each(jQuery('input[name=file]')[0].files, function(key, value) {
+			dataFiles.append("file", value);
+		});
 		
 		$.ajax({
-			url: "/repouniversity/grupo/nuevoTp?" + $("#nuevoTpForm").serialize(),
+			url: "/repouniversity/grupo/nuevoTp",
 			type: "POST",
-			data: data,
+			data: dataFiles,
 			success: function(data){
 				$.gritter.add({
 					title:'TP creado',

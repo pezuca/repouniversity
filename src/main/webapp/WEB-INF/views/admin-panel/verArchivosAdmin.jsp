@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" 
 			href="/repouniversity/resources/css/plugins/chosen/chosen.css" />
 <script
-	src="/repouniversity/resources/js/application/admin-panel/verCarrerasAdmin.js"></script>
+	src="/repouniversity/resources/js/application/admin-panel/verArchivosAdmin.js"></script>
 </head>
 <body class=" pace-done">
 
@@ -31,13 +31,21 @@
 								<h5>Lista de archivos</h5>
 							</div>
 							<div class="ibox-content">
-								<table id="listaCarreras"
+								<table id="listaArchivos"
 									class="table table-striped table-hover">
 									<thead class="encabezado">
 										<tr>
 											<th>Id</th>
 											<th>Nombre</th>
-											<th>Materias</th>
+											<th>Descripcion</th>
+											<th>Fecha despublicacion</th>
+											<th>Fecha publicacion</th>
+											<th>Tipo</th>
+											<th>Estado</th>
+											<th>Curso</th>
+											<th>Persona</th>
+											<th>Tags</th>
+											<th>Grupo</th>
 											<th></th>
 										</tr>
 									</thead>
@@ -48,12 +56,20 @@
 												<td>${archivo.id}</td>
 												<td>${archivo.nombre}</td>
 												<td>${archivo.descripcion}</td>
-												<td><a href="#" name="editCarrera"
-													data-carreraId="${carrera.id}"><button
+												<td>${archivo.fechaDespublicacion}</td>
+												<td>${archivo.fechaPublicacion}</td>
+												<td>${archivo.archivoTipo}</td>
+												<td>${archivo.estado}</td>
+												<td>${archivo.curso}</td>
+												<td>${archivo.persona}</td>
+												<td>${archivo.tags}</td>
+												<td>${archivo.grupo}</td>
+												<td><a  name="editArchivo"
+													data-archivoId="${archivo.id}"><button
 															class="btn btn-primary btn-circle" type="button">
 															<i class="fa fa-pencil"></i>
-														</button></a> <a href="#" name="deleteCarrera"
-													data-carreraId="${carrera.id}"><button
+														</button></a> <a  name="deleteArchivo"
+													data-archivoId="${archivo.id}"><button
 															class="btn btn-danger btn-circle" type="button">
 															<i class="fa fa-times"></i>
 														</button></a></td>
@@ -70,57 +86,40 @@
 			<%@include file="../../components/footer.jsp"%>
 		</div>
 		<!-- 	Ventanas -->
-		<div id="agregarCarreraDialog" title="Nueva Carrera">
-			<form id="nuevoCarreraForm" class="form-horizontal">
+		<div id="editarArchivoDialog" title="Editar Archivo">
+			<form id="editarArchivoForm" class="form-horizontal">
+				<input name="archivoId" type="hidden">
 				<div class="form-group">
-					<label class="col-sm-2 control-label">Nombre*:</label>
+					<label class="col-sm-2 control-label">Descripción*:</label>
 					<div class="col-sm-10">
-						<input name="nombre" type="text" class="form-control"
+						<input name="descripcion" type="text" class="form-control"
 							required="required">
 					</div>
 				</div>
-				
 				<div class="form-group">
-					<label class="col-sm-2 control-label">Materias*:</label>
+					<label class="col-sm-2 control-label">Fecha de Publicación*:</label>
 					<div class="col-sm-10">
-						<select data-placeholder="Elija una materia" name="materias" multiple class="chosen-select"
-							required="required" tabindex="-1">
-							<c:forEach items="${materias}" var="materia" varStatus="status">
-								<option value="${materia.id}">${materia.nombre}</option>
-							</c:forEach>
-						</select>
+						<input name="fechaPublicacion" type="text" class="form-control" read-only disabled />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Tipo:</label>
+					<div class="col-sm-10">
+						<input name="tipo" type="text" class="form-control" read-only disabled />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Tags*:</label>
+					<div class="col-sm-10">
+						<input name="tags" type="text" class="form-control"
+							required="required">
 					</div>
 				</div>
 			</form>
 		</div>
 
-		<div id="editarCarreraDialog" title="Editar Carrera">
-			<form id="editarCarreraForm" class="form-horizontal">
-				<input name="carreraId" type="hidden">
-				<div class="form-group">
-					<label class="col-sm-2 control-label">Nombre*:</label>
-					<div class="col-sm-10">
-						<input name="nombre" type="text" class="form-control"
-							required="required">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-2 control-label">Materias*:</label>
-					<div class="col-sm-10">
-						<select data-placeholder="Elija una materia" name="materias" multiple class="chosen-select"
-							required="required" tabindex="-1">
-							<c:forEach items="${materias}" var="materia" varStatus="status">
-								<option value="${materia.id}">${materia.nombre}</option>
-							</c:forEach>
-					</select>
-					</div>
-				</div>
-				
-			</form>
-		</div>
-
-		<div id="deleteCarreraDialog" title="Eliminar Carrera">
-			<p>¿Esta seguro que desea eliminar la carrera?</p>
+		<div id="deleteArchivoDialog" title="Eliminar Archivo">
+			<p>¿Esta seguro que desea eliminar la archivo?</p>
 		</div>
 	</div>
 

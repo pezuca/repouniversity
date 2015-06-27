@@ -6,12 +6,12 @@
 	<script src="/repouniversity/resources/js/application/verGrupoDocente.js"></script>
 	
 	
-		<script src="/repouniversity/resources/js/plugins/dropzone/dropzone.js"></script>
-	<link href="/repouniversity/resources/css/plugins/dropzone/basic.css" rel="stylesheet">
-	<link href="/repouniversity/resources/css/plugins/dropzone/dropzone.css" rel="stylesheet">
+<!-- 		<script src="/repouniversity/resources/js/plugins/dropzone/dropzone.js"></script> -->
+<!-- 	<link href="/repouniversity/resources/css/plugins/dropzone/basic.css" rel="stylesheet"> -->
+<!-- 	<link href="/repouniversity/resources/css/plugins/dropzone/dropzone.css" rel="stylesheet"> -->
 <!-- 	<script src="/repouniversity/resources/js/application/subirArchivo.js"></script> -->
-	<script src="/repouniversity/resources/js/application/fileUpload.js"></script>
-	<link rel="stylesheet" href="/repouniversity/resources/css/fileUpload.css">
+<!-- 	<script src="/repouniversity/resources/js/application/fileUpload.js"></script> -->
+<!-- 	<link rel="stylesheet" href="/repouniversity/resources/css/fileUpload.css"> -->
 
 </head>
 <body class=" pace-done">
@@ -111,7 +111,7 @@
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Archivo*:</label>
-                <input name="file" type="file" required="required">	
+                <input name="file" type="file" />	
             </div> 
            
 		</form>
@@ -147,10 +147,10 @@
 	</div>
 
 	<script>
-		$(document).ready(function(){
-			myDropzoneOptions.parallelUploads = 1;
-			myDropzoneOptions.maxFiles = 1;
-		});
+// 		$(document).ready(function(){
+// 			myDropzoneOptions.parallelUploads = 1;
+// 			myDropzoneOptions.maxFiles = 1;
+// 		});
 	</script>
 	
 </body>
