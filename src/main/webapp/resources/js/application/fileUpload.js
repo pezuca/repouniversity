@@ -1,5 +1,10 @@
 $(document).ready(function () {
-	myDropzoneOptions = {
+	var previewNode = document.querySelector("#template");
+	previewNode.id = "";
+	var previewTemplate = previewNode.parentNode.innerHTML;
+	previewNode.parentNode.removeChild(previewNode);
+	
+	myDropzone = new Dropzone(document.body, {
 		url: "/repouniversity/subirArchivo",
 		method: "POST",
 		paramName: "file",
@@ -16,14 +21,7 @@ $(document).ready(function () {
 		clickable: ".fileinput-button",
 		acceptedFiles: "image/*,application/*",
 		dictFileTooBig: "File is too big ({{filesize}}KB). Max filesize: {{maxFilesize}}KB."
-	}
-	
-	var previewNode = document.querySelector("#template");
-	previewNode.id = "";
-	var previewTemplate = previewNode.parentNode.innerHTML;
-	previewNode.parentNode.removeChild(previewNode);
-
-	myDropzone = new Dropzone(document.body, myDropzoneOptions);
+	});
 
 	myDropzone.on("addedfile", function(file) {
 		file.previewElement.querySelector(".start").onclick = function() { myDropzone.enqueueFile(file); };
@@ -71,14 +69,14 @@ $(document).ready(function () {
 	});
 
 	myDropzone.on("success", function(file, data, message) {
-		var input = $("input[name='title-" + file.name.substring(0,file.name.lastIndexOf(".")) + "'][data-value='" + data.descripcion + "']:not([readonly=readonly])").first();
+		var input = $("input[name='title-" + file.name.substring(0,file.name.lastIndexOf(".")) + "'][data-value='" + data[0].descripcion + "']:not([readonly=readonly])").first();
 		var inputTags = $("input[name='tags-" + file.name.substring(0,file.name.lastIndexOf(".")) + "']:not([readonly=readonly])").first();
 		
 		input.parents(".file-row").find("span.preview").append("<p class='text-success'>" + "El archivo se cargó correctamente" + "</p>");
 		input.attr("readonly", "readonly");
 		inputTags.attr("readonly", "readonly");
 		
-		$("input[name=archivoId]").val(data.id);
+		$("input[name=archivoId]").val(data[0].id);
 	});
 	
 	myDropzone.on("error", function(file, message, data) {

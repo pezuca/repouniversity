@@ -59,7 +59,7 @@ public class AdministradorController {
 
     @Autowired
     public CarreraService carreraService;
-    
+
     @Autowired
     public ArchivoService archivoService;
 
@@ -97,10 +97,9 @@ public class AdministradorController {
         return new ModelAndView("admin-panel/verCarrerasAdmin").addObject("carreras", carreraService.buildCarreras(listaCarreras)).addObject("materias",
             listaMaterias);
     }
-    
+
     @RequestMapping(value = "admin/verArchivos", method = {RequestMethod.GET})
     public ModelAndView getArchivos() {
-
         List<Archivo> listaArchivos = archivoService.getAll();
 
         return new ModelAndView("admin-panel/verArchivosAdmin").addObject("archivos", listaArchivos);
@@ -238,5 +237,21 @@ public class AdministradorController {
         carreraService.asociarMateriasCarreras(carrera.getId(), Arrays.asList(listaMaterias));
 
         return carreraService.buildCarrera(carrera);
+    }
+
+    @RequestMapping(value = "admin/editarArchivo", method = {RequestMethod.POST})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public Archivo editarArchivoAjax(@RequestParam(value = "archivoId") Long archivoId, @RequestParam(value = "descripcion") String descripcion,
+            @RequestParam(value = "tags") String tags) {
+
+        return archivoService.update(archivoId, descripcion, tags);
+    }
+
+    @RequestMapping(value = "admin/eliminarArchivo", method = {RequestMethod.POST})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public void deleteArchivoAjax(@RequestParam(value = "archivoId") Long archivo) {
+        archivoService.delete(archivo);
     }
 }

@@ -46,18 +46,6 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
     }
 
     @Override
-    public void update(Archivo e) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public boolean delete(Archivo e) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
     public List<Archivo> findArchivoByEtiqueta(String etiqueta) {
         // TODO Auto-generated method stub
         return null;
@@ -93,8 +81,19 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
 
     @Override
     protected SQLStatement buildUpdateSQLStatement(Archivo t) {
-        // TODO Auto-generated method stub
-        return null;
+        return new SQLStatement("UPDATE archivo SET descripcion = ?, tags = ?, fecsys = now()  where " + getColumnIdName() + " = ?") {
+
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+                ps.setString(1, t.getDescripcion());
+                ps.setString(2, t.getTags());
+                ps.setLong(3, t.getId());
+            }
+
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+        };
     }
 
     @Override

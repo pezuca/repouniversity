@@ -19,9 +19,9 @@ import com.repouniversity.model.entity.to.ArchivoTO;
 
 @Service
 public class ArchivoService {
-    
-//  @Value("${system.fileUpload.location}")
-  private String UPLOAD_PATH = "/home/federico/Documents/repouniversity/archivos";
+
+    // @Value("${system.fileUpload.location}")
+    private String UPLOAD_PATH = "/home/federico/Documents/repouniversity/archivos/";
 
     @Autowired
     private ArchivoDAO archivoDao;
@@ -30,7 +30,7 @@ public class ArchivoService {
         for (Archivo archivo : listaArchivos) {
             archivoDao.insert(archivo);
         }
-        
+
         return listaArchivos;
     }
 
@@ -42,7 +42,33 @@ public class ArchivoService {
         return archivoTo;
     }
 
-    private ArchivoTO buildArchivo(Archivo archivo) {
+    public List<ArchivoTO> buildArchivos(List<Archivo> archivos) {
+        List<ArchivoTO> listaArchivos = new ArrayList<ArchivoTO>();
+
+        for (Archivo archivo : archivos) {
+            listaArchivos.add(buildArchivo(archivo));
+        }
+
+        return listaArchivos;
+    }
+
+    public Archivo update(Long archivoId, String descripcion, String tags) {
+        Archivo archivo = archivoDao.findById(archivoId);
+        
+        archivo.setDescripcion(descripcion);
+        archivo.setTags(tags);
+        
+        archivoDao.update(archivo);
+
+        return archivo;
+    }
+    
+    public void delete(Long archivoId) {
+        archivoDao.delete(archivoDao.findById(archivoId));
+    }
+
+
+    public ArchivoTO buildArchivo(Archivo archivo) {
         ArchivoTO archivoTo = new ArchivoTO();
 
         archivoTo.setId(archivo.getId());
@@ -68,7 +94,8 @@ public class ArchivoService {
         return archivoDao.findAll();
     }
 
-    public List<Archivo> parseArchivo(CommonsMultipartFile[] file, String[] tags, String descripcion, Long cursoId, Long grupoId, UsuarioRol usuario) throws IOException {
+    public List<Archivo> parseArchivo(CommonsMultipartFile[] file, String[] tags, String descripcion, Long cursoId, Long grupoId, UsuarioRol usuario)
+            throws IOException {
         StringBuffer etiqueta = new StringBuffer();
 
         // AGREGO LAS ETIQUETAS AL CAMPO ETIQUETAS PARA LUEGO SUBIR A LA BASE
@@ -76,7 +103,7 @@ public class ArchivoService {
 
         if (tags != null) {
             for (int i = 0; i < tags.length; i++) {
-                if(StringUtils.isNoneBlank(tags[i])) {
+                if (StringUtils.isNoneBlank(tags[i])) {
                     etiqueta.append(tags[i] + ";");
                 }
             }
@@ -123,7 +150,7 @@ public class ArchivoService {
                 }
             }
         }
-        
+
         return listaArchivos;
     }
 }
