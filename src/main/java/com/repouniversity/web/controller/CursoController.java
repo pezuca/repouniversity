@@ -79,14 +79,14 @@ public class CursoController {
         Curso curso = cursoService.getById(cursoId);
         List<NotificacionTO> notificaciones = notificacionService.getNotificacionPorCurso(curso.getId());
         curso.setNotificaciones(notificaciones);
-        
+
         List<Grupo> grupos = grupoService.getGruposForCurso(curso.getId());
         curso.setGrupos(grupos);
-        
+
         List<AlumnoTO> alumnos = alumnoService.getAlumnosForCurso(curso.getId());
-        
+
         List<AlumnoTO> alumnosSinGrupo = alumnoService.getAlumnosForCursoSinGrupo(curso.getId());
-        
+
         curso.setAlumnos(alumnos);
         curso.setAlumnosSinGrupo(alumnosSinGrupo);
 
@@ -95,8 +95,7 @@ public class CursoController {
 
     @RequestMapping(value = "docente/crearGrupo", method = {RequestMethod.POST})
     public ModelAndView crearGrupo(@RequestParam(value = "idcurso", required = true) Long idCurso,
-            @RequestParam(value = "alumnosIds", required = true) Long[] listaAlumnoId,
-            @RequestParam(value = "nombre", required = true) String nombre) {
+            @RequestParam(value = "alumnosIds", required = true) Long[] listaAlumnoId, @RequestParam(value = "nombre", required = true) String nombre) {
 
         grupoService.crearGrupo(idCurso, listaAlumnoId, nombre);
 
@@ -106,9 +105,9 @@ public class CursoController {
     @RequestMapping(value = "docente/verGrupo", method = {RequestMethod.GET})
     public ModelAndView verGrupoDocente(HttpServletRequest request, @RequestParam("grupoId") Long grupoId) {
         GrupoTO grupo = grupoService.getGrupoById(grupoId);
-        
+
         List<AlumnoTO> alumnosSinGrupo = alumnoService.getAlumnosForCursoSinGrupo(grupo.getIdCurso());
-          
+
         grupo.setAlumnosSinGrupo(alumnosSinGrupo);
 
         return new ModelAndView("verGrupoDocente").addObject("grupo", grupo);

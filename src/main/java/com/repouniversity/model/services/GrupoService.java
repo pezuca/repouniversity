@@ -9,7 +9,6 @@ import com.repouniversity.model.dao.CursoDAO;
 import com.repouniversity.model.dao.GrupoDAO;
 import com.repouniversity.model.entity.Grupo;
 import com.repouniversity.model.entity.to.GrupoTO;
-import com.repouniversity.model.entity.to.TpGrupoTO;
 
 @Service
 public class GrupoService {
@@ -19,15 +18,13 @@ public class GrupoService {
 
     @Autowired
     private CursoDAO cursoDao;
-    
 
     @Autowired
     private AlumnoService alumnoService;
 
     @Autowired
     private TpGrupoService tpGrupoService;
-    
-    
+
     public Grupo save(Grupo grupo) {
         return grupoDao.insert(grupo);
     }
@@ -63,16 +60,17 @@ public class GrupoService {
 
     public GrupoTO getGrupoById(Long grupoId) {
         Grupo grupo = grupoDao.findById(grupoId);
-        
+
         GrupoTO grupoTo = buildGrupo(grupo);
 
         return grupoTo;
     }
 
-    public Long getIdCursoForGrupo (long idGrupo){
-    	
-    	return grupoDao.findIdCursoForGrupo(idGrupo);
+    public Long getIdCursoForGrupo(long idGrupo) {
+
+        return grupoDao.findIdCursoForGrupo(idGrupo);
     }
+
     private GrupoTO buildGrupo(Grupo grupo) {
         GrupoTO grupoTo = new GrupoTO();
 
@@ -88,25 +86,25 @@ public class GrupoService {
 
     public List<Grupo> getGruposForCurso(Long idCurso) {
         List<Grupo> grupos = grupoDao.findGruposByCurso(idCurso);
-//        List<GrupoTO> gruposTo = new ArrayList<GrupoTO>();
-//        
-//        for (Grupo grupo : grupos) {
-//            gruposTo.add(buildGrupo(grupo));
-//        }
-        
+        // List<GrupoTO> gruposTo = new ArrayList<GrupoTO>();
+        //
+        // for (Grupo grupo : grupos) {
+        // gruposTo.add(buildGrupo(grupo));
+        // }
+
         return grupos;
     }
 
-	public GrupoTO agregarAlumnosGrupo(Long idGrupo, Long[] listaAlumnoId) {
-		// TODO Auto-generated method stub
-				
-		saveGrupoAlumnoCurso(idGrupo, getGrupoById(idGrupo).getIdCurso(), listaAlumnoId);
-				
-		return getGrupoById(idGrupo);
-	}
+    public GrupoTO agregarAlumnosGrupo(Long idGrupo, Long[] listaAlumnoId) {
+        // TODO Auto-generated method stub
 
-	public void eliminarAlumno(Long alumnoId, Long cursoId) {
-		// TODO Auto-generated method stub
-		cursoDao.saveAlumnoCursoGrupo(1L, cursoId, alumnoId);
-	}
+        saveGrupoAlumnoCurso(idGrupo, getGrupoById(idGrupo).getIdCurso(), listaAlumnoId);
+
+        return getGrupoById(idGrupo);
+    }
+
+    public void eliminarAlumno(Long alumnoId, Long cursoId) {
+        // TODO Auto-generated method stub
+        cursoDao.saveAlumnoCursoGrupo(1L, cursoId, alumnoId);
+    }
 }

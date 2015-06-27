@@ -80,7 +80,7 @@ public class TpGrupoDAOImpl extends GenericDAOImpl<TpGrupo> implements TpGrupoDA
     }
     
     protected InsertSQLStatement buildInsertSQLStatement(final TpGrupo t) {
-        return new InsertSQLStatement("INSERT INTO tp_grupo (id_grupo, id_archivo, descripcion, nota) values (?, ?, ?, ?)") {
+        return new InsertSQLStatement("INSERT INTO tp_grupo (id_grupo, id_archivo, descripcion) values (?, ?, ?)") {
 
             @Override
             public void doAfterInsert(Long id) {
@@ -91,7 +91,6 @@ public class TpGrupoDAOImpl extends GenericDAOImpl<TpGrupo> implements TpGrupoDA
                 ps.setLong(1, t.getIdGrupo());
                 ps.setLong(2, t.getIdArchivo());
                 ps.setString(3, t.getDescripcion());
-                ps.setLong(4, t.getNota());
             }
 
             @Override

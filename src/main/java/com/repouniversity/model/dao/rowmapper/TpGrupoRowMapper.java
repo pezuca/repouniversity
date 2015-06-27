@@ -17,7 +17,13 @@ public class TpGrupoRowMapper implements RowMapper<TpGrupo> {
         result.setIdArchivo(rs.getLong("id_archivo"));
         result.setIdGrupo(rs.getLong("id_grupo"));
         result.setDescripcion(rs.getString("descripcion"));
-        result.setNota(rs.getLong("nota"));
+        
+        if(rs.getLong("nota") == 0) {
+            result.setNota(null);
+        } else {
+            rs.getLong("nota");
+        }
+        
         result.setActivo(rs.getBoolean("activo"));
         result.setFechasys(rs.getDate("fecsys"));
         

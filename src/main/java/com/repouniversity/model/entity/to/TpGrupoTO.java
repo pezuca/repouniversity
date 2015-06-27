@@ -3,23 +3,20 @@ package com.repouniversity.model.entity.to;
 import java.util.Date;
 import java.util.List;
 
-import com.repouniversity.model.entity.Curso;
-
 public class TpGrupoTO {
     private Long id;
     private String descripcion;
-    private boolean activo;
+    private Boolean activo;
     private Date fechasys;
-    //private GrupoTO grupo;
-    private long grupo;
+    // private GrupoTO grupo;
+    private Long grupo;
     private String grupoNombre;
-    private long archivo;
+    private Long archivo;
     private String archivoNombre;
     private String archivoDescripcion;
     private String archivoPath;
-    private long nota;
+    private Long nota;
     private List<TpEntregaTO> tpEntrega;
-    
 
     public Long getId() {
         return id;
@@ -36,7 +33,7 @@ public class TpGrupoTO {
     public void setGrupoNombre(String grupoNombre) {
         this.grupoNombre = grupoNombre;
     }
-    
+
     public String getArchivoNombre() {
         return archivoNombre;
     }
@@ -44,6 +41,7 @@ public class TpGrupoTO {
     public void setArchivoNombre(String archivoNombre) {
         this.archivoNombre = archivoNombre;
     }
+
     public String getArchivoDescripcion() {
         return archivoDescripcion;
     }
@@ -51,6 +49,7 @@ public class TpGrupoTO {
     public void setArchivoDescripcion(String archivoDescripcion) {
         this.archivoDescripcion = archivoDescripcion;
     }
+
     public String getArchivoPath() {
         return archivoPath;
     }
@@ -66,11 +65,12 @@ public class TpGrupoTO {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    public boolean isActivo() {
+
+    public Boolean isActivo() {
         return activo;
     }
 
-    public void setActivo(boolean activo) {
+    public void setActivo(Boolean activo) {
         this.activo = activo;
     }
 
@@ -82,11 +82,11 @@ public class TpGrupoTO {
         this.fechasys = fechasys;
     }
 
-    public long getGrupo() {
+    public Long getGrupo() {
         return grupo;
     }
 
-    public void setGrupo(long grupo) {
+    public void setGrupo(Long grupo) {
         this.grupo = grupo;
     }
 
@@ -97,7 +97,7 @@ public class TpGrupoTO {
     public void setArchivo(Long archivo) {
         this.archivo = archivo;
     }
-    
+
     public Long getNota() {
         return nota;
     }
@@ -105,7 +105,7 @@ public class TpGrupoTO {
     public void setNota(Long nota) {
         this.nota = nota;
     }
-    
+
     public List<TpEntregaTO> getTpEntrega() {
         return tpEntrega;
     }
@@ -113,5 +113,5 @@ public class TpGrupoTO {
     public void setTpEntrega(List<TpEntregaTO> tpEntrega) {
         this.tpEntrega = tpEntrega;
     }
-   
+
 }
