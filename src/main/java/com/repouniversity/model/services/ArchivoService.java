@@ -1,11 +1,15 @@
 package com.repouniversity.model.services;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +26,14 @@ public class ArchivoService {
 
     // @Value("${system.fileUpload.location}")
     private String UPLOAD_PATH = "/home/federico/Documents/repouniversity/archivos/";
+    
+    public static final String SEPARATOR = "##";
 
     @Autowired
     private ArchivoDAO archivoDao;
+    
+    @Autowired
+    private ArchivoTipoService archivoTipoService;
 
     public List<Archivo> subirArchivo(List<Archivo> listaArchivos) {
         for (Archivo archivo : listaArchivos) {
@@ -54,19 +63,18 @@ public class ArchivoService {
 
     public Archivo update(Long archivoId, String descripcion, String tags) {
         Archivo archivo = archivoDao.findById(archivoId);
-        
+
         archivo.setDescripcion(descripcion);
         archivo.setTags(tags);
-        
+
         archivoDao.update(archivo);
 
         return archivo;
     }
-    
+
     public void delete(Long archivoId) {
         archivoDao.delete(archivoDao.findById(archivoId));
     }
-
 
     public ArchivoTO buildArchivo(Archivo archivo) {
         ArchivoTO archivoTo = new ArchivoTO();
@@ -76,7 +84,7 @@ public class ArchivoService {
         archivoTo.setDescripcion(archivo.getDescripcion());
         archivoTo.setFechaDespublicacion(archivo.getFechaDespublicacion());
         archivoTo.setFechaPublicacion(archivo.getFechaPublicacion());
-        archivoTo.setArchivoTipo(archivo.getArchivoTipo());
+        archivoTo.setArchivoTipo(archivoTipoService.findById(archivo.getArchivoTipo()));
         archivoTo.setActivo(archivo.isActivo());
         archivoTo.setFechasys(archivo.getFechasys());
 
@@ -90,8 +98,15 @@ public class ArchivoService {
         return archivoTo;
     }
 
-    public List<Archivo> getAll() {
-        return archivoDao.findAll();
+    public List<ArchivoTO> getAll() {
+        List<Archivo> archivoList = archivoDao.findAll();
+        List<ArchivoTO> archivoToList = new ArrayList<ArchivoTO>();
+        
+        for (Archivo archivo : archivoList) {
+            archivoToList.add(buildArchivo(archivo));
+        }
+        
+        return archivoToList;
     }
 
     public List<Archivo> parseArchivo(CommonsMultipartFile[] file, String[] tags, String descripcion, Long cursoId, Long grupoId, UsuarioRol usuario)
@@ -112,7 +127,7 @@ public class ArchivoService {
         List<Archivo> listaArchivos = new ArrayList<Archivo>();
         // AGREGO LOS ARCHIVOS Y LOS SUBO A LA CARPETA DEL SERVER.
         for (int i = 0; i < file.length; i++) {
-            File localFile = new File(UPLOAD_PATH + (new Date()).getTime() + file[i].getOriginalFilename());
+            File localFile = new File(UPLOAD_PATH + (new Date()).getTime() + SEPARATOR + file[i].getOriginalFilename());
             FileOutputStream os = null;
             // GUARDO LOS ARCHIVOS EN LA CARPETA
             os = new FileOutputStream(localFile);
@@ -152,5 +167,37 @@ public class ArchivoService {
         }
 
         return listaArchivos;
+    }
+
+    public Archivo bajarArchivo(Long archivoId, HttpServletResponse response) throws IOException {
+        Archivo archivo = archivoDao.findById(archivoId);
+        
+        File file = new File(archivo.getPath());
+        FileInputStream fileIn = new FileInputStream(file);
+        ServletOutputStream out = response.getOutputStream();
+
+        byte[] outputByte = new byte[4096];
+        // copy binary contect to output stream
+        while (fileIn.read(outputByte, 0, 4096) != -1) {
+            out.write(outputByte, 0, 4096);
+        }
+        
+        fileIn.close();
+        out.flush();
+        out.close();
+        
+        response.setContentType("application/download");
+        response.setContentLength((int)file.length());
+        response.setHeader("Content-Transfer-Encoding", "binary");
+        response.setHeader("Content-Disposition", "attachment; filename=\"" + archivo.getPath().split(SEPARATOR)[1] + "\"");
+        
+        
+//        response.setHeader("Content-Type", "application/octet-stream");
+//        response.setHeader("Content-Description", "File Transfer");
+//        response.setHeader("Expires", "0");
+//        response.setHeader("Cache-Control", "must-revalidate, post-check=0, pre-check=0");
+//        response.setHeader("Pragma", "public");
+        
+        return archivo;
     }
 }

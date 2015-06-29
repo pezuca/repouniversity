@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -54,10 +55,22 @@ public class ArchivoController {
             @RequestParam(value = "grupoId", required = false, defaultValue = "1") Long grupoId, @ModelAttribute("login") UsuarioRol usuario) {
 
         try {
-            
+
             List<Archivo> nuevoArchivo = archivoService.parseArchivo(file, tags, descripcion, cursoId, grupoId, usuario);
-            
+
             return archivoService.subirArchivo(nuevoArchivo);
+        } catch (Exception e) {
+            throw new SubirArchivoException("Ha ocurrido un error al intentar subir el archivo.", e);
+        }
+    }
+
+    @RequestMapping(value = "/bajarArchivo", method = {RequestMethod.POST, RequestMethod.GET})
+    public void bajarAchivo(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "archivoId") Long archivoId,
+            @ModelAttribute("login") UsuarioRol usuario) {
+        try {
+
+            archivoService.bajarArchivo(archivoId, response);
+
         } catch (Exception e) {
             throw new SubirArchivoException("Ha ocurrido un error al intentar subir el archivo.", e);
         }

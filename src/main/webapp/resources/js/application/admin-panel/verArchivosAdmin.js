@@ -98,14 +98,6 @@ $(document).ready(function() {
             "infoFiltered": "(filtered from _MAX_ total records)",
             "search": "Búsqueda: "
         }
-//        "columnDefs": [
-//                       {"width": "5%", "targets": 0},
-//                       {"width": "8%", "targets": 1},
-//                       {"width": "8%", "targets": 2},
-//                       {"width": "8%", "targets": 4},
-//                       {"width": "20%", "targets": 9},
-//                       {"width": "6%", "targets": 11}
-//                      ]
 	});
 	
 	table.column(1).visible(false);
@@ -191,3 +183,5 @@ $(document).ready(function() {
 			.dialog("open");
 	});
 });
+
+

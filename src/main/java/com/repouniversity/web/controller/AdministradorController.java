@@ -19,6 +19,7 @@ import com.repouniversity.model.entity.Curso;
 import com.repouniversity.model.entity.Materia;
 import com.repouniversity.model.entity.Usuario;
 import com.repouniversity.model.entity.UsuarioRol;
+import com.repouniversity.model.entity.to.ArchivoTO;
 import com.repouniversity.model.entity.to.CarreraTO;
 import com.repouniversity.model.entity.to.CursoTO;
 import com.repouniversity.model.entity.to.DocenteTO;
@@ -100,7 +101,7 @@ public class AdministradorController {
 
     @RequestMapping(value = "admin/verArchivos", method = {RequestMethod.GET})
     public ModelAndView getArchivos() {
-        List<Archivo> listaArchivos = archivoService.getAll();
+        List<ArchivoTO> listaArchivos = archivoService.getAll();
 
         return new ModelAndView("admin-panel/verArchivosAdmin").addObject("archivos", listaArchivos);
     }

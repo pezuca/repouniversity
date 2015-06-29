@@ -26,15 +26,15 @@
 					class="fa fa-home"></i> <span class="nav-label">Inicio |
 						Administrador</span></a></li>
 			<li class="${activeTab eq 'verMaterias' ? 'active':''}"><a href="/repouniversity/admin/verMaterias"><i
-					class="fa fa-home"></i> <span class="nav-label">Ver Materias</span></a></li>
+					class="fa fa-book"></i> <span class="nav-label">Ver Materias</span></a></li>
 			<li class="${activeTab eq 'verCursos' ? 'active':''}"><a href="/repouniversity/admin/verCursos"><i
-					class="fa fa-home"></i> <span class="nav-label">Ver cursos</span></a></li>
+					class="fa fa-laptop"></i> <span class="nav-label">Ver cursos</span></a></li>
 			<li class="${activeTab eq 'verUsuarios' ? 'active':''}"><a href="/repouniversity/admin/verUsuarios"><i
-					class="fa fa-home"></i> <span class="nav-label">Ver usuarios</span></a></li>
+					class="fa fa-group"></i> <span class="nav-label">Ver usuarios</span></a></li>
 			<li class="${activeTab eq 'verCarreras' ? 'active':''}"><a href="/repouniversity/admin/verCarreras"><i
-					class="fa fa-home"></i> <span class="nav-label">Ver carreras</span></a></li>
+					class="fa fa-bank"></i> <span class="nav-label">Ver carreras</span></a></li>
 			<li class="${activeTab eq 'verArchivos' ? 'active':''}"><a href="/repouniversity/admin/verArchivos"><i
-					class="fa fa-home"></i> <span class="nav-label">Ver archivos</span></a></li>
+					class="fa fa-file-pdf-o"></i> <span class="nav-label">Ver archivos</span></a></li>
 		</ul>
 	</div>
 </nav>
