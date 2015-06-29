@@ -56,7 +56,7 @@
 							<tr class="head">
 								<th><a data-toggle="modal" href="#fileUpload" class="btn btn-success"><i class="fa fa-upload"></i> Subir Archivo</a></th>
 								<th></th>
-								<th></th>
+								<th><a href="/repouniversity/alumno/verGrupo?grupoId=${curso.grupoAlumno.id}" name="Ver" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver grupo" class="btn btn-success"><i class="fa fa-upload"></i> Ver Grupo</a></th>
 							</tr>
 						</tfoot>
 					</table>

@@ -21,7 +21,7 @@ import com.repouniversity.model.entity.to.ArchivoTO;
 public class ArchivoService {
 
     // @Value("${system.fileUpload.location}")
-    private String UPLOAD_PATH = "/home/federico/Documents/repouniversity/archivos/";
+    private String UPLOAD_PATH = "C:/temp/archivos/";
 
     @Autowired
     private ArchivoDAO archivoDao;

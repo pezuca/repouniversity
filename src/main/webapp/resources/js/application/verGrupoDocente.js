@@ -119,11 +119,11 @@ var tpAdmin = {
 			}
 		})
 	},
-	deleteAlumnoAjax : function(alunnoId, cursoId) {
+	deleteAlumnoAjax : function(alumnoId, cursoId) {
 		$.ajax({
 			url: "/repouniversity/grupo/eliminarAlumno",
 			type: "POST",
-			data: {"alunnoId" : alunnoId, "cursoId" : cursoId},
+			data: {"alumnoId" : alumnoId, "cursoId" : cursoId},
 			success: function(data){
 				$.gritter.add({
 					title:'Alumno eliminado',
@@ -131,7 +131,7 @@ var tpAdmin = {
 					sticky: false
 				});
 				
-				table2.row( $("#GruposAlumnos a[data-alunnoId=" + alunnoId + "]").parents('tr') ).remove().draw();
+				table2.row( $("#GruposAlumnos a[data-alumnoId=" + alumnoId + "]").parents('tr') ).remove().draw();
 				$("#deleteAlumnoDialog").dialog("close");						
 			},
 			error: function(data) {

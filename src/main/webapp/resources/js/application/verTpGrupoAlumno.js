@@ -1,44 +1,48 @@
-var alumnoAdmin = {
-	crearNuevoAlumnoAjax : function() {
+var tpEntregaAdmin = {
+	crearNuevoEntregaTpAjax : function() {
+		
+		var dataFiles = new FormData($("#NuevoEntregaTpForm")[0]);
+		
 		$.ajax({
-			url: "/repouniversity/grupo/agregarAlumnos",
+			url: "/repouniversity/tpgrupo/nuevoEntregaTp",
 			type: "POST",
-			data: $("#nuevoAlumnoForm").serialize(),
+			data: dataFiles,
+			processData: false,
+			contentType: false,
 			success: function(data){
 				$.gritter.add({
 					title:'Entrega creada',
 					text: 'La creacion de la entrega fue exitosa.',
 					sticky: false
 				});
-				
-				
+
 				table.row.add([
 				                                          data.id,
 				                                          data.descripcion,
 				                                          data.archivo,
-				                                          "<a href='#' name='editEntregaTp' data-alumnoId='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a> " + 
-				  										  "<a href='#' name='deleteEntregaTp' data-alumnoId='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a> " +
-				  										  "<a href='/repouniversitytpgrupo/verEntregasTP?alumnoId=" + data.id + "' name='Ver' data-alumnoId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Ver TP'><i class='fa fa-codepen'></i></button></a>"
+				                                          "<a href='#' name='editEntregaTp' data-tpentregaId='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a> " + 
+				  										  "<a href='#' name='deleteEntregaTp' data-tpentregaId='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a> " +
+				  										  "<a href='/repouniversitytpgrupo/verEntregasTP?tpEntregaId=" + data.id + "' name='Ver' data-tpentregaId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Ver TP'><i class='fa fa-codepen'></i></button></a>"
 				                                     ]).draw();
 				
 				//Agrego el evento de delete
-				$("a[name='deleteEntregaTp'][data-alumnoId=" + data.id + "] button").click(function(){
-					$("#deleteEntregaTpDialog").data('alumnoId', $(this).parent().attr("data-alumnoId")).dialog("open");
+				$("a[name='deleteEntregaTp'][data-tpentregaId=" + data.id + "] button").click(function(){
+					$("#deleteEntregaTpDialog").data('tpEntregaId', $(this).parent().attr("data-tpentregaId")).dialog("open");
 				});
 				
-				$("a[name=editEntregaTp][data-alumnoId=" + data.id + "] button").click(function(){
-					$("#editarEntregaTpDialog").data('alumnoId', $(this).parent().attr("data-alumnoId"))
+				$("a[name=editEntregaTp][data-tpentregaId=" + data.id + "] button").click(function(){
+					$("#editarEntregaTpDialog").data('tpEntregaId', $(this).parent().attr("data-tpentregaId"))
 						.data('descripcion', $(this).parents("tr").find("td").get(1).innerHTML)
 						.data('archivo', $(this).parents("tr").find("td").get(2).innerHTML)
 						.dialog("open");
 				});
 				
-				$("#agregarAlumnoDialog").dialog("close");						
+				$("#agregarEntregaTpDialog").dialog("close");						
 			},
 			error: function(data) {
-				$("#nuevoAlumnoForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de crear el curso, inténtelo mas tarde.</p></div>")
+				$("#NuevoEntregaTpForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de crear el curso, inténtelo mas tarde.</p></div>")
 				setTimeout(function(){
-					$("#agregarAlumnoDialog .infoDialog").hide(function(){
+					$("#agregarEntregaTpDialog .infoDialog").hide(function(){
 						$(this).remove();
 					});
 				}, 3000);	
@@ -57,18 +61,18 @@ var alumnoAdmin = {
 					sticky: false
 				});
 				
-				var celdas = $("#EntregaTP td a[data-alumnoId=" + data.id + "]").parents("tr").find("td");
+				var celdas = $("#EntregaTP td a[data-tpentregaId=" + data.id + "]").parents("tr").find("td");
 				celdas.get(0).innerHTML = data.id;
 				celdas.get(1).innerHTML = data.descripcion;
 				celdas.get(2).innerHTML = data.archivo;
 												
 				//Agrego el evento de delete
-				$("a[name='deleteEntregaTp'][data-alumnoId=" + data.id + "] button").click(function(){
-					$("#deleteEntregaTpDialog").data('alumnoId', $(this).parent().attr("data-alumnoId")).dialog("open");
+				$("a[name='deleteEntregaTp'][data-tpentregaId=" + data.id + "] button").click(function(){
+					$("#deleteEntregaTpDialog").data('tpEntregaId', $(this).parent().attr("data-tpentregaId")).dialog("open");
 				});
 				
-				$("a[name=editEntregaTp][data-alumnoId=" + data.id + "] button").click(function(){
-					$("#editarEntregaTpDialog").data('alumnoId', data.id)
+				$("a[name=editEntregaTp][data-tpentregaId=" + data.id + "] button").click(function(){
+					$("#editarEntregaTpDialog").data('tpEntregaId', data.id)
 						.data('descripcion', $(this).parents("tr").find("td").get(1).innerHTML)
 						.data('archivo', $(this).parents("tr").find("td").get(2).innerHTML)
 						.dialog("open");
@@ -77,20 +81,20 @@ var alumnoAdmin = {
 				$("#editarEntregaTpDialog").dialog("close");						
 			},
 			error: function(data) {
-				$("#nuevoAlumnoForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de editar el Trabajo Practico, inténtelo mas tarde.</p></div>")
+				$("#NuevoEntregaTpForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de editar el Trabajo Practico, inténtelo mas tarde.</p></div>")
 				setTimeout(function(){
-					$("#agregarAlumnoDialog .infoDialog").hide(function(){
+					$("#agregarEntregaTpDialog .infoDialog").hide(function(){
 						$(this).remove();
 					});
 				}, 3000);	
 			}
 		})
 	},
-	deleteEntregaTpAjax : function(alumnoId) {
+	deleteEntregaTpAjax : function(tpEntregaId) {
 		$.ajax({
 			url: "/repouniversity/tpgrupo/eliminarTp",
 			type: "POST",
-			data: {"alumnoId" : alumnoId},
+			data: {"tpEntregaId" : tpEntregaId},
 			success: function(data){
 				$.gritter.add({
 					title:'Entrega eliminada',
@@ -98,7 +102,7 @@ var alumnoAdmin = {
 					sticky: false
 				});
 				
-				table.row( $("#EntregaTP a[data-alumnoId=" + alumnoId + "]").parents('tr') ).remove().draw();
+				table.row( $("#EntregaTP a[data-tpentregaId=" + tpEntregaId + "]").parents('tr') ).remove().draw();
 				$("#deleteEntregaTpDialog").dialog("close");						
 			},
 			error: function(data) {
@@ -149,7 +153,7 @@ $(document).ready(function() {
 
 	$("#clientTable_length").remove();
 	
-	$("#agregarAlumnoDialog").dialog({
+	$("#agregarEntregaTpDialog").dialog({
 		resizable: false,
 		width:700,
 		modal: true,
@@ -159,8 +163,8 @@ $(document).ready(function() {
 		show: {effect: "fade", duration: 300},
 		buttons: {
 			"Crear": function() {
-				if(alumnoAdmin.validacionFormlario("#nuevoAlumnoForm")) {
-					alumnoAdmin.crearNuevoAlumnoAjax();
+				if(tpEntregaAdmin.validacionFormlario("#nuevoEntregaTpForm")) {
+					tpEntregaAdmin.crearNuevoEntregaTpAjax();
 				}
 			},
 			"Cancelar": function() {
@@ -169,8 +173,8 @@ $(document).ready(function() {
 		},
 		open: function(event, ui) {
 			$(".infoDialog").remove();
-			$('#nuevoAlumnoForm').trigger("reset");
-			$("#nuevoAlumnoForm").find(".form-group").removeClass("has-error");
+			$('#NuevoEntregaTpForm').trigger("reset");
+			$("#NuevoEntregaTpForm").find(".form-group").removeClass("has-error");
 		},
 		close: function(event, ui) {
 		}
@@ -186,8 +190,8 @@ $(document).ready(function() {
 		hide: {effect: "fade", duration: 300},
 		buttons: {
 			"Ok": function() {
-				if(alumnoAdmin.validacionFormlario("#editarEntregaTpForm")) {
-					alumnoAdmin.editarEntregaTpAjax();
+				if(tpEntregaAdmin.validacionFormlario("#editarEntregaTpForm")) {
+					tpEntregaAdmin.editarEntregaTpAjax();
 				}
 			},
 			"Cancelar": function() {
@@ -200,7 +204,7 @@ $(document).ready(function() {
 			$("#editarEntregaTpForm").find(".form-group").removeClass("has-error");
 			$("#editarEntregaTpForm select option").removeAttr("selected");
 			
-			$('#editarEntregaTpForm input[name=alumnoId]').val($("#editarEntregaTpDialog").data('alumnoId'));
+			$('#editarEntregaTpForm input[name=tpEntregaId]').val($("#editarEntregaTpDialog").data('tpEntregaId'));
 			$('#editarEntregaTpForm input[name=descripcion]').val($("#editarEntregaTpDialog").data('descripcion'));
 			$('#editarEntregaTpForm input[name=archivoId]').val($("#editarEntregaTpDialog").data('archivo'));
 			
@@ -219,7 +223,7 @@ $(document).ready(function() {
 		hide: {effect: "fade", duration: 300},
 		buttons: {
 			"Eliminar": function() {
-				alumnoAdmin.deleteEntregaTpAjax($("#deleteEntregaTpDialog").data('alumnoId'));
+				tpEntregaAdmin.deleteEntregaTpAjax($("#deleteEntregaTpDialog").data('tpEntregaId'));
 			},
 			"Cancelar": function() {
 				$(this).dialog("close");
@@ -227,23 +231,23 @@ $(document).ready(function() {
 		},
 		open: function(event, ui) {
 			$(".infoDialog").remove();
-			$('#nuevoAlumnoForm').trigger("reset");
+			$('#NuevoEntregaTpForm').trigger("reset");
 		},
 		close: function(event, ui) {
 		}
 	});
 	
-	$("#agregarAlumnoButton").click(function() {
-		$("#agregarAlumnoDialog").dialog("open");
+	$("#agregarEntregaTpButton").click(function() {
+		$("#agregarEntregaTpDialog").dialog("open");
 	});
 	
 	$("a[name=deleteEntregaTp] button").click(function(){
-		$("#deleteEntregaTpDialog").data('alumnoId', $(this).parent().attr("data-alumnoId")).dialog("open");
+		$("#deleteEntregaTpDialog").data('tpEntregaId', $(this).parent().attr("data-tpentregaId")).dialog("open");
 	});
 	
 	$("a[name=editEntregaTp] button").click(function(){
-		$("#editarEntregaTpDialog").data('alumnoId', $(this).parent().attr("data-alumnoId"))
-			.data('alumnoId', $(this).parents("tr").find("td").get(0).innerHTML)
+		$("#editarEntregaTpDialog").data('tpEntregaId', $(this).parent().attr("data-tpentregaId"))
+			.data('tpEntregaId', $(this).parents("tr").find("td").get(0).innerHTML)
 			.data('descripcion', $(this).parents("tr").find("td").get(1).innerHTML)
 			.data('archivo', $(this).parents("tr").find("td").get(2).innerHTML)
 			.dialog("open");

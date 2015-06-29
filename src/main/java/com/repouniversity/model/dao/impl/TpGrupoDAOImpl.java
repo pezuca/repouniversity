@@ -118,7 +118,14 @@ public class TpGrupoDAOImpl extends GenericDAOImpl<TpGrupo> implements TpGrupoDA
             }
         };
     }
-    
+    @Override
+    public long findIdCursoForTpGrupo(long tpGrupoId) {
+        
+        long id = jdbcTemplate.queryForLong("select distinct ac.id_curso from tp_grupo tp JOIN alumno_curso ac ON ac.id_grupo = tp.id_grupo where tp.idtp_grupo =  " + tpGrupoId + " LIMIT 1");
+
+        return id;
+    }
+
 
 
 }

@@ -113,5 +113,9 @@ public class TpGrupoService {
 
         return tpGrupoToList;
     }
+    public Long getIdCursoForTpGrupo(long idTpGrupo) {
+
+        return tpGrupoDao.findIdCursoForTpGrupo(idTpGrupo);
+    } 
 
 }

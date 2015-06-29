@@ -1,5 +1,6 @@
 package com.repouniversity.model.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,7 +95,16 @@ public class GrupoService {
 
         return grupos;
     }
+    public GrupoTO getGrupoForCursoAlumno(Long idCurso, Long idAlumno) {
+        List<Grupo> grupos = grupoDao.findGrupoByCursoAlumno(idCurso, idAlumno);
+         List<GrupoTO> gruposTo = new ArrayList<GrupoTO>();
+        
+         for (Grupo grupo : grupos) {
+         gruposTo.add(buildGrupo(grupo));
+         }
 
+        return gruposTo.get(0);
+    }
     public GrupoTO agregarAlumnosGrupo(Long idGrupo, Long[] listaAlumnoId) {
         // TODO Auto-generated method stub
 
