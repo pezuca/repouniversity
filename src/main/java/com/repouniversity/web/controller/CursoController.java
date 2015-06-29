@@ -53,10 +53,11 @@ public class CursoController {
     }
 
     @RequestMapping(value = "alumno/verCurso", method = {RequestMethod.GET})
-    public ModelAndView verCurso(@RequestParam(value = "cursoId", required = true) Long cursoId) {
+    public ModelAndView verCurso(@RequestParam(value = "cursoId", required = true) Long cursoId, @ModelAttribute("login") UsuarioRol usuario) {
         Curso curso = cursoService.getById(cursoId);
         curso.setNotificaciones(notificacionService.getNotificacionPorCurso(cursoId));
-
+        curso.setGrupoAlumno(grupoService.getGrupoForCursoAlumno(cursoId, usuario.getIdAluDoc()));
+        
         return new ModelAndView("verCursoAlumno").addObject("curso", curso);
     }
 
@@ -111,5 +112,15 @@ public class CursoController {
         grupo.setAlumnosSinGrupo(alumnosSinGrupo);
 
         return new ModelAndView("verGrupoDocente").addObject("grupo", grupo);
+    }
+    @RequestMapping(value = "alumno/verGrupo", method = {RequestMethod.GET})
+    public ModelAndView verGrupoAlumno(HttpServletRequest request, @RequestParam("grupoId") Long grupoId) {
+        GrupoTO grupo = grupoService.getGrupoById(grupoId);
+
+    //    List<AlumnoTO> alumnosSinGrupo = alumnoService.getAlumnosForCursoSinGrupo(grupo.getIdCurso());
+
+        //grupo.setAlumnosSinGrupo(alumnosSinGrupo);
+
+        return new ModelAndView("verGrupoAlumno").addObject("grupo", grupo);
     }
 }

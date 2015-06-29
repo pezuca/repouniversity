@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -24,14 +25,14 @@ import com.repouniversity.model.entity.to.ArchivoTO;
 @Service
 public class ArchivoService {
 
-    // @Value("${system.fileUpload.location}")
-    private String UPLOAD_PATH = "/home/federico/Documents/repouniversity/archivos/";
-    
+    @Autowired
+    private String systemFileUploadLocation;
+
     public static final String SEPARATOR = "##";
 
     @Autowired
     private ArchivoDAO archivoDao;
-    
+
     @Autowired
     private ArchivoTipoService archivoTipoService;
 
@@ -101,11 +102,11 @@ public class ArchivoService {
     public List<ArchivoTO> getAll() {
         List<Archivo> archivoList = archivoDao.findAll();
         List<ArchivoTO> archivoToList = new ArrayList<ArchivoTO>();
-        
+
         for (Archivo archivo : archivoList) {
             archivoToList.add(buildArchivo(archivo));
         }
-        
+
         return archivoToList;
     }
 
@@ -127,7 +128,7 @@ public class ArchivoService {
         List<Archivo> listaArchivos = new ArrayList<Archivo>();
         // AGREGO LOS ARCHIVOS Y LOS SUBO A LA CARPETA DEL SERVER.
         for (int i = 0; i < file.length; i++) {
-            File localFile = new File(UPLOAD_PATH + (new Date()).getTime() + SEPARATOR + file[i].getOriginalFilename());
+            File localFile = new File(systemFileUploadLocation + (new Date()).getTime() + SEPARATOR + file[i].getOriginalFilename());
             FileOutputStream os = null;
             // GUARDO LOS ARCHIVOS EN LA CARPETA
             os = new FileOutputStream(localFile);
@@ -171,7 +172,7 @@ public class ArchivoService {
 
     public Archivo bajarArchivo(Long archivoId, HttpServletResponse response) throws IOException {
         Archivo archivo = archivoDao.findById(archivoId);
-        
+
         File file = new File(archivo.getPath());
         FileInputStream fileIn = new FileInputStream(file);
         ServletOutputStream out = response.getOutputStream();
@@ -181,23 +182,22 @@ public class ArchivoService {
         while (fileIn.read(outputByte, 0, 4096) != -1) {
             out.write(outputByte, 0, 4096);
         }
-        
+
         fileIn.close();
         out.flush();
         out.close();
-        
+
         response.setContentType("application/download");
-        response.setContentLength((int)file.length());
+        response.setContentLength((int) file.length());
         response.setHeader("Content-Transfer-Encoding", "binary");
         response.setHeader("Content-Disposition", "attachment; filename=\"" + archivo.getPath().split(SEPARATOR)[1] + "\"");
-        
-        
-//        response.setHeader("Content-Type", "application/octet-stream");
-//        response.setHeader("Content-Description", "File Transfer");
-//        response.setHeader("Expires", "0");
-//        response.setHeader("Cache-Control", "must-revalidate, post-check=0, pre-check=0");
-//        response.setHeader("Pragma", "public");
-        
+
+        // response.setHeader("Content-Type", "application/octet-stream");
+        // response.setHeader("Content-Description", "File Transfer");
+        // response.setHeader("Expires", "0");
+        // response.setHeader("Cache-Control", "must-revalidate, post-check=0, pre-check=0");
+        // response.setHeader("Pragma", "public");
+
         return archivo;
     }
 }

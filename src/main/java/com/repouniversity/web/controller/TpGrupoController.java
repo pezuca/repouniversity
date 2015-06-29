@@ -21,6 +21,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.repouniversity.model.entity.UsuarioRol;
+import com.repouniversity.model.entity.to.TpEntregaTO;
 import com.repouniversity.model.entity.to.TpGrupoTO;
 import com.repouniversity.model.services.AlumnoService;
 import com.repouniversity.model.services.ArchivoService;
@@ -105,4 +106,10 @@ public class TpGrupoController {
 	        return new ModelAndView("verTpGrupoDocente").addObject("tpgrupo", tpgrupo);
 	    }
 
+	  @RequestMapping(value = "grupo/verTrabajosPracticosAlumno", method = {RequestMethod.GET})
+	    public ModelAndView verTrabajosPracticosAlumno(HttpServletRequest request, @RequestParam("tpGrupoId") Long tpGrupoId) {
+		  TpGrupoTO tpgrupo = tpGrupoService.getTpGrupoById(tpGrupoId);
+
+	        return new ModelAndView("verTpGrupoAlumno").addObject("tpgrupo", tpgrupo);
+	    }
 }

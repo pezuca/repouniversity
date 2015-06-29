@@ -1,17 +1,21 @@
 package com.repouniversity.model.services;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.repouniversity.model.dao.GrupoDAO;
 import com.repouniversity.model.dao.TpEntregaDAO;
 import com.repouniversity.model.dao.TpGrupoDAO;
+import com.repouniversity.model.entity.Archivo;
 import com.repouniversity.model.entity.Grupo;
 import com.repouniversity.model.entity.TpEntrega;
 import com.repouniversity.model.entity.TpGrupo;
+import com.repouniversity.model.entity.UsuarioRol;
 import com.repouniversity.model.entity.to.TpEntregaTO;
 import com.repouniversity.model.entity.to.TpGrupoTO;
 
@@ -30,11 +34,37 @@ public class TpEntregaService {
     
     @Autowired
     private GrupoService grupoService;
+    
+    @Autowired
+    private TpGrupoService tpGrupoService;
+    
+    @Autowired
+    private ArchivoService archivoService;
 
     public TpEntrega save(TpEntrega tpEntrega) {
         return tpEntregaDao.insert(tpEntrega);
     }
 
+    public TpEntregaTO nuevoEntregaTp(Long tpGrupoId, String descripcion, CommonsMultipartFile[] file, UsuarioRol usuario) throws IOException {
+        String[] tags = null;
+
+        Long cursoId = tpGrupoService.getIdCursoForTpGrupo(tpGrupoId);
+
+        List<Archivo> nuevoArchivo = archivoService.parseArchivo(file, tags, descripcion, cursoId, tpGrupoId, usuario);
+        List<Archivo> elArchivo = archivoService.subirArchivo(nuevoArchivo);
+
+        TpEntrega tpEntrega = new TpEntrega();
+    	tpEntrega.setIdTpGrupo(tpGrupoId);
+    	tpEntrega.setDescripcion(descripcion);
+    	tpEntrega.setIdArchivo(elArchivo.get(0).getId());
+       	tpEntrega.setActivo(true);
+    	
+    	tpEntrega = save(tpEntrega);
+    	return buildTpEntrega(tpEntrega);
+
+    }
+
+    
     public TpEntregaTO nuevoEntregaTp(Long tpGrupoId, String descripcion, Long archivoId) {
         
     	TpEntrega tpEntrega = new TpEntrega();

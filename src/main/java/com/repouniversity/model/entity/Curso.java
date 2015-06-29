@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.repouniversity.model.dao.IdentifiedObject;
 import com.repouniversity.model.entity.to.AlumnoTO;
+import com.repouniversity.model.entity.to.GrupoTO;
 import com.repouniversity.model.entity.to.NotificacionTO;
 
 public class Curso implements Comparable<Curso>, IdentifiedObject {
@@ -23,7 +24,7 @@ public class Curso implements Comparable<Curso>, IdentifiedObject {
     private Long materiaId;
     private Long docenteId;
     private List<AlumnoTO> alumnosSinGrupo;
-
+    private GrupoTO grupoAlumno;
     public Long getId() {
         return id;
     }
@@ -124,5 +125,14 @@ public class Curso implements Comparable<Curso>, IdentifiedObject {
     
     public List<AlumnoTO> getAlumnosSinGrupo() {
         return alumnosSinGrupo;
+    }
+  
+    public void setGrupoAlumno(GrupoTO grupoAlumno) {
+        this.grupoAlumno = grupoAlumno;
+        
+    }
+    
+    public GrupoTO getGrupoAlumno() {
+        return grupoAlumno;
     }
 }

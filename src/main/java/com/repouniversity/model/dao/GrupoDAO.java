@@ -12,4 +12,6 @@ public interface GrupoDAO extends GenericDAO<Grupo> {
     List<Grupo> findGruposByCurso(Long idGrupo);
 
 	long findIdCursoForGrupo(long idGrupo);
+
+	List<Grupo> findGrupoByCursoAlumno(Long idCurso, Long idAlumno);
 }

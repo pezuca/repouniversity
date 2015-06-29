@@ -77,7 +77,36 @@ public class GrupoDAOImpl extends GenericDAOImpl<Grupo> implements GrupoDAO {
             @Override
             public void doAfterTransaction(int result) {
             }
-        }, new GrupoRowMapper(), "findCursosForDocenteId: " + cursoId);
+        }, new GrupoRowMapper(), "findGruposByCurso: " + cursoId);
+
+        if (list.isEmpty()) {
+            return new ArrayList<Grupo>();
+        }
+
+        return list;
+    }
+    @Override
+    public List<Grupo> findGrupoByCursoAlumno(final Long idCurso, Long idAlumno) {
+        StringBuilder sql = new StringBuilder();
+
+        sql.append("SELECT DISTINCT g.* ");
+        sql.append("FROM grupo g JOIN alumno_curso ac ON ac.id_grupo = g.id_grupo ");
+        sql.append("WHERE ac.id_curso = ? ");
+        sql.append("AND ac.id_alumno = ? ");
+        sql.append("AND ac.id_grupo <> 1 ");
+        sql.append("AND g.activo = 1");
+        
+         List<Grupo> list = doQuery(new SQLStatement(sql.toString()) {
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+                ps.setLong(1, idCurso);
+                ps.setLong(2, idAlumno);
+            }
+
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+        }, new GrupoRowMapper(), "findGruposByCursoAlumno: " + idCurso);
 
         if (list.isEmpty()) {
             return new ArrayList<Grupo>();
