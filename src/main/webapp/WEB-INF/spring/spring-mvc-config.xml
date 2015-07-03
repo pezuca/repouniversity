@@ -23,5 +23,5 @@
  			<bean class="com.repouniversity.web.interceptors.LoginInterceptor" />
  		</mvc:interceptor>
 	</mvc:interceptors>
-
+	
 </beans>

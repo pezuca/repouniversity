@@ -59,4 +59,5 @@
 	<tx:annotation-driven transaction-manager="txManager" />
 	
 	<import resource="spring/spring-mvc-config.xml"/>
+	<import resource="spring/beans.xml"/>
 </beans>

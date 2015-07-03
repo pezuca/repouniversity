@@ -58,7 +58,7 @@
 												<td>${archivo.descripcion}</td>
 												<td>${archivo.fechaDespublicacion}</td>
 												<td>${archivo.fechaPublicacion}</td>
-												<td>${archivo.archivoTipo}</td>
+												<td>${archivo.archivoTipo.nombre}</td>
 												<td>${archivo.estado}</td>
 												<td>${archivo.curso}</td>
 												<td>${archivo.persona}</td>
@@ -72,6 +72,11 @@
 													data-archivoId="${archivo.id}"><button
 															class="btn btn-danger btn-circle" type="button">
 															<i class="fa fa-times"></i>
+														</button></a>
+														</a> <a  name="dowloadArchivo"
+													data-archivoId="${archivo.id}" href="/repouniversity/bajarArchivo?archivoId=${archivo.id}" target="_blank"><button
+															class="btn btn-success btn-circle" type="button">
+															<i class="fa fa-download"></i>
 														</button></a></td>
 											</tr>
 										</c:forEach>
@@ -121,6 +126,9 @@
 		<div id="deleteArchivoDialog" title="Eliminar Archivo">
 			<p>¿Esta seguro que desea eliminar la archivo?</p>
 		</div>
+		
+		<form id="downloadArchivoForm" method="POST">
+		</form>
 	</div>
 
 </body>
