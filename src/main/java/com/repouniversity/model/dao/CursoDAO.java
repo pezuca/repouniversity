@@ -17,4 +17,6 @@ public interface CursoDAO extends GenericDAO<Curso>{
     void saveAlumnoCursoGrupo(Long grupoId, Long cursoId, Long alumnoId);
 
 	List<Long> ObtenerAlumnosSinGrupo(Long idCurso);
+
+	void bajaCursoAlumno(Long cursoId, Long idAluDoc);
 }

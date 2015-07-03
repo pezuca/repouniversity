@@ -65,18 +65,6 @@ public class TpEntregaService {
     }
 
     
-    public TpEntregaTO nuevoEntregaTp(Long tpGrupoId, String descripcion, Long archivoId) {
-        
-    	TpEntrega tpEntrega = new TpEntrega();
-    	tpEntrega.setIdTpGrupo(tpGrupoId);
-    	tpEntrega.setDescripcion(descripcion);
-    	tpEntrega.setIdArchivo(archivoId);
-       	tpEntrega.setActivo(true);
-    	
-    	tpEntrega = save(tpEntrega);
-    	return buildTpEntrega(tpEntrega);
-
-    }
 
    
     public TpEntregaTO editarEntregaTp(Long tpGrupoId, Long tpEntregaId, String descripcion, Long archivoId) {

@@ -152,4 +152,8 @@ public class CursoService {
 		
 		return alumnoService.getAlumnosByIds(listaAlumnosid);
 	}
+
+	public void bajaCursoAlumno(Long cursoId, Long idAluDoc) {
+		cursoDao.bajaCursoAlumno(cursoId, idAluDoc);
+	}
 }

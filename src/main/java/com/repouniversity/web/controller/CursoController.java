@@ -67,6 +67,12 @@ public class CursoController {
         return new ModelAndView("solicitarCurso").addObject("cursosMaterias", cursos);
     }
 
+    @RequestMapping(value = "alumno/bajaCurso", method = {RequestMethod.POST})
+    public void bajaCurso(@RequestParam(value = "cursoId", required = true) Long cursoId, @ModelAttribute("login") UsuarioRol usuario) {
+    	cursoService.bajaCursoAlumno(cursoId, usuario.getIdAluDoc());
+    	
+    }
+
     @RequestMapping(value = "docente/verCursos", method = {RequestMethod.GET})
     public ModelAndView verCursosDocente(HttpServletRequest request, @ModelAttribute("login") UsuarioRol usuario) {
         List<CursoMateria> cursos = cursoService.getCursosMateriaDisponiblesParaDocente(usuario.getIdAluDoc());

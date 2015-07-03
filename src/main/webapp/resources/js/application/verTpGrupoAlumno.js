@@ -1,7 +1,7 @@
 var tpEntregaAdmin = {
 	crearNuevoEntregaTpAjax : function() {
 		
-		var dataFiles = new FormData($("#NuevoEntregaTpForm")[0]);
+		var dataFiles = new FormData($("#nuevoEntregaTpForm")[0]);
 		
 		$.ajax({
 			url: "/repouniversity/tpgrupo/nuevoEntregaTp",
@@ -40,7 +40,7 @@ var tpEntregaAdmin = {
 				$("#agregarEntregaTpDialog").dialog("close");						
 			},
 			error: function(data) {
-				$("#NuevoEntregaTpForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de crear el curso, inténtelo mas tarde.</p></div>")
+				$("#nuevoEntregaTpForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de crear el curso, inténtelo mas tarde.</p></div>")
 				setTimeout(function(){
 					$("#agregarEntregaTpDialog .infoDialog").hide(function(){
 						$(this).remove();
@@ -81,7 +81,7 @@ var tpEntregaAdmin = {
 				$("#editarEntregaTpDialog").dialog("close");						
 			},
 			error: function(data) {
-				$("#NuevoEntregaTpForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de editar el Trabajo Practico, inténtelo mas tarde.</p></div>")
+				$("#nuevoEntregaTpForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de editar el Trabajo Practico, inténtelo mas tarde.</p></div>")
 				setTimeout(function(){
 					$("#agregarEntregaTpDialog .infoDialog").hide(function(){
 						$(this).remove();
@@ -173,8 +173,8 @@ $(document).ready(function() {
 		},
 		open: function(event, ui) {
 			$(".infoDialog").remove();
-			$('#NuevoEntregaTpForm').trigger("reset");
-			$("#NuevoEntregaTpForm").find(".form-group").removeClass("has-error");
+			$('#nuevoEntregaTpForm').trigger("reset");
+			$("#nuevoEntregaTpForm").find(".form-group").removeClass("has-error");
 		},
 		close: function(event, ui) {
 		}
@@ -231,7 +231,7 @@ $(document).ready(function() {
 		},
 		open: function(event, ui) {
 			$(".infoDialog").remove();
-			$('#NuevoEntregaTpForm').trigger("reset");
+			$('#nuevoEntregaTpForm').trigger("reset");
 		},
 		close: function(event, ui) {
 		}
