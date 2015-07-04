@@ -30,7 +30,9 @@ public class TpGrupoService {
     private GrupoService grupoService;
     @Autowired
     private TpEntregaService tpEntregaService;
-
+    @Autowired
+    private ComentarioService comentarioService;
+    
     @Autowired
     private ArchivoService archivoService;
 
@@ -99,6 +101,7 @@ public class TpGrupoService {
         tpGrupoTo.setArchivoPath(archivoService.getArchivoById(tpGrupo.getIdArchivo()).getPath());
         tpGrupoTo.setNota(tpGrupo.getNota());
         tpGrupoTo.setTpEntrega(tpEntregaService.getTpEntregaForTpGrupo(tpGrupo.getId()));
+        tpGrupoTo.setComentario(comentarioService.getComentariosForTpGrupo(tpGrupo.getId()));
         return tpGrupoTo;
     }
 

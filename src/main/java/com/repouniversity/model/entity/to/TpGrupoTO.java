@@ -17,13 +17,22 @@ public class TpGrupoTO {
     private String archivoPath;
     private Long nota;
     private List<TpEntregaTO> tpEntrega;
-
+    private List<ComentarioTO> comentario;
+   
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<ComentarioTO> getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(List<ComentarioTO> comentario) {
+        this.comentario = comentario;
     }
 
     public String getGrupoNombre() {

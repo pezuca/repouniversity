@@ -57,6 +57,38 @@
 						</tbody>
 	                  	</table>
 	                  </div>
+	                  <div class="ibox-title">
+	                      <h5>Comentarios</h5>
+		                  <div class="ibox-tools" id="agregarEntregaTpButton">
+	                          <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  Comentario</a>
+	                      </div>
+	                  </div>
+	                  <div class="ibox-content">
+	                  	<table id="ComentarioTP" class="table table-striped table-hover" >
+	                  		<thead class="encabezado">
+							<tr>
+								<th>Descripcion</th>
+								<th>Persona</th>
+								<th>Fecha</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${tpgrupo.comentario}" var="comentario" varStatus="status">
+								<tr>
+									<td>${comentario.descripcion}</td>
+									<td>${tpentrega.idPersona}</td>
+									<td>${tpentrega.fechasys}</td>
+									<td>
+										<a href="#" name="editEntregaTp" data-tpentregaId="${tpentrega.id}"><button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Editar EntregaTP"><i class="fa fa-pencil"></i></button></a>
+										<a href="#" name="deleteEntregaTp" data-tpentregaId="${tpentrega.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar EntregaTP"><i class="fa fa-times"></i></button></a>
+										<a href="/repouniversitytpgrupo/verEntregasTP?tpEntregaId=${tpentrega.id}" name="Ver" data-tpentregaId="${tpentrega.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver EntregaTP"><i class="fa fa-codepen"></i></button></a>
+									</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+	                  	</table>
+	                  </div>
 	              </div>
 	      		</div>
 	         </div>
