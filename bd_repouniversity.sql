@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `repouniversity` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `repouniversity`;
--- MySQL dump 10.13  Distrib 5.6.17, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.6.13, for Win32 (x86)
 --
--- Host: localhost    Database: repouniversity
+-- Host: 127.0.0.1    Database: repouniversity
 -- ------------------------------------------------------
--- Server version	5.6.17
+-- Server version	5.1.37
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -201,6 +201,64 @@ INSERT INTO `carrera_materia` VALUES (1,1),(1,2),(1,3),(2,1),(3,1),(3,4);
 UNLOCK TABLES;
 
 --
+-- Table structure for table `comentario`
+--
+
+DROP TABLE IF EXISTS `comentario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `comentario` (
+  `id_comentario` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(500) DEFAULT NULL,
+  `id_persona` int(11) DEFAULT NULL,
+  `fecsys` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `activo` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_comentario`),
+  KEY `id_persona_fk_idx` (`id_persona`),
+  CONSTRAINT `id_persona_fk` FOREIGN KEY (`id_persona`) REFERENCES `persona` (`id_persona`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comentario`
+--
+
+LOCK TABLES `comentario` WRITE;
+/*!40000 ALTER TABLE `comentario` DISABLE KEYS */;
+INSERT INTO `comentario` VALUES (1,'Hay que revisar el trabajo numero 3',4,'2015-07-03 20:02:38',1),(2,'Hay que revisar el trabajo numero 1',4,'2015-07-03 20:02:38',1);
+/*!40000 ALTER TABLE `comentario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `comentario_tp`
+--
+
+DROP TABLE IF EXISTS `comentario_tp`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `comentario_tp` (
+  `id_comentario` int(11) NOT NULL,
+  `id_tpgrupo` int(11) NOT NULL,
+  `fecsys` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `activo` int(11) DEFAULT '1',
+  PRIMARY KEY (`id_comentario`,`id_tpgrupo`),
+  KEY `FK_comentario_tp_2` (`id_tpgrupo`),
+  CONSTRAINT `FK_comentario_tp_2` FOREIGN KEY (`id_tpgrupo`) REFERENCES `tp_grupo` (`idtp_grupo`),
+  CONSTRAINT `FK_comentario_tp_1` FOREIGN KEY (`id_comentario`) REFERENCES `comentario` (`id_comentario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comentario_tp`
+--
+
+LOCK TABLES `comentario_tp` WRITE;
+/*!40000 ALTER TABLE `comentario_tp` DISABLE KEYS */;
+INSERT INTO `comentario_tp` VALUES (1,1,'2015-07-03 20:02:38',1),(2,1,'2015-07-03 20:02:38',1);
+/*!40000 ALTER TABLE `comentario_tp` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `curso`
 --
 
@@ -250,7 +308,7 @@ CREATE TABLE `docente` (
   PRIMARY KEY (`id_docente`),
   KEY `fk_docente_1` (`id_docente`),
   CONSTRAINT `fk_docente_1` FOREIGN KEY (`id_docente`) REFERENCES `persona` (`id_persona`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -261,6 +319,35 @@ LOCK TABLES `docente` WRITE;
 /*!40000 ALTER TABLE `docente` DISABLE KEYS */;
 INSERT INTO `docente` VALUES (2,2,1,'2014-04-14 15:52:40'),(29,4,1,'2014-04-14 16:24:39'),(30,7,1,'2014-04-14 16:24:39'),(31,10,1,'2014-04-14 16:24:39'),(32,12,1,'2014-04-14 16:24:39'),(33,32,1,'2014-04-14 16:24:39'),(34,42,1,'2014-04-14 16:24:39'),(35,52,1,'2014-04-14 16:24:49'),(36,60,1,'2014-04-14 16:24:53');
 /*!40000 ALTER TABLE `docente` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `error_archivo`
+--
+
+DROP TABLE IF EXISTS `error_archivo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `error_archivo` (
+  `iderror_archivo` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(500) DEFAULT NULL,
+  `id_archivo` int(11) DEFAULT NULL,
+  `id_persona` int(11) DEFAULT NULL,
+  `fecsys` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `activo` int(11) DEFAULT '1',
+  PRIMARY KEY (`iderror_archivo`),
+  KEY `id_archivo_fk_idx` (`id_archivo`),
+  KEY `id_persona_fk_error_idx` (`id_persona`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `error_archivo`
+--
+
+LOCK TABLES `error_archivo` WRITE;
+/*!40000 ALTER TABLE `error_archivo` DISABLE KEYS */;
+/*!40000 ALTER TABLE `error_archivo` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -364,7 +451,7 @@ CREATE TABLE `notificacion` (
   KEY `tiponotificacion_idx` (`tiponotificacion`),
   CONSTRAINT `idcurso` FOREIGN KEY (`idcurso`) REFERENCES `curso` (`id_curso`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `tiponotificacion` FOREIGN KEY (`tiponotificacion`) REFERENCES `tipo_notificacion` (`idTipoNotificacion`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1 COMMENT='En esta tabla se alojaran todas las notificaciones del sistema, ej alta de cursos, alta de grupo, etc.';
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1 COMMENT='En esta tabla se alojaran todas las notificaciones del siste';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -450,6 +537,35 @@ INSERT INTO `tipo_notificacion` VALUES (1,'Solicitud alta curso',1),(2,'Nuevo ar
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tp_entrega`
+--
+
+DROP TABLE IF EXISTS `tp_entrega`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tp_entrega` (
+  `idtp_entrega` int(11) NOT NULL AUTO_INCREMENT,
+  `idtp_grupo` int(11) NOT NULL,
+  `id_archivo` int(11) NOT NULL,
+  `descripcion` varchar(100) DEFAULT NULL,
+  `fecsys` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `activo` bit(1) NOT NULL DEFAULT b'1',
+  PRIMARY KEY (`idtp_entrega`),
+  KEY `fk_tp_grupo_idx` (`idtp_grupo`),
+  KEY `fk_archivo_idx` (`id_archivo`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tp_entrega`
+--
+
+LOCK TABLES `tp_entrega` WRITE;
+/*!40000 ALTER TABLE `tp_entrega` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tp_entrega` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tp_grupo`
 --
 
@@ -461,7 +577,7 @@ CREATE TABLE `tp_grupo` (
   `id_grupo` int(11) NOT NULL,
   `id_archivo` int(11) NOT NULL,
   `descripcion` varchar(100) DEFAULT NULL,
-  `nota` INT NULL,
+  `nota` int(11) DEFAULT NULL,
   `fecsys` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `activo` int(11) DEFAULT '1',
   PRIMARY KEY (`idtp_grupo`),
@@ -478,7 +594,7 @@ CREATE TABLE `tp_grupo` (
 
 LOCK TABLES `tp_grupo` WRITE;
 /*!40000 ALTER TABLE `tp_grupo` DISABLE KEYS */;
-INSERT INTO `tp_grupo` VALUES (1,2,1,'Entrega de tranajo practico del grupo smart solution', NULL, '2015-05-16 20:37:42', 1),(2,2,5,'Entrega del tp del grupo samrt solution ', NULL, '2015-05-16 20:41:08', 1),(3,3,6,'nada', NULL, '2015-05-16 20:43:21', 1);
+INSERT INTO `tp_grupo` VALUES (1,2,1,'Entrega de tranajo practico del grupo smart solution',NULL,'2015-05-16 20:37:42',1),(2,2,5,'Entrega del tp del grupo samrt solution ',NULL,'2015-05-16 20:41:08',1),(3,3,6,'nada',NULL,'2015-05-16 20:43:21',1);
 /*!40000 ALTER TABLE `tp_grupo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -513,37 +629,6 @@ INSERT INTO `usuario` VALUES (1,'repo','repo',1,'2014-01-08 03:00:00',2),(2,'alu
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
-
---
--- Table structure for table `tp_entregas`
---
-
-DROP TABLE IF EXISTS `tp_entrega`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `repouniversity`.`tp_entrega` (
-  `idtp_entrega` INT NOT NULL AUTO_INCREMENT,
-  `idtp_grupo` INT NOT NULL,
-  `id_archivo` INT NOT NULL,
-  `descripcion` VARCHAR(100) NULL,
-  `fecsys` TIMESTAMP NOT NULL,
-  `activo` BIT NOT NULL DEFAULT 1,
-  PRIMARY KEY (`idtp_entrega`),
-  INDEX `fk_tp_grupo_idx` (`idtp_grupo` ASC),
-  INDEX `fk_archivo_idx` (`id_archivo` ASC),
-  CONSTRAINT `fk_tp_grupo`
-    FOREIGN KEY (`idtp_grupo`)
-    REFERENCES `repouniversity`.`tp_grupo` (`idtp_grupo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_archivo`
-    FOREIGN KEY (`id_archivo`)
-    REFERENCES `repouniversity`.`archivo` (`id_archivo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-
-
 --
 -- Final view structure for view `roles`
 --
@@ -558,7 +643,7 @@ CREATE TABLE `repouniversity`.`tp_entrega` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `roles` AS select `u`.`id_usuario` AS `id_usuario`,`u`.`user` AS `user`,`u`.`pass` AS `pass`,`u`.`activo` AS `activo`,'docente' AS `rol`,`p`.`id_persona` AS `id_persona`,`a`.`id_docente` AS `id_alu_doc` from ((`usuario` `u` join `persona` `p` on((`p`.`id_persona` = `u`.`id_persona`))) join `docente` `a` on((`a`.`id_persona` = `p`.`id_persona`))) union select `u`.`id_usuario` AS `id_usuario`,`u`.`user` AS `user`,`u`.`pass` AS `pass`,`u`.`activo` AS `activo`,'alumno' AS `rol`,`p`.`id_persona` AS `id_persona`,`a`.`id_alumno` AS `id_alu_doc` from ((`usuario` `u` join `persona` `p` on((`p`.`id_persona` = `u`.`id_persona`))) join `alumno` `a` on((`a`.`id_persona` = `p`.`id_persona`))) union select `u`.`id_usuario` AS `id_usuario`,`u`.`user` AS `user`,`u`.`pass` AS `pass`,`u`.`activo` AS `activo`,'administrador' AS `rol`,`u`.`id_persona` AS `id_persona`,`u`.`id_usuario` AS `id_alu_doc` from `usuario` `u` where ((not(`u`.`id_persona` in (select `alumno`.`id_persona` from `alumno`))) and (not(`u`.`id_persona` in (select `docente`.`id_persona` from `docente`))) and (`u`.`activo` = 1)) */;
+/*!50001 VIEW `roles` AS select `u`.`id_usuario` AS `id_usuario`,`u`.`user` AS `user`,`u`.`pass` AS `pass`,`u`.`activo` AS `activo`,'docente' AS `rol`,`p`.`id_persona` AS `id_persona`,`a`.`id_docente` AS `id_alu_doc` from ((`usuario` `u` join `persona` `p` on((`p`.`id_persona` = `u`.`id_persona`))) join `docente` `a` on((`a`.`id_persona` = `p`.`id_persona`))) union select `u`.`id_usuario` AS `id_usuario`,`u`.`user` AS `user`,`u`.`pass` AS `pass`,`u`.`activo` AS `activo`,'alumno' AS `rol`,`p`.`id_persona` AS `id_persona`,`a`.`id_alumno` AS `id_alu_doc` from ((`usuario` `u` join `persona` `p` on((`p`.`id_persona` = `u`.`id_persona`))) join `alumno` `a` on((`a`.`id_persona` = `p`.`id_persona`))) union select `u`.`id_usuario` AS `id_usuario`,`u`.`user` AS `user`,`u`.`pass` AS `pass`,`u`.`activo` AS `activo`,'administrador' AS `rol`,`u`.`id_persona` AS `id_persona`,`u`.`id_usuario` AS `id_alu_doc` from `usuario` `u` where ((not(`u`.`id_persona` in (select `alumno`.`id_persona` AS `id_persona` from `alumno`))) and (not(`u`.`id_persona` in (select `docente`.`id_persona` AS `id_persona` from `docente`))) and (`u`.`activo` = 1)) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -572,4 +657,4 @@ CREATE TABLE `repouniversity`.`tp_entrega` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-16 17:53:56
+-- Dump completed on 2015-07-03 18:36:34
