@@ -18,9 +18,12 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.repouniversity.model.entity.UsuarioRol;
+import com.repouniversity.model.entity.to.ComentarioTO;
+import com.repouniversity.model.entity.to.TpEntregaTO;
 import com.repouniversity.model.entity.to.TpGrupoTO;
 import com.repouniversity.model.services.AlumnoService;
 import com.repouniversity.model.services.ArchivoService;
+import com.repouniversity.model.services.ComentarioService;
 import com.repouniversity.model.services.CursoService;
 import com.repouniversity.model.services.DocenteService;
 import com.repouniversity.model.services.GrupoService;
@@ -43,10 +46,34 @@ public class ComentarioController {
 	private TpGrupoService tpGrupoService;
 	
 	@Autowired
-	private AlumnoService alumnoService;
+	private ComentarioService comentarioService;
 
 	@Autowired
 	private ArchivoService archivoService;
 	
-	
+	@RequestMapping(value = "comentario/nuevoComentario", method = { RequestMethod.POST })
+	@ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+	public ComentarioTO nuevoComentarioAjax(
+			@RequestParam(value = "tpGrupoId", required = true) Long tpGrupoId,
+			@RequestParam(value = "descripcion", required = true) String descripcion,
+			@ModelAttribute("login") UsuarioRol usuario) throws IOException {
+
+		return comentarioService.nuevoComentario(tpGrupoId, descripcion, usuario);
+		
+
+	}
+
+
+	@RequestMapping(value = "comentario/eliminarComentario", method = { RequestMethod.POST })
+	@ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+	public void eliminarComentarioAjax(
+			@RequestParam(value = "comentarioId", required = true) Long comentarioId) {
+
+		comentarioService.eliminarComentario(comentarioId);
+		
+
+	}
+
 }

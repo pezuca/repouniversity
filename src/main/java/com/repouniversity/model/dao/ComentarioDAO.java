@@ -9,4 +9,6 @@ public interface ComentarioDAO extends GenericDAO<Comentario> {
 
 	List<Comentario> findComentariosForTpGrupo(Long tpGrupoId);
 
+	void saveComentarioTp(long comentarioId, long tpGrupoId);
+
 }

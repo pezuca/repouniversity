@@ -59,7 +59,7 @@
 	                  </div>
 	                  <div class="ibox-title">
 	                      <h5>Comentarios</h5>
-		                  <div class="ibox-tools" id="agregarEntregaTpButton">
+		                  <div class="ibox-tools" id="agregarComentarioButton">
 	                          <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  Comentario</a>
 	                      </div>
 	                  </div>
@@ -77,12 +77,10 @@
 							<c:forEach items="${tpgrupo.comentario}" var="comentario" varStatus="status">
 								<tr>
 									<td>${comentario.descripcion}</td>
-									<td>${tpentrega.idPersona}</td>
-									<td>${tpentrega.fechasys}</td>
+									<td>${comentario.idPersona}</td>
+									<td>${comentario.fechasys}</td>
 									<td>
-										<a href="#" name="editEntregaTp" data-tpentregaId="${tpentrega.id}"><button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Editar EntregaTP"><i class="fa fa-pencil"></i></button></a>
-										<a href="#" name="deleteEntregaTp" data-tpentregaId="${tpentrega.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar EntregaTP"><i class="fa fa-times"></i></button></a>
-										<a href="/repouniversitytpgrupo/verEntregasTP?tpEntregaId=${tpentrega.id}" name="Ver" data-tpentregaId="${tpentrega.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver EntregaTP"><i class="fa fa-codepen"></i></button></a>
+										<a href="#" name="deleteComentario" data-comentarioId="${comentario.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar Comentario"><i class="fa fa-times"></i></button></a>
 									</td>
 								</tr>
 							</c:forEach>
@@ -130,6 +128,22 @@
 	<div id="deleteTpDialog" title="Eliminar EntregaTP">
 		<p>¿Esta seguro que desea eliminar la entrega?</p>
 	</div>
+	
+	<div id="agregarComentarioDialog" title="Nuevo comentario">
+		<form id="nuevoComentarioForm" class="form-horizontal">
+			<input name="tpGrupoId" type="hidden" class="form-control" value="${param.tpGrupoId}">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Comentario*:</label>
+                <div class="col-sm-10"><input name="comentario" type="text" class="form-control" required="required"></div>
+            </div>
+                     
+		</form>
+	</div>
+
+	<div id="deleteComentarioDialog" title="Eliminar Comentario">
+		<p>¿Esta seguro que desea eliminar el comentario?</p>
+	</div>
+
 	</div>
 	
 </body>

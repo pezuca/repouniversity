@@ -1,13 +1,18 @@
 package com.repouniversity.model.dao.impl;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.repouniversity.model.dao.ComentarioDAO;
@@ -78,8 +83,8 @@ public class ComentarioDAOImpl extends GenericDAOImpl<Comentario> implements Com
     }
     
     protected InsertSQLStatement buildInsertSQLStatement(final Comentario t) {
-        return new InsertSQLStatement("INSERT INTO comentario (descripcion, id_persona) values (?, ?, ?)") {
-
+        return new InsertSQLStatement("INSERT INTO comentario (descripcion, id_persona, activo) values (?, ?, 1)") {
+        	
             @Override
             public void doAfterInsert(Long id) {
             }
@@ -96,6 +101,34 @@ public class ComentarioDAOImpl extends GenericDAOImpl<Comentario> implements Com
         };
     }
 
+    @Override
+    public void saveComentarioTp(final long comentarioId, final long tpGrupoId) {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        final InsertSQLStatement sqlStatement = new InsertSQLStatement(
+                "INSERT INTO comentario_tp (id_comentario, id_tpgrupo, activo) VALUES (?, ?, 1)") {
+            @Override
+            public void doAfterInsert(Long id) {
+            }
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+                ps.setLong(1, comentarioId);
+                ps.setLong(2, tpGrupoId);
+                            }
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+        };
+        jdbcTemplate.update(new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+                PreparedStatement ps = connection.prepareStatement(sqlStatement.getQuery(), Statement.RETURN_GENERATED_KEYS);
+                sqlStatement.buildPreparedStatement(ps);
+                return ps;
+            }
+        }, keyHolder);
+    }
+    
     @Override
     protected SQLStatement buildUpdateSQLStatement(final Comentario t) {
         return new SQLStatement("UPDATE tp_grupo SET id_grupo = ?, id_archivo = ?, descripcion = ?, nota = ?, activo = ?, fecsys = now() WHERE idtp_grupo = ?") {

@@ -86,6 +86,67 @@ var tpEntregaAdmin = {
 			}
 		})
 	},
+	crearNuevoComentarioAjax : function() {
+		$.ajax({
+			url: "/repouniversity/comentario/nuevoComentario",
+			type: "POST",
+			data: $("#NuevoComentarioForm").serialize(),
+			success: function(data){
+				$.gritter.add({
+					title:'Comentario creada',
+					text: 'La creacion del comentario fue exitosa.',
+					sticky: false
+				});
+				
+				
+				tableComentario.row.add([
+				                                          data.descripcion,
+				                                          data.idPersona,
+				                                          data.fechasys,
+														  "<a href='#' name='deleteComentario' data-comentarioId='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a> " 
+													]).draw();
+													 
+				//Agrego el evento de delete
+				$("a[name='deleteComentario'][data-comentarioId=" + data.id + "] button").click(function(){
+					$("#deleteComentarioDialog").data('comentarioId', $(this).parent().attr("data-comentarioId")).dialog("open");
+				});
+								
+				$("#agregarComentarioDialog").dialog("close");						
+			},
+			error: function(data) {
+				$("#NuevoComentarioForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de crear el comentario, inténtelo mas tarde.</p></div>")
+				setTimeout(function(){
+					$("#agregarComentarioDialog .infoDialog").hide(function(){
+						$(this).remove();
+					});
+				}, 3000);	
+			}
+		})
+	},
+	deleteComentarioAjax : function(comentarioId) {
+		$.ajax({
+			url: "/repouniversity/comentario/eliminarComentario",
+			type: "POST",
+			data: {"comentarioId" : comentarioId},
+			success: function(data){
+				$.gritter.add({
+					title:'Comentario eliminado',
+					text: 'El comentario fue elimnado exitosamente.',
+					sticky: false
+				});
+				
+				tableComentario.row( $("#Comentario a[data-comentarioId=" + comentarioId + "]").parents('tr') ).remove().draw();
+				$("#deleteComentarioDialog").dialog("close");						
+			},
+			error: function(data) {
+				$.gritter.add({
+					title: 'Eliminar Comentario',
+					text: 'Hubo un problema al tratar de eliminar el comentario. Por favor inténtelo mas tarde.',
+					class_name: 'gritter-light'
+				});	
+			}
+		})
+	},
 	deleteEntregaTpAjax : function(tpEntregaId) {
 		$.ajax({
 			url: "/repouniversity/tpgrupo/eliminarTp",
@@ -146,6 +207,19 @@ $(document).ready(function() {
             "search": "Búsqueda: "
         }
 	});
+	tableComentario = $('#ComentarioTP').DataTable({
+		"processing" : false,
+		"serverSide" : false,
+		"paging" : false,
+		"language": {
+            "lengthMenu": "Mostrar _MENU_ resultados por página",
+            "zeroRecords": "No fueron encontrados resultados.",
+            "info": "Pagina _PAGE_ of _PAGES_",
+            "infoEmpty": "No hay resultados disponibles.",
+            "infoFiltered": "(filtered from _MAX_ total records)",
+            "search": "Búsqueda: "
+        }
+	});
 
 	$("#clientTable_length").remove();
 	
@@ -176,6 +250,32 @@ $(document).ready(function() {
 		}
 	});
 	
+	$("#agregarComentarioDialog").dialog({
+		resizable: false,
+		width:700,
+		modal: true,
+		autoOpen: false,
+		autoResize:true,
+		hide: {effect: "fade", duration: 300},
+		show: {effect: "fade", duration: 300},
+		buttons: {
+			"Crear": function() {
+				if(tpEntregaAdmin.validacionFormlario("#nuevoComentarioForm")) {
+					tpEntregaAdmin.crearNuevoComentarioAjax();
+				}
+			},
+			"Cancelar": function() {
+				$(this).dialog("close");
+			}
+		},
+		open: function(event, ui) {
+			$(".infoDialog").remove();
+			$('#nuevoComentarioForm').trigger("reset");
+			$("#nuevoComentarioForm").find(".form-group").removeClass("has-error");
+		},
+		close: function(event, ui) {
+		}
+	});
 	$("#editarEntregaTpDialog").dialog({
 		resizable: false,
 		width:700,
@@ -204,6 +304,29 @@ $(document).ready(function() {
 			$('#editarEntregaTpForm input[name=descripcion]').val($("#editarEntregaTpDialog").data('descripcion'));
 			$('#editarEntregaTpForm input[name=archivoId]').val($("#editarEntregaTpDialog").data('archivo'));
 			
+		},
+		close: function(event, ui) {
+		}
+	});
+	$("#deleteComentarioDialog").dialog({
+		resizable: false,
+		width:400,
+		modal: true,
+		autoOpen: false,
+		autoResize:true,
+		hide: {effect: "fade", duration: 300},
+		hide: {effect: "fade", duration: 300},
+		buttons: {
+			"Eliminar": function() {
+				tpEntregaAdmin.deleteComentarioAjax($("#deleteComentarioDialog").data('comentarioId'));
+			},
+			"Cancelar": function() {
+				$(this).dialog("close");
+			}
+		},
+		open: function(event, ui) {
+			$(".infoDialog").remove();
+			$('#NuevoComentarioForm').trigger("reset");
 		},
 		close: function(event, ui) {
 		}
@@ -239,6 +362,13 @@ $(document).ready(function() {
 	
 	$("a[name=deleteEntregaTp] button").click(function(){
 		$("#deleteEntregaTpDialog").data('tpEntregaId', $(this).parent().attr("data-tpentregaId")).dialog("open");
+	});
+	$("#agregarComentarioButton").click(function() {
+		$("#agregarComentarioDialog").dialog("open");
+	});
+	
+	$("a[name=deleteComentario] button").click(function(){
+		$("#deleteComentarioDialog").data('comentarioId', $(this).parent().attr("data-comentarioId")).dialog("open");
 	});
 	
 	$("a[name=editEntregaTp] button").click(function(){
