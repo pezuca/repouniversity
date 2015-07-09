@@ -56,7 +56,7 @@ public class ComentarioController {
     @ResponseStatus(value = HttpStatus.OK)
 	public ComentarioTO nuevoComentarioAjax(
 			@RequestParam(value = "tpGrupoId", required = true) Long tpGrupoId,
-			@RequestParam(value = "descripcion", required = true) String descripcion,
+			@RequestParam(value = "comentario", required = true) String descripcion,
 			@ModelAttribute("login") UsuarioRol usuario) throws IOException {
 
 		return comentarioService.nuevoComentario(tpGrupoId, descripcion, usuario);

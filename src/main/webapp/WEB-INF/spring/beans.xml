@@ -9,4 +9,8 @@
 	<bean name="systemFileUploadLocation" class="java.lang.String">
 		<constructor-arg value="${system.fileUpload.location}" />
 	</bean>
+	
+	<bean name="systemFilePreviewLocation" class="java.lang.String">
+		<constructor-arg value="${system.filePreview.location}" />
+	</bean>
 </beans>

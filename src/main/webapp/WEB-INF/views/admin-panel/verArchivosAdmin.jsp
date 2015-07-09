@@ -76,7 +76,7 @@
 														</a> 
 														
 														<a  name="dowloadArchivo"
-													data-archivoId="${archivo.id}" href="/repouniversity/resources/js/ViewerJS/index.html#../demo/fede.ods" target="_blank"><button
+													data-archivoId="${archivo.id}" href="/repouniversity/resources/js/ViewerJS/index.html#documents/previews/1436464446905${archivo.nombre}" target="_blank"><button
 															class="btn btn-success btn-circle" type="button">
 															<i class="fa fa-download"></i>
 														</button></a>

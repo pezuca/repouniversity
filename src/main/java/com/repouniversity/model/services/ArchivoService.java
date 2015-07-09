@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -27,7 +26,10 @@ import com.repouniversity.model.entity.to.ArchivoTO;
 public class ArchivoService {
 
     @Autowired
-    private String systemFileUploadLocation;
+    public String systemFileUploadLocation;
+    
+    @Autowired
+    public String systemFilePreviewLocation;
 
     public static final String SEPARATOR = "##";
 

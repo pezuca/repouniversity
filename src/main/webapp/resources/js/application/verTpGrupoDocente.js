@@ -90,7 +90,7 @@ var tpEntregaAdmin = {
 		$.ajax({
 			url: "/repouniversity/comentario/nuevoComentario",
 			type: "POST",
-			data: $("#NuevoComentarioForm").serialize(),
+			data: $("#nuevoComentarioForm").serialize(),
 			success: function(data){
 				$.gritter.add({
 					title:'Comentario creada',
