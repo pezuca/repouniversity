@@ -1,6 +1,5 @@
 package com.repouniversity.web.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +19,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.repouniversity.model.entity.Archivo;
-import com.repouniversity.model.entity.CursoMateria;
 import com.repouniversity.model.entity.UsuarioRol;
 import com.repouniversity.model.entity.VwArchivo;
 import com.repouniversity.model.services.ArchivoService;
@@ -89,17 +87,16 @@ public class ArchivoController {
     // }
     @RequestMapping(value = "/verArchivos", method = {RequestMethod.GET})
     public ModelAndView verArchivos(@ModelAttribute("login") UsuarioRol usuario) {
-    	List<VwArchivo> archivos = archivoService.getArchivosDePersona(usuario.getIdPersona());
-    			
+        List<VwArchivo> archivos = archivoService.getArchivosDePersona(usuario.getIdPersona());
+
         return new ModelAndView("verArchivos").addObject("archivos", archivos);
-        
+
     }
 
+    @RequestMapping(value = "/vistaPrevia", method = {RequestMethod.GET})
+    public ModelAndView vistaPrevia(@RequestParam(value = "archivoId") Long archivoId) {
+        VwArchivo archivo = archivoService.getVwArchivo(archivoId);
 
-    private ArrayList buscarFicheroLocal(String archivo) {
-        ArrayList archivosEncontrados;
-        archivosEncontrados = new ArrayList();
-        return archivosEncontrados;
-
+        return new ModelAndView("vistaPrevia").addObject("archivo", archivo);
     }
 }

@@ -13,5 +13,7 @@ public interface ArchivoDAO extends GenericDAO<Archivo> {
 
     List<Archivo> findArchivoByDocente(String string);
 
-	List<VwArchivo> findArchivosDePersona(long idPersona);
+    List<VwArchivo> findArchivosDePersona(long idPersona);
+
+    VwArchivo findVwArchivo(Long archivoId);
 }

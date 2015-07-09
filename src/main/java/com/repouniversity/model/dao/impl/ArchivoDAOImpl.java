@@ -76,7 +76,6 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
         return "archivo";
     }
 
-    
     @Override
     protected Archivo extractEntityFromResultSet(ResultSet rs, int line) throws SQLException {
         return (new ArchivoRowMapper()).mapRow(rs, line);
@@ -103,29 +102,52 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
     protected String getColumnIdName() {
         return "id_archivo";
     }
-    
 
-	@Override
-	  public List<VwArchivo> findArchivosDePersona(final long idPersona) {
-	        StringBuilder sql = new StringBuilder();
+    @Override
+    public List<VwArchivo> findArchivosDePersona(final long idPersona) {
+        StringBuilder sql = new StringBuilder();
 
-	        sql.append("select * from vw_archivos where activo = 1 and persona_id_persona = ? ");
+        sql.append("select * from vw_archivos where activo = 1 and persona_id_persona = ? ");
 
-	        List<VwArchivo> list = doQuery(new SQLStatement(sql.toString()) {
-	            @Override
-	            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
-	                ps.setLong(1, idPersona);
-	            }
+        List<VwArchivo> list = doQuery(new SQLStatement(sql.toString()) {
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+                ps.setLong(1, idPersona);
+            }
 
-	            @Override
-	            public void doAfterTransaction(int result) {
-	            }
-	        }, new VwArchivoRowMapper(), "findArchivosDePersona: " + idPersona);
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+        }, new VwArchivoRowMapper(), "findArchivosDePersona: " + idPersona);
 
-	        if (list.isEmpty()) {
-	            return new ArrayList<VwArchivo>();
-	        }
+        if (list.isEmpty()) {
+            return new ArrayList<VwArchivo>();
+        }
 
-	        return list;
-	    }
+        return list;
+    }
+
+    @Override
+    public VwArchivo findVwArchivo(final Long archivoId) {
+        StringBuilder sql = new StringBuilder();
+
+        sql.append("select * from vw_archivos where activo = 1 and id_archivo = ? ");
+
+        List<VwArchivo> list = doQuery(new SQLStatement(sql.toString()) {
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+                ps.setLong(1, archivoId);
+            }
+
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+        }, new VwArchivoRowMapper(), "findVwArchivo: " + archivoId);
+
+        if (list.isEmpty()) {
+            return null;
+        }
+
+        return list.get(0);
+    }
 }

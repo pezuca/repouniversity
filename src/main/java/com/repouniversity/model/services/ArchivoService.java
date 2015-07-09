@@ -31,7 +31,7 @@ public class ArchivoService {
     @Autowired
     public String systemFilePreviewLocation;
 
-    public static final String SEPARATOR = "##";
+    public static final String SEPARATOR = "-aa-";
 
     @Autowired
     private ArchivoDAO archivoDao;
@@ -139,9 +139,16 @@ public class ArchivoService {
         for (int i = 0; i < file.length; i++) {
             File localFile = new File(systemFileUploadLocation + (new Date()).getTime() + SEPARATOR + file[i].getOriginalFilename());
             FileOutputStream os = null;
+            
+//            File previewFile = new File(systemFileUploadLocation + (new Date()).getTime() + SEPARATOR + file[i].getOriginalFilename());
+//            FileOutputStream previewOs = null;
+            
             // GUARDO LOS ARCHIVOS EN LA CARPETA
             os = new FileOutputStream(localFile);
             os.write(file[i].getBytes());
+            
+//            os = new FileOutputStream(localFile);
+//            os.write(file[i].getBytes());
 
             try {
 
@@ -155,7 +162,7 @@ public class ArchivoService {
                 nuevoArchivo.setId(null);
                 nuevoArchivo.setFechasys(null);
                 nuevoArchivo.setEstado(null);
-                nuevoArchivo.setPath(localFile.getAbsolutePath());
+                nuevoArchivo.setPath(localFile.getName());
                 nuevoArchivo.setPersona(usuario.getIdPersona());
                 nuevoArchivo.setTags(etiqueta.toString());
                 nuevoArchivo.setCurso(cursoId);
@@ -208,5 +215,9 @@ public class ArchivoService {
         // response.setHeader("Pragma", "public");
 
         return archivo;
+    }
+
+    public VwArchivo getVwArchivo(Long archivoId) {
+        return archivoDao.findVwArchivo(archivoId);
     }
 }
