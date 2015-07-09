@@ -73,7 +73,15 @@
 															class="btn btn-danger btn-circle" type="button">
 															<i class="fa fa-times"></i>
 														</button></a>
-														</a> <a  name="dowloadArchivo"
+														</a> 
+														
+														<a  name="dowloadArchivo"
+													data-archivoId="${archivo.id}" href="/repouniversity/resources/js/ViewerJS/index.html#../demo/fede.ods" target="_blank"><button
+															class="btn btn-success btn-circle" type="button">
+															<i class="fa fa-download"></i>
+														</button></a>
+														
+														<a  name="dowloadArchivo"
 													data-archivoId="${archivo.id}" href="/repouniversity/bajarArchivo?archivoId=${archivo.id}" target="_blank"><button
 															class="btn btn-success btn-circle" type="button">
 															<i class="fa fa-download"></i>
@@ -127,8 +135,6 @@
 			<p>¿Esta seguro que desea eliminar la archivo?</p>
 		</div>
 		
-		<form id="downloadArchivoForm" method="POST">
-		</form>
 	</div>
 
 </body>
