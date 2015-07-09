@@ -3,6 +3,7 @@ package com.repouniversity.model.dao.impl;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,9 @@ import com.repouniversity.model.dao.ArchivoDAO;
 import com.repouniversity.model.dao.query.InsertSQLStatement;
 import com.repouniversity.model.dao.query.SQLStatement;
 import com.repouniversity.model.dao.rowmapper.ArchivoRowMapper;
+import com.repouniversity.model.dao.rowmapper.VwArchivoRowMapper;
 import com.repouniversity.model.entity.Archivo;
+import com.repouniversity.model.entity.VwArchivo;
 
 @Repository
 public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDAO {
@@ -100,4 +103,29 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
     protected String getColumnIdName() {
         return "id_archivo";
     }
+    
+
+	@Override
+	  public List<VwArchivo> findArchivosDePersona(final long idPersona) {
+	        StringBuilder sql = new StringBuilder();
+
+	        sql.append("select * from vw_archivos where activo = 1 and persona_id_persona = ? ");
+
+	        List<VwArchivo> list = doQuery(new SQLStatement(sql.toString()) {
+	            @Override
+	            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+	                ps.setLong(1, idPersona);
+	            }
+
+	            @Override
+	            public void doAfterTransaction(int result) {
+	            }
+	        }, new VwArchivoRowMapper(), "findArchivosDePersona: " + idPersona);
+
+	        if (list.isEmpty()) {
+	            return new ArrayList<VwArchivo>();
+	        }
+
+	        return list;
+	    }
 }

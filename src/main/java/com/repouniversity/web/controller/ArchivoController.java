@@ -20,7 +20,9 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.repouniversity.model.entity.Archivo;
+import com.repouniversity.model.entity.CursoMateria;
 import com.repouniversity.model.entity.UsuarioRol;
+import com.repouniversity.model.entity.VwArchivo;
 import com.repouniversity.model.services.ArchivoService;
 import com.repouniversity.model.services.PersonaService;
 import com.repouniversity.web.exceptions.SubirArchivoException;
@@ -85,6 +87,14 @@ public class ArchivoController {
     // buscarFicheroLocal(parametro);
     //
     // }
+    @RequestMapping(value = "/verArchivos", method = {RequestMethod.GET})
+    public ModelAndView verArchivos(@ModelAttribute("login") UsuarioRol usuario) {
+    	List<VwArchivo> archivos = archivoService.getArchivosDePersona(usuario.getIdPersona());
+    			
+        return new ModelAndView("verArchivos").addObject("archivos", archivos);
+        
+    }
+
 
     private ArrayList buscarFicheroLocal(String archivo) {
         ArrayList archivosEncontrados;

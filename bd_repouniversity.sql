@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `repouniversity` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `repouniversity`;
--- MySQL dump 10.13  Distrib 5.6.13, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.6.17, for Win32 (x86)
 --
 -- Host: 127.0.0.1    Database: repouniversity
 -- ------------------------------------------------------
--- Server version	5.1.37
+-- Server version	5.6.20
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -74,7 +74,7 @@ CREATE TABLE `alumno_curso` (
 
 LOCK TABLES `alumno_curso` WRITE;
 /*!40000 ALTER TABLE `alumno_curso` DISABLE KEYS */;
-INSERT INTO `alumno_curso` VALUES (3,2,2),(4,3,2),(5,4,2),(8,3,2),(9,3,2),(9,4,3);
+INSERT INTO `alumno_curso` VALUES (3,2,2),(4,3,2),(5,4,2),(8,3,2);
 /*!40000 ALTER TABLE `alumno_curso` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,7 +118,7 @@ CREATE TABLE `archivo` (
 
 LOCK TABLES `archivo` WRITE;
 /*!40000 ALTER TABLE `archivo` DISABLE KEYS */;
-INSERT INTO `archivo` VALUES (1,'practica Algebra','practica ejercicios del 1 a 20 ','0000-00-00','0000-00-00',1,'2014-04-15 14:21:04',1,1,'c:\\algebra.doc',31,3,NULL),(5,'Teoria nº 1 programción','Teoria de pilas y  colas','0000-00-00','0000-00-00',1,'2014-04-15 14:24:29',1,1,'c:\\prog.doc',32,4,NULL),(6,'Teoria nº 2 programción','Recursividad','0000-00-00','0000-00-00',1,'2014-04-15 14:33:11',1,1,'c:\\prog2.doc',32,4,NULL),(7,'practica Nº 2  Algebra ','practica ejercicios del 1 a 20 ','0000-00-00','0000-00-00',1,'2014-04-15 14:34:15',1,1,'c:\\algebra2.doc',32,5,NULL),(8,'practica Nº 3  Algebra ','practica ejercicios del 20 a 30 ','0000-00-00','0000-00-00',1,'2014-04-15 14:45:37',1,1,'c:\\algebra3.doc',32,5,NULL),(9,'practica Nº 3  Algebra ','practica ejercicios del 20 a 30 ','0000-00-00','0000-00-00',1,'2014-04-15 14:46:14',1,1,'c:\\algebra3.doc',31,3,NULL);
+INSERT INTO `archivo` VALUES (1,'practica Algebra','practica ejercicios del 1 a 20 ','1900-01-01','1900-01-01',1,'2014-04-15 14:21:04',1,1,'c:\\algebra.doc',4,3,NULL),(5,'Teoria nº 1 programción','Teoria de pilas y  colas','1900-01-01','1900-01-01',1,'2014-04-15 14:24:29',1,1,'c:\\prog.doc',4,4,NULL),(6,'Teoria nº 2 programción','Recursividad','1900-01-01','1900-01-01',1,'2014-04-15 14:33:11',1,1,'c:\\prog2.doc',4,4,NULL),(7,'practica Nº 2  Algebra ','practica ejercicios del 1 a 20 ','1900-01-01','1900-01-01',1,'2014-04-15 14:34:15',1,1,'c:\\algebra2.doc',32,5,NULL),(8,'practica Nº 3  Algebra ','practica ejercicios del 20 a 30 ','1900-01-01','1900-01-01',1,'2014-04-15 14:45:37',1,1,'c:\\algebra3.doc',32,5,NULL),(9,'practica Nº 3  Algebra ','practica ejercicios del 20 a 30 ','1900-01-01','1900-01-01',1,'2014-04-15 14:46:14',1,1,'c:\\algebra3.doc',31,3,NULL);
 /*!40000 ALTER TABLE `archivo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -216,7 +216,7 @@ CREATE TABLE `comentario` (
   PRIMARY KEY (`id_comentario`),
   KEY `id_persona_fk_idx` (`id_persona`),
   CONSTRAINT `id_persona_fk` FOREIGN KEY (`id_persona`) REFERENCES `persona` (`id_persona`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -225,7 +225,7 @@ CREATE TABLE `comentario` (
 
 LOCK TABLES `comentario` WRITE;
 /*!40000 ALTER TABLE `comentario` DISABLE KEYS */;
-INSERT INTO `comentario` VALUES (1,'Hay que revisar el trabajo numero 3',4,'2015-07-03 20:02:38',1),(2,'Hay que revisar el trabajo numero 1',4,'2015-07-03 20:02:38',1);
+INSERT INTO `comentario` VALUES (1,'Hay que revisar el trabajo numero 3',4,'2015-07-03 20:02:38',1),(2,'Hay que revisar el trabajo numero 1',4,'2015-07-03 20:02:38',1),(3,'pepe',4,'2015-07-04 16:23:10',1),(4,NULL,4,'2015-07-06 02:34:26',1);
 /*!40000 ALTER TABLE `comentario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -243,8 +243,8 @@ CREATE TABLE `comentario_tp` (
   `activo` int(11) DEFAULT '1',
   PRIMARY KEY (`id_comentario`,`id_tpgrupo`),
   KEY `FK_comentario_tp_2` (`id_tpgrupo`),
-  CONSTRAINT `FK_comentario_tp_2` FOREIGN KEY (`id_tpgrupo`) REFERENCES `tp_grupo` (`idtp_grupo`),
-  CONSTRAINT `FK_comentario_tp_1` FOREIGN KEY (`id_comentario`) REFERENCES `comentario` (`id_comentario`)
+  CONSTRAINT `FK_comentario_tp_1` FOREIGN KEY (`id_comentario`) REFERENCES `comentario` (`id_comentario`),
+  CONSTRAINT `FK_comentario_tp_2` FOREIGN KEY (`id_tpgrupo`) REFERENCES `tp_grupo` (`idtp_grupo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -254,7 +254,7 @@ CREATE TABLE `comentario_tp` (
 
 LOCK TABLES `comentario_tp` WRITE;
 /*!40000 ALTER TABLE `comentario_tp` DISABLE KEYS */;
-INSERT INTO `comentario_tp` VALUES (1,1,'2015-07-03 20:02:38',1),(2,1,'2015-07-03 20:02:38',1);
+INSERT INTO `comentario_tp` VALUES (1,1,'2015-07-03 20:02:38',1),(2,1,'2015-07-03 20:02:38',1),(3,2,'2015-07-04 16:23:47',1);
 /*!40000 ALTER TABLE `comentario_tp` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -630,6 +630,40 @@ INSERT INTO `usuario` VALUES (1,'repo','repo',1,'2014-01-08 03:00:00',2),(2,'alu
 UNLOCK TABLES;
 
 --
+-- Temporary table structure for view `vw_archivos`
+--
+
+DROP TABLE IF EXISTS `vw_archivos`;
+/*!50001 DROP VIEW IF EXISTS `vw_archivos`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `vw_archivos` (
+  `id_archivo` tinyint NOT NULL,
+  `nombre` tinyint NOT NULL,
+  `descripcion` tinyint NOT NULL,
+  `fecha_despublicacion` tinyint NOT NULL,
+  `fecha_publicacion` tinyint NOT NULL,
+  `id_tipo` tinyint NOT NULL,
+  `fecsys` tinyint NOT NULL,
+  `activo` tinyint NOT NULL,
+  `estado` tinyint NOT NULL,
+  `path` tinyint NOT NULL,
+  `persona_id_persona` tinyint NOT NULL,
+  `id_curso` tinyint NOT NULL,
+  `Tags` tinyint NOT NULL,
+  `tipoArchivo` tinyint NOT NULL,
+  `estadoArchivo` tinyint NOT NULL,
+  `Curso` tinyint NOT NULL,
+  `descripcionCurso` tinyint NOT NULL,
+  `id_docente` tinyint NOT NULL,
+  `id_materia` tinyint NOT NULL,
+  `nombreDocente` tinyint NOT NULL,
+  `apellidoDocente` tinyint NOT NULL,
+  `materia` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Final view structure for view `roles`
 --
 
@@ -647,6 +681,25 @@ UNLOCK TABLES;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `vw_archivos`
+--
+
+/*!50001 DROP TABLE IF EXISTS `vw_archivos`*/;
+/*!50001 DROP VIEW IF EXISTS `vw_archivos`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vw_archivos` AS select `a`.`id_archivo` AS `id_archivo`,`a`.`nombre` AS `nombre`,`a`.`descripcion` AS `descripcion`,`a`.`fecha_despublicacion` AS `fecha_despublicacion`,`a`.`fecha_publicacion` AS `fecha_publicacion`,`a`.`id_tipo` AS `id_tipo`,`a`.`fecsys` AS `fecsys`,`a`.`activo` AS `activo`,`a`.`estado` AS `estado`,`a`.`path` AS `path`,`a`.`persona_id_persona` AS `persona_id_persona`,`a`.`id_curso` AS `id_curso`,`a`.`Tags` AS `Tags`,`t`.`nombre` AS `tipoArchivo`,`e`.`nombre` AS `estadoArchivo`,`c`.`nombre` AS `Curso`,`c`.`descripcion` AS `descripcionCurso`,`c`.`id_docente` AS `id_docente`,`c`.`id_materia` AS `id_materia`,`p`.`nombre` AS `nombreDocente`,`p`.`apellido` AS `apellidoDocente`,`m`.`nombre` AS `materia` from ((((((`archivo` `a` join `estado` `e` on((`e`.`id_estado` = `a`.`estado`))) join `archivo_tipo` `t` on((`t`.`id_tipo` = `a`.`id_tipo`))) join `curso` `c` on((`c`.`id_curso` = `a`.`id_curso`))) join `docente` `d` on((`d`.`id_docente` = `c`.`id_docente`))) join `persona` `p` on((`p`.`id_persona` = `d`.`id_persona`))) join `materia` `m` on((`m`.`id_materia` = `c`.`id_materia`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -657,4 +710,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-07-03 18:36:34
+-- Dump completed on 2015-07-09 15:03:53

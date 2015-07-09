@@ -234,22 +234,13 @@ public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
 
 	@Override
 	public void bajaCursoAlumno(final Long cursoId, final Long idAluDoc) {
-	
-		final InsertSQLStatement sqlStatement = new InsertSQLStatement(
-                "DELETE from alumno_curso where id_alumno = ? and id_curso = ?") {
-            @Override
-            public void doAfterInsert(Long id) {
-            }
-            @Override
-            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
-                ps.setLong(1, idAluDoc);
-                ps.setLong(2, cursoId);
-            }
-            @Override
-            public void doAfterTransaction(int result) {
-            }
-        };
-	}
+	        StringBuilder sql = new StringBuilder();
+	        sql.append("DELETE from alumno_curso ");
+	        sql.append("WHERE (id_alumno = " + idAluDoc + ") AND (id_curso = " + cursoId + ")");
+
+	        jdbcTemplate.update(sql.toString());
+
+	    }
 	
     
 }

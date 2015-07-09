@@ -20,6 +20,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import com.repouniversity.model.dao.ArchivoDAO;
 import com.repouniversity.model.entity.Archivo;
 import com.repouniversity.model.entity.UsuarioRol;
+import com.repouniversity.model.entity.VwArchivo;
 import com.repouniversity.model.entity.to.ArchivoTO;
 
 @Service
@@ -42,6 +43,12 @@ public class ArchivoService {
         }
 
         return listaArchivos;
+    }
+
+    public List<VwArchivo> getArchivosDePersona(long idPersona) {
+        
+           return archivoDao.findArchivosDePersona(idPersona);
+        
     }
 
     public ArchivoTO getArchivoById(Long archivoId) {

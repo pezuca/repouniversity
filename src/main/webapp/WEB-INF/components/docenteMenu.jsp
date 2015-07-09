@@ -28,8 +28,8 @@
                 <a href="index.html"><i class="fa fa-pencil-square-o"></i> <span class="nav-label">Mis cursos</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li><a href="/repouniversity/docente/verCursos">Ver cursos</a></li>      
-                    <li><a href="docente/notificaciones">Ver mis notificaciones</a></li>
-                        
+                    <li><a href="/repouniversity/docente/notificaciones">Ver mis notificaciones</a></li>
+                    <li><a href="/repouniversity/verArchivos">Ver mis Archivos</a></li>    
                 </ul>
             </li>
         </ul>
