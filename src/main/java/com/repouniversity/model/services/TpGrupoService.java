@@ -56,14 +56,14 @@ public class TpGrupoService {
         return buildTpGrupo(tpGrupo);
     }
 
-    public TpGrupoTO editarTp(Long grupoId, Long tpId, String descripcion, Long archivoId, Long nota) {
+    public TpGrupoTO editarTp(Long grupoId, Long tpId, String descripcion, String nota) {
         // TODO Auto-generated method stub
         TpGrupo tpGrupo = new TpGrupo();
 
         tpGrupo.setIdGrupo(grupoId);
         tpGrupo.setId(tpId);
         tpGrupo.setDescripcion(descripcion);
-        tpGrupo.setIdArchivo(archivoId);
+        tpGrupo.setIdArchivo(archivoService.getArchivoById(tpId).getId());
         tpGrupo.setNota(nota);
         tpGrupo.setActivo(true);
         tpGrupoDao.update(tpGrupo);

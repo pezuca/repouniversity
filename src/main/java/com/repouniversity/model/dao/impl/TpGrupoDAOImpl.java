@@ -40,7 +40,7 @@ public class TpGrupoDAOImpl extends GenericDAOImpl<TpGrupo> implements TpGrupoDA
          result.setIdArchivo(rs.getLong("id_archivo"));
          result.setIdGrupo(rs.getLong("id_grupo"));
          result.setDescripcion(rs.getString("descripcion"));
-         result.setNota(rs.getLong("nota"));
+         result.setNota(rs.getString("nota"));
          result.setActivo(rs.getBoolean("activo"));
          result.setFechasys(rs.getDate("fecsys"));
          
@@ -101,16 +101,15 @@ public class TpGrupoDAOImpl extends GenericDAOImpl<TpGrupo> implements TpGrupoDA
 
     @Override
     protected SQLStatement buildUpdateSQLStatement(final TpGrupo t) {
-        return new SQLStatement("UPDATE tp_grupo SET id_grupo = ?, id_archivo = ?, descripcion = ?, nota = ?, activo = ?, fecsys = now() WHERE idtp_grupo = ?") {
+        return new SQLStatement("UPDATE tp_grupo SET id_grupo = ?, descripcion = ?, nota = ?, activo = ?, fecsys = now() WHERE idtp_grupo = ?") {
 
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
                 ps.setLong(1, t.getIdGrupo());
-                ps.setLong(2, t.getIdArchivo());
-                ps.setString(3, t.getDescripcion());
-                ps.setLong(4, t.getNota());
-                ps.setBoolean(5, t.isActivo());
-                ps.setLong(6, t.getId());
+                ps.setString(2, t.getDescripcion());
+                ps.setString(3, t.getNota());
+                ps.setBoolean(4, t.isActivo());
+                ps.setLong(5, t.getId());
             }
 
             @Override

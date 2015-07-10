@@ -15,7 +15,7 @@ public class TpGrupoTO {
     private String archivoNombre;
     private String archivoDescripcion;
     private String archivoPath;
-    private Long nota;
+    private String nota;
     private List<TpEntregaTO> tpEntrega;
     private List<ComentarioTO> comentario;
    
@@ -107,11 +107,11 @@ public class TpGrupoTO {
         this.archivo = archivo;
     }
 
-    public Long getNota() {
+    public String getNota() {
         return nota;
     }
 
-    public void setNota(Long nota) {
+    public void setNota(String nota) {
         this.nota = nota;
     }
 

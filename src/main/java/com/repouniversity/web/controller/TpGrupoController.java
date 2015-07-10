@@ -80,10 +80,9 @@ public class TpGrupoController {
 			@RequestParam(value = "grupoId", required = true) Long grupoId,
 			@RequestParam(value = "tpId", required = true) Long tpId,
 			@RequestParam(value = "descripcion", required = true) String descripcion,
-			@RequestParam(value = "archivoId", required = true) Long archivoId,
-			@RequestParam(value = "nota", required = true) Long nota) {
+			@RequestParam(value = "nota", required = true) String nota) {
 
-	return	tpGrupoService.editarTp(grupoId, tpId, descripcion, archivoId, nota);
+	return	tpGrupoService.editarTp(grupoId, tpId, descripcion, nota);
 		
 
 	}

@@ -74,7 +74,7 @@ CREATE TABLE `alumno_curso` (
 
 LOCK TABLES `alumno_curso` WRITE;
 /*!40000 ALTER TABLE `alumno_curso` DISABLE KEYS */;
-INSERT INTO `alumno_curso` VALUES (3,2,2),(4,3,2),(5,4,2),(8,3,2);
+INSERT INTO `alumno_curso` VALUES (3,2,2),(4,3,2),(5,4,2),(8,3,2),(9,2,2),(9,3,2);
 /*!40000 ALTER TABLE `alumno_curso` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -577,7 +577,7 @@ CREATE TABLE `tp_grupo` (
   `id_grupo` int(11) NOT NULL,
   `id_archivo` int(11) NOT NULL,
   `descripcion` varchar(100) DEFAULT NULL,
-  `nota` int(11) DEFAULT NULL,
+  `nota` varchar(30) DEFAULT NULL,
   `fecsys` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `activo` int(11) DEFAULT '1',
   PRIMARY KEY (`idtp_grupo`),
@@ -594,7 +594,7 @@ CREATE TABLE `tp_grupo` (
 
 LOCK TABLES `tp_grupo` WRITE;
 /*!40000 ALTER TABLE `tp_grupo` DISABLE KEYS */;
-INSERT INTO `tp_grupo` VALUES (1,2,1,'Entrega de tranajo practico del grupo smart solution',NULL,'2015-05-16 20:37:42',1),(2,2,5,'Entrega del tp del grupo samrt solution ',NULL,'2015-05-16 20:41:08',1),(3,3,6,'nada',NULL,'2015-05-16 20:43:21',1);
+INSERT INTO `tp_grupo` VALUES (1,2,1,'Entrega de tranajo practico del grupo smart solution','Aprobado','2015-07-10 04:21:34',1),(2,2,5,'Entrega del tp del grupo samrt solution ',NULL,'2015-05-16 20:41:08',1),(3,3,6,'nada',NULL,'2015-05-16 20:43:21',1);
 /*!40000 ALTER TABLE `tp_grupo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -710,4 +710,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-07-09 15:03:53
+-- Dump completed on 2015-07-10  1:35:00
