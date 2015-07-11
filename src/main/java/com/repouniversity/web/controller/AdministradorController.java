@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,12 +24,14 @@ import com.repouniversity.model.entity.to.ArchivoTO;
 import com.repouniversity.model.entity.to.CarreraTO;
 import com.repouniversity.model.entity.to.CursoTO;
 import com.repouniversity.model.entity.to.DocenteTO;
+import com.repouniversity.model.entity.to.ErrorArchivoTO;
 import com.repouniversity.model.entity.to.UsuarioTO;
 import com.repouniversity.model.services.AlumnoService;
 import com.repouniversity.model.services.ArchivoService;
 import com.repouniversity.model.services.CarreraService;
 import com.repouniversity.model.services.CursoService;
 import com.repouniversity.model.services.DocenteService;
+import com.repouniversity.model.services.ErrorArchivoService;
 import com.repouniversity.model.services.MateriaService;
 import com.repouniversity.model.services.PersonaService;
 import com.repouniversity.model.services.UsuarioRolService;
@@ -64,6 +67,10 @@ public class AdministradorController {
     @Autowired
     public ArchivoService archivoService;
 
+    @Autowired
+    public ErrorArchivoService errorArchivoService;
+
+    
     @RequestMapping(value = "admin/verUsuarios", method = {RequestMethod.GET})
     public ModelAndView getUsuarios() {
 
@@ -254,5 +261,12 @@ public class AdministradorController {
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteArchivoAjax(@RequestParam(value = "archivoId") Long archivo) {
         archivoService.delete(archivo);
+    }
+    
+    @RequestMapping(value = "admin/verReporteErrores", method = {RequestMethod.GET})
+    public ModelAndView reporteErrores(@ModelAttribute("login") UsuarioRol usuario) {
+        List<ErrorArchivoTO> errorArchivo = errorArchivoService.getErrores();
+         
+        return new ModelAndView("verErroresArchivosAdmin").addObject("errorArchivo", errorArchivo);
     }
 }

@@ -21,7 +21,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.repouniversity.model.entity.Archivo;
 import com.repouniversity.model.entity.UsuarioRol;
 import com.repouniversity.model.entity.VwArchivo;
+import com.repouniversity.model.entity.to.ErrorArchivoTO;
 import com.repouniversity.model.services.ArchivoService;
+import com.repouniversity.model.services.ErrorArchivoService;
 import com.repouniversity.model.services.PersonaService;
 import com.repouniversity.web.exceptions.SubirArchivoException;
 
@@ -31,6 +33,9 @@ public class ArchivoController {
 
     @Autowired
     private ArchivoService archivoService;
+    
+    @Autowired
+    private ErrorArchivoService errorArchivoService;
 
     @Autowired
     private PersonaService personaService;
@@ -96,7 +101,10 @@ public class ArchivoController {
     @RequestMapping(value = "/vistaPrevia", method = {RequestMethod.GET})
     public ModelAndView vistaPrevia(@RequestParam(value = "archivoId") Long archivoId) {
         VwArchivo archivo = archivoService.getVwArchivo(archivoId);
-
-        return new ModelAndView("vistaPrevia").addObject("archivo", archivo);
+        List<ErrorArchivoTO> errorArchivo = errorArchivoService.getErroresForArchivo(archivoId);
+         
+        return new ModelAndView("vistaPrevia").addObject("archivo", archivo).addObject("errorArchivo", errorArchivo);
     }
+    
+
 }
