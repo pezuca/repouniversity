@@ -29,7 +29,8 @@ public class VwArchivo implements IdentifiedObject {
     private String nombreDocente;
     private String apellidoDocente;
     private String materia;
-    
+    private Long idCarrera;
+    private String carrera;
 
     public Long getId() {
         return id;
@@ -205,6 +206,22 @@ public class VwArchivo implements IdentifiedObject {
 
 	public void setMateria(String materia) {
 		this.materia = materia;
+	}
+
+	public Long getIdCarrera() {
+		return idCarrera;
+	}
+
+	public void setIdCarrera(Long idCarrera) {
+		this.idCarrera = idCarrera;
+	}
+
+	public String getCarrera() {
+		return carrera;
+	}
+
+	public void setCarrera(String carrera) {
+		this.carrera = carrera;
 	}
 
    
