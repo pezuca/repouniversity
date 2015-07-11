@@ -1,5 +1,6 @@
 package com.repouniversity.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -76,20 +77,25 @@ public class ArchivoController {
         }
     }
 
-    // @RequestMapping(value = "/buscarArchivo", method = { RequestMethod.POST })
-    // @ResponseBody
-    // @ResponseStatus(value = HttpStatus.OK)
-    // public ModelAndView buscarFichero(
-    // HttpServletRequest request,
-    // @RequestParam(value = "parametroDeBusqueda") String parametro) {
-    // buscarFicheroLocal(parametro);
-    //
-    // }
+
     @RequestMapping(value = "/verArchivos", method = {RequestMethod.GET})
     public ModelAndView verArchivos(@ModelAttribute("login") UsuarioRol usuario) {
         List<VwArchivo> archivos = archivoService.getArchivosDePersona(usuario.getIdPersona());
-
         return new ModelAndView("verArchivos").addObject("archivos", archivos);
+    }    
+
+     @RequestMapping(value = "/buscarArchivo", method = { RequestMethod.POST })
+     public ModelAndView buscarFichero(
+    		HttpServletRequest request,@RequestParam(value = "top-search") String parametro){
+    	 	List <Archivo> listaResultados = new ArrayList<Archivo>();
+    	 	listaResultados= buscarFicheroLocal(parametro);
+    	 	return new ModelAndView("resultList").addObject("listaResultados", listaResultados).addObject("parametroBusqueda", parametro);
+     }
+
+    private List<Archivo> buscarFicheroLocal(String parametro) {
+        List<Archivo> archivosEncontrados = new ArrayList<Archivo>();
+        archivosEncontrados = archivoService.requestArchivos(parametro);
+        return archivosEncontrados;
 
     }
 

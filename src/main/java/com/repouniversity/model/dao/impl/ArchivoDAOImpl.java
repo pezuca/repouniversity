@@ -4,7 +4,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -92,13 +95,144 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
                 ps.setLong(3, t.getId());
             }
 
+			@Override
+			public void doAfterTransaction(int result) {
+				// TODO Auto-generated method stub
+				
+			}
+        };
+    }
+    
+	@Override
+	public List<Archivo> requestArchivos(String parametro){
+		List<Archivo> resultList = new ArrayList<Archivo>();
+		List<String> parametrosBusqueda = new ArrayList<String>();
+		//quitamos las noise word
+		parametro = parametro.toUpperCase();
+		parametrosBusqueda = quitarNoiseWords(parametro);
+		
+		// agregamos las palabras equivalentes
+		parametrosBusqueda = agregarEquivalencias(parametrosBusqueda);
+		
+		//realizamos la busqueda a los archivos que tengan estado 1 o 2
+		resultList = generarBusqueda (parametrosBusqueda);
+		return resultList;
+	}
+	
+	@Override
+    public List<Archivo> generarBusqueda(final List<String> parametrosBusqueda) {
+        StringBuilder sql = new StringBuilder();
+        //se genera la condicion a mano, pero en la condicion es donde se va a armarse la query
+        //con las cadenas que llegaron de los filtros.
+        
+        //quitamos los duplicados
+        HashSet hs = new HashSet();
+        hs.addAll(parametrosBusqueda);
+        parametrosBusqueda.clear();
+        parametrosBusqueda.addAll(hs);
+        
+        //aramamos la cadena con todos los tags con LIKE
+        String tags= new String();
+        for (String parametro:parametrosBusqueda) {
+			tags= tags.concat(" tags like \'%" + parametro +"%\' OR ");
+		}
+        tags = tags.substring(0, tags.length()-3);
+        
+        //armamos la query de busqueda en la base
+        sql.append("select * from repouniversity.archivo ");
+        sql.append("where "+ tags);
+        sql.append("AND (estado=1 OR  estado=2)");
+
+        List<Archivo> list = doQuery(new SQLStatement(sql.toString()) {
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+//                ps.setString (1, parametro);
+            }
+
             @Override
             public void doAfterTransaction(int result) {
             }
-        };
+        }, new ArchivoRowMapper(), "generarBusqueda: ");
+
+        if (list.isEmpty()) {
+            return null;
+        }
+
+        return list;
     }
 
-    @Override
+	@Override
+	public List<String> quitarNoiseWords( String parametro) {
+		 
+	//doy de alta el listado de Noise words y verifico si cada string esta dentro del listado
+		List<String> noiseWords = new ArrayList<String>();
+		noiseWords.add("EN");
+		noiseWords.add("DE");
+		noiseWords.add("DONDE");
+		noiseWords.add("CUANDO");
+		noiseWords.add("POR");
+		
+	//tokenizo la cadena
+		String[] tokens = parametro.split(" ");
+		List<String> parametrosBusqueda = new ArrayList<String>();
+		
+		for (int i = 0; i < tokens.length; i++) {
+			if (! noiseWords.contains(tokens[i])){
+				parametrosBusqueda.add(tokens[i]);
+			}
+		}	 
+	
+	return parametrosBusqueda; 
+	}
+	
+	public List<String> agregarEquivalencias (List<String> parametrosBusqueda){
+		
+		List<String> terminosBusqueda = new ArrayList<String>();
+		List<String> listaTemporal = new ArrayList<String>();
+		
+		//Agregando equivalencias
+		//mapa de listas con el termino y sus equivalencias
+		Map <String, List<String>> equivList = new HashMap<String, List<String>>();
+		List<String> equivalencia = new ArrayList<String>();
+		
+		equivalencia.add("VECTOR");
+		equivalencia.add("MATRIZ");
+		equivalencia.add("MATEMATICA");
+		equivList.put("ALGEBRA", equivalencia);
+		//equivalencia.clear();
+		
+		equivalencia.add("ALGEBRA");
+		equivalencia.add("FISICA");
+		equivalencia.add("MATRIZ");
+		equivList.put("MATEMATICA", equivalencia);
+		//equivalencia.clear();
+		
+		equivalencia.add("OBJETOS");
+		equivalencia.add("LENGUAJE");
+		equivalencia.add("MODELO");
+		equivList.put("PROGRAMACION", equivalencia);
+		//equivalencia.clear();
+		
+		equivalencia.add("RED");
+		equivalencia.add("COMPUTACION");
+		equivalencia.add("INTERNET");
+		equivList.put("HARDWARE", equivalencia);
+		//equivalencia.clear();
+		
+		for (String termino : parametrosBusqueda) {
+			if(equivList.containsKey(termino)){
+				listaTemporal= equivList.get(termino);
+				for(String e: listaTemporal){
+					terminosBusqueda.add(e);
+				}
+			}
+			terminosBusqueda.add(termino);
+		}
+		return terminosBusqueda;
+		
+	}
+
+	@Override
     protected String getColumnIdName() {
         return "id_archivo";
     }

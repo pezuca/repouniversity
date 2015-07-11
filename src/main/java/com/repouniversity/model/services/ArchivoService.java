@@ -1,5 +1,6 @@
 package com.repouniversity.model.services;
 
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -214,10 +215,17 @@ public class ArchivoService {
         // response.setHeader("Cache-Control", "must-revalidate, post-check=0, pre-check=0");
         // response.setHeader("Pragma", "public");
 
+
         return archivo;
     }
+
 
     public VwArchivo getVwArchivo(Long archivoId) {
         return archivoDao.findVwArchivo(archivoId);
     }
+
+	public List<Archivo> requestArchivos(String parametro) {
+		return archivoDao.requestArchivos(parametro);
+		
+	}
 }
