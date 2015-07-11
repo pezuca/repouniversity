@@ -55,7 +55,7 @@
 										<tr class="even">
 											<td>${error.descripcion}</td>
 											<td>${error.persona.apellido}, ${error.persona.nombre}</td>
-											<td>${error.fesys}</td>
+											<td>${error.fechasys}</td>
 										</tr>
 									</c:forEach>
 								</tbody>
