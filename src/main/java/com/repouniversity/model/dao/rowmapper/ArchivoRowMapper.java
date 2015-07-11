@@ -21,13 +21,11 @@ public class ArchivoRowMapper implements RowMapper<Archivo> {
         archivo.setActivo(rs.getBoolean("activo"));
         archivo.setFechasys(rs.getDate("fecsys"));
         archivo.setPersona(rs.getLong("persona_id_persona"));
-        // result.setFechaDespublicacion(rs.getDate("fecha_despublicacion"));
-        // result.setFechaPublicacion(rs.getDate("fecha_publicacion"));
+        archivo.setFechaDespublicacion(rs.getDate("fecha_despublicacion"));
+        archivo.setFechaPublicacion(rs.getDate("fecha_publicacion"));
         archivo.setEstado(rs.getLong("estado"));
         archivo.setPath(rs.getString("path"));
         archivo.setTags(rs.getString("tags"));
-        //  result.setGrupo(rs.getLong("grupo"));
-        
         return archivo;
     }
 

@@ -2,7 +2,7 @@
    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
     <div class="navbar-header">
         <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-        <form role="search" class="navbar-form-custom" method="post" action="/buscarArchivo">
+        <form role="search" class="navbar-form-custom" method="post" action="/repouniversity/buscarArchivo">
             <div class="form-group">
                 <input type="text" placeholder="Buscar archivos..." class="form-control" name="top-search" id="top-search">
             </div>
