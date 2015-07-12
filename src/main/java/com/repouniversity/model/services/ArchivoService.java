@@ -1,6 +1,5 @@
 package com.repouniversity.model.services;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -28,10 +27,10 @@ public class ArchivoService {
 
     @Autowired
     public String systemFileUploadLocation;
-    
+
     @Autowired
     public String systemFilePreviewTomcatLocation;
-    
+
     @Autowired
     public String systemFilePreviewLocation;
 
@@ -52,9 +51,9 @@ public class ArchivoService {
     }
 
     public List<VwArchivo> getArchivosDePersona(long idPersona) {
-        
-           return archivoDao.findArchivosDePersona(idPersona);
-        
+
+        return archivoDao.findArchivosDePersona(idPersona);
+
     }
 
     public ArchivoTO getArchivoById(Long archivoId) {
@@ -142,24 +141,24 @@ public class ArchivoService {
         // AGREGO LOS ARCHIVOS Y LOS SUBO A LA CARPETA DEL SERVER.
         for (int i = 0; i < file.length; i++) {
             String fileName = (new Date()).getTime() + SEPARATOR + file[i].getOriginalFilename();
-            
+
             File localFile = new File(systemFileUploadLocation + fileName);
             FileOutputStream os = null;
-            
+
             // GUARDO LOS ARCHIVOS EN LA CARPETA
             os = new FileOutputStream(localFile);
             os.write(file[i].getBytes());
 
             File previewTomcatFile = new File(systemFilePreviewTomcatLocation + fileName);
             FileOutputStream previewTomcatOs = null;
-            
+
             // GUARDO LOS ARCHIVOS EN LA CARPETA DE PREVIEW
             previewTomcatOs = new FileOutputStream(previewTomcatFile);
             previewTomcatOs.write(file[i].getBytes());
-            
+
             File previewFile = new File(systemFilePreviewLocation + fileName);
             FileOutputStream previewOs = null;
-            
+
             // GUARDO LOS ARCHIVOS EN LA CARPETA DE PREVIEW
             previewOs = new FileOutputStream(previewFile);
             previewOs.write(file[i].getBytes());
@@ -228,22 +227,19 @@ public class ArchivoService {
         // response.setHeader("Cache-Control", "must-revalidate, post-check=0, pre-check=0");
         // response.setHeader("Pragma", "public");
 
-
         return archivo;
     }
-
 
     public VwArchivo getVwArchivo(Long archivoId) {
         return archivoDao.findVwArchivo(archivoId);
     }
 
-	public List<Archivo> requestArchivos(String parametro) {
-		return archivoDao.requestArchivos(parametro);
-		
-	}
+    public List<Archivo> requestArchivos(String parametro) {
+        return archivoDao.requestArchivos(parametro);
 
-	public List<Archivo> busquedaAvanzada(String materia, String nbreDocente, String apeDocente,
-			String carrera, java.sql.Date fechaDde, java.sql.Date fechaHta) {
-		return archivoDao.busquedaAvanzada(materia, nbreDocente, apeDocente, carrera, fechaDde, fechaHta);
-	}
+    }
+
+    public List<Archivo> busquedaAvanzada(String materia, String nbreDocente, String apeDocente, String carrera, Date fechaDde, Date fechaHta) {
+        return archivoDao.busquedaAvanzada(materia, nbreDocente, apeDocente, carrera, fechaDde, fechaHta);
+    }
 }
