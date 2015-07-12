@@ -58,12 +58,12 @@ public class TpGrupoService {
 
     public TpGrupoTO editarTp(Long grupoId, Long tpId, String descripcion, String nota) {
         // TODO Auto-generated method stub
-        TpGrupo tpGrupo = new TpGrupo();
+        TpGrupo tpGrupo =tpGrupoDao.findById(tpId);
 
-        tpGrupo.setIdGrupo(grupoId);
-        tpGrupo.setId(tpId);
+      //  tpGrupo.setIdGrupo(grupoId);
+        //tpGrupo.setId(tpId);
         tpGrupo.setDescripcion(descripcion);
-        tpGrupo.setIdArchivo(archivoService.getArchivoById(tpId).getId());
+       // tpGrupo.setIdArchivo(archivoService.getArchivoById(tpId).getId());
         tpGrupo.setNota(nota);
         tpGrupo.setActivo(true);
         tpGrupoDao.update(tpGrupo);

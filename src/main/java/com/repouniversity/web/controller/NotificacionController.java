@@ -57,6 +57,16 @@ public class NotificacionController {
         Notificacion noti = notificacionService.getById(notificacionId);
         cursoService.rechazarAlumnoACurso(noti);
     }
+    @RequestMapping(value = "notificacion/borrarNotificacion", method = {RequestMethod.POST})
+    @ResponseBody
+    public void borrarNotificacionCursoAjax(HttpServletRequest request, @RequestParam(value = "notificacionId", required = true) Long notificacionId) {
+
+    	 Notificacion noti = notificacionService.getById(notificacionId);
+        notificacionService.remove(noti);
+        
+    }
+
+    
 
     @RequestMapping(value = "alumno/solicitarCurso", method = {RequestMethod.POST})
     @ResponseBody

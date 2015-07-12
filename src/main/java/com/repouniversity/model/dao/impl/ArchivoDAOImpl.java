@@ -260,6 +260,33 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
 
         return list;
     }
+    
+    
+    @Override
+    public List<VwArchivo> findArchivosDelCurso(final long idCurso) {
+        StringBuilder sql = new StringBuilder();
+
+        sql.append("select * from vw_archivos where activo = 1 and id_curso = ? ");
+        sql.append("and id_archivo not in (select distinct id_archivo from tp_entrega) ");
+        sql.append("and id_archivo not in (select distinct id_archivo from tp_grupo) ");
+       
+        List<VwArchivo> list = doQuery(new SQLStatement(sql.toString()) {
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+                ps.setLong(1, idCurso);
+            }
+
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+        }, new VwArchivoRowMapper(), "findArchivosDelCurso: " + idCurso);
+
+        if (list.isEmpty()) {
+            return new ArrayList<VwArchivo>();
+        }
+
+        return list;
+    }
 
     @Override
     public VwArchivo findVwArchivo(final Long archivoId) {

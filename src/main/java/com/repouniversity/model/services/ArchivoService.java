@@ -56,6 +56,12 @@ public class ArchivoService {
            return archivoDao.findArchivosDePersona(idPersona);
         
     }
+    
+    public List<VwArchivo> getArchivosDelCurso(long idCurso) {
+        
+        return archivoDao.findArchivosDelCurso(idCurso);
+     
+ }
 
     public ArchivoTO getArchivoById(Long archivoId) {
         Archivo archivo = archivoDao.findById(archivoId);

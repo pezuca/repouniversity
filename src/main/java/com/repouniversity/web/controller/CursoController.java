@@ -20,10 +20,12 @@ import com.repouniversity.model.entity.Curso;
 import com.repouniversity.model.entity.CursoMateria;
 import com.repouniversity.model.entity.Grupo;
 import com.repouniversity.model.entity.UsuarioRol;
+import com.repouniversity.model.entity.VwArchivo;
 import com.repouniversity.model.entity.to.AlumnoTO;
 import com.repouniversity.model.entity.to.GrupoTO;
 import com.repouniversity.model.entity.to.NotificacionTO;
 import com.repouniversity.model.services.AlumnoService;
+import com.repouniversity.model.services.ArchivoService;
 import com.repouniversity.model.services.CursoService;
 import com.repouniversity.model.services.DocenteService;
 import com.repouniversity.model.services.GrupoService;
@@ -45,6 +47,9 @@ public class CursoController {
     @Autowired
     private AlumnoService alumnoService;
     @Autowired
+    private ArchivoService archivoService;
+    
+    @Autowired
     private GrupoService grupoService;
 
     @RequestMapping(value = "alumno/cursos", method = {RequestMethod.GET})
@@ -60,8 +65,9 @@ public class CursoController {
         Curso curso = cursoService.getById(cursoId);
         curso.setNotificaciones(notificacionService.getNotificacionPorCurso(cursoId));
         curso.setGrupoAlumno(grupoService.getGrupoForCursoAlumno(cursoId, usuario.getIdAluDoc()));
-        
-        return new ModelAndView("verCursoAlumno").addObject("curso", curso);
+        List<VwArchivo> archivos = archivoService.getArchivosDelCurso(cursoId);
+               
+        return new ModelAndView("verCursoAlumno").addObject("curso", curso).addObject("archivos", archivos);
     }
 
     @RequestMapping(value = "alumno/solicitarCurso", method = {RequestMethod.GET})
@@ -101,8 +107,10 @@ public class CursoController {
 
         curso.setAlumnos(alumnos);
         curso.setAlumnosSinGrupo(alumnosSinGrupo);
+        
+        List<VwArchivo> archivos = archivoService.getArchivosDelCurso(cursoId);
 
-        return new ModelAndView("verCursoDocente").addObject("curso", curso);
+        return new ModelAndView("verCursoDocente").addObject("curso", curso).addObject("archivos", archivos);
     }
 
     @RequestMapping(value = "docente/crearGrupo", method = {RequestMethod.POST})

@@ -23,43 +23,18 @@
 		
 		<div class="wrapper wrapper-content animated fadeInRight">
 			<div class="row">
-	             <div class="col-lg-12">
-					<div class="usuarioInformation">
-						<div class="page-header">
-							<h1>Ver Notificaciones</h1>
-						</div>
-					</div>
-
-
-					<table id="clientTable" class="table table-striped hover">
-						<thead class="encabezado">
-							<tr>
-								<th>idNotificacion</th>
-								<th>Descripcion</th>
-								<th>Curso</th>
-								
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${notificaciones}" var="notificacion"
-								varStatus="status">
-								<tr class="even">
-									<td>${notificacion.id}</td>
-									<td>${notificacion.tipo.descripcion}</td>
-									<td>${notificacion.curso.nombre}</td>
-									
-								</tr>
-							</c:forEach>
-						</tbody>
-						<tfoot>
-							<tr class="head">
-								<th></th>
-								<th></th>
-								<th></th>
-							</tr>
-						</tfoot>
-					</table>
-				</div>
+	            
+			<div class="col-lg-6">
+				<c:forEach items="${notificaciones}" var="notificacion" varStatus="status">
+                  
+                            <div class="alert alert-info alert-dismissable">
+                                <button aria-hidden="true" data-dismiss="alert" class="close" type="button" onclick="borrarNotificacion(${notificacion.id})">×</button>
+                               	<p>Curso: ${notificacion.curso.nombre}, ${notificacion.curso.descripcion}</p>
+								<p>${notificacion.tipo.descripcion}</p>
+                            </div>
+                   
+				</c:forEach>
+            </div>
 	        </div>
 		</div>
 		
@@ -78,9 +53,20 @@
 			});
 	
 			$("#clientTable_length").remove();
+			
+			function borrarNotificacion(notificacionId) {
+				$.ajax({
+					  type: "POST",
+					  url: "/repouniversity/notificacion/borrarNotificacion",
+					  data: {"notificacionId" : notificacionId},
+					  success: function(){ 
+						  alert("Good!")
+					  }
+				});
+			}
 		});
 		
-	}
+
 	</script>	
 </body>
 </html>

@@ -108,7 +108,7 @@
 							<div class="chat-form">
 								<form id="comentarioForm" role="form">
 									<div class="form-group">
-										<textarea class="form-control" placeholder="Message"></textarea>
+										<textarea class="form-control" placeholder="Nuevo.."></textarea>
 									</div>
 									<div class="text-right">
 										<button type="submit" class="btn btn-sm btn-primary m-t-n-xs">

@@ -28,40 +28,67 @@
 						<div class="page-header">
 							<h1>Detalles curso ${curso.nombre}</h1>
 						</div>
-						<div class="page-header">
-							<h3>Notificaciones</h3>
-						</div>
 					</div>
 
-					<table id="cursosDocente" class="table table-striped hover">
-						<thead class="encabezado">
-							<tr>
-								<th>Tipo notificacion</th>
-								<th>Nombre alumno</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${curso.notificaciones}" var="notificacion" varStatus="status">
-								<tr>
-									<td>${notificacion.tipo.descripcion}</td>
-									<td>${notificacion.alumno.persona.nombre} ${notificacion.alumno.persona.apellido}</td>
-									<td>
-										<button class="altaNotificacion btn btn-primary" onclick="altaEnCurso(${notificacion.id})">Confirmar</button>&nbsp;
-										<button class="rechazoNotificacion btn btn-danger" onclick="rechazoAltaEnCurso(${notificacion.id})">Rechazar</button>
-									</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-						<tfoot>
-							<tr class="head">
-								<th><a data-toggle="modal" href="#fileUpload" class="btn btn-success"><i class="fa fa-upload"></i> Subir Archivo</a></th>
-								<th></th>
-								<th><a href="/repouniversity/alumno/verGrupo?grupoId=${curso.grupoAlumno.id}" name="Ver" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver grupo" class="btn btn-success"><i class="fa fa-upload"></i> Ver Grupo</a></th>
-							</tr>
-						</tfoot>
-					</table>
+					<tr class="head">
+						<th><a data-toggle="modal" href="#fileUpload" class="btn btn-success"><i class="fa fa-upload"></i> Subir Archivo</a></th>
+						<th></th>
+						<th><a href="/repouniversity/alumno/verGrupo?grupoId=${curso.grupoAlumno.id}" name="Ver" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver grupo" class="btn btn-success"><i class="fa fa-upload"></i> Ver Grupo</a></th>
+					</tr>
 				</div>
+			<div class="col-lg-6">
+	        	<c:forEach items="${archivos}" var="archivo" varStatus="status">
+                    <div class="ibox float-e-margins">
+
+							<div class="ibox-title">
+								<h5>${archivo.nombre}</h5>
+								<div class="ibox-tools">
+									<a class="collapse-link">
+										<i class="fa fa-chevron-up"></i>
+									</a>
+									<a class="close-link">
+										<i class="fa fa-times"></i>
+									</a>
+								</div>
+							</div>
+							<div class="ibox-content profile-content">
+								<h4><strong>Materia: ${archivo.materia}</strong></h4>
+								<p><i class="fa fa-clock-o"></i> Publicado en ${archivo.fechaPublicacion}</p>
+								<h5>
+								   Tipo de Archivo: ${archivo.tipoArchivo}
+								</h5>
+								<p>
+									${archivo.descripcion}
+									<br>
+									<br>
+									<small>Publicado por ${archivo.apellidoPersona}, ${archivo.nombrePersona}</small>
+									<br>
+									<br>
+									Estado archivo: ${archivo.estadoArchivo}</p>
+								<div class="row m-t-md">
+									<div class="col-md-3">
+										<h5><a  name="dowloadArchivo" data-archivoId="${archivo.id}" href="/repouniversity/vistaPrevia?archivoId=${archivo.id}">
+												<button class="btn btn-primary btn-circle" type="button"><i class="fa fa-search"></i>
+												</button>
+											</a>
+										</h5>
+									</div>
+									<div class="col-md-9">
+										<h5><a  name="dowloadArchivo" data-archivoId="${archivo.id}" href="/repouniversity/bajarArchivo?archivoId=${archivo.id}" target="_blank">
+												<button class="btn btn-success btn-circle" type="button"><i class="fa fa-download"></i>
+												</button>
+											</a>
+										</h5>
+									</div>
+								</div>
+							</div>
+						
+                    </div>
+                    </c:forEach>
+				</div>
+				
 	        </div>
+	        
 		</div>
 		<%@include file="../components/footer.jsp"%>
 		</div>

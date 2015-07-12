@@ -32,47 +32,21 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-12">
-						<div class="ibox float-e-margins">
-							<div class="ibox-title">
-								<h5>Lista de notificaciones</h5>
-							</div>
-							<div class="ibox-content">
-								<table id="notificaciones" class="table table-striped table-hover">
-									<thead class="encabezado">
-										<tr>
-											<th>Tipo notificacion</th>
-											<th>Nombre alumno</th>
-											<th></th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach items="${curso.notificaciones}" var="notificacion"
-											varStatus="status">
-											<tr>
-												<td>${notificacion.tipo.descripcion}</td>
-												<td>${notificacion.alumno.persona.nombre}
-													${notificacion.alumno.persona.apellido}</td>
-												<td>
-													<button class="altaNotificacion btn btn-primary"
-														onclick="altaEnCurso(${notificacion.id})">Confirmar</button>&nbsp;
-													<button class="rechazoNotificacion btn btn-danger"
-														onclick="rechazoAltaEnCurso(${notificacion.id})">Rechazar</button>
-												</td>
-											</tr>
-										</c:forEach>
-									</tbody>
-									<tfoot>
-										<tr class="head">
-											<th></th>
-											<th></th>
-											<th></th>
-										</tr>
-									</tfoot>
-								</table>
-							</div>
-						</div>
-					</div>
+				<a data-toggle="modal" href="#fileUpload" class="btn btn-success"><i class="fa fa-upload"></i> Subir Archivo</a>
+					<div class="col-lg-6">
+						<c:forEach items="${curso.notificaciones}" var="notificacion" varStatus="status">
+	                  
+	                            <div class="alert alert-info alert-dismissable">
+	                                <p>Curso: ${notificacion.curso.nombre}, ${notificacion.curso.descripcion}</p>
+									<p>${notificacion.tipo.descripcion}</p>
+									<button aria-hidden="true" data-dismiss="alert" class="altaNotificacion btn btn-primary"
+											onclick="altaEnCurso(${notificacion.id})">Confirmar</button>&nbsp;
+									<button aria-hidden="true" data-dismiss="alert" class="rechazoNotificacion btn btn-danger"
+											onclick="rechazoAltaEnCurso(${notificacion.id})">Rechazar</button>
+	                            </div>
+	                   
+						</c:forEach>
+            		</div>
 				</div>
 
 				<div class="row">
@@ -122,6 +96,56 @@
 							</div>
 						</div>
 					</div>
+						<div class="col-lg-6">
+	        	<c:forEach items="${archivos}" var="archivo" varStatus="status">
+                    <div class="ibox float-e-margins">
+
+							<div class="ibox-title">
+								<h5>${archivo.nombre}</h5>
+								<div class="ibox-tools">
+									<a class="collapse-link">
+										<i class="fa fa-chevron-up"></i>
+									</a>
+									<a class="close-link">
+										<i class="fa fa-times"></i>
+									</a>
+								</div>
+							</div>
+							<div class="ibox-content profile-content">
+								<h4><strong>Materia: ${archivo.materia}</strong></h4>
+								<p><i class="fa fa-clock-o"></i> Publicado en ${archivo.fechaPublicacion}</p>
+								<h5>
+								   Tipo de Archivo: ${archivo.tipoArchivo}
+								</h5>
+								<p>
+									${archivo.descripcion}
+									<br>
+									<br>
+									<small>Publicado por ${archivo.apellidoPersona}, ${archivo.nombrePersona}</small>
+									<br>
+									<br>
+									Estado archivo: ${archivo.estadoArchivo}</p>
+								<div class="row m-t-md">
+									<div class="col-md-3">
+										<h5><a  name="dowloadArchivo" data-archivoId="${archivo.id}" href="/repouniversity/vistaPrevia?archivoId=${archivo.id}">
+												<button class="btn btn-primary btn-circle" type="button"><i class="fa fa-search"></i>
+												</button>
+											</a>
+										</h5>
+									</div>
+									<div class="col-md-9">
+										<h5><a  name="dowloadArchivo" data-archivoId="${archivo.id}" href="/repouniversity/bajarArchivo?archivoId=${archivo.id}" target="_blank">
+												<button class="btn btn-success btn-circle" type="button"><i class="fa fa-download"></i>
+												</button>
+											</a>
+										</h5>
+									</div>
+								</div>
+							</div>
+						
+                    </div>
+                    </c:forEach>
+				</div>
 				</div>
 
 				<!-- 	Ventanas -->

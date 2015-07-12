@@ -36,9 +36,8 @@ public class VwArchivoRowMapper implements RowMapper<VwArchivo> {
         vwarchivo.setNombreDocente(rs.getString("nombreDocente"));
         vwarchivo.setApellidoDocente(rs.getString("apellidoDocente"));
         vwarchivo.setMateria(rs.getString("materia"));
-        vwarchivo.setIdCarrera(rs.getLong("idcarrera"));
-        vwarchivo.setCarrera(rs.getString("carrera"));
-        
+        vwarchivo.setNombrePersona(rs.getString("nombrePersona"));
+        vwarchivo.setApellidoPersona(rs.getString("apellidoPersona"));        
         
         return vwarchivo;
     }
