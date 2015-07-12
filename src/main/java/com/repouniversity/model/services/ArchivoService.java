@@ -241,4 +241,9 @@ public class ArchivoService {
 		return archivoDao.requestArchivos(parametro);
 		
 	}
+
+	public List<Archivo> busquedaAvanzada(String materia, String nbreDocente, String apeDocente,
+			String carrera, java.sql.Date fechaDde, java.sql.Date fechaHta) {
+		return archivoDao.busquedaAvanzada(materia, nbreDocente, apeDocente, carrera, fechaDde, fechaHta);
+	}
 }

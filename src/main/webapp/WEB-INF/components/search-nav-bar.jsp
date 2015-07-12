@@ -7,6 +7,8 @@
                 <input type="text" placeholder="Buscar archivos..." class="form-control" name="top-search" id="top-search">
             </div>
         </form>
+        <ul class="nav navbar-top-links navbar-right">
+        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="/repouniversity/busquedaAvanzada"><i class="fa fa-search advance-search"> Busqueda avanzada</i> </a>
     </div>
        <ul class="nav navbar-top-links navbar-right">
            <li>

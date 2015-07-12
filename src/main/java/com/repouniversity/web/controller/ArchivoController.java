@@ -1,5 +1,6 @@
 package com.repouniversity.web.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -96,10 +97,36 @@ public class ArchivoController {
     	 	listaResultados= buscarFicheroLocal(parametro);
     	 	return new ModelAndView("resultList").addObject("listaResultados", listaResultados).addObject("parametroBusqueda", parametro);
      }
+     @RequestMapping(value = "/busquedaAvanzada", method = { RequestMethod.POST })
+     public ModelAndView busquedaAvanzada(
+    		HttpServletRequest request,
+    		@RequestParam(value = "materia", required = false) String materia,
+    		@RequestParam(value = "nbreDocente", required = false) String nbreDocente,
+    		@RequestParam(value = "apeDocente", required = false) String apeDocente,
+    		@RequestParam(value = "carrera", required = false) String carrera,
+            @RequestParam(value = "fechaDde", required = true) Date fechaDde, 
+            @RequestParam(value = "fechaHta", required = false) Date fechaHta) {
+     
+     		List <Archivo> listaResultados = new ArrayList<Archivo>();
+    	 	listaResultados= busquedaAvanzada(materia, nbreDocente, apeDocente, carrera, fechaDde, fechaHta);
+    	 	return new ModelAndView("resultList").addObject("listaResultados", listaResultados);
+     }
+     
+     @RequestMapping(value = "/busquedaAvanzada", method = { RequestMethod.GET })
+     public ModelAndView busquedaAvanzada(){
+    		return new ModelAndView("busquedaAvanzada");
+     }
 
     private List<Archivo> buscarFicheroLocal(String parametro) {
         List<Archivo> archivosEncontrados = new ArrayList<Archivo>();
         archivosEncontrados = archivoService.requestArchivos(parametro);
+        return archivosEncontrados;
+
+    }
+    
+    private List<Archivo> busquedaAvanzada(String materia, String nbreDocente, String apeDocente, String carrera, Date fechaDde, Date fechaHta) {
+        List<Archivo> archivosEncontrados = new ArrayList<Archivo>();
+        archivosEncontrados = archivoService.busquedaAvanzada(materia, nbreDocente, apeDocente, carrera, fechaDde, fechaHta);
         return archivosEncontrados;
 
     }
