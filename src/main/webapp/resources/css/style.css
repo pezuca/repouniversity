@@ -3639,6 +3639,6 @@ body.skin-3 {
 	width: 100%!important;
 }
 
-#page-wrapper {
-	min-height: inherit!important;
+.hidden {
+	display: none;
 }

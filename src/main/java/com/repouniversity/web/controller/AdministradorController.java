@@ -264,7 +264,7 @@ public class AdministradorController {
     }
     
     @RequestMapping(value = "admin/verReporteErrores", method = {RequestMethod.GET})
-    public ModelAndView reporteErrores(@ModelAttribute("login") UsuarioRol usuario) {
+    public ModelAndView reporteErrores() {
         List<ErrorArchivoTO> errorArchivo = errorArchivoService.getErrores();
          
         return new ModelAndView("verErroresArchivosAdmin").addObject("errorArchivo", errorArchivo);

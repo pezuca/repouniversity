@@ -95,8 +95,8 @@
 								<div class="chat-activity-list">
 
 									<c:forEach items="${errorArchivo}" var="error" varStatus="status">
-										<div class="chat-element">
-											<div class="media-body ">
+										<div class="chat-element ${(status.index % 2 != 0) ? 'right':''}">
+											<div class="media-body ${(status.index % 2 != 0) ? 'text-right':''}">
 												 <strong>${error.persona.apellido}, ${error.persona.nombre}</strong>
 												<p class="m-b-xs">${error.descripcion}</p>
 												<small class="text-muted">${error.fechasys}</small>

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-dfbhdsfhgczx ageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="activeTab" value="${'verErroresArchivos'}" />
 <c:set var="userLog" value="${sessionScope.login}" />
@@ -9,16 +8,16 @@ dfbhdsfhgczx ageEncoding="ISO-8859-1"%>
 <head>
 <meta charset="utf-8" />
 <title>Repouniversity</title>
-<%@include file="../../components/common-statics-imports.jsp"%>
+<%@include file="../components/common-statics-imports.jsp"%>
 <script
 	src="/repouniversity/resources/js/application/admin-panel/verMateriasAdmin.js"></script>
 </head>
 <body class=" pace-done">
 
 	<div id="wrapper">
-		<%@include file="../../components/static-nav-bar.jsp"%>
+		<%@include file="../components/static-nav-bar.jsp"%>
 		<div id="page-wrapper" class="gray-bg dashbard-1">
-			<%@include file="../../components/search-nav-bar.jsp"%>
+			<%@include file="../components/search-nav-bar.jsp"%>
 
 			<div class="wrapper wrapper-content animated fadeInRight">
 				<div class="row">
@@ -57,7 +56,7 @@ dfbhdsfhgczx ageEncoding="ISO-8859-1"%>
 				</div>
 			</div>
 
-			<%@include file="../../components/footer.jsp"%>
+			<%@include file="../components/footer.jsp"%>
 		</div>
 		<!-- 	Ventanas -->
 		<div id="deleteErrorDialog" title="Eliminar error">
