@@ -1,6 +1,9 @@
 package com.repouniversity.web.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,12 +37,14 @@ public class ArchivoController {
 
     @Autowired
     private ArchivoService archivoService;
-    
+
     @Autowired
     private ErrorArchivoService errorArchivoService;
 
     @Autowired
     private PersonaService personaService;
+
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     /**
      * @param request
@@ -82,20 +87,37 @@ public class ArchivoController {
         }
     }
 
-
     @RequestMapping(value = "/verArchivos", method = {RequestMethod.GET})
     public ModelAndView verArchivos(@ModelAttribute("login") UsuarioRol usuario) {
         List<VwArchivo> archivos = archivoService.getArchivosDePersona(usuario.getIdPersona());
         return new ModelAndView("verArchivos").addObject("archivos", archivos);
-    }    
+    }
 
-     @RequestMapping(value = "/buscarArchivo", method = { RequestMethod.POST })
-     public ModelAndView buscarFichero(
-    		HttpServletRequest request,@RequestParam(value = "top-search") String parametro){
-    	 	List <Archivo> listaResultados = new ArrayList<Archivo>();
-    	 	listaResultados= buscarFicheroLocal(parametro);
-    	 	return new ModelAndView("resultList").addObject("listaResultados", listaResultados).addObject("parametroBusqueda", parametro);
-     }
+    @RequestMapping(value = "/buscarArchivo", method = {RequestMethod.POST})
+    public ModelAndView buscarFichero(HttpServletRequest request, @RequestParam(value = "top-search") String parametro) {
+        List<Archivo> listaResultados = new ArrayList<Archivo>();
+        listaResultados = buscarFicheroLocal(parametro);
+        return new ModelAndView("resultList").addObject("listaResultados", listaResultados).addObject("parametroBusqueda", parametro);
+    }
+
+    @RequestMapping(value = "/busquedaAvanzada", method = {RequestMethod.POST})
+    public ModelAndView busquedaAvanzada(HttpServletRequest request, @RequestParam(value = "materia", required = false) String materia,
+            @RequestParam(value = "nbreDocente", required = false) String nbreDocente, @RequestParam(value = "apeDocente", required = false) String apeDocente,
+            @RequestParam(value = "carrera", required = false) String carrera, @RequestParam(value = "fechaDde", required = false) String fechaDde,
+            @RequestParam(value = "fechaHta", required = false) String fechaHta) throws ParseException {
+        
+        Date desde = dateFormat.parse(fechaDde);
+        Date hasta = dateFormat.parse(fechaHta);
+
+        List<Archivo> listaResultados = new ArrayList<Archivo>();
+        listaResultados = busquedaAvanzada(materia, nbreDocente, apeDocente, carrera, desde, hasta);
+        return new ModelAndView("resultList").addObject("listaResultados", listaResultados);
+    }
+
+    @RequestMapping(value = "/busquedaAvanzada", method = {RequestMethod.GET})
+    public ModelAndView busquedaAvanzada() {
+        return new ModelAndView("busquedaAvanzada");
+    }
 
     private List<Archivo> buscarFicheroLocal(String parametro) {
         List<Archivo> archivosEncontrados = new ArrayList<Archivo>();
@@ -104,13 +126,19 @@ public class ArchivoController {
 
     }
 
+    private List<Archivo> busquedaAvanzada(String materia, String nbreDocente, String apeDocente, String carrera, Date fechaDde, Date fechaHta) {
+        List<Archivo> archivosEncontrados = new ArrayList<Archivo>();
+        archivosEncontrados = archivoService.busquedaAvanzada(materia, nbreDocente, apeDocente, carrera, fechaDde, fechaHta);
+        return archivosEncontrados;
+
+    }
+
     @RequestMapping(value = "/vistaPrevia", method = {RequestMethod.GET})
     public ModelAndView vistaPrevia(@RequestParam(value = "archivoId") Long archivoId) {
         VwArchivo archivo = archivoService.getVwArchivo(archivoId);
         List<ErrorArchivoTO> errorArchivo = errorArchivoService.getErroresForArchivo(archivoId);
-         
+
         return new ModelAndView("vistaPrevia").addObject("archivo", archivo).addObject("errorArchivo", errorArchivo);
     }
-    
 
 }

@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -131,12 +132,21 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
         parametrosBusqueda.clear();
         parametrosBusqueda.addAll(hs);
         
-        //aramamos la cadena con todos los tags con LIKE
+        //armamos la cadena con todos los tags con LIKE
         String tags= new String();
-        for (String parametro:parametrosBusqueda) {
-			tags= tags.concat(" tags like \'%" + parametro +"%\' OR ");
-		}
-        tags = tags.substring(0, tags.length()-3);
+        
+        //se inicializa tagas por si se agrega un espacio solamente en la busqued para que no rompa
+        //para el resto de los caracteres especiales no hay problemas
+        tags="tags=\'\'";
+        
+        if(parametrosBusqueda.size() > 0){
+        	tags="";
+	        for (String parametro:parametrosBusqueda) {
+				tags= tags.concat(" tags like \'%" + parametro.trim() +"%\' OR ");
+			}
+	        tags = tags.substring(0, tags.length()-3);
+        }
+        
         
         //armamos la query de busqueda en la base
         sql.append("select * from repouniversity.archivo ");
@@ -160,7 +170,40 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
 
         return list;
     }
+	
+	@Override
+    public List<Archivo> busquedaAvanzada(String materia, String nbreDocente, String apeDocente, String carrera, Date fechaDde, Date fechaHta) {
+        StringBuilder sql = new StringBuilder();
+        //se genera la condicion a mano, pero en la condicion es donde se va a armarse la query
+        
+        //armamos la query de busqueda en la base
+        //FALTA AGEGREGAR LA QUERY A LA BASE CON LA VISTA DE FEDE PARA
+        sql.append("select * from repouniversity.vw_archivos ");
+        sql.append("where curso like %"+ materia + "% AND");
+        sql.append(" nombreDocente like %"+ nbreDocente + "% AND");
+        sql.append(" apellidoDocente like %"+ apeDocente + "% AND");
+        sql.append(" curso like %"+ carrera + "% AND");
+        sql.append(" fecha_publicacion between "+ fechaDde + " AND" + fechaHta);
+        sql.append(" AND (estado=1 OR  estado=2)");
 
+        List<Archivo> list = doQuery(new SQLStatement(sql.toString()) {
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+//                ps.setString (1, parametro);
+            }
+
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+        }, new ArchivoRowMapper(), "generarBusqueda: ");
+
+        if (list.isEmpty()) {
+            return null;
+        }
+
+        return list;
+    }
+	
 	@Override
 	public List<String> quitarNoiseWords( String parametro) {
 		 

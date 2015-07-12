@@ -18,32 +18,46 @@
 	<div id="wrapper">
 		<%@include file="../components/static-nav-bar.jsp"%>
 		<div id="page-wrapper" class="gray-bg dashbard-1">
-		
 		<%@include file="../components/search-nav-bar.jsp"%>
-		<div class="wrapper wrapper-content animated fadeInRight">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-content">
-                            <h2>
-                                Se encontraron ${listaResultados.size()} resultados con: <span class="text-navy">${parametroBusqueda}</span>
-                            </h2>
-                            <c:forEach items="${listaResultados}" var="result" varStatus="status">
-								<div class="search-result">
-	                                <h3><a href="#">${result.nombre}</a></h3>
-	                                <h5><a href="#">fecha publicacion: ${result.fechaPublicacion}</a></h5>
-	                                <p>
-	                                    ${result.descripcion}<br><br><button class="btn btn-primary btn-xs" type="button">vista previa</button>
-	                                </p>
-	                            </div>
-	                            <div class="hr-line-dashed"></div>
-							</c:forEach>
-                        </div>
-                    </div>
-                </div>
-        </div>
-		
-		<%@include file="../components/footer.jsp"%>
+			<div class="wrapper wrapper-content animated fadeInRight">
+	            <div class="row">
+	                <div class="col-lg-12">
+	                    <div class="ibox float-e-margins">
+	                        <div class="ibox-content">
+	                        	<c:choose>
+								    <c:when test="${listaResultados != null} and ${parametroBusqueda!= null}">
+								        <h2>
+			                                Se encontraron ${listaResultados.size()} resultados con: <span class="text-navy">${parametroBusqueda}</span>
+			                            </h2>
+								    </c:when>
+								    <c:when test="${listaResultados != null} and ${parametroBusqueda == null}">
+								        <h2>
+			                                Se encontraron ${listaResultados.size()} resultados con: <span class="text-navy">${parametroBusqueda}</span>
+			                            </h2>
+								    </c:when>    
+								    <c:otherwise>
+								        <h2>
+			                                No se encontraron resultados  para su busqueda <span class="text-navy">${parametroBusqueda}</span>
+			                            </h2>
+								    </c:otherwise>
+								</c:choose>
+	                        	<c:forEach items="${listaResultados}" var="result" varStatus="status">
+									<div class="search-result">
+		                                <h3><a href="#">${result.nombre}</a></h3>
+		                                <h5><a href="#">fecha publicacion: ${result.fechaPublicacion}</a></h5>
+		                                <p>
+		                                    ${result.descripcion}<br><br><button class="btn btn-primary btn-xs" type="button">vista previa</button>
+		                                </p>
+		                            </div>
+		                            <div class="hr-line-dashed"></div>
+								</c:forEach>
+	                        </div>
+	                    </div>
+	            	</div>
+	        	</div>
+			
+			<%@include file="../components/footer.jsp"%>
+			</div>
 		</div>
 	</div>
 	<script>
