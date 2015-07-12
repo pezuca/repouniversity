@@ -125,10 +125,6 @@ public class NotificacionDAOImpl extends GenericDAOImpl<Notificacion> implements
             public void doAfterTransaction(int result) {
             }
         }, new NotificacionRowMapper(), "findNotificacionesForAlumnoId: " + idAluDoc);
-        
-        if (list.isEmpty()) {
-            return null;
-        }
 
         return list;
     }

@@ -54,17 +54,18 @@
 	
 			$("#clientTable_length").remove();
 			
-			function borrarNotificacion(notificacionId) {
-				$.ajax({
-					  type: "POST",
-					  url: "/repouniversity/notificacion/borrarNotificacion",
-					  data: {"notificacionId" : notificacionId},
-					  success: function(){ 
-						  alert("Good!")
-					  }
-				});
-			}
 		});
+
+		function borrarNotificacion(notificacionId) {
+			$.ajax({
+				  type: "POST",
+				  url: "/repouniversity/notificacion/borrarNotificacion",
+				  data: {"notificacionId" : notificacionId},
+				  success: function(){ 
+					  alert("Good!")
+				  }
+			});
+		}
 		
 
 	</script>	
