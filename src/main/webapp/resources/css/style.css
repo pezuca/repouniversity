@@ -3638,3 +3638,7 @@ body.skin-3 {
 .chosen-container {
 	width: 100%!important;
 }
+
+#page-wrapper {
+	min-height: inherit!important;
+}

@@ -6,11 +6,17 @@
 	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd 		http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<bean name="systemFileUploadLocation" class="java.lang.String">
+	<bean name="systemFileUploadLocation" id="systemFileUploadLocation" class="java.lang.String">
 		<constructor-arg value="${system.fileUpload.location}" />
 	</bean>
 	
-	<bean name="systemFilePreviewLocation" class="java.lang.String">
-		<constructor-arg value="${system.filePreview.location}" />
+	<bean name="systemFilePreviewTomcatLocation" id="systemFilePreviewTomcatLocation" class="java.lang.String">
+		<constructor-arg value="${system.filePreviewTomcat.location}" />
 	</bean>
+	
+	<bean name="systemFilePreviewLocation" id="systemFilePreviewLocation" class="java.lang.String">
+		<constructor-arg value="${system.fileUploadPreview.location}" />
+	</bean>
+	
+	<bean class="com.repouniversity.model.init.ServletContextCopyFileInitializer" />
 </beans>

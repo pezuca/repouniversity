@@ -66,7 +66,7 @@
 												<td>${archivo.grupo}</td>
 												<td><a  name="editArchivo"
 													data-archivoId="${archivo.id}"><button
-															class="btn btn-primary btn-circle" type="button">
+															class="btn btn-info btn-circle" type="button">
 															<i class="fa fa-pencil"></i>
 														</button></a> <a  name="deleteArchivo"
 													data-archivoId="${archivo.id}"><button
@@ -77,8 +77,8 @@
 														
 														<a  name="dowloadArchivo"
 													data-archivoId="${archivo.id}" href="/repouniversity/vistaPrevia?archivoId=${archivo.id}"><button
-															class="btn btn-success btn-circle" type="button">
-															<i class="fa fa-download"></i>
+															class="btn btn-primary btn-circle" type="button">
+															<i class="fa fa-search"></i>
 														</button></a>
 														
 														<a  name="dowloadArchivo"

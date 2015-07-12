@@ -19,7 +19,7 @@ $(document).ready(function () {
 		autoQueue: false,
 		previewsContainer: "#previews",
 		clickable: ".fileinput-button",
-		acceptedFiles: "image/*,.pdf,.doc,.ods",
+		acceptedFiles: "image/*,.pdf,.doc,.ods,.xlsx,.docx",
 		dictFileTooBig: "File is too big ({{filesize}}KB). Max filesize: {{maxFilesize}}KB."
 	});
 

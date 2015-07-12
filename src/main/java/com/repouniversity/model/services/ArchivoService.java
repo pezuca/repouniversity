@@ -30,6 +30,9 @@ public class ArchivoService {
     public String systemFileUploadLocation;
     
     @Autowired
+    public String systemFilePreviewTomcatLocation;
+    
+    @Autowired
     public String systemFilePreviewLocation;
 
     public static final String SEPARATOR = "-aa-";
@@ -138,18 +141,28 @@ public class ArchivoService {
         List<Archivo> listaArchivos = new ArrayList<Archivo>();
         // AGREGO LOS ARCHIVOS Y LOS SUBO A LA CARPETA DEL SERVER.
         for (int i = 0; i < file.length; i++) {
-            File localFile = new File(systemFileUploadLocation + (new Date()).getTime() + SEPARATOR + file[i].getOriginalFilename());
-            FileOutputStream os = null;
+            String fileName = (new Date()).getTime() + SEPARATOR + file[i].getOriginalFilename();
             
-//            File previewFile = new File(systemFileUploadLocation + (new Date()).getTime() + SEPARATOR + file[i].getOriginalFilename());
-//            FileOutputStream previewOs = null;
+            File localFile = new File(systemFileUploadLocation + fileName);
+            FileOutputStream os = null;
             
             // GUARDO LOS ARCHIVOS EN LA CARPETA
             os = new FileOutputStream(localFile);
             os.write(file[i].getBytes());
+
+            File previewTomcatFile = new File(systemFilePreviewTomcatLocation + fileName);
+            FileOutputStream previewTomcatOs = null;
             
-//            os = new FileOutputStream(localFile);
-//            os.write(file[i].getBytes());
+            // GUARDO LOS ARCHIVOS EN LA CARPETA DE PREVIEW
+            previewTomcatOs = new FileOutputStream(previewTomcatFile);
+            previewTomcatOs.write(file[i].getBytes());
+            
+            File previewFile = new File(systemFilePreviewLocation + fileName);
+            FileOutputStream previewOs = null;
+            
+            // GUARDO LOS ARCHIVOS EN LA CARPETA DE PREVIEW
+            previewOs = new FileOutputStream(previewFile);
+            previewOs.write(file[i].getBytes());
 
             try {
 
@@ -190,7 +203,7 @@ public class ArchivoService {
     public Archivo bajarArchivo(Long archivoId, HttpServletResponse response) throws IOException {
         Archivo archivo = archivoDao.findById(archivoId);
 
-        File file = new File(archivo.getPath());
+        File file = new File(systemFileUploadLocation + archivo.getPath());
         FileInputStream fileIn = new FileInputStream(file);
         ServletOutputStream out = response.getOutputStream();
 

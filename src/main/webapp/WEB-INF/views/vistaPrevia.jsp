@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="activeTab" value="${'verCursos'}" />
+<c:set var="activeTab" value="${'verArchivos'}" />
 <c:set var="userLog" value="${sessionScope.login}" />
 
 <html>
@@ -9,7 +9,6 @@
 	<meta charset="utf-8" />
 	<title>Repouniversity</title>
 	<%@include file="../components/common-statics-imports.jsp"%>
-	<script	src="/repouniversity/resources/js/application/verCursosAlumno.js"></script>
 </head>
 <body class=" pace-done">
 	
@@ -20,57 +19,107 @@
 	
 	 	<div class="wrapper wrapper-content animated fadeInRight">
 	         <div class="row">
-	            <div class="col-lg-3">
-					<p>Nombre: ${archivo.nombre}</p>
-					<p>Descipcion: ${archivo.descripcion}</p>
-					<p>Tipo: ${archivo.tipoArchivo}</p>
-					<p>Estado: ${archivo.estadoArchivo}</p>
-					<p>Materia: ${archivo.materia}</p>
-					<p>Curso: ${archivo.curso} (${archivo.descripcionCurso})</p>
-	      		</div>
 	      		<div class="col-lg-9">
-					<iframe style="width: 100%;height: 500px;" src="/repouniversity/resources/js/ViewerJS/index.html#documents/previews/${archivo.path}" allowfullscreen webkitallowfullscreen></iframe>
+	         		<div class="ibox">
+						<div class="ibox-title">
+	                        <h5>Vista Previa</h5>
+	                    </div>
+	                    <div class="ibox-content">
+	                    	<figure>
+								<c:choose>
+									<c:when test="${archivo.idTipo == 1}">
+										<iframe style="width: 100%;height: 500px;" src="/repouniversity/resources/js/ViewerJS/index.html#documents/previews/${archivo.path}" allowfullscreen webkitallowfullscreen></iframe>
+									</c:when>
+									<c:when test="${archivo.idTipo == 2}">
+										<img style="width: 100%;height: 500px;" src="/repouniversity/resources/js/ViewerJS/documents/previews/${archivo.path}"></iframe>
+									</c:when>
+								</c:choose>
+	                    	</figure>
+	                    </div>
+                    </div>
 	      		</div>
-	      		
-	      		<div class="wrapper wrapper-content animated fadeInRight">
-					<div class="row">
-			             <div class="col-lg-12">
-							<div class="usuarioInformation">
-								<div class="page-header">
-									<h1>Errores</h1>
+					
+	         	<div class="col-lg-3">
+	         		<div class="row">
+	         			<div class="col-lg-12">
+		         			<div class="wrapper wrapper-content project-manager">
+		                        <h2 style="color:#1ab394;"><strong>${archivo.nombre}</strong></h2>
+		                        <ul class="list-unstyled m-t-md">
+		                            <li>
+		                                <label>Descripcion:</label>
+		                                ${archivo.descripcion}
+		                            </li>
+		                            <li>
+		                                <label>Tipo:</label>
+		                                ${archivo.tipoArchivo}
+		                            </li>
+		                            <li>
+		                                <label>Estado:</label>
+		                                ${archivo.estadoArchivo}
+		                            </li>
+		                            <li>
+		                                <label>Materia:</label>
+		                                ${archivo.materia}
+		                            </li>
+		                            <li>
+		                                <label>Curso:</label>
+		                                ${archivo.curso} (${archivo.descripcionCurso})
+		                            </li>
+		                        </ul>
+		                    </div>
+	                    </div>
+                    </div>
+                    <div class="row">
+						<div class="col-lg-12">
+							<a href="/repouniversity/bajarArchivo?archivoId=${archivo.id}" target="_blank">
+			                    <button class="btn btn-primary dim" type="button">
+			                        <div class="row vertical-align">
+			                            <div class="col-xs-3">
+			                                <i class="fa fa-shield fa-3x"></i>
+			                            </div>
+			                            <div class="col-xs-9 text-right" style="padding-top:5px;">
+			                                <h2 class="font-bold">Descargar</h2>
+			                            </div>
+			                        </div>
+			                    </button>
+		                    </a>
+		                </div>
+                    </div>
+                </div>
+	         </div>
+	         <div class="row">
+	         	<div class="col-lg-9">
+	         		<div class="ibox float-e-margins">
+						<div class="ibox-content">
+							<div>
+								<div class="chat-activity-list">
+
+									<c:forEach items="${errorArchivo}" var="error" varStatus="status">
+										<div class="chat-element">
+											<div class="media-body ">
+												 <strong>${error.persona.apellido}, ${error.persona.nombre}</strong>
+												<p class="m-b-xs">${error.descripcion}</p>
+												<small class="text-muted">${error.fechasys}</small>
+											</div>
+										</div>
+									</c:forEach>
 								</div>
 							</div>
-							<table id="errorTable" class="table table-striped hover">
-								<thead class="encabezado">
-									<tr>
-										<th>Error</th>
-										<th>Reportado Por</th>
-										<th>Fecha</th>
-										
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach items="${errorArchivo}" var="error"
-										varStatus="status">
-										<tr class="even">
-											<td>${error.descripcion}</td>
-											<td>${error.persona.apellido}, ${error.persona.nombre}</td>
-											<td>${error.fechasys}</td>
-										</tr>
-									</c:forEach>
-								</tbody>
-								<tfoot>
-									<tr class="head">
-										<th></th>
-										<th></th>
-										<th></th>
-									</tr>
-								</tfoot>
-							</table>
+							<div class="chat-form">
+								<form id="comentarioForm" role="form">
+									<div class="form-group">
+										<textarea class="form-control" placeholder="Message"></textarea>
+									</div>
+									<div class="text-right">
+										<button type="submit" class="btn btn-sm btn-primary m-t-n-xs">
+											<strong>Enviar</strong>
+										</button>
+									</div>
+								</form>
+							</div>
 						</div>
-			        </div>
+					</div>
 				</div>
-	      		
 	         </div>
 	     </div>
         
