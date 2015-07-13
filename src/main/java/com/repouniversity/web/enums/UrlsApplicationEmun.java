@@ -8,7 +8,7 @@ package com.repouniversity.web.enums;
 public enum UrlsApplicationEmun {
 
 	LOGIN("/login"),
-	DASHBOARD("/dashboard");
+	DASHBOARD("/dashboard?bread=Home-0");
 	
 	private String url;
 

@@ -21,6 +21,8 @@
 		
 		<%@include file="../components/search-nav-bar.jsp"%>
 		
+		<tag:breadcrumb label="Ver archivos"/>
+		
 		<div class="wrapper wrapper-content animated fadeInRight">
 			<div class="row">
 	             <div class="col-lg-12">

@@ -21,6 +21,8 @@
 		
 		<%@include file="../components/search-nav-bar.jsp"%>
 		
+		<tag:breadcrumb label="Ver curso"/>
+		
 		<div class="wrapper wrapper-content animated fadeInRight">
 			<div class="row">
 	             <div class="col-lg-12">
@@ -46,7 +48,7 @@
 					<tr class="head">
 						<th><a data-toggle="modal" href="#fileUpload" class="btn btn-success"><i class="fa fa-upload"></i> Subir Archivo</a></th>
 						<th></th>
-						<th><a href="/repouniversity/alumno/verGrupo?grupoId=${curso.grupoAlumno.id}" name="Ver" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver grupo" class="btn btn-success"><i class="fa fa-upload"></i> Ver Grupo</a></th>
+						<th><a href="/repouniversity/alumno/verGrupo?grupoId=${curso.grupoAlumno.id}&bread=Ver grupo-2" name="Ver" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver grupo" class="btn btn-success"><i class="fa fa-upload"></i> Ver Grupo</a></th>
 					</tr>
 				</div>
 			<div class="col-lg-6">
@@ -80,7 +82,7 @@
 									Estado archivo: ${archivo.estadoArchivo}</p>
 								<div class="row m-t-md">
 									<div class="col-md-3">
-										<h5><a  name="dowloadArchivo" data-archivoId="${archivo.id}" href="/repouniversity/vistaPrevia?archivoId=${archivo.id}">
+										<h5><a  name="dowloadArchivo" data-archivoId="${archivo.id}" href="/repouniversity/vistaPrevia?archivoId=${archivo.id}&bread=Vista previa-3">
 												<button class="btn btn-primary btn-circle" type="button"><i class="fa fa-search"></i>
 												</button>
 											</a>

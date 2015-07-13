@@ -22,6 +22,13 @@ http://www.springframework.org/schema/context/spring-context.xsd">
  			<mvc:exclude-mapping path="/**/loginAnonimo/**" />
  			<bean class="com.repouniversity.web.interceptors.LoginInterceptor" />
  		</mvc:interceptor>
+ 		<mvc:interceptor>
+ 			<mvc:mapping path="/**" />
+  			<mvc:exclude-mapping path="/**/login" />
+ 			<mvc:exclude-mapping path="/**/resources/**" />
+ 			<bean class="com.repouniversity.web.interceptors.BreadcrumbInterceptor" />
+ 		</mvc:interceptor>
 	</mvc:interceptors>
+	
  	<mvc:view-controller path="/busquedaAvanzada" view-name="busquedaAvanzada"/>
 </beans>

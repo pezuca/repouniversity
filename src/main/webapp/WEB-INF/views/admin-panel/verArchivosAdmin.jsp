@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="activeTab" value="${'verArchivos'}" />
 <c:set var="userLog" value="${sessionScope.login}" />
+<c:set var="breadcrumbTree" value="${sessionScope.breadcrumbTree}" />
 
 <html>
 <head>
@@ -17,11 +18,12 @@
 	src="/repouniversity/resources/js/application/admin-panel/verArchivosAdmin.js"></script>
 </head>
 <body class=" pace-done">
-
 	<div id="wrapper">
 		<%@include file="../../components/static-nav-bar.jsp"%>
 		<div id="page-wrapper" class="gray-bg dashbard-1">
 			<%@include file="../../components/search-nav-bar.jsp"%>
+
+			<tag:breadcrumb label="Ver archivos"/>
 
 			<div class="wrapper wrapper-content animated fadeInRight">
 				<div class="row">
@@ -76,7 +78,7 @@
 														</a> 
 														
 														<a  name="dowloadArchivo"
-													data-archivoId="${archivo.id}" href="/repouniversity/vistaPrevia?archivoId=${archivo.id}"><button
+													data-archivoId="${archivo.id}" href="/repouniversity/vistaPrevia?archivoId=${archivo.id}&bread=Vista previa-2"><button
 															class="btn btn-primary btn-circle" type="button">
 															<i class="fa fa-search"></i>
 														</button></a>
