@@ -18,11 +18,11 @@
 	<div id="wrapper">
 		<%@include file="../components/static-nav-bar.jsp"%>
 		
-		<tag:breadcrumb label="Ver notificaciones"/>
-		
 		<div id="page-wrapper" class="gray-bg dashbard-1">
 		
 		<%@include file="../components/search-nav-bar.jsp"%>
+
+		<tag:breadcrumb label="Ver notificaciones"/>
 		
 		<div class="wrapper wrapper-content animated fadeInRight">
 			<div class="row">
