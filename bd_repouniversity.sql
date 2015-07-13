@@ -118,7 +118,7 @@ CREATE TABLE `archivo` (
 
 LOCK TABLES `archivo` WRITE;
 /*!40000 ALTER TABLE `archivo` DISABLE KEYS */;
-INSERT INTO `archivo` VALUES (1,'practica Algebra','practica ejercicios del 1 a 20 ','1900-01-01','1900-01-01',1,'2014-04-15 14:21:04',1,1,'c:\\algebra.doc',4,3,NULL),(5,'Teoria nº 1 programción','Teoria de pilas y  colas','1900-01-01','1900-01-01',1,'2014-04-15 14:24:29',1,1,'c:\\prog.doc',4,4,NULL),(6,'Teoria nº 2 programción','Recursividad','1900-01-01','1900-01-01',1,'2014-04-15 14:33:11',1,1,'c:\\prog2.doc',4,4,NULL),(7,'practica Nº 2  Algebra ','practica ejercicios del 1 a 20 ','1900-01-01','1900-01-01',1,'2014-04-15 14:34:15',1,1,'c:\\algebra2.doc',32,5,NULL),(8,'practica Nº 3  Algebra ','practica ejercicios del 20 a 30 ','1900-01-01','1900-01-01',1,'2014-04-15 14:45:37',1,1,'c:\\algebra3.doc',32,5,NULL),(9,'practica Nº 3  Algebra ','practica ejercicios del 20 a 30 ','1900-01-01','1900-01-01',1,'2014-04-15 14:46:14',1,1,'c:\\algebra3.doc',31,3,NULL);
+INSERT INTO `archivo` VALUES (1,'practica Algebra','practica ejercicios del 1 a 20 ','1900-01-01','1900-01-01',1,'2014-04-15 14:21:04',1,1,'c:\\algebra.doc',4,3,NULL),(5,'Teoria nº 1 programción','Teoria de pilas y  colas','1900-01-01','1900-01-01',1,'2014-04-15 14:24:29',1,1,'c:\\prog.doc',4,4,NULL),(6,'Teoria nº 2 programción','Recursividad','1900-01-01','1900-01-01',1,'2014-04-15 14:33:11',1,1,'c:\\prog2.doc',4,4,NULL),(7,'practica Nº 2  Algebra ','practica ejercicios del 1 a 20 ','1900-01-01','1900-01-01',1,'2014-04-15 14:34:15',1,1,'c:\\algebra2.doc',32,5,NULL),(8,'practica Nº 3  Algebra ','practica ejercicios del 20 a 30 ','1900-01-01','1900-01-01',1,'2014-04-15 14:45:37',1,1,'c:\\algebra3.doc',32,5,NULL),(9,'practica Nº 3  Algebra ','practica ejercicios del 20 a 30 ','1900-01-01','1900-01-01',1,'2014-04-15 14:46:14',1,1,'c:\\algebra3.doc',31,2,'fede');
 /*!40000 ALTER TABLE `archivo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -225,7 +225,7 @@ CREATE TABLE `comentario` (
 
 LOCK TABLES `comentario` WRITE;
 /*!40000 ALTER TABLE `comentario` DISABLE KEYS */;
-INSERT INTO `comentario` VALUES (1,'Hay que revisar el trabajo numero 3',4,'2015-07-03 20:02:38',1),(2,'Hay que revisar el trabajo numero 1',4,'2015-07-03 20:02:38',1),(3,'pepe',4,'2015-07-04 16:23:10',1),(4,NULL,4,'2015-07-06 02:34:26',1);
+INSERT INTO `comentario` VALUES (1,'Hay que revisar el trabajo numero 3',4,'2015-07-03 20:02:38',0),(2,'Hay que revisar el trabajo numero 1',4,'2015-07-03 20:02:38',0),(3,'pepe',4,'2015-07-04 16:23:10',1),(4,NULL,4,'2015-07-06 02:34:26',1);
 /*!40000 ALTER TABLE `comentario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -452,7 +452,7 @@ CREATE TABLE `notificacion` (
   KEY `tiponotificacion_idx` (`tiponotificacion`),
   CONSTRAINT `idcurso` FOREIGN KEY (`idcurso`) REFERENCES `curso` (`id_curso`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `tiponotificacion` FOREIGN KEY (`tiponotificacion`) REFERENCES `tipo_notificacion` (`idTipoNotificacion`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1 COMMENT='En esta tabla se alojaran todas las notificaciones del siste';
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1 COMMENT='En esta tabla se alojaran todas las notificaciones del siste';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -461,7 +461,7 @@ CREATE TABLE `notificacion` (
 
 LOCK TABLES `notificacion` WRITE;
 /*!40000 ALTER TABLE `notificacion` DISABLE KEYS */;
-INSERT INTO `notificacion` VALUES (10,3,1,29,9,'nuevo',1),(16,4,4,29,9,'nuevo',1),(17,3,4,29,9,'nuevo',1),(18,1,3,29,9,'nuevo',1),(20,3,3,29,9,'nuevo',1),(21,3,4,29,9,'nuevo',1);
+INSERT INTO `notificacion` VALUES (10,3,1,29,9,'nuevo',1),(16,4,4,29,9,'nuevo',1),(17,3,4,29,9,'nuevo',1),(18,1,2,29,9,'nuevo',1),(20,3,3,29,9,'nuevo',1),(21,3,4,29,9,'nuevo',1),(22,3,2,29,9,'nuevo',1),(23,4,2,29,9,'nuevo',1),(24,3,2,29,9,'nuevo',1);
 /*!40000 ALTER TABLE `notificacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -661,8 +661,8 @@ SET character_set_client = utf8;
   `nombreDocente` tinyint NOT NULL,
   `apellidoDocente` tinyint NOT NULL,
   `materia` tinyint NOT NULL,
-  `idcarrera` tinyint NOT NULL,
-  `carrera` tinyint NOT NULL
+  `nombrePersona` tinyint NOT NULL,
+  `apellidoPersona` tinyint NOT NULL
 ) ENGINE=MyISAM */;
 SET character_set_client = @saved_cs_client;
 
@@ -699,7 +699,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vw_archivos` AS select `a`.`id_archivo` AS `id_archivo`,`a`.`nombre` AS `nombre`,`a`.`descripcion` AS `descripcion`,`a`.`fecha_despublicacion` AS `fecha_despublicacion`,`a`.`fecha_publicacion` AS `fecha_publicacion`,`a`.`id_tipo` AS `id_tipo`,`a`.`fecsys` AS `fecsys`,`a`.`activo` AS `activo`,`a`.`estado` AS `estado`,`a`.`path` AS `path`,`a`.`persona_id_persona` AS `persona_id_persona`,`a`.`id_curso` AS `id_curso`,`a`.`Tags` AS `Tags`,`t`.`nombre` AS `tipoArchivo`,`e`.`nombre` AS `estadoArchivo`,`c`.`nombre` AS `Curso`,`c`.`descripcion` AS `descripcionCurso`,`c`.`id_docente` AS `id_docente`,`c`.`id_materia` AS `id_materia`,`p`.`nombre` AS `nombreDocente`,`p`.`apellido` AS `apellidoDocente`,`m`.`nombre` AS `materia`,`ca`.`idcarrera` AS `idcarrera`,`ca`.`nombre` AS `carrera` from ((((((((`archivo` `a` join `estado` `e` on((`e`.`id_estado` = `a`.`estado`))) join `archivo_tipo` `t` on((`t`.`id_tipo` = `a`.`id_tipo`))) join `curso` `c` on((`c`.`id_curso` = `a`.`id_curso`))) join `docente` `d` on((`d`.`id_docente` = `c`.`id_docente`))) join `persona` `p` on((`p`.`id_persona` = `d`.`id_persona`))) join `materia` `m` on((`m`.`id_materia` = `c`.`id_materia`))) join `carrera_materia` `cm` on((`cm`.`idmateria` = `m`.`id_materia`))) join `carrera` `ca` on((`ca`.`idcarrera` = `cm`.`idcarrera`))) */;
+/*!50001 VIEW `vw_archivos` AS select `a`.`id_archivo` AS `id_archivo`,`a`.`nombre` AS `nombre`,`a`.`descripcion` AS `descripcion`,`a`.`fecha_despublicacion` AS `fecha_despublicacion`,`a`.`fecha_publicacion` AS `fecha_publicacion`,`a`.`id_tipo` AS `id_tipo`,`a`.`fecsys` AS `fecsys`,`a`.`activo` AS `activo`,`a`.`estado` AS `estado`,`a`.`path` AS `path`,`a`.`persona_id_persona` AS `persona_id_persona`,`a`.`id_curso` AS `id_curso`,`a`.`Tags` AS `Tags`,`t`.`nombre` AS `tipoArchivo`,`e`.`nombre` AS `estadoArchivo`,`c`.`nombre` AS `Curso`,`c`.`descripcion` AS `descripcionCurso`,`c`.`id_docente` AS `id_docente`,`c`.`id_materia` AS `id_materia`,`p`.`nombre` AS `nombreDocente`,`p`.`apellido` AS `apellidoDocente`,`m`.`nombre` AS `materia`,`pe`.`nombre` AS `nombrePersona`,`pe`.`apellido` AS `apellidoPersona` from (((((((`archivo` `a` join `estado` `e` on((`e`.`id_estado` = `a`.`estado`))) join `archivo_tipo` `t` on((`t`.`id_tipo` = `a`.`id_tipo`))) join `curso` `c` on((`c`.`id_curso` = `a`.`id_curso`))) join `docente` `d` on((`d`.`id_docente` = `c`.`id_docente`))) join `persona` `p` on((`p`.`id_persona` = `d`.`id_persona`))) join `materia` `m` on((`m`.`id_materia` = `c`.`id_materia`))) join `persona` `pe` on((`pe`.`id_persona` = `a`.`persona_id_persona`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -713,4 +713,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-07-11 18:34:21
+-- Dump completed on 2015-07-13  0:19:11
