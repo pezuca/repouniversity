@@ -3,14 +3,15 @@ package com.repouniversity.model.entity.to;
 import java.util.Date;
 import java.util.List;
 
+import com.repouniversity.model.entity.Persona;
+
 public class ComentarioTO {
     private Long id;
     private String descripcion;
     private Boolean activo;
     private Date fechasys;
     // private GrupoTO grupo;
-    private Long idPersona;
-   
+    private Persona persona;
     public Long getId() {
         return id;
     }
@@ -43,13 +44,13 @@ public class ComentarioTO {
         this.fechasys = fechasys;
     }
 
-    public Long getIdPersona() {
-        return idPersona;
-    }
+	public Persona getPersona() {
+		return persona;
+	}
 
-    public void setIdPersona(Long idPersona) {
-        this.idPersona = idPersona;
-    }
+	public void setPersona(Persona persona) {
+		this.persona = persona;
+	}
 
   
 }

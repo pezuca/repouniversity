@@ -27,9 +27,6 @@
 						</div>
 	                  <div class="ibox-title">
 	                      <h5>Entregas</h5>
-		                  <div class="ibox-tools" id="agregarEntregaTpButton">
-	                          <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  Entrega</a>
-	                      </div>
 	                  </div>
 	                  <div class="ibox-content">
 	                  	<table id="EntregaTP" class="table table-striped table-hover" >
@@ -48,8 +45,6 @@
 									<td>${tpentrega.descripcion}</td>
 									<td>${tpentrega.archivoNombre}</td>
 									<td>
-										<a href="#" name="editEntregaTp" data-tpentregaId="${tpentrega.id}"><button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Editar EntregaTP"><i class="fa fa-pencil"></i></button></a>
-										<a href="#" name="deleteEntregaTp" data-tpentregaId="${tpentrega.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar EntregaTP"><i class="fa fa-times"></i></button></a>
 										<a href="/repouniversitytpgrupo/verEntregasTP?tpEntregaId=${tpentrega.id}" name="Ver" data-tpentregaId="${tpentrega.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver EntregaTP"><i class="fa fa-codepen"></i></button></a>
 									</td>
 								</tr>
@@ -57,39 +52,45 @@
 						</tbody>
 	                  	</table>
 	                  </div>
-	                  <div class="ibox-title">
-	                      <h5>Comentarios</h5>
-		                  <div class="ibox-tools" id="agregarComentarioButton">
-	                          <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  Comentario</a>
-	                      </div>
-	                  </div>
-	                  <div class="ibox-content">
-	                  	<table id="ComentarioTP" class="table table-striped table-hover" >
-	                  		<thead class="encabezado">
-							<tr>
-								<th>Descripcion</th>
-								<th>Persona</th>
-								<th>Fecha</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${tpgrupo.comentario}" var="comentario" varStatus="status">
-								<tr>
-									<td>${comentario.descripcion}</td>
-									<td>${comentario.idPersona}</td>
-									<td>${comentario.fechasys}</td>
-									<td>
-										<a href="#" name="deleteComentario" data-comentarioId="${comentario.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar Comentario"><i class="fa fa-times"></i></button></a>
-									</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-	                  	</table>
-	                  </div>
+	                 
 	              </div>
 	      		</div>
 	         </div>
+	         <div class="row">
+	         	<div class="col-lg-9">
+	         		<div class="ibox float-e-margins">
+						<div class="ibox-content">
+							<div>
+								<div class="chat-activity-list">
+
+									<c:forEach items="${tpgrupo.comentario}" var="comentario" varStatus="status">
+										<div class="chat-element ${(status.index % 2 != 0) ? 'right':''}">
+											<div class="media-body ${(status.index % 2 != 0) ? 'text-right':''}">
+												 <strong>${comentario.persona.apellido}, ${comentario.persona.nombre}</strong>
+												<p class="m-b-xs">${comentario.descripcion}</p>
+												<small class="text-muted">${comentario.fechasys}</small> <a href="#" name="deleteComentario" data-comentarioId="${comentario.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar Comentario"><i class="fa fa-times"></i></button></a>
+											</div>
+										</div>
+									</c:forEach>
+								</div>
+							</div>
+							<div class="chat-form">
+								<form id="comentarioForm" role="form">
+									<div class="form-group">
+										<textarea name = "mensaje" class="form-control" placeholder="Comentario.."></textarea>
+									</div>
+									<div class="text-right">
+										<button type="submit" class="btn btn-sm btn-primary m-t-n-xs" onclick="borrarNotificacion(${archivo.id}, mensaje)">
+											<strong>Comentar</strong>
+										</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+	         </div>
+	         
 	     </div>
         
 		<%@include file="../components/footer.jsp"%>

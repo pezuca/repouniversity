@@ -29,7 +29,20 @@
 							<h1>Detalles curso ${curso.nombre}</h1>
 						</div>
 					</div>
-
+				<div class="col-lg-2">
+                    <div class="widget navy-bg p-lg text-center">
+                    	<a href="/repouniversity/alumno/verGrupo?grupoId=${curso.grupoAlumno.id}" name="Ver" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver grupo" class="m-b-md">
+                            <i class="fa fa-user fa-3x"></i>
+							<i class="fa fa-user fa-3x"></i>
+                            <h1 class="m-xs">${curso.grupoAlumno.nombre}</h1>
+                            <h3 class="font-bold no-margins">
+                                
+                            </h3>
+                            
+                         </a>
+                       
+                    </div>
+                </div>
 					<tr class="head">
 						<th><a data-toggle="modal" href="#fileUpload" class="btn btn-success"><i class="fa fa-upload"></i> Subir Archivo</a></th>
 						<th></th>
@@ -100,7 +113,7 @@
 				"serverSide" : false,
 				"paging": false,
 				"language": {
-		            "search": "Búsqueda"
+		            "search": "BÃºsqueda"
 		        }
 			});
 	

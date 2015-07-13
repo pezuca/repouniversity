@@ -60,6 +60,41 @@
 	              </div>
 	      		</div>
 	         </div>
+	         <div class="row">
+	         	<div class="col-lg-9">
+	         		<div class="ibox float-e-margins">
+						<div class="ibox-content">
+							<div>
+								<div class="chat-activity-list">
+
+									<c:forEach items="${tpgrupo.comentario}" var="comentario" varStatus="status">
+										<div class="chat-element ${(status.index % 2 != 0) ? 'right':''}">
+											<div class="media-body ${(status.index % 2 != 0) ? 'text-right':''}">
+												 <strong>${comentario.persona.apellido}, ${comentario.persona.nombre}</strong>
+												<p class="m-b-xs">${comentario.descripcion}</p>
+												<small class="text-muted">${comentario.fechasys}</small> 
+											</div>
+										</div>
+									</c:forEach>
+								</div>
+							</div>
+							<div class="chat-form">
+								<form id="comentarioForm" role="form">
+									<div class="form-group">
+										<textarea name = "mensaje" class="form-control" placeholder="Comentario.."></textarea>
+									</div>
+									<div class="text-right">
+										<button type="submit" class="btn btn-sm btn-primary m-t-n-xs" onclick="borrarNotificacion(${archivo.id}, mensaje)">
+											<strong>Comentar</strong>
+										</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+	         </div>
+	         
 	     </div>
         
 		<%@include file="../components/footer.jsp"%>

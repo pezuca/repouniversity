@@ -31,6 +31,9 @@ public class ComentarioService {
     private AlumnoService alumnoService;
 
     @Autowired
+    private PersonaService personaService;
+    
+    @Autowired
     private GrupoService grupoService;
     @Autowired
     private TpEntregaService tpEntregaService;
@@ -47,8 +50,7 @@ public class ComentarioService {
     	comentarioTO.setActivo(comentario.isActivo());
     	comentarioTO.setFechasys(comentario.getFechasys());
         // tpGrupoTo.setGrupo(grupoService.getGrupoById(tpGrupo.getIdGrupo()));
-    	comentarioTO.setIdPersona(comentario.getIdPersona());
-    
+    	comentarioTO.setPersona(personaService.findById(comentario.getIdPersona()));
         return comentarioTO;
     }
 

@@ -108,10 +108,10 @@
 							<div class="chat-form">
 								<form id="comentarioForm" role="form">
 									<div class="form-group">
-										<textarea class="form-control" placeholder="Nuevo.."></textarea>
+										<textarea name = "mensaje" class="form-control" placeholder="Nuevo.."></textarea>
 									</div>
 									<div class="text-right">
-										<button type="submit" class="btn btn-sm btn-primary m-t-n-xs">
+										<button type="submit" class="btn btn-sm btn-primary m-t-n-xs" onclick="borrarNotificacion(${archivo.id}, mensaje)">
 											<strong>Enviar</strong>
 										</button>
 									</div>
@@ -131,5 +131,33 @@
 	</div>
 	</div>
 	
+	<script>
+		$(document).ready(function() {
+			$('#clientTable').dataTable({
+				"processing" : false,
+				"serverSide" : false,
+				"paging": false,
+				"language": {
+		            "search": "Búsqueda"
+		        }
+			});
+	
+			$("#clientTable_length").remove();
+			
+		});
+
+		function borrarNotificacion(archivoId, descripcion) {
+			$.ajax({
+				  type: "POST",
+				  url: "/repouniversity/errorArchivo/reportarError",
+				  data: {"archivoId" : archivoId},{"descripcion" : descripcion},
+				  success: function(){ 
+					  alert("Good!")
+				  }
+				});
+		}
+		
+
+	</script>	
 </body>
 </html>
