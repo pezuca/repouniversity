@@ -35,9 +35,9 @@ public class BreadcrumbTree {
                 breadCrumb.remove(i);
             }
         } else {
-            if (breadCrumb.size() > 0) {
-                breadCrumb.get(breadCrumb.size() - 1).setValue(node.getValue());
-            }
+//            if (breadCrumb.size() > 0) {
+//                breadCrumb.get(breadCrumb.size() - 1).setUrl(node.getUrl());
+//            }
         }
         breadCrumb.add(node);
 

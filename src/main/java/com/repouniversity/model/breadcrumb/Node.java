@@ -35,14 +35,14 @@ public class Node {
     /**
      * @return
      */
-    public String getValue() {
+    public String getUrl() {
         return url;
     }
 
     /**
      * @param value
      */
-    public void setValue(String value) {
+    public void setUrl(String value) {
         this.url = value;
     }
 

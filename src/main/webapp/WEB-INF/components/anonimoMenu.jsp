@@ -25,7 +25,7 @@
 
                     </li>
                     <li>
-       					<a  href="login"><i class="fa fa-home"></i> <span class="nav-label">Inicio  |  Alumno</span></a>
+       					<a href="/repouniversity/dashboard?bread=Inicio-0"><i class="fa fa-home"></i> <span class="nav-label">Inicio  |  Alumno</span></a>
       			    </li>
       		</div>
         </nav>
@@ -57,11 +57,6 @@
 
         </nav>
         </div>
-        
-        <div class="wrapper wrapper-content">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="ibox float-e-margins">
                           
   
  

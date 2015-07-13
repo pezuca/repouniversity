@@ -207,22 +207,6 @@ public class VwArchivo implements IdentifiedObject {
 		this.materia = materia;
 	}
 
-	public Long getIdCarrera() {
-		return idCarrera;
-	}
-
-	public void setIdCarrera(Long idCarrera) {
-		this.idCarrera = idCarrera;
-	}
-
-	public String getCarrera() {
-		return carrera;
-	}
-
-	public void setCarrera(String carrera) {
-		this.carrera = carrera;
-	}
-
 	public String getNombrePersona() {
 		return nombrePersona;
 	}

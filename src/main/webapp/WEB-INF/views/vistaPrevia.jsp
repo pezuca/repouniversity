@@ -16,6 +16,8 @@
 	<%@include file="../components/static-nav-bar.jsp"%>
 		<div id="page-wrapper" class="gray-bg dashbard-1">
 		<%@include file="../components/search-nav-bar.jsp"%>
+		
+		<tag:breadcrumb label="Vista previa"/>
 	
 	 	<div class="wrapper wrapper-content animated fadeInRight">
 	         <div class="row">
@@ -90,10 +92,12 @@
 	         <div class="row">
 	         	<div class="col-lg-9">
 	         		<div class="ibox float-e-margins">
+	         			<div class="ibox-title">
+	                        <h5>Reporte de errores</h5>
+	                    </div>
 						<div class="ibox-content">
 							<div>
 								<div class="chat-activity-list">
-
 									<c:forEach items="${errorArchivo}" var="error" varStatus="status">
 										<div class="chat-element ${(status.index % 2 != 0) ? 'right':''}">
 											<div class="media-body ${(status.index % 2 != 0) ? 'text-right':''}">

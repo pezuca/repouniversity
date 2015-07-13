@@ -17,6 +17,8 @@
 	<%@include file="../components/static-nav-bar.jsp"%>
 		<div id="page-wrapper" class="gray-bg dashbard-1">
 		<%@include file="../components/search-nav-bar.jsp"%>
+		
+		<tag:breadcrumb label="Ver cursos"/>
 	
 	 	<div class="wrapper wrapper-content animated fadeInRight">
 	         <div class="row">
@@ -45,7 +47,7 @@
 									<td>${curso.descripcion}</td>
 									<td>
 										<a href="#" name="deleteCurso" data-cursoId="${curso.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar curso"><i class="fa fa-times"></i></button></a>
-										<a href="/repouniversity/alumno/verCurso?cursoId=${curso.id}"><button class="btn btn-primary btn-circle" type="button"><i class="fa fa-arrow-right"></i></button></a>
+										<a href="/repouniversity/alumno/verCurso?cursoId=${curso.id}&bread=Curso-2"><button class="btn btn-primary btn-circle" type="button"><i class="fa fa-arrow-right"></i></button></a>
 									</td>
 								</tr>
 							</c:forEach>
