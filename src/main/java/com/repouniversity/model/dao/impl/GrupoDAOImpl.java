@@ -14,7 +14,6 @@ import com.repouniversity.model.dao.GrupoDAO;
 import com.repouniversity.model.dao.query.InsertSQLStatement;
 import com.repouniversity.model.dao.query.SQLStatement;
 import com.repouniversity.model.dao.rowmapper.GrupoRowMapper;
-import com.repouniversity.model.dao.rowmapper.LongRowMapper;
 import com.repouniversity.model.entity.Alumno;
 import com.repouniversity.model.entity.Grupo;
 
@@ -150,6 +149,36 @@ public class GrupoDAOImpl extends GenericDAOImpl<Grupo> implements GrupoDAO {
             }
         };
     }
+    
+    @Override
+    public List<Grupo> findGruposDeAlumno(final long idAlumno) {
+        StringBuilder sql = new StringBuilder();
+
+        sql.append("SELECT DISTINCT g.* ");
+        sql.append("FROM grupo g JOIN alumno_curso ac ON ac.id_grupo = g.id_grupo ");
+        sql.append("WHERE ac.id_alumno = ? ");
+        sql.append("AND ac.id_grupo <> 1 ");
+        sql.append("AND g.activo = 1");
+        
+        List<Grupo> list = doQuery(new SQLStatement(sql.toString()) {
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+                ps.setLong(1, idAlumno);
+            }
+
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+        }, new GrupoRowMapper(), "findGruposDeAlumno: " + idAlumno);
+
+        if (list.isEmpty()) {
+            return new ArrayList<Grupo>();
+        }
+
+        return list;
+    }
+
+    
     @Override
     public long findIdCursoForGrupo(long grupoId) {
         

@@ -117,4 +117,18 @@ public class GrupoService {
         // TODO Auto-generated method stub
         cursoDao.saveAlumnoCursoGrupo(1L, cursoId, alumnoId);
     }
+    
+    public List<GrupoTO> getGruposDeAlumno(long idAlumno) {
+
+        List<Grupo> grupos = grupoDao.findGruposDeAlumno(idAlumno);
+        List<GrupoTO> gruposTo = new ArrayList<GrupoTO>();
+       
+        for (Grupo grupo : grupos) {
+        gruposTo.add(buildGrupo(grupo));
+        }
+
+        return gruposTo;
+
+    }
+    
 }
