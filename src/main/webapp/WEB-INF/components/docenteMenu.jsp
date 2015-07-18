@@ -28,10 +28,15 @@
                 <a href="index.html"><i class="fa fa-pencil-square-o"></i> <span class="nav-label">Mis cursos</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li><a href="/repouniversity/docente/verCursos?bread=Ver Cursos-1">Ver cursos</a></li>      
-                    <li><a href="/repouniversity/docente/notificaciones?bread=Notificaciones-1">Ver mis notificaciones</a></li>
-                    <li><a href="/repouniversity/verArchivos?bread=Ver archivos-1">Ver mis Archivos</a></li>    
                 </ul>
             </li>
+            <li class= ${activeTab eq 'administracion' ? 'active':''}>
+                 <a><i class="fa fa-gears"></i> <span class="nav-label">Administración</span> <span class="fa arrow"></span></a>
+                 <ul class="nav nav-second-level">
+	                <li><a href="/repouniversity/docente/notificaciones?bread=Notificaciones-1">Ver mis notificaciones</a></li>
+                    <li><a href="/repouniversity/verArchivos?bread=Ver archivos-1">Ver mis Archivos</a></li>        
+				</ul>
+             </li>
         </ul>
     </div>
 </nav>

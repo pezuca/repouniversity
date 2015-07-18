@@ -100,7 +100,7 @@
 					</div>
 						<div class="col-lg-6">
 	        	<c:forEach items="${archivos}" var="archivo" varStatus="status">
-                    <div class="ibox float-e-margins">
+                    <div class="ibox float-e-margins" style="display:block;width:50%;float:left">
 
 							<div class="ibox-title">
 								<h5>${archivo.nombre}</h5>
@@ -129,7 +129,7 @@
 									Estado archivo: ${archivo.estadoArchivo}</p>
 								<div class="row m-t-md">
 									<div class="col-md-3">
-										<h5><a  name="dowloadArchivo" data-archivoId="${archivo.id}" href="/repouniversity/vistaPrevia?archivoId=${archivo.id}">
+										<h5><a  name="verArchivo" data-archivoId="${archivo.id}" href="/repouniversity/vistaPrevia?archivoId=${archivo.id}">
 												<button class="btn btn-primary btn-circle" type="button"><i class="fa fa-search"></i>
 												</button>
 											</a>

@@ -48,11 +48,13 @@
 								<tr>
 									<td>${tpentrega.id}</td>
 									<td>${tpentrega.descripcion}</td>
-									<td>${tpentrega.archivoNombre}</td>
+									<td>${tpentrega.archivo}</td>
 									<td>
 										<a href="#" name="editEntregaTp" data-tpentregaId="${tpentrega.id}"><button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Editar EntregaTP"><i class="fa fa-pencil"></i></button></a>
 										<a href="#" name="deleteEntregaTp" data-tpentregaId="${tpentrega.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar EntregaTP"><i class="fa fa-times"></i></button></a>
-										<a href="/repouniversitytpgrupo/verEntregasTP?tpEntregaId=${tpentrega.id}" name="Ver" data-tpentregaId="${tpentrega.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver EntregaTP"><i class="fa fa-codepen"></i></button></a>
+										<a href="/repouniversity/tpgrupo/verEntregasTP?tpEntregaId=${tpentrega.id}" name="Ver" data-tpentregaId="${tpentrega.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver EntregaTP"><i class="fa fa-codepen"></i></button></a>
+										<a href="/repouniversity/vistaPrevia?archivoId=${tpentrega.archivo}" name="verArchivo" data-tpentregaId="${tpentrega.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver Archivo"><i class="fa fa-search"></i></button></a>
+										<a href="/repouniversity/bajarArchivo?archivoId=${tpentrega.archivo}" name="dowloadArchivo" data-tpentregaId="${tpentrega.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Bajar Archivo"><i class="fa fa-download"></i></button></a>
 									</td>
 								</tr>
 							</c:forEach>

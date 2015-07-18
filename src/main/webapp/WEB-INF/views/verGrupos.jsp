@@ -27,7 +27,7 @@
 			<div class="row">
 	             <div class="col-lg-6">
 	        	<c:forEach items="${grupos}" var="grupo" varStatus="status">
-                    <div class="ibox float-e-margins">
+                    <div class="ibox float-e-margins" style="display:block;width:50%;float:left">
 
 							<div class="ibox-title">
 								<h5>${grupo.nombre}</h5>

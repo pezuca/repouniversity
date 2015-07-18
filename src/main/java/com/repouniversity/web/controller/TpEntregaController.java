@@ -18,9 +18,10 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.repouniversity.model.entity.UsuarioRol;
+import com.repouniversity.model.entity.VwArchivo;
 import com.repouniversity.model.entity.to.TpEntregaTO;
-import com.repouniversity.model.entity.to.TpGrupoTO;
 import com.repouniversity.model.services.AlumnoService;
+import com.repouniversity.model.services.ArchivoService;
 import com.repouniversity.model.services.TpEntregaService;
 
 @Controller
@@ -31,7 +32,10 @@ public class TpEntregaController {
 
 	@Autowired
 	private AlumnoService alumnoService;
-
+	
+	@Autowired
+	private ArchivoService archivoService;
+	
 	@Autowired
 	private TpEntregaService tpEntregaService;
 
@@ -78,16 +82,18 @@ public class TpEntregaController {
 	  @RequestMapping(value = "tpgrupo/verEntregasTP", method = {RequestMethod.GET})
 	    public ModelAndView verEntregasTP(HttpServletRequest request, @RequestParam("tpEntregaId") Long tpEntregaId) {
 		  TpEntregaTO tpEntrega = tpEntregaService.getTpEntregaById(tpEntregaId);
-
-	        return new ModelAndView("verTpGrupoDocente").addObject("tpEntrega", tpEntrega);
+	 
+	        VwArchivo archivo = archivoService.getVwArchivo(tpEntrega.getArchivo());
+	        return new ModelAndView("verTpEntregaAlumno").addObject("tpEntrega", tpEntrega).addObject("archivo", archivo);
+	        
 	    }
 	  
-	  @RequestMapping(value = "tpgrupo/verEntregasTPAlumno", method = {RequestMethod.GET})
-	    public ModelAndView verEntregasTPAlumno(HttpServletRequest request, @RequestParam("tpEntregaId") Long tpEntregaId) {
-		  TpEntregaTO tpEntrega = tpEntregaService.getTpEntregaById(tpEntregaId);
-
-	        return new ModelAndView("verTpGrupoAlumno").addObject("tpEntrega", tpEntrega);
-	    }
+//	  @RequestMapping(value = "tpgrupo/verEntregasTPAlumno", method = {RequestMethod.GET})
+//	    public ModelAndView verEntregasTPAlumno(HttpServletRequest request, @RequestParam("tpEntregaId") Long tpEntregaId) {
+//		  TpEntregaTO tpEntrega = tpEntregaService.getTpEntregaById(tpEntregaId);
+//
+//	        return new ModelAndView("verTpEntregaAlumno").addObject("tpEntrega", tpEntrega);
+//	    }
 	
 
 

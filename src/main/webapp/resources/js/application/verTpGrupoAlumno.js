@@ -22,7 +22,10 @@ var tpEntregaAdmin = {
 				                                          data.archivo,
 				                                          "<a href='#' name='editEntregaTp' data-tpentregaId='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a> " + 
 				  										  "<a href='#' name='deleteEntregaTp' data-tpentregaId='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a> " +
-				  										  "<a href='/repouniversitytpgrupo/verEntregasTP?tpEntregaId=" + data.id + "' name='Ver' data-tpentregaId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Ver TP'><i class='fa fa-codepen'></i></button></a>"
+				  										  "<a href='/repouniversity/tpgrupo/verEntregasTP?tpEntregaId=" + data.id + "' name='Ver' data-tpentregaId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Ver TP'><i class='fa fa-codepen'></i></button></a>" + 
+				  										  "<a href='/repouniversity/vistaPrevia?archivoId=" + data.archivo + "' name='verArchivo' data-tpentregaId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Ver Archivo'><i class='fa fa-search'></i></button></a>" +
+				  										  "<a href='/repouniversity/bajarArchivo?archivoId=" + data.archivo + "' name='dowloadArchivo' data-tpentregaId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Bajar Archivo'><i class='fa fa-download'></i></button></a>"
+												  			
 				                                     ]).draw();
 				
 				//Agrego el evento de delete
