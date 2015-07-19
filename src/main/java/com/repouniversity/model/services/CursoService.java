@@ -1,7 +1,7 @@
 package com.repouniversity.model.services;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,12 +42,8 @@ public class CursoService {
 	}
 
 	public List<CursoTO> buildCursos(List<Curso> cursos) {
-		List<CursoTO> cursosTo = new ArrayList<CursoTO>();
-
-		for (Curso curso : cursos) {
-			cursosTo.add(buildCurso(curso));
-		}
-		return cursosTo;
+		return cursos.stream().map(curso -> buildCurso(curso))
+				.collect(Collectors.toList());
 	}
 
 	public CursoTO buildCurso(Curso curso) {
@@ -148,8 +144,8 @@ public class CursoService {
 
 	public List<AlumnoTO> ObtenerAlumnosSinGrupo(Long idCurso) {
 		// TODO Auto-generated method stub
-		List<Long> listaAlumnosid=  cursoDao.ObtenerAlumnosSinGrupo(idCurso);
-		
+		List<Long> listaAlumnosid = cursoDao.ObtenerAlumnosSinGrupo(idCurso);
+
 		return alumnoService.getAlumnosByIds(listaAlumnosid);
 	}
 
