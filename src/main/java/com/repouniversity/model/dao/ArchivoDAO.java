@@ -26,7 +26,7 @@ public interface ArchivoDAO extends GenericDAO<Archivo> {
 
     List<Archivo> generarBusqueda(List<String> parametrosBusqueda);
 
-    List<Archivo> busquedaAvanzada(String materia, String nbreDocente, String apeDocente, String carrera, Date fechaDde, Date fechaHta);
+    List<Archivo> busquedaAvanzada(String materia, String nbreDocente, String apeDocente, String carrera, String descripcion, Date fechaDde, Date fechaHta);
 
 	List<VwArchivo> findArchivosDelCurso(long idCurso);
 

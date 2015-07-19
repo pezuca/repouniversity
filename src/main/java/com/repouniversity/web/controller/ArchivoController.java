@@ -103,14 +103,21 @@ public class ArchivoController {
     @RequestMapping(value = "/busquedaAvanzada", method = {RequestMethod.POST})
     public ModelAndView busquedaAvanzada(HttpServletRequest request, @RequestParam(value = "materia", required = false) String materia,
             @RequestParam(value = "nbreDocente", required = false) String nbreDocente, @RequestParam(value = "apeDocente", required = false) String apeDocente,
-            @RequestParam(value = "carrera", required = false) String carrera, @RequestParam(value = "fechaDde", required = false) String fechaDde,
+            @RequestParam(value = "carrera", required = false) String carrera, @RequestParam(value = "descripcion", required = false) String descripcion, @RequestParam(value = "fechaDde", required = false) String fechaDde,
             @RequestParam(value = "fechaHta", required = false) String fechaHta) throws ParseException {
         
-        Date desde = dateFormat.parse(fechaDde);
-        Date hasta = dateFormat.parse(fechaHta);
+    	Date desde = dateFormat.parse("01/01/1900");
+    	Date hasta = dateFormat.parse("31/12/9999");
+    	if (fechaDde != ""){
+    		desde = dateFormat.parse(fechaDde);
+    	}
+    	if (fechaDde != ""){
+    		hasta = dateFormat.parse(fechaHta);
+    	}
+         
 
         List<Archivo> listaResultados = new ArrayList<Archivo>();
-        listaResultados = busquedaAvanzada(materia, nbreDocente, apeDocente, carrera, desde, hasta);
+        listaResultados = busquedaAvanzada(materia, nbreDocente, apeDocente, carrera, descripcion, desde, hasta);
         return new ModelAndView("resultList").addObject("listaResultados", listaResultados);
     }
 
@@ -126,9 +133,9 @@ public class ArchivoController {
 
     }
 
-    private List<Archivo> busquedaAvanzada(String materia, String nbreDocente, String apeDocente, String carrera, Date fechaDde, Date fechaHta) {
+    private List<Archivo> busquedaAvanzada(String materia, String nbreDocente, String apeDocente, String carrera, String descripcion, Date fechaDde, Date fechaHta) {
         List<Archivo> archivosEncontrados = new ArrayList<Archivo>();
-        archivosEncontrados = archivoService.busquedaAvanzada(materia, nbreDocente, apeDocente, carrera, fechaDde, fechaHta);
+        archivosEncontrados = archivoService.busquedaAvanzada(materia, nbreDocente, apeDocente, carrera, descripcion, fechaDde, fechaHta);
         return archivosEncontrados;
 
     }

@@ -47,6 +47,9 @@
 		                                <div class="form-group"><label class="col-sm-2 control-label">Carrera</label>
 											<div class="col-sm-10"><input type="text" class="form-control" name="carrera"></div>
 		                                </div>
+		                                <div class="form-group"><label class="col-sm-2 control-label">Descripcion</label>
+											<div class="col-sm-10"><input type="text" class="form-control" name="descripcion"></div>
+		                                </div>
 		                                <div class="form-group"><label class="col-sm-2 control-label">Fecha publicacion</label>
 		                                	<div class="col-sm-10">
 		                                        <div class="row">		                                

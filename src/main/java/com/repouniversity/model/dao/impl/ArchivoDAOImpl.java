@@ -3,6 +3,7 @@ package com.repouniversity.model.dao.impl;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -173,21 +174,43 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
     }
 	
 	@Override
-    public List<Archivo> busquedaAvanzada(String materia, String nbreDocente, String apeDocente, String carrera, Date fechaDde, Date fechaHta) {
+    public List<Archivo> busquedaAvanzada(String materia, String nbreDocente, String apeDocente, String carrera, String descripcion, Date fechaDde, Date fechaHta) {
         StringBuilder sql = new StringBuilder();
         //se genera la condicion a mano, pero en la condicion es donde se va a armarse la query
+        
+        List<String> laDescripcion = new ArrayList<String>();
+		//quitamos las noise word
+		descripcion = descripcion.toUpperCase();
+		laDescripcion = quitarNoiseWords(descripcion);
+		
+		// agregamos las palabras equivalentes
+		laDescripcion = agregarEquivalencias(laDescripcion);
+		
+		//se inicializa tags por si se agrega un espacio solamente en la busqued para que no rompa
+        //para el resto de los caracteres especiales no hay problemas
+		String tags= new String();
+		tags="tags=\'\' ";
+        
+        if(laDescripcion.size() > 0){
+        	tags="";
+	        for (String parametro:laDescripcion) {
+				tags= tags.concat(" tags like \'%" + parametro.trim() +"%\' OR ");
+			}
+	        tags = tags.substring(0, tags.length()-3);
+        }
         
         //armamos la query de busqueda en la base
         //FALTA AGEGREGAR LA QUERY A LA BASE CON LA VISTA DE FEDE PARA
         sql.append("select * from repouniversity.vw_archivos ");
-        sql.append("where curso like %"+ materia + "% AND");
-        sql.append(" nombreDocente like %"+ nbreDocente + "% AND");
-        sql.append(" apellidoDocente like %"+ apeDocente + "% AND");
-        sql.append(" curso like %"+ carrera + "% AND");
-        sql.append(" fecha_publicacion between "+ fechaDde + " AND" + fechaHta);
+        sql.append("where "+ tags + "AND");
+        sql.append(" nombreDocente like \'%"+ nbreDocente.trim() + "%\' AND");
+        sql.append(" apellidoDocente like \'%"+ apeDocente.trim() + "%\' AND");
+        sql.append(" carrera like \'%"+ carrera.trim() + "%\' AND");
+        sql.append(" materia like \'%"+ materia.trim() + "%\' AND");
+        sql.append(" fecha_publicacion between \'"+ new SimpleDateFormat("yyyy-MM-dd").format(fechaDde) + "\' AND \'" + new SimpleDateFormat("yyyy-MM-dd").format(fechaHta) + "\'");
         sql.append(" AND (estado=1 OR  estado=2)");
 
-        List<Archivo> list = doQuery(new SQLStatement(sql.toString()) {
+        List<Archivo> resultList = doQuery(new SQLStatement(sql.toString()) {
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
 //                ps.setString (1, parametro);
@@ -198,11 +221,11 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
             }
         }, new ArchivoRowMapper(), "generarBusqueda: ");
 
-        if (list.isEmpty()) {
+        if (resultList.isEmpty()) {
             return null;
         }
 
-        return list;
+        return resultList;
     }
 	
 	@Override
@@ -214,7 +237,15 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
 		noiseWords.add("DE");
 		noiseWords.add("DONDE");
 		noiseWords.add("CUANDO");
-		noiseWords.add("POR");
+		noiseWords.add(",");
+		noiseWords.add(";");
+		noiseWords.add("'");
+		noiseWords.add("`");
+		noiseWords.add("´");
+		noiseWords.add(".");
+		noiseWords.add("&");
+		noiseWords.add("/");
+		
 		
 	//tokenizo la cadena
 		String[] tokens = parametro.split(" ");

@@ -245,8 +245,8 @@ public class ArchivoService {
 
     }
 
-    public List<Archivo> busquedaAvanzada(String materia, String nbreDocente, String apeDocente, String carrera, Date fechaDde, Date fechaHta) {
-        return archivoDao.busquedaAvanzada(materia, nbreDocente, apeDocente, carrera, fechaDde, fechaHta);
+    public List<Archivo> busquedaAvanzada(String materia, String nbreDocente, String apeDocente, String carrera, String descripcion, Date fechaDde, Date fechaHta) {
+        return archivoDao.busquedaAvanzada(materia, nbreDocente, apeDocente, carrera, descripcion, fechaDde, fechaHta);
     }
 
 	public VwArchivo modificarArchivo(Long archivoId, String tagsArchivo,
