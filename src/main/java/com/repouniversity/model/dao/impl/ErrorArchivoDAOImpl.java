@@ -103,7 +103,7 @@ public class ErrorArchivoDAOImpl extends GenericDAOImpl<ErrorArchivo> implements
         return list;
     }
     protected InsertSQLStatement buildInsertSQLStatement(final ErrorArchivo t) {
-        return new InsertSQLStatement("INSERT INTO error_archivo (descripcion, id_archivo, id_persona, activo) VALUES values (?, ?, ?, ?)") {
+        return new InsertSQLStatement("INSERT INTO error_archivo (descripcion, id_archivo, id_persona, activo) VALUES (?, ?, ?, 1)") {
         	
             @Override
             public void doAfterInsert(Long id) {
@@ -114,7 +114,6 @@ public class ErrorArchivoDAOImpl extends GenericDAOImpl<ErrorArchivo> implements
                 ps.setString(1, t.getDescripcion());
                 ps.setLong(2, t.getIdArchivo());
                 ps.setLong(3, t.getIdPersona());
-                ps.setBoolean(4, t.isActivo());
             }
 
             @Override

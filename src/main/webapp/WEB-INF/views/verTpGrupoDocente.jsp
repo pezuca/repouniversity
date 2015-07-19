@@ -64,30 +64,28 @@
 	         		<div class="ibox float-e-margins">
 						<div class="ibox-content">
 							<div>
-								<div class="chat-activity-list">
+								<div class="chat-activity-list" style="padding: 20px 0px;">
 
 									<c:forEach items="${tpgrupo.comentario}" var="comentario" varStatus="status">
-										<div class="chat-element ${(status.index % 2 != 0) ? 'right':''}">
-											<div class="media-body ${(status.index % 2 != 0) ? 'text-right':''}">
+										<div class="chat-element">
+											<div class="media-body">
 												 <strong>${comentario.persona.apellido}, ${comentario.persona.nombre}</strong>
 												<p class="m-b-xs">${comentario.descripcion}</p>
-												<small class="text-muted">${comentario.fechasys}</small> <a href="#" name="deleteComentario" data-comentarioId="${comentario.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar Comentario"><i class="fa fa-times"></i></button></a>
+												<small class="text-muted">${comentario.fechasys}</small>
 											</div>
 										</div>
 									</c:forEach>
 								</div>
 							</div>
 							<div class="chat-form">
-								<form id="comentarioForm" role="form">
-									<div class="form-group">
-										<textarea name = "mensaje" class="form-control" placeholder="Comentario.."></textarea>
-									</div>
-									<div class="text-right">
-										<button type="submit" class="btn btn-sm btn-primary m-t-n-xs" onclick="borrarNotificacion(${archivo.id}, mensaje)">
-											<strong>Comentar</strong>
-										</button>
-									</div>
-								</form>
+								<div class="form-group">
+									<textarea name = "mensaje" class="form-control" placeholder="Comentario.."></textarea>
+								</div>
+								<div class="text-right">
+									<button id="enviarComentario" class="btn btn-sm btn-primary m-t-n-xs"">
+										<strong>Comentar</strong>
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -148,6 +146,7 @@
 		<p>¿Esta seguro que desea eliminar el comentario?</p>
 	</div>
 
+		<input name="tpGrupoIdGlobal" type="hidden" value="${param.tpGrupoId}" />
 	</div>
 	
 </body>

@@ -381,4 +381,29 @@ $(document).ready(function() {
 			.data('archivo', $(this).parents("tr").find("td").get(2).innerHTML)
 			.dialog("open");
 	});
+	
+	$("#enviarComentario").click(function() {
+		$.ajax({
+			type: "POST",
+			url: "/repouniversity/comentario/nuevoComentario",
+			data: {"tpGrupoId" : $("input[name=tpGrupoIdGlobal]").val(), "comentario" : $("textarea[name=mensaje]").val()},
+			success: function(data){
+				$.gritter.add({
+					title: 'Comentario',
+					text: 'Su comentario fue agregado correctamente',
+					sticky: false
+				});	
+				$(".chat-activity-list").append("<div class='media-body'><strong>" + data.persona.nombre + " " + data.persona.apellido + "</strong>"
+						+ "<p class='m-b-xs'>" + data.descripcion + "</p><small class='text-muted'>" + data.fechasys + "</small></div>");
+				$("textarea[name=mensaje]").val("");
+			},
+			error: function() {
+				$.gritter.add({
+					title: 'Comentario',
+					text: 'Hubo un problema al agregar su comentario, por favor intentelo mas tarde.',
+					sticky: false
+				});	
+			}
+		});
+	});
 });

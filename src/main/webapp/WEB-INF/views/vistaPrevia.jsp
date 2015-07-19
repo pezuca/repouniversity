@@ -97,10 +97,10 @@
 	                    </div>
 						<div class="ibox-content">
 							<div>
-								<div class="chat-activity-list">
+								<div class="chat-activity-list" style="padding: 20px 0px;">
 									<c:forEach items="${errorArchivo}" var="error" varStatus="status">
-										<div class="chat-element ${(status.index % 2 != 0) ? 'right':''}">
-											<div class="media-body ${(status.index % 2 != 0) ? 'text-right':''}">
+										<div class="chat-element">
+											<div class="media-body">
 												 <strong>${error.persona.apellido}, ${error.persona.nombre}</strong>
 												<p class="m-b-xs">${error.descripcion}</p>
 												<small class="text-muted">${error.fechasys}</small>
@@ -110,16 +110,14 @@
 								</div>
 							</div>
 							<div class="chat-form">
-								<form id="comentarioForm" role="form">
-									<div class="form-group">
-										<textarea name = "mensaje" class="form-control" placeholder="Nuevo.."></textarea>
-									</div>
-									<div class="text-right">
-										<button type="submit" class="btn btn-sm btn-primary m-t-n-xs" onclick="borrarNotificacion(${archivo.id}, mensaje)">
-											<strong>Enviar</strong>
-										</button>
-									</div>
-								</form>
+								<div class="form-group">
+									<textarea name = "mensaje" class="form-control" placeholder="Nuevo.."></textarea>
+								</div>
+								<div class="text-right">
+									<button class="btn btn-sm btn-primary m-t-n-xs" onclick="reporteError(${archivo.id})">
+										<strong>Enviar</strong>
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -150,13 +148,29 @@
 			
 		});
 
-		function borrarNotificacion(archivoId, descripcion) {
+		function reporteError(archivoId) {
 			$.ajax({
 				  type: "POST",
 				  url: "/repouniversity/errorArchivo/reportarError",
-				  data: {"archivoId" : archivoId},{"descripcion" : descripcion},
-				  success: function(){ 
-					  alert("Good!")
+				  data: {"archivoId" : archivoId, "descripcion" : $("textarea[name=mensaje]").val()},
+				  success: function(data){ 
+					  $.gritter.add({
+						  title: 'Comentario',
+						  text: 'Su comentario fue agregado correctamente',
+						  sticky: false
+					  });	
+					  
+					  $(".chat-activity-list").append("<div class='media-body'><strong>" + data.persona.nombre + " " + data.persona.apellido + "</strong>"
+					  		+ "<p class='m-b-xs'>" + data.descripcion + "</p><small class='text-muted'>" + data.fechasys + "</small></div>");
+					  $("textarea[name=mensaje]").val("");
+					  
+				  },
+				  error: function() {
+					  $.gritter.add({
+						  title: 'Comentario',
+						  text: 'Hubo un problema al agregar su comentario, por favor intentelo mas tarde.',
+						  sticky: false
+					  });	
 				  }
 				});
 		}
