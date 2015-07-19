@@ -87,13 +87,14 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
 
     @Override
     protected SQLStatement buildUpdateSQLStatement(Archivo t) {
-        return new SQLStatement("UPDATE archivo SET descripcion = ?, tags = ?, fecsys = now()  where " + getColumnIdName() + " = ?") {
+        return new SQLStatement("UPDATE archivo SET descripcion = ?, tags = ?, estado =?  where " + getColumnIdName() + " = ?") {
 
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
                 ps.setString(1, t.getDescripcion());
                 ps.setString(2, t.getTags());
-                ps.setLong(3, t.getId());
+                ps.setLong(3, t.getEstado());
+                ps.setLong(4, t.getId());
             }
 
 			@Override

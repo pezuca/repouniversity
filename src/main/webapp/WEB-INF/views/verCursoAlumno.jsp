@@ -51,8 +51,13 @@
 						<th><a href="/repouniversity/alumno/verGrupo?grupoId=${curso.grupoAlumno.id}&bread=Ver grupo-2" name="Ver" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver grupo" class="btn btn-success"><i class="fa fa-upload"></i> Ver Grupo</a></th>
 					</tr>
 				</div>
-			<div class="col-lg-6">
+			<div class="row">
+			<div class="col-lg-12">
 	        	<c:forEach items="${archivos}" var="archivo" varStatus="status">
+            	<c:if test = "${status.count mod 2 != 0}" >
+            	<div class="row">
+            	</c:if>
+            	<div class="col-lg-6">
                     <div class="ibox float-e-margins">
 
 							<div class="ibox-title">
@@ -97,11 +102,14 @@
 									</div>
 								</div>
 							</div>
-						
-                    </div>
+					</div>
+					</div>
+					<c:if test = "${status.count mod 2 == 0}" >
+            			</div>
+            		</c:if>	
                     </c:forEach>
 				</div>
-				
+				</div>
 	        </div>
 	        
 		</div>

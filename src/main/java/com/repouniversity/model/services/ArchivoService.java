@@ -248,4 +248,16 @@ public class ArchivoService {
     public List<Archivo> busquedaAvanzada(String materia, String nbreDocente, String apeDocente, String carrera, Date fechaDde, Date fechaHta) {
         return archivoDao.busquedaAvanzada(materia, nbreDocente, apeDocente, carrera, fechaDde, fechaHta);
     }
+
+	public VwArchivo modificarArchivo(Long archivoId, String tagsArchivo,
+			String desArchivo, Long estadoArchivo) {
+		
+		Archivo archi = archivoDao.findById(archivoId);
+		archi.setTags(tagsArchivo);
+		archi.setDescripcion(desArchivo);
+		archi.setEstado(estadoArchivo);
+		archivoDao.update(archi);
+		
+		return archivoDao.findVwArchivo(archivoId);
+	}
 }

@@ -25,7 +25,7 @@
 
                     </li>
                     <li>
-       					<a href="/repouniversity/dashboard?bread=Inicio-0"><i class="fa fa-home"></i> <span class="nav-label">Inicio  |  Alumno</span></a>
+       					<a href="/repouniversity/dashboard?bread=Inicio-0"><i class="fa fa-home"></i> <span class="nav-label">Inicio  |  Anonimo</span></a>
       			    </li>
       		</div>
         </nav>
