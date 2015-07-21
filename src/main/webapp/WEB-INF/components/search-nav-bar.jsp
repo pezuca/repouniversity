@@ -1,3 +1,4 @@
+<script src="/repouniversity/resources/js/application/reportarError.js"></script>
 <div class="row border-bottom">
    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
     <div class="navbar-header">
@@ -14,6 +15,7 @@
            <li>
                <span class="m-r-sm text-muted welcome-message">Bienvenidos a RepoUniversity.</span>
            </li>
+           
            <li class="dropdown">
                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                    <i class="fa fa-envelope"></i>  <span class="label label-warning">3</span>
@@ -104,10 +106,26 @@
                </ul>
            </li>
            <li>
+               <div id="agregarErrorButton">
+					<a href="#"><i class="fa fa-ban"></i></a>
+				</div>
+            </li>
+           <li>
                <a href="/repouniversity/logout">
                    <i class="fa fa-sign-out"></i> Salir
                </a>
            </li>
        </ul>
    </nav>
+   
+   <!-- 	Ventanas -->
+	<div id="agregarErrorDialog" title="Nuevo Error">
+		<form id="nuevoErrorForm" class="form-horizontal">
+		    <div class="form-group">
+                <label class="col-sm-2 control-label">Descripcion*:</label>
+                <div class="col-sm-10"><input name="descripcion" type="textarea" class="form-control" placeholder="Reporte error.."required="required"></div>
+            </div>
+           
+		</form>
+	</div>
 </div>

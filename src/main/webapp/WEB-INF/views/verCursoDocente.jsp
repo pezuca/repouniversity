@@ -15,6 +15,8 @@
 	src="/repouniversity/resources/js/plugins/chosen/chosen.jquery.js"></script>
 <script
 	src="/repouniversity/resources/js/application/verCursoDocente.js"></script>
+	<script
+	src="/repouniversity/resources/js/application/Archivos.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="/repouniversity/resources/css/plugins/chosen/chosen.css" />
 </head>
@@ -98,9 +100,14 @@
 							</div>
 						</div>
 					</div>
-						<div class="col-lg-6">
+	<div class="row">
+			<div class="col-lg-12">
 	        	<c:forEach items="${archivos}" var="archivo" varStatus="status">
-                    <div class="ibox float-e-margins" style="display:block;width:50%;float:left">
+            	<c:if test = "${status.count mod 2 != 0}" >
+            	<div class="row">
+            	</c:if>
+            	<div class="col-lg-6">
+                    <div class="ibox float-e-margins">
 
 							<div class="ibox-title">
 								<h5>${archivo.nombre}</h5>
@@ -129,14 +136,19 @@
 									Estado archivo: ${archivo.estadoArchivo}</p>
 								<div class="row m-t-md">
 									<div class="col-md-3">
-										<h5><a  name="verArchivo" data-archivoId="${archivo.id}" href="/repouniversity/vistaPrevia?archivoId=${archivo.id}">
-												<button class="btn btn-primary btn-circle" type="button"><i class="fa fa-search"></i>
-												</button>
-											</a>
+										<h5>
+										<a  name="editArchivo" data-archivoId="${archivo.id}"><button class="btn btn-info btn-circle" type="button"><i class="fa fa-pencil"></i></button></a>
+										<a  name="deleteArchivo" data-archivoId="${archivo.id}"><button class="btn btn-danger btn-circle" type="button"><i class="fa fa-times"></i> </button></a>
 										</h5>
 									</div>
 									<div class="col-md-9">
-										<h5><a  name="dowloadArchivo" data-archivoId="${archivo.id}" href="/repouniversity/bajarArchivo?archivoId=${archivo.id}" target="_blank">
+										<h5>
+											<a  name="verArchivo" data-archivoId="${archivo.id}" href="/repouniversity/vistaPrevia?archivoId=${archivo.id}">
+												<button class="btn btn-primary btn-circle" type="button"><i class="fa fa-search"></i>
+												</button>
+											</a>
+			
+											<a  name="dowloadArchivo" data-archivoId="${archivo.id}" href="/repouniversity/bajarArchivo?archivoId=${archivo.id}" target="_blank">
 												<button class="btn btn-success btn-circle" type="button"><i class="fa fa-download"></i>
 												</button>
 											</a>
@@ -144,9 +156,13 @@
 									</div>
 								</div>
 							</div>
-						
-                    </div>
+					</div>
+					</div>
+					<c:if test = "${status.count mod 2 == 0}" >
+            			</div>
+            		</c:if>	
                     </c:forEach>
+				</div>
 				</div>
 				</div>
 
@@ -180,6 +196,41 @@
 						</div>
 					</form>
 				</div>
+				<div id="editarArchivoDialog" title="Editar Archivo">
+					<form id="editarArchivoForm" class="form-horizontal">
+						<input name="archivoId" type="hidden">
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Descripción*:</label>
+							<div class="col-sm-10">
+								<input name="descripcion" type="text" class="form-control"
+									required="required">
+							</div>
+						</div>
+						
+						<div class="form-group">
+			                <label class="col-sm-2 control-label">Estado*:</label>
+			                <div class="col-sm-10">
+			                	<select name="estadoArchivo" class="form-control" required="required">
+			                		<option value="1" selected>Publico</option>
+			                		<option value="2">Privado</option>
+			                	</select>
+			                </div>
+			            </div>
+						
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Tags*:</label>
+							<div class="col-sm-10">
+								<input name="tags" type="text" class="form-control"
+									required="required">
+							</div>
+						</div>
+					</form>
+				</div>
+		
+				<div id="deleteArchivoDialog" title="Eliminar Archivo">
+					<p>¿Esta seguro que desea eliminar la archivo?</p>
+				</div>
+						
 				<%@include file="../components/footer.jsp"%>
 			</div>
 		</div>

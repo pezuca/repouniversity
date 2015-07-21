@@ -48,7 +48,7 @@ public class ErrorArchivoController {
 	@ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
 	public ErrorArchivoTO reportarErrorAjax(
-			@RequestParam(value = "archivoId", required = true) Long archivoId,
+			@RequestParam(value = "archivoId", required = false) Long archivoId,
 			@RequestParam(value = "descripcion", required = true) String descripcion,
 			@ModelAttribute("login") UsuarioRol usuario) throws IOException {
 

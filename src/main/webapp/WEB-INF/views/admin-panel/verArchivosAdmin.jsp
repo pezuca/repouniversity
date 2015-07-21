@@ -75,8 +75,6 @@
 															class="btn btn-danger btn-circle" type="button">
 															<i class="fa fa-times"></i>
 														</button></a>
-														</a> 
-														
 														<a  name="dowloadArchivo"
 													data-archivoId="${archivo.id}" href="/repouniversity/vistaPrevia?archivoId=${archivo.id}&bread=Vista previa-2"><button
 															class="btn btn-primary btn-circle" type="button">

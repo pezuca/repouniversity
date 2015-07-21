@@ -24,11 +24,15 @@
 		<tag:breadcrumb label="Ver archivos"/>
 		
 		<div class="wrapper wrapper-content animated fadeInRight">
+			
 			<div class="row">
-	             <div class="col-lg-6">
+			<div class="col-lg-12">
 	        	<c:forEach items="${grupos}" var="grupo" varStatus="status">
-                    <div class="ibox float-e-margins" style="display:block;width:50%;float:left">
-
+					<c:if test = "${status.count mod 2 != 0}" >
+						<div class="row">
+					</c:if>
+					<div class="col-lg-6">
+						<div class="ibox float-e-margins">
 							<div class="ibox-title">
 								<h5>${grupo.nombre}</h5>
 								<div class="ibox-tools">
@@ -56,12 +60,15 @@
 									</div>
 								</div>
 							</div>
-						
-                    </div>
-                    </c:forEach>
-				</div>
-				 
-	        </div>
+
+						</div>
+					</div>
+					<c:if test = "${status.count mod 2 != 0}" >
+						</div>
+					</c:if>	
+                </c:forEach>
+			</div>
+		</div>
 		</div>
 		
 		<%@include file="../components/footer.jsp"%>

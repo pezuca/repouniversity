@@ -9,8 +9,7 @@
 <meta charset="utf-8" />
 <title>Repouniversity</title>
 <%@include file="../components/common-statics-imports.jsp"%>
-<script
-	src="/repouniversity/resources/js/application/admin-panel/verMateriasAdmin.js"></script>
+<script src="/repouniversity/resources/js/application/reportarError.js"></script>
 </head>
 <body class=" pace-done">
 
@@ -29,12 +28,13 @@
 								<h5>Lista de Errores</h5>
 							</div>
 							<div class="ibox-content">
-								<table id="GruposAlumnos" class="table table-striped table-hover" >
+								<table id="listaErrores" class="table table-striped table-hover" >
 								<thead class="encabezado">
 								<tr>
 									<th>Error</th>
 									<th>Reportado por</th>
 									<th>Fecha</th>
+									<th>Archivo</th>
 									<th></th>
 								</tr>
 								</thead>
@@ -44,6 +44,7 @@
 										<td>${error.descripcion}</td>
 										<td>${error.persona.apellido}, ${error.persona.nombre}</td>
 										<td>${error.fechasys}</td>
+										<td>${error.archivo.nombre} <a href="/repouniversity/vistaPrevia?archivoId=${error.archivo.id}" name="verArchivo" data-errorId="${error.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver Archivo"><i class="fa fa-search"></i></button></a></td>
 										<td>
 											<a name="deleteError" data-errorId="${error.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar Error"><i class="fa fa-times"></i></button></a>
 										</td>
