@@ -137,8 +137,7 @@ $(document).ready(function() {
 			
 			$('#editarArchivoForm input[name=archivoId]').val($("#editarArchivoDialog").data('archivoId'));
 			$('#editarArchivoForm input[name=descripcion]').val($("#editarArchivoDialog").data('descripcion'));
-			$('#editarArchivoForm input[name=fechaPublicacion]').val($("#editarArchivoDialog").data('fechaPublicacion'));
-			$('#editarArchivoForm input[name=tipo]').val($("#editarArchivoDialog").data('tipo'));
+			$('#editarArchivoForm input[name=estadoArchivo]').val($("#editarArchivoDialog").data('estadoArchivo'));
 			$('#editarArchivoForm input[name=tags]').val($("#editarArchivoDialog").data('tags'));
 		},
 		close: function(event, ui) {
@@ -177,8 +176,7 @@ $(document).ready(function() {
 		$("#editarArchivoDialog").data('archivoId', $(this).parent().attr("data-archivoid"))
 			.data('archivoId', $(this).parents("tr").find("td").get(0).innerHTML)
 			.data('descripcion', $(this).parents("tr").find("td").get(1).innerHTML)
-			.data('fechaPublicacion', $(this).parents("tr").find("td").get(2).innerHTML)
-			.data('tipo', $(this).parents("tr").find("td").get(3).innerHTML)
+			.data('estadoArchivo', '1')
 			.data('tags', $(this).parents("tr").find("td").get(4).innerHTML)
 			.dialog("open");
 	});

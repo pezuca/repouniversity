@@ -107,7 +107,12 @@
            </li>
            <li>
                <div id="agregarErrorButton">
-					<a href="#"><i class="fa fa-ban"></i></a>
+					<a href="#"><i class="fa fa-warning"></i></a>
+				</div>
+            </li>
+            <li>
+               <div id="preguntasFrecuentes">
+					<a href="/repouniversity/preguntasFrecuentes?bread=PreguntasFrecuentes-1"><i class="fa fa-question"></i></a>
 				</div>
             </li>
            <li>

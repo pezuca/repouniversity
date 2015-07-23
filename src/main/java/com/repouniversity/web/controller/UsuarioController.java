@@ -34,6 +34,7 @@ public class UsuarioController {
 
         return mav;
     }
+    
 
     @RequestMapping(value = "usuario/misdatos/update", method = RequestMethod.POST)
     public ModelAndView updateInformation(HttpServletRequest request, @RequestParam(value = "id", required = true) Long id,
@@ -47,5 +48,13 @@ public class UsuarioController {
         HTTPSessionManagerUtil.setSessionAttribute(request, "login", usuarioRol);
 
         return new ModelAndView("redirect:/dashboard");
+    }
+    
+    
+    @RequestMapping(value = "/preguntasFrecuentes", method = RequestMethod.GET)
+    public ModelAndView preguntasFrecuentes(HttpServletRequest request) {
+ 
+    	return new ModelAndView("verPreguntasFrecuentes");
+
     }
 }
