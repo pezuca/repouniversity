@@ -105,7 +105,7 @@ public class CursoService {
 				.findCursosForDocenteId(idAluDoc);
 
 		for (CursoMateria cursoMateria : cursoMateriaList) {
-			cursoMateria.setDocente(docenteService.getById(idAluDoc));
+			cursoMateria.setDocente(docenteService.getDocenteById(idAluDoc));
 		}
 
 		return cursoMateriaList;

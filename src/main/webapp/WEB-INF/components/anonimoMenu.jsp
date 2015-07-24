@@ -27,6 +27,9 @@
                     <li>
        					<a href="/repouniversity/dashboard?bread=Inicio-0"><i class="fa fa-home"></i> <span class="nav-label">Inicio  |  Anonimo</span></a>
       			    </li>
+      			     <li class="${activeTab eq 'Busqueda' ? 'active':''}"><a href="/repouniversity/busquedaAvanzada?bread=Busqueda avanzada-1"><i
+					class="fa fa-search"></i> <span class="nav-label"> Busqueda Avanzada </span></a></li>
+				 </ul>	
       		</div>
         </nav>
 

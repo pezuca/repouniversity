@@ -99,7 +99,7 @@
 				  url: "/repouniversity/alumno/solicitarCurso",
 				  data: {"cursoId" : cursoId, "alumnoId" : alumnoId, "docenteId" : docenteId, "tipoNotif" : tipoNotif},
 				  success: function(){
-					  alert("Good!")
+					  //alert("Good!")
 				  }
 			});
 		}

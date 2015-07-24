@@ -34,11 +34,13 @@
              <li ${activeTab eq 'administracion' ? 'active':''}>
                  <a><i class="fa fa-gears"></i> <span class="nav-label">Administración</span> <span class="fa arrow"></span></a>
                  <ul class="nav nav-second-level">
-	                <li><a href="#">Ver mis archivos</a></li>
-					<li><a href="/repouniversity/alumno/verGrupos?bread=Ver Grupos-1">Ver mis grupos de TPs</a></li>
-					<li><a href="/repouniversity/alumno/notificaciones?bread=Notificaciones-1">Ver mis notificaciones</a></li>        
+	                <li><a href="/repouniversity/alumno/notificaciones?bread=Notificaciones-1">Mis notificaciones</a></li>
+					<li><a href="/repouniversity/alumno/verGrupos?bread=Ver Grupos-1">Mis grupos de TPs</a></li>
+					<li><a href="/repouniversity/verArchivos?bread=Ver archivos-1">Mis archivos</a></li>        
 				</ul>
              </li>
-         </ul>
+             <li class="${activeTab eq 'Busqueda' ? 'active':''}"><a href="/repouniversity/busquedaAvanzada?bread=Busqueda avanzada-1"><i
+					class="fa fa-search"></i> <span class="nav-label"> Busqueda Avanzada </span></a></li>
+		</ul>
      </div>
  </nav>

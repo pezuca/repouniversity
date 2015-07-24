@@ -51,8 +51,10 @@ public class ErrorArchivoService {
     	errorArchivoTO.setActivo(errorArchivo.isActivo());
     	errorArchivoTO.setFechasys(errorArchivo.getFechasys());
         errorArchivoTO.setPersona(personaService.findById(errorArchivo.getIdPersona()));
-    	errorArchivoTO.setArchivo(archivoService.getArchivoById(errorArchivo.getIdArchivo()));
-    			    
+    	if (errorArchivo.getIdArchivo() != null && errorArchivo.getIdArchivo() != 0)
+    	{	
+    		errorArchivoTO.setArchivo(archivoService.getArchivoById(errorArchivo.getIdArchivo()));
+    	}
         return errorArchivoTO;
     }
 

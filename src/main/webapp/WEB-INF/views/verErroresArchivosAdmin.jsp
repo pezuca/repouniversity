@@ -44,7 +44,12 @@
 										<td>${error.descripcion}</td>
 										<td>${error.persona.apellido}, ${error.persona.nombre}</td>
 										<td>${error.fechasys}</td>
-										<td>${error.archivo.nombre} <a href="/repouniversity/vistaPrevia?archivoId=${error.archivo.id}" name="verArchivo" data-errorId="${error.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver Archivo"><i class="fa fa-search"></i></button></a></td>
+										<c:if test = "${error.archivo.id != 0 && error.archivo.id != null}" >
+											<td>${error.archivo.nombre} <a href="/repouniversity/vistaPrevia?archivoId=${error.archivo.id}" name="verArchivo" data-errorId="${error.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver Archivo"><i class="fa fa-search"></i></button></a></td>						
+										</c:if>	
+										<c:if test = "${error.archivo.id == 0 || error.archivo.id == null}" >
+											<td> Sin archivo </td>						
+										</c:if>
 										<td>
 											<a name="deleteError" data-errorId="${error.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar Error"><i class="fa fa-times"></i></button></a>
 										</td>

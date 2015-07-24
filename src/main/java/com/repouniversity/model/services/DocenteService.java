@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.repouniversity.model.dao.DocenteDAO;
+import com.repouniversity.model.entity.Alumno;
 import com.repouniversity.model.entity.Docente;
+import com.repouniversity.model.entity.to.AlumnoTO;
 import com.repouniversity.model.entity.to.DocenteTO;
 
 @Service
@@ -58,9 +60,13 @@ public class DocenteService {
         
         return docenteTo;
     }
+    public DocenteTO getDocenteById(Long idAluDoc) {
+        return buildDocente(docenteDao.findById(idAluDoc));
+    }
 
-    public Docente getByCursoMateriaId(Long id) {
-        return docenteDao.getByCursoMateriaId(id);
+    public DocenteTO getByCursoMateriaId(Long id) {
+    //    return docenteDao.getByCursoMateriaId(id);
+        return buildDocente(docenteDao.getByCursoMateriaId(id));
     }
     
     public Docente save(Docente docente) {
@@ -71,4 +77,17 @@ public class DocenteService {
         Docente docente = docenteDao.findById(docenteId);
         docenteDao.delete(docente);
     }
+    
+
+    private DocenteTO buildDocente(Docente docente) {
+      
+        DocenteTO docenteTo = new DocenteTO();
+        docenteTo.setId(docente.getId());
+        docenteTo.setFechasys(docente.getFechasys());
+        docenteTo.setActivo(docente.isActivo());
+        docenteTo.setPersona(personaService.findById(docente.getPersonaId()));
+        
+        return docenteTo;
+    }
+    
 }

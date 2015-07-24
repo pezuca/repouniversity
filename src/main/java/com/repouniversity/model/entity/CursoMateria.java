@@ -1,13 +1,14 @@
 package com.repouniversity.model.entity;
 
 import com.repouniversity.model.dao.IdentifiedObject;
+import com.repouniversity.model.entity.to.DocenteTO;
 
 public class CursoMateria implements IdentifiedObject {
     private static final long serialVersionUID = -634119785139383757L;
     
     private Long id;
     private boolean activo;
-    private Docente docente;
+    private DocenteTO docente;
     private String codigoCurso;
     private String descripcionCurso;
     private Long idMateria;
@@ -30,11 +31,11 @@ public class CursoMateria implements IdentifiedObject {
         this.activo = activo;
     }
 
-    public Docente getDocente() {
+    public DocenteTO getDocente() {
         return docente;
     }
 
-    public void setDocente(Docente docente) {
+    public void setDocente(DocenteTO docente) {
         this.docente = docente;
     }
 

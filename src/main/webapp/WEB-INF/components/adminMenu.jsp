@@ -36,7 +36,9 @@
 			<li class="${activeTab eq 'verArchivos' ? 'active':''}"><a href="/repouniversity/admin/verArchivos?bread=Ver archivos-1"><i
 					class="fa fa-file-pdf-o"></i> <span class="nav-label">Ver archivos</span></a></li>
 			<li class="${activeTab eq 'verErroresArchivos' ? 'active':''}"><a href="/repouniversity/admin/verReporteErrores?bread=Ver reportes de errores-1"><i
-					class="fa fa-file-pdf-o"></i> <span class="nav-label">Ver reportes errores</span></a></li>
+					class="fa fa-warning"></i> <span class="nav-label">Ver reportes errores</span></a></li>
+			<li class="${activeTab eq 'Busqueda' ? 'active':''}"><a href="/repouniversity/busquedaAvanzada?bread=Busqueda avanzada-1"><i
+					class="fa fa-search"></i> <span class="nav-label"> Busqueda Avanzada </span></a></li>					
 		</ul>
 	</div>
 </nav>

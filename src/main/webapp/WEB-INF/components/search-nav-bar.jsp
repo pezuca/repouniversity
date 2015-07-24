@@ -9,7 +9,7 @@
             </div>
         </form>
         <ul class="nav navbar-top-links navbar-right">
-        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="/repouniversity/busquedaAvanzada?bread=Busqueda avanzada-1"><i class="fa fa-search advance-search"> Busqueda avanzada</i> </a>
+       
     </div>
        <ul class="nav navbar-top-links navbar-right">
            <li>
