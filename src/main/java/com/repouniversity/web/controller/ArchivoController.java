@@ -80,7 +80,7 @@ public class ArchivoController {
             @ModelAttribute("login") UsuarioRol usuario) {
         try {
 
-            archivoService.bajarArchivo(archivoId, response);
+            archivoService.bajarArchivo(archivoId, response, request);
 
         } catch (Exception e) {
             throw new SubirArchivoException("Ha ocurrido un error al intentar subir el archivo.", e);

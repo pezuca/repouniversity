@@ -18,7 +18,7 @@ var errorAdmin = {
 							$.gritter.add({
 								title: 'Reportar Error',
 								text: 'Hubo un problema al tratar de reportar el error. Por favor inténtelo mas tarde.',
-								class_name: 'gritter-light'
+								sticky: false
 							});	
 						}
 					})
@@ -42,10 +42,25 @@ var errorAdmin = {
 				$.gritter.add({
 					title: 'Eliminar Error',
 					text: 'Hubo un problema al tratar de eliminar al error. Por favor inténtelo mas tarde.',
-					class_name: 'gritter-light'
+					sticky: false
 				});	
 			}
 		})
+	},
+	validacionFormlario: function(formularioSelector) {
+		var elementos = $(formularioSelector).find("input[required], select[required]");
+		var flag = true;
+
+		elementos.each(function(index) {
+			if($(this).val() == '') {
+				$(this).parents(".form-group").addClass(" has-error");
+				flag = false;
+			} else {
+				$(this).parents(".form-group").removeClass("has-error");
+			}
+		});
+		
+		return flag;
 	}
 	};
 

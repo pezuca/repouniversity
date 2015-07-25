@@ -4,11 +4,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.ServletOutputStream;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
@@ -21,6 +23,7 @@ import com.repouniversity.model.entity.Archivo;
 import com.repouniversity.model.entity.UsuarioRol;
 import com.repouniversity.model.entity.VwArchivo;
 import com.repouniversity.model.entity.to.ArchivoTO;
+import com.repouniversity.web.enums.MappingArchivoTipoEnum;
 
 @Service
 public class ArchivoService {
@@ -55,12 +58,12 @@ public class ArchivoService {
         return archivoDao.findArchivosDePersona(idPersona);
 
     }
-    
+
     public List<VwArchivo> getArchivosDelCurso(long idCurso) {
-        
+
         return archivoDao.findArchivosDelCurso(idCurso);
-     
- }
+
+    }
 
     public ArchivoTO getArchivoById(Long archivoId) {
         Archivo archivo = archivoDao.findById(archivoId);
@@ -185,7 +188,7 @@ public class ArchivoService {
                 nuevoArchivo.setPersona(usuario.getIdPersona());
                 nuevoArchivo.setTags(etiqueta.toString());
                 nuevoArchivo.setCurso(cursoId);
-                nuevoArchivo.getCurso();
+                nuevoArchivo.setArchivoTipo(MappingArchivoTipoEnum.getByExtension(fileName.split("\\.")[1]).getTipoId());
 
                 listaArchivos.add(nuevoArchivo);
                 // if(grupoId != Integer.parseInt("1")){
@@ -205,33 +208,36 @@ public class ArchivoService {
         return listaArchivos;
     }
 
-    public Archivo bajarArchivo(Long archivoId, HttpServletResponse response) throws IOException {
+    public Archivo bajarArchivo(Long archivoId, HttpServletResponse response, HttpServletRequest request) throws IOException {
         Archivo archivo = archivoDao.findById(archivoId);
 
-        File file = new File(systemFileUploadLocation + archivo.getPath());
-        FileInputStream fileIn = new FileInputStream(file);
-        ServletOutputStream out = response.getOutputStream();
+        File downloadFile = new File(systemFileUploadLocation + archivo.getPath());
+        FileInputStream inputStream = new FileInputStream(downloadFile);
 
-        byte[] outputByte = new byte[4096];
-        // copy binary contect to output stream
-        while (fileIn.read(outputByte, 0, 4096) != -1) {
-            out.write(outputByte, 0, 4096);
+        ServletContext context = request.getServletContext();
+        String mimeType = context.getMimeType(systemFileUploadLocation + archivo.getPath());
+        if (mimeType == null) {
+            // set to binary type if MIME mapping not found
+            mimeType = "application/octet-stream";
+        }
+        response.setContentType(mimeType);
+        response.setContentLength((int) downloadFile.length());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = String.format("attachment; filename=\"%s\"", downloadFile.getName());
+        response.setHeader(headerKey, headerValue);
+
+        OutputStream outStream = response.getOutputStream();
+
+        byte[] buffer = new byte[4096];
+        int bytesRead = -1;
+
+        while ((bytesRead = inputStream.read(buffer)) != -1) {
+            outStream.write(buffer, 0, bytesRead);
         }
 
-        fileIn.close();
-        out.flush();
-        out.close();
-
-        response.setContentType("application/download");
-        response.setContentLength((int) file.length());
-        response.setHeader("Content-Transfer-Encoding", "binary");
-        response.setHeader("Content-Disposition", "attachment; filename=\"" + archivo.getPath().split(SEPARATOR)[1] + "\"");
-
-        // response.setHeader("Content-Type", "application/octet-stream");
-        // response.setHeader("Content-Description", "File Transfer");
-        // response.setHeader("Expires", "0");
-        // response.setHeader("Cache-Control", "must-revalidate, post-check=0, pre-check=0");
-        // response.setHeader("Pragma", "public");
+        inputStream.close();
+        outStream.close();
 
         return archivo;
     }
@@ -245,19 +251,19 @@ public class ArchivoService {
 
     }
 
-    public List<Archivo> busquedaAvanzada(String materia, String nbreDocente, String apeDocente, String carrera, String descripcion, Date fechaDde, Date fechaHta) {
+    public List<Archivo> busquedaAvanzada(String materia, String nbreDocente, String apeDocente, String carrera, String descripcion, Date fechaDde,
+            Date fechaHta) {
         return archivoDao.busquedaAvanzada(materia, nbreDocente, apeDocente, carrera, descripcion, fechaDde, fechaHta);
     }
 
-	public VwArchivo modificarArchivo(Long archivoId, String tagsArchivo,
-			String desArchivo, Long estadoArchivo) {
-		
-		Archivo archi = archivoDao.findById(archivoId);
-		archi.setTags(tagsArchivo);
-		archi.setDescripcion(desArchivo);
-		archi.setEstado(estadoArchivo);
-		archivoDao.update(archi);
-		
-		return archivoDao.findVwArchivo(archivoId);
-	}
+    public VwArchivo modificarArchivo(Long archivoId, String tagsArchivo, String desArchivo, Long estadoArchivo) {
+
+        Archivo archi = archivoDao.findById(archivoId);
+        archi.setTags(tagsArchivo);
+        archi.setDescripcion(desArchivo);
+        archi.setEstado(estadoArchivo);
+        archivoDao.update(archi);
+
+        return archivoDao.findVwArchivo(archivoId);
+    }
 }

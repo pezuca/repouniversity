@@ -128,7 +128,7 @@
 		<form id="nuevoErrorForm" class="form-horizontal">
 		    <div class="form-group">
                 <label class="col-sm-2 control-label">Descripcion*:</label>
-                <div class="col-sm-10"><input name="descripcion" type="textarea" class="form-control" placeholder="Reporte error.."required="required"></div>
+                <div class="col-sm-10"><textarea name="descripcion" class="form-control" placeholder="Reporte error.." required="required"></textarea></div>
             </div>
            
 		</form>

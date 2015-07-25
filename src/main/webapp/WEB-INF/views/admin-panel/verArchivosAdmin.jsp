@@ -82,7 +82,7 @@
 														</button></a>
 														
 														<a  name="dowloadArchivo"
-													data-archivoId="${archivo.id}" href="/repouniversity/bajarArchivo?archivoId=${archivo.id}" target="_blank"><button
+													data-archivoId="${archivo.id}" href="/repouniversity/bajarArchivo?archivoId=${archivo.id}"><button
 															class="btn btn-success btn-circle" type="button">
 															<i class="fa fa-download"></i>
 														</button></a></td>

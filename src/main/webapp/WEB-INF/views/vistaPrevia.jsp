@@ -73,7 +73,7 @@
                     </div>
                     <div class="row">
 						<div class="col-lg-12">
-							<a href="/repouniversity/bajarArchivo?archivoId=${archivo.id}" target="_blank">
+							<a href="/repouniversity/bajarArchivo?archivoId=${archivo.id}">
 			                    <button class="btn btn-primary dim" type="button">
 			                        <div class="row vertical-align">
 			                            <div class="col-xs-3">

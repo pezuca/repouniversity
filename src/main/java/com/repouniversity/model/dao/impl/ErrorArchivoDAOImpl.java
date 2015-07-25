@@ -3,6 +3,7 @@ package com.repouniversity.model.dao.impl;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,6 @@ import com.repouniversity.model.dao.ErrorArchivoDAO;
 import com.repouniversity.model.dao.query.InsertSQLStatement;
 import com.repouniversity.model.dao.query.SQLStatement;
 import com.repouniversity.model.dao.rowmapper.ErrorArchivoRowMapper;
-import com.repouniversity.model.entity.Comentario;
 import com.repouniversity.model.entity.ErrorArchivo;
 
 @Repository
@@ -112,7 +112,13 @@ public class ErrorArchivoDAOImpl extends GenericDAOImpl<ErrorArchivo> implements
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
                 ps.setString(1, t.getDescripcion());
-                ps.setLong(2, t.getIdArchivo());
+                
+                if(t.getIdArchivo() == null){
+                    ps.setNull(2, Types.NULL);
+                } else {
+                    ps.setLong(2, t.getIdArchivo());
+                }
+                
                 ps.setLong(3, t.getIdPersona());
             }
 
