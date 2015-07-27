@@ -41,8 +41,9 @@
 						<c:forEach items="${curso.notificaciones}" var="notificacion" varStatus="status">
 	                  
 	                            <div class="alert alert-info alert-dismissable">
+	                                <p>El alumno ${notificacion.alumno.persona.apellido}, ${notificacion.alumno.persona.nombre}</p>
+	                               	<p>${notificacion.tipo.descripcion}</p>
 	                                <p>Curso: ${notificacion.curso.nombre}, ${notificacion.curso.descripcion}</p>
-									<p>${notificacion.tipo.descripcion}</p>
 									<button aria-hidden="true" data-dismiss="alert" class="altaNotificacion btn btn-primary"
 											onclick="altaEnCurso(${notificacion.id})">Confirmar</button>&nbsp;
 									<button aria-hidden="true" data-dismiss="alert" class="rechazoNotificacion btn btn-danger"
@@ -107,6 +108,7 @@
             	<div class="row">
             	</c:if>
             	<div class="col-lg-6">
+            	   
                     <div class="ibox float-e-margins">
 
 							<div class="ibox-title">
@@ -136,6 +138,12 @@
 									Estado archivo: ${archivo.estadoArchivo}</p>
 								<div class="row m-t-md">
 									<div class="col-md-3">
+									 	<div class="ocultos">
+					            	    	<input type="hidden" value="${archivo.id}" name="archivoId" />
+					            	    	<input type="hidden" value="${archivo.descripcion}" name="descripcion" />
+					            	    	<input type="hidden" value="${archivo.estado}" name="estado" />
+					            	    	<input type="hidden" value="${archivo.tags}" name="tags" />
+					            	    </div>
 										<h5>
 										<a  name="editArchivo" data-archivoId="${archivo.id}"><button class="btn btn-info btn-circle" type="button"><i class="fa fa-pencil"></i></button></a>
 										<a  name="deleteArchivo" data-archivoId="${archivo.id}"><button class="btn btn-danger btn-circle" type="button"><i class="fa fa-times"></i> </button></a>
@@ -256,7 +264,7 @@
 				  url: "/repouniversity/notificacion/confirmaaltancurso",
 				  data: {"notificacionId" : notificacionId},
 				  success: function(){ 
-					  alert("Good!")
+					 
 				  }
 			});
 		}
@@ -267,7 +275,7 @@
 				  url: "/repouniversity/notificacion/rechazaaltancurso",
 				  data: {"notificacionId" : notificacionId},
 				  success: function(){ 
-					  alert("Good!")
+					
 				  }
 			});
 		}

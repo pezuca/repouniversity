@@ -174,12 +174,14 @@ $(document).ready(function() {
 	
 	$("a[name=editArchivo] button").click(function(){
 		$("#editarArchivoDialog").data('archivoId', $(this).parent().attr("data-archivoid"))
-			.data('archivoId', $(this).parents("tr").find("td").get(0).innerHTML)
-			.data('descripcion', $(this).parents("tr").find("td").get(1).innerHTML)
-			.data('estadoArchivo', '1')
-			.data('tags', $(this).parents("tr").find("td").get(4).innerHTML)
+			.data('archivoId', $(this).parent("ocultos").find("input[name=archivoId]").val())
+			.data('descripcion', $(this).parent("ocultos").find("input[name=descripcion]").val())
+			.data('estadoArchivo', $(this).parent("ocultos").find("input[name=estado]").val())
+			.data('tags', $(this).parent("ocultos").find("input[name=tags]").val())
 			.dialog("open");
+		
 	});
 });
+
 
 

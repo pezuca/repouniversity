@@ -5,6 +5,7 @@
 	<%@include file="../components/common-statics-imports.jsp"%>
 	<script src="/repouniversity/resources/js/application/verGrupoDocente.js"></script>
 		<script src="/repouniversity/resources/js/plugins/chosen/chosen.jquery.js"></script>
+		
 <link rel="stylesheet" type="text/css" href="/repouniversity/resources/css/plugins/chosen/chosen.css" />
 </head>
 <body class=" pace-done">
@@ -48,7 +49,7 @@
 									<td>${alumno.id}</td>
 									<td>${alumno.persona.apellido}, ${alumno.persona.nombre}</td>
 									<td>
-										<a name="deleteAlumno" data-alumnoId="${alumno.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar Alumno"><i class="fa fa-times"></i></button></a>
+										<a href="#" name="deleteAlumno" data-alumnoId="${alumno.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar Alumno"><i class="fa fa-times"></i></button></a>
 									</td>
 								</tr>
 							</c:forEach>
@@ -150,20 +151,20 @@
 		<form id="nuevoAlumnoForm" class="form-horizontal">
 			
 			<input name="grupoId" type="hidden" class="form-control" value="${param.grupoId}">
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Lista de Alumnos*:</label>
-				<div class="col-sm-10">
-					<select data-placeholder="Elija un alumno" name="alumnosIds"
-							multiple class="chosen-select" required="required"
-							tabindex="-1">
-						<c:forEach items="${grupo.alumnosSinGrupo}" var="alumno"
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Lista de Alumnos*:</label>
+						<div class="col-sm-10">
+							<select data-placeholder="Elija un alumno" name="alumnosIds"
+								multiple class="chosen-select" required="required"
+								tabindex="-1">
+								<c:forEach items="${grupo.alumnosSinGrupo}" var="alumno"
 									varStatus="status">
-							<option value="${alumno.id}">${alumno.persona.apellido},
+									<option value="${alumno.id}">${alumno.persona.apellido},
 										${alumno.persona.nombre}</option>
-						</c:forEach>
-					</select>
+								</c:forEach>
+							</select>
+						</div>
 				</div>
-			</div>
 		</form>
 	</div>
 	
@@ -179,7 +180,7 @@
 	
 	<div id="hiddenInputs" class="hidden">
 		<input type="hidden" name="personaId" value="${userLog.idPersona}"/>
-		<input type="hidden" name="cursoId" value="${grupo.idCurso}."/>
+		<input type="hidden" name="cursoId" value="${grupo.idCurso}"/>
 	</div>
 
 	

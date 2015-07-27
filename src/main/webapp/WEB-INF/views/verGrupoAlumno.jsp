@@ -89,7 +89,7 @@
 	
 	<div id="hiddenInputs" class="hidden">
 		<input type="hidden" name="personaId" value="${userLog.idPersona}"/>
-		<input type="hidden" name="cursoId" value="${grupo.idCurso}."/>
+		<input type="hidden" name="cursoId" value="${grupo.idCurso}"/>
 	</div>
 
 	

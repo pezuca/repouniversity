@@ -30,11 +30,29 @@
 			<div class="col-lg-6">
 				<c:forEach items="${notificaciones}" var="notificacion" varStatus="status">
                   
-                            <div class="alert alert-info alert-dismissable">
-                                <button aria-hidden="true" data-dismiss="alert" class="close" type="button" onclick="borrarNotificacion(${notificacion.id})">×</button>
-                               	<p>Curso: ${notificacion.curso.nombre}, ${notificacion.curso.descripcion}</p>
-								<p>${notificacion.tipo.descripcion}</p>
-                            </div>
+							<c:choose>
+								<c:when test="${login.rol == 'alumno'}">
+		                            <div class="alert alert-info alert-dismissable">
+		                                <button aria-hidden="true" data-dismiss="alert" class="close" type="button" onclick="borrarNotificacion(${notificacion.id})">×</button>
+		                               	 <p>El docente: ${notificacion.docente.persona.apellido}, ${notificacion.docente.persona.nombre}</p>
+			                         	 <p>${notificacion.tipo.descripcion}</p>
+			                             <p>Curso: ${notificacion.curso.nombre}, ${notificacion.curso.descripcion}</p>
+										 
+		                            </div>
+								</c:when>
+								<c:when test="${login.rol == 'docente'}">
+									 <div class="alert alert-info alert-dismissable">
+			                             <p>El alumno: ${notificacion.alumno.persona.apellido}, ${notificacion.alumno.persona.nombre}</p>
+			                         	 <p>${notificacion.tipo.descripcion}</p>
+			                             <p>Curso: ${notificacion.curso.nombre}, ${notificacion.curso.descripcion}</p>
+										 <button aria-hidden="true" data-dismiss="alert" class="altaNotificacion btn btn-primary"
+													onclick="altaEnCurso(${notificacion.id})">Confirmar</button>&nbsp;
+										 <button aria-hidden="true" data-dismiss="alert" class="rechazoNotificacion btn btn-danger"
+													onclick="rechazoAltaEnCurso(${notificacion.id})">Rechazar</button>
+			                         </div>
+								</c:when>
+				
+							</c:choose>
                    
 				</c:forEach>
             </div>
@@ -65,12 +83,33 @@
 				  url: "/repouniversity/notificacion/borrarNotificacion",
 				  data: {"notificacionId" : notificacionId},
 				  success: function(){ 
-					  alert("Good!")
+					 
 				  }
 			});
 		}
 		
-
+		function altaEnCurso(notificacionId) {
+			$.ajax({
+				  type: "POST",
+				  url: "/repouniversity/notificacion/confirmaaltancurso",
+				  data: {"notificacionId" : notificacionId},
+				  success: function(){ 
+					 
+				  }
+			});
+		}
+		
+		function rechazoAltaEnCurso(notificacionId) {
+			$.ajax({
+				  type: "POST",
+				  url: "/repouniversity/notificacion/rechazaaltancurso",
+				  data: {"notificacionId" : notificacionId},
+				  success: function(){ 
+					 
+				  }
+			});
+		}
 	</script>	
+	
 </body>
 </html>
