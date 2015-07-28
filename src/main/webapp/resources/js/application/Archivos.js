@@ -12,25 +12,22 @@ var archivosAdmin = {
 					sticky: false
 				});
 				
-				var celdas = $("#listaArchivos td a[data-archivoid=" + data.id + "]").parents("tr").find("td");
-				celdas.get(1).innerHTML = data.descripcion;
-				celdas.get(2).innerHTML = data.fechaPublicacion;
-				celdas.get(3).innerHTML = data.archivoTipo;
-				celdas.get(4).innerHTML = data.tags;
+				$(".archivoInfo." + data.id).empty();
+				$(".archivoInfo." + data.id).parent().find(".botones .ocultos").empty();
 				
-				//Agrego el evento de delete
-				$("a[name='deleteArchivo'][data-archivoid=" + data.id + "] button").click(function(){
-					$("#deleteArchivoDialog").data('archivoId', $(this).parent().attr("data-archivoid")).dialog("open");
-				});
+				var archivoInfo = "<h4><strong>Materia: " + data.materia + "</strong></h4>" +
+									"<p><i class='fa fa-clock-o'></i> Publicado en " + data.fechaPublicacion + "</p>" +
+									"<h5>Tipo de Archivo: " + data.tipoArchivo + "</h5>" +
+									"<p>" + data.descripcion + "<br><br><small>Publicado por " + data.apellidoPersona + ", " + data.nombrePersona + "</small>" +
+									"<br><br>Estado archivo: " + data.estado + "</p>";
 				
-				$("a[name=editArchivo][data-archivoid=" + data.id + "] button").click(function(){
-					$("#editarArchivoDialog").data('archivoId', $(this).parent().attr("data-archivoid"))
-						.data('descripcion', $(this).parents("tr").find("td").get(1).innerHTML)
-						.data('fechaPublicacion', $(this).parents("tr").find("td").get(2).innerHTML)
-						.data('tipo', $(this).parents("tr").find("td").get(3).innerHTML)
-						.data('tags', $(this).parents("tr").find("td").get(4).innerHTML)
-						.dialog("open");
-				});
+				var inputsOcultos = "<input name=archivoId value='" + data.id + "' type=hidden />" +
+									"<input name=descripcion value='" + data.descripcion + "' type=hidden />" + 
+									"<input name=estado value='" + data.estado + "' type=hidden />" +
+									"<input name=tags value='" + data.tags + "' type=hidden />";
+				
+				$(".archivoInfo." + data.id).append(archivoInfo);
+				$(".archivoInfo." + data.id).parent().find(".botones .ocultos").append(inputsOcultos);
 				
 				$("#editarArchivoDialog").dialog("close");						
 			},
@@ -46,7 +43,7 @@ var archivosAdmin = {
 	},
 	deleteArchivoAjax : function(archivoId) {
 		$.ajax({
-			url: "/repouniversity/admin/eliminarArchivo",
+			url: "/repouniversity/eliminarArchivo",
 			type: "POST",
 			data: {"archivoId" : archivoId},
 			success: function(data){
@@ -56,7 +53,8 @@ var archivosAdmin = {
 					sticky: false
 				});
 				
-				table.row($("#listaArchivos a[data-archivoid=" + archivoId + "]").parents('tr')).remove().draw();
+				$(".archivoInfo." + archivoId).parents(".archivoPlaca").remove();
+				
 				$("#deleteArchivoDialog").dialog("close");						
 			},
 			error: function(data) {
@@ -137,7 +135,13 @@ $(document).ready(function() {
 			
 			$('#editarArchivoForm input[name=archivoId]').val($("#editarArchivoDialog").data('archivoId'));
 			$('#editarArchivoForm input[name=descripcion]').val($("#editarArchivoDialog").data('descripcion'));
-			$('#editarArchivoForm input[name=estadoArchivo]').val($("#editarArchivoDialog").data('estadoArchivo'));
+			
+			var estado = $("#editarArchivoDialog").data('estadoArchivo');
+			if(estado == 1) {
+				$('#editarArchivoForm select[name=estadoArchivo] option[value=1]').attr("selected", "selected");				
+			} else {
+				$('#editarArchivoForm select[name=estadoArchivo] option[value=2]').attr("selected", "selected");
+			}
 			$('#editarArchivoForm input[name=tags]').val($("#editarArchivoDialog").data('tags'));
 		},
 		close: function(event, ui) {
@@ -173,15 +177,11 @@ $(document).ready(function() {
 	});
 	
 	$("a[name=editArchivo] button").click(function(){
-		$("#editarArchivoDialog").data('archivoId', $(this).parent().attr("data-archivoid"))
-			.data('archivoId', $(this).parent("ocultos").find("input[name=archivoId]").val())
-			.data('descripcion', $(this).parent("ocultos").find("input[name=descripcion]").val())
-			.data('estadoArchivo', $(this).parent("ocultos").find("input[name=estado]").val())
-			.data('tags', $(this).parent("ocultos").find("input[name=tags]").val())
+		$("#editarArchivoDialog").data('archivoId', $(this).parents(".botones").find(".ocultos input[name=archivoId]").val())
+			.data('descripcion', $(this).parents(".botones").find(".ocultos input[name=descripcion]").val())
+			.data('estadoArchivo', $(this).parents(".botones").find(".ocultos input[name=estado]").val())
+			.data('tags', $(this).parents(".botones").find(".ocultos input[name=tags]").val())
 			.dialog("open");
 		
 	});
 });
-
-
-

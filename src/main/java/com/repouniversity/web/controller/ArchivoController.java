@@ -148,12 +148,21 @@ public class ArchivoController {
         return new ModelAndView("vistaPrevia").addObject("archivo", archivo).addObject("errorArchivo", errorArchivo);
     }
     
-    @RequestMapping(value = "/modificarArchivo", method = {RequestMethod.GET})
+    @RequestMapping(value = "/modificarArchivo", method = {RequestMethod.POST})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
     public VwArchivo modificarArchivo(HttpServletRequest request, @RequestParam(value = "archivoId", required = true) Long archivoId,
-            @RequestParam(value = "tagsArchivo", required = true) String tagsArchivo, @RequestParam(value = "desArchivo", required = true) String desArchivo,
+            @RequestParam(value = "tags", required = true) String tagsArchivo, @RequestParam(value = "descripcion", required = true) String desArchivo,
             @RequestParam(value = "estadoArchivo", required = true) Long estadoArchivo) {
     	
     	 return archivoService.modificarArchivo(archivoId, tagsArchivo, desArchivo, estadoArchivo);
    }
 
+    @RequestMapping(value = "/eliminarArchivo", method = {RequestMethod.POST})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public void eliminarArchivo(HttpServletRequest request, @RequestParam(value = "archivoId", required = true) Long archivoId) {
+        
+         archivoService.delete(archivoId);
+   }
 }

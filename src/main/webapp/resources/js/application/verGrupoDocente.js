@@ -391,5 +391,7 @@ $(document).ready(function() {
 			.data('nota', $(this).parents("tr").find("td").get(3).innerHTML)
 			.dialog("open");
 	});
+	
+	$("select[name=alumnosIds]").chosen({no_results_text:'No hay resultados para: '});
 });
 

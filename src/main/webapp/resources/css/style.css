@@ -3642,3 +3642,7 @@ body.skin-3 {
 .hidden {
 	display: none;
 }
+
+.ui-dialog .ui-dialog-content {
+	overflow: hidden !important;
+}
