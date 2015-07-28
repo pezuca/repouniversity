@@ -132,7 +132,7 @@ public class NotificacionDAOImpl extends GenericDAOImpl<Notificacion> implements
     public List<Notificacion> findNotificacionesForDocenteId(final Long idAluDoc) {
         StringBuilder sql = new StringBuilder();
 
-        sql.append("SELECT * FROM notificacion n WHERE(n.tiponotificacion = 1 or n.tiponotificacion = 2) AND n.iddocente = ? ");
+        sql.append("SELECT * FROM notificacion n WHERE(n.tiponotificacion = 1 or n.tiponotificacion = 2) AND n.iddocente = ? AND activo = 1 ");
         sql.append("order by n.idnotificacion asc");
 
         List<Notificacion> list = doQuery(new SQLStatement(sql.toString()) {
@@ -146,10 +146,7 @@ public class NotificacionDAOImpl extends GenericDAOImpl<Notificacion> implements
             }
         }, new NotificacionRowMapper(), "findNotificacionesForDocenteId: " + idAluDoc);
         
-        if (list.isEmpty()) {
-            return null;
-        }
-
+  
         return list;
     }
     

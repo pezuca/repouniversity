@@ -100,4 +100,20 @@ public class NotificacionController {
 
         return new ModelAndView("verNotificaciones").addObject("notificaciones", Notificaciones);
     }
+    
+    @RequestMapping(value = "/notificaciones", method = {RequestMethod.GET})
+    @ResponseBody
+    public List<NotificacionTO> cantNotificaciones(HttpServletRequest request, @ModelAttribute("login") UsuarioRol usuario) {
+    	List<NotificacionTO> notificaciones = null;
+    	if (usuario.getRol().equals("alumno"))
+    	{
+    		notificaciones = notificacionService.getNotificacionesForAlumno(usuario.getIdAluDoc());
+	   	}
+    	if (usuario.getRol().equals("docente"))
+    	{
+    		notificaciones = notificacionService.getNotificacionesForDocente(usuario.getIdAluDoc());
+	   	}	
+    
+        return notificaciones;
+    }
 }

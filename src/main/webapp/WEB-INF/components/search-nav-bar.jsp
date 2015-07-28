@@ -65,16 +65,16 @@
            </li>
            <li class="dropdown">
                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                   <i class="fa fa-bell"></i>  <span class="label label-primary">1</span>
+                   <i class="fa fa-bell"></i>  <span id = "contNoti" class="label label-primary" style='display:none;'>0</span>
                </a>
                <ul class="dropdown-menu dropdown-alerts">
                    <li>
-                       <a href="mailbox.html">
-                           <div>
-                               <i class="fa fa-envelope fa-fw"></i> Tiene 3 solicitudes nuevas
-                               <span class="pull-right text-muted small">4 minutos</span>
+                     
+                           <div id="linkNoti">
+                               <i class="fa fa-envelope fa-fw"></i> 
+                               <span id="textNoti">Tiene 3 solicitudes nuevas</span>
                            </div>
-                       </a>
+                      
                    </li>
                    
                    <li class="divider"></li>
@@ -134,3 +134,36 @@
 		</form>
 	</div>
 </div>
+<script>
+var myVar = setInterval(function () {misNotificaciones()}, 5000);
+function myTimer() {
+	alert('Hi')
+}
+
+function misNotificaciones() {
+	$.ajax({
+		  type: "GET",
+		  url: "/repouniversity/notificaciones",
+		  success: function(data){ 
+
+			  if (data.length == 0) {
+				  $("#contNoti").hide();
+		//		  $("#linkNoti").hide();
+		//		  $("#textNoti").hide();
+				  $("#textNoti").html("No tiene solicitudes nuevas");
+				} else{
+					  $("#contNoti").show();
+		//			  $("#linkNoti").show();
+		//			  $("#textNoti").show();
+					  $("#contNoti").html(data.length);
+					  if (data.length == 1) {
+					 	 $("#textNoti").html("Tiene una nueva solicitud");
+					  } else{
+						  	
+						  	$("#textNoti").html("Tiene " + data.length + " solicitudes nuevas");
+							}
+				}
+		  }
+	});
+}
+</script>

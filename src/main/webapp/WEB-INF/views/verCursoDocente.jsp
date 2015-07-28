@@ -238,7 +238,7 @@
 				<div id="deleteArchivoDialog" title="Eliminar Archivo">
 					<p>¿Esta seguro que desea eliminar la archivo?</p>
 				</div>
-						
+
 				<%@include file="../components/footer.jsp"%>
 			</div>
 		</div>
@@ -280,5 +280,6 @@
 			});
 		}
 	</script>
+	<%@include file="../components/fileUpload.jsp"%>
 </body>
 </html>
