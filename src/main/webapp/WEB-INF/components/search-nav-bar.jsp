@@ -83,19 +83,19 @@
                            	<c:choose>
 								<c:when test="${login.rol == 'alumno'}">
 									<a href="/repouniversity/alumno/notificaciones?bread=Notificaciones-1">
-		                               <strong>Ver todas las notificaciones</strong>
+		                               <strong>Ver las notificaciones</strong>
 		                               <i class="fa fa-angle-right"></i>
 		                           </a>
 								</c:when>
 								<c:when test="${login.rol == 'docente'}">
 									<a href="/repouniversity/docente/notificaciones?bread=Notificaciones-1">
-		                               <strong>Ver todas las notificaciones</strong>
+		                               <strong>Ver las notificaciones</strong>
 		                               <i class="fa fa-angle-right"></i>
 		                           </a>
 								</c:when>
 								<c:when test="${login.rol == 'administrador'}">
-									<a href="/repouniversity/notificaciones.html">
-		                               <strong>Ver todas las notificaciones</strong>
+									<a href="/repouniversity/admin/verReporteErrores?bread=Ver reportes de errores-1">
+		                               <strong>Ver los errores</strong>
 		                               <i class="fa fa-angle-right"></i>
 		                           </a>
 								</c:when>
@@ -146,21 +146,22 @@ function misNotificaciones() {
 		  url: "/repouniversity/notificaciones",
 		  success: function(data){ 
 
-			  if (data.length == 0) {
+			  if (data == 0) {
+				  //if (data.length == 0) {
 				  $("#contNoti").hide();
 		//		  $("#linkNoti").hide();
 		//		  $("#textNoti").hide();
-				  $("#textNoti").html("No tiene solicitudes nuevas");
+				  $("#textNoti").html("No tiene notificaciones nuevas");
 				} else{
 					  $("#contNoti").show();
 		//			  $("#linkNoti").show();
 		//			  $("#textNoti").show();
-					  $("#contNoti").html(data.length);
-					  if (data.length == 1) {
-					 	 $("#textNoti").html("Tiene una nueva solicitud");
+					  $("#contNoti").html(data);
+					  if (data == 1) {
+					 	 $("#textNoti").html("Tiene una nueva notificacion");
 					  } else{
 						  	
-						  	$("#textNoti").html("Tiene " + data.length + " solicitudes nuevas");
+						  	$("#textNoti").html("Tiene " + data + " notificaciones nuevas");
 							}
 				}
 		  }

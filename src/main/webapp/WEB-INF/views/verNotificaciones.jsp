@@ -34,10 +34,9 @@
 								<c:when test="${login.rol == 'alumno'}">
 		                            <div class="alert alert-info alert-dismissable">
 		                                <button aria-hidden="true" data-dismiss="alert" class="close" type="button" onclick="borrarNotificacion(${notificacion.id})">×</button>
-		                               	 <p>El docente: ${notificacion.docente.persona.apellido}, ${notificacion.docente.persona.nombre}</p>
+		                               	 <p>Curso: ${notificacion.curso.nombre}, ${notificacion.curso.descripcion}</p>
 			                         	 <p>${notificacion.tipo.descripcion}</p>
-			                             <p>Curso: ${notificacion.curso.nombre}, ${notificacion.curso.descripcion}</p>
-										 
+			                             									 
 		                            </div>
 								</c:when>
 								<c:when test="${login.rol == 'docente'}">

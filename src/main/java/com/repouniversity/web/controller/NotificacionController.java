@@ -16,10 +16,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.repouniversity.model.entity.Notificacion;
 import com.repouniversity.model.entity.UsuarioRol;
+import com.repouniversity.model.entity.to.ErrorArchivoTO;
 import com.repouniversity.model.entity.to.NotificacionTO;
 import com.repouniversity.model.services.AlumnoService;
 import com.repouniversity.model.services.CursoService;
 import com.repouniversity.model.services.DocenteService;
+import com.repouniversity.model.services.ErrorArchivoService;
 import com.repouniversity.model.services.NotificacionService;
 import com.repouniversity.model.services.TipoNotificacionService;
 
@@ -35,6 +37,9 @@ public class NotificacionController {
 
     @Autowired
     private NotificacionService notificacionService;
+
+    @Autowired
+    private ErrorArchivoService errorArchivoService;
 
     @Autowired
     private TipoNotificacionService tipoNotificacionService;
@@ -103,17 +108,26 @@ public class NotificacionController {
     
     @RequestMapping(value = "/notificaciones", method = {RequestMethod.GET})
     @ResponseBody
-    public List<NotificacionTO> cantNotificaciones(HttpServletRequest request, @ModelAttribute("login") UsuarioRol usuario) {
+    public int cantNotificaciones(HttpServletRequest request, @ModelAttribute("login") UsuarioRol usuario) {
     	List<NotificacionTO> notificaciones = null;
+    	List<ErrorArchivoTO> errores = null;
     	if (usuario.getRol().equals("alumno"))
     	{
     		notificaciones = notificacionService.getNotificacionesForAlumno(usuario.getIdAluDoc());
+    		return notificaciones.size();
 	   	}
     	if (usuario.getRol().equals("docente"))
     	{
     		notificaciones = notificacionService.getNotificacionesForDocente(usuario.getIdAluDoc());
+    		return notificaciones.size();
+	   	}
+    	if (usuario.getRol().equals("administrador"))
+    	{
+    		errores = errorArchivoService.getErrores();
+    		return errores.size();
 	   	}	
-    
-        return notificaciones;
+    	
+    	return 0;
+        //return notificaciones;
     }
 }

@@ -95,5 +95,7 @@ public class NotificacionService {
 	            notificacionList.add(buildNotificacion(notificacion));
 	        }
 
-	        return notificacionList;	}
+	        return notificacionList;	
+	        
+	}
 }
