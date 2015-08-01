@@ -124,6 +124,15 @@ public class TpGrupoDAOImpl extends GenericDAOImpl<TpGrupo> implements TpGrupoDA
 
         return id;
     }
+    
+    @Override
+    public long findTPsAprobadoForAlumno(long alumnoId) {
+        
+  	
+        long TPs = jdbcTemplate.queryForLong("SELECT count(*) FROM repouniversity.tp_grupo t join alumno_curso a on a.id_grupo = t.id_grupo where t.nota = 'Aprobado' and a.id_alumno = " + alumnoId);
+
+        return TPs;
+    }
 
 
 

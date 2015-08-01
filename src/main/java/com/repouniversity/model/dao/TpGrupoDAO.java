@@ -9,5 +9,7 @@ public interface TpGrupoDAO extends GenericDAO<TpGrupo> {
     List<TpGrupo> findTpGrupoForGrupo(Long grupoid);
 
 	long findIdCursoForTpGrupo(long tpGrupoId);
+	
+	long findTPsAprobadoForAlumno(long alumnoId);
 
 }
