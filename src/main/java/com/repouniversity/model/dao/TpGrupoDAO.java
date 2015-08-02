@@ -12,4 +12,5 @@ public interface TpGrupoDAO extends GenericDAO<TpGrupo> {
 	
 	long findTPsAprobadoForAlumno(long alumnoId);
 
+	long findTPSinNotaForDocente(long docenteId);
 }

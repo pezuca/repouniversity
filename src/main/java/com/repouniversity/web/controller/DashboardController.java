@@ -1,7 +1,5 @@
 package com.repouniversity.web.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.repouniversity.model.entity.Curso;
 import com.repouniversity.model.entity.UsuarioRol;
-import com.repouniversity.model.entity.VwArchivo;
-import com.repouniversity.model.entity.to.GrupoTO;
-import com.repouniversity.model.entity.to.NotificacionTO;
 import com.repouniversity.model.services.ArchivoService;
 import com.repouniversity.model.services.CursoService;
+import com.repouniversity.model.services.DocenteService;
 import com.repouniversity.model.services.GrupoService;
 import com.repouniversity.model.services.NotificacionService;
 import com.repouniversity.model.services.TpGrupoService;
@@ -34,8 +29,10 @@ public class DashboardController {
 	private GrupoService grupoService;
     @Autowired
     private ArchivoService archivoService;
-
-	@Autowired
+    @Autowired
+    private DocenteService docenteService;
+    
+    @Autowired
 	private TpGrupoService tpGrupoService;
     
 	@RequestMapping(value = "/dashboard", method = { RequestMethod.GET })
@@ -60,7 +57,41 @@ public class DashboardController {
     		model.addObject("notificaciones", notificaciones).addObject("cursos", cursos).addObject("grupos", grupos).addObject("archivos", archivos).addObject("tps", tps);
 	   	}
 		
+		if (usuario.getRol().equals("docente"))
+    	{
+		//	List<NotificacionTO> notificaciones = null;
+			model = new ModelAndView("dashboardDocente");
+			int notificaciones = notificacionService.getNotificacionesForAlumno(usuario.getIdAluDoc()).size();
+    		    	   		
+			int cursos = cursoService.getCursosMateriaDisponiblesParaDocente(usuario.getIdAluDoc()).size();
+    
+			long alumnos = docenteService.getAlumnosAcargoForDocente(usuario.getIdAluDoc());
+			
+			 int archivos = archivoService.getArchivosDePersona(usuario.getIdPersona()).size();
+			 
+			 long tps = tpGrupoService.getTPSinNotaForDocente(usuario.getIdAluDoc());
+			 
+			 
+    		model.addObject("notificaciones", notificaciones).addObject("cursos", cursos).addObject("alumnos", alumnos).addObject("archivos", archivos).addObject("tps", tps);
+	   	}
 		
+		if (usuario.getRol().equals("administrador"))
+    	{
+		//	List<NotificacionTO> notificaciones = null;
+			model = new ModelAndView("dashboardDocente");
+			int notificaciones = notificacionService.getNotificacionesForAlumno(usuario.getIdAluDoc()).size();
+    		    	   		
+			int cursos = cursoService.getCursosMateriaDisponiblesParaDocente(usuario.getIdAluDoc()).size();
+    
+			long alumnos = docenteService.getAlumnosAcargoForDocente(usuario.getIdAluDoc());
+			
+			 int archivos = archivoService.getArchivosDePersona(usuario.getIdPersona()).size();
+			 
+			 long tps = tpGrupoService.getTPSinNotaForDocente(usuario.getIdAluDoc());
+			 
+			 
+    		model.addObject("notificaciones", notificaciones).addObject("cursos", cursos).addObject("alumnos", alumnos).addObject("archivos", archivos).addObject("tps", tps);
+	   	}
 		return model;
 	}
 

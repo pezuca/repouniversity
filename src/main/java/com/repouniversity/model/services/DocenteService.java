@@ -90,4 +90,10 @@ public class DocenteService {
         return docenteTo;
     }
     
+    public Long getAlumnosAcargoForDocente(long docenteId) {
+
+        return docenteDao.findAlumnosAcargoForDocente(docenteId);
+    } 
+    
+    
 }

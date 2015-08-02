@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.repouniversity.model.dao.DocenteDAO;
@@ -16,7 +18,10 @@ import com.repouniversity.model.entity.Docente;
 @Repository
 public class DocenteDAOImpl extends GenericDAOImpl<Docente> implements DocenteDAO {
 
-    @Override
+	@Autowired
+    private JdbcTemplate jdbcTemplate;
+
+	@Override
     public Docente getByCursoMateriaId(final Long cursoId) {
         StringBuilder sql = new StringBuilder();
 
@@ -96,6 +101,14 @@ public class DocenteDAOImpl extends GenericDAOImpl<Docente> implements DocenteDA
     @Override
     protected String getColumnIdName() {
         return "id_docente";
+    }
+    
+    @Override
+    public long findAlumnosAcargoForDocente(long docenteId) {
+    	
+        long TPs = jdbcTemplate.queryForLong("SELECT count(distinct a.id_alumno) FROM repouniversity.curso c join alumno_curso a on a.id_curso = c.id_curso where c.id_docente = " + docenteId);
+
+        return TPs;
     }
 
 }

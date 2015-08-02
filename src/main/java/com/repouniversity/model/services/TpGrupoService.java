@@ -125,6 +125,9 @@ public class TpGrupoService {
 
         return tpGrupoDao.findTPsAprobadoForAlumno(alumnoId);
     } 
-    
- 
+    public Long getTPSinNotaForDocente(long docenteId) {
+
+        return tpGrupoDao.findTPSinNotaForDocente(docenteId);
+    } 
+     
 }
