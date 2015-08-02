@@ -39,5 +39,11 @@
 					class="fa fa-search"></i> <span class="nav-label"> Busqueda Avanzada </span></a>
 			</li>
         </ul>
+        	</ul>
+		<ul class="nav">
+        <li style="border-top:solid 1px #504f40">
+            <a data-pjax id='ayuda-link' href="/repouniversity/preguntasFrecuentes?bread=PreguntasFrecuentes-1"><i class="fa fa-question-circle"></i><span class="nav-label">Ayuda</span> </a>
+        </li>      
+        </ul>
     </div>
 </nav>

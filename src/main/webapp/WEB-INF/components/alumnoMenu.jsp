@@ -36,11 +36,18 @@
                  <ul class="nav nav-second-level">
 	                <li><a href="/repouniversity/alumno/notificaciones?bread=Notificaciones-1">Mis notificaciones</a></li>
 					<li><a href="/repouniversity/alumno/verGrupos?bread=Ver Grupos-1">Mis grupos de TPs</a></li>
-					<li><a href="/repouniversity/verArchivos?bread=Ver archivos-1">Mis archivos</a></li>        
+					<li><a href="/repouniversity/verArchivos?bread=Ver archivos-1">Mis archivos</a></li>   				
+            </a>
+        </li>     
 				</ul>
              </li>
              <li class="${activeTab eq 'Busqueda' ? 'active':''}"><a href="/repouniversity/busquedaAvanzada?bread=Busqueda avanzada-1"><i
 					class="fa fa-search"></i> <span class="nav-label"> Busqueda Avanzada </span></a></li>
 		</ul>
+		<ul class="nav">
+        <li style="border-top:solid 1px #504f40">
+            <a data-pjax id='ayuda-link' href="/repouniversity/preguntasFrecuentes?bread=PreguntasFrecuentes-1"><i class="fa fa-question-circle"></i><span class="nav-label">Ayuda</span> </a>
+        </li>      
+        </ul>
      </div>
  </nav>
