@@ -63,9 +63,9 @@
 								   <div class="widget yellow-bg p-lg  text-center">
 										<div class="m-b-md">
 											<i class="fa fa-warning fa-4x"></i>
-											<h1 class="m-xs"> </h1>
+											<h1 class="m-xs">Reportar</h1>
 											<h3 class="font-bold no-margins">
-												Reportar
+												nuevo
 											</h3>
 											<small>error</small>
 										</div>

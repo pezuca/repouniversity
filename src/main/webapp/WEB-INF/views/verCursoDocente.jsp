@@ -32,28 +32,44 @@
 			<div class="wrapper wrapper-content animated fadeInRight">
 				<div class="row">
 					<div class="col-lg-12">
-						<h2>Detalles curso ${curso.nombre}</h2>
+						<h3><b>${curso.nombre}</b></h3>
 					</div>
 				</div>
-				<div class="row">
-				<a data-toggle="modal" href="#fileUpload" class="btn btn-success"><i class="fa fa-upload"></i> Subir Archivo</a>
-					<div class="col-lg-6">
-						<c:forEach items="${curso.notificaciones}" var="notificacion" varStatus="status">
-	                  
-	                            <div class="alert alert-info alert-dismissable">
-	                                <p>El alumno ${notificacion.alumno.persona.apellido}, ${notificacion.alumno.persona.nombre}</p>
-	                               	<p>${notificacion.tipo.descripcion}</p>
-	                                <p>Curso: ${notificacion.curso.nombre}, ${notificacion.curso.descripcion}</p>
-									<button aria-hidden="true" data-dismiss="alert" class="altaNotificacion btn btn-primary"
-											onclick="altaEnCurso(${notificacion.id})">Confirmar</button>&nbsp;
-									<button aria-hidden="true" data-dismiss="alert" class="rechazoNotificacion btn btn-danger"
-											onclick="rechazoAltaEnCurso(${notificacion.id})">Rechazar</button>
-	                            </div>
-	                   
-						</c:forEach>
-            		</div>
+				<div class="col-lg-12">
+					<a data-toggle="modal" href="#fileUpload" class="btn btn-success"><i class="fa fa-upload"></i> Subir Archivo</a>
 				</div>
-
+				
+				<div class="row">
+					<div class="col-lg-12">
+			        	<c:forEach items="${curso.notificaciones}" var="notificacion" varStatus="status">
+			            <c:if test = "${status.count mod 2 != 0}" >
+							<div class="row">
+		            	</c:if>
+							<div class="col-lg-6">
+								
+			                            <div class="alert alert-info alert-dismissable">
+			                                <p>El alumno ${notificacion.alumno.persona.apellido}, ${notificacion.alumno.persona.nombre}</p>
+			                               	<p>${notificacion.tipo.descripcion}</p>
+			                                <p>Curso: ${notificacion.curso.nombre}, ${notificacion.curso.descripcion}</p>
+											<button aria-hidden="true" data-dismiss="alert" class="altaNotificacion btn btn-primary"
+													onclick="altaEnCurso(${notificacion.id})">Confirmar</button>&nbsp;
+											<button aria-hidden="true" data-dismiss="alert" class="rechazoNotificacion btn btn-danger"
+													onclick="rechazoAltaEnCurso(${notificacion.id})">Rechazar</button>
+			                            </div>
+			                   
+							</div>
+						
+						<c:if test = "${status.count mod 2 == 0}" >
+		            		</div>
+		            	</c:if>	
+		                </c:forEach>
+					</div>
+				</div>
+				
+			<c:if test = "${curso.notificaciones.size() mod 2 != 0}" >
+				</div>
+		    </c:if>	
+		    
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="ibox float-e-margins">
@@ -80,8 +96,8 @@
 												<td>${grupo.nombre}</td>
 												<td>${grupo.fechasys}</td>
 												<td><a class="verCurso"
-													href="/repouniversity/docente/verGrupo?grupoId=${grupo.id}"><button
-															class="btn btn-primary">Ver</button></a></td>
+													href="/repouniversity/docente/verGrupo?grupoId=${grupo.id}&bread=Ver grupo-2"><button
+															class="btn btn-primary btn-circle"><i class="fa fa-arrow-right"></i></button></a></td>
 											</tr>
 											<!-- 						<td> -->
 											<%-- 						<button class="verGrupo btn btn-primary" onclick="verGrupo(${curso.grupo.id})">Ver</button>&nbsp; --%>

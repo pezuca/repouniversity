@@ -13,6 +13,7 @@
 <%@include file="../components/common-statics-imports.jsp"%>
 
 <script type="text/javascript" src="/repouniversity/resources/js/application/dashboard.js"></script>
+<script	src="/repouniversity/resources/js/application/Archivos.js"></script>
 </head>
 <body class=" pace-done">
 	<div id="wrapper">
@@ -27,39 +28,33 @@
 			<div class="row">
 	             <div class="col-lg-12">
 					<div class="usuarioInformation">
-						<div class="page-header">
-							<h1>Detalles curso ${curso.nombre}</h1>
-						</div>
+							<h3><b>${curso.nombre}</b></h3>
+						
 					</div>
-				<div class="col-lg-2">
-                    <div class="widget navy-bg p-lg text-center">
-                    	<a href="/repouniversity/alumno/verGrupo?grupoId=${curso.grupoAlumno.id}" name="Ver" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver grupo" class="m-b-md">
-                            <i class="fa fa-user fa-3x"></i>
-							<i class="fa fa-user fa-3x"></i>
-                            <h1 class="m-xs">${curso.grupoAlumno.nombre}</h1>
-                            <h3 class="font-bold no-margins">
-                                
-                            </h3>
-                            
-                         </a>
-                       
-                    </div>
-                </div>
+				
 					<tr class="head">
 						<th><a data-toggle="modal" href="#fileUpload" class="btn btn-success"><i class="fa fa-upload"></i> Subir Archivo</a></th>
 						<th></th>
-						<th><a href="/repouniversity/alumno/verGrupo?grupoId=${curso.grupoAlumno.id}&bread=Ver grupo-2" name="Ver" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver grupo" class="btn btn-success"><i class="fa fa-upload"></i> Ver Grupo</a></th>
+						<c:choose>
+							<c:when test="${curso.grupoAlumno.id != 1}">
+								<th><a href="/repouniversity/alumno/verGrupo?grupoId=${curso.grupoAlumno.id}&bread=Ver grupo-2" name="Ver" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver grupo" class="btn btn-success"><i class="fa fa-upload"></i> Ver Grupo (${curso.grupoAlumno.nombre}) </a></th>
+							</c:when>
+							<c:otherwise>
+								<th><a href="/repouniversity/alumno/verGrupo?grupoId=${curso.grupoAlumno.id}&bread=Ver grupo-2" name="Ver" type="button" disabled="disabled" data-toggle="tooltip" data-placement="top" data-original-title="Ver grupo" class="btn btn-success"><i class="fa fa-upload"></i> Ver Grupo (${curso.grupoAlumno.nombre}) </a></th>
+							</c:otherwise>
+						</c:choose>
+
+						
 					</tr>
 				</div>
-			<div class="row">
+<div class="row">
 			<div class="col-lg-12">
 	        	<c:forEach items="${archivos}" var="archivo" varStatus="status">
             	<c:if test = "${status.count mod 2 != 0}" >
             	<div class="row">
             	</c:if>
-            	<div class="col-lg-6">
+            	<div class="col-lg-6 archivoPlaca">
                     <div class="ibox float-e-margins">
-
 							<div class="ibox-title">
 								<h5>${archivo.nombre}</h5>
 								<div class="ibox-tools">
@@ -72,29 +67,39 @@
 								</div>
 							</div>
 							<div class="ibox-content profile-content">
-								<h4><strong>Materia: ${archivo.materia}</strong></h4>
-								<p><i class="fa fa-clock-o"></i> Publicado en ${archivo.fechaPublicacion}</p>
-								<h5>
-								   Tipo de Archivo: ${archivo.tipoArchivo}
-								</h5>
-								<p>
-									${archivo.descripcion}
-									<br>
-									<br>
-									<small>Publicado por ${archivo.apellidoPersona}, ${archivo.nombrePersona}</small>
-									<br>
-									<br>
-									Estado archivo: ${archivo.estadoArchivo}</p>
+								<div class="archivoInfo ${archivo.id}">
+									<h4><strong>Materia: ${archivo.materia}</strong></h4>
+									<p><i class="fa fa-clock-o"></i> Publicado en ${archivo.fechaPublicacion}</p>
+									<h5>
+									   Tipo de Archivo: ${archivo.tipoArchivo}
+									</h5>
+									<p>
+										${archivo.descripcion}
+										<br>
+										<br>
+										<small>Publicado por ${archivo.apellidoPersona}, ${archivo.nombrePersona}</small>
+										<br>
+										<br>
+										Estado archivo: ${archivo.estadoArchivo}</p>
+								</div>
 								<div class="row m-t-md">
-									<div class="col-md-3">
-										<h5><a  name="dowloadArchivo" data-archivoId="${archivo.id}" href="/repouniversity/vistaPrevia?archivoId=${archivo.id}&bread=Vista previa-3">
+									<div class="col-md-6 botones">
+									 	<div class="ocultos">
+					            	    	<input type="hidden" value="${archivo.id}" name="archivoId" />
+					            	    	<input type="hidden" value="${archivo.descripcion}" name="descripcion" />
+					            	    	<input type="hidden" value="${archivo.estado}" name="estado" />
+					            	    	<input type="hidden" value="${archivo.tags}" name="tags" />
+					            	    </div>
+										<h5>
+											<c:if test="${archivo.idPersona == login.idPersona}">
+												<a  name="editArchivo" data-archivoId="${archivo.id}"><button class="btn btn-info btn-circle" type="button"><i class="fa fa-pencil"></i></button></a>
+												<a  name="deleteArchivo" data-archivoId="${archivo.id}"><button class="btn btn-danger btn-circle" type="button"><i class="fa fa-times"></i> </button></a>
+											</c:if>
+											<a  name="verArchivo" data-archivoId="${archivo.id}" href="/repouniversity/vistaPrevia?archivoId=${archivo.id}">
 												<button class="btn btn-primary btn-circle" type="button"><i class="fa fa-search"></i>
 												</button>
 											</a>
-										</h5>
-									</div>
-									<div class="col-md-9">
-										<h5><a  name="dowloadArchivo" data-archivoId="${archivo.id}" href="/repouniversity/bajarArchivo?archivoId=${archivo.id}" target="_blank">
+											<a  name="dowloadArchivo" data-archivoId="${archivo.id}" href="/repouniversity/bajarArchivo?archivoId=${archivo.id}" target="_blank">
 												<button class="btn btn-success btn-circle" type="button"><i class="fa fa-download"></i>
 												</button>
 											</a>
@@ -110,9 +115,45 @@
                     </c:forEach>
 				</div>
 				</div>
+	
 	        </div>
 	        
 		</div>
+			<!-- 	Ventanas -->
+				<div id="editarArchivoDialog" title="Editar Archivo">
+					<form id="editarArchivoForm" class="form-horizontal">
+						<input name="archivoId" type="hidden">
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Descripción*:</label>
+							<div class="col-sm-10">
+								<input name="descripcion" type="text" class="form-control"
+									required="required">
+							</div>
+						</div>
+						
+						<div class="form-group">
+			                <label class="col-sm-2 control-label">Estado*:</label>
+			                <div class="col-sm-10">
+			                	<select name="estadoArchivo" class="form-control" required="required">
+			                		<option value="1" selected>Publico</option>
+			                		<option value="2">Privado</option>
+			                	</select>
+			                </div>
+			            </div>
+						
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Tags:</label>
+							<div class="col-sm-10">
+								<input name="tags" type="text" class="form-control" >
+							</div>
+						</div>
+					</form>
+				</div>
+		
+				<div id="deleteArchivoDialog" title="Eliminar Archivo">
+					<p>¿Esta seguro que desea eliminar la archivo?</p>
+				</div>
+	
 		<%@include file="../components/footer.jsp"%>
 		</div>
 	</div>

@@ -27,9 +27,8 @@
 			<div class="row">
 	             <div class="col-lg-12">
 					<div class="usuarioInformation">
-						<div class="page-header">
-							<h1>Lista Cursos</h1>
-						</div>
+							<h3><b>Lista Cursos</b></h3>
+						
 					</div>
 					
 					<table id="cursosDocente" class="table table-striped hover">
@@ -56,8 +55,7 @@
 								<td>${cursoMat.codigoCurso}</td>
 								<td>${cursoMat.nombreMateria}</td>
 								<td>${cursoMat.descripcionCurso}</td>
-								<td><a class="verCurso"
-									href="/repouniversity/docente/verCurso?cursoId=${cursoMat.id}"><button class="btn btn-primary">Ver</button></a></td>
+								<td><a href="/repouniversity/docente/verCurso?cursoId=${cursoMat.id}&bread=Curso-2"><button class="btn btn-primary btn-circle" type="button"><i class="fa fa-arrow-right"></i></button></a></td>
 								</tr>
 							</c:forEach>
 						</tbody>

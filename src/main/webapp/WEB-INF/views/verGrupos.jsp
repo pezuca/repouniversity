@@ -53,7 +53,7 @@
 
 									<div class="col-md-9">
 										<h5><a  name="verGrupo data-grupoId="${grupo.id}" href="/repouniversity/alumno/verGrupo?grupoId=${grupo.id}" target="_blank">
-												<button class="btn btn-success btn-circle" type="button"><i class="fa fa-download"></i>
+												<button class="btn btn-success btn-circle" type="button"><i class="fa fa-group"></i>
 												</button>
 											</a>
 										</h5>

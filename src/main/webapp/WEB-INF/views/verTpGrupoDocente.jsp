@@ -20,11 +20,11 @@
 	              <div class="ibox float-e-margins">
 						<div class="GrupoInformation">
 							<div class="page-header">
-								<h1>Grupo ${tpgrupo.grupoNombre}</h1>
+								<h3><b>Grupo ${tpgrupo.grupoNombre}</b></h3>
 							</div>
 							
 							<div class="page-header">
-								<h3>Detalles TP ${tpgrupo.descripcion}</h3>
+								<h4>Detalles TP ${tpgrupo.descripcion}</h4>
 							</div>
 						</div>
 	                  <div class="ibox-title">

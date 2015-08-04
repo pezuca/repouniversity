@@ -22,7 +22,7 @@
 	              <div class="ibox float-e-margins">
 						<div class="GrupoInformation">
 							<div class="page-header">
-								<h1>Detalles grupo ${grupo.nombre}</h1>
+								<h3><b>${grupo.nombre}</b></h3>
 							</div>
 							
 						</div>
