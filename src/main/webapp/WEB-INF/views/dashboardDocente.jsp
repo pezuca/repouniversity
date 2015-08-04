@@ -26,7 +26,7 @@
 			<div class="wrapper wrapper-content animated fadeInRight">
 				<div class="row">
 		             <div class="col-lg-12">
-						<div class="col-lg-6">
+						<div class="col-lg-4">
 							<a href="/repouniversity/docente/verCursos?bread=Ver Cursos-1">
 								<div class="widget navy-bg p-lg text-center">
 									<div class="m-b-md">
@@ -57,7 +57,7 @@
 						</div>
 
 					
-						<div class="col-lg-2">
+						<div class="col-lg-4">
 							<div id="agregarErrorButton">
 								<a href="#">
 								   <div class="widget yellow-bg p-lg text-left">
@@ -78,7 +78,7 @@
 		        </div>
 		        <div class="row">
 		             <div class="col-lg-12">
-						<div class="col-lg-6">
+						<div class="col-lg-4">
 								<div class="widget navy-bg p-lg text-center">
 									<div class="m-b-md">
 										<i class="fa fa-user fa-4x"></i>
@@ -107,7 +107,7 @@
 						</div>
 
 					
-						<div class="col-lg-2">
+						<div class="col-lg-4">
 							  <div class="widget blue-bg p-lg text-left">
 									<div class="m-b-md">
 										<i class="fa fa-thumbs-up fa-4x"></i>

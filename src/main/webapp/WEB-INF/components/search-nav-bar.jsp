@@ -15,57 +15,10 @@
            <li>
                <span class="m-r-sm text-muted welcome-message">Bienvenidos a RepoUniversity.</span>
            </li>
-           
+                     
            <li class="dropdown">
                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                   <i class="fa fa-envelope"></i>  <span class="label label-warning">3</span>
-               </a>
-               <ul class="dropdown-menu dropdown-messages">
-                   <li>
-                       <div class="dropdown-messages-box">
-                          
-                           <div>
-                               <small class="pull-right">hace 46m</small>
-                               <strong>Esteban Amodio</strong> Pedido de inscripción</strong>. <br>
-                               <small class="text-muted">3 dias a las 7:58 pm - 10.06.2014</small>
-                           </div>
-                       </div>
-                   </li>
-                   <li class="divider"></li>
-                   <li>
-                       <div class="dropdown-messages-box">
-                           
-                           <div>
-                               <small class="pull-right text-navy">hace 5h</small>
-                               <strong>Juan Perez</strong> Pedido de inscripción</strong>. <br>
-                               <small class="text-muted">Ayer 1:21 pm - 11.06.2014</small>
-                           </div>
-                       </div>
-                   </li>
-                   <li class="divider"></li>
-                   <li>
-                       <div class="dropdown-messages-box">
-                           
-                           <div>
-                               <small class="pull-right">hace 23h</small>
-                               <strong>Federico Triay</strong> Pedido de inscripción</strong>. <br>
-                               <small class="text-muted">hace 2 dias a las 2:30 am - 11.06.2014</small>
-                           </div>
-                       </div>
-                   </li>
-                   <li class="divider"></li>
-                   <li>
-                       <div class="text-center link-block">
-                           <a href="mailbox.html">
-                               <i class="fa fa-envelope"></i> <strong>Leer todos los mensajes</strong>
-                           </a>
-                       </div>
-                   </li>
-               </ul>
-           </li>
-           <li class="dropdown">
-               <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                   <i class="fa fa-bell"></i>  <span id = "contNoti" class="label label-primary" style='display:none;'>0</span>
+                   <i class="fa fa-bell" title= "Notificaciones"></i>  <span id = "contNoti" class="label label-primary" style='display:none;'>0</span>
                </a>
                <ul class="dropdown-menu dropdown-alerts">
                    <li>
@@ -106,16 +59,11 @@
                </ul>
            </li>
            <li>
-               <div id="agregarErrorButton">
-					<a href="#"><i class="fa fa-warning"></i></a>
-				</div>
+               <a href="#"><div id="agregarErrorButton">
+					<i class="fa fa-warning" title= "Reportar error"></i>
+				</div></a>
             </li>
             <li>
-               <div id="preguntasFrecuentes">
-					<a href="/repouniversity/preguntasFrecuentes?bread=PreguntasFrecuentes-1"><i class="fa fa-question"></i></a>
-				</div>
-            </li>
-           <li>
                <a href="/repouniversity/logout">
                    <i class="fa fa-sign-out"></i> Salir
                </a>

@@ -26,23 +26,23 @@
 			<div class="wrapper wrapper-content animated fadeInRight">
 				<div class="row">
 		             <div class="col-lg-12">
-						<div class="col-lg-6">
-							<a href="/repouniversity/docente/verCursos?bread=Ver Cursos-1">
+						<div class="col-lg-4">
+							<a href="/repouniversity/admin/verMaterias?bread=Ver materias-1">
 								<div class="widget navy-bg p-lg text-center">
 									<div class="m-b-md">
-										<i class="fa fa-pencil-square-o fa-4x"></i>
-										<h1 class="m-xs">${cursos}</h1>
+										<i class="fa fa-book fa-4x"></i>
+										<h1 class="m-xs">${materias}</h1>
 										<h3 class="font-bold no-margins">
-											Cursos a cargo
+											Materias disponibles
 										</h3>
-										<small>mis cursos</small>
+										<small>materias creadas</small>
 									</div>
 								</div>
 							</a>
 						</div>
 					
 						<div class="col-lg-4">
-							<a href="/repouniversity/alumno/notificaciones?bread=Notificaciones-1">
+							<a href="/repouniversity/admin/verReporteErrores?bread=Ver reportes de errores-1">
 								<div class="widget red-bg p-lg text-center">
 									<div class="m-b-md">
 										<i class="fa fa-bell fa-4x"></i>
@@ -50,76 +50,76 @@
 										<h3 class="font-bold no-margins">
 											Notificaciones
 										</h3>
-										<small>tiene nuevas novedades</small>
+										<small>errores reportados</small>
 									</div>
 								</div>
 							</a>
 						</div>
 
 					
-						<div class="col-lg-2">
-							<div id="agregarErrorButton">
-								<a href="#">
-								   <div class="widget yellow-bg p-lg text-left">
-										<div class="m-b-md">
-											<i class="fa fa-warning fa-4x"></i>
-											<h1 class="m-xs"> </h1>
-											<h3 class="font-bold no-margins">
-												Reportar
-											</h3>
-											<small>error</small>
-										</div>
+						<div class="col-lg-4">
+							<a href="/repouniversity/admin/verUsuarios?bread=Ver usuario-1">
+								<div class="widget red-bg p-lg text-center">
+									<div class="m-b-md">
+										<i class="fa fa-group fa-4x"></i>
+										<h1 class="m-xs">${usuarios}</h1>
+										<h3 class="font-bold no-margins">
+											Usuarios del sistema
+										</h3>
+										<small>usuarios activos</small>
 									</div>
-								</a>
-							</div>
+								</div>
+							</a>
 						</div>
 					 
 					 </div>
 		        </div>
 		        <div class="row">
 		             <div class="col-lg-12">
-						<div class="col-lg-6">
-								<div class="widget navy-bg p-lg text-center">
-									<div class="m-b-md">
-										<i class="fa fa-user fa-4x"></i>
-										<h1 class="m-xs">${alumnos}</h1>
-										<h3 class="font-bold no-margins">
-											Alumnos a cargo
-										</h3>
-										<small>mis alumnos</small>
+						<div class="col-lg-4">
+								<a href="/repouniversity/admin/verCursos?bread=Ver cursos-1">
+									<div class="widget navy-bg p-lg text-center">
+										<div class="m-b-md">
+											<i class="fa fa-laptop fa-4x"></i>
+											<h1 class="m-xs">${cursos}</h1>
+											<h3 class="font-bold no-margins">
+												Cursos disponibles
+											</h3>
+											<small>cursos creados</small>
+										</div>
 									</div>
-								</div>
+								</a>
 						</div>
 					
 						<div class="col-lg-4">
-							<a href="/repouniversity/verArchivos?bread=Ver archivos-1">
+							<a href="/repouniversity/admin/verArchivos?bread=Ver archivos-1">
 								<div class="widget blue-bg p-lg text-center">
 									<div class="m-b-md">
 										<i class="fa fa-file-pdf-o fa-4x"></i>
 										<h1 class="m-xs">${archivos}</h1>
 										<h3 class="font-bold no-margins">
-											Archivos subidos
+											Archivos disponibles
 										</h3>
-										<small>mis archivos</small>
+										<small>Archivos del repositorio</small>
 									</div>
 								</div>
 							</a>
 						</div>
 
 					
-						<div class="col-lg-2">
-							  <div class="widget blue-bg p-lg text-left">
-									<div class="m-b-md">
-										<i class="fa fa-thumbs-up fa-4x"></i>
-										<h1 class="m-xs">${tps}</h1>
-										<h3 class="font-bold no-margins">
-											TPs
-										</h3>
-										<small>pendiente</small>
-										<small>correccion</small>
+						<div class="col-lg-4">
+								<a href="/repouniversity/admin/verCarreras?bread=Ver carreras-1">
+									<div class="widget navy-bg p-lg text-center">
+										<div class="m-b-md">
+											<i class="fa fa-bank fa-4x"></i>
+											<h1 class="m-xs">${carreras}</h1>
+											<h3 class="font-bold no-margins">
+												Carreras disponibles
+											</h3>
+											<small>carreras creados</small>
+										</div>
 									</div>
-								</div>
-							
+								</a>
 						</div>
 					 
 					 </div>
@@ -128,16 +128,7 @@
 			</div>
 			<%@include file="../components/footer.jsp"%>
 		</div>
-				   <!-- 	Ventanas -->
-			<div id="agregarErrorDialog" title="Nuevo Error">
-				<form id="nuevoErrorForm" class="form-horizontal">
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Descripcion*:</label>
-						<div class="col-sm-10"><textarea name="descripcion" class="form-control" placeholder="Reporte error.." required="required"></textarea></div>
-					</div>
-				   
-				</form>
-			</div>
+			
 	</div>	
 </body>
 </html>

@@ -26,7 +26,7 @@
 			<div class="wrapper wrapper-content animated fadeInRight">
 				<div class="row">
 		             <div class="col-lg-12">
-						<div class="col-lg-6">
+						<div class="col-lg-4">
 							<a href="/repouniversity/alumno/cursos?bread=Ver cursos-1">
 								<div class="widget navy-bg p-lg text-center">
 									<div class="m-b-md">
@@ -57,10 +57,10 @@
 						</div>
 
 					
-						<div class="col-lg-2">
+						<div class="col-lg-4">
 							<div id="agregarErrorButton">
 								<a href="#">
-								   <div class="widget yellow-bg p-lg text-left">
+								   <div class="widget yellow-bg p-lg  text-center">
 										<div class="m-b-md">
 											<i class="fa fa-warning fa-4x"></i>
 											<h1 class="m-xs"> </h1>
@@ -78,12 +78,11 @@
 		        </div>
 		        <div class="row">
 		             <div class="col-lg-12">
-						<div class="col-lg-6">
+						<div class="col-lg-4">
 							<a  href="/repouniversity/alumno/verGrupos?bread=Ver Grupos-1">
 								<div class="widget navy-bg p-lg text-center">
 									<div class="m-b-md">
-										<i class="fa fa-user fa-4x"></i>
-										<i class="fa fa-user fa-4x"></i>
+										<i class="fa fa-group fa-4x"></i>
 										<h1 class="m-xs">${grupos}</h1>
 										<h3 class="font-bold no-margins">
 											Grupos inscripto
@@ -110,8 +109,8 @@
 						</div>
 
 					
-						<div class="col-lg-2">
-							  <div class="widget blue-bg p-lg text-left">
+						<div class="col-lg-4">
+							  <div class="widget blue-bg p-lg  text-center">
 									<div class="m-b-md">
 										<i class="fa fa-thumbs-up fa-4x"></i>
 										<h1 class="m-xs">${tps}</h1>
