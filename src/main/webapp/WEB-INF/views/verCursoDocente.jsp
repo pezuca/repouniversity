@@ -275,6 +275,10 @@
 			});
 		}
 	</script>
+	<div id="hiddenInputs" class="hidden">
+		<input type="hidden" name="personaId" value="${userLog.idPersona}"/>
+		<input type="hidden" name="cursoId" value="${curso.id}"/>
+	</div>
 	<%@include file="../components/fileUpload.jsp"%>
 </body>
 </html>

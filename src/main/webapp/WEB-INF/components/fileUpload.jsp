@@ -6,6 +6,9 @@
 <script src="/repouniversity/resources/js/application/fileUpload.js"></script>
 <link rel="stylesheet"
 	href="/repouniversity/resources/css/fileUpload.css">
+<link rel="stylesheet" href="/repouniversity/resources/css/plugins/switchery/switchery.css" />
+<script src="/repouniversity/resources/js/plugins/switchery/switchery.js"></script>	
+
 
 <div id="fileUpload" class="modal animated fade ui-front" role="modal"
 	tabindex="-1" style="display: none;" aria-hidden="true">

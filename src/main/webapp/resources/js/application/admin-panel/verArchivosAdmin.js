@@ -16,7 +16,8 @@ var archivosAdmin = {
 				celdas.get(1).innerHTML = data.descripcion;
 				celdas.get(2).innerHTML = data.fechaPublicacion;
 				celdas.get(3).innerHTML = data.archivoTipo;
-				celdas.get(4).innerHTML = data.tags;
+				celdas.get(4).innerHTML = data.estado == 1 ? "Publico" : "Privado";
+				celdas.get(5).innerHTML = data.tags;
 				
 				//Agrego el evento de delete
 				$("a[name='deleteArchivo'][data-archivoid=" + data.id + "] button").click(function(){
@@ -28,7 +29,8 @@ var archivosAdmin = {
 						.data('descripcion', $(this).parents("tr").find("td").get(1).innerHTML)
 						.data('fechaPublicacion', $(this).parents("tr").find("td").get(2).innerHTML)
 						.data('tipo', $(this).parents("tr").find("td").get(3).innerHTML)
-						.data('tags', $(this).parents("tr").find("td").get(4).innerHTML)
+						.data('estado', $(this).parents("tr").find("td").get(4).innerHTML)
+						.data('tags', $(this).parents("tr").find("td").get(5).innerHTML)
 						.dialog("open");
 				});
 				
@@ -102,7 +104,6 @@ $(document).ready(function() {
 	
 	table.column(1).visible(false);
 	table.column(3).visible(false);
-	table.column(6).visible(false);
 	table.column(7).visible(false);
 	table.column(8).visible(false);
 	table.column(10).visible(false);
@@ -114,7 +115,7 @@ $(document).ready(function() {
 	$("#editarArchivoDialog").dialog({
 		resizable: false,
 		width:700,
-		height:350,
+		height:400,
 		modal: true,
 		autoOpen: false,
 		autoResize:true,
@@ -140,6 +141,14 @@ $(document).ready(function() {
 			$('#editarArchivoForm input[name=fechaPublicacion]').val($("#editarArchivoDialog").data('fechaPublicacion'));
 			$('#editarArchivoForm input[name=tipo]').val($("#editarArchivoDialog").data('tipo'));
 			$('#editarArchivoForm input[name=tags]').val($("#editarArchivoDialog").data('tags'));
+			
+			if($("#editarArchivoDialog").data('estado') == 'Publico') {
+				$('#editarArchivoForm select[name=estado] option[value=1]').attr("selected", "selected");
+				$('#editarArchivoForm select[name=estado] option[value=2]').removeAttr("selected");
+			} else {
+				$('#editarArchivoForm select[name=estado] option[value=2]').attr("selected", "selected");
+				$('#editarArchivoForm select[name=estado] option[value=1]').removeAttr("selected");
+			}
 		},
 		close: function(event, ui) {
 		}
@@ -151,7 +160,6 @@ $(document).ready(function() {
 		modal: true,
 		autoOpen: false,
 		autoResize:true,
-		hide: {effect: "fade", duration: 300},
 		hide: {effect: "fade", duration: 300},
 		buttons: {
 			"Eliminar": function() {
@@ -179,7 +187,8 @@ $(document).ready(function() {
 			.data('descripcion', $(this).parents("tr").find("td").get(1).innerHTML)
 			.data('fechaPublicacion', $(this).parents("tr").find("td").get(2).innerHTML)
 			.data('tipo', $(this).parents("tr").find("td").get(3).innerHTML)
-			.data('tags', $(this).parents("tr").find("td").get(4).innerHTML)
+			.data('estado', $(this).parents("tr").find("td").get(4).innerHTML)
+			.data('tags', $(this).parents("tr").find("td").get(5).innerHTML)
 			.dialog("open");
 	});
 });

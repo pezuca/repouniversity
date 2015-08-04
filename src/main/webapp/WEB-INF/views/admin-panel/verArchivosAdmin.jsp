@@ -61,7 +61,7 @@
 												<td>${archivo.fechaDespublicacion}</td>
 												<td>${archivo.fechaPublicacion}</td>
 												<td>${archivo.archivoTipo.nombre}</td>
-												<td>${archivo.estado}</td>
+												<td>${archivo.estado == 1 ? 'Publico' : 'Privado'}</td>
 												<td>${archivo.curso}</td>
 												<td>${archivo.persona}</td>
 												<td>${archivo.tags}</td>
@@ -126,6 +126,15 @@
 					<div class="col-sm-10">
 						<input name="tags" type="text" class="form-control"
 							required="required">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Estado*:</label>
+					<div class="col-sm-10">
+						<select name="estado" class="form-control" required="required">
+							<option value="1" selected>Publico</option>
+							<option value="2">Privado</option>
+						</select>
 					</div>
 				</div>
 			</form>

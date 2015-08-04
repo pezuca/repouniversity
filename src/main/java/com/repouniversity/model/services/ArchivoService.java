@@ -83,17 +83,6 @@ public class ArchivoService {
         return listaArchivos;
     }
 
-    public Archivo update(Long archivoId, String descripcion, String tags) {
-        Archivo archivo = archivoDao.findById(archivoId);
-
-        archivo.setDescripcion(descripcion);
-        archivo.setTags(tags);
-
-        archivoDao.update(archivo);
-
-        return archivo;
-    }
-
     public void delete(Long archivoId) {
         archivoDao.delete(archivoDao.findById(archivoId));
     }
@@ -131,8 +120,8 @@ public class ArchivoService {
         return archivoToList;
     }
 
-    public List<Archivo> parseArchivo(CommonsMultipartFile[] file, String[] tags, String descripcion, Long cursoId, Long grupoId, UsuarioRol usuario)
-            throws IOException {
+    public List<Archivo> parseArchivo(CommonsMultipartFile[] file, String[] tags, String descripcion, Long cursoId, Long grupoId, Boolean estado,
+            UsuarioRol usuario) throws IOException {
         StringBuffer etiqueta = new StringBuffer();
 
         // AGREGO LAS ETIQUETAS AL CAMPO ETIQUETAS PARA LUEGO SUBIR A LA BASE
@@ -183,7 +172,13 @@ public class ArchivoService {
                 nuevoArchivo.setFechaPublicacion(null);
                 nuevoArchivo.setId(null);
                 nuevoArchivo.setFechasys(null);
-                nuevoArchivo.setEstado(null);
+                
+                if(estado) {
+                    nuevoArchivo.setEstado(1L);
+                } else {
+                    nuevoArchivo.setEstado(2L);
+                }
+                
                 nuevoArchivo.setPath(localFile.getName());
                 nuevoArchivo.setPersona(usuario.getIdPersona());
                 nuevoArchivo.setTags(etiqueta.toString());

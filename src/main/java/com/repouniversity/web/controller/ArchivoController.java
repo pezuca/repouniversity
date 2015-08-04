@@ -63,11 +63,12 @@ public class ArchivoController {
     public List<Archivo> guardaFichero(HttpServletRequest request, @RequestParam(value = "file") CommonsMultipartFile[] file,
             @RequestParam(value = "tags", required = false) String[] tags, @RequestParam(value = "descripcion", required = false) String descripcion,
             @RequestParam(value = "cursoId", required = true) Long cursoId,
-            @RequestParam(value = "grupoId", required = false, defaultValue = "1") Long grupoId, @ModelAttribute("login") UsuarioRol usuario) {
+            @RequestParam(value = "grupoId", required = false, defaultValue = "1") Long grupoId,
+            @RequestParam(value = "estado", required = false) Boolean estado, @ModelAttribute("login") UsuarioRol usuario) {
 
         try {
 
-            List<Archivo> nuevoArchivo = archivoService.parseArchivo(file, tags, descripcion, cursoId, grupoId, usuario);
+            List<Archivo> nuevoArchivo = archivoService.parseArchivo(file, tags, descripcion, cursoId, grupoId, estado, usuario);
 
             return archivoService.subirArchivo(nuevoArchivo);
         } catch (Exception e) {
@@ -103,18 +104,18 @@ public class ArchivoController {
     @RequestMapping(value = "/busquedaAvanzada", method = {RequestMethod.POST})
     public ModelAndView busquedaAvanzada(HttpServletRequest request, @RequestParam(value = "materia", required = false) String materia,
             @RequestParam(value = "nbreDocente", required = false) String nbreDocente, @RequestParam(value = "apeDocente", required = false) String apeDocente,
-            @RequestParam(value = "carrera", required = false) String carrera, @RequestParam(value = "descripcion", required = false) String descripcion, @RequestParam(value = "fechaDde", required = false) String fechaDde,
-            @RequestParam(value = "fechaHta", required = false) String fechaHta) throws ParseException {
-        
-    	Date desde = dateFormat.parse("01/01/1900");
-    	Date hasta = dateFormat.parse("31/12/9999");
-    	if (fechaDde != ""){
-    		desde = dateFormat.parse(fechaDde);
-    	}
-    	if (fechaDde != ""){
-    		hasta = dateFormat.parse(fechaHta);
-    	}
-         
+            @RequestParam(value = "carrera", required = false) String carrera, @RequestParam(value = "descripcion", required = false) String descripcion,
+            @RequestParam(value = "fechaDde", required = false) String fechaDde, @RequestParam(value = "fechaHta", required = false) String fechaHta)
+            throws ParseException {
+
+        Date desde = dateFormat.parse("01/01/1900");
+        Date hasta = dateFormat.parse("31/12/9999");
+        if (fechaDde != "") {
+            desde = dateFormat.parse(fechaDde);
+        }
+        if (fechaDde != "") {
+            hasta = dateFormat.parse(fechaHta);
+        }
 
         List<Archivo> listaResultados = new ArrayList<Archivo>();
         listaResultados = busquedaAvanzada(materia, nbreDocente, apeDocente, carrera, descripcion, desde, hasta);
@@ -133,7 +134,8 @@ public class ArchivoController {
 
     }
 
-    private List<Archivo> busquedaAvanzada(String materia, String nbreDocente, String apeDocente, String carrera, String descripcion, Date fechaDde, Date fechaHta) {
+    private List<Archivo> busquedaAvanzada(String materia, String nbreDocente, String apeDocente, String carrera, String descripcion, Date fechaDde,
+            Date fechaHta) {
         List<Archivo> archivosEncontrados = new ArrayList<Archivo>();
         archivosEncontrados = archivoService.busquedaAvanzada(materia, nbreDocente, apeDocente, carrera, descripcion, fechaDde, fechaHta);
         return archivosEncontrados;
@@ -147,22 +149,22 @@ public class ArchivoController {
 
         return new ModelAndView("vistaPrevia").addObject("archivo", archivo).addObject("errorArchivo", errorArchivo);
     }
-    
+
     @RequestMapping(value = "/modificarArchivo", method = {RequestMethod.POST})
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
     public VwArchivo modificarArchivo(HttpServletRequest request, @RequestParam(value = "archivoId", required = true) Long archivoId,
             @RequestParam(value = "tags", required = true) String tagsArchivo, @RequestParam(value = "descripcion", required = true) String desArchivo,
             @RequestParam(value = "estadoArchivo", required = true) Long estadoArchivo) {
-    	
-    	 return archivoService.modificarArchivo(archivoId, tagsArchivo, desArchivo, estadoArchivo);
-   }
+
+        return archivoService.modificarArchivo(archivoId, tagsArchivo, desArchivo, estadoArchivo);
+    }
 
     @RequestMapping(value = "/eliminarArchivo", method = {RequestMethod.POST})
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
     public void eliminarArchivo(HttpServletRequest request, @RequestParam(value = "archivoId", required = true) Long archivoId) {
-        
-         archivoService.delete(archivoId);
-   }
+
+        archivoService.delete(archivoId);
+    }
 }

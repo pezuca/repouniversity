@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.repouniversity.model.entity.Archivo;
 import com.repouniversity.model.entity.Carrera;
 import com.repouniversity.model.entity.Curso;
 import com.repouniversity.model.entity.Materia;
 import com.repouniversity.model.entity.Usuario;
 import com.repouniversity.model.entity.UsuarioRol;
+import com.repouniversity.model.entity.VwArchivo;
 import com.repouniversity.model.entity.to.ArchivoTO;
 import com.repouniversity.model.entity.to.CarreraTO;
 import com.repouniversity.model.entity.to.CursoTO;
@@ -249,10 +249,10 @@ public class AdministradorController {
     @RequestMapping(value = "admin/editarArchivo", method = {RequestMethod.POST})
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
-    public Archivo editarArchivoAjax(@RequestParam(value = "archivoId") Long archivoId, @RequestParam(value = "descripcion") String descripcion,
-            @RequestParam(value = "tags") String tags) {
+    public VwArchivo editarArchivoAjax(@RequestParam(value = "archivoId") Long archivoId, @RequestParam(value = "descripcion") String descripcion,
+            @RequestParam(value = "tags") String tags, @RequestParam(value = "estado") Long estado) {
 
-        return archivoService.update(archivoId, descripcion, tags);
+        return archivoService.modificarArchivo(archivoId, tags, descripcion, estado);
     }
 
     @RequestMapping(value = "admin/eliminarArchivo", method = {RequestMethod.POST})

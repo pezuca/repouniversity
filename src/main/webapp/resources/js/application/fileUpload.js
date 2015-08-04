@@ -20,19 +20,23 @@ $(document).ready(function () {
 		previewsContainer: "#previews",
 		clickable: ".fileinput-button",
 		acceptedFiles: "image/*,.pdf,.doc,.ods,.xlsx,.docx,.odt",
-		dictFileTooBig: "File is too big ({{filesize}}KB). Max filesize: {{maxFilesize}}KB."
+		dictFileTooBig: "El archivo es muy grande ({{filesize}}KB). El tamaño máximo es: {{maxFilesize}}KB."
 	});
 
 	myDropzone.on("addedfile", function(file) {
 		file.previewElement.querySelector(".start").onclick = function() { myDropzone.enqueueFile(file); };
 		$("#previews p.name").each(function(){
+			var now = (new Date()).getTime();
 			if($(this).text() == file.name) {
 				$(this).before("<div class='form-group'><input type='text' name='title-" + file.name.substring(0,file.name.lastIndexOf(".")) 
 						+ "' value='" + file.name.substring(0,file.name.lastIndexOf(".")) 
 						+ "' class='form-control' required /><span class='help-block m-b-none'>Breve descripción del archivo</span></div>");
 				$(this).before("<div class='form-group'><input type='text' name='tags-" + file.name.substring(0,file.name.lastIndexOf(".")) 
-						+ "' class='form-control' required /><span class='help-block m-b-none'>Coloque los diferentes temas separados por coma (,)</span></div>");
+						+ "' class='form-control' required /><span class='help-block m-b-none'>Coloque los diferentes temas separados por coma (,)</span></div>" + 
+						"<div class='form-group'><input name='estado' type='checkbox' class='js-switch a" + now + "' checked='' ><span class='help-block m-b-none'>Privado / Público</span></div>");
+						
 				$(this).remove();
+				new Switchery(document.querySelector('.a' + now));
 			}
 		});
 	});
@@ -48,6 +52,7 @@ $(document).ready(function () {
 		
 		var inputTitle = $("input[name='title-" + file.name.substring(0,file.name.lastIndexOf(".")) + "']:not([data-value])").first();
 		var inputTags = $("input[name='tags-" + file.name.substring(0,file.name.lastIndexOf(".")) + "']:not([data-value])").first();
+		var inputEstado = inputTitle.parents(".file-row").find("input[name=estado]").is(":checked");
 		
 		if(inputTitle.val() != '') {
 			formData.append("descripcion", inputTitle.val());
@@ -58,6 +63,7 @@ $(document).ready(function () {
 		}
 		
 		formData.append("tags", inputTags.val().split(","));
+		formData.append("estado", inputEstado);
 	});
 
 	myDropzone.on("queuecomplete", function(progress) {
