@@ -31,7 +31,7 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
     @Override
     protected InsertSQLStatement buildInsertSQLStatement(final Archivo a) {
         return new InsertSQLStatement(
-                "INSERT INTO archivo (nombre,descripcion,fecha_despublicacion,fecha_publicacion,id_tipo,fecsys,activo,estado,path,persona_id_persona,id_curso,Tags) VALUES(?,?,now(),now(),?,now(),1,1,?,?,?,?)") {
+                "INSERT INTO archivo (nombre,descripcion,fecha_despublicacion,fecha_publicacion,id_tipo,fecsys,activo,estado,path,persona_id_persona,id_curso,Tags) VALUES(?,?,now(),now(),?,now(),1,?,?,?,?,?)") {
 
             @Override
             public void doAfterInsert(Long id) {
@@ -42,10 +42,11 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
                 ps.setString(1, a.getNombre());
                 ps.setString(2, a.getDescripcion());
                 ps.setLong(3, a.getArchivoTipo());
-                ps.setString(4, a.getPath());
-                ps.setLong(5, a.getPersona());
-                ps.setLong(6, a.getCurso());
-                ps.setString(7, a.getTags());
+                ps.setLong(4, a.getEstado());
+                ps.setString(5, a.getPath());
+                ps.setLong(6, a.getPersona());
+                ps.setLong(7, a.getCurso());
+                ps.setString(8, a.getTags());
             }
 
             @Override
@@ -99,67 +100,66 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
                 ps.setLong(4, t.getId());
             }
 
-			@Override
-			public void doAfterTransaction(int result) {
-				// TODO Auto-generated method stub
-				
-			}
+            @Override
+            public void doAfterTransaction(int result) {
+                // TODO Auto-generated method stub
+
+            }
         };
     }
-    
-	@Override
-	public List<Archivo> requestArchivos(String parametro){
-		List<Archivo> resultList = new ArrayList<Archivo>();
-		List<String> parametrosBusqueda = new ArrayList<String>();
-		//quitamos las noise word
-		parametro = parametro.toUpperCase();
-		parametrosBusqueda = quitarNoiseWords(parametro);
-		
-		// agregamos las palabras equivalentes
-		parametrosBusqueda = agregarEquivalencias(parametrosBusqueda);
-		
-		//realizamos la busqueda a los archivos que tengan estado 1 o 2
-		resultList = generarBusqueda (parametrosBusqueda);
-		return resultList;
-	}
-	
-	@Override
+
+    @Override
+    public List<Archivo> requestArchivos(String parametro) {
+        List<Archivo> resultList = new ArrayList<Archivo>();
+        List<String> parametrosBusqueda = new ArrayList<String>();
+        // quitamos las noise word
+        parametro = parametro.toUpperCase();
+        parametrosBusqueda = quitarNoiseWords(parametro);
+
+        // agregamos las palabras equivalentes
+        parametrosBusqueda = agregarEquivalencias(parametrosBusqueda);
+
+        // realizamos la busqueda a los archivos que tengan estado 1 o 2
+        resultList = generarBusqueda(parametrosBusqueda);
+        return resultList;
+    }
+
+    @Override
     public List<Archivo> generarBusqueda(final List<String> parametrosBusqueda) {
         StringBuilder sql = new StringBuilder();
-        //se genera la condicion a mano, pero en la condicion es donde se va a armarse la query
-        //con las cadenas que llegaron de los filtros.
-        
-        //quitamos los duplicados
+        // se genera la condicion a mano, pero en la condicion es donde se va a armarse la query
+        // con las cadenas que llegaron de los filtros.
+
+        // quitamos los duplicados
         HashSet hs = new HashSet();
         hs.addAll(parametrosBusqueda);
         parametrosBusqueda.clear();
         parametrosBusqueda.addAll(hs);
-        
-        //armamos la cadena con todos los tags con LIKE
-        String tags= new String();
-        
-        //se inicializa tagas por si se agrega un espacio solamente en la busqued para que no rompa
-        //para el resto de los caracteres especiales no hay problemas
-        tags="tags=\'\'";
-        
-        if(parametrosBusqueda.size() > 0){
-        	tags="";
-	        for (String parametro:parametrosBusqueda) {
-				tags= tags.concat(" tags like \'%" + parametro.trim() +"%\' OR ");
-			}
-	        tags = tags.substring(0, tags.length()-3);
+
+        // armamos la cadena con todos los tags con LIKE
+        String tags = new String();
+
+        // se inicializa tagas por si se agrega un espacio solamente en la busqued para que no rompa
+        // para el resto de los caracteres especiales no hay problemas
+        tags = "tags=\'\'";
+
+        if (parametrosBusqueda.size() > 0) {
+            tags = "";
+            for (String parametro : parametrosBusqueda) {
+                tags = tags.concat(" tags like \'%" + parametro.trim() + "%\' OR ");
+            }
+            tags = tags.substring(0, tags.length() - 3);
         }
-        
-        
-        //armamos la query de busqueda en la base
+
+        // armamos la query de busqueda en la base
         sql.append("select * from repouniversity.archivo ");
-        sql.append("where "+ tags);
+        sql.append("where " + tags);
         sql.append("AND (estado=1 OR  estado=2)");
 
         List<Archivo> list = doQuery(new SQLStatement(sql.toString()) {
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
-//                ps.setString (1, parametro);
+                // ps.setString (1, parametro);
             }
 
             @Override
@@ -173,48 +173,50 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
 
         return list;
     }
-	
-	@Override
-    public List<Archivo> busquedaAvanzada(String materia, String nbreDocente, String apeDocente, String carrera, String descripcion, Date fechaDde, Date fechaHta) {
+
+    @Override
+    public List<Archivo> busquedaAvanzada(String materia, String nbreDocente, String apeDocente, String carrera, String descripcion, Date fechaDde,
+            Date fechaHta) {
         StringBuilder sql = new StringBuilder();
-        //se genera la condicion a mano, pero en la condicion es donde se va a armarse la query
-        
+        // se genera la condicion a mano, pero en la condicion es donde se va a armarse la query
+
         List<String> laDescripcion = new ArrayList<String>();
-		//quitamos las noise word
-		descripcion = descripcion.toUpperCase();
-		laDescripcion = quitarNoiseWords(descripcion);
-		
-		// agregamos las palabras equivalentes
-		laDescripcion = agregarEquivalencias(laDescripcion);
-		
-		//se inicializa tags por si se agrega un espacio solamente en la busqued para que no rompa
-        //para el resto de los caracteres especiales no hay problemas
-		String tags= new String();
-		tags="tags=\'\' ";
-        
-        if(laDescripcion.size() > 0){
-        	tags="";
-	        for (String parametro:laDescripcion) {
-				tags= tags.concat(" tags like \'%" + parametro.trim() +"%\' OR ");
-			}
-	        tags = tags.substring(0, tags.length()-3);
+        // quitamos las noise word
+        descripcion = descripcion.toUpperCase();
+        laDescripcion = quitarNoiseWords(descripcion);
+
+        // agregamos las palabras equivalentes
+        laDescripcion = agregarEquivalencias(laDescripcion);
+
+        // se inicializa tags por si se agrega un espacio solamente en la busqued para que no rompa
+        // para el resto de los caracteres especiales no hay problemas
+        String tags = new String();
+        tags = "tags=\'\' ";
+
+        if (laDescripcion.size() > 0) {
+            tags = "";
+            for (String parametro : laDescripcion) {
+                tags = tags.concat(" tags like \'%" + parametro.trim() + "%\' OR ");
+            }
+            tags = tags.substring(0, tags.length() - 3);
         }
-        
-        //armamos la query de busqueda en la base
-        //FALTA AGEGREGAR LA QUERY A LA BASE CON LA VISTA DE FEDE PARA
+
+        // armamos la query de busqueda en la base
+        // FALTA AGEGREGAR LA QUERY A LA BASE CON LA VISTA DE FEDE PARA
         sql.append("select * from repouniversity.vw_archivos ");
-        sql.append("where "+ tags + "AND");
-        sql.append(" nombreDocente like \'%"+ nbreDocente.trim() + "%\' AND");
-        sql.append(" apellidoDocente like \'%"+ apeDocente.trim() + "%\' AND");
-        sql.append(" carrera like \'%"+ carrera.trim() + "%\' AND");
-        sql.append(" materia like \'%"+ materia.trim() + "%\' AND");
-        sql.append(" fecha_publicacion between \'"+ new SimpleDateFormat("yyyy-MM-dd").format(fechaDde) + "\' AND \'" + new SimpleDateFormat("yyyy-MM-dd").format(fechaHta) + "\'");
+        sql.append("where " + tags + "AND");
+        sql.append(" nombreDocente like \'%" + nbreDocente.trim() + "%\' AND");
+        sql.append(" apellidoDocente like \'%" + apeDocente.trim() + "%\' AND");
+        sql.append(" carrera like \'%" + carrera.trim() + "%\' AND");
+        sql.append(" materia like \'%" + materia.trim() + "%\' AND");
+        sql.append(" fecha_publicacion between \'" + new SimpleDateFormat("yyyy-MM-dd").format(fechaDde) + "\' AND \'"
+                + new SimpleDateFormat("yyyy-MM-dd").format(fechaHta) + "\'");
         sql.append(" AND (estado=1 OR  estado=2)");
 
         List<Archivo> resultList = doQuery(new SQLStatement(sql.toString()) {
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
-//                ps.setString (1, parametro);
+                // ps.setString (1, parametro);
             }
 
             @Override
@@ -228,87 +230,86 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
 
         return resultList;
     }
-	
-	@Override
-	public List<String> quitarNoiseWords( String parametro) {
-		 
-	//doy de alta el listado de Noise words y verifico si cada string esta dentro del listado
-		List<String> noiseWords = new ArrayList<String>();
-		noiseWords.add("EN");
-		noiseWords.add("DE");
-		noiseWords.add("DONDE");
-		noiseWords.add("CUANDO");
-		noiseWords.add(",");
-		noiseWords.add(";");
-		noiseWords.add("'");
-		noiseWords.add("`");
-		noiseWords.add("´");
-		noiseWords.add(".");
-		noiseWords.add("&");
-		noiseWords.add("/");
-		
-		
-	//tokenizo la cadena
-		String[] tokens = parametro.split(" ");
-		List<String> parametrosBusqueda = new ArrayList<String>();
-		
-		for (int i = 0; i < tokens.length; i++) {
-			if (! noiseWords.contains(tokens[i])){
-				parametrosBusqueda.add(tokens[i]);
-			}
-		}	 
-	
-	return parametrosBusqueda; 
-	}
-	
-	public List<String> agregarEquivalencias (List<String> parametrosBusqueda){
-		
-		List<String> terminosBusqueda = new ArrayList<String>();
-		List<String> listaTemporal = new ArrayList<String>();
-		
-		//Agregando equivalencias
-		//mapa de listas con el termino y sus equivalencias
-		Map <String, List<String>> equivList = new HashMap<String, List<String>>();
-		List<String> equivalencia = new ArrayList<String>();
-		
-		equivalencia.add("VECTOR");
-		equivalencia.add("MATRIZ");
-		equivalencia.add("MATEMATICA");
-		equivList.put("ALGEBRA", equivalencia);
-		//equivalencia.clear();
-		
-		equivalencia.add("ALGEBRA");
-		equivalencia.add("FISICA");
-		equivalencia.add("MATRIZ");
-		equivList.put("MATEMATICA", equivalencia);
-		//equivalencia.clear();
-		
-		equivalencia.add("OBJETOS");
-		equivalencia.add("LENGUAJE");
-		equivalencia.add("MODELO");
-		equivList.put("PROGRAMACION", equivalencia);
-		//equivalencia.clear();
-		
-		equivalencia.add("RED");
-		equivalencia.add("COMPUTACION");
-		equivalencia.add("INTERNET");
-		equivList.put("HARDWARE", equivalencia);
-		//equivalencia.clear();
-		
-		for (String termino : parametrosBusqueda) {
-			if(equivList.containsKey(termino)){
-				listaTemporal= equivList.get(termino);
-				for(String e: listaTemporal){
-					terminosBusqueda.add(e);
-				}
-			}
-			terminosBusqueda.add(termino);
-		}
-		return terminosBusqueda;
-		
-	}
 
-	@Override
+    @Override
+    public List<String> quitarNoiseWords(String parametro) {
+
+        // doy de alta el listado de Noise words y verifico si cada string esta dentro del listado
+        List<String> noiseWords = new ArrayList<String>();
+        noiseWords.add("EN");
+        noiseWords.add("DE");
+        noiseWords.add("DONDE");
+        noiseWords.add("CUANDO");
+        noiseWords.add(",");
+        noiseWords.add(";");
+        noiseWords.add("'");
+        noiseWords.add("`");
+        noiseWords.add("´");
+        noiseWords.add(".");
+        noiseWords.add("&");
+        noiseWords.add("/");
+
+        // tokenizo la cadena
+        String[] tokens = parametro.split(" ");
+        List<String> parametrosBusqueda = new ArrayList<String>();
+
+        for (int i = 0; i < tokens.length; i++) {
+            if (!noiseWords.contains(tokens[i])) {
+                parametrosBusqueda.add(tokens[i]);
+            }
+        }
+
+        return parametrosBusqueda;
+    }
+
+    public List<String> agregarEquivalencias(List<String> parametrosBusqueda) {
+
+        List<String> terminosBusqueda = new ArrayList<String>();
+        List<String> listaTemporal = new ArrayList<String>();
+
+        // Agregando equivalencias
+        // mapa de listas con el termino y sus equivalencias
+        Map<String, List<String>> equivList = new HashMap<String, List<String>>();
+        List<String> equivalencia = new ArrayList<String>();
+
+        equivalencia.add("VECTOR");
+        equivalencia.add("MATRIZ");
+        equivalencia.add("MATEMATICA");
+        equivList.put("ALGEBRA", equivalencia);
+        // equivalencia.clear();
+
+        equivalencia.add("ALGEBRA");
+        equivalencia.add("FISICA");
+        equivalencia.add("MATRIZ");
+        equivList.put("MATEMATICA", equivalencia);
+        // equivalencia.clear();
+
+        equivalencia.add("OBJETOS");
+        equivalencia.add("LENGUAJE");
+        equivalencia.add("MODELO");
+        equivList.put("PROGRAMACION", equivalencia);
+        // equivalencia.clear();
+
+        equivalencia.add("RED");
+        equivalencia.add("COMPUTACION");
+        equivalencia.add("INTERNET");
+        equivList.put("HARDWARE", equivalencia);
+        // equivalencia.clear();
+
+        for (String termino : parametrosBusqueda) {
+            if (equivList.containsKey(termino)) {
+                listaTemporal = equivList.get(termino);
+                for (String e : listaTemporal) {
+                    terminosBusqueda.add(e);
+                }
+            }
+            terminosBusqueda.add(termino);
+        }
+        return terminosBusqueda;
+
+    }
+
+    @Override
     protected String getColumnIdName() {
         return "id_archivo";
     }
@@ -336,8 +337,7 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
 
         return list;
     }
-    
-    
+
     @Override
     public List<VwArchivo> findArchivosDelCurso(final long idCurso) {
         StringBuilder sql = new StringBuilder();
@@ -345,7 +345,7 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
         sql.append("select * from vw_archivos where activo = 1 and id_curso = ? ");
         sql.append("and id_archivo not in (select distinct id_archivo from tp_entrega) ");
         sql.append("and id_archivo not in (select distinct id_archivo from tp_grupo) ");
-       
+
         List<VwArchivo> list = doQuery(new SQLStatement(sql.toString()) {
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
