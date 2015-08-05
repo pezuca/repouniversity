@@ -30,7 +30,7 @@
                 <div class="col-lg-12">
                     <div class="wrapper wrapper-content animated fadeInUp">
 
-                  
+<!----------------------------- Inicio de Preguntas  ----------------------------------------->                 
 
                         <div class="faq-item">
                             <div class="row">
@@ -59,7 +59,128 @@
                          <div class="faq-item">
                             <div class="row">
                                 <div class="col-md-7">
-                                    <a data-toggle="collapse" href="#faq2" class="faq-question">¿Como cierro sesión?</a>                                 
+                                    <a data-toggle="collapse" href="#faq2" class="faq-question">¿Como se da de alta un alumno?</a>                                 
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="small font-bold">Tipo</span>
+                                    <div class="tag-list">
+                                        <span class="tag-item">Docente</span>
+                                        <span class="tag-item">Altas</span>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div id="faq2" class="panel-collapse collapse faq-answer">
+                                        <p>
+                                           Completar....
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <a data-toggle="collapse" href="#faq2" class="faq-question">¿Como se da de alta un docente?</a>                                 
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="small font-bold">Tipo</span>
+                                    <div class="tag-list">
+                                        <span class="tag-item">Administrador</span>
+                                        <span class="tag-item">Alta</span>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div id="faq2" class="panel-collapse collapse faq-answer">
+                                        <p>
+                                           Completar....
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+						<div class="faq-item">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <a data-toggle="collapse" href="#faq2" class="faq-question">¿Cómo se da de alta un documento al curso?</a>                                 
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="small font-bold">Tipo</span>
+                                    <div class="tag-list">
+                                        <span class="tag-item">General</span>
+                                        <span class="tag-item">Alta</span>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div id="faq2" class="panel-collapse collapse faq-answer">
+                                        <p>
+                                           Completar....
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						
+							<div class="faq-item">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <a data-toggle="collapse" href="#faq2" class="faq-question">¿Como funciona el grupo de trabajo practico?</a>                                 
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="small font-bold">Tipo</span>
+                                    <div class="tag-list">
+                                        <span class="tag-item">Alumno</span>
+										<span class="tag-item">Docente</span>
+                                        <span class="tag-item">Utilidades</span>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div id="faq2" class="panel-collapse collapse faq-answer">
+                                        <p>
+                                           Completar....
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						
+						<div class="faq-item">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <a data-toggle="collapse" href="#faq2" class="faq-question">¿Cómo se entrega un trabajo práctico?</a>                                 
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="small font-bold">Tipo</span>
+                                    <div class="tag-list">
+                                        <span class="tag-item">Alumno</span>
+                                        <span class="tag-item">Utilidades</span>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div id="faq2" class="panel-collapse collapse faq-answer">
+                                        <p>
+                                           Completar....
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						
+						<div class="faq-item">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <a data-toggle="collapse" href="#faq2" class="faq-question">¿Cuáles son los tipos de acceso al sistema?</a>                                 
                                 </div>
                                 <div class="col-md-3">
                                     <span class="small font-bold">Tipo</span>
@@ -73,16 +194,379 @@
                                 <div class="col-lg-12">
                                     <div id="faq2" class="panel-collapse collapse faq-answer">
                                         <p>
-                                           Es muy importante que cierres tu sesión ya que ahora al ingresar tu usuario y clave todos tus sistemas se autentican a la vez. Con el fin de evitar el acceso de terceros a tus aplicaciones e información personal debes cerrar tu sesión. El portal permite que cierres la sesión de una sola aplicación como también la todas a la vez. Cuando cierres sesión en cualquiera de la aplicaciones de consultará si querés cerrar solo esa o todas a las que hayas accedido para que te sea mas cómodo.
+                                           Completar....
                                         </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        
-                        
-                        
+						
+						
+						<div class="faq-item">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <a data-toggle="collapse" href="#faq2" class="faq-question">¿Qué es la autorización de acceso a un curso?</a>                                 
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="small font-bold">Tipo</span>
+                                    <div class="tag-list">
+                                        <span class="tag-item">Alumno</span>
+										<span class="tag-item">Docente</span>
+                                        <span class="tag-item">Seguridad</span>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div id="faq2" class="panel-collapse collapse faq-answer">
+                                        <p>
+                                           Completar....
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						
+						<div class="faq-item">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <a data-toggle="collapse" href="#faq2" class="faq-question">¿Cómo se autoriza un alumno a un curso?</a>                                 
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="small font-bold">Tipo</span>
+                                    <div class="tag-list">
+                                        <span class="tag-item">Docente</span>
+                                        <span class="tag-item">Seguridad</span>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div id="faq2" class="panel-collapse collapse faq-answer">
+                                        <p>
+                                           Completar....
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						
+						<div class="faq-item">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <a data-toggle="collapse" href="#faq2" class="faq-question">¿Cómo se da de alta un curso?</a>                                 
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="small font-bold">Tipo</span>
+                                    <div class="tag-list">
+                                        <span class="tag-item">Docente</span>
+                                        <span class="tag-item">Alta</span>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div id="faq2" class="panel-collapse collapse faq-answer">
+                                        <p>
+                                           Completar....
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						
+						<div class="faq-item">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <a data-toggle="collapse" href="#faq2" class="faq-question">¿Qué son los documentos públicos y privados?</a>                                 
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="small font-bold">Tipo</span>
+                                    <div class="tag-list">
+                                        <span class="tag-item">General</span>
+                                        <span class="tag-item">Seguridad</span>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div id="faq2" class="panel-collapse collapse faq-answer">
+                                        <p>
+                                           Completar....
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						
+						<div class="faq-item">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <a data-toggle="collapse" href="#faq2" class="faq-question">¿Cómo descargar un documento? </a>                                 
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="small font-bold">Tipo</span>
+                                    <div class="tag-list">
+                                        <span class="tag-item">Alumno</span>
+										<span class="tag-item">Docente</span>
+                                        <span class="tag-item">Utilidades</span>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div id="faq2" class="panel-collapse collapse faq-answer">
+                                        <p>
+                                           Completar....
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						
+								<div class="faq-item">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <a data-toggle="collapse" href="#faq2" class="faq-question">¿Cómo agrego un alumno a un grupo? </a>                                 
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="small font-bold">Tipo</span>
+                                    <div class="tag-list">
+                                        <span class="tag-item">Docente</span>
+                                        <span class="tag-item">Utilidades</span>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div id="faq2" class="panel-collapse collapse faq-answer">
+                                        <p>
+                                           Completar....
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						
+							<div class="faq-item">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <a data-toggle="collapse" href="#faq2" class="faq-question">¿Cómo elimino un alumno de un grupo?</a>                                 
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="small font-bold">Tipo</span>
+                                    <div class="tag-list">
+                                        <span class="tag-item">General</span>
+                                        <span class="tag-item">Seguridad</span>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div id="faq2" class="panel-collapse collapse faq-answer">
+                                        <p>
+                                           Completar....
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						
+						<div class="faq-item">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <a data-toggle="collapse" href="#faq2" class="faq-question">¿Cómo busco un documento en el sistema?</a>                                 
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="small font-bold">Tipo</span>
+                                    <div class="tag-list">
+                                        <span class="tag-item">General</span>
+                                        <span class="tag-item">Seguridad</span>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div id="faq2" class="panel-collapse collapse faq-answer">
+                                        <p>
+                                           Completar....
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						
+						<div class="faq-item">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <a data-toggle="collapse" href="#faq2" class="faq-question">¿Cómo reporto un error en el sistema?</a>                                 
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="small font-bold">Tipo</span>
+                                    <div class="tag-list">
+                                        <span class="tag-item">General</span>
+                                        <span class="tag-item">Seguridad</span>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div id="faq2" class="panel-collapse collapse faq-answer">
+                                        <p>
+                                           Completar....
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						
+						<div class="faq-item">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <a data-toggle="collapse" href="#faq2" class="faq-question">¿Cómo cambiar mi contraseña?</a>                                 
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="small font-bold">Tipo</span>
+                                    <div class="tag-list">
+                                        <span class="tag-item">General</span>
+                                        <span class="tag-item">Seguridad</span>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div id="faq2" class="panel-collapse collapse faq-answer">
+                                        <p>
+                                           Completar....
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						
+						<div class="faq-item">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <a data-toggle="collapse" href="#faq2" class="faq-question">¿Qué son las notificaciones?</a>                                 
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="small font-bold">Tipo</span>
+                                    <div class="tag-list">
+                                        <span class="tag-item">General</span>
+                                        <span class="tag-item">Seguridad</span>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div id="faq2" class="panel-collapse collapse faq-answer">
+                                        <p>
+                                           Completar....
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						
+						<div class="faq-item">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <a data-toggle="collapse" href="#faq2" class="faq-question">¿Cómo corregir un trabajo entregado por un alumno?</a>                                 
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="small font-bold">Tipo</span>
+                                    <div class="tag-list">
+                                        <span class="tag-item">General</span>
+                                        <span class="tag-item">Seguridad</span>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div id="faq2" class="panel-collapse collapse faq-answer">
+                                        <p>
+                                           Completar....
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						
+						<div class="faq-item">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <a data-toggle="collapse" href="#faq2" class="faq-question">¿Donde veo los cursos disponibles?</a>                                 
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="small font-bold">Tipo</span>
+                                    <div class="tag-list">
+                                        <span class="tag-item">General</span>
+                                        <span class="tag-item">Seguridad</span>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div id="faq2" class="panel-collapse collapse faq-answer">
+                                        <p>
+                                           Completar....
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						
+						<div class="faq-item">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <a data-toggle="collapse" href="#faq2" class="faq-question">¿Dónde veo mis cursos inscriptos?</a>                                 
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="small font-bold">Tipo</span>
+                                    <div class="tag-list">
+                                        <span class="tag-item">General</span>
+                                        <span class="tag-item">Seguridad</span>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div id="faq2" class="panel-collapse collapse faq-answer">
+                                        <p>
+                                           Completar....
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						
+						<div class="faq-item">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <a data-toggle="collapse" href="#faq2" class="faq-question">¿Cómo me doy de alta a un curso?</a>                                 
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="small font-bold">Tipo</span>
+                                    <div class="tag-list">
+                                        <span class="tag-item">General</span>
+                                        <span class="tag-item">Seguridad</span>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div id="faq2" class="panel-collapse collapse faq-answer">
+                                        <p>
+                                           Completar....
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						
+<!------------------------------- Fin de Preguntas--------------------------------->        
+
+
                     </div>
                 </div>
             </div>
@@ -106,7 +590,6 @@
 			$("#clientTable_length").remove();
 			
 		});
-
 		function borrarNotificacion(notificacionId) {
 			$.ajax({
 				  type: "POST",
@@ -118,7 +601,6 @@
 			});
 		}
 		
-
 	</script>	
 </body>
 </html>
