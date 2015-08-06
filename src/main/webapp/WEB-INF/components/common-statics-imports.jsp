@@ -2,10 +2,26 @@
 			src="/repouniversity/resources/js/jquery-1.11.0.min.js"></script>
 			
 <!-- 		<script src="/repouniversity/resources/js/jquery-1.10.2.js"></script> -->
+
 		<script type="text/javascript"
 			src="/repouniversity/resources/js/bootstrap.min.js" ></script>
+			
 		<link rel="stylesheet" type="text/css"
 			href="/repouniversity/resources/css/bootstrap.min.css" />
+			
+		<link rel="stylesheet" type="text/css" 
+		    href="/repouniversity/resources/css/bootstrap-tour.css"  />
+		    
+		<script type="text/javascript" 
+		    src="/repouniversity/resources/js/bootstrap-tour.js"></script>
+		    	
+		<link rel="stylesheet" type="text/css" 
+		    href="/repouniversity/resources/css/bootstrap-tour.min.css"  />
+		    
+		<script type="text/javascript" 
+		    src="/repouniversity/resources/js/bootstrap-tour.min.js"></script>
+		
+		
 <!-- 		<link rel="stylesheet" type="text/css" -->
 <!-- 			href="/repouniversity/resources/css/bootstrap-theme.min.css" /> -->
 		<link rel="stylesheet" type="text/css" 

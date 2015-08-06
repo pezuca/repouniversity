@@ -16,7 +16,7 @@
                         <li><a href="/repouniversity/logout">Salir</a></li>
                     </ul>
                 </div>
-                <div class="logo-element">
+                <div class="logo-element" >
                     RU
                 </div>
 
@@ -25,25 +25,66 @@
 				<a href="/repouniversity/dashboard?bread=Inicio-0"><i class="fa fa-home"></i> <span class="nav-label">Inicio  |  Docente</span></a>
 	    	</li>
             <li class="${activeTab eq 'verCursoDocente' ? 'active':''}">
-                <a href="/repouniversity/docente/verCursos?bread=Ver Cursos-1"><i class="fa fa-pencil-square-o"></i> <span class="nav-label">Mis cursos</span></a>
+                <a class="miscursos" href="/repouniversity/docente/verCursos?bread=Ver Cursos-1"><i class="fa fa-pencil-square-o"></i> <span class="nav-label">Mis cursos</span></a>
                
             </li>
             <li class= ${activeTab eq 'administracion' ? 'active':''}>
-                 <a><i class="fa fa-gears"></i> <span class="nav-label">Administración</span> <span class="fa arrow"></span></a>
+                 <a class="adminmenu" ><i class="fa fa-gears"></i> <span class="nav-label" >Administración</span> <span class="fa arrow"></span></a>
                  <ul class="nav nav-second-level">
 	                <li><a href="/repouniversity/docente/notificaciones?bread=Notificaciones-1">Mis notificaciones</a></li>
                     <li><a href="/repouniversity/verArchivos?bread=Ver archivos-1">Mis archivos</a></li>        
 				</ul>
              </li>
-             <li class="${activeTab eq 'Busqueda' ? 'active':''}"><a href="/repouniversity/busquedaAvanzada?bread=Busqueda avanzada-1"><i
+             <li class="${activeTab eq 'Busqueda' ? 'active':''}"><a class="busqueda" href="/repouniversity/busquedaAvanzada?bread=Busqueda avanzada-1"><i
 					class="fa fa-search"></i> <span class="nav-label"> Busqueda Avanzada </span></a>
 			</li>
         </ul>
         	</ul>
 		<ul class="nav">
         <li style="border-top:solid 1px #504f40">
-            <a data-pjax id='ayuda-link' href="/repouniversity/preguntasFrecuentes?bread=PreguntasFrecuentes-1"><i class="fa fa-question-circle"></i><span class="nav-label">Ayuda</span> </a>
+            <a class="ayuda" data-pjax id='ayuda-link' href="/repouniversity/preguntasFrecuentes?bread=PreguntasFrecuentes-1"><i class="fa fa-question-circle"></i><span class="nav-label">Ayuda</span> </a>
         </li>      
         </ul>
+        <a href="#" class="btn btn-block btn-primary" id="startTour">Start tour</a>
     </div>
 </nav>
+
+
+ <script type="text/javascript">
+
+
+ var tour = new Tour({
+     steps: [{
+         element: ".logo-name-menu",
+         title: "Tutorial Repouniversity",
+         content: "Logo de Repouniversity"
+     }, {
+         element: ".miscursos",
+         title: "Mis Cursos",
+         content: "En esta sección se listan los cursos que creo el docente."
+     },  {
+         element: ".adminmenu",
+         title: "Administración",
+         content: "En esta sección se administran las notificaciones y archivos cargados por el docente."
+     }, {
+         element: ".busqueda",
+         title: "Busqueda Avanzada",
+         content: "En esta sección se encuentra las búsquedas de avanzadas de los archivos subidos por todos los usuario, se pueden realizar búsquedas por diferentes categorías."
+     },{
+         
+    	 
+     },{
+    	 element: ".ayuda",
+         title: "Ayuda",
+         content: "Toda la ayuda del sistema se encuentra en esta sección del menú."
+    	 
+    	 
+     }]
+ }).init().start(true);
+
+$("#startTour").click(function(){
+ tour.restart();
+})
+ </script>
+
+

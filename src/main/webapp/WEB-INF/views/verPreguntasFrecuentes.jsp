@@ -30,6 +30,7 @@
                 <div class="col-lg-12">
                     <div class="wrapper wrapper-content animated fadeInUp">
 
+
 <!----------------------------- Inicio de Preguntas  ----------------------------------------->                 
                         <div class="faq-item">
                             <div class="row">
@@ -625,6 +626,10 @@ Los documentos públicos pueden verse por todos los usuarios del sistema y por lo
 			});
 		}
 		
-	</script>	
+		</script>	
+
+
+
+ </script>
 </body>
 </html>
