@@ -1,13 +1,18 @@
 package com.repouniversity.model.dao.impl;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.repouniversity.model.dao.GrupoDAO;
@@ -187,4 +192,34 @@ public class GrupoDAOImpl extends GenericDAOImpl<Grupo> implements GrupoDAO {
 
         return id;
     }
+    @Override
+    public void eliminarAlumnosGrupo(final long grupoId) {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        final InsertSQLStatement sqlStatement = new InsertSQLStatement(
+                "UPDATE alumno_curso set id_grupo = 1 where id_grupo = ?") {
+            @Override
+            public void doAfterInsert(Long id) {
+            }
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+                ps.setLong(1, grupoId);
+            }
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+        };
+
+        jdbcTemplate.update(new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+                PreparedStatement ps = connection.prepareStatement(sqlStatement.getQuery(), Statement.RETURN_GENERATED_KEYS);
+                sqlStatement.buildPreparedStatement(ps);
+                return ps;
+            }
+        }, keyHolder);
+    }
+
+
+
 }

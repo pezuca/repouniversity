@@ -50,7 +50,7 @@ public class TpEntregaService {
 
         Long cursoId = tpGrupoService.getIdCursoForTpGrupo(tpGrupoId);
 
-        List<Archivo> nuevoArchivo = archivoService.parseArchivo(file, tags, descripcion, cursoId, tpGrupoId, usuario);
+        List<Archivo> nuevoArchivo = archivoService.parseArchivo(file, tags, descripcion, cursoId, tpGrupoId, false, usuario);
         List<Archivo> elArchivo = archivoService.subirArchivo(nuevoArchivo);
 
         TpEntrega tpEntrega = new TpEntrega();

@@ -43,7 +43,7 @@ public class TpGrupoService {
     public TpGrupoTO nuevoTp(Long grupoId, String descripcion, CommonsMultipartFile[] file, Long cursoId, UsuarioRol usuario) throws IOException {
         String[] tags = null;
 
-        List<Archivo> nuevoArchivo = archivoService.parseArchivo(file, tags, descripcion, cursoId, grupoId, usuario);
+        List<Archivo> nuevoArchivo = archivoService.parseArchivo(file, tags, descripcion, cursoId, grupoId, false, usuario);
         List<Archivo> elArchivo = archivoService.subirArchivo(nuevoArchivo);
 
         TpGrupo tpGrupo = new TpGrupo();

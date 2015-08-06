@@ -11,38 +11,22 @@ var GruposAdmin = {
 					sticky: false
 				});
 				
-				$("#listaPersonas").DataTable().row.add([
-                      data.id,
-                      data.persona.nombre,
-                      data.persona.apellido,
-                      data.user,
-                      data.persona.mail,
-                      data.activo == true ? 'Si':'No',
-                      data.rol,
-                      "<a href='#' name='editUser' data-userid='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a>" + 
-					  "<a href='#' name='deleteUser' data-userid='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a>"
+				$("#cursosGrupos").DataTable().row.add([
+                      data.nombre,
+                      data.fechasys,
+					  "<a href='#' name='deleteGrupo' data-grupoid='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a>" +
+					  "<a class='verCurso' href='/repouniversity/docente/verGrupo?grupoId='" + data.id + "'&bread=Ver grupo-2'><button class='btn btn-primary btn-circle'><i class='fa fa-arrow-right'></i></button></a>"
                  ]).draw();
 				
 				//Agrego el evento de delete
-				$("a[name='deleteUser'][data-userid=" + data.id + "] button").click(function(){
-					$("#deleteAlumnoDialog").data('userId', $(this).parent().attr("data-userid")).dialog("open");
+				$("a[name='deleteGrupo'][data-grupoid=" + data.id + "] button").click(function(){
+					$("#deleteGrupoDialog").data('grupoId', $(this).parent().attr("data-grupoid")).dialog("open");
 				});
-				
-				$("a[name=editUser][data-userid=" + data.id + "] button").click(function(){
-					$("#editarAlumnoDialog").data('userId', $(this).parent().attr("data-userid"))
-						.data('nombre', $(this).parents("tr").find("td").get(1).innerHTML)
-						.data('apellido', $(this).parents("tr").find("td").get(2).innerHTML)
-						.data('user', $(this).parents("tr").find("td").get(3).innerHTML)
-						.data('mail', $(this).parents("tr").find("td").get(4).innerHTML)
-						.data('activo', $(this).parents("tr").find("td").get(5).innerHTML)
-						.data('rol', $(this).parents("tr").find("td").get(6).innerHTML)
-						.dialog("open");
-				});
-				
+			
 				$("#crearGrupoDialog").dialog("close");						
 			},
 			error: function(data) {
-				$("#nuevoGrupoForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de crear el usuario, inténtelo mas tarde.</p></div>")
+				$("#nuevoGrupoForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de crear el grupo, inténtelo mas tarde.</p></div>")
 				setTimeout(function(){
 					$("#crearGrupoDialog .infoDialog").hide(function(){
 						$(this).remove();
@@ -99,74 +83,26 @@ var GruposAdmin = {
 			}
 		})
 	},
-
-	editarUsuarioAjax : function() {
+	
+	deleteGrupoAjax : function(grupoId) {
 		$.ajax({
-			url: "editarUsuario",
+			url: "/repouniversity/docente/eliminarGrupo",
 			type: "POST",
-			data: $("#editarAlumnoForm").serialize(),
+			data: {"grupoId" : grupoId},
 			success: function(data){
 				$.gritter.add({
-					title:'Usuario editado',
-					text: 'Los datos del usuario fueron editados exitosamente.',
+					title:'Grupo eliminado',
+					text: 'El grupo fue elimnado exitosamente.',
 					sticky: false
 				});
 				
-				var celdas = $("#listaPersonas td a[data-userid=" + data.id + "]").parents("tr").find("td");
-				celdas.get(1).innerHTML = data.persona.nombre;
-				celdas.get(2).innerHTML = data.persona.apellido;
-				celdas.get(3).innerHTML = data.user;
-				celdas.get(4).innerHTML = data.persona.mail;
-				celdas.get(5).innerHTML = (data.activo == true ? 'Si':'No');
-				celdas.get(6).innerHTML = data.rol;
-				
-				//Agrego el evento de delete
-				$("a[name='deleteUser'][data-userid=" + data.id + "] button").click(function(){
-					$("#deleteAlumnoDialog").data('userId', $(this).parent().attr("data-userid")).dialog("open");
-				});
-				
-				$("a[name=editUser][data-userid=" + data.id + "] button").click(function(){
-					$("#editarAlumnoDialog").data('userId', $(this).parent().attr("data-userid"))
-						.data('nombre', $(this).parents("tr").find("td").get(1).innerHTML)
-						.data('apellido', $(this).parents("tr").find("td").get(2).innerHTML)
-						.data('user', $(this).parents("tr").find("td").get(3).innerHTML)
-						.data('mail', $(this).parents("tr").find("td").get(4).innerHTML)
-						.data('activo', $(this).parents("tr").find("td").get(5).innerHTML)
-						.data('rol', $(this).parents("tr").find("td").get(6).innerHTML)
-						.dialog("open");
-				});
-				
-				$("#editarAlumnoDialog").dialog("close");						
-			},
-			error: function(data) {
-				$("#nuevoGrupoForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de crear el usuario, inténtelo mas tarde.</p></div>")
-				setTimeout(function(){
-					$("#crearGrupoDialog .infoDialog").hide(function(){
-						$(this).remove();
-					});
-				}, 3000);	
-			}
-		})
-	},
-	deleteUsuarioAjax : function(userId) {
-		$.ajax({
-			url: "eliminarUsuario",
-			type: "POST",
-			data: {"userId" : userId},
-			success: function(data){
-				$.gritter.add({
-					title:'Usuario eliminado',
-					text: 'El usuario fue elimnado exitosamente.',
-					sticky: false
-				});
-				
-				$("#listaPersonas").DataTable().row( $("#listaPersonas a[data-userid=" + userId + "]").parents('tr') ).remove().draw();
-				$("#deleteAlumnoDialog").dialog("close");						
+				$("#cursosGrupos").DataTable().row( $("#cursosGrupos a[data-grupoid=" + grupoId + "]").parents('tr') ).remove().draw();
+				$("#deleteGrupoDialog").dialog("close");						
 			},
 			error: function(data) {
 				$.gritter.add({
-					title: 'Eliminar usuario',
-					text: 'Hubo un problema al tratar de eliminar al usuario. Por favor inténtelo mas tarde.',
+					title: 'Eliminar grupo',
+					text: 'Hubo un problema al tratar de eliminar al grupo. Por favor inténtelo mas tarde.',
 					class_name: 'gritter-light'
 				});	
 			}
@@ -268,42 +204,8 @@ $(document).ready(function() {
 		$("#crearGrupoDialog").dialog("open");
 	});
 	
-	$("#editarAlumnoDialog").dialog({
-		resizable: false,
-		width:700,
-		modal: true,
-		autoOpen: false,
-		autoResize:true,
-		hide: {effect: "fade", duration: 300},
-		hide: {effect: "fade", duration: 300},
-		buttons: {
-			"Ok": function() {
-				if(GruposAdmin.validacionFormlario("#editarAlumnoForm")) {
-					GruposAdmin.editarUsuarioAjax();
-				}
-			},
-			"Cancelar": function() {
-				$(this).dialog("close");
-			}
-		},
-		open: function(event, ui) {
-			$(".infoDialog").remove();
-			$('#editarAlumnoForm').trigger("reset");
-			$("#editarAlumnoForm").find(".form-group").removeClass("has-error");
-			
-			$('#editarAlumnoForm input[name=userId]').val($("#editarAlumnoDialog").data('userId'));
-			$('#editarAlumnoForm input[name=nombre]').val($("#editarAlumnoDialog").data('nombre'));
-			$('#editarAlumnoForm input[name=apellido]').val($("#editarAlumnoDialog").data('apellido'));
-			$('#editarAlumnoForm input[name=mail]').val($("#editarAlumnoDialog").data('mail'));
-			$('#editarAlumnoForm input[name=user]').val($("#editarAlumnoDialog").data('user'));
-			$('#editarAlumnoForm input[name=activo]').val($("#editarAlumnoDialog").data('activo'));
-			$('#editarAlumnoForm select[name=rol]').val($("#editarAlumnoDialog").data('rol'));
-		},
-		close: function(event, ui) {
-		}
-	});
-	
-	$("#deleteAlumnoDialog").dialog({
+		
+	$("#deleteGrupoDialog").dialog({
 		resizable: false,
 		width:400,
 		modal: true,
@@ -313,7 +215,7 @@ $(document).ready(function() {
 		hide: {effect: "fade", duration: 300},
 		buttons: {
 			"Eliminar": function() {
-				GruposAdmin.deleteUsuarioAjax($("#deleteAlumnoDialog").data('userId'));
+				GruposAdmin.deleteGrupoAjax($("#deleteGrupoDialog").data('grupoId'));
 			},
 			"Cancelar": function() {
 				$(this).dialog("close");
@@ -327,20 +229,8 @@ $(document).ready(function() {
 		}
 	});
 	
-	$("a[name=deleteUser] button").click(function(){
-		$("#deleteAlumnoDialog").data('userId', $(this).parent().attr("data-userid")).dialog("open");
-	});
-	
-	$("a[name=editUser] button").click(function(){
-		$("#editarAlumnoDialog").data('userId', $(this).parent().attr("data-userid"))
-			.data('userId', $(this).parents("tr").find("td").get(0).innerHTML)
-			.data('nombre', $(this).parents("tr").find("td").get(1).innerHTML)
-			.data('apellido', $(this).parents("tr").find("td").get(2).innerHTML)
-			.data('user', $(this).parents("tr").find("td").get(3).innerHTML)
-			.data('mail', $(this).parents("tr").find("td").get(4).innerHTML)
-			.data('activo', $(this).parents("tr").find("td").get(5).innerHTML)
-			.data('rol', $(this).parents("tr").find("td").get(6).innerHTML)
-			.dialog("open");
+	$("a[name=deleteGrupo] button").click(function(){
+		$("#deleteGrupoDialog").data('grupoId', $(this).parent().attr("data-grupoid")).dialog("open");
 	});
 	
 	$("select[name=alumnosIds]").chosen({no_results_text:'No hay resultados para: '});

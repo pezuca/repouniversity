@@ -130,5 +130,11 @@ public class GrupoService {
         return gruposTo;
 
     }
+
+	public void eliminarGrupo(Long grupoId) {
+		grupoDao.delete(grupoDao.findById(grupoId));
+        grupoDao.eliminarAlumnosGrupo(grupoId);
+        
+	}
     
 }

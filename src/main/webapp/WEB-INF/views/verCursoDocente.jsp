@@ -95,9 +95,11 @@
 											<tr>
 												<td>${grupo.nombre}</td>
 												<td>${grupo.fechasys}</td>
-												<td><a class="verCurso"
-													href="/repouniversity/docente/verGrupo?grupoId=${grupo.id}&bread=Ver grupo-2"><button
-															class="btn btn-primary btn-circle"><i class="fa fa-arrow-right"></i></button></a></td>
+												<td>
+													<a href="#" name="deleteGrupo" data-grupoId="${grupo.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar Grupo"><i class="fa fa-times"></i></button></a>
+													<a class="verCurso" href="/repouniversity/docente/verGrupo?grupoId=${grupo.id}&bread=Ver grupo-2"><button class="btn btn-primary btn-circle"><i class="fa fa-arrow-right"></i></button></a>
+												</td>
+															
 											</tr>
 											<!-- 						<td> -->
 											<%-- 						<button class="verGrupo btn btn-primary" onclick="verGrupo(${curso.grupo.id})">Ver</button>&nbsp; --%>
@@ -248,6 +250,9 @@
 		
 				<div id="deleteArchivoDialog" title="Eliminar Archivo">
 					<p>¿Esta seguro que desea eliminar la archivo?</p>
+				</div>
+				<div id="deleteGrupoDialog" title="Eliminar Grupo">
+					<p>¿Esta seguro que desea eliminar el Grupo?</p>
 				</div>
 
 				<%@include file="../components/footer.jsp"%>
