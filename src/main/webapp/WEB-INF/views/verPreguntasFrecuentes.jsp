@@ -31,7 +31,6 @@
                     <div class="wrapper wrapper-content animated fadeInUp">
 
 <!----------------------------- Inicio de Preguntas  ----------------------------------------->                 
-
                         <div class="faq-item">
                             <div class="row">
                                 <div class="col-md-7">
@@ -194,7 +193,32 @@
                                 <div class="col-lg-12">
                                     <div id="faq7" class="panel-collapse collapse faq-answer">
                                         <p>
-                                           Completar....
+                                           Existen cuatro tipos de acceso al sistema, como alumno, docente, administrador o de manera anónima. 
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						
+						
+						<div class="faq-item">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <a data-toggle="collapse" href="#faq101" class="faq-question">¿Qué es el acceso en modo anónimo?</a>                                 
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="small font-bold">Tipo</span>
+                                    <div class="tag-list">
+                                        <span class="tag-item">General</span>
+                                        <span class="tag-item">Seguridad</span>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div id="faq101" class="panel-collapse collapse faq-answer">
+                                        <p>
+                                           El cuando un usuario ingresa sin usuario ni contraseña para ver el contenido subido por un docente en forma publica.
                                         </p>
                                     </div>
                                 </div>
@@ -220,7 +244,7 @@
                                 <div class="col-lg-12">
                                     <div id="faq8" class="panel-collapse collapse faq-answer">
                                         <p>
-                                           Completar....
+                                           Para poder acceder a un curso, primero hay que pedir la autorización de acceso, luego el docente recibe una notificación para aceptar o rechazar el pedido.  
                                         </p>
                                     </div>
                                 </div>
@@ -244,7 +268,7 @@
                                 <div class="col-lg-12">
                                     <div id="faq9" class="panel-collapse collapse faq-answer">
                                         <p>
-                                           Completar....
+                                           El docente recibe en un listado las notificaciones de pedido de los alumnos que desea tener acceso a un curso creado por el mismo, haciendo clic en el botón ubicado a la derecha del listado autoriza al alumno a ingresar al curso.
                                         </p>
                                     </div>
                                 </div>
@@ -292,7 +316,9 @@
                                 <div class="col-lg-12">
                                     <div id="faq11" class="panel-collapse collapse faq-answer">
                                         <p>
-                                           Completar....
+                                           Los documentos privados solo pueden verse por los usuarios que están registrados en el curso donde se dio de alta el documento.
+Los documentos públicos pueden verse por todos los usuarios del sistema y por los usuarios que ingresan de forma anónima.
+
                                         </p>
                                     </div>
                                 </div>
@@ -565,8 +591,6 @@
                         </div>
 						
 <!------------------------------- Fin de Preguntas--------------------------------->        
-
-
                     </div>
                 </div>
             </div>
