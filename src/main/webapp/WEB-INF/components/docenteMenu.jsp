@@ -71,16 +71,33 @@
          title: "Busqueda Avanzada",
          content: "En esta sección se encuentra las búsquedas de avanzadas de los archivos subidos por todos los usuario, se pueden realizar búsquedas por diferentes categorías."
      },{
-         
+    	 element: ".navbar-form-custom",
+         title: "Busqueda Rapida",
+         content: "Acceso rápido para buscar un documento en el sistema."   	 
+     },{
+    	 element: "#contNoti",
+         title: "Ver Notificaciones",
+         content: "Botón para acceder a las notificaciones, el número que aparece arriba del icono indica la cantidad de notificaciones nuevas que posee el usuario.",   	 
+         placement: "left"
+
+     },{
+    	 element: ".error",
+         title: "Reporte de error",
+         content: "Botón para reportar un error en el sistema",
+         placement: "left"
     	 
+     },{
+    	 element: ".salir",
+         title: "Salir",
+         content: "Botón para cerrar la sesión del usuario",
+         placement: "left"
      },{
     	 element: ".ayuda",
          title: "Ayuda",
          content: "Toda la ayuda del sistema se encuentra en esta sección del menú."
-    	 
-    	 
+    	 	 
      }]
- }).init().start(true);
+ }).init().start(false);
 
 $("#startTour").click(function(){
  tour.restart();

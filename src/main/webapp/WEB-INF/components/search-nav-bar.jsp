@@ -59,12 +59,12 @@
                </ul>
            </li>
            <li>
-               <a href="#"><div id="agregarErrorButton">
+               <a class="error" href="#"><div id="agregarErrorButton">
 					<i class="fa fa-warning" title= "Reportar error"></i>
 				</div></a>
             </li>
             <li>
-               <a href="/repouniversity/logout">
+               <a class="salir" href="/repouniversity/logout">
                    <i class="fa fa-sign-out"></i> Salir
                </a>
            </li>
