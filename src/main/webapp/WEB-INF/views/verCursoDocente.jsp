@@ -97,7 +97,7 @@
 												<td>${grupo.fechasys}</td>
 												<td>
 													<a href="#" name="deleteGrupo" data-grupoId="${grupo.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar Grupo"><i class="fa fa-times"></i></button></a>
-													<a class="verCurso" href="/repouniversity/docente/verGrupo?grupoId=${grupo.id}&bread=Ver grupo-2"><button class="btn btn-primary btn-circle"><i class="fa fa-arrow-right"></i></button></a>
+													<a class="verCurso" href="/repouniversity/docente/verGrupo?grupoId=${grupo.id}&bread=Ver grupo-3"><button class="btn btn-primary btn-circle"><i class="fa fa-arrow-right"></i></button></a>
 												</td>
 															
 											</tr>
@@ -165,7 +165,7 @@
 										<h5>
 											<a  name="editArchivo" data-archivoId="${archivo.id}"><button class="btn btn-info btn-circle" type="button"><i class="fa fa-pencil"></i></button></a>
 											<a  name="deleteArchivo" data-archivoId="${archivo.id}"><button class="btn btn-danger btn-circle" type="button"><i class="fa fa-times"></i> </button></a>
-											<a  name="verArchivo" data-archivoId="${archivo.id}" href="/repouniversity/vistaPrevia?archivoId=${archivo.id}">
+											<a  name="verArchivo" data-archivoId="${archivo.id}" href="/repouniversity/vistaPrevia?archivoId=${archivo.id}&bread=VistaPrevia-3">
 												<button class="btn btn-primary btn-circle" type="button"><i class="fa fa-search"></i>
 												</button>
 											</a>
