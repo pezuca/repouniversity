@@ -54,7 +54,8 @@
 	
 	    <!-- jQuery UI -->
 	    <script src="/repouniversity/resources/js/plugins/jquery-ui/jquery-ui.min.js"></script>
-	    <link href="/repouniversity/resources/js/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet"></link>
+	    <link href="/repouniversity/resources/js/plugins/jquery-ui/jquery-ui-1.10.3.custom.css" rel="stylesheet"></link>
+	    
 	
 	    <!-- Jvectormap -->
 <!-- 	    <script src="/repouniversity/resources/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script> -->
