@@ -1,28 +1,28 @@
 var errorAdmin = {
-				crearNuevoErrorAjax : function() {
-					$.ajax({
-						url: "/repouniversity/errorArchivo/reportarError",
-						type: "POST",
-						data: $("#nuevoErrorForm").serialize(),
-						success: function(data){
-							$.gritter.add({
-								title:'Error reportado',
-								text: 'El error fue reportado de forma exitosa.',
-								sticky: false
-							});
-							
-							
-							$("#agregarErrorDialog").dialog("close");						
-						},
-						error: function(data) {
-							$.gritter.add({
-								title: 'Reportar Error',
-								text: 'Hubo un problema al tratar de reportar el error. Por favor inténtelo mas tarde.',
-								sticky: false
-							});	
-						}
-					})
-				},
+	crearNuevoErrorAjax : function() {
+		$.ajax({
+			url: "/repouniversity/errorArchivo/reportarError",
+			type: "POST",
+			data: $("#nuevoErrorForm").serialize(),
+			success: function(data){
+				$.gritter.add({
+					title:'Error reportado',
+					text: 'El error fue reportado de forma exitosa.',
+					sticky: false
+				});
+				
+				
+				$("#agregarErrorDialog").dialog("close");						
+			},
+			error: function(data) {
+				$.gritter.add({
+					title: 'Reportar Error',
+					text: 'Hubo un problema al tratar de reportar el error. Por favor inténtelo mas tarde.',
+					sticky: false
+				});	
+			}
+		})
+	},
 	deleteErrorAjax : function(errorId) {
 		$.ajax({
 			url: "/repouniversity/errorArchivo/eliminarError",
@@ -62,26 +62,23 @@ var errorAdmin = {
 		
 		return flag;
 	}
-	};
+};
 
 $(document).ready(function() {
-	table = $('#listaErrores').DataTable({
-		"processing" : false,
-		"serverSide" : false,
-		"paging" : false,
-		"language": {
-            "lengthMenu": "Mostrar _MENU_ resultados por página",
-            "zeroRecords": "No fueron encontrados resultados.",
-            "info": "Pagina _PAGE_ of _PAGES_",
-            "infoEmpty": "No hay resultados disponibles.",
-            "infoFiltered": "(filtered from _MAX_ total records)",
-            "search": "Búsqueda: "
-        }
-	});
+//	table = $('#listaErrores').DataTable({
+//		"processing" : false,
+//		"serverSide" : false,
+//		"paging" : false,
+//		"language": {
+//            "lengthMenu": "Mostrar _MENU_ resultados por página",
+//            "zeroRecords": "No fueron encontrados resultados.",
+//            "info": "Pagina _PAGE_ of _PAGES_",
+//            "infoEmpty": "No hay resultados disponibles.",
+//            "infoFiltered": "(filtered from _MAX_ total records)",
+//            "search": "Búsqueda: "
+//        }
+//	});
 
-	$("#clientTable_length").remove();
-	
-	
 	$("#agregarErrorDialog").dialog({
 		resizable: false,
 		width:700,
@@ -113,7 +110,6 @@ $(document).ready(function() {
 		$("#agregarErrorDialog").dialog("open");
 	});
 	
-		
 	$("#deleteErrorDialog").dialog({
 		resizable: false,
 		width:400,
@@ -141,6 +137,4 @@ $(document).ready(function() {
 	$("a[name=deleteError] button").click(function(){
 		$("#deleteErrorDialog").data('errorId', $(this).parent().attr("data-errorid")).dialog("open");
 	});
-	
-	
 });
