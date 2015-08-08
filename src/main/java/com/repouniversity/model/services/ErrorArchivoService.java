@@ -1,22 +1,17 @@
 package com.repouniversity.model.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.repouniversity.model.dao.ComentarioDAO;
 import com.repouniversity.model.dao.ErrorArchivoDAO;
 import com.repouniversity.model.dao.GrupoDAO;
 import com.repouniversity.model.dao.TpGrupoDAO;
-import com.repouniversity.model.entity.Alumno;
-import com.repouniversity.model.entity.Archivo;
-import com.repouniversity.model.entity.Comentario;
 import com.repouniversity.model.entity.ErrorArchivo;
-import com.repouniversity.model.entity.TpEntrega;
 import com.repouniversity.model.entity.UsuarioRol;
-import com.repouniversity.model.entity.to.ComentarioTO;
 import com.repouniversity.model.entity.to.ErrorArchivoTO;
 
 @Service
@@ -98,10 +93,12 @@ public class ErrorArchivoService {
 		errorArchivo.setDescripcion(descripcion);
 		errorArchivo.setIdPersona(usuario.getIdPersona());
 		errorArchivo.setActivo(true);
-	    	
+		
 		errorArchivo = save(errorArchivo);
-	      
-	    	return buildErrorArchivo(errorArchivo);
+
+		
+	    	return buildErrorArchivo(errorArchivoDao.findById(errorArchivo.getId()));
+	    	
 	} 
   
 }
