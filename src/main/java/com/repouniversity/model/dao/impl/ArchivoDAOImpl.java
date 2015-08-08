@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -180,26 +181,25 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
         StringBuilder sql = new StringBuilder();
         // se genera la condicion a mano, pero en la condicion es donde se va a armarse la query
 
-        List<String> laDescripcion = new ArrayList<String>();
-		//quitamos las noise word
-		descripcion = descripcion.toUpperCase();
-		laDescripcion = quitarNoiseWords(descripcion);
-		
-		// agregamos las palabras equivalentes
-		laDescripcion = agregarEquivalencias(laDescripcion);
-		
 		//se inicializa tags por si se agrega un espacio solamente en la busqued para que no rompa
         //para el resto de los caracteres especiales no hay problemas
-		String tags= new String();
-		tags="tags like \'%%\' ";
-        
-        if(laDescripcion.size() > 0 && laDescripcion.get(0) != ""){
-        	tags="";
-	        for (String parametro:laDescripcion) {
+		String tags= "tags like \'%%\' ";
+		
+        List<String> laDescripcion = new ArrayList<String>();
+		//quitamos las noise word
+		if(StringUtils.isNoneBlank(descripcion)) {
+			descripcion = descripcion.toUpperCase();
+			laDescripcion = quitarNoiseWords(descripcion);
+
+			// agregamos las palabras equivalentes
+			laDescripcion = agregarEquivalencias(laDescripcion);
+
+			tags="";
+			for (String parametro:laDescripcion) {
 				tags= tags.concat(" tags like \'%" + parametro.trim() +"%\' OR ");
 			}
-	        tags = tags.substring(0, tags.length()-3);
-        }
+			tags = tags.substring(0, tags.length()-3);
+		}
         
         //armamos la query de busqueda en la base
         
@@ -234,18 +234,18 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
 		String accesoUsuario = new String();
 		switch (usuario.getRol()){
 		case "alumno":
-		accesoUsuario= "AND (estado = 1 OR id_curso in (Select id_curso from repouniversity.alumno_curso where id_alumno = "+ usuario.getIdAluDoc()+"))"; 	
+		accesoUsuario= " AND (estado = 1 OR id_curso in (Select id_curso from repouniversity.alumno_curso where id_alumno = "+ usuario.getIdAluDoc()+"))"; 	
     	break;
     	
 		case "docente":
-		accesoUsuario= "AND (estado = 1 OR id_curso in (Select id_curso from repouniversity.curso where id_docente = "+ usuario.getIdAluDoc()+"))";	
+		accesoUsuario= " AND (estado = 1 OR id_curso in (Select id_curso from repouniversity.curso where id_docente = "+ usuario.getIdAluDoc()+"))";	
 	    break;
 	    	
 		case "administrador":
-		accesoUsuario= "AND (estado = 1 OR estado= 2)";	
+		accesoUsuario= " AND (estado = 1 OR estado= 2)";	
 	    break;
 	    default:
-	    accesoUsuario= "AND (estado = 1)";	
+	    accesoUsuario= " AND (estado = 1)";	
 		break;
 		}
 		
@@ -259,7 +259,7 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
 		List<String> parametrosBusqueda = new ArrayList<String>();
 		
 		for (int i = 0; i < tokens.length; i++) {
-			if (! LoadXMLFilesApplicationListener.listadoNoiseWord.contains(tokens[i])){
+			if (!LoadXMLFilesApplicationListener.listadoNoiseWord.contains(tokens[i])){
 				parametrosBusqueda.add(tokens[i]);
 			}
 		}	 

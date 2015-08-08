@@ -58,7 +58,7 @@ public class LoadXMLFilesApplicationListener implements ServletContextListener {
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 					Element eElement = (Element) nNode;
 					
-					noiseWords.add(eElement.getTextContent());
+					noiseWords.add(eElement.getTextContent().toUpperCase());
 					
 				}
 			}
@@ -84,10 +84,10 @@ public class LoadXMLFilesApplicationListener implements ServletContextListener {
 						Node nPalabra = listaPalabras.item(i);
 						Element ePalabra = (Element) nPalabra;
 						
-						palabras.add(ePalabra.getTextContent());
+						palabras.add(ePalabra.getTextContent().toUpperCase());
 					}
 					
-					equivList.put(palabra, palabras);
+					equivList.put(palabra.toUpperCase(), palabras);
 				}
 			}
 

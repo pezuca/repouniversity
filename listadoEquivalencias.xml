@@ -7,6 +7,14 @@
       <equivalente>cero</equivalente>
     </equivalentes>
   </equivalencia>
+   <equivalencia>
+    <palabra>algebra</palabra>
+    <equivalentes>
+      <equivalente>matematica</equivalente>
+      <equivalente>espacio</equivalente>
+      <equivalente>vector</equivalente>
+    </equivalentes>
+  </equivalencia>
   <equivalencia>
     <palabra>1</palabra>
     <equivalentes>
