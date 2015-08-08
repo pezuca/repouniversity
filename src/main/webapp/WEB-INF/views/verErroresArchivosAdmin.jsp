@@ -45,7 +45,7 @@
 										<td>${error.persona.apellido}, ${error.persona.nombre}</td>
 										<td>${error.fechasys}</td>
 										<c:if test = "${error.archivo.id != 0 && error.archivo.id != null}" >
-											<td>${error.archivo.nombre} <a href="/repouniversity/vistaPrevia?archivoId=${error.archivo.id}" name="verArchivo" data-errorId="${error.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver Archivo"><i class="fa fa-search"></i></button></a></td>						
+											<td>${error.archivo.nombre} <a href="/repouniversity/vistaPrevia?archivoId=${error.archivo.id}&bread=Vista previa-2" name="verArchivo" data-errorId="${error.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver Archivo"><i class="fa fa-search"></i></button></a></td>						
 										</c:if>	
 										<c:if test = "${error.archivo.id == 0 || error.archivo.id == null}" >
 											<td> Sin archivo </td>						
