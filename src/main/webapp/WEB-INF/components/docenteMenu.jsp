@@ -97,7 +97,7 @@
          content: "Toda la ayuda del sistema se encuentra en esta sección del menú."
     	 	 
      }]
- }).init().start(false);
+ }).start(false);
 
 $("#startTour").click(function(){
  tour.restart();
