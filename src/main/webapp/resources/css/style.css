@@ -209,7 +209,12 @@ h5 {
   top: 12px;
 }
 .arrow {
-  float: right;
+	float: right;
+	overflow: inherit !important;
+	position: inherit !important;
+	margin-left: inherit !important;
+	height: inherit !important;
+	width: inherit !important;
 }
 .fa.arrow:before {
   content: "\f104";
@@ -3645,4 +3650,8 @@ body.skin-3 {
 
 .ui-dialog .ui-dialog-content {
 	overflow: hidden !important;
+}
+
+#startTour {
+	border-radius:0px !important;
 }

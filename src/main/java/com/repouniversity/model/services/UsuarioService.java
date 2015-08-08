@@ -63,6 +63,7 @@ public class UsuarioService {
         persona.setNombre(nombre);
         persona.setApellido(apellido);
         persona.setMail(mail);
+        persona.setActivo(Boolean.TRUE);
         persona = personaService.save(persona);
 
         Usuario usuario = new Usuario();

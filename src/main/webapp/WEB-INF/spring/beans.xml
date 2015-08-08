@@ -18,5 +18,13 @@
 		<constructor-arg value="${system.fileUploadPreview.location}" />
 	</bean>
 	
+	<bean name="noiseWordsTomcatLocation" id="noiseWordsTomcatLocation" class="java.lang.String">
+		<constructor-arg value="${system.noiseWords.location}" />
+	</bean>
+	
+	<bean name="equivalenciasTomcatLocation" id="equivalenciasTomcatLocation" class="java.lang.String">
+		<constructor-arg value="${system.equivalencias.location}" />
+	</bean>
+	
 	<bean class="com.repouniversity.model.init.ServletContextCopyFileInitializer" />
 </beans>

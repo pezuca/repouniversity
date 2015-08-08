@@ -53,8 +53,6 @@ public class ErrorArchivoController {
 			@ModelAttribute("login") UsuarioRol usuario) throws IOException {
 
 		return errorArchivoService.reportarError(archivoId, descripcion, usuario);
-		
-
 	}
 
 

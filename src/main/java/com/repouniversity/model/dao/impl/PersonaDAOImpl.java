@@ -41,7 +41,7 @@ public class PersonaDAOImpl extends GenericDAOImpl<Persona> implements
 
     @Override
     protected InsertSQLStatement buildInsertSQLStatement(final Persona t) {
-        return new InsertSQLStatement("INSERT INTO persona (nombre, apellido, mail, activo, fecsys) values (?, ?, ?, ?, now())") {
+        return new InsertSQLStatement("INSERT INTO persona (nombre, apellido, mail, activo, fecsys) values (?, ?, ?, 1, now())") {
 
             @Override
             public void doAfterInsert(Long id) {
@@ -52,7 +52,6 @@ public class PersonaDAOImpl extends GenericDAOImpl<Persona> implements
                 ps.setString(1, t.getNombre());
                 ps.setString(2, t.getApellido());
                 ps.setString(3, t.getMail());
-                ps.setBoolean(4, t.isActivo());
             }
 
             @Override

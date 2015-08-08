@@ -6,18 +6,12 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.jasper.tagplugins.jstl.core.Choose;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.repouniversity.model.dao.ArchivoDAO;
 import com.repouniversity.model.dao.query.InsertSQLStatement;
@@ -27,6 +21,7 @@ import com.repouniversity.model.dao.rowmapper.VwArchivoRowMapper;
 import com.repouniversity.model.entity.Archivo;
 import com.repouniversity.model.entity.UsuarioRol;
 import com.repouniversity.model.entity.VwArchivo;
+import com.repouniversity.model.manager.LoadXMLFilesApplicationListener;
 
 @Repository
 public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDAO {
@@ -234,7 +229,7 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
 
         return resultList;
     }
-	
+
 	public String acotarBusquedaXTipoUsuario (UsuarioRol usuario){
 		String accesoUsuario = new String();
 		switch (usuario.getRol()){
@@ -258,77 +253,28 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
 	}
 	
 	@Override
-	public List<String> quitarNoiseWords( String parametro) {
-		 
-	//doy de alta el listado de Noise words y verifico si cada string esta dentro del listado
-		List<String> noiseWords = new ArrayList<String>();
-		noiseWords.add("EN");
-		noiseWords.add("DE");
-		noiseWords.add("DONDE");
-		noiseWords.add("CUANDO");
-		noiseWords.add(",");
-		noiseWords.add(";");
-		noiseWords.add("'");
-		noiseWords.add("`");
-		noiseWords.add("´");
-		noiseWords.add(".");
-		noiseWords.add("&");
-		noiseWords.add("/");
-		
-		
+	public List<String> quitarNoiseWords(String parametro) {
 	//tokenizo la cadena
 		String[] tokens = parametro.split(" ");
 		List<String> parametrosBusqueda = new ArrayList<String>();
 		
 		for (int i = 0; i < tokens.length; i++) {
-			if (! noiseWords.contains(tokens[i])){
+			if (! LoadXMLFilesApplicationListener.listadoNoiseWord.contains(tokens[i])){
 				parametrosBusqueda.add(tokens[i]);
 			}
 		}	 
 	
-	return parametrosBusqueda; 
+		return parametrosBusqueda; 
 	}
 	
-	public List<String> agregarEquivalencias (List<String> parametrosBusqueda){
+	public List<String> agregarEquivalencias(List<String> parametrosBusqueda){
 		
 		List<String> terminosBusqueda = new ArrayList<String>();
 		List<String> listaTemporal = new ArrayList<String>();
 		
-		//Agregando equivalencias
-		//mapa de listas con el termino y sus equivalencias
-		Map <String, List<String>> equivList = new HashMap<String, List<String>>();
-		List<String> equivalencia = new ArrayList<String>();
-		List<String> equivalencia2 = new ArrayList<String>();
-		List<String> equivalencia3 = new ArrayList<String>();
-		List<String> equivalencia4 = new ArrayList<String>();
-		
-		
-		equivalencia.add("VECTOR");
-		equivalencia.add("MATRIZ");
-		equivalencia.add("MATEMATICA");
-		equivList.put("ALGEBRA", equivalencia);
-		//equivalencia.clear();
-		
-		equivalencia2.add("ALGEBRA");
-		equivalencia2.add("FISICA");
-		equivList.put("MATEMATICA", equivalencia2);
-		//equivalencia.clear();
-		
-		equivalencia3.add("OBJETOS");
-		equivalencia3.add("LENGUAJE");
-		equivalencia3.add("MODELO");
-		equivList.put("PROGRAMACION", equivalencia3);
-		//equivalencia.clear();
-		
-		equivalencia4.add("RED");
-		equivalencia4.add("COMPUTACION");
-		equivalencia4.add("INTERNET");
-		equivList.put("HARDWARE", equivalencia4);
-		//equivalencia.clear();
-		
 		for (String termino : parametrosBusqueda) {
-			if(equivList.containsKey(termino)){
-				listaTemporal= equivList.get(termino);
+			if(LoadXMLFilesApplicationListener.listadoEquivalencias.containsKey(termino)){
+				listaTemporal= LoadXMLFilesApplicationListener.listadoEquivalencias.get(termino);
 				for(String e: listaTemporal){
 					terminosBusqueda.add(e);
 				}
