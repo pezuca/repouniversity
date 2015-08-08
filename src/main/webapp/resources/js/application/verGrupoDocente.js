@@ -134,7 +134,7 @@ var tpAdmin = {
 					sticky: false
 				});
 				
-				table2.row( $("#GruposAlumnos a[data-alumnoId=" + alumnoId + "]").parents('tr') ).remove().draw();
+				tableGrupo.row( $("#GruposAlumnos a[data-alumnoId=" + alumnoId + "]").parents('tr') ).remove().draw();
 				$("#deleteAlumnoDialog").dialog("close");						
 			},
 			error: function(data) {
@@ -159,7 +159,7 @@ var tpAdmin = {
 				});
 				
 				
-				table2.row.add([
+				tableGrupo.row.add([
 				                                          data.id,
 				                                          data.persona.apellido + ", " + data.persona.nombre,
 				                                          "<a name='deleteAlumno' data-alumnoId='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a> "
