@@ -26,19 +26,19 @@
 					class="fa fa-home"></i> <span class="nav-label">Inicio |
 						Administrador</span></a></li>
 			<li class="${activeTab eq 'verMaterias' ? 'active':''}"><a href="/repouniversity/admin/verMaterias?bread=Ver materias-1"><i
-					class="fa fa-book"></i> <span class="nav-label">Ver materias</span></a></li>
+					class="fa fa-book"></i> <span class="nav-label">Materias</span></a></li>
 			<li class="${activeTab eq 'verCursos' ? 'active':''}"><a href="/repouniversity/admin/verCursos?bread=Ver cursos-1"><i
-					class="fa fa-laptop"></i> <span class="nav-label">Ver cursos</span></a></li>
+					class="fa fa-laptop"></i> <span class="nav-label">Cursos</span></a></li>
 			<li class="${activeTab eq 'verUsuarios' ? 'active':''}"><a href="/repouniversity/admin/verUsuarios?bread=Ver usuario-1"><i
-					class="fa fa-group"></i> <span class="nav-label">Ver usuarios</span></a></li>
+					class="fa fa-group"></i> <span class="nav-label">Usuarios</span></a></li>
 			<li class="${activeTab eq 'verCarreras' ? 'active':''}"><a href="/repouniversity/admin/verCarreras?bread=Ver carreras-1"><i
-					class="fa fa-bank"></i> <span class="nav-label">Ver carreras</span></a></li>
+					class="fa fa-bank"></i> <span class="nav-label">Carreras</span></a></li>
 			<li class="${activeTab eq 'verArchivos' ? 'active':''}"><a href="/repouniversity/admin/verArchivos?bread=Ver archivos-1"><i
-					class="fa fa-file-pdf-o"></i> <span class="nav-label">Ver archivos</span></a></li>
+					class="fa fa-file-pdf-o"></i> <span class="nav-label">Archivos</span></a></li>
 			<li class="${activeTab eq 'verErroresArchivos' ? 'active':''}"><a href="/repouniversity/admin/verReporteErrores?bread=Ver reportes de errores-1"><i
-					class="fa fa-warning"></i> <span class="nav-label">Ver reportes errores</span></a></li>
+					class="fa fa-warning"></i> <span class="nav-label">Reportes errores</span></a></li>
 			<li class="${activeTab eq 'Busqueda' ? 'active':''}"><a href="/repouniversity/busquedaAvanzada?bread=Busqueda avanzada-1"><i
-					class="fa fa-search"></i> <span class="nav-label"> Busqueda Avanzada </span></a></li>					
+					class="fa fa-search"></i> <span class="nav-label">Busqueda Avanzada </span></a></li>					
 		</ul>
 			</ul>
 		<ul class="nav">
