@@ -17,6 +17,8 @@ var cursosAdmin = {
 				                                          data.nombre,
 				                                          data.codigo,
 				                                          data.descripcion,
+				                          				  data.materia.nombre,
+				                          				  data.docente.persona.nombre + ", " + data.docente.persona.apellido,
 				                                          "<a href='#' name='editCurso' data-cursoId='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a>" + 
 				  										  "<a href='#' name='deleteCurso' data-cursoId='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a>"
 				                                     ]).draw();

@@ -64,6 +64,8 @@ public class LoginController {
 	@RequestMapping(value = "/loginAnonimo", method = { RequestMethod.GET })
 	public ModelAndView loginAnonimo(HttpServletRequest request)
 	{
+		loginService.loginAnonimo(request);
+		
 		return new ModelAndView("loginAnonimo");
 	}
 

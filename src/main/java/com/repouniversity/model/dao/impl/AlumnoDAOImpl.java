@@ -67,7 +67,7 @@ public class AlumnoDAOImpl extends GenericDAOImpl<Alumno> implements AlumnoDAO {
                 } else {
                     ps.setLong(2, 1L);
                 }
-                ps.setBoolean(3, t.isActivo());
+               
             }
 
             @Override

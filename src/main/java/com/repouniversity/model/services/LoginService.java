@@ -63,4 +63,19 @@ public class LoginService {
 		HTTPSessionManagerUtil.removeSessionAttribute(request,
 				HTTPSessionManagerUtil.ATTR_LOGIN);
 	}
+
+	public void loginAnonimo(HttpServletRequest request) {
+		// TODO Auto-generated method stub
+
+		UsuarioRol usuarioRol = new UsuarioRol();
+		usuarioRol.setId(-1L);
+		usuarioRol.setIdAluDoc(-1L);
+		usuarioRol.setIdPersona(-1L);
+		usuarioRol.setNombreUsuario("Anonimo");
+		usuarioRol.setRol("Anonimo");
+		
+		HTTPSessionManagerUtil.setSessionAttribute(request,
+				HTTPSessionManagerUtil.ATTR_LOGIN, usuarioRol);
+		
+	}
 }

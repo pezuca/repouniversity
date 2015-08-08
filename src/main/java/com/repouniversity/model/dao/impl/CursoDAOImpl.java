@@ -73,7 +73,7 @@ public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
 
     @Override
     protected InsertSQLStatement buildInsertSQLStatement(final Curso t) {
-        return new InsertSQLStatement("INSERT INTO curso (nombre, codigo, descripcion, activo, id_materia, id_docente, fecsys) values (?, ?, ?, ?, ?, ?, now())") {
+        return new InsertSQLStatement("INSERT INTO curso (nombre, codigo, descripcion, id_materia, id_docente, activo, fecsys) values (?, ?, ?, ?, ?, 1, now())") {
 
             @Override
             public void doAfterInsert(Long id) {
@@ -86,7 +86,7 @@ public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
                 ps.setString(3, t.getDescripcion());
                 ps.setLong(4, t.getMateriaId());
                 ps.setLong(5, t.getDocenteId());
-                ps.setBoolean(6, t.isActivo());
+               
             }
 
             @Override
