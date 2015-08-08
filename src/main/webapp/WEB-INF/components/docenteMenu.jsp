@@ -42,7 +42,7 @@
         	</ul>
 		<ul class="nav">
         <li style="border-top:solid 1px #504f40">
-            <a class="ayuda" data-pjax id='ayuda-link' href="/repouniversity/preguntasFrecuentes?bread=PreguntasFrecuentes-1"><i class="fa fa-question-circle"></i><span class="nav-label">Ayuda</span> </a>
+            <a id="ayuda" data-pjax id='ayuda-link' href="/repouniversity/preguntasFrecuentes?bread=PreguntasFrecuentes-1"><i class="fa fa-question-circle"></i><span class="nav-label">Ayuda</span> </a>
         </li>      
         </ul>
         <a href="#" class="btn btn-block btn-primary" id="startTour">Start tour</a>
@@ -69,7 +69,7 @@
      }, {
          element: ".busqueda",
          title: "Busqueda Avanzada",
-         content: "En esta sección se encuentra las búsquedas de avanzadas de los archivos subidos por todos los usuario, se pueden realizar búsquedas por diferentes categorías."
+         content: "En esta sección se encuentra las búsquedas de avanzadas de los archivos subidos por todos los usuarios, se pueden realizar búsquedas por diferentes categorías."
      },{
     	 element: ".navbar-form-custom",
          title: "Busqueda Rapida",
@@ -92,12 +92,12 @@
          content: "Botón para cerrar la sesión del usuario",
          placement: "left"
      },{
-    	 element: ".ayuda",
+    	 element: "#ayuda",
          title: "Ayuda",
          content: "Toda la ayuda del sistema se encuentra en esta sección del menú."
     	 	 
      }]
- }).init().start(false);
+ });
 
 $("#startTour").click(function(){
  tour.restart();
