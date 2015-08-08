@@ -59,7 +59,6 @@
 									<td>
 										<a href="#" name="editCurso" data-cursoId="${curso.id}"><button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Editar curso"><i class="fa fa-pencil"></i></button></a>
 										<a href="#" name="deleteCurso" data-cursoId="${curso.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar curso"><i class="fa fa-times"></i></button></a>
-										<a href="#" name="administrarCurso" data-cursoId="${curso.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Administrar curso"><i class="fa fa-codepen"></i></button></a>
 									</td>
 								</tr>
 							</c:forEach>

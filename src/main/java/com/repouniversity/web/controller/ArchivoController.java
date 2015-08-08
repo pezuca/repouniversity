@@ -93,6 +93,12 @@ public class ArchivoController {
         List<VwArchivo> archivos = archivoService.getArchivosDePersona(usuario.getIdPersona());
         return new ModelAndView("verArchivos").addObject("archivos", archivos);
     }
+    @RequestMapping(value = "/buscarArchivoAnonimo", method = {RequestMethod.POST})
+    public ModelAndView buscarFicheroAnonimo(HttpServletRequest request, @RequestParam(value = "search") String parametro) {
+        List<Archivo> listaResultados = new ArrayList<Archivo>();
+        listaResultados = buscarFicheroLocal(parametro);
+        return new ModelAndView("resultListAnonimo").addObject("listaResultados", listaResultados).addObject("parametroBusqueda", parametro);
+    }
 
     @RequestMapping(value = "/buscarArchivo", method = {RequestMethod.POST})
     public ModelAndView buscarFichero(HttpServletRequest request, @RequestParam(value = "top-search") String parametro) {

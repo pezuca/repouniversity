@@ -13,7 +13,7 @@
 <body id="loginAnonimo">
 
 	<%@include file="../components/static-nav-bar.jsp"%>
-	<tag:breadcrumb label="Lista de resultados"/>
+
 	
 	<div id="page-wrapper" class="gray-bg dashbard-1">
 		<div class="row border">
@@ -22,7 +22,7 @@
 				   	<h3><i class="fa fa-envelope-o"></i> Buscador de archivos</h3>
 				  	<small><i class="fa fa-tim"></i> Recuerde que solamente se podrás buscar archivos que sean publicos.</small>
 					<div class="search-form">
-						<form action="/repouniversity/buscarArchivo" method="post" role="search">
+						<form action="/repouniversity/buscarArchivoAnonimo" method="post" role="search">
 							<div class="input-group">
 								<input type="text" placeholder="Buscar archivos..." name="search" class="form-control input-lg">
 									<div class="input-group-btn">
@@ -38,7 +38,8 @@
 			</div>
 		</div>
 	</div>
-	
+		<tag:breadcrumb label="Lista de resultados"/>
+		
 	            <div class="row">
 	                <div class="col-lg-12">
 	                    <div class="ibox float-e-margins">

@@ -21,9 +21,9 @@
 				   	<h3><i class="fa fa-envelope-o"></i> Buscador de archivos</h3>
 				  	<small><i class="fa fa-tim"></i> Recuerde que solamente se podrás buscar archivos que sean publicos.</small>
 					<div class="search-form">
-						<form action="/repouniversity/buscarArchivo" method="post" role="search">
+						<form action="/repouniversity/buscarArchivoAnonimo" method="post" role="search">
 							<div class="input-group">
-								<input type="text" placeholder="Buscar archivos..." name="search" class="form-control input-lg">
+								<input type="text" placeholder="Buscar archivos..." name="search" class="form-control input-lg" id="search">
 									<div class="input-group-btn">
 										<button class="btn btn-lg btn-primary" type="submit">
 											Search
