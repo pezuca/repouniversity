@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.repouniversity.model.entity.Archivo;
+import com.repouniversity.model.entity.UsuarioRol;
 import com.repouniversity.model.entity.VwArchivo;
 
 public interface ArchivoDAO extends GenericDAO<Archivo> {
@@ -18,15 +19,15 @@ public interface ArchivoDAO extends GenericDAO<Archivo> {
 
     VwArchivo findVwArchivo(Long archivoId);
 
-    List<Archivo> requestArchivos(String parametro);
+    List<Archivo> requestArchivos(String parametro, UsuarioRol usuario);
 
     List<String> quitarNoiseWords(String parametro);
 
     List<String> agregarEquivalencias(List<String> parametro);
 
-    List<Archivo> generarBusqueda(List<String> parametrosBusqueda);
+    List<Archivo> generarBusqueda(List<String> parametrosBusqueda, UsuarioRol usuario);
 
-    List<Archivo> busquedaAvanzada(String materia, String nbreDocente, String apeDocente, String carrera, String descripcion, Date fechaDde, Date fechaHta);
+    List<Archivo> busquedaAvanzada(String materia, String nbreDocente, String apeDocente, String descripcion, Date fechaDde, Date fechaHta, UsuarioRol usuario);
 
 	List<VwArchivo> findArchivosDelCurso(long idCurso);
 

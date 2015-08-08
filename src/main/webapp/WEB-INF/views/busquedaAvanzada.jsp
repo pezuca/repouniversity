@@ -39,9 +39,9 @@
 		                                        </div>
 		                                    </div>
 	                                    </div>
-		                                <div class="form-group"><label class="col-sm-2 control-label">Carrera</label>
+		                                <!-- div class="form-group"><label class="col-sm-2 control-label">Carrera</label>
 											<div class="col-sm-10"><input type="text" class="form-control" name="carrera"></div>
-		                                </div>
+		                                </div-->
 		                                <div class="form-group"><label class="col-sm-2 control-label">Descripci&oacute;n</label>
 											<div class="col-sm-10"><input type="text" class="form-control" name="descripcion"></div>
 		                                </div>

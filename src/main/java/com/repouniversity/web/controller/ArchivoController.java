@@ -95,30 +95,37 @@ public class ArchivoController {
     }
 
     @RequestMapping(value = "/buscarArchivo", method = {RequestMethod.POST})
-    public ModelAndView buscarFichero(HttpServletRequest request, @RequestParam(value = "top-search") String parametro) {
+    public ModelAndView buscarFichero(HttpServletRequest request, @ModelAttribute("login") UsuarioRol usuario,
+    	@RequestParam(value = "top-search") String parametro) {
         List<Archivo> listaResultados = new ArrayList<Archivo>();
-        listaResultados = buscarFicheroLocal(parametro);
+        listaResultados = buscarFicheroLocal(parametro, usuario);
         return new ModelAndView("resultList").addObject("listaResultados", listaResultados).addObject("parametroBusqueda", parametro);
     }
 
     @RequestMapping(value = "/busquedaAvanzada", method = {RequestMethod.POST})
-    public ModelAndView busquedaAvanzada(HttpServletRequest request, @RequestParam(value = "materia", required = false) String materia,
-            @RequestParam(value = "nbreDocente", required = false) String nbreDocente, @RequestParam(value = "apeDocente", required = false) String apeDocente,
-            @RequestParam(value = "carrera", required = false) String carrera, @RequestParam(value = "descripcion", required = false) String descripcion,
-            @RequestParam(value = "fechaDde", required = false) String fechaDde, @RequestParam(value = "fechaHta", required = false) String fechaHta)
-            throws ParseException {
+    public ModelAndView busquedaAvanzada(HttpServletRequest request, @ModelAttribute("login") UsuarioRol usuario,
+    		@RequestParam(value = "materia", required = false) String materia,
+            @RequestParam(value = "nbreDocente", required = false) String nbreDocente,
+            @RequestParam(value = "apeDocente", required = false) String apeDocente,
+            @RequestParam(value = "descripcion", required = false) String descripcion,
+            @RequestParam(value = "fechaDde", required = false) String fechaDde,
+            @RequestParam(value = "fechaHta", required = false) String fechaHta)
+            throws ParseException
+    		{
+        
+    	Date desde = dateFormat.parse("01/01/1900");
+    	Date hasta = dateFormat.parse("31/12/9999");
+    	if (!fechaDde.equals("")){
+    		desde = dateFormat.parse(fechaDde);
+    	}
+    	if (!fechaHta.equals("")){
+    		hasta = dateFormat.parse(fechaHta);
+    	}
+         
 
-        Date desde = dateFormat.parse("01/01/1900");
-        Date hasta = dateFormat.parse("31/12/9999");
-        if (fechaDde != "") {
-            desde = dateFormat.parse(fechaDde);
-        }
-        if (fechaDde != "") {
-            hasta = dateFormat.parse(fechaHta);
-        }
 
         List<Archivo> listaResultados = new ArrayList<Archivo>();
-        listaResultados = busquedaAvanzada(materia, nbreDocente, apeDocente, carrera, descripcion, desde, hasta);
+        listaResultados = busquedaAvanzada(materia, nbreDocente, apeDocente, descripcion, desde, hasta, usuario);
         return new ModelAndView("resultList").addObject("listaResultados", listaResultados);
     }
 
@@ -127,17 +134,17 @@ public class ArchivoController {
         return new ModelAndView("busquedaAvanzada");
     }
 
-    private List<Archivo> buscarFicheroLocal(String parametro) {
+    private List<Archivo> buscarFicheroLocal(String parametro, UsuarioRol usuario) {
         List<Archivo> archivosEncontrados = new ArrayList<Archivo>();
-        archivosEncontrados = archivoService.requestArchivos(parametro);
+        archivosEncontrados = archivoService.requestArchivos(parametro, usuario);
         return archivosEncontrados;
 
     }
 
-    private List<Archivo> busquedaAvanzada(String materia, String nbreDocente, String apeDocente, String carrera, String descripcion, Date fechaDde,
-            Date fechaHta) {
+
+    private List<Archivo> busquedaAvanzada(String materia, String nbreDocente, String apeDocente, String descripcion, Date fechaDde, Date fechaHta, UsuarioRol usuario) {
         List<Archivo> archivosEncontrados = new ArrayList<Archivo>();
-        archivosEncontrados = archivoService.busquedaAvanzada(materia, nbreDocente, apeDocente, carrera, descripcion, fechaDde, fechaHta);
+        archivosEncontrados = archivoService.busquedaAvanzada(materia, nbreDocente, apeDocente, descripcion, fechaDde, fechaHta, usuario);
         return archivosEncontrados;
 
     }

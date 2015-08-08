@@ -241,14 +241,14 @@ public class ArchivoService {
         return archivoDao.findVwArchivo(archivoId);
     }
 
-    public List<Archivo> requestArchivos(String parametro) {
-        return archivoDao.requestArchivos(parametro);
+    public List<Archivo> requestArchivos(String parametro, UsuarioRol usuario) {
+        return archivoDao.requestArchivos(parametro, usuario);
 
     }
 
-    public List<Archivo> busquedaAvanzada(String materia, String nbreDocente, String apeDocente, String carrera, String descripcion, Date fechaDde,
-            Date fechaHta) {
-        return archivoDao.busquedaAvanzada(materia, nbreDocente, apeDocente, carrera, descripcion, fechaDde, fechaHta);
+    public List<Archivo> busquedaAvanzada(String materia, String nbreDocente, String apeDocente, String descripcion, Date fechaDde,
+            Date fechaHta, UsuarioRol usuario) {
+        return archivoDao.busquedaAvanzada(materia, nbreDocente, apeDocente, descripcion, fechaDde, fechaHta, usuario);
     }
 
     public VwArchivo modificarArchivo(Long archivoId, String tagsArchivo, String desArchivo, Long estadoArchivo) {

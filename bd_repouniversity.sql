@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `repouniversity` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `repouniversity`;
--- MySQL dump 10.13  Distrib 5.6.17, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.6.13, for Win32 (x86)
 --
 -- Host: 127.0.0.1    Database: repouniversity
 -- ------------------------------------------------------
--- Server version	5.6.20
+-- Server version	5.5.24-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -74,7 +74,7 @@ CREATE TABLE `alumno_curso` (
 
 LOCK TABLES `alumno_curso` WRITE;
 /*!40000 ALTER TABLE `alumno_curso` DISABLE KEYS */;
-INSERT INTO `alumno_curso` VALUES (3,2,2),(4,3,2),(5,4,2),(8,3,2),(9,2,2),(9,3,2);
+INSERT INTO `alumno_curso` VALUES (3,2,2),(5,4,2),(8,3,2),(9,3,2),(14,2,2),(14,3,2);
 /*!40000 ALTER TABLE `alumno_curso` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,7 +118,7 @@ CREATE TABLE `archivo` (
 
 LOCK TABLES `archivo` WRITE;
 /*!40000 ALTER TABLE `archivo` DISABLE KEYS */;
-INSERT INTO `archivo` VALUES (1,'practica Algebra','practica ejercicios del 1 a 20 ','1900-01-01','1900-01-01',1,'2014-04-15 14:21:04',1,1,'c:\\algebra.doc',4,3,NULL),(5,'Teoria nº 1 programción','Teoria de pilas y  colas','1900-01-01','1900-01-01',1,'2014-04-15 14:24:29',1,1,'c:\\prog.doc',4,4,NULL),(6,'Teoria nº 2 programción','Recursividad','1900-01-01','1900-01-01',1,'2014-04-15 14:33:11',1,1,'c:\\prog2.doc',4,4,NULL),(7,'practica Nº 2  Algebra ','practica ejercicios del 1 a 20 ','1900-01-01','1900-01-01',1,'2014-04-15 14:34:15',1,1,'c:\\algebra2.doc',32,5,NULL),(8,'practica Nº 3  Algebra ','practica ejercicios del 20 a 30 ','1900-01-01','1900-01-01',1,'2014-04-15 14:45:37',1,1,'c:\\algebra3.doc',32,5,NULL),(9,'practica Nº 3  Algebra ','practica ejercicios del 20 a 30 ','1900-01-01','1900-01-01',1,'2014-04-15 14:46:14',1,1,'c:\\algebra3.doc',31,2,'fede');
+INSERT INTO `archivo` VALUES (1,'practica Algebra','practica ejercicios del 1 a 20 ','1900-01-01','2013-04-14',1,'2014-04-15 14:21:04',1,2,'c:\\algebra.doc',4,3,'algebra, matriz'),(5,'Teoria nº 1 programción','Teoria de pilas y  colas','1900-01-01','2014-05-25',1,'2014-04-15 14:24:29',1,1,'c:\\prog.doc',4,4,'programacion, pilas, colas'),(6,'Teoria nº 2 programción','Recursividad','1900-01-01','2015-02-24',1,'2014-04-15 14:33:11',1,2,'c:\\prog2.doc',4,3,'programacion, recursividad'),(7,'practica Nº 2  Algebra ','practica ejercicios del 1 a 20 ','1900-01-01','2010-10-01',1,'2014-04-15 14:34:15',1,1,'c:\\algebra2.doc',32,5,'vector'),(8,'practica Nº 3  Algebra ','practica ejercicios del 20 a 30 ','1900-01-01','2012-04-16',1,'2014-04-15 14:45:37',1,1,'c:\\algebra3.doc',32,5,'matriz'),(9,'practica Nº 3  Algebra ','practica ejercicios del 20 a 30 ','1900-01-01','2012-03-09',1,'2014-04-15 14:46:14',1,2,'c:\\algebra3.doc',31,2,'vector');
 /*!40000 ALTER TABLE `archivo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -713,4 +713,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-07-13  0:19:11
+-- Dump completed on 2015-08-01 16:08:00
