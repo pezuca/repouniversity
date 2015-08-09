@@ -211,6 +211,7 @@ var tpAdmin = {
 
 $(document).ready(function() {
 	table = $('#GruposTP').DataTable({
+		retrieve: true,
 		"processing" : false,
 		"serverSide" : false,
 		"paging" : false,
@@ -225,6 +226,7 @@ $(document).ready(function() {
 	});
 	
 	tableGrupo = $('#GruposAlumnos').DataTable({
+		retrieve: true,
 		"processing" : false,
 		"serverSide" : false,
 		"paging" : false,

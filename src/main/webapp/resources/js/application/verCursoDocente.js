@@ -133,6 +133,7 @@ var GruposAdmin = {
 
 $(document).ready(function() {
 	gruposTable = $('#cursosGrupos').DataTable({
+		retrieve: true,
 		"processing" : false,
 		"serverSide" : false,
 		"paging" : false,
@@ -153,6 +154,7 @@ $(document).ready(function() {
 	$("#cursosGruposTable_length").remove();
 	
 	notificacionesTable = $('#notificaciones').DataTable({
+		retrieve: true,
 		"processing" : false,
 		"serverSide" : false,
 		"paging" : false,

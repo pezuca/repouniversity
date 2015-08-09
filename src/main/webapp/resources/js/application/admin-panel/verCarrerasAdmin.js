@@ -146,6 +146,7 @@ var carrerasAdmin = {
 
 $(document).ready(function() {
 	table = $('#listaCarreras').DataTable({
+		retrieve: true,
 		"processing" : false,
 		"serverSide" : false,
 		"paging" : false,

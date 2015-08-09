@@ -604,6 +604,7 @@ Los documentos públicos pueden verse por todos los usuarios del sistema y por lo
 	<script>
 		$(document).ready(function() {
 			$('#clientTable').dataTable({
+				retrieve: true,
 				"processing" : false,
 				"serverSide" : false,
 				"paging": false,

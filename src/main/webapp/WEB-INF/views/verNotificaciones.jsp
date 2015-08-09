@@ -64,6 +64,7 @@
 	<script>
 		$(document).ready(function() {
 			$('#clientTable').dataTable({
+				retrieve: true,
 				"processing" : false,
 				"serverSide" : false,
 				"paging": false,

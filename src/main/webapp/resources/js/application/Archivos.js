@@ -84,7 +84,8 @@ var archivosAdmin = {
 };
 
 $(document).ready(function() {
-	table = $('#listaArchivos').DataTable({
+	listaArchivos = $('#listaArchivos').DataTable({
+		retrieve: true,
 		"processing" : false,
 		"serverSide" : false,
 		"paging" : false,
@@ -98,14 +99,14 @@ $(document).ready(function() {
         }
 	});
 	
-	table.column(1).visible(false);
-	table.column(3).visible(false);
-	table.column(6).visible(false);
-	table.column(7).visible(false);
-	table.column(8).visible(false);
-	table.column(10).visible(false);
-	table.columns.adjust().draw();
-
+	listaArchivos.column(1).visible(false);
+	listaArchivos.column(3).visible(false);
+	listaArchivos.column(6).visible(false);
+	listaArchivos.column(7).visible(false);
+	listaArchivos.column(8).visible(false);
+	listaArchivos.column(10).visible(false);
+	listaArchivos.columns.adjust().draw();
+	
 	$("#listaArchivosTable_length").remove();
 	$("#listaArchivos_info").remove();
 	
@@ -182,6 +183,5 @@ $(document).ready(function() {
 			.data('estadoArchivo', $(this).parents(".botones").find(".ocultos input[name=estado]").val())
 			.data('tags', $(this).parents(".botones").find(".ocultos input[name=tags]").val())
 			.dialog("open");
-		
 	});
 });

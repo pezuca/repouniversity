@@ -89,6 +89,7 @@ var archivosAdmin = {
 
 $(document).ready(function() {
 	table = $('#listaArchivos').DataTable({
+		retrieve: true,
 		"processing" : false,
 		"serverSide" : false,
 		"paging" : false,

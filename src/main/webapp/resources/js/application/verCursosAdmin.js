@@ -142,6 +142,7 @@ var cursosAdmin = {
 
 $(document).ready(function() {
 	table = $('#listaCursos').DataTable({
+		retrieve: true,
 		"processing" : false,
 		"serverSide" : false,
 		"paging" : false,
