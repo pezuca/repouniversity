@@ -71,8 +71,8 @@ public class LoginService {
 		usuarioRol.setId(-1L);
 		usuarioRol.setIdAluDoc(-1L);
 		usuarioRol.setIdPersona(-1L);
-		usuarioRol.setNombreUsuario("Anonimo");
-		usuarioRol.setRol("Anonimo");
+		usuarioRol.setNombreUsuario("anonimo");
+		usuarioRol.setRol("anonimo");
 		
 		HTTPSessionManagerUtil.setSessionAttribute(request,
 				HTTPSessionManagerUtil.ATTR_LOGIN, usuarioRol);
