@@ -64,9 +64,18 @@
 				</div></a>
             </li>
             <li>
-               <a class="salir" href="/repouniversity/logout">
-                   <i class="fa fa-sign-out"></i> Salir
-               </a>
+               <c:choose>
+					<c:when test="${login.rol == 'anonimo'}">
+						<a class="salir" href="/repouniversity/logout">
+				            <i class="fa fa-sign-out"></i> Login
+				        </a>
+					</c:when>
+					<c:when test="${login.rol != 'anonimo'}">
+						<a class="salir" href="/repouniversity/logout">
+				            <i class="fa fa-sign-out"></i> Salir
+				        </a>
+					</c:when>						
+				</c:choose>
            </li>
        </ul>
    </nav>

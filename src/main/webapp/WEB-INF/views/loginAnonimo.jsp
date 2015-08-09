@@ -32,7 +32,7 @@
 							</div>
 						</form>
 					</div>
-					<a href="#" class="search-link">Busqueda Avanzada</a>
+					<a class="busqueda" href="/repouniversity/busquedaAvanzadaAnononimo">Busqueda Avanzada</a>
 				</div>
 			</div>
 		</div>

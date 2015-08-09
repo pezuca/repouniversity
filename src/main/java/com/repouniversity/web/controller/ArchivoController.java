@@ -141,6 +141,38 @@ public class ArchivoController {
         return new ModelAndView("busquedaAvanzada");
     }
 
+    @RequestMapping(value = "/busquedaAvanzadaAnonimo", method = {RequestMethod.POST})
+    public ModelAndView busquedaAvanzadaAnonimo(HttpServletRequest request, @ModelAttribute("login") UsuarioRol usuario,
+    		@RequestParam(value = "materia", required = false) String materia,
+            @RequestParam(value = "nbreDocente", required = false) String nbreDocente,
+            @RequestParam(value = "apeDocente", required = false) String apeDocente,
+            @RequestParam(value = "descripcion", required = false) String descripcion,
+            @RequestParam(value = "fechaDde", required = false) String fechaDde,
+            @RequestParam(value = "fechaHta", required = false) String fechaHta)
+            throws ParseException
+    		{
+        
+    	Date desde = dateFormat.parse("01/01/1900");
+    	Date hasta = dateFormat.parse("31/12/9999");
+    	if (!fechaDde.equals("")){
+    		desde = dateFormat.parse(fechaDde);
+    	}
+    	if (!fechaHta.equals("")){
+    		hasta = dateFormat.parse(fechaHta);
+    	}
+         
+
+
+        List<Archivo> listaResultados = new ArrayList<Archivo>();
+        listaResultados = busquedaAvanzada(materia, nbreDocente, apeDocente, descripcion, desde, hasta, usuario);
+        return new ModelAndView("resultListBusquedaAnonimo").addObject("listaResultados", listaResultados);
+    }
+    
+    @RequestMapping(value = "/busquedaAvanzadaAnononimo", method = {RequestMethod.GET})
+    public ModelAndView busquedaAvanzadaAnonimo() {
+        return new ModelAndView("busquedaAvanzadaAnonimo");
+    }
+
     private List<Archivo> buscarFicheroLocal(String parametro, UsuarioRol usuario) {
         List<Archivo> archivosEncontrados = new ArrayList<Archivo>();
         archivosEncontrados = archivoService.requestArchivos(parametro, usuario);
@@ -164,6 +196,13 @@ public class ArchivoController {
         return new ModelAndView("vistaPrevia").addObject("archivo", archivo).addObject("errorArchivo", errorArchivo);
     }
 
+    @RequestMapping(value = "/vistaPreviaAnonimo", method = {RequestMethod.GET})
+    public ModelAndView vistaPreviaAnonimo(@RequestParam(value = "archivoId") Long archivoId) {
+        VwArchivo archivo = archivoService.getVwArchivo(archivoId);
+      
+        return new ModelAndView("vistaPreviaAnonimo").addObject("archivo", archivo);
+    }
+    
     @RequestMapping(value = "/modificarArchivo", method = {RequestMethod.POST})
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)

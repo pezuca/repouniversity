@@ -33,18 +33,31 @@
 							</div>
 						</form>
 					</div>
-					<a href="#" class="search-link">Busqueda Avanzada</a>
+					<a class="busqueda" href="/repouniversity/busquedaAvanzadaAnononimo">Busqueda Avanzada</a>
 				</div>
 			</div>
 		</div>
 	
-		<tag:breadcrumb label="Lista de resultados"/>
-		
-	           	            <div class="row">
+				<div class="row">
 	                <div class="col-lg-12">
 	                    <div class="ibox float-e-margins">
 	                        <div class="ibox-content">
 	                        	<c:choose>
+	                        		<c:when test="${listaResultados.size() == 1 and not parametroBusqueda.isEmpty()}">
+								        <h2>
+			                                Se encontro ${listaResultados.size()} resultado con: <span class="text-navy">${parametroBusqueda}</span>
+			                            </h2>
+								    </c:when>
+								    <c:when test="${listaResultados.size() == 1 and parametroBusqueda.isEmpty()}">
+								        <h2>
+			                                Se encontro ${listaResultados.size()} resultado con: <span class="text-navy">${parametroBusqueda}</span>
+			                            </h2>
+								    </c:when>    
+								    <c:when test="${listaResultados.size() > 0 and not parametroBusqueda.isEmpty()}">
+								        <h2>
+			                                Se encontraron ${listaResultados.size()} resultados con: <span class="text-navy">${parametroBusqueda}</span>
+			                            </h2>
+								    </c:when>
 								    <c:when test="${listaResultados.size() > 0 and not parametroBusqueda.isEmpty()}">
 								        <h2>
 			                                Se encontraron ${listaResultados.size()} resultados con: <span class="text-navy">${parametroBusqueda}</span>
@@ -66,7 +79,10 @@
 		                                <h3><a href="#">${result.nombre}</a></h3>
 		                                <h5><a href="#">fecha publicacion: ${result.fechaPublicacion}</a></h5>
 		                                <p>
-		                                    ${result.descripcion}<br><br><button class="btn btn-primary btn-xs" type="button">vista previa</button>
+		                                    ${result.descripcion}<br><br>
+		                                    <a  name="verArchivo" data-archivoId="${result.id}" href="/repouniversity/vistaPreviaAnonimo?archivoId=${result.id}">
+												<button class="btn btn-primary btn-xs" type="button">vista previa</button>
+											</a>
 		                                </p>
 		                            </div>
 		                            <div class="hr-line-dashed"></div>
