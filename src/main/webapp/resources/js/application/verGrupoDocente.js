@@ -158,20 +158,23 @@ var tpAdmin = {
 					sticky: false
 				});
 				
+				tableGrupo.clear().draw();
 				
-				tableGrupo.row.add([
-				                                          data.id,
-				                                          data.persona.apellido + ", " + data.persona.nombre,
-				                                          "<a name='deleteAlumno' data-alumnoId='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a> "
-				                                         ]).draw();
+				for(var i= 0; i < data.alumnos.length; i++) {
+					tableGrupo.row.add([
+	                    data.alumnos[i].id,
+	                    data.alumnos[i].persona.apellido + ", " + data.alumnos[i].persona.nombre,
+	                    "<a name='deleteAlumno' data-alumnoId='" + data.alumnos[i].id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a> "
+		            ]).draw();
+					
+					//Agrego el evento de delete
+					$("a[name='deleteAlumno'][data-alumnoId=" + data.alumnos[i].id + "] button").click(function(){
+						$("#deleteAlumnoDialog").data('alumnoId', $(this).parent().attr("data-alumnoId"))
+						.data('cursoId', $("input[name=cursoId]").val())
+						.dialog("open");
+					});
+				}
 				
-				//Agrego el evento de delete
-				$("a[name='deleteAlumno'][data-alumnoId=" + data.id + "] button").click(function(){
-					$("#deleteAlumnoDialog").data('alumnoId', $(this).parent().attr("data-alumnoId"))
-					.data('cursoId', $("input[name=cursoId]").val())
-					.dialog("open");
-				});
-
 				$("#agregarAlumnoDialog").dialog("close");						
 			},
 			error: function(data) {
@@ -283,6 +286,23 @@ $(document).ready(function() {
 			$(".infoDialog").remove();
 			$('#nuevoAlumnoForm').trigger("reset");
 			$("#nuevoAlumnoForm").find(".form-group").removeClass("has-error");
+			var grupoId = $("#nuevoAlumnoForm input[name=grupoId]").val();
+			
+			$.ajax({
+				url: "/repouniversity/docente/alumnosSinGrupo",
+				type: "GET",
+				data: {"grupoId" : grupoId},
+				success: function(data){
+					$("select[name=alumnosIds]").empty();
+					
+					for(var i = 0; i < data.length; i++) {
+						$("select[name=alumnosIds]").append("<option value='" + data[i].id + "'>" + 
+								data[i].persona.nombre + ", " + data[i].persona.apellido + "</option>");
+					}
+					
+					$("select[name=alumnosIds]").trigger("chosen:updated");
+				}
+			})
 		},
 		close: function(event, ui) {
 		}

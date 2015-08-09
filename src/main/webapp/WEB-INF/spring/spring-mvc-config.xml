@@ -29,6 +29,4 @@ http://www.springframework.org/schema/context/spring-context.xsd">
  			<bean class="com.repouniversity.web.interceptors.LoginInterceptor" />
  		</mvc:interceptor>
 	</mvc:interceptors>
-	
- 	<mvc:view-controller path="/busquedaAvanzada" view-name="busquedaAvanzada"/>
 </beans>

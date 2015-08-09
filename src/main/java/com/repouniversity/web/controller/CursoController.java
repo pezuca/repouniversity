@@ -132,6 +132,16 @@ public class CursoController {
 
         return new ModelAndView("verGrupoDocente").addObject("grupo", grupo);
     }
+    
+    @RequestMapping(value = "docente/alumnosSinGrupo", method = {RequestMethod.GET})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<AlumnoTO> alumnosSinGrupo(HttpServletRequest request, @RequestParam("grupoId") Long grupoId) {
+    	GrupoTO grupo = grupoService.getGrupoById(grupoId);
+    	
+        return alumnoService.getAlumnosForCursoSinGrupo(grupo.getIdCurso());
+    }
+    
     @RequestMapping(value = "alumno/verGrupo", method = {RequestMethod.GET})
     public ModelAndView verGrupoAlumno(HttpServletRequest request, @RequestParam("grupoId") Long grupoId) {
         GrupoTO grupo = grupoService.getGrupoById(grupoId);
