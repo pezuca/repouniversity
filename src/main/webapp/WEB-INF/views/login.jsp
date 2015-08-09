@@ -55,14 +55,8 @@
                 <button type="submit" class="btn btn-lg btn-primary btn-block" id="entrar">Entrar</button>
 				<br/><br/>
 				<a href="loginAnonimo">Ingreso sin Usuario</a><br/>
-                <a href="#"><small>¿Te olvidaste el password?</small></a>
-                <p class="text-muted text-center"><small>¿Sos nuevo en RepoUniversity?</small></p>
-                <a class="btn btn-sm btn-white btn-block" href="register.html">Crear Cuenta</a>
             </form>
-            <c:if test="${not empty loginexception}">
-			<label  class="m-t" style="color: red"> <small>Usuario o password son incorrectos</small></label>
-		    </c:if>
-            <p class="m-t"> <small>Reposuinversity trabajo practico final CAECE &copy; 2014</small> </p>
+            <p class="m-t"> <small>Reposuinversity trabajo practico final CAECE &copy; 2015</small> </p>
         </div>
     </div>
 
