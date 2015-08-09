@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.repouniversity.model.entity.Curso;
 import com.repouniversity.model.entity.UsuarioRol;
 import com.repouniversity.model.entity.to.GrupoTO;
 import com.repouniversity.model.entity.to.TpGrupoTO;
@@ -93,8 +92,6 @@ public class GrupoController {
 				@RequestParam(value = "cursoId", required = true) Long cursoId) {
 
 			grupoService.eliminarAlumno(alumnoId, cursoId);
-			
-
 		}
 		
 	    @RequestMapping(value = "alumno/verGrupos", method = {RequestMethod.GET})

@@ -100,7 +100,7 @@ function misNotificaciones() {
 		//		  $("#linkNoti").hide();
 		//		  $("#textNoti").hide();
 				  $("#textNoti").html("No tiene notificaciones nuevas");
-				} else{
+				} else {
 					  $("#contNoti").show();
 		//			  $("#linkNoti").show();
 		//			  $("#textNoti").show();
@@ -108,11 +108,14 @@ function misNotificaciones() {
 					  if (data == 1) {
 					 	 $("#textNoti").html("Tiene una nueva notificacion");
 					  } else{
-						  	
-						  	$("#textNoti").html("Tiene " + data + " notificaciones nuevas");
-							}
+						  $("#textNoti").html("Tiene " + data + " notificaciones nuevas");
+					  }
 				}
 		  }
 	});
 }
+
+$(document).ready(function(){
+	$(".ui-dialog, .ui-dialog-content").css("overflow","visible");
+});
 </script>
