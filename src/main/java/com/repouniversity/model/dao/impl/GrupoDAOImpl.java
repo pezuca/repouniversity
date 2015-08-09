@@ -176,10 +176,6 @@ public class GrupoDAOImpl extends GenericDAOImpl<Grupo> implements GrupoDAO {
             }
         }, new GrupoRowMapper(), "findGruposDeAlumno: " + idAlumno);
 
-        if (list.isEmpty()) {
-            return new ArrayList<Grupo>();
-        }
-
         return list;
     }
 

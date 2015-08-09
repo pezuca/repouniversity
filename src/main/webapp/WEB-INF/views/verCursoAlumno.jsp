@@ -170,6 +170,14 @@
 			});
 	
 			$("#clientTable_length").remove();
+			
+			$('#fileUpload').on('hidden.bs.modal', function () {
+				var success = $("#fileUpload input[name=atLestOneSuccess]").val();
+				
+				if(success == "1") {
+					location.reload();
+				}
+			})
 		});
 		
 		function altaEnCurso(notificacionId) {

@@ -78,11 +78,13 @@ $(document).ready(function () {
 		var input = $("input[name='title-" + file.name.substring(0,file.name.lastIndexOf(".")) + "'][data-value='" + data[0].descripcion + "']:not([readonly=readonly])").first();
 		var inputTags = $("input[name='tags-" + file.name.substring(0,file.name.lastIndexOf(".")) + "']:not([readonly=readonly])").first();
 		
-		input.parents(".file-row").find("span.preview").append("<p class='text-success'>" + "El archivo se cargó correctamente" + "</p>");
+		input.parents(".file-row").find("span.preview").append("<p class='text-success'><b>" + "El archivo se cargó correctamente" + "</b></p>");
 		input.attr("readonly", "readonly");
 		inputTags.attr("readonly", "readonly");
 		
 		$("input[name=archivoId]").val(data[0].id);
+		
+		$("#fileUpload input[name=atLestOneSuccess]").val("1");
 	});
 	
 	myDropzone.on("error", function(file, message, data) {

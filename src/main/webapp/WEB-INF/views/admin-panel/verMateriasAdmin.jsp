@@ -14,7 +14,6 @@
 	src="/repouniversity/resources/js/application/admin-panel/verMateriasAdmin.js"></script>
 </head>
 <body class=" pace-done">
-
 	<div id="wrapper">
 		<%@include file="../../components/static-nav-bar.jsp"%>
 		<div id="page-wrapper" class="gray-bg dashbard-1">
