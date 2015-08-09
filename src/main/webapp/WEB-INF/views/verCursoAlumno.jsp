@@ -99,7 +99,7 @@
 												<button class="btn btn-primary btn-circle" type="button"><i class="fa fa-search"></i>
 												</button>
 											</a>
-											<a  name="dowloadArchivo" data-archivoId="${archivo.id}" href="/repouniversity/bajarArchivo?archivoId=${archivo.id}" target="_blank">
+											<a  name="dowloadArchivo" data-archivoId="${archivo.id}" href="/repouniversity/bajarArchivo?archivoId=${archivo.id}">
 												<button class="btn btn-success btn-circle" type="button"><i class="fa fa-download"></i>
 												</button>
 											</a>

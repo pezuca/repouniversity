@@ -6,7 +6,7 @@
         </li>
         <li>
             <a href="/repouniversity/logout">
-                <i class="fa fa-sign-out"></i> Salir
+                <i class="fa fa-sign-out"></i> Log in
             </a>
         </li>
     </ul>
