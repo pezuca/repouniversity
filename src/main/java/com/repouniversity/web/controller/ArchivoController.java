@@ -120,8 +120,7 @@ public class ArchivoController {
     @RequestMapping(value = "/busquedaAvanzada", method = {RequestMethod.POST})
     public ModelAndView busquedaAvanzada(HttpServletRequest request, @ModelAttribute("login") UsuarioRol usuario,
     		@RequestParam(value = "materia", required = false) String materia,
-            @RequestParam(value = "nbreDocente", required = false) String nbreDocente,
-            @RequestParam(value = "apeDocente", required = false) String apeDocente,
+            @RequestParam(value = "docente", required = false) String docente,
             @RequestParam(value = "descripcion", required = false) String descripcion,
             @RequestParam(value = "fechaDde", required = false) String fechaDde,
             @RequestParam(value = "fechaHta", required = false) String fechaHta)
@@ -140,7 +139,7 @@ public class ArchivoController {
 
 
         List<Archivo> listaResultados = new ArrayList<Archivo>();
-        listaResultados = busquedaAvanzada(materia, nbreDocente, apeDocente, descripcion, desde, hasta, usuario);
+        listaResultados = busquedaAvanzada(materia, docente, descripcion, desde, hasta, usuario);
         return new ModelAndView("resultList").addObject("listaResultados", listaResultados);
     }
 
@@ -152,7 +151,7 @@ public class ArchivoController {
     @RequestMapping(value = "/busquedaAvanzadaAnonimo", method = {RequestMethod.POST})
     public ModelAndView busquedaAvanzadaAnonimo(HttpServletRequest request, @ModelAttribute("login") UsuarioRol usuario,
     		@RequestParam(value = "materia", required = false) String materia,
-            @RequestParam(value = "Docente", required = false) String Docente,
+            @RequestParam(value = "docente", required = false) String docente,
             @RequestParam(value = "descripcion", required = false) String descripcion,
             @RequestParam(value = "fechaDde", required = false) String fechaDde,
             @RequestParam(value = "fechaHta", required = false) String fechaHta)
@@ -171,7 +170,7 @@ public class ArchivoController {
 
 
         List<Archivo> listaResultados = new ArrayList<Archivo>();
-        listaResultados = busquedaAvanzada(materia, Docente, "a", descripcion, desde, hasta, usuario);
+        listaResultados = busquedaAvanzada(materia, docente, "a", descripcion, desde, hasta, usuario);
         return new ModelAndView("resultListBusquedaAnonimo").addObject("listaResultados", listaResultados);
     }
     

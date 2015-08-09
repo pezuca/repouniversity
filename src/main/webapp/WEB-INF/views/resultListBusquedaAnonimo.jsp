@@ -28,24 +28,37 @@
 			                    <div class="ibox-content">
 	                        		<form method="post" class="form-horizontal" action="/repouniversity/busquedaAvanzadaAnonimo" role="form">
 										<div class="form-group"><label class="col-sm-2 control-label">Materia</label>
-											<div class="col-sm-10"><input type="text" class="form-control" name="materia"></div>
+											 <div class="col-sm-6">
+		                                        <div class="row">
+												   <select data-placeholder="Elija una materia" name="materia" class="chosen-select" tabindex="-1">
+														<option value="" disabled selected>Elija una materia</option>
+														<c:forEach items="${materias}" var="materia" varStatus="status">
+															<option value="${materia.id}">${materia.nombre}</option>
+														</c:forEach>
+													</select>
+												</div>
+											</div>
 		                                </div>
 		                                <div class="form-group"><label class="col-sm-2 control-label">Docente</label>
-			                                <div class="col-sm-10">
+		                                	 <div class="col-sm-6">
 		                                        <div class="row">
-		                                            <div class="col-md-4"><input type="text" placeholder="docente nombre" class="form-control" name="nbreDocente"></div>
-		                                            <div class="col-md-4"><input type="text" placeholder="docente apellido" class="form-control" name="apeDocente"></div>
-		                                        </div>
-		                                    </div>
-	                                    </div>
+												   <select data-placeholder="Elija un docente" name="docente" class="chosen-select" tabindex="-1">
+														<option value="" disabled selected>Elija un docente</option>
+														<c:forEach items="${docentes}" var="docente" varStatus="status">
+															<option value="${docente.id}">${docente.persona.nombre}, ${docente.persona.apellido}</option>
+														</c:forEach>
+													</select>
+												</div>
+											</div>
+			                              </div>
 		                                <!-- div class="form-group"><label class="col-sm-2 control-label">Carrera</label>
 											<div class="col-sm-10"><input type="text" class="form-control" name="carrera"></div>
 		                                </div-->
-		                                <div class="form-group"><label class="col-sm-2 control-label">Descripci&oacute;n</label>
-											<div class="col-sm-10"><input type="text" class="form-control" name="descripcion"></div>
+		                                <div class="form-group"><label class="col-sm-2 control-label">Palabra clave</label>
+											<div class="col-sm-6"><input type="text" maxlength="80" class="form-control" name="descripcion"></div>
 		                                </div>
 		                                <div class="form-group" id="data_5"><label class="col-sm-2 control-label"><b>Fecha publicaci&oacute;n</b></label>
-		                                	<div class="col-sm-10">
+		                                	<div class="col-sm-6">
 		                                		<div class="input-daterange input-group" id="datepicker">
 				                                    <input type="text" class="form-control input-sm" name="fechaDde" placeholder="Fecha desde"/>
 				                                    <span class="input-group-addon">-</span>
