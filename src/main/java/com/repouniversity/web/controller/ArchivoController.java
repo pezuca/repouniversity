@@ -23,11 +23,15 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.repouniversity.model.entity.Archivo;
+import com.repouniversity.model.entity.Materia;
 import com.repouniversity.model.entity.UsuarioRol;
 import com.repouniversity.model.entity.VwArchivo;
+import com.repouniversity.model.entity.to.DocenteTO;
 import com.repouniversity.model.entity.to.ErrorArchivoTO;
 import com.repouniversity.model.services.ArchivoService;
+import com.repouniversity.model.services.DocenteService;
 import com.repouniversity.model.services.ErrorArchivoService;
+import com.repouniversity.model.services.MateriaService;
 import com.repouniversity.model.services.PersonaService;
 import com.repouniversity.web.exceptions.SubirArchivoException;
 
@@ -37,7 +41,11 @@ public class ArchivoController {
 
     @Autowired
     private ArchivoService archivoService;
-
+    @Autowired
+    private DocenteService docenteService;
+    @Autowired
+    private MateriaService materiaService;
+    
     @Autowired
     private ErrorArchivoService errorArchivoService;
 
@@ -144,8 +152,7 @@ public class ArchivoController {
     @RequestMapping(value = "/busquedaAvanzadaAnonimo", method = {RequestMethod.POST})
     public ModelAndView busquedaAvanzadaAnonimo(HttpServletRequest request, @ModelAttribute("login") UsuarioRol usuario,
     		@RequestParam(value = "materia", required = false) String materia,
-            @RequestParam(value = "nbreDocente", required = false) String nbreDocente,
-            @RequestParam(value = "apeDocente", required = false) String apeDocente,
+            @RequestParam(value = "Docente", required = false) String Docente,
             @RequestParam(value = "descripcion", required = false) String descripcion,
             @RequestParam(value = "fechaDde", required = false) String fechaDde,
             @RequestParam(value = "fechaHta", required = false) String fechaHta)
@@ -164,13 +171,16 @@ public class ArchivoController {
 
 
         List<Archivo> listaResultados = new ArrayList<Archivo>();
-        listaResultados = busquedaAvanzada(materia, nbreDocente, apeDocente, descripcion, desde, hasta, usuario);
+        listaResultados = busquedaAvanzada(materia, Docente, "a", descripcion, desde, hasta, usuario);
         return new ModelAndView("resultListBusquedaAnonimo").addObject("listaResultados", listaResultados);
     }
     
     @RequestMapping(value = "/busquedaAvanzadaAnononimo", method = {RequestMethod.GET})
     public ModelAndView busquedaAvanzadaAnonimo() {
-        return new ModelAndView("busquedaAvanzadaAnonimo");
+        List<DocenteTO> docentes = docenteService.getAll();
+        List<Materia> materias = materiaService.getAll();
+        
+        return new ModelAndView("busquedaAvanzadaAnonimo").addObject("docentes", docentes).addObject("materias", materias);
     }
 
     private List<Archivo> buscarFicheroLocal(String parametro, UsuarioRol usuario) {

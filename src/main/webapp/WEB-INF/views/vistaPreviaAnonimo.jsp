@@ -10,10 +10,10 @@
 <link href="/repouniversity/resources/css/loginAnonimo.css" rel="stylesheet">
 
 </head>
-<body class=" pace-done">
+<body class="loginAnonimo">
 	
 	<div id="wrapper">
-	<%@include file="../components/static-nav-bar.jsp"%>
+		<%@include file="../components/static-nav-bar.jsp"%>
 		<div id="page-wrapper" class="gray-bg dashbard-1">
 		
 		
