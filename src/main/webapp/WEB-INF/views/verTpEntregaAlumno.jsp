@@ -32,7 +32,7 @@
 									<c:when test="${archivo.idTipo == 1}">
 										<iframe style="width: 100%;height: 500px;" src="/repouniversity/resources/js/ViewerJS/index.html#documents/previews/${archivo.path}" allowfullscreen webkitallowfullscreen></iframe>
 									</c:when>
-									<c:when test="${archivo.idTipo == 2}">
+									<c:when test="${archivo.idTipo == 4}">
 										<img style="width: 100%;height: 500px;" src="/repouniversity/resources/js/ViewerJS/documents/previews/${archivo.path}"></iframe>
 									</c:when>
 								</c:choose>
