@@ -12,7 +12,7 @@
 <title>Repouniversity</title>
 <%@include file="../components/common-statics-imports.jsp"%>
 
-<script type="text/javascript" src="resources/js/application/dashboard.js"></script>
+<script type="text/javascript" src="/repouniversity/resources/js/application/dashboard.js"></script>
 </head>
 <body class=" pace-done">
 	<div id="wrapper">
@@ -51,10 +51,10 @@
 											<td>
 												<c:choose>
 													<c:when test="${cursoMat.tipoNotificacion != 1}">
-														<button class="btn btn-info btn-circle" type="button" onclick="clickSolicitud(${cursoMat.id}, ${userLog.idAluDoc}, ${cursoMat.docente.id}, 1)"><i class="fa fa-check"></i></button>
+														<button data-cursoId="${cursoMat.id}" class="btn btn-info btn-circle" type="button" onclick="clickSolicitud(${cursoMat.id}, ${userLog.idAluDoc}, ${cursoMat.docente.id}, 1)"><i class="fa fa-check"></i></button>
 													</c:when>
 													<c:otherwise>
-														<button disabled="disabled" class="btn btn-default btn-circle" type="button"><i class="fa fa-check"></i></button>
+														<button disabled="disabled" class="btn btn-info btn-circle" type="button"><i class="fa fa-check"></i></button>
 													</c:otherwise>
 												</c:choose>
 											</td>
@@ -86,7 +86,12 @@
 				"serverSide" : false,
 				"paging": false,
 				"language": {
-		            "search": "Búsqueda"
+		            "lengthMenu": "Mostrar _MENU_ resultados por página",
+		            "zeroRecords": "No fueron encontrados resultados.",
+		            "info": "Pagina _PAGE_ of _PAGES_",
+		            "infoEmpty": "No hay resultados disponibles.",
+		            "infoFiltered": "(filtered from _MAX_ total records)",
+		            "search": "Búsqueda: "
 		        }
 			});
 	
@@ -99,7 +104,20 @@
 				  url: "/repouniversity/alumno/solicitarCurso",
 				  data: {"cursoId" : cursoId, "alumnoId" : alumnoId, "docenteId" : docenteId, "tipoNotif" : tipoNotif},
 				  success: function(){
-					  //alert("Good!")
+						$.gritter.add({
+							title:'Solicitud',
+							text: 'La solicitud fue enviada correctamente. Aguarde la respuesta del docente.',
+							sticky: false
+						});
+						
+						$("button[data-cursoId=" + cursoId + "]").attr("disabled", "disabled");
+				  },
+				  error: function(){
+						$.gritter.add({
+							title:'Solicitud',
+							text: 'Hubo un problema al enviar su solicitud. Por favor inténtelo mas tarde.',
+							sticky: false
+						});
 				  }
 			});
 		}
