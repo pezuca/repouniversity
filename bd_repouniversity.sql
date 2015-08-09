@@ -144,7 +144,7 @@ CREATE TABLE `archivo_tipo` (
 
 LOCK TABLES `archivo_tipo` WRITE;
 /*!40000 ALTER TABLE `archivo_tipo` DISABLE KEYS */;
-INSERT INTO `archivo_tipo` VALUES (1,'Word','2014-04-14 20:04:21',1),(2,'PDF','2014-04-14 20:04:31',1),(3,'Excel','2014-04-14 20:04:39',1);
+INSERT INTO `archivo_tipo` VALUES (1,'Word','2014-04-14 20:04:21',1),(2,'PDF','2014-04-14 20:04:31',1),(3,'Excel','2014-04-14 20:04:39',1),(4,'Imagem','2014-04-14 20:04:39',1);
 /*!40000 ALTER TABLE `archivo_tipo` ENABLE KEYS */;
 UNLOCK TABLES;
 

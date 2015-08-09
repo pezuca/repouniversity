@@ -73,13 +73,13 @@
     <script>
         $(document).ready(function(){
             $("#datepicker input[name=fechaDde]").datepicker({
-                fateFormat: "dd/mm/yy",
+                fateFormat: "dd/mm/yyyy",
                 onClose: function( selectedDate ) {
                   $("#datepicker input[name=fechaHta]").datepicker("option", "minDate", selectedDate);
                 }
               });
               $("#datepicker input[name=fechaHta]").datepicker({
-                fateFormat: "dd/mm/yy",
+                fateFormat: "dd/mm/yyyy",
                 onClose: function( selectedDate ) {
                   $("#datepicker input[name=fechaDde]").datepicker("option", "maxDate", selectedDate);
                 }

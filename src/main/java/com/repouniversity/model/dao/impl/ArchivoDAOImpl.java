@@ -139,23 +139,38 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
 
         // armamos la cadena con todos los tags con LIKE
         String tags = new String();
+        String nbreDocente = new String();
+        String apeDocente = new String();
+        String materia = new String();
 
         // se inicializa tagas por si se agrega un espacio solamente en la busqued para que no rompa
         // para el resto de los caracteres especiales no hay problemas
         tags = "tags=\'\'";
+        nbreDocente = "";
+        apeDocente = "";
+        materia = "";
 
         if (parametrosBusqueda.size() > 0) {
             tags = "";
             for (String parametro : parametrosBusqueda) {
-                tags = tags.concat(" tags like \'%" + parametro.trim() + "%\' OR ");
+                tags = tags.concat(" tags like \'%" + parametro.trim() + "%\' OR descripcion like \'%" + parametro.trim() + "%\' OR ");
+                nbreDocente = nbreDocente.concat(" nombreDocente like \'%" + parametro.trim() + "%\' OR ");
+                apeDocente = apeDocente.concat(" apellidoDocente like \'%" + parametro.trim() + "%\' OR ");
+                materia = materia.concat(" materia like \'%" + parametro.trim() + "%\' OR ");
             }
             tags = tags.substring(0, tags.length() - 3);
+            nbreDocente = nbreDocente.substring(0, nbreDocente.length() - 3);
+            apeDocente = apeDocente.substring(0, apeDocente.length() - 3);
+            materia = materia.substring(0, materia.length() - 3);
         }
        
         
         //armamos la query de busqueda en la base
         sql.append("select * from repouniversity.vw_archivos");
-        sql.append(" where ("+ tags + ")");
+        sql.append(" where ("+ tags + ") OR ");
+        sql.append(nbreDocente.trim() + "OR ");
+        sql.append(apeDocente.trim() + "OR ");
+        sql.append(materia.trim());
         sql.append(acotarBusquedaXTipoUsuario(usuario));
 
         List<Archivo> list = doQuery(new SQLStatement(sql.toString()) {
@@ -196,7 +211,7 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
 
 			tags="";
 			for (String parametro:laDescripcion) {
-				tags= tags.concat(" tags like \'%" + parametro.trim() +"%\' OR ");
+				tags= tags.concat(" tags like \'%" + parametro.trim() +"%\' OR descripcion like \'%" + parametro.trim() +"%\' OR ");
 			}
 			tags = tags.substring(0, tags.length()-3);
 		}
@@ -209,7 +224,7 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
         sql.append(" apellidoDocente like \'%"+ apeDocente.trim() + "%\' AND");
         //sql.append(" carrera like \'%"+ carrera.trim() + "%\' AND");
         sql.append(" materia like \'%"+ materia.trim() + "%\' AND");
-        sql.append(" fecha_publicacion between \'"+ new SimpleDateFormat("yyyy-MM-dd").format(fechaDde) + "\' AND \'" + new SimpleDateFormat("yyyy-MM-dd").format(fechaHta) + "\'");
+        sql.append(" fecha_publicacion between \'"+ new SimpleDateFormat("yyyy/MM/dd").format(fechaDde) + "\' AND \'" + new SimpleDateFormat("yyyy/MM/dd").format(fechaHta) + "\'");
         sql.append(acotarBusquedaXTipoUsuario(usuario));
 
         List<Archivo> resultList = doQuery(new SQLStatement(sql.toString()) {
