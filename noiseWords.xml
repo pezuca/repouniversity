@@ -32,6 +32,7 @@
 	<noise-word>cual</noise-word>
 	<noise-word>cuando</noise-word>
 	<noise-word>de</noise-word>
+	<noise-word>del</noise-word>
 	<noise-word>dentro</noise-word>
 	<noise-word>desde</noise-word>
 	<noise-word>donde</noise-word>
@@ -175,4 +176,5 @@
 	<noise-word>vosotros</noise-word>
 	<noise-word>voy</noise-word>
 	<noise-word>yo</noise-word>
+	<noise-word>y</noise-word>
 </noise-words>
