@@ -174,7 +174,6 @@ $(document).ready(function() {
 	$("#agregarCarreraDialog").dialog({
 		resizable: false,
 		width:700,
-		height:500,
 		modal: true,
 		autoOpen: false,
 		autoResize:true,
@@ -202,7 +201,6 @@ $(document).ready(function() {
 	$("#editarCarreraDialog").dialog({
 		resizable: false,
 		width:700,
-		height:500,
 		modal: true,
 		autoOpen: false,
 		autoResize:true,

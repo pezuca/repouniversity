@@ -113,7 +113,6 @@ $(document).ready(function() {
 	$("#editarArchivoDialog").dialog({
 		resizable: false,
 		width:700,
-		height:350,
 		modal: true,
 		autoOpen: false,
 		autoResize:true,
