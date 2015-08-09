@@ -35,7 +35,7 @@ var errorAdmin = {
 					sticky: false
 				});
 				
-				table.row( $("#listaErrores a[data-errorid=" + errorId + "]").parents('tr') ).remove().draw();
+				listaErrores.row( $("#listaErrores a[data-errorid=" + errorId + "]").parents('tr') ).remove().draw();
 				$("#deleteErrorDialog").dialog("close");						
 			},
 			error: function(data) {
@@ -65,7 +65,8 @@ var errorAdmin = {
 };
 
 $(document).ready(function() {
-	table = $('#listaErrores').DataTable({
+	listaErrores = $('#listaErrores').DataTable({
+		retrieve: true,
 		"processing" : false,
 		"serverSide" : false,
 		"paging" : false,

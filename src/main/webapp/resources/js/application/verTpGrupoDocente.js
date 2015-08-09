@@ -198,6 +198,7 @@ var tpEntregaAdmin = {
 
 $(document).ready(function() {
 	table = $('#EntregaTP').DataTable({
+		retrieve: true,
 		"processing" : false,
 		"serverSide" : false,
 		"paging" : false,
@@ -211,6 +212,7 @@ $(document).ready(function() {
         }
 	});
 	tableComentario = $('#ComentarioTP').DataTable({
+		retrieve: true,
 		"processing" : false,
 		"serverSide" : false,
 		"paging" : false,

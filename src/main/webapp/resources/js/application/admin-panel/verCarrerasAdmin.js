@@ -146,6 +146,7 @@ var carrerasAdmin = {
 
 $(document).ready(function() {
 	table = $('#listaCarreras').DataTable({
+		retrieve: true,
 		"processing" : false,
 		"serverSide" : false,
 		"paging" : false,
@@ -173,7 +174,6 @@ $(document).ready(function() {
 	$("#agregarCarreraDialog").dialog({
 		resizable: false,
 		width:700,
-		height:500,
 		modal: true,
 		autoOpen: false,
 		autoResize:true,
@@ -201,7 +201,6 @@ $(document).ready(function() {
 	$("#editarCarreraDialog").dialog({
 		resizable: false,
 		width:700,
-		height:500,
 		modal: true,
 		autoOpen: false,
 		autoResize:true,

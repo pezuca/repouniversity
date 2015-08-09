@@ -132,6 +132,7 @@ var materiasAdmin = {
 
 $(document).ready(function() {
 	table = $('#listaMaterias').DataTable({
+		retrieve: true,
 		"processing" : false,
 		"serverSide" : false,
 		"paging" : false,

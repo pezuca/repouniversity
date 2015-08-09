@@ -144,6 +144,7 @@ var usuariosAdmin = {
 
 $(document).ready(function() {
 	table = $('#listaPersonas').DataTable({
+		retrieve: true,
 		"processing" : false,
 		"serverSide" : false,
 		"paging" : false,

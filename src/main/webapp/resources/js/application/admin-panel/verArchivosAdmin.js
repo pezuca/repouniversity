@@ -89,6 +89,7 @@ var archivosAdmin = {
 
 $(document).ready(function() {
 	table = $('#listaArchivos').DataTable({
+		retrieve: true,
 		"processing" : false,
 		"serverSide" : false,
 		"paging" : false,
@@ -115,7 +116,6 @@ $(document).ready(function() {
 	$("#editarArchivoDialog").dialog({
 		resizable: false,
 		width:700,
-		height:400,
 		modal: true,
 		autoOpen: false,
 		autoResize:true,

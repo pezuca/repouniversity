@@ -47,6 +47,7 @@ var cursosAdmin = {
 
 $(document).ready(function() {
 	table = $('#cursosAlumno').DataTable({
+		retrieve: true,
 		"processing" : false,
 		"serverSide" : false,
 		"paging" : false,
