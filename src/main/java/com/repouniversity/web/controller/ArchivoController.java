@@ -173,7 +173,11 @@ public class ArchivoController {
 
         List<Archivo> listaResultados = new ArrayList<Archivo>();
         listaResultados = busquedaAvanzada(materia, docente, descripcion, desde, hasta, usuario);
-        return new ModelAndView("resultListBusquedaAnonimo").addObject("listaResultados", listaResultados);
+        
+        List<DocenteTO> docentes = docenteService.getAll();
+        List<Materia> materias = materiaService.getAll();
+        
+        return new ModelAndView("resultListBusquedaAnonimo").addObject("listaResultados", listaResultados).addObject("docentes", docentes).addObject("materias", materias);
     }
     
     @RequestMapping(value = "/busquedaAvanzadaAnononimo", method = {RequestMethod.GET})

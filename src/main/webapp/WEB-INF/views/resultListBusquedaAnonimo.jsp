@@ -8,7 +8,9 @@
 <title>Repouniversity</title>
 <%@include file="../components/common-statics-imports.jsp"%>
 <link href="/repouniversity/resources/css/loginAnonimo.css" rel="stylesheet">
+<script src="/repouniversity/resources/js/plugins/chosen/chosen.jquery.js"></script>
 
+<link rel="stylesheet" type="text/css" href="/repouniversity/resources/css/plugins/chosen/chosen.css" />
 </head>
 <body id="loginAnonimo">
 
@@ -31,9 +33,9 @@
 										</div>
 								</div>
 										
-								<div class="ibox-content profile-content">
+								<div class="ibox-content profile-content" style="display: none;">
 			                   
-									<div class="ibox-content">
+									<div class="ibox-content" style="display: none;">
 										<form method="post" class="form-horizontal" action="/repouniversity/busquedaAvanzadaAnonimo" role="form">
 											<div class="form-group"><label class="col-sm-2 control-label">Materia</label>
 												 <div class="col-sm-6">
@@ -85,7 +87,7 @@
 			            	</div>
 						</div>
 					</div>
-		    	</div>
+		    	 </div>
 				<div class="row">
 	                <div class="col-lg-12">
 	                    <div class="ibox float-e-margins">
@@ -134,6 +136,7 @@
 	                    </div>
 	            	</div>
 	        	</div>
+	       
 	</div>
 	<%@include file="../components/footer.jsp"%>
 	    
