@@ -390,6 +390,21 @@ $(document).ready(function() {
 		}
 	});
 	
+	$("#deleteAlumnoValidationDialog").dialog({
+		resizable: false,
+		width:400,
+		modal: true,
+		autoOpen: false,
+		autoResize:true,
+		hide: {effect: "fade", duration: 300},
+		hide: {effect: "fade", duration: 300},
+		buttons: {
+			"Aceptar": function() {
+				$(this).dialog("close");
+			}
+		}
+	});
+	
 	$("#agregarTpButton").click(function() {
 		$("#agregarTpDialog").dialog("open");
 	});
@@ -401,9 +416,13 @@ $(document).ready(function() {
 		$("#deleteTpDialog").data('tpId', $(this).parent().attr("data-tpgrupoId")).dialog("open");
 	});
 	$("a[name=deleteAlumno] button").click(function(){
-		$("#deleteAlumnoDialog").data('alumnoId', $(this).parent().attr("data-alumnoId"))
-		.data('cursoId', $("input[name=cursoId]").val())
-		.dialog("open");
+		if($("#GruposAlumnos tr").size() > 2) {
+			$("#deleteAlumnoDialog").data('alumnoId', $(this).parent().attr("data-alumnoId"))
+			.data('cursoId', $("input[name=cursoId]").val())
+			.dialog("open");
+		} else {
+			$("#deleteAlumnoValidationDialog").dialog("open");
+		}
 	});
 	$("a[name=editTp] button").click(function(){
 		$("#editarTpDialog").data('tpId', $(this).parent().attr("data-tpgrupoId"))

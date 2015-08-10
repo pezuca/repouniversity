@@ -33,33 +33,32 @@
 	                  <div class="ibox-content">
 	                  	<table id="listaPersonas" class="table table-striped table-hover" >
 	                  		<thead class="encabezado">
-							<tr>
-								<th>Id</th>
-								<th>Nombre</th>
-								<th>Apellido</th>
-								<th>User name</th>
-								<th>Mail</th>
-								<th>Rol</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${usuarios}" var="usuario"
-								varStatus="status">
 								<tr>
-									<td>${usuario.id}</td>
-									<td>${usuario.persona.nombre}</td>
-									<td>${usuario.persona.apellido}</td>
-									<td>${usuario.user}</td>
-									<td>${usuario.persona.mail}</td>
-									<td>${usuario.rol}</td>
-									<td>
-										<a href="#" name="editUser" data-userId="${usuario.id}"><button class="btn btn-primary btn-circle" type="button"><i class="fa fa-pencil"></i></button></a>
-										<a href="#" name="deleteUser" data-userId="${usuario.id}" ><button class="btn btn-danger btn-circle" type="button"><i class="fa fa-times"></i></button></a>
-									</td>
+									<th>Id</th>
+									<th>Nombre</th>
+									<th>Apellido</th>
+									<th>User name</th>
+									<th>Mail</th>
+									<th>Rol</th>
+									<th></th>
 								</tr>
-							</c:forEach>
-						</tbody>
+							</thead>
+							<tbody>
+								<c:forEach items="${usuarios}" var="usuario" varStatus="status">
+									<tr>
+										<td>${usuario.id}</td>
+										<td>${usuario.persona.nombre}</td>
+										<td>${usuario.persona.apellido}</td>
+										<td>${usuario.user}</td>
+										<td>${usuario.persona.mail}</td>
+										<td>${usuario.rol}</td>
+										<td class="text-center">
+											<a href="#" name="editUser" data-userId="${usuario.id}"><button class="btn btn-primary btn-circle" type="button"><i class="fa fa-pencil"></i></button></a>
+											<a href="#" name="deleteUser" data-userId="${usuario.id}" ><button class="btn btn-danger btn-circle" type="button"><i class="fa fa-times"></i></button></a>
+										</td>
+									</tr>
+								</c:forEach>
+							</tbody>
 	                  	</table>
 	                  </div>
 	              </div>
