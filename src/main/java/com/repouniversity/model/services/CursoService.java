@@ -80,8 +80,8 @@ public class CursoService {
 	}
 
 	public void registrarAlumnoACurso(Notificacion noti) {
-		cursoDao.saveAlumnoCursoGrupo(noti.getAlumnoId(), noti.getCursoId(), 0L);
-
+		cursoDao.insertAlumnoCursoGrupo(1L, noti.getCursoId(), noti.getAlumnoId());
+	
 		notificacionService.insertarNotificacion(noti.getAlumnoId(),
 				noti.getCursoId(), noti.getDocenteId(), 3L);
 

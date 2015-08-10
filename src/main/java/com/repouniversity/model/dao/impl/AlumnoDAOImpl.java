@@ -144,9 +144,6 @@ public class AlumnoDAOImpl extends GenericDAOImpl<Alumno> implements AlumnoDAO {
             }
         }, new AlumnoRowMapper(), "findAlumnoForGrupo: " + cursoId);
 
-        if (list.isEmpty()) {
-            return null;
-        }
 
         return list;
     }

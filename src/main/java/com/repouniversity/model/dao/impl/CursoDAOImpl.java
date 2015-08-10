@@ -119,7 +119,7 @@ public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
         sql.append("FROM curso c ");
         sql.append("JOIN materia m ON m.id_materia = c.id_materia ");
         sql.append("JOIN carrera_materia cm on cm.idmateria = m.id_materia ");
-        sql.append("LEFT JOIN notificacion n ON n.idcurso = c.id_curso AND tiponotificacion = 1 AND n.idalumno = ? ");
+        sql.append("LEFT JOIN notificacion n ON n.idcurso = c.id_curso AND tiponotificacion = 1 AND n.activo = 1 AND n.idalumno = ? ");
         sql.append("WHERE c.id_curso not in (SELECT alumno_curso.id_curso from alumno_curso WHERE alumno_curso.id_alumno = ?) ");
         sql.append("AND c.activo = 1 AND m.activo = 1");
         
@@ -221,10 +221,10 @@ public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
             }
         }, new LongRowMapper(), "ObtenerAlumnosSinGrupo: " + idCurso);
 
-        if (list.isEmpty()) {
+   /*     if (list.isEmpty()) {
             return new ArrayList<Long>();
         }
-
+    */
         return list;
     }
 
@@ -237,6 +237,34 @@ public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
 	        jdbcTemplate.update(sql.toString());
 
 	    }
-	
+	   @Override
+	    public void insertAlumnoCursoGrupo(final Long grupoId, final Long cursoId, final Long alumnoId) {
+	        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+	        final InsertSQLStatement sqlStatement = new InsertSQLStatement(
+	                "insert into alumno_curso (id_grupo, id_alumno, id_curso) values (?,?,?)") {
+	            @Override
+	            public void doAfterInsert(Long id) {
+	            }
+	            @Override
+	            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+	                ps.setLong(1, grupoId);
+	                ps.setLong(2, alumnoId);
+	                ps.setLong(3, cursoId);
+	            }
+	            @Override
+	            public void doAfterTransaction(int result) {
+	            }
+	        };
+
+	        jdbcTemplate.update(new PreparedStatementCreator() {
+	            @Override
+	            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+	                PreparedStatement ps = connection.prepareStatement(sqlStatement.getQuery(), Statement.RETURN_GENERATED_KEYS);
+	                sqlStatement.buildPreparedStatement(ps);
+	                return ps;
+	            }
+	        }, keyHolder);
+	    }
     
 }
