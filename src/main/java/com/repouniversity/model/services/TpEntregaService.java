@@ -67,14 +67,14 @@ public class TpEntregaService {
     
 
    
-    public TpEntregaTO editarEntregaTp(Long tpGrupoId, Long tpEntregaId, String descripcion, Long archivoId) {
+    public TpEntregaTO editarEntregaTp(Long tpGrupoId, Long tpEntregaId, String descripcion) {
 		// TODO Auto-generated method stub
     	TpEntrega tpEntrega = new TpEntrega();
 
     	tpEntrega.setIdTpGrupo(tpGrupoId);
     	tpEntrega.setId(tpEntregaId);
     	tpEntrega.setDescripcion(descripcion);
-    	tpEntrega.setIdArchivo(archivoId);
+    	tpEntrega.setIdArchivo(tpEntregaDao.findById(tpEntregaId).getIdArchivo());
     	tpEntrega.setActivo(true);
     	tpEntregaDao.update(tpEntrega);
     	
@@ -106,7 +106,10 @@ public class TpEntregaService {
         //tpGrupoTo.setGrupo(grupoService.getGrupoById(tpGrupo.getIdGrupo()));
     	tpEntregaTo.setTpGrupo(tpEntrega.getIdTpGrupo());
     	tpEntregaTo.setArchivo(tpEntrega.getIdArchivo());
-       
+    	tpEntregaTo.setArchivoNombre(archivoService.getArchivoById(tpEntrega.getIdArchivo()).getNombre());
+    	tpEntregaTo.setArchivoDescripcion(archivoService.getArchivoById(tpEntrega.getIdArchivo()).getDescripcion());
+    	tpEntregaTo.setArchivoPath(archivoService.getArchivoById(tpEntrega.getIdArchivo()).getPath());
+    	
         return tpEntregaTo;
     }
 
@@ -122,6 +125,7 @@ public class TpEntregaService {
         
         return tpEntregaToList;
 	}
+
 
 
 

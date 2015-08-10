@@ -12,7 +12,10 @@ public class TpEntregaTO {
     private Date fechasys;
     private long tpgrupo;
     private long archivo;
-
+    private String archivoNombre;
+    private String archivoDescripcion;
+    private String archivoPath;
+    
     public Long getId() {
         return id;
     }
@@ -60,6 +63,30 @@ public class TpEntregaTO {
     public void setArchivo(Long archivo) {
         this.archivo = archivo;
     }
+
+	public String getArchivoNombre() {
+		return archivoNombre;
+	}
+
+	public void setArchivoNombre(String archivoNombre) {
+		this.archivoNombre = archivoNombre;
+	}
+
+	public String getArchivoDescripcion() {
+		return archivoDescripcion;
+	}
+
+	public void setArchivoDescripcion(String archivoDescripcion) {
+		this.archivoDescripcion = archivoDescripcion;
+	}
+
+	public String getArchivoPath() {
+		return archivoPath;
+	}
+
+	public void setArchivoPath(String archivoPath) {
+		this.archivoPath = archivoPath;
+	}
     
    
 }

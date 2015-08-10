@@ -19,9 +19,9 @@ var tpEntregaAdmin = {
 				table.row.add([
 				                                          data.id,
 				                                          data.descripcion,
-				                                          data.archivo,
-				                                          "<a href='#' name='editEntregaTp' data-tpentregaId='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a> " + 
-				  										  "<a href='#' name='deleteEntregaTp' data-tpentregaId='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a> " +
+				                                          data.archivoNombre,
+				                                          "<a name='editEntregaTp' data-tpentregaId='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a> " + 
+				  										  "<a name='deleteEntregaTp' data-tpentregaId='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a> " +
 				  										  "<a href='/repouniversity/tpgrupo/verEntregasTP?tpEntregaId=" + data.id + "' name='Ver' data-tpentregaId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Ver TP'><i class='fa fa-codepen'></i></button></a>" + 
 				  										  "<a href='/repouniversity/vistaPrevia?archivoId=" + data.archivo + "' name='verArchivo' data-tpentregaId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Ver Archivo'><i class='fa fa-search'></i></button></a>" +
 				  										  "<a href='/repouniversity/bajarArchivo?archivoId=" + data.archivo + "' name='dowloadArchivo' data-tpentregaId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Bajar Archivo'><i class='fa fa-download'></i></button></a>"
@@ -36,7 +36,6 @@ var tpEntregaAdmin = {
 				$("a[name=editEntregaTp][data-tpentregaId=" + data.id + "] button").click(function(){
 					$("#editarEntregaTpDialog").data('tpEntregaId', $(this).parent().attr("data-tpentregaId"))
 						.data('descripcion', $(this).parents("tr").find("td").get(1).innerHTML)
-						.data('archivo', $(this).parents("tr").find("td").get(2).innerHTML)
 						.dialog("open");
 				});
 				
@@ -67,7 +66,7 @@ var tpEntregaAdmin = {
 				var celdas = $("#EntregaTP td a[data-tpentregaId=" + data.id + "]").parents("tr").find("td");
 				celdas.get(0).innerHTML = data.id;
 				celdas.get(1).innerHTML = data.descripcion;
-				celdas.get(2).innerHTML = data.archivo;
+				celdas.get(2).innerHTML = data.archivoNombre;
 												
 				//Agrego el evento de delete
 				$("a[name='deleteEntregaTp'][data-tpentregaId=" + data.id + "] button").click(function(){
@@ -77,7 +76,6 @@ var tpEntregaAdmin = {
 				$("a[name=editEntregaTp][data-tpentregaId=" + data.id + "] button").click(function(){
 					$("#editarEntregaTpDialog").data('tpEntregaId', data.id)
 						.data('descripcion', $(this).parents("tr").find("td").get(1).innerHTML)
-						.data('archivo', $(this).parents("tr").find("td").get(2).innerHTML)
 						.dialog("open");
 				});
 				
@@ -210,7 +208,7 @@ $(document).ready(function() {
 			
 			$('#editarEntregaTpForm input[name=tpEntregaId]').val($("#editarEntregaTpDialog").data('tpEntregaId'));
 			$('#editarEntregaTpForm input[name=descripcion]').val($("#editarEntregaTpDialog").data('descripcion'));
-			$('#editarEntregaTpForm input[name=archivoId]').val($("#editarEntregaTpDialog").data('archivo'));
+			
 			
 		},
 		close: function(event, ui) {
@@ -253,7 +251,30 @@ $(document).ready(function() {
 		$("#editarEntregaTpDialog").data('tpEntregaId', $(this).parent().attr("data-tpentregaId"))
 			.data('tpEntregaId', $(this).parents("tr").find("td").get(0).innerHTML)
 			.data('descripcion', $(this).parents("tr").find("td").get(1).innerHTML)
-			.data('archivo', $(this).parents("tr").find("td").get(2).innerHTML)
 			.dialog("open");
+	});
+	$("#enviarComentario").click(function() {
+		$.ajax({
+			type: "POST",
+			url: "/repouniversity/comentario/nuevoComentario",
+			data: {"tpGrupoId" : $("input[name=tpGrupoIdGlobal]").val(), "comentario" : $("textarea[name=mensaje]").val()},
+			success: function(data){
+				$.gritter.add({
+					title: 'Comentario',
+					text: 'Su comentario fue agregado correctamente',
+					sticky: false
+				});	
+				$(".chat-activity-list").append("<div class='media-body'><strong>" + data.persona.nombre + " " + data.persona.apellido + "</strong>"
+						+ "<p class='m-b-xs'>" + data.descripcion + "</p><small class='text-muted'>" + data.fechasys + "</small></div>");
+				$("textarea[name=mensaje]").val("");
+			},
+			error: function() {
+				$.gritter.add({
+					title: 'Comentario',
+					text: 'Hubo un problema al agregar su comentario, por favor intentelo mas tarde.',
+					sticky: false
+				});	
+			}
+		});
 	});
 });

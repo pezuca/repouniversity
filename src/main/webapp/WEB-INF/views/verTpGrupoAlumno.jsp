@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="activeTab" value="${'verTPs'}" />
+<c:set var="userLog" value="${sessionScope.login}" />
 <html>
 <head>
 	<meta charset="utf-8" />
@@ -48,10 +54,10 @@
 								<tr>
 									<td>${tpentrega.id}</td>
 									<td>${tpentrega.descripcion}</td>
-									<td>${tpentrega.archivo}</td>
+									<td>${tpentrega.archivoNombre}</td>
 									<td>
-										<a href="#" name="editEntregaTp" data-tpentregaId="${tpentrega.id}"><button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Editar EntregaTP"><i class="fa fa-pencil"></i></button></a>
-										<a href="#" name="deleteEntregaTp" data-tpentregaId="${tpentrega.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar EntregaTP"><i class="fa fa-times"></i></button></a>
+										<a name="editEntregaTp" data-tpentregaId="${tpentrega.id}"><button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Editar EntregaTP"><i class="fa fa-pencil"></i></button></a>
+										<a name="deleteEntregaTp" data-tpentregaId="${tpentrega.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar EntregaTP"><i class="fa fa-times"></i></button></a>
 										<a href="/repouniversity/tpgrupo/verEntregasTP?tpEntregaId=${tpentrega.id}&bread=Ver entregas-5" name="Ver" data-tpentregaId="${tpentrega.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver EntregaTP"><i class="fa fa-codepen"></i></button></a>
 										<a href="/repouniversity/vistaPrevia?archivoId=${tpentrega.archivo}&bread=Vista previa-5" name="verArchivo" data-tpentregaId="${tpentrega.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver Archivo"><i class="fa fa-search"></i></button></a>
 										<a href="/repouniversity/bajarArchivo?archivoId=${tpentrega.archivo}" name="dowloadArchivo" data-tpentregaId="${tpentrega.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Bajar Archivo"><i class="fa fa-download"></i></button></a>
@@ -69,30 +75,28 @@
 	         		<div class="ibox float-e-margins">
 						<div class="ibox-content">
 							<div>
-								<div class="chat-activity-list">
+								<div class="chat-activity-list" style="padding: 20px 0px;">
 
 									<c:forEach items="${tpgrupo.comentario}" var="comentario" varStatus="status">
-										<div class="chat-element ${(status.index % 2 != 0) ? 'right':''}">
-											<div class="media-body ${(status.index % 2 != 0) ? 'text-right':''}">
+										<div class="chat-element">
+											<div class="media-body">
 												 <strong>${comentario.persona.apellido}, ${comentario.persona.nombre}</strong>
 												<p class="m-b-xs">${comentario.descripcion}</p>
-												<small class="text-muted">${comentario.fechasys}</small> 
+												<small class="text-muted">${comentario.fechasys}</small>
 											</div>
 										</div>
 									</c:forEach>
 								</div>
 							</div>
 							<div class="chat-form">
-								<form id="comentarioForm" role="form">
-									<div class="form-group">
-										<textarea name = "mensaje" class="form-control" placeholder="Comentario.."></textarea>
-									</div>
-									<div class="text-right">
-										<button type="submit" class="btn btn-sm btn-primary m-t-n-xs" onclick="borrarNotificacion(${archivo.id}, mensaje)">
-											<strong>Comentar</strong>
-										</button>
-									</div>
-								</form>
+								<div class="form-group">
+									<textarea name = "mensaje" class="form-control" placeholder="Comentario.."></textarea>
+								</div>
+								<div class="text-right">
+									<button id="enviarComentario" class="btn btn-sm btn-primary m-t-n-xs"">
+										<strong>Comentar</strong>
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -125,10 +129,6 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Descripcion*:</label>
                 <div class="col-sm-10"><input name="descripcion" type="text" class="form-control" required="required"></div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Archivo*:</label>
-                <div class="col-sm-10"><input name="archivoId" type="text" class="form-control" required="required"></div>
             </div>
         </form>
 	</div>

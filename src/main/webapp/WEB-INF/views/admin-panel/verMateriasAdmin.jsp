@@ -28,7 +28,7 @@
 							<div class="ibox-title">
 								<h5>Lista de materias</h5>
 								<div class="ibox-tools" id="agregarMateriaButton">
-									<a href="#agregarMateriaDialog" class="btn btn-primary btn-xs"><i
+									<a href="#" class="btn btn-primary btn-xs"><i
 										class="fa fa-magic"></i> Materia</a>
 								</div>
 							</div>

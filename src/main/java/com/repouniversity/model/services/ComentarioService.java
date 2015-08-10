@@ -88,7 +88,7 @@ public class ComentarioService {
 	    	
 	        comentario = save(comentario);
 	        guardarComentarioTp(comentario.getId(), tpGrupoId);
-	    	return buildComentario(comentario);
+	    	return buildComentario(comentarioDao.findById(comentario.getId()));
 	}
 
 	public void eliminarComentario(long comentarioId) {

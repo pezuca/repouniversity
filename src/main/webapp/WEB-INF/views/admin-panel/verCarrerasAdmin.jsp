@@ -32,7 +32,7 @@
 							<div class="ibox-title">
 								<h5>Lista de carreras</h5>
 								<div class="ibox-tools" id="agregarCarreraButton">
-									<a href="#agregarCarreraDialog" class="btn btn-primary btn-xs"><i
+									<a href="#" class="btn btn-primary btn-xs"><i
 										class="fa fa-magic"></i> Carrera</a>
 								</div>
 							</div>

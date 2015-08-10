@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="activeTab" value="${'verGrupo'}" />
+<c:set var="userLog" value="${sessionScope.login}" />
 <html>
 <head>
 	<meta charset="utf-8" />
@@ -67,7 +73,7 @@
 								<tr>
 									<td>${tpgrupo.id}</td>
 									<td>${tpgrupo.descripcion}</td>
-									<td>${tpgrupo.archivo} ${tpgrupo.archivoNombre}</td>
+									<td>${tpgrupo.archivoNombre}</td>
 									<td>${tpgrupo.nota}</td>
 									<td>
 										<a href="/repouniversity/grupo/verTrabajosPracticosAlumno?tpGrupoId=${tpgrupo.id}&bread=Ver TP-4" name="Ver" data-tpgrupoId="${tpgrupo.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver TP"><i class="fa fa-codepen"></i></button></a>

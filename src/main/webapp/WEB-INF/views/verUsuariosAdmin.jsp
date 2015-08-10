@@ -27,7 +27,7 @@
 	                  <div class="ibox-title">
 	                      <h5>Lista de usuarios</h5>
 		                  <div class="ibox-tools" id="agregarAlumnoButton">
-	                          <a href="#agregarAlumnoDialog" class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  Usuario</a>
+	                          <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  Usuario</a>
 	                      </div>
 	                  </div>
 	                  <div class="ibox-content">

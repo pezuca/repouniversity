@@ -60,10 +60,9 @@ public class TpEntregaController {
 	public TpEntregaTO editarEntregaTpAjax(
 			@RequestParam(value = "tpGrupoId", required = true) Long tpGrupoId,
 			@RequestParam(value = "tpEntregaId", required = true) Long tpEntregaId,
-			@RequestParam(value = "descripcion", required = true) String descripcion,
-			@RequestParam(value = "archivoId", required = true) Long archivoId) {
+			@RequestParam(value = "descripcion", required = true) String descripcion) {
 
-	return	tpEntregaService.editarEntregaTp(tpGrupoId, tpEntregaId, descripcion, archivoId);
+	return	tpEntregaService.editarEntregaTp(tpGrupoId, tpEntregaId, descripcion);
 		
 
 	}
