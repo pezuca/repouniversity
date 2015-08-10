@@ -93,7 +93,7 @@ var tpEntregaAdmin = {
 	},
 	deleteEntregaTpAjax : function(tpEntregaId) {
 		$.ajax({
-			url: "/repouniversity/tpgrupo/eliminarTp",
+			url: "/repouniversity/tpgrupo/eliminarEntregaTp",
 			type: "POST",
 			data: {"tpEntregaId" : tpEntregaId},
 			success: function(data){

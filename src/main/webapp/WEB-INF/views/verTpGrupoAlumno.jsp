@@ -133,9 +133,11 @@
         </form>
 	</div>
 	
-	<div id="deleteTpDialog" title="Eliminar EntregaTP">
+	<div id="deleteEntregaTpDialog" title="Eliminar EntregaTP">
 		<p>¿Esta seguro que desea eliminar la entrega?</p>
 	</div>
+	
+	<input name="tpGrupoIdGlobal" type="hidden" value="${param.tpGrupoId}" />
 	</div>
 	
 </body>
