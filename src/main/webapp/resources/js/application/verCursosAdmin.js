@@ -159,11 +159,11 @@ $(document).ready(function() {
 	$("#clientTable_length").remove();
 	
 	$("#agregarCursoDialog").dialog({
+		position: "top",
 		resizable: false,
 		width:700,
 		modal: true,
 		autoOpen: false,
-		autoResize:true,
 		hide: {effect: "fade", duration: 300},
 		show: {effect: "fade", duration: 300},
 		buttons: {
@@ -186,11 +186,11 @@ $(document).ready(function() {
 	});
 	
 	$("#editarCursoDialog").dialog({
+		position: "top",
 		resizable: false,
 		width:700,
 		modal: true,
 		autoOpen: false,
-		autoResize:true,
 		hide: {effect: "fade", duration: 300},
 		hide: {effect: "fade", duration: 300},
 		buttons: {
@@ -221,11 +221,11 @@ $(document).ready(function() {
 	});
 	
 	$("#deleteCursoDialog").dialog({
+		position: "top",
 		resizable: false,
 		width:400,
 		modal: true,
 		autoOpen: false,
-		autoResize:true,
 		hide: {effect: "fade", duration: 300},
 		hide: {effect: "fade", duration: 300},
 		buttons: {

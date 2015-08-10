@@ -65,11 +65,11 @@ $(document).ready(function() {
 	
 	
 	$("#deleteCursoDialog").dialog({
+		position: "top",
 		resizable: false,
 		width:400,
 		modal: true,
 		autoOpen: false,
-		autoResize:true,
 		hide: {effect: "fade", duration: 300},
 		hide: {effect: "fade", duration: 300},
 		buttons: {

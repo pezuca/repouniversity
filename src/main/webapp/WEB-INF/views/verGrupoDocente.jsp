@@ -50,7 +50,7 @@
 									<td>${alumno.persona.apellido}, ${alumno.persona.nombre}</td>
 									<td>${alumno.persona.mail}</td>
 									<td class="text-center">
-										<a href="#" name="deleteAlumno" data-alumnoId="${alumno.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar Alumno"><i class="fa fa-times"></i></button></a>
+										<a name="deleteAlumno" data-alumnoId="${alumno.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar Alumno"><i class="fa fa-times"></i></button></a>
 									</td>
 								</tr>
 							</c:forEach>
@@ -171,7 +171,8 @@
 				</div>
 		</form>
 	</div>
-	
+	</div>
+
 	<div id="deleteTpDialog" title="Eliminar TP">
 		<p>¿Esta seguro que desea eliminar el Trabajo Practico?</p>
 	</div>
@@ -180,10 +181,7 @@
 	</div>
 	<div id="deleteAlumnoValidationDialog" title="Eliminar Alumno">
 		<p>No puede dejar un grupo sin alumnnos. Para eleminar el grupo lo puede hacer desde la vista de docente.</p>
-	</div>
-	
-	</div>
-	
+	</div>	
 	<div id="hiddenInputs" class="hidden">
 		<input type="hidden" name="personaId" value="${userLog.idPersona}"/>
 		<input type="hidden" name="cursoId" value="${grupo.idCurso}"/>
