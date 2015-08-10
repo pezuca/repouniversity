@@ -52,8 +52,8 @@
 									<td>${tpentrega.id}</td>
 									<td>${tpentrega.descripcion}</td>
 									<td>${tpentrega.archivoNombre}</td>
-									<td>
-										<a href="/repouniversity/tpgrupo/verEntregasTP?tpEntregaId=${tpentrega.id}&bread=Ver entregas-5" name="Ver" data-tpentregaId="${tpentrega.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver EntregaTP"><i class="fa fa-codepen"></i></button></a>
+									<td> 
+										<a href="/repouniversity/tpgrupo/verEntregasTP?tpEntregaId=${tpentrega.id}&bread=Ver entregas-5" name="Ver" data-tpentregaId="${tpentrega.id}" ><button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver EntregaTP"><i class="fa fa-arrow-right"></i></button></a>
 										<a href="/repouniversity/vistaPrevia?archivoId=${tpentrega.archivo}&bread=Vista Previa-5" name="verArchivo" data-tpentregaId="${tpentrega.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver Archivo"><i class="fa fa-search"></i></button></a>
 										<a href="/repouniversity/bajarArchivo?archivoId=${tpentrega.archivo}" name="dowloadArchivo" data-tpentregaId="${tpentrega.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Bajar Archivo"><i class="fa fa-download"></i></button></a>
 									</tr>

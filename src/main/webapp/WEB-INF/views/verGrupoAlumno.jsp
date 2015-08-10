@@ -76,7 +76,7 @@
 									<td>${tpgrupo.archivoNombre}</td>
 									<td>${tpgrupo.nota}</td>
 									<td>
-										<a href="/repouniversity/grupo/verTrabajosPracticosAlumno?tpGrupoId=${tpgrupo.id}&bread=Ver TP-4" name="Ver" data-tpgrupoId="${tpgrupo.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver TP"><i class="fa fa-codepen"></i></button></a>
+										<a href="/repouniversity/grupo/verTrabajosPracticosAlumno?tpGrupoId=${tpgrupo.id}&bread=Ver TP-4" name="Ver" data-tpgrupoId="${tpgrupo.id}" ><button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver TP"><i class="fa fa-arrow-right"></i></button></a>
 									</td>
 								</tr>
 							</c:forEach>
