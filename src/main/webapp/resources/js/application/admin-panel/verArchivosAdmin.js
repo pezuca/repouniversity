@@ -114,11 +114,11 @@ $(document).ready(function() {
 	$("#listaArchivos_info").remove();
 	
 	$("#editarArchivoDialog").dialog({
+		position: "top",
 		resizable: false,
 		width:700,
 		modal: true,
 		autoOpen: false,
-		autoResize:true,
 		hide: {effect: "fade", duration: 300},
 		hide: {effect: "fade", duration: 300},
 		buttons: {
@@ -155,11 +155,11 @@ $(document).ready(function() {
 	});
 	
 	$("#deleteArchivoDialog").dialog({
+		position: "top",
 		resizable: false,
 		width:400,
 		modal: true,
 		autoOpen: false,
-		autoResize:true,
 		hide: {effect: "fade", duration: 300},
 		buttons: {
 			"Eliminar": function() {

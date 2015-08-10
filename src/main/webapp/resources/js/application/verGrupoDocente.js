@@ -18,17 +18,17 @@ var tpAdmin = {
 				
 				
 				table.row.add([
-				                                          data.id,
-				                                          data.descripcion,
-				                                          data.archivoNombre,
-				                                          data.nota,
-				                                          "<a href='#' name='editTp' data-tpgrupoId='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a> " + 
-				  										  "<a href='#' name='deleteTp' data-tpgrupoId='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a> " +
-				  										  "<a href='/repouniversity/grupo/verTrabajosPracticos?tpGrupoId=" + data.id + "' name='Ver' data-tpgrupoId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Ver TP'><i class='fa fa-codepen'></i></button></a>" +
-				  										  "<a href='/repouniversity/vistaPrevia?archivoId=" + data.archivo + "' name='verArchivo' data-tpgrupoId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Ver Archivo'><i class='fa fa-search'></i></button></a>" +
-				  										  "<a href='/repouniversity/bajarArchivo?archivoId=" + data.archivo + "' name='dowloadArchivo' data-tpgrupoId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Bajar Archivo'><i class='fa fa-download'></i></button></a>"
-												  			
-				                                     ]).draw();
+	                  data.id,
+	                  data.descripcion,
+	                  data.archivoNombre,
+	                  data.nota,
+	                  "<a href='#' name='editTp' data-tpgrupoId='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a> " + 
+					  "<a href='#' name='deleteTp' data-tpgrupoId='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a> " +
+					  "<a href='/repouniversity/grupo/verTrabajosPracticos?tpGrupoId=" + data.id + "' name='Ver' data-tpgrupoId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Ver TP'><i class='fa fa-codepen'></i></button></a>" +
+					  "<a href='/repouniversity/vistaPrevia?archivoId=" + data.archivo + "' name='verArchivo' data-tpgrupoId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Ver Archivo'><i class='fa fa-search'></i></button></a>" +
+					  "<a href='/repouniversity/bajarArchivo?archivoId=" + data.archivo + "' name='dowloadArchivo' data-tpgrupoId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Bajar Archivo'><i class='fa fa-download'></i></button></a>"
+			  			
+	             ]).draw();
 				
 				//Agrego el evento de delete
 				$("a[name='deleteTp'][data-tpgrupoId=" + data.id + "] button").click(function(){
@@ -241,11 +241,12 @@ $(document).ready(function() {
 	});
 
 	$("#agregarTpDialog").dialog({
+		position: "top",
 		resizable: false,
 		width:700,
 		modal: true,
 		autoOpen: false,
-		autoResize:true,
+		position: 'top',
 		hide: {effect: "fade", duration: 300},
 		show: {effect: "fade", duration: 300},
 		buttons: {
@@ -267,11 +268,12 @@ $(document).ready(function() {
 		}
 	});
 	$("#agregarAlumnoDialog").dialog({
+		position: "top",
 		resizable: false,
 		width:700,
 		modal: true,
 		autoOpen: false,
-		autoResize:true,
+		position: 'top',
 		hide: {effect: "fade", duration: 300},
 		show: {effect: "fade", duration: 300},
 		buttons: {
@@ -310,11 +312,12 @@ $(document).ready(function() {
 		}
 	});	
 	$("#editarTpDialog").dialog({
+		position: "top",
 		resizable: false,
 		width:700,
 		modal: true,
 		autoOpen: false,
-		autoResize:true,
+		position: 'top',
 		hide: {effect: "fade", duration: 300},
 		hide: {effect: "fade", duration: 300},
 		buttons: {
@@ -344,11 +347,11 @@ $(document).ready(function() {
 	});
 	
 	$("#deleteTpDialog").dialog({
+		position: "top",
 		resizable: false,
 		width:400,
 		modal: true,
 		autoOpen: false,
-		autoResize:true,
 		hide: {effect: "fade", duration: 300},
 		hide: {effect: "fade", duration: 300},
 		buttons: {
@@ -371,7 +374,7 @@ $(document).ready(function() {
 		width:400,
 		modal: true,
 		autoOpen: false,
-		autoResize:true,
+		position: 'top',
 		hide: {effect: "fade", duration: 300},
 		hide: {effect: "fade", duration: 300},
 		buttons: {
@@ -395,7 +398,7 @@ $(document).ready(function() {
 		width:400,
 		modal: true,
 		autoOpen: false,
-		autoResize:true,
+		position: 'top',
 		hide: {effect: "fade", duration: 300},
 		hide: {effect: "fade", duration: 300},
 		buttons: {

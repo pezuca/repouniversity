@@ -176,11 +176,12 @@ $(document).ready(function() {
 
 	
 	$("#crearGrupoDialog").dialog({
+		position: "top",
 		resizable: false,
 		width:700,
 		modal: true,
 		autoOpen: false,
-		autoResize:true,
+		position: 'top',
 		hide: {effect: "fade", duration: 300},
 		show: {effect: "fade", duration: 300},
 		buttons: {
@@ -208,11 +209,12 @@ $(document).ready(function() {
 	
 		
 	$("#deleteGrupoDialog").dialog({
+		position: "top",
 		resizable: false,
 		width:400,
 		modal: true,
 		autoOpen: false,
-		autoResize:true,
+		position: 'top',
 		hide: {effect: "fade", duration: 300},
 		hide: {effect: "fade", duration: 300},
 		buttons: {

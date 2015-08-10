@@ -44,7 +44,7 @@
 									<td>${alumno.persona.apellido}, ${alumno.persona.nombre}</td>
 									<td>${alumno.persona.mail}</td>
 									<td class="text-center">
-										<a href="#" name="deleteAlumno" data-alumnoId="${alumno.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar Alumno"><i class="fa fa-times"></i></button></a>
+										<a name="deleteAlumno" data-alumnoId="${alumno.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar Alumno"><i class="fa fa-times"></i></button></a>
 									</td>
 								</tr>
 							</c:forEach>
@@ -79,8 +79,8 @@
 										<td>${tpgrupo.archivoNombre}</td>
 										<td>${tpgrupo.nota}</td>
 										<td class="text-center">
-											<a href="#" name="editTp" data-tpgrupoId="${tpgrupo.id}"><button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Editar TP"><i class="fa fa-pencil"></i></button></a>
-											<a href="#" name="deleteTp" data-tpgrupoId="${tpgrupo.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar TP"><i class="fa fa-times"></i></button></a>
+											<a name="editTp" data-tpgrupoId="${tpgrupo.id}"><button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Editar TP"><i class="fa fa-pencil"></i></button></a>
+											<a name="deleteTp" data-tpgrupoId="${tpgrupo.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar TP"><i class="fa fa-times"></i></button></a>
 											<a href="/repouniversity/grupo/verTrabajosPracticos?tpGrupoId=${tpgrupo.id}&bread=Ver TP-4" name="Ver" data-tpgrupoId="${tpgrupo.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver TP"><i class="fa fa-codepen"></i></button></a>
 											<a href="/repouniversity/vistaPrevia?archivoId=${tpgrupo.archivo}&bread=Vista Previa-4" name="verArchivo" data-tpgrupoId="${tpgrupo.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver Archivo"><i class="fa fa-search"></i></button></a>
 											<a href="/repouniversity/bajarArchivo?archivoId=${tpgrupo.archivo}" name="dowloadArchivo" data-tpgrupoId="${tpgrupo.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Bajar Archivo"><i class="fa fa-download"></i></button></a>
@@ -165,7 +165,8 @@
 				</div>
 		</form>
 	</div>
-	
+	</div>
+
 	<div id="deleteTpDialog" title="Eliminar TP">
 		<p>¿Esta seguro que desea eliminar el Trabajo Practico?</p>
 	</div>
@@ -174,10 +175,7 @@
 	</div>
 	<div id="deleteAlumnoValidationDialog" title="Eliminar Alumno">
 		<p>No puede dejar un grupo sin alumnnos. Para eleminar el grupo lo puede hacer desde la vista de docente.</p>
-	</div>
-	
-	</div>
-	
+	</div>	
 	<div id="hiddenInputs" class="hidden">
 		<input type="hidden" name="personaId" value="${userLog.idPersona}"/>
 		<input type="hidden" name="cursoId" value="${grupo.idCurso}"/>

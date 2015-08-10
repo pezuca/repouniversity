@@ -172,74 +172,6 @@
 				</div>
 				</div>
 
-				<!-- 	Ventanas -->
-				<div id="crearGrupoDialog" title="Nuevo Grupo" class="modal fade in">
-					<form id="nuevoGrupoForm" class="form-horizontal">
-						<div class="form-group">
-							<label class="col-sm-2 control-label">Nombre Grupo*:</label>
-							<div class="col-sm-10">
-								<input name="nombre" type="text" class="form-control"
-									required="required" />
-							</div>
-							<div class="col-sm-10">
-								<input name="idcurso" type="hidden" class="form-control"
-									required="required" value="${curso.id}" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-2 control-label">Lista de Alumnos*:</label>
-							<div class="col-sm-10">
-								<select data-placeholder="Elija un alumno" name="alumnosIds"
-									multiple class="chosen-select" required="required"
-									tabindex="-1">
-									<c:forEach items="${curso.alumnosSinGrupo}" var="alumno"
-										varStatus="status">
-										<option value="${alumno.id}">${alumno.persona.apellido},
-											${alumno.persona.nombre}</option>
-									</c:forEach>
-								</select>
-							</div>
-						</div>
-					</form>
-				</div>
-				<div id="editarArchivoDialog" title="Editar Archivo">
-					<form id="editarArchivoForm" class="form-horizontal">
-						<input name="archivoId" type="hidden">
-						<div class="form-group">
-							<label class="col-sm-2 control-label">Descripción*:</label>
-							<div class="col-sm-10">
-								<input name="descripcion" type="text" class="form-control"
-									required="required">
-							</div>
-						</div>
-						
-						<div class="form-group">
-			                <label class="col-sm-2 control-label">Estado*:</label>
-			                <div class="col-sm-10">
-			                	<select name="estadoArchivo" class="form-control" required="required">
-			                		<option value="1" selected>Publico</option>
-			                		<option value="2">Privado</option>
-			                	</select>
-			                </div>
-			            </div>
-						
-						<div class="form-group">
-							<label class="col-sm-2 control-label">Tags*:</label>
-							<div class="col-sm-10">
-								<input name="tags" type="text" class="form-control"
-									required="required">
-							</div>
-						</div>
-					</form>
-				</div>
-		
-				<div id="deleteArchivoDialog" title="Eliminar Archivo">
-					<p>¿Esta seguro que desea eliminar la archivo?</p>
-				</div>
-				<div id="deleteGrupoDialog" title="Eliminar Grupo">
-					<p>¿Esta seguro que desea eliminar el Grupo?</p>
-				</div>
-
 				<%@include file="../components/footer.jsp"%>
 			</div>
 		</div>
@@ -294,6 +226,75 @@
 		<input type="hidden" name="personaId" value="${userLog.idPersona}"/>
 		<input type="hidden" name="cursoId" value="${curso.id}"/>
 	</div>
+	
+	<!-- 	Ventanas -->
+	<div id="crearGrupoDialog" title="Nuevo Grupo" class="modal fade in">
+		<form id="nuevoGrupoForm" class="form-horizontal">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Nombre Grupo*:</label>
+				<div class="col-sm-10">
+					<input name="nombre" type="text" class="form-control"
+						required="required" />
+				</div>
+				<div class="col-sm-10">
+					<input name="idcurso" type="hidden" class="form-control"
+						required="required" value="${curso.id}" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Lista de Alumnos*:</label>
+				<div class="col-sm-10">
+					<select data-placeholder="Elija un alumno" name="alumnosIds"
+						multiple class="chosen-select" required="required"
+						tabindex="-1">
+						<c:forEach items="${curso.alumnosSinGrupo}" var="alumno"
+							varStatus="status">
+							<option value="${alumno.id}">${alumno.persona.apellido},
+								${alumno.persona.nombre}</option>
+						</c:forEach>
+					</select>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div id="editarArchivoDialog" title="Editar Archivo">
+		<form id="editarArchivoForm" class="form-horizontal">
+			<input name="archivoId" type="hidden">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Descripción*:</label>
+				<div class="col-sm-10">
+					<input name="descripcion" type="text" class="form-control"
+						required="required">
+				</div>
+			</div>
+			
+			<div class="form-group">
+                <label class="col-sm-2 control-label">Estado*:</label>
+                <div class="col-sm-10">
+                	<select name="estadoArchivo" class="form-control" required="required">
+                		<option value="1" selected>Publico</option>
+                		<option value="2">Privado</option>
+                	</select>
+                </div>
+            </div>
+			
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Tags*:</label>
+				<div class="col-sm-10">
+					<input name="tags" type="text" class="form-control"
+						required="required">
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div id="deleteArchivoDialog" title="Eliminar Archivo">
+		<p>¿Esta seguro que desea eliminar la archivo?</p>
+	</div>
+	<div id="deleteGrupoDialog" title="Eliminar Grupo">
+		<p>¿Esta seguro que desea eliminar el Grupo?</p>
+	</div>
+				
 	<%@include file="../components/fileUpload.jsp"%>
 </body>
 </html>
