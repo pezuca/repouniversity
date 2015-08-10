@@ -78,6 +78,7 @@
 						</div>
 					</div>
 				</div>
+				<input name="atLestOneSuccess" value="0" type="hidden" />
 			</div>
 		</div>
 		<div class="modal-footer"></div>

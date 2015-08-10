@@ -20,16 +20,9 @@
 	 	<div class="wrapper wrapper-content animated fadeInRight">
 	         <div class="row">
 	             <div class="col-lg-12">
-	              <div class="ibox float-e-margins">
-						<div class="GrupoInformation">
-							<div class="page-header">
-								<h3><b>${grupo.nombre}</b></h3>
-							</div>
-							
-						</div>
-						
+	              <div class="ibox float-e-margins">				
 	                  <div class="ibox-title">
-	                      <h5>Alumnos</h5>
+	                      <h5>Nombre de grupo: ${grupo.nombre}</h5>
 		                  <div class="ibox-tools" id="agregarAlumnoButton">
 		                       <a class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  Alumno</a>
 	                      </div>
@@ -40,6 +33,7 @@
 							<tr>
 								<th>Id</th>
 								<th>Alumno</th>
+								<th>Mail</th>
 								<th></th>
 							</tr>
 						</thead>
@@ -48,7 +42,8 @@
 								<tr>
 									<td>${alumno.id}</td>
 									<td>${alumno.persona.apellido}, ${alumno.persona.nombre}</td>
-									<td>
+									<td>${alumno.persona.mail}</td>
+									<td class="text-center">
 										<a href="#" name="deleteAlumno" data-alumnoId="${alumno.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar Alumno"><i class="fa fa-times"></i></button></a>
 									</td>
 								</tr>
@@ -56,6 +51,9 @@
 						</tbody>
 	                  	</table>
 	                  </div>
+	               </div>
+	                  
+	               <div class="ibox float-e-margins">  
 	                  <div class="ibox-title">
 	                      <h5>Trabajo Practicos</h5>
 		                  <div class="ibox-tools" id="agregarTpButton">
@@ -63,33 +61,33 @@
 	                      </div>
 	                  </div>
 	                  <div class="ibox-content">
-	                  	<table id="GruposTP" class="table table-striped table-hover" >
+	                  	<table id="GruposTP" class="table table-striped table-hover">
 	                  		<thead class="encabezado">
-							<tr>
-								<th>Id</th>
-								<th>Descripcion</th>
-								<th>Archivo</th>
-								<th>Nota</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${grupo.tpGrupo}" var="tpgrupo" varStatus="status">
 								<tr>
-									<td>${tpgrupo.id}</td>
-									<td>${tpgrupo.descripcion}</td>
-									<td>${tpgrupo.archivoNombre}</td>
-									<td>${tpgrupo.nota}</td>
-									<td>
-										<a href="#" name="editTp" data-tpgrupoId="${tpgrupo.id}"><button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Editar TP"><i class="fa fa-pencil"></i></button></a>
-										<a href="#" name="deleteTp" data-tpgrupoId="${tpgrupo.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar TP"><i class="fa fa-times"></i></button></a>
-										<a href="/repouniversity/grupo/verTrabajosPracticos?tpGrupoId=${tpgrupo.id}&bread=Ver TP-4" name="Ver" data-tpgrupoId="${tpgrupo.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver TP"><i class="fa fa-codepen"></i></button></a>
-										<a href="/repouniversity/vistaPrevia?archivoId=${tpgrupo.archivo}&bread=Vista Previa-4" name="verArchivo" data-tpgrupoId="${tpgrupo.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver Archivo"><i class="fa fa-search"></i></button></a>
-										<a href="/repouniversity/bajarArchivo?archivoId=${tpgrupo.archivo}" name="dowloadArchivo" data-tpgrupoId="${tpgrupo.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Bajar Archivo"><i class="fa fa-download"></i></button></a>
-									</td>
+									<th>Id</th>
+									<th>Descripcion</th>
+									<th>Archivo</th>
+									<th>Nota</th>
+									<th></th>
 								</tr>
-							</c:forEach>
-						</tbody>
+							</thead>
+							<tbody>
+								<c:forEach items="${grupo.tpGrupo}" var="tpgrupo" varStatus="status">
+									<tr>
+										<td>${tpgrupo.id}</td>
+										<td>${tpgrupo.descripcion}</td>
+										<td>${tpgrupo.archivoNombre}</td>
+										<td>${tpgrupo.nota}</td>
+										<td class="text-center">
+											<a href="#" name="editTp" data-tpgrupoId="${tpgrupo.id}"><button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Editar TP"><i class="fa fa-pencil"></i></button></a>
+											<a href="#" name="deleteTp" data-tpgrupoId="${tpgrupo.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar TP"><i class="fa fa-times"></i></button></a>
+											<a href="/repouniversity/grupo/verTrabajosPracticos?tpGrupoId=${tpgrupo.id}&bread=Ver TP-4" name="Ver" data-tpgrupoId="${tpgrupo.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver TP"><i class="fa fa-codepen"></i></button></a>
+											<a href="/repouniversity/vistaPrevia?archivoId=${tpgrupo.archivo}&bread=Vista Previa-4" name="verArchivo" data-tpgrupoId="${tpgrupo.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver Archivo"><i class="fa fa-search"></i></button></a>
+											<a href="/repouniversity/bajarArchivo?archivoId=${tpgrupo.archivo}" name="dowloadArchivo" data-tpgrupoId="${tpgrupo.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Bajar Archivo"><i class="fa fa-download"></i></button></a>
+										</td>
+									</tr>
+								</c:forEach>
+							</tbody>
 	                  	</table>
 	                  </div>
 	              </div>
@@ -174,8 +172,10 @@
 	<div id="deleteAlumnoDialog" title="Eliminar Alumno">
 		<p>¿Esta seguro que desea eliminar el Alumno?</p>
 	</div>
+	<div id="deleteAlumnoValidationDialog" title="Eliminar Alumno">
+		<p>No puede dejar un grupo sin alumnnos. Para eleminar el grupo lo puede hacer desde la vista de docente.</p>
+	</div>
 	
-			
 	</div>
 	
 	<div id="hiddenInputs" class="hidden">
@@ -183,6 +183,5 @@
 		<input type="hidden" name="cursoId" value="${grupo.idCurso}"/>
 	</div>
 
-	
 </body>
 </html>

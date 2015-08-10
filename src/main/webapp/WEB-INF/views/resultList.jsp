@@ -61,7 +61,7 @@
 								</c:choose>
 	                        	<c:forEach items="${listaResultados}" var="result" varStatus="status">
 									<div class="search-result">
-		                                <h3><a href="#">${result.nombre}</a></h3>
+		                                <h3><a href="/repouniversity/vistaPrevia?archivoId=${result.id}&bread=Vista previa-1">${result.nombre}</a></h3>
 		                                <h5><a href="#">fecha publicacion: ${result.fechaPublicacion}</a></h5>
 		                                <p>
 		                                    ${result.descripcion}<br><br><button class="btn btn-primary btn-xs" type="button">vista previa</button>

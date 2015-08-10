@@ -120,7 +120,9 @@ public class ArchivoController {
     @RequestMapping(value = "/busquedaAvanzada", method = {RequestMethod.POST})
     public ModelAndView busquedaAvanzada(HttpServletRequest request, @ModelAttribute("login") UsuarioRol usuario,
     		@RequestParam(value = "materia", required = false) String materia,
-            @RequestParam(value = "docente", required = false) String docente,
+    		@RequestParam(value = "docente", required = false) String docente,
+            //@RequestParam(value = "nbreDocente", required = false) String nbreDocente,
+            //@RequestParam(value = "apeDocente", required = false) String apeDocente,
             @RequestParam(value = "descripcion", required = false) String descripcion,
             @RequestParam(value = "fechaDde", required = false) String fechaDde,
             @RequestParam(value = "fechaHta", required = false) String fechaHta)
@@ -170,7 +172,7 @@ public class ArchivoController {
 
 
         List<Archivo> listaResultados = new ArrayList<Archivo>();
-        listaResultados = busquedaAvanzada(materia, docente, "a", descripcion, desde, hasta, usuario);
+        listaResultados = busquedaAvanzada(materia, docente, descripcion, desde, hasta, usuario);
         return new ModelAndView("resultListBusquedaAnonimo").addObject("listaResultados", listaResultados);
     }
     
@@ -190,9 +192,9 @@ public class ArchivoController {
     }
 
 
-    private List<Archivo> busquedaAvanzada(String materia, String nbreDocente, String apeDocente, String descripcion, Date fechaDde, Date fechaHta, UsuarioRol usuario) {
+    private List<Archivo> busquedaAvanzada(String materia, String docente, String descripcion, Date fechaDde, Date fechaHta, UsuarioRol usuario) {
         List<Archivo> archivosEncontrados = new ArrayList<Archivo>();
-        archivosEncontrados = archivoService.busquedaAvanzada(materia, nbreDocente, apeDocente, descripcion, fechaDde, fechaHta, usuario);
+        archivosEncontrados = archivoService.busquedaAvanzada(materia, docente, descripcion, fechaDde, fechaHta, usuario);
         return archivosEncontrados;
 
     }

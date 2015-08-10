@@ -49,10 +49,6 @@ public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
             }
         }, "findCursosForAlumnoId: " + idAluDoc);
 
-        if (list.isEmpty()) {
-            return null;
-        }
-
         return list;
     }
 

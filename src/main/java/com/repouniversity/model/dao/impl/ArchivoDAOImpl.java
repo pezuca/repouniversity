@@ -167,10 +167,10 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
         
         //armamos la query de busqueda en la base
         sql.append("select * from repouniversity.vw_archivos");
-        sql.append(" where ("+ tags + ") OR ");
-        sql.append(nbreDocente.trim() + "OR ");
-        sql.append(apeDocente.trim() + "OR ");
-        sql.append(materia.trim());
+        sql.append(" where ("+ tags + " OR ");
+        sql.append(nbreDocente.trim() + " OR ");
+        sql.append(apeDocente.trim() + " OR ");
+        sql.append(materia.trim() + ")");
         sql.append(acotarBusquedaXTipoUsuario(usuario));
 
         List<Archivo> list = doQuery(new SQLStatement(sql.toString()) {
@@ -192,7 +192,7 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
     }
 	
 	@Override
-    public List<Archivo> busquedaAvanzada(String materia, String nbreDocente, String apeDocente, String descripcion, Date fechaDde, Date fechaHta, UsuarioRol usuario) {
+    public List<Archivo> busquedaAvanzada(String materia, String docente, String descripcion, Date fechaDde, Date fechaHta, UsuarioRol usuario) {
         StringBuilder sql = new StringBuilder();
         // se genera la condicion a mano, pero en la condicion es donde se va a armarse la query
 
@@ -220,10 +220,14 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
         
         sql.append("select * from repouniversity.vw_archivos ");
         sql.append("where ("+ tags + ")AND");
-        sql.append(" nombreDocente like \'%"+ nbreDocente.trim() + "%\' AND");
-        sql.append(" apellidoDocente like \'%"+ apeDocente.trim() + "%\' AND");
+        if (docente != null){
+        sql.append(" id_docente= "+ docente + " AND");
+        }
+        //sql.append(" apellidoDocente like \'%"+ apeDocente.trim() + "%\' AND");
         //sql.append(" carrera like \'%"+ carrera.trim() + "%\' AND");
-        sql.append(" materia like \'%"+ materia.trim() + "%\' AND");
+        if (materia != null){
+        sql.append(" id_materia = "+ materia + " AND");
+        }
         sql.append(" fecha_publicacion between \'"+ new SimpleDateFormat("yyyy/MM/dd").format(fechaDde) + "\' AND \'" + new SimpleDateFormat("yyyy/MM/dd").format(fechaHta) + "\'");
         sql.append(acotarBusquedaXTipoUsuario(usuario));
 

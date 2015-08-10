@@ -46,17 +46,15 @@
 							<div class="row">
 		            	</c:if>
 							<div class="col-lg-6">
-								
-			                            <div class="alert alert-info alert-dismissable">
-			                                <p>El alumno ${notificacion.alumno.persona.apellido}, ${notificacion.alumno.persona.nombre}</p>
-			                               	<p>${notificacion.tipo.descripcion}</p>
-			                                <p>Curso: ${notificacion.curso.nombre}, ${notificacion.curso.descripcion}</p>
-											<button aria-hidden="true" data-dismiss="alert" class="altaNotificacion btn btn-primary"
-													onclick="altaEnCurso(${notificacion.id})">Confirmar</button>&nbsp;
-											<button aria-hidden="true" data-dismiss="alert" class="rechazoNotificacion btn btn-danger"
-													onclick="rechazoAltaEnCurso(${notificacion.id})">Rechazar</button>
-			                            </div>
-			                   
+	                            <div class="alert alert-info alert-dismissable">
+	                                <p>El alumno ${notificacion.alumno.persona.apellido}, ${notificacion.alumno.persona.nombre}</p>
+	                               	<p>${notificacion.tipo.descripcion}</p>
+	                                <p>Curso: ${notificacion.curso.nombre}, ${notificacion.curso.descripcion}</p>
+									<button aria-hidden="true" data-dismiss="alert" class="altaNotificacion btn btn-primary"
+											onclick="altaEnCurso(${notificacion.id})">Confirmar</button>&nbsp;
+									<button aria-hidden="true" data-dismiss="alert" class="rechazoNotificacion btn btn-danger"
+											onclick="rechazoAltaEnCurso(${notificacion.id})">Rechazar</button>
+	                            </div>
 							</div>
 						
 						<c:if test = "${status.count mod 2 == 0}" >
@@ -95,31 +93,18 @@
 											<tr>
 												<td>${grupo.nombre}</td>
 												<td>${grupo.fechasys}</td>
-												<td>
+												<td class="text-center">
 													<a href="#" name="deleteGrupo" data-grupoId="${grupo.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar Grupo"><i class="fa fa-times"></i></button></a>
 													<a class="verCurso" href="/repouniversity/docente/verGrupo?grupoId=${grupo.id}&bread=Ver grupo-3"><button class="btn btn-primary btn-circle"><i class="fa fa-arrow-right"></i></button></a>
 												</td>
-															
 											</tr>
-											<!-- 						<td> -->
-											<%-- 						<button class="verGrupo btn btn-primary" onclick="verGrupo(${curso.grupo.id})">Ver</button>&nbsp; --%>
-											<%-- 							<button class="rechazoNotificacion btn btn-danger" onclick="rechazoAltaEnCurso(${notificacion.id})">Eliminar</button> --%>
-											<!-- 						</td> -->
-											<!-- 					</tr> -->
 										</c:forEach>
 									</tbody>
-									<tfoot>
-										<tr class="head">
-											<th></th>
-											<th></th>
-											<th></th>
-										</tr>
-									</tfoot>
 								</table>
 							</div>
 						</div>
 					</div>
-	<div class="row">
+		<div class="row">
 			<div class="col-lg-12">
 	        	<c:forEach items="${archivos}" var="archivo" varStatus="status">
             	<c:if test = "${status.count mod 2 != 0}" >
@@ -273,6 +258,14 @@
 			});
 	
 			$("#clientTable_length").remove();
+			
+			$('#fileUpload').on('hidden.bs.modal', function () {
+				var success = $("#fileUpload input[name=atLestOneSuccess]").val();
+				
+				if(success == "1") {
+					location.reload();
+				}
+			})
 		});
 		
 		function altaEnCurso(notificacionId) {

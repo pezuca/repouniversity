@@ -152,6 +152,9 @@
                 }
               });
         });
+        
+        $("select[name=materia]").chosen({no_results_text:'No hay resultados para: '});
+        $("select[name=docente]").chosen({no_results_text:'No hay resultados para: '});
     </script>
 </body>
 </html>
