@@ -45,7 +45,7 @@ public class ArchivoController {
     private DocenteService docenteService;
     @Autowired
     private MateriaService materiaService;
-    
+
     @Autowired
     private ErrorArchivoService errorArchivoService;
 
@@ -101,9 +101,10 @@ public class ArchivoController {
         List<VwArchivo> archivos = archivoService.getArchivosDePersona(usuario.getIdPersona());
         return new ModelAndView("verArchivos").addObject("archivos", archivos);
     }
-    
+
     @RequestMapping(value = "/buscarArchivoAnonimo", method = {RequestMethod.POST})
-    public ModelAndView buscarFicheroAnonimo(HttpServletRequest request, @RequestParam(value = "search") String parametro, @ModelAttribute("login") UsuarioRol usuario) {
+    public ModelAndView buscarFicheroAnonimo(HttpServletRequest request, @RequestParam(value = "search") String parametro,
+            @ModelAttribute("login") UsuarioRol usuario) {
         List<Archivo> listaResultados = new ArrayList<Archivo>();
         listaResultados = buscarFicheroLocal(parametro, usuario);
         return new ModelAndView("resultListAnonimo").addObject("listaResultados", listaResultados).addObject("parametroBusqueda", parametro);
@@ -111,7 +112,7 @@ public class ArchivoController {
 
     @RequestMapping(value = "/buscarArchivo", method = {RequestMethod.POST})
     public ModelAndView buscarFichero(HttpServletRequest request, @ModelAttribute("login") UsuarioRol usuario,
-    	@RequestParam(value = "top-search") String parametro) {
+            @RequestParam(value = "top-search") String parametro) {
         List<Archivo> listaResultados = new ArrayList<Archivo>();
         listaResultados = buscarFicheroLocal(parametro, usuario);
         return new ModelAndView("resultList").addObject("listaResultados", listaResultados).addObject("parametroBusqueda", parametro);
@@ -119,26 +120,21 @@ public class ArchivoController {
 
     @RequestMapping(value = "/busquedaAvanzada", method = {RequestMethod.POST})
     public ModelAndView busquedaAvanzada(HttpServletRequest request, @ModelAttribute("login") UsuarioRol usuario,
-    		@RequestParam(value = "materia", required = false) String materia,
-    		@RequestParam(value = "docente", required = false) String docente,
-            //@RequestParam(value = "nbreDocente", required = false) String nbreDocente,
-            //@RequestParam(value = "apeDocente", required = false) String apeDocente,
-            @RequestParam(value = "descripcion", required = false) String descripcion,
-            @RequestParam(value = "fechaDde", required = false) String fechaDde,
-            @RequestParam(value = "fechaHta", required = false) String fechaHta)
-            throws ParseException
-    		{
-        
-    	Date desde = dateFormat.parse("01/01/1900");
-    	Date hasta = dateFormat.parse("31/12/9999");
-    	if (!fechaDde.equals("")){
-    		desde = dateFormat.parse(fechaDde);
-    	}
-    	if (!fechaHta.equals("")){
-    		hasta = dateFormat.parse(fechaHta);
-    	}
-         
+            @RequestParam(value = "materia", required = false) String materia,
+            @RequestParam(value = "docente", required = false) String docente,
+            // @RequestParam(value = "nbreDocente", required = false) String nbreDocente,
+            // @RequestParam(value = "apeDocente", required = false) String apeDocente,
+            @RequestParam(value = "descripcion", required = false) String descripcion, @RequestParam(value = "fechaDde", required = false) String fechaDde,
+            @RequestParam(value = "fechaHta", required = false) String fechaHta) throws ParseException {
 
+        Date desde = dateFormat.parse("01/01/1900");
+        Date hasta = dateFormat.parse("31/12/9999");
+        if (!fechaDde.equals("")) {
+            desde = dateFormat.parse(fechaDde);
+        }
+        if (!fechaHta.equals("")) {
+            hasta = dateFormat.parse(fechaHta);
+        }
 
         List<Archivo> listaResultados = new ArrayList<Archivo>();
         listaResultados = busquedaAvanzada(materia, docente, descripcion, desde, hasta, usuario);
@@ -152,39 +148,34 @@ public class ArchivoController {
 
     @RequestMapping(value = "/busquedaAvanzadaAnonimo", method = {RequestMethod.POST})
     public ModelAndView busquedaAvanzadaAnonimo(HttpServletRequest request, @ModelAttribute("login") UsuarioRol usuario,
-    		@RequestParam(value = "materia", required = false) String materia,
-            @RequestParam(value = "docente", required = false) String docente,
-            @RequestParam(value = "descripcion", required = false) String descripcion,
-            @RequestParam(value = "fechaDde", required = false) String fechaDde,
-            @RequestParam(value = "fechaHta", required = false) String fechaHta)
-            throws ParseException
-    		{
-        
-    	Date desde = dateFormat.parse("01/01/1900");
-    	Date hasta = dateFormat.parse("31/12/9999");
-    	if (!fechaDde.equals("")){
-    		desde = dateFormat.parse(fechaDde);
-    	}
-    	if (!fechaHta.equals("")){
-    		hasta = dateFormat.parse(fechaHta);
-    	}
-         
+            @RequestParam(value = "materia", required = false) String materia, @RequestParam(value = "docente", required = false) String docente,
+            @RequestParam(value = "descripcion", required = false) String descripcion, @RequestParam(value = "fechaDde", required = false) String fechaDde,
+            @RequestParam(value = "fechaHta", required = false) String fechaHta) throws ParseException {
 
+        Date desde = dateFormat.parse("01/01/1900");
+        Date hasta = dateFormat.parse("31/12/9999");
+        if (!fechaDde.equals("")) {
+            desde = dateFormat.parse(fechaDde);
+        }
+        if (!fechaHta.equals("")) {
+            hasta = dateFormat.parse(fechaHta);
+        }
 
         List<Archivo> listaResultados = new ArrayList<Archivo>();
         listaResultados = busquedaAvanzada(materia, docente, descripcion, desde, hasta, usuario);
-        
+
         List<DocenteTO> docentes = docenteService.getAll();
         List<Materia> materias = materiaService.getAll();
-        
-        return new ModelAndView("resultListBusquedaAnonimo").addObject("listaResultados", listaResultados).addObject("docentes", docentes).addObject("materias", materias);
+
+        return new ModelAndView("resultListBusquedaAnonimo").addObject("listaResultados", listaResultados).addObject("docentes", docentes)
+                .addObject("materias", materias);
     }
-    
+
     @RequestMapping(value = "/busquedaAvanzadaAnononimo", method = {RequestMethod.GET})
     public ModelAndView busquedaAvanzadaAnonimo() {
         List<DocenteTO> docentes = docenteService.getAll();
         List<Materia> materias = materiaService.getAll();
-        
+
         return new ModelAndView("busquedaAvanzadaAnonimo").addObject("docentes", docentes).addObject("materias", materias);
     }
 
@@ -194,7 +185,6 @@ public class ArchivoController {
         return archivosEncontrados;
 
     }
-
 
     private List<Archivo> busquedaAvanzada(String materia, String docente, String descripcion, Date fechaDde, Date fechaHta, UsuarioRol usuario) {
         List<Archivo> archivosEncontrados = new ArrayList<Archivo>();
@@ -208,16 +198,18 @@ public class ArchivoController {
         VwArchivo archivo = archivoService.getVwArchivo(archivoId);
         List<ErrorArchivoTO> errorArchivo = errorArchivoService.getErroresForArchivo(archivoId);
 
-        return new ModelAndView("vistaPrevia").addObject("archivo", archivo).addObject("errorArchivo", errorArchivo);
+        String extension = archivo.getPath().split("\\.")[1];
+
+        return new ModelAndView("vistaPrevia").addObject("archivo", archivo).addObject("errorArchivo", errorArchivo).addObject("extension", extension);
     }
 
     @RequestMapping(value = "/vistaPreviaAnonimo", method = {RequestMethod.GET})
     public ModelAndView vistaPreviaAnonimo(@RequestParam(value = "archivoId") Long archivoId) {
         VwArchivo archivo = archivoService.getVwArchivo(archivoId);
-      
+
         return new ModelAndView("vistaPreviaAnonimo").addObject("archivo", archivo);
     }
-    
+
     @RequestMapping(value = "/modificarArchivo", method = {RequestMethod.POST})
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
