@@ -28,10 +28,10 @@ import org.xml.sax.SAXException;
 public class LoadXMLFilesApplicationListener implements ServletContextListener {
 	
 	@Autowired
-    public String noiseWordsTomcatLocation = "C:\\Users\\Federico\\Desktop\\RepoUniversity-Java\\repouniversity\\noiseWords.xml";
+    public String noiseWordsTomcatLocation = "/home/federico/movile-workspace/repouniversity/noiseWords.xml";
 	
 	@Autowired
-    public String equivalenciasTomcatLocation = "C:\\Users\\Federico\\Desktop\\RepoUniversity-Java\\repouniversity\\listadoEquivalencias.xml";
+    public String equivalenciasTomcatLocation = "/home/federico/movile-workspace/repouniversity/listadoEquivalencias.xml";
 
 	public static List<String> listadoNoiseWord;
 	public static Map<String, List<String>> listadoEquivalencias;

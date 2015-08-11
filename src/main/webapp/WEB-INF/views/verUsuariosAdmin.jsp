@@ -114,7 +114,7 @@
                      </select>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group carreraSelect">
                 <label class="col-sm-2 control-label">Carrera*:</label>
                 <div class="col-sm-10">
                 	<select class="form-control m-b" name="carrera">
@@ -160,7 +160,7 @@
                      </select>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group carreraSelect">
                 <label class="col-sm-2 control-label">Carrera*:</label>
                 <div class="col-sm-10">
                 	<select class="form-control m-b" name="carrera">

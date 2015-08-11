@@ -11,18 +11,26 @@ var usuariosAdmin = {
 					sticky: false
 				});
 				
+				var options = $("#nuevoAlumnoForm select[name=carrera] option");
+				var carreraNuevo = "";
+				for(var i = 0; i < options.size(); i++) {
+					if(data.rol == 'alumno' && options.get(i).getAttribute("value") == data.alumno.idCarrera) {
+						carreraNuevo = options.get(i).innerHTML;
+						break;
+					}
+				}
 				
 				table.row.add([
-				                                          data.id,
-				                                          data.persona.nombre,
-				                                          data.persona.apellido,
-				                                          data.user,
-				                                          data.persona.mail,
-				                                          data.rol,
-				                                          data.carrera,
-				                                          "<a href='#' name='editUser' data-userid='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a>" + 
-				  										  "<a href='#' name='deleteUser' data-userid='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a>"
-				                                     ]).draw();
+	                      data.id,
+	                      data.persona.nombre,
+	                      data.persona.apellido,
+	                      data.user,
+	                      data.persona.mail,
+	                      data.rol,
+	                      carreraNuevo,
+	                      "<a href='#' name='editUser' data-userid='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a>" + 
+						  "<a href='#' name='deleteUser' data-userid='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a>"
+                ]).draw();
 				
 				//Agrego el evento de delete
 				$("a[name='deleteUser'][data-userid=" + data.id + "] button").click(function(){
@@ -73,7 +81,7 @@ var usuariosAdmin = {
 				
 				var options = $("#editarAlumnoForm select[name=carrera] option");
 				for(var i = 0; i < options.size(); i++) {
-					if(options.get(i).getAttribute("value") == data.alumno.idCarrera) {
+					if(data.rol == 'alumno' && options.get(i).getAttribute("value") == data.alumno.idCarrera) {
 						celdas.get(6).setAttribute("data-carreraId", data.alumno.idCarrera);
 						celdas.get(6).innerHTML = options.get(i).innerHTML;
 						break;
@@ -195,6 +203,7 @@ $(document).ready(function() {
 			$(".infoDialog").remove();
 			$('#nuevoAlumnoForm').trigger("reset");
 			$("#nuevoAlumnoForm").find(".form-group").removeClass("has-error");
+			$('#nuevoAlumnoForm .carreraSelect').show();
 		},
 		close: function(event, ui) {
 		}
@@ -234,9 +243,14 @@ $(document).ready(function() {
 			$('#editarAlumnoForm input[name=user]').val($("#editarAlumnoDialog").data('user'));
 			$('#editarAlumnoForm select[name=rol]').val($("#editarAlumnoDialog").data('rol'));
 			
-			$('#editarAlumnoForm select[name=carrera] option').removeAttr("selected");
-			$("#editarAlumnoForm select[name=carrera] option[value=" + $("#editarAlumnoDialog").data('carrera')  + "]").attr("selected", "selected");
-			$("#editarAlumnoForm select[name=carrera]").trigger('chosen:updated');
+			if($("#editarAlumnoDialog").data('rol') == 'alumno'){
+				$('#editarAlumnoForm .carreraSelect').show();
+				$('#editarAlumnoForm select[name=carrera] option').removeAttr("selected");
+				$("#editarAlumnoForm select[name=carrera] option[value=" + $("#editarAlumnoDialog").data('carrera')  + "]").attr("selected", "selected");
+				$("#editarAlumnoForm select[name=carrera]").trigger('chosen:updated');
+			} else {
+				$('#editarAlumnoForm .carreraSelect').hide();
+			}
 		},
 		close: function(event, ui) {
 		}
@@ -283,4 +297,13 @@ $(document).ready(function() {
 	});
 	
 	$("select[name=carrera]").chosen({no_results_text:'No hay resultados para: '});
+	
+	$('#nuevoAlumnoForm select[name=rol]').change(function(){
+		if($(this).val() != 'alumno') {
+			$('#nuevoAlumnoForm .carreraSelect').hide();
+		} else {
+			$('#nuevoAlumnoForm .carreraSelect').show();
+		}
+	});
+	
 });
