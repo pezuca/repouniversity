@@ -35,7 +35,7 @@
 						<h3><b>${curso.nombre}</b></h3>
 					</div>
 				</div>
-				<div class="col-lg-12">
+				<div class="col-lg-12" style="margin: 10px 0px;">
 					<a data-toggle="modal" href="#fileUpload" class="btn btn-success"><i class="fa fa-upload"></i> Subir Archivo</a>
 				</div>
 				

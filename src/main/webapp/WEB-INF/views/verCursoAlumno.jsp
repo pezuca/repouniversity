@@ -26,21 +26,20 @@
 		
 		<div class="wrapper wrapper-content animated fadeInRight">
 			<div class="row">
-	             <div class="col-lg-12">
-					<div class="usuarioInformation">
-							<h3><b>${curso.nombre}</b></h3>
-						
-					</div>
+				<div class="usuarioInformation">
+					<h3><b>${curso.nombre}</b></h3>
+				</div>
+	             <div class="col-lg-12" style="margin: 10px;">
+					
 				
-					<tr class="head">
+					<tr class="head" >
 						<th><a data-toggle="modal" href="#fileUpload" class="btn btn-success"><i class="fa fa-upload"></i> Subir Archivo</a></th>
-						<th></th>
 						<c:choose>
 							<c:when test="${curso.grupoAlumno.id != 1}">
-								<th><a href="/repouniversity/alumno/verGrupo?grupoId=${curso.grupoAlumno.id}&bread=Ver grupo-2" name="Ver" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver grupo" class="btn btn-success"><i class="fa fa-upload"></i> Ver Grupo (${curso.grupoAlumno.nombre}) </a></th>
+								<th><a href="/repouniversity/alumno/verGrupo?grupoId=${curso.grupoAlumno.id}&bread=Ver grupo-2" name="Ver" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver grupo" class="btn btn-success"><i class="fa fa-arrow-right"></i> Ver Grupo (${curso.grupoAlumno.nombre}) </a></th>
 							</c:when>
 							<c:otherwise>
-								<th><a href="/repouniversity/alumno/verGrupo?grupoId=${curso.grupoAlumno.id}&bread=Ver grupo-2" name="Ver" type="button" disabled="disabled" data-toggle="tooltip" data-placement="top" data-original-title="Ver grupo" class="btn btn-success"><i class="fa fa-upload"></i> Ver Grupo (${curso.grupoAlumno.nombre}) </a></th>
+								<th><a href="/repouniversity/alumno/verGrupo?grupoId=${curso.grupoAlumno.id}&bread=Ver grupo-2" name="Ver" type="button" disabled="disabled" data-toggle="tooltip" data-placement="top" data-original-title="Ver grupo" class="btn btn-success"><i class="fa fa-arrow-right"></i> Ver Grupo (${curso.grupoAlumno.nombre}) </a></th>
 							</c:otherwise>
 						</c:choose>
 
