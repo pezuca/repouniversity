@@ -69,12 +69,12 @@ public class AdministradorController {
     @Autowired
     public ErrorArchivoService errorArchivoService;
 
-    
     @RequestMapping(value = "admin/verUsuarios", method = {RequestMethod.GET})
     public ModelAndView getUsuarios() {
 
         List<UsuarioTO> listaUsuarios = usuarioService.getAll();
-        return new ModelAndView("verUsuariosAdmin").addObject("usuarios", listaUsuarios);
+        List<Carrera> listacarreras = carreraService.getAll();
+        return new ModelAndView("verUsuariosAdmin").addObject("usuarios", listaUsuarios).addObject("listacarreras", listacarreras);
     }
 
     @RequestMapping(value = "admin/verCursos", method = {RequestMethod.GET})
@@ -120,9 +120,9 @@ public class AdministradorController {
     @ResponseStatus(value = HttpStatus.OK)
     public UsuarioTO crearUsuarioAjax(@RequestParam(value = "nombre") String nombre, @RequestParam(value = "apellido") String apellido,
             @RequestParam(value = "mail") String mail, @RequestParam(value = "user") String user, @RequestParam(value = "password") String password,
-            @RequestParam(value = "rol") String rol) {
+            @RequestParam(value = "rol") String rol, @RequestParam(value = "carrera", required = false) Long carreraId) {
 
-        Usuario usuario = usuarioService.saveUser(nombre, apellido, mail, user, password, rol);
+        Usuario usuario = usuarioService.saveUser(nombre, apellido, mail, user, password, rol, carreraId);
 
         UsuarioTO usuarioTo = usuarioService.getUserById(usuario.getId());
 
@@ -134,9 +134,9 @@ public class AdministradorController {
     @ResponseStatus(value = HttpStatus.OK)
     public UsuarioTO editarUsuarioAjax(@RequestParam(value = "userId") Long userId, @RequestParam(value = "nombre") String nombre,
             @RequestParam(value = "apellido") String apellido, @RequestParam(value = "mail") String mail, @RequestParam(value = "user") String user,
-            @RequestParam(value = "password") String password) {
+            @RequestParam(value = "password") String password, @RequestParam(value = "carrera", required = false) Long carreraId) {
 
-        Usuario usuario = usuarioService.updateUser(userId, nombre, apellido, mail, user, password, password);
+        Usuario usuario = usuarioService.updateUser(userId, nombre, apellido, mail, user, password, password, carreraId);
 
         UsuarioTO usuarioTo = usuarioService.getUserById(usuario.getId());
         return usuarioTo;
@@ -261,11 +261,11 @@ public class AdministradorController {
     public void deleteArchivoAjax(@RequestParam(value = "archivoId") Long archivo) {
         archivoService.delete(archivo);
     }
-    
+
     @RequestMapping(value = "admin/verReporteErrores", method = {RequestMethod.GET})
     public ModelAndView reporteErrores() {
         List<ErrorArchivoTO> errorArchivo = errorArchivoService.getErrores();
-         
+
         return new ModelAndView("verErroresArchivosAdmin").addObject("errorArchivo", errorArchivo);
     }
 }

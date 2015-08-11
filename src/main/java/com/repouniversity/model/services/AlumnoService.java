@@ -36,6 +36,10 @@ public class AlumnoService {
 
         return buildAlumno(alumno);
     }
+    
+    public Alumno getAlumnoByIdDao(Long alumnoId) {
+        return alumnoDao.findById(alumnoId);
+    }
 
     private AlumnoTO buildAlumno(Alumno alumno) {
         AlumnoTO alumnoTo = new AlumnoTO();
@@ -49,6 +53,10 @@ public class AlumnoService {
 
     public void save(Alumno alumno) {
         alumnoDao.insert(alumno);
+    }
+    
+    public void update(Alumno alumno) {
+        alumnoDao.update(alumno);
     }
     
     public void delete(Long alumnoId) {

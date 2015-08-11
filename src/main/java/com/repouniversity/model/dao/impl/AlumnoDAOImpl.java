@@ -79,7 +79,7 @@ public class AlumnoDAOImpl extends GenericDAOImpl<Alumno> implements AlumnoDAO {
     @Override
     protected SQLStatement buildUpdateSQLStatement(final Alumno t) {
 
-        return new SQLStatement("update alumno set id_persona = ?, Idcarrera = ?, fechasys = now()  where id = ?") {
+        return new SQLStatement("update alumno set id_persona = ?, Idcarrera = ?, fecsys = now()  where id_alumno = ?") {
 
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {

@@ -10,6 +10,9 @@
 	<title>Repouniversity</title>
 	<%@include file="../components/common-statics-imports.jsp"%>
 	<script src="/repouniversity/resources/js/application/verUsuariosAdmin.js"></script>
+	<script src="/repouniversity/resources/js/plugins/chosen/chosen.jquery.js"></script>
+	<link rel="stylesheet" type="text/css" 
+				href="/repouniversity/resources/css/plugins/chosen/chosen.css" />
 </head>
 <body class=" pace-done">
 	
@@ -40,6 +43,7 @@
 									<th>User name</th>
 									<th>Mail</th>
 									<th>Rol</th>
+									<th>Carrera</th>
 									<th></th>
 								</tr>
 							</thead>
@@ -52,6 +56,15 @@
 										<td>${usuario.user}</td>
 										<td>${usuario.persona.mail}</td>
 										<td>${usuario.rol}</td>
+										
+										<c:set var="carreraName" value="" />
+										<c:forEach items="${listacarreras}" var="carrera" varStatus="status">
+											<c:if test="${carrera.id == usuario.alumno.idCarrera}">
+												<c:set var="carreraName" value="${carrera.nombre}" />
+											</c:if>
+										</c:forEach>
+										
+										<td data-carreraId="${usuario.alumno.idCarrera}">${carreraName}</td>
 										<td class="text-center">
 											<a href="#" name="editUser" data-userId="${usuario.id}"><button class="btn btn-primary btn-circle" type="button"><i class="fa fa-pencil"></i></button></a>
 											<a href="#" name="deleteUser" data-userId="${usuario.id}" ><button class="btn btn-danger btn-circle" type="button"><i class="fa fa-times"></i></button></a>
@@ -101,6 +114,16 @@
                      </select>
                 </div>
             </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Carrera*:</label>
+                <div class="col-sm-10">
+                	<select class="form-control m-b" name="carrera">
+						<c:forEach items="${listacarreras}" var="carrera" varStatus="status">
+							<option value="${carrera.id}">${carrera.nombre}</option>
+						</c:forEach>
+                     </select>
+                </div>
+            </div>
 		</form>
 	</div>
 	
@@ -134,6 +157,16 @@
                          <option value="alumno">Alumno</option>
                          <option value="docente">Docente</option>
                          <option value="administrador">Administrador</option>
+                     </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Carrera*:</label>
+                <div class="col-sm-10">
+                	<select class="form-control m-b" name="carrera">
+						<c:forEach items="${listacarreras}" var="carrera" varStatus="status">
+							<option value="${carrera.id}">${carrera.nombre}</option>
+						</c:forEach>
                      </select>
                 </div>
             </div>

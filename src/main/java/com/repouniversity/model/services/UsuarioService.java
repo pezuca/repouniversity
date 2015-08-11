@@ -35,7 +35,7 @@ public class UsuarioService {
     private UsuarioRolService usuarioRolService;
 
     @Transactional
-    public Usuario updateUser(Long id, String nombre, String apellido, String mail, String user, String newPassword, String repeatPassword) {
+    public Usuario updateUser(Long id, String nombre, String apellido, String mail, String user, String newPassword, String repeatPassword, Long carreraId) {
 
         Usuario usuario = usuarioDAO.findById(id);
 
@@ -52,12 +52,20 @@ public class UsuarioService {
 
         personaService.update(persona);
         usuarioDAO.update(usuario);
+        
+        UsuarioRol usuarioRol = usuarioRolService.getUsuarioById(id);
+        if(usuarioRol.getRol().equals("alumno")) {
+            Alumno alumno = alumnoService.getAlumnoByIdDao(usuarioRol.getIdAluDoc());
+            alumno.setIdCarrera(carreraId);
+            
+            alumnoService.update(alumno);
+        }
 
         return usuario;
     }
 
     @Transactional
-    public Usuario saveUser(String nombre, String apellido, String mail, String user, String password, String rol) {
+    public Usuario saveUser(String nombre, String apellido, String mail, String user, String password, String rol, Long carreraId) {
 
         Persona persona = new Persona();
         persona.setNombre(nombre);
@@ -75,6 +83,7 @@ public class UsuarioService {
         if (rol.equalsIgnoreCase("alumno")) {
             Alumno alumno = new Alumno();
             alumno.setIdPersona(persona.getId());
+            alumno.setIdCarrera(carreraId);
             alumnoService.save(alumno);
 
         } else if (rol.equalsIgnoreCase("docente")) {
@@ -111,6 +120,10 @@ public class UsuarioService {
         usuarioTo.setActivo(usuario.isActivo());
         usuarioTo.setPersona(personaService.findById(usuarioRol.getIdPersona()));
         usuarioTo.setRol(usuarioRol.getRol());
+        
+        if(usuarioRol.getRol().equals("alumno")) {
+            usuarioTo.setAlumno(alumnoService.getAlumnoById(usuarioRol.getIdAluDoc()));
+        }
 
         return usuarioTo;
     }

@@ -13,6 +13,7 @@ public class UsuarioTO {
     private Persona Persona;
     private Date fechasys;
     private String rol;
+    private AlumnoTO alumno;
 
     public Long getId() {
         return id;
@@ -68,5 +69,13 @@ public class UsuarioTO {
 
     public void setRol(String rol) {
         this.rol = rol;
+    }
+
+    public AlumnoTO getAlumno() {
+        return alumno;
+    }
+
+    public void setAlumno(AlumnoTO alumno) {
+        this.alumno = alumno;
     }
 }
