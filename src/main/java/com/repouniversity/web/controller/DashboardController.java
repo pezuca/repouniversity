@@ -81,7 +81,7 @@ public class DashboardController {
 			// List<NotificacionTO> notificaciones = null;
 			model = new ModelAndView("dashboardDocente");
 			int notificaciones = notificacionService
-					.getNotificacionesForAlumno(usuario.getIdAluDoc()).size();
+					.getNotificacionesForDocente(usuario.getIdAluDoc()).size();
 
 			int cursos = cursoService.getCursosMateriaDisponiblesParaDocente(
 					usuario.getIdAluDoc()).size();
