@@ -13,6 +13,9 @@
 
 	<script type="text/javascript"
 		src="/repouniversity/resources/js/application/misDatos.js"></script>
+	<script src="/repouniversity/resources/js/plugins/chosen/chosen.jquery.js"></script>
+	<link rel="stylesheet" type="text/css" 
+				href="/repouniversity/resources/css/plugins/chosen/chosen.css" />
 </head>
 <body class=" pace-done">
 	<div id="wrapper">
@@ -82,6 +85,16 @@
 										type="email" value="${usuario.persona.mail}" required>
 								</div>
 							</div>
+							<div class="form-group">
+				                <label for="mailInput" class="col-sm-2 control-label"> Carrera</label>
+				                <div class="col-sm-10">
+				                	<select class="form-control m-b" name="carrera">
+										<c:forEach items="${listacarreras}" var="carrera" varStatus="status">
+											<option value="${carrera.id}">${carrera.nombre}</option>
+										</c:forEach>
+				                     </select>
+				                </div>
+				            </div>
 							<div class="form-group">
 								<div class="col-sm-offset-2 col-sm-10">
 									<button type="submit" class="btn btn-primary">Salvar</button>
