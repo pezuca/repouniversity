@@ -21,13 +21,14 @@ var tpAdmin = {
 	                  data.id,
 	                  data.descripcion,
 	                  data.archivoNombre,
-	                  data.nota,
+	                  //data.nota,
+	                  "          ",
 				                                          "<a name='editTp' data-tpgrupoId='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a> " + 
 				  										  "<a name='deleteTp' data-tpgrupoId='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a> " +
-					  "<a href='/repouniversity/grupo/verTrabajosPracticos?tpGrupoId=" + data.id + "' name='Ver' data-tpgrupoId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Ver TP'><i class='fa fa-codepen'></i></button></a>" +
-					  "<a href='/repouniversity/vistaPrevia?archivoId=" + data.archivo + "' name='verArchivo' data-tpgrupoId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Ver Archivo'><i class='fa fa-search'></i></button></a>" +
-					  "<a href='/repouniversity/bajarArchivo?archivoId=" + data.archivo + "' name='dowloadArchivo' data-tpgrupoId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Bajar Archivo'><i class='fa fa-download'></i></button></a>"
-			  			
+														  "<a href='/repouniversity/grupo/verTrabajosPracticos?tpGrupoId=" + data.id + "' name='Ver' data-tpgrupoId=" + data.id + "><button class='btn btn-primary btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Ver TP'><i class='fa fa-arrow-right'></i></button></a>" +
+														  "<a href='/repouniversity/vistaPrevia?archivoId=" + data.archivo + "' name='verArchivo' data-tpgrupoId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Ver Archivo'><i class='fa fa-search'></i></button></a>" +
+														  "<a href='/repouniversity/bajarArchivo?archivoId=" + data.archivo + "' name='dowloadArchivo' data-tpgrupoId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Bajar Archivo'><i class='fa fa-download'></i></button></a>"
+												  			
 	             ]).draw();
 				
 				//Agrego el evento de delete
@@ -164,7 +165,8 @@ var tpAdmin = {
 					tableGrupo.row.add([
 	                    data.alumnos[i].id,
 	                    data.alumnos[i].persona.apellido + ", " + data.alumnos[i].persona.nombre,
-	                    "<a name='deleteAlumno' data-alumnoId='" + data.alumnos[i].id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a> "
+	                    data.alumnos[i].persona.mail,
+	                   "<a name='deleteAlumno' data-alumnoId='" + data.alumnos[i].id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a> "
 		            ]).draw();
 					
 					//Agrego el evento de delete

@@ -114,12 +114,12 @@ public class CursoController {
     }
 
     @RequestMapping(value = "docente/crearGrupo", method = {RequestMethod.POST})
-    public ModelAndView crearGrupo(@RequestParam(value = "idcurso", required = true) Long idCurso,
+	@ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public Grupo crearGrupo(@RequestParam(value = "idcurso", required = true) Long idCurso,
             @RequestParam(value = "alumnosIds", required = true) Long[] listaAlumnoId, @RequestParam(value = "nombre", required = true) String nombre) {
-
-        grupoService.crearGrupo(idCurso, listaAlumnoId, nombre);
-
-        return new ModelAndView("verCursoDocente").addObject("curso", cursoService.getById(idCurso));
+        
+        return grupoService.crearGrupo(idCurso, listaAlumnoId, nombre);
     }
 
     @RequestMapping(value = "docente/verGrupo", method = {RequestMethod.GET})

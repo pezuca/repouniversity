@@ -30,7 +30,7 @@ public class GrupoService {
         return grupoDao.insert(grupo);
     }
 
-    public void crearGrupo(Long cursoId, Long[] alumnos, String nombre) {
+    public Grupo crearGrupo(Long cursoId, Long[] alumnos, String nombre) {
         Grupo grupo = new Grupo();
 
         grupo.setNombre(nombre);
@@ -39,6 +39,7 @@ public class GrupoService {
         grupo = save(grupo);
 
         saveGrupoAlumnoCurso(grupo.getId(), cursoId, alumnos);
+        return grupoDao.findById(grupo.getId());
     }
 
     private void saveGrupoAlumnoCurso(Long grupoId, Long cursoId, Long[] alumnos) {
