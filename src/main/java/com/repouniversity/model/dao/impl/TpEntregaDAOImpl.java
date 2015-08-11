@@ -14,9 +14,7 @@ import com.repouniversity.model.dao.TpEntregaDAO;
 import com.repouniversity.model.dao.query.InsertSQLStatement;
 import com.repouniversity.model.dao.query.SQLStatement;
 import com.repouniversity.model.dao.rowmapper.TpEntregaRowMapper;
-import com.repouniversity.model.dao.rowmapper.TpGrupoRowMapper;
 import com.repouniversity.model.entity.TpEntrega;
-import com.repouniversity.model.entity.TpGrupo;
 
 @Repository
 public class TpEntregaDAOImpl extends GenericDAOImpl<TpEntrega> implements TpEntregaDAO {
@@ -103,15 +101,15 @@ public class TpEntregaDAOImpl extends GenericDAOImpl<TpEntrega> implements TpEnt
 
     @Override
     protected SQLStatement buildUpdateSQLStatement(final TpEntrega t) {
-        return new SQLStatement("UPDATE tp_entrega SET idtp_grupo = ?, id_archivo = ?, descripcion = ?, nota = ?, activo = ?, fecsys = now() WHERE idtp_entrega = ?") {
+        return new SQLStatement("UPDATE tp_entrega SET idtp_grupo = ?, id_archivo = ?, descripcion = ?, activo = ?, fecsys = now() WHERE idtp_entrega = ?") {
 
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
                 ps.setLong(1, t.getIdTpGrupo());
                 ps.setLong(2, t.getIdArchivo());
                 ps.setString(3, t.getDescripcion());
-                ps.setBoolean(5, t.isActivo());
-                ps.setLong(6, t.getId());
+                ps.setBoolean(4, t.isActivo());
+                ps.setLong(5, t.getId());
             }
 
             @Override

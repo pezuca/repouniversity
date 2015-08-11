@@ -19,6 +19,7 @@ var usuariosAdmin = {
 				                                          data.user,
 				                                          data.persona.mail,
 				                                          data.rol,
+				                                          data.carrera,
 				                                          "<a href='#' name='editUser' data-userid='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a>" + 
 				  										  "<a href='#' name='deleteUser' data-userid='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a>"
 				                                     ]).draw();
@@ -35,6 +36,7 @@ var usuariosAdmin = {
 						.data('user', $(this).parents("tr").find("td").get(3).innerHTML)
 						.data('mail', $(this).parents("tr").find("td").get(4).innerHTML)
 						.data('rol', $(this).parents("tr").find("td").get(5).innerHTML)
+						.data('carrera', $(this).parents("tr").find("td").get(6).innerHTML)
 						.dialog("open");
 				});
 				
@@ -69,6 +71,15 @@ var usuariosAdmin = {
 				celdas.get(4).innerHTML = data.persona.mail;
 				celdas.get(5).innerHTML = data.rol;
 				
+				var options = $("#editarAlumnoForm select[name=carrera] option");
+				for(var i = 0; i < options.size(); i++) {
+					if(options.get(i).getAttribute("value") == data.alumno.idCarrera) {
+						celdas.get(6).setAttribute("data-carreraId", data.alumno.idCarrera);
+						celdas.get(6).innerHTML = options.get(i).innerHTML;
+						break;
+					}
+				}
+				
 				//Agrego el evento de delete
 				$("a[name='deleteUser'][data-userid=" + data.id + "] button").click(function(){
 					$("#deleteAlumnoDialog").data('userId', $(this).parent().attr("data-userid")).dialog("open");
@@ -81,6 +92,7 @@ var usuariosAdmin = {
 						.data('user', $(this).parents("tr").find("td").get(3).innerHTML)
 						.data('mail', $(this).parents("tr").find("td").get(4).innerHTML)
 						.data('rol', $(this).parents("tr").find("td").get(5).innerHTML)
+						.data('carrera', $(this).parents("tr").find("td[data-carreraId]").attr("data-carreraId"))
 						.dialog("open");
 				});
 				
@@ -221,6 +233,10 @@ $(document).ready(function() {
 			$('#editarAlumnoForm input[name=mail]').val($("#editarAlumnoDialog").data('mail'));
 			$('#editarAlumnoForm input[name=user]').val($("#editarAlumnoDialog").data('user'));
 			$('#editarAlumnoForm select[name=rol]').val($("#editarAlumnoDialog").data('rol'));
+			
+			$('#editarAlumnoForm select[name=carrera] option').removeAttr("selected");
+			$("#editarAlumnoForm select[name=carrera] option[value=" + $("#editarAlumnoDialog").data('carrera')  + "]").attr("selected", "selected");
+			$("#editarAlumnoForm select[name=carrera]").trigger('chosen:updated');
 		},
 		close: function(event, ui) {
 		}
@@ -262,6 +278,9 @@ $(document).ready(function() {
 			.data('user', $(this).parents("tr").find("td").get(3).innerHTML)
 			.data('mail', $(this).parents("tr").find("td").get(4).innerHTML)
 			.data('rol', $(this).parents("tr").find("td").get(5).innerHTML)
+			.data('carrera', $(this).parents("tr").find("td[data-carreraId]").attr("data-carreraId"))
 			.dialog("open");
 	});
+	
+	$("select[name=carrera]").chosen({no_results_text:'No hay resultados para: '});
 });

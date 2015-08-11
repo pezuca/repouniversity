@@ -58,7 +58,7 @@
 
 					
 						<div class="col-lg-4">
-							<div id="agregarErrorButton">
+							<div id="agregarErrorDashboardButton">
 								<a href="#">
 								   <div class="widget yellow-bg p-lg  text-center">
 										<div class="m-b-md">
@@ -129,16 +129,6 @@
 			</div>
 			<%@include file="../components/footer.jsp"%>
 		</div>
-				   <!-- 	Ventanas -->
-			<div id="agregarErrorDialog" title="Nuevo Error">
-				<form id="nuevoErrorForm" class="form-horizontal">
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Descripcion*:</label>
-						<div class="col-sm-10"><textarea name="descripcion" class="form-control" placeholder="Reporte error.." required="required"></textarea></div>
-					</div>
-				   
-				</form>
-			</div>
 	</div>	
 </body>
 </html>

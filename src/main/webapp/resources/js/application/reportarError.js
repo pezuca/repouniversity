@@ -107,7 +107,7 @@ $(document).ready(function() {
 		}
 	});
 	
-	$("#agregarErrorButton").click(function() {
+	$("#agregarErrorButton, #agregarErrorDashboardButton").click(function() {
 		$("#agregarErrorDialog").dialog("open");
 	});
 	
