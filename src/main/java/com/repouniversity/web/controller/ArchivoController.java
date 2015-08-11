@@ -200,14 +200,17 @@ public class ArchivoController {
 
         String extension = archivo.getPath().split("\\.")[1];
 
-        return new ModelAndView("vistaPrevia").addObject("archivo", archivo).addObject("errorArchivo", errorArchivo).addObject("extension", extension);
+        return new ModelAndView("vistaPrevia").addObject("archivo", archivo).addObject("errorArchivo", errorArchivo)
+                .addObject("extension", extension.toLowerCase());
     }
 
     @RequestMapping(value = "/vistaPreviaAnonimo", method = {RequestMethod.GET})
     public ModelAndView vistaPreviaAnonimo(@RequestParam(value = "archivoId") Long archivoId) {
         VwArchivo archivo = archivoService.getVwArchivo(archivoId);
 
-        return new ModelAndView("vistaPreviaAnonimo").addObject("archivo", archivo);
+        String extension = archivo.getPath().split("\\.")[1];
+
+        return new ModelAndView("vistaPreviaAnonimo").addObject("archivo", archivo).addObject("extension", extension.toLowerCase());
     }
 
     @RequestMapping(value = "/modificarArchivo", method = {RequestMethod.POST})

@@ -19,7 +19,7 @@ $(document).ready(function () {
 		autoQueue: false,
 		previewsContainer: "#previews",
 		clickable: ".fileinput-button",
-		acceptedFiles: "image/*,.pdf,.doc,.ods,.xlsx,.docx,.odt",
+		acceptedFiles: "image/*,.pdf,.doc,.ods,.xlsx,.xls,.docx,.odt,.odp,.ppt,.pptx",
 		dictFileTooBig: "El archivo es muy grande ({{filesize}}KB). El tamaño máximo es: {{maxFilesize}}KB."
 	});
 
