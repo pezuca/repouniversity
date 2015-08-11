@@ -25,7 +25,7 @@ public class DocenteDAOImpl extends GenericDAOImpl<Docente> implements DocenteDA
     public Docente getByCursoMateriaId(final Long cursoId) {
         StringBuilder sql = new StringBuilder();
 
-        sql.append("SELECT distinct d.*, p.* from curso c JOIN docente d ON c.id_docente = c.id_docente ");
+        sql.append("SELECT distinct d.*, p.* from curso c JOIN docente d ON d.id_docente = c.id_docente ");
         sql.append("JOIN persona p ON p.id_persona = d.id_persona ");
         sql.append("WHERE c.id_curso =  ? ");
         sql.append("AND d.activo = 1 AND p.activo = 1");
