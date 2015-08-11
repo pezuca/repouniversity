@@ -64,7 +64,7 @@
                                 <div class="col-md-3">
                                     <span class="small font-bold">Tipo</span>
                                     <div class="tag-list">
-                                        <span class="tag-item">Docente</span>
+                                        <span class="tag-item">Administrador</span>
                                         <span class="tag-item">Altas</span>
                                     </div>
                                 </div> 
@@ -73,7 +73,7 @@
                                 <div class="col-lg-12">
                                     <div id="faq2" class="panel-collapse collapse faq-answer">
                                         <p>
-                                           Completar....
+                                           Para dar de alta un alumno hay que ingresar a la opción Usuarios del menú de la izquierda, hacer click en el icono <a class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  Usuario</a> y completar los campos que aparecen en pantalla. Es muy importante elegir el rol Alumno y la carrera a la que pertenece para finalizar el alta.
                                         </p>
                                     </div>
                                 </div>
@@ -97,7 +97,7 @@
                                 <div class="col-lg-12">
                                     <div id="faq3" class="panel-collapse collapse faq-answer">
                                         <p>
-                                           Completar....
+                                           Para dar de alta un docente hay que ingresar a la opción Usuarios del menú de la izquierda, hacer click en el icono <a class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  Usuario</a> y completar los campos que aparecen en pantalla. Es muy importante elegir el rol Docente para finalizar el alta.
                                         </p>
                                     </div>
                                 </div>
@@ -121,7 +121,7 @@
                                 <div class="col-lg-12">
                                     <div id="faq4" class="panel-collapse collapse faq-answer">
                                         <p>
-                                           Completar....
+                                           Se puede dar de alta documentos como alumno y como docente ingresando a la opción 	mis cursos->ver cursos del menú de la izquierda, en esa sección aparece un listado de los cursos que tiene acceso. Para acceder a un curso hacer click en la flecha <a class="btn btn-primary btn-circle" type="button"><i class="fa fa-arrow-right"></i></a> y una vez dentro del curso hacer click en el icono <a class="btn btn-success"><i class="fa fa-upload"></i> Subir Archivo</a> de la parte superior. El icono con el símbolo más abre una ventana del explorador para elegir el archivo, se pueden subir más de uno. Una vez hecho estos pasos hace click en subir todo.
                                         </p>
                                     </div>
                                 </div>
@@ -146,7 +146,7 @@
                                 <div class="col-lg-12">
                                     <div id="faq5" class="panel-collapse collapse faq-answer">
                                         <p>
-                                           Completar....
+                                           El grupo de trabajos prácticos es creado por el docente y sirve para entregar trabajos a nombre de un conjunto de alumnos que pertenecen a un mismo curso.
                                         </p>
                                     </div>
                                 </div>
@@ -170,7 +170,7 @@
                                 <div class="col-lg-12">
                                     <div id="faq6" class="panel-collapse collapse faq-answer">
                                         <p>
-                                           Completar....
+                                           Se puede dar de alta documentos dentro de un grupo de trabajos prácticos, ingresar a mis cursos->ver cursos del menú de la izquierda, en esa sección aparece un listado de los cursos que tiene acceso. Para acceder a un curso basta con hacer click en la flecha, una vez dentro del curso hacer click en el icono Ver Grupo, dentro del grupo hacer click en el icono subir archivo. El icono con el símbolo más abre una ventana del explorador para elegir el archivo, se pueden subir más de uno. Una vez hecho estos pasos ir a  subir todo. 
                                         </p>
                                     </div>
                                 </div>
@@ -293,7 +293,7 @@
                                 <div class="col-lg-12">
                                     <div id="faq10" class="panel-collapse collapse faq-answer">
                                         <p>
-                                           Completar....
+                                           Para dar de alta un curso hay que ingresar a la opción Cursos del menú de la izquierda, hacer click en el icono <a class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  Curso</a> y completar los campos que aparecen en pantalla. Es muy importante elegir el docente y la materia para finalizar el alta.
                                         </p>
                                     </div>
                                 </div>
@@ -326,31 +326,7 @@ Los documentos públicos pueden verse por todos los usuarios del sistema y por lo
                             </div>
                         </div>
 						
-						<div class="faq-item">
-                            <div class="row">
-                                <div class="col-md-7">
-                                    <a data-toggle="collapse" href="#faq13" class="faq-question">¿Cómo descargar un documento? </a>                                 
-                                </div>
-                                <div class="col-md-3">
-                                    <span class="small font-bold">Tipo</span>
-                                    <div class="tag-list">
-                                        <span class="tag-item">Alumno</span>
-										<span class="tag-item">Docente</span>
-                                        <span class="tag-item">Utilidades</span>
-                                    </div>
-                                </div> 
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div id="faq13" class="panel-collapse collapse faq-answer">
-                                        <p>
-                                           Completar....
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-						
+												
 								<div class="faq-item">
                             <div class="row">
                                 <div class="col-md-7">
@@ -368,7 +344,7 @@ Los documentos públicos pueden verse por todos los usuarios del sistema y por lo
                                 <div class="col-lg-12">
                                     <div id="faq14" class="panel-collapse collapse faq-answer">
                                         <p>
-                                           Completar....
+                                           Hacer click en la opción de mis cursos del menú izquierdo, seleccionar un curso, dentro del mismo seleccionar un grupo, para agregar un alumno hacer click en el botón alumno, en la ventana que se abrió seleccionar uno o más alumnos para agregar. Recuerde que solo puede agregar alumnos que están inscripto en el curso del docente.
                                         </p>
                                     </div>
                                 </div>
@@ -392,7 +368,7 @@ Los documentos públicos pueden verse por todos los usuarios del sistema y por lo
                                 <div class="col-lg-15">
                                     <div id="faq15" class="panel-collapse collapse faq-answer">
                                         <p>
-                                           Completar....
+                                           Hacer click en la opción de mis cursos del menú izquierdo, seleccionar un curso, dentro del mismo seleccionar un grupo, para eliminar un alumno hacer click en el botón rojo circular a la derecha del nombre del alumno. Confirmar el borrado del alumno
                                         </p>
                                     </div>
                                 </div>
@@ -416,7 +392,7 @@ Los documentos públicos pueden verse por todos los usuarios del sistema y por lo
                                 <div class="col-lg-12">
                                     <div id="faq16" class="panel-collapse collapse faq-answer">
                                         <p>
-                                           Completar....
+                                           El sistema ofrece dos modalidades de búsqueda, una se encuentra en la parte superior del menú, y corresponde a la búsqueda rápida de un documento, la segunda se encuentra en la parte izquierda del menú y es la búsqueda avanzada de un documento, con la posibilidad de refinar la búsqueda por diferentes categorías. 
                                         </p>
                                     </div>
                                 </div>
@@ -440,7 +416,7 @@ Los documentos públicos pueden verse por todos los usuarios del sistema y por lo
                                 <div class="col-lg-12">
                                     <div id="faq17" class="panel-collapse collapse faq-answer">
                                         <p>
-                                           Completar....
+                                           El sistema ofrece dos modalidades para reportar un error, una se encuentra en la parte superior derecha del menú y corresponde a reportes de errores generales, haciendo click en el icono se abre una ventana para ingresar un texto, luego el botón enviar lo reporta. La segunda es dentro de la vista de un documento y corresponde a un error reportado a un documento en particular, debajo del documento se puede ingresar  texto que luego es enviado como reporte. 
                                         </p>
                                     </div>
                                 </div>
@@ -464,7 +440,7 @@ Los documentos públicos pueden verse por todos los usuarios del sistema y por lo
                                 <div class="col-lg-12">
                                     <div id="faq18" class="panel-collapse collapse faq-answer">
                                         <p>
-                                           Completar....
+                                           Ingresar a la opción mis datos, que se encuentra debajo del logo de repouniversity, se puede cambiar todos los datos del usuario menos su identificación. Uno de los cambios que ofrece es el de la contraseña.
                                         </p>
                                     </div>
                                 </div>
@@ -488,7 +464,7 @@ Los documentos públicos pueden verse por todos los usuarios del sistema y por lo
                                 <div class="col-lg-12">
                                     <div id="faq19" class="panel-collapse collapse faq-answer">
                                         <p>
-                                           Completar....
+                                           Son avisos dirigidos a los alumnos y docente cuando ocurre un evento dentro del sistema que tiene competencia con algunos de estos usuarios, ejemplo, el pedido de alta de un alumno, genera una notificación al docente, y cuando el docente lo acepta genera una notificación al alumno. 
                                         </p>
                                     </div>
                                 </div>
@@ -512,7 +488,7 @@ Los documentos públicos pueden verse por todos los usuarios del sistema y por lo
                                 <div class="col-lg-12">
                                     <div id="faq20" class="panel-collapse collapse faq-answer">
                                         <p>
-                                           Completar....
+                                           Hacer click en la opción de mis cursos del menú izquierdo, seleccionar un curso, dentro del mismo seleccionar un grupo, para corregir un trabajo practico hacer click en el botón circular primero, en la ventana que se abrió seleccionar un estado, en este caso aprobado, agregar una descripción y dar aceptar.
                                         </p>
                                     </div>
                                 </div>
@@ -536,7 +512,9 @@ Los documentos públicos pueden verse por todos los usuarios del sistema y por lo
                                 <div class="col-lg-12">
                                     <div id="faq21" class="panel-collapse collapse faq-answer">
                                         <p>
-                                           Completar....
+                                           
+											Los cursos se pueden ver en dos listados en el menú mis cursos, los cursos inscriptos o los cursos disponibles.
+                                           
                                         </p>
                                     </div>
                                 </div>
@@ -560,7 +538,7 @@ Los documentos públicos pueden verse por todos los usuarios del sistema y por lo
                                 <div class="col-lg-12">
                                     <div id="faq22" class="panel-collapse collapse faq-answer">
                                         <p>
-                                           Completar....
+                                           Los cursos se pueden ver en dos listados en el menú mis cursos, los cursos inscriptos o los cursos disponibles.
                                         </p>
                                     </div>
                                 </div>
@@ -584,7 +562,7 @@ Los documentos públicos pueden verse por todos los usuarios del sistema y por lo
                                 <div class="col-lg-12">
                                     <div id="faq23" class="panel-collapse collapse faq-answer">
                                         <p>
-                                           Completar....
+                                           Entrar en el menú mis cursos, ir a la opción solicitar alta a un curso, se desplegara un listado con todos los cursos disponibles, elegir uno y esperar la confirmación del docente con una notificación que ya tiene autorización para acceder al mismo.
                                         </p>
                                     </div>
                                 </div>

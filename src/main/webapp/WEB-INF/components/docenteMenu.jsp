@@ -57,7 +57,7 @@
      steps: [{
          element: ".logo-name-menu",
          title: "Tutorial Repouniversity",
-         content: "Logo de Repouniversity"
+         content: "Logo de Repouniversity",
      }, {
          element: ".miscursos",
          title: "Mis Cursos",
@@ -79,13 +79,11 @@
          title: "Ver Notificaciones",
          content: "Botón para acceder a las notificaciones, el número que aparece arriba del icono indica la cantidad de notificaciones nuevas que posee el usuario.",   	 
          placement: "left"
-
      },{
     	 element: ".error",
          title: "Reporte de error",
          content: "Botón para reportar un error en el sistema",
          placement: "left"
-    	 
      },{
     	 element: ".salir",
          title: "Salir",
@@ -95,7 +93,6 @@
     	 element: "#ayuda",
          title: "Ayuda",
          content: "Toda la ayuda del sistema se encuentra en esta sección del menú."
-    	 	 
      }]
  });
 
