@@ -1,3 +1,5 @@
+		<link rel="icon" type="image/png" href="/repouniversity/resources/images/icon.png">
+		
 		<script type="text/javascript"
 			src="/repouniversity/resources/js/jquery-1.11.0.min.js"></script>
 			

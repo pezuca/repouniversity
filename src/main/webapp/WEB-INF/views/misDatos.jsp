@@ -36,7 +36,7 @@
 						</div>
 			
 						<form action="misdatos/update" class="form-horizontal" role="form"
-							id="userUpdate" method="post" onsubmit="return checkForm();">
+							id="userUpdate" method="post">
 							<input name="id" type="hidden" value="${usuario.id}" />
 							<div class="form-group">
 								<label class="col-sm-2 control-label" for="userInput">
