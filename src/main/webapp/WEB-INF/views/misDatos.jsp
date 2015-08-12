@@ -51,7 +51,7 @@
 									Nueva Contraseña</label>
 								<div class="col-sm-10">
 									<input name="newPassword" class="form-control" id="passwordInput"
-										type="text">
+										type="password">
 								</div>
 							</div>
 							<div class="form-group">
@@ -59,7 +59,7 @@
 									Confirmar Contraseña</label>
 								<div class="col-sm-10">
 									<input name="repeatPassword" class="form-control"
-										id="repeatPasswordInput" type="text">
+										id="repeatPasswordInput" type="password">
 								</div>
 							</div>
 							<div class="form-group">
@@ -108,6 +108,10 @@
 		
 		<%@include file="../components/footer.jsp"%>
 		</div>
-	</div>	
+	</div>
+	
+	<div id="errorPass" title="Error">
+		<p>Las contraseñas deben ser iguales</p>
+	</div>
 </body>
 </html>

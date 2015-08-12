@@ -42,7 +42,10 @@ public class UsuarioService {
         if (newPassword != null && checkChangePassword(newPassword, repeatPassword)) {
             usuario.setPass(newPassword);
         }
-        usuario.setUser(user);
+        
+        if(StringUtils.isNotBlank(user)) {
+            usuario.setUser(user);
+        }
 
         Persona persona = personaService.findById(usuario.getIdPersona());
 
