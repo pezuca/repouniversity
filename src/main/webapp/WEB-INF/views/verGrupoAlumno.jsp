@@ -54,6 +54,7 @@
 						</tbody>
 	                  	</table>
 	                  </div>
+	                  <br/><br/>
 	                  <div class="ibox-title">
 	                      <h5>Trabajo Practicos</h5>
 		              </div>

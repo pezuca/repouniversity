@@ -8,6 +8,8 @@
 	<title>Repouniversity</title>
 	<%@include file="../components/common-statics-imports.jsp"%>
 	
+	<script src="/repouniversity/resources/js/plugins/chosen/chosen.jquery.js"></script>
+	<link rel="stylesheet" type="text/css" href="/repouniversity/resources/css/plugins/chosen/chosen.css" />
 </head>
 <body class=" pace-done">
 	<c:set var="userLog" value="${sessionScope.login}"/>
@@ -97,6 +99,9 @@
                   $("#datepicker input[name=fechaDde]").datepicker("option", "maxDate", selectedDate);
                 }
               });
+             
+            $("select[name=materia]").chosen({no_results_text:'No hay resultados para: '});
+            $("select[name=docente]").chosen({no_results_text:'No hay resultados para: '});
         });
     </script>
 </body>

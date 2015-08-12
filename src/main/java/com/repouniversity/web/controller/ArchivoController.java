@@ -143,7 +143,11 @@ public class ArchivoController {
 
     @RequestMapping(value = "/busquedaAvanzada", method = {RequestMethod.GET})
     public ModelAndView busquedaAvanzada() {
-        return new ModelAndView("busquedaAvanzada");
+        List<DocenteTO> docentes = docenteService.getAll();
+        List<Materia> materias = materiaService.getAll();
+        
+        return new ModelAndView("busquedaAvanzada").addObject("docentes", docentes)
+                .addObject("materias", materias);
     }
 
     @RequestMapping(value = "/busquedaAvanzadaAnonimo", method = {RequestMethod.POST})
