@@ -51,6 +51,10 @@ public class CarreraService {
     public List<Carrera> findByMateriaId(Long materiaId) {
         return carreraDao.findByMateriaId(materiaId);
     }
+    
+    public Carrera findById(Long carreraId) {
+        return carreraDao.findById(carreraId);
+    }
 
     public List<Long> getMateriaIds(Long carreraId) {
         return carreraDao.getMateriaIds(carreraId);
