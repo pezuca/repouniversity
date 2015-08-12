@@ -76,6 +76,8 @@
 									<td>${tpgrupo.archivoNombre}</td>
 									<td>${tpgrupo.nota}</td>
 									<td>
+										<a href="/repouniversity/vistaPrevia?archivoId=${tpgrupo.archivo}&bread=Vista Previa-4" name="verArchivo" data-tpgrupoId="${tpgrupo.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver Archivo"><i class="fa fa-search"></i></button></a>
+										<a href="/repouniversity/bajarArchivo?archivoId=${tpgrupo.archivo}" name="dowloadArchivo" data-tpgrupoId="${tpgrupo.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Bajar Archivo"><i class="fa fa-download"></i></button></a>
 										<a href="/repouniversity/grupo/verTrabajosPracticosAlumno?tpGrupoId=${tpgrupo.id}&bread=Ver TP-4" name="Ver" data-tpgrupoId="${tpgrupo.id}" ><button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver TP"><i class="fa fa-arrow-right"></i></button></a>
 									</td>
 								</tr>
