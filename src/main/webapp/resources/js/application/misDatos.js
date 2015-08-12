@@ -18,12 +18,16 @@ $(document).ready(function() {
 	});
 	
 	$("#userUpdate").submit(function(event){
-		var newPass = $(this).find("input[name=newPassword]").val();
-		var confirmPass = $(this).find("input[name=repeatPassword]").val();
+		var newPass = $(this).find("input[name=newPassword]");
+		var confirmPass = $(this).find("input[name=repeatPassword]");
 		
-		if(newPass != '' && newPass != confirmPass) {
+		if(newPass.val() != '' && newPass.val() != confirmPass.val()) {
 			$("#errorPass").dialog("open");
 			event.preventDefault();
+			
+			newPass.val("");
+			confirmPass.val("");
+			
 			return false;
 		}
 	});
