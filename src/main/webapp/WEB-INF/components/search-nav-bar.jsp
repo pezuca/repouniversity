@@ -25,7 +25,7 @@
                      
                            <div id="linkNoti">
                                <i class="fa fa-envelope fa-fw"></i> 
-                               <span id="textNoti">Tiene 3 solicitudes nuevas</span>
+                               <span id="textNoti">Usted no tiene notificaciones</span>
                            </div>
                       
                    </li>
