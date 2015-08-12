@@ -232,7 +232,6 @@ $(document).ready(function() {
 		width:400,
 		modal: true,
 		autoOpen: false,
-		position: 'top',
 		hide: {effect: "fade", duration: 300},
 		hide: {effect: "fade", duration: 300},
 		buttons: {
