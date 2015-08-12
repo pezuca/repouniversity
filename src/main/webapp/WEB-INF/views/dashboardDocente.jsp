@@ -42,7 +42,7 @@
 						</div>
 					
 						<div class="col-lg-4">
-							<a href="/repouniversity/alumno/notificaciones?bread=Notificaciones-1">
+							<a href="/repouniversity/docente/notificaciones?bread=Notificaciones-1">
 								<div class="widget red-bg p-lg text-center">
 									<div class="m-b-md">
 										<i class="fa fa-bell fa-4x"></i>
