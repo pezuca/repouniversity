@@ -16,4 +16,5 @@ public interface UsuarioDAO extends GenericDAO<Usuario> {
      * @return User TO object
      */
     Usuario getUserByUsernameAndPass(String username, String password);
+    void updateUserWithoutPass(final Usuario t);
 }

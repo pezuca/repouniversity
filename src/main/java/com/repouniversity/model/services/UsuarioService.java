@@ -38,23 +38,34 @@ public class UsuarioService {
     public Usuario updateUser(Long id, String nombre, String apellido, String mail, String user, String newPassword, String repeatPassword, Long carreraId) {
 
         Usuario usuario = usuarioDAO.findById(id);
+        
+        Usuario userToUpdate = new Usuario();
+        userToUpdate.setId(usuario.getId());
+        userToUpdate.setUser(usuario.getUser());
+        userToUpdate.setFechasys(usuario.getFechasys());
+        userToUpdate.setActivo(usuario.isActivo());
+        userToUpdate.setPersona(usuario.getIdPersona());
 
-        if (newPassword != null && checkChangePassword(newPassword, repeatPassword)) {
-            usuario.setPass(newPassword);
-        }
+
         
         if(StringUtils.isNotBlank(user)) {
-            usuario.setUser(user);
+            userToUpdate.setUser(user);
         }
 
-        Persona persona = personaService.findById(usuario.getIdPersona());
+        Persona persona = personaService.findById(userToUpdate.getIdPersona());
 
         persona.setNombre(nombre);
         persona.setApellido(apellido);
         persona.setMail(mail);
 
         personaService.update(persona);
-        usuarioDAO.update(usuario);
+        
+        if (newPassword != null && checkChangePassword(newPassword, repeatPassword)) {
+            userToUpdate.setPass(newPassword);
+            usuarioDAO.update(userToUpdate);
+        } else {
+            usuarioDAO.updateUserWithoutPass(userToUpdate);
+        }
         
         UsuarioRol usuarioRol = usuarioRolService.getUsuarioById(id);
         if(usuarioRol.getRol().equals("alumno") && carreraId != null) {
@@ -64,7 +75,7 @@ public class UsuarioService {
             alumnoService.update(alumno);
         }
 
-        return usuario;
+        return userToUpdate;
     }
 
     @Transactional

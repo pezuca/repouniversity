@@ -1,10 +1,17 @@
 package com.repouniversity.model.dao.impl;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.repouniversity.model.dao.UsuarioDAO;
@@ -18,6 +25,9 @@ import com.repouniversity.model.entity.Usuario;
  */
 @Repository
 public class UsuarioDAOImpl extends GenericDAOImpl<Usuario> implements UsuarioDAO {
+    
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
     
     public Usuario getUserByUsernameAndPass(final String username, final String password) {
         StringBuilder sql = new StringBuilder();
@@ -98,6 +108,34 @@ public class UsuarioDAOImpl extends GenericDAOImpl<Usuario> implements UsuarioDA
             public void doAfterTransaction(int result) {
             }
         };
+    }
+    
+    public void updateUserWithoutPass(final Usuario t) {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        final InsertSQLStatement sqlStatement = new InsertSQLStatement(
+                "UPDATE usuario SET user = ?, id_persona = ? where id_usuario = ? ") {
+            @Override
+            public void doAfterInsert(Long id) {
+            }
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+                ps.setString(1, t.getUser());
+                ps.setLong(2, t.getIdPersona());
+                ps.setLong(3, t.getId());
+            }
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+        };
+        jdbcTemplate.update(new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+                PreparedStatement ps = connection.prepareStatement(sqlStatement.getQuery(), Statement.RETURN_GENERATED_KEYS);
+                sqlStatement.buildPreparedStatement(ps);
+                return ps;
+            }
+        }, keyHolder);
     }
 
     @Override
