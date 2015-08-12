@@ -23,7 +23,7 @@ public class UsuarioDAOImpl extends GenericDAOImpl<Usuario> implements UsuarioDA
         StringBuilder sql = new StringBuilder();
         
         sql.append("SELECT * FROM usuario u ");
-        sql.append("WHERE u.user = ? AND u.pass = ?" );
+        sql.append("WHERE u.user = ? AND u.pass = SHA1(?)" );
                 
         List<Usuario> list = doQuery(new SQLStatement(sql.toString()) {
             
@@ -63,7 +63,7 @@ public class UsuarioDAOImpl extends GenericDAOImpl<Usuario> implements UsuarioDA
 
     @Override
     protected InsertSQLStatement buildInsertSQLStatement(final Usuario t) {
-        return new InsertSQLStatement("INSERT INTO usuario (user, pass, activo, fecsys, id_persona) values (?, ?, 1, now(), ?)") {
+        return new InsertSQLStatement("INSERT INTO usuario (user, pass, activo, fecsys, id_persona) values (?, SHA1(?), 1, now(), ?)") {
 
             @Override
             public void doAfterInsert(Long id) {
@@ -84,7 +84,7 @@ public class UsuarioDAOImpl extends GenericDAOImpl<Usuario> implements UsuarioDA
 
     @Override
     protected SQLStatement buildUpdateSQLStatement(final Usuario t) {
-        return new SQLStatement("UPDATE usuario SET user = ?, pass = ?, id_persona = ?, fecsys = now()  WHERE id_usuario = ?") {
+        return new SQLStatement("UPDATE usuario SET user = ?, pass = SHA1(?), id_persona = ?, fecsys = now()  WHERE id_usuario = ?") {
 
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {

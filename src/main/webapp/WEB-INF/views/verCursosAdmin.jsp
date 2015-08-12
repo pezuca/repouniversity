@@ -10,6 +10,8 @@
 	<title>Repouniversity</title>
 	<%@include file="../components/common-statics-imports.jsp"%>
 	<script src="/repouniversity/resources/js/application/verCursosAdmin.js"></script>
+	<script src="/repouniversity/resources/js/plugins/chosen/chosen.jquery.js"></script>
+	<link rel="stylesheet" type="text/css" href="/repouniversity/resources/css/plugins/chosen/chosen.css" />
 </head>
 <body class=" pace-done">
 	

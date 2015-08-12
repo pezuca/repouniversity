@@ -108,24 +108,24 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
             }
         };
     }
-    
-	@Override
-	public List<Archivo> requestArchivos(String parametro, UsuarioRol usuario){
-		List<Archivo> resultList = new ArrayList<Archivo>();
-		List<String> parametrosBusqueda = new ArrayList<String>();
-		//quitamos las noise word
-		parametro = parametro.toUpperCase();
-		parametrosBusqueda = quitarNoiseWords(parametro);
-		
-		// agregamos las palabras equivalentes
-		parametrosBusqueda = agregarEquivalencias(parametrosBusqueda);
-		
-		//realizamos la busqueda a los archivos que sean publicos o bien la persona este en ese curso sea alumno o docente
-		resultList = generarBusqueda (parametrosBusqueda, usuario);
-		return resultList;
-	}
-	
-	@Override
+
+    @Override
+    public List<Archivo> requestArchivos(String parametro, UsuarioRol usuario) {
+        List<Archivo> resultList = new ArrayList<Archivo>();
+        List<String> parametrosBusqueda = new ArrayList<String>();
+        // quitamos las noise word
+        parametro = parametro.toUpperCase();
+        parametrosBusqueda = quitarNoiseWords(parametro);
+
+        // agregamos las palabras equivalentes
+        parametrosBusqueda = agregarEquivalencias(parametrosBusqueda);
+
+        // realizamos la busqueda a los archivos que sean publicos o bien la persona este en ese curso sea alumno o docente
+        resultList = generarBusqueda(parametrosBusqueda, usuario);
+        return resultList;
+    }
+
+    @Override
     public List<Archivo> generarBusqueda(final List<String> parametrosBusqueda, UsuarioRol usuario) {
         StringBuilder sql = new StringBuilder();
         // se genera la condicion a mano, pero en la condicion es donde se va a armarse la query
@@ -163,11 +163,10 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
             apeDocente = apeDocente.substring(0, apeDocente.length() - 3);
             materia = materia.substring(0, materia.length() - 3);
         }
-       
-        
-        //armamos la query de busqueda en la base
+
+        // armamos la query de busqueda en la base
         sql.append("select * from repouniversity.vw_archivos");
-        sql.append(" where ("+ tags + " OR ");
+        sql.append(" where (" + tags + " OR ");
         sql.append(nbreDocente.trim() + " OR ");
         sql.append(apeDocente.trim() + " OR ");
         sql.append(materia.trim() + ")");
@@ -190,45 +189,47 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
 
         return list;
     }
-	
-	@Override
+
+    @Override
     public List<Archivo> busquedaAvanzada(String materia, String docente, String descripcion, Date fechaDde, Date fechaHta, UsuarioRol usuario) {
         StringBuilder sql = new StringBuilder();
         // se genera la condicion a mano, pero en la condicion es donde se va a armarse la query
 
-		//se inicializa tags por si se agrega un espacio solamente en la busqued para que no rompa
-        //para el resto de los caracteres especiales no hay problemas
-		String tags= "tags like \'%%\' ";
-		
+        // se inicializa tags por si se agrega un espacio solamente en la busqued para que no rompa
+        // para el resto de los caracteres especiales no hay problemas
+        String tags = "tags like \'%%\' ";
+
         List<String> laDescripcion = new ArrayList<String>();
-		//quitamos las noise word
-		if(StringUtils.isNoneBlank(descripcion)) {
-			descripcion = descripcion.toUpperCase();
-			laDescripcion = quitarNoiseWords(descripcion);
+        // quitamos las noise word
+        if (StringUtils.isNotBlank(descripcion)) {
+            descripcion = descripcion.toUpperCase();
+            laDescripcion = quitarNoiseWords(descripcion);
 
-			// agregamos las palabras equivalentes
-			laDescripcion = agregarEquivalencias(laDescripcion);
+            // agregamos las palabras equivalentes
+            laDescripcion = agregarEquivalencias(laDescripcion);
 
-			tags="";
-			for (String parametro:laDescripcion) {
-				tags= tags.concat(" tags like \'%" + parametro.trim() +"%\' OR descripcion like \'%" + parametro.trim() +"%\' OR ");
-			}
-			tags = tags.substring(0, tags.length()-3);
-		}
-        
-        //armamos la query de busqueda en la base
-        
+            tags = "";
+            for (String parametro : laDescripcion) {
+                tags = tags.concat(" tags like \'%" + parametro.trim() + "%\' OR descripcion like \'%" + parametro.trim() + "%\' OR ");
+            }
+            tags = tags.substring(0, tags.length() - 3);
+        }
+
+        // armamos la query de busqueda en la base
+
         sql.append("select * from repouniversity.vw_archivos ");
-        sql.append("where ("+ tags + ")AND");
-        if (docente != null){
-        sql.append(" id_docente= "+ docente + " AND");
+        sql.append("where (" + tags + ")AND");
+        if (StringUtils.isNotBlank(docente)) {
+            sql.append(" id_docente= " + docente + " AND");
         }
-        //sql.append(" apellidoDocente like \'%"+ apeDocente.trim() + "%\' AND");
-        //sql.append(" carrera like \'%"+ carrera.trim() + "%\' AND");
-        if (materia != null){
-        sql.append(" id_materia = "+ materia + " AND");
+        // sql.append(" apellidoDocente like \'%"+ apeDocente.trim() + "%\' AND");
+        // sql.append(" carrera like \'%"+ carrera.trim() + "%\' AND");
+        if (StringUtils.isNotBlank(materia)) {
+            sql.append(" id_materia = " + materia + " AND");
         }
-        sql.append(" fecha_publicacion between \'"+ new SimpleDateFormat("yyyy/MM/dd").format(fechaDde) + "\' AND \'" + new SimpleDateFormat("yyyy/MM/dd").format(fechaHta) + "\'");
+        
+        sql.append(" fecha_publicacion between \'" + new SimpleDateFormat("yyyy/MM/dd").format(fechaDde) + "\' AND \'"
+                + new SimpleDateFormat("yyyy/MM/dd").format(fechaHta) + "\'");
         sql.append(acotarBusquedaXTipoUsuario(usuario));
 
         List<Archivo> resultList = doQuery(new SQLStatement(sql.toString()) {
@@ -249,62 +250,63 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
         return resultList;
     }
 
-	public String acotarBusquedaXTipoUsuario (UsuarioRol usuario){
-		String accesoUsuario = new String();
-		switch (usuario.getRol()){
-		case "alumno":
-		accesoUsuario= " AND (estado = 1 OR id_curso in (Select id_curso from repouniversity.alumno_curso where id_alumno = "+ usuario.getIdAluDoc()+"))"; 	
-    	break;
-    	
-		case "docente":
-		accesoUsuario= " AND (estado = 1 OR id_curso in (Select id_curso from repouniversity.curso where id_docente = "+ usuario.getIdAluDoc()+"))";	
-	    break;
-	    	
-		case "administrador":
-		accesoUsuario= " AND (estado = 1 OR estado= 2)";	
-	    break;
-	    default:
-	    accesoUsuario= " AND (estado = 1)";	
-		break;
-		}
-		
-	    return accesoUsuario;
-	}
-	
-	@Override
-	public List<String> quitarNoiseWords(String parametro) {
-	//tokenizo la cadena
-		String[] tokens = parametro.split(" ");
-		List<String> parametrosBusqueda = new ArrayList<String>();
-		
-		for (int i = 0; i < tokens.length; i++) {
-			if (!LoadXMLFilesApplicationListener.listadoNoiseWord.contains(tokens[i])){
-				parametrosBusqueda.add(tokens[i]);
-			}
-		}	 
-	
-		return parametrosBusqueda; 
-	}
-	
-	public List<String> agregarEquivalencias(List<String> parametrosBusqueda){
-		
-		List<String> terminosBusqueda = new ArrayList<String>();
-		List<String> listaTemporal = new ArrayList<String>();
-		
-		for (String termino : parametrosBusqueda) {
-			if(LoadXMLFilesApplicationListener.listadoEquivalencias.containsKey(termino)){
-				listaTemporal= LoadXMLFilesApplicationListener.listadoEquivalencias.get(termino);
-				for(String e: listaTemporal){
-					terminosBusqueda.add(e);
-				}
-			}
-			terminosBusqueda.add(termino);
-		}
-		return terminosBusqueda;
-		
-	}
+    public String acotarBusquedaXTipoUsuario(UsuarioRol usuario) {
+        String accesoUsuario = new String();
+        switch (usuario.getRol()) {
+        case "alumno":
+            accesoUsuario = " AND (estado = 1 OR id_curso in (Select id_curso from repouniversity.alumno_curso where id_alumno = " + usuario.getIdAluDoc()
+                    + "))";
+            break;
 
-	@Override
+        case "docente":
+            accesoUsuario = " AND (estado = 1 OR id_curso in (Select id_curso from repouniversity.curso where id_docente = " + usuario.getIdAluDoc() + "))";
+            break;
+
+        case "administrador":
+            accesoUsuario = " AND (estado = 1 OR estado= 2)";
+            break;
+        default:
+            accesoUsuario = " AND (estado = 1)";
+            break;
+        }
+
+        return accesoUsuario;
+    }
+
+    @Override
+    public List<String> quitarNoiseWords(String parametro) {
+        // tokenizo la cadena
+        String[] tokens = parametro.split(" ");
+        List<String> parametrosBusqueda = new ArrayList<String>();
+
+        for (int i = 0; i < tokens.length; i++) {
+            if (!LoadXMLFilesApplicationListener.listadoNoiseWord.contains(tokens[i])) {
+                parametrosBusqueda.add(tokens[i]);
+            }
+        }
+
+        return parametrosBusqueda;
+    }
+
+    public List<String> agregarEquivalencias(List<String> parametrosBusqueda) {
+
+        List<String> terminosBusqueda = new ArrayList<String>();
+        List<String> listaTemporal = new ArrayList<String>();
+
+        for (String termino : parametrosBusqueda) {
+            if (LoadXMLFilesApplicationListener.listadoEquivalencias.containsKey(termino)) {
+                listaTemporal = LoadXMLFilesApplicationListener.listadoEquivalencias.get(termino);
+                for (String e : listaTemporal) {
+                    terminosBusqueda.add(e);
+                }
+            }
+            terminosBusqueda.add(termino);
+        }
+        return terminosBusqueda;
+
+    }
+
+    @Override
     protected String getColumnIdName() {
         return "id_archivo";
     }

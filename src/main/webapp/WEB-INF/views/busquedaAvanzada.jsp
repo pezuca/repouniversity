@@ -34,7 +34,7 @@
 											 <div class="col-sm-6">
 		                                        <div class="row">
 												   <select data-placeholder="Elija una materia" name="materia" class="chosen-select" tabindex="-1">
-														<option value="" disabled selected>Elija una materia</option>
+														<option value="" selected>Elija una materia</option>
 														<c:forEach items="${materias}" var="materia" varStatus="status">
 															<option value="${materia.id}">${materia.nombre}</option>
 														</c:forEach>
@@ -46,7 +46,7 @@
 		                                	 <div class="col-sm-6">
 		                                        <div class="row">
 												   <select data-placeholder="Elija un docente" name="docente" class="chosen-select" tabindex="-1">
-														<option value="" disabled selected>Elija un docente</option>
+														<option value="" selected>Elija un docente</option>
 														<c:forEach items="${docentes}" var="docente" varStatus="status">
 															<option value="${docente.id}">${docente.persona.nombre}, ${docente.persona.apellido}</option>
 														</c:forEach>
@@ -58,20 +58,28 @@
 											<div class="col-sm-10"><input type="text" class="form-control" name="carrera"></div>
 		                                </div-->
 		                                <div class="form-group"><label class="col-sm-2 control-label">Palabra clave</label>
-											<div class="col-sm-6"><input type="text" maxlength="80" class="form-control" name="descripcion"></div>
+											<div class="col-sm-6">
+												<div class="row">
+													<input type="text" maxlength="80" class="form-control" name="descripcion"></div>
+												</div>
 		                                </div>
-		                                <div class="form-group" id="data_5"><label class="col-sm-2 control-label"><b>Fecha publicaci&oacute;n</b></label>
+		                                <div class="form-group" id="data_5">
+		                                	<label class="col-sm-2 control-label"><b>Fecha publicaci&oacute;n</b></label>
 		                                	<div class="col-sm-6">
-		                                		<div class="input-daterange input-group" id="datepicker">
-				                                    <input type="text" class="form-control input-sm" name="fechaDde" placeholder="Fecha desde"/>
-				                                    <span class="input-group-addon">-</span>
-				                                    <input type="text" class="form-control input-sm" name="fechaHta" placeholder="Fecha hasta"/>
+		                                		<div class="row">
+			                                		<div class="input-daterange input-group" id="datepicker">
+					                                    <input type="text" class="form-control input-sm" name="fechaDde" placeholder="Fecha desde"/>
+					                                    <span class="input-group-addon">-</span>
+					                                    <input type="text" class="form-control input-sm" name="fechaHta" placeholder="Fecha hasta"/>
+					                                </div>
 				                                </div>
-				                            </dbusquedaAvanzadaAnonimoiv>		
+		                                	</div>
 		                                </div>
 		                                <div class="form-group">
 		                                    <div class="col-sm-4 col-sm-offset-2">
-		                                        <button class="btn btn-primary" type="submit">buscar</button>
+		                                    	<div class="row">
+		                                        	<button class="btn btn-primary" type="submit">buscar</button>
+		                                        </div>
 		                                    </div>
 		                                </div>
 		                            </form>

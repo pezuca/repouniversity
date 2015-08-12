@@ -262,4 +262,7 @@ $(document).ready(function() {
 			.data('docenteId', $(this).parents("tr").find("td[data-docenteId]").attr("data-docenteId"))
 			.dialog("open");
 	});
+	
+    $("#agregarCursoDialog select[name=materia], #editarCursoDialog select[name=materia]").chosen({no_results_text:'No hay resultados para: '});
+    $("#agregarCursoDialog select[name=docente], #editarCursoDialog select[name=docente]").chosen({no_results_text:'No hay resultados para: '});
 });
