@@ -49,7 +49,7 @@
 									<td>${alumno.id}</td>
 									<td>${alumno.persona.apellido}, ${alumno.persona.nombre}</td>
 									<td>${alumno.persona.mail}</td>
-									<td class="text-center">
+									<td>
 										<a name="deleteAlumno" data-alumnoId="${alumno.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar Alumno"><i class="fa fa-times"></i></button></a>
 									</td>
 								</tr>
@@ -84,7 +84,7 @@
 										<td>${tpgrupo.descripcion}</td>
 										<td>${tpgrupo.archivoNombre}</td>
 										<td>${tpgrupo.nota}</td>
-										<td class="text-center">
+										<td>
 											<a name="editTp" data-tpgrupoId="${tpgrupo.id}"><button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Editar TP"><i class="fa fa-pencil"></i></button></a>
 											<a name="deleteTp" data-tpgrupoId="${tpgrupo.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar TP"><i class="fa fa-times"></i></button></a>
 											<a href="/repouniversity/grupo/verTrabajosPracticos?tpGrupoId=${tpgrupo.id}&bread=Ver TP-4" name="Ver" data-tpgrupoId="${tpgrupo.id}" ><button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver TP"><i class="fa fa-arrow-right"></i></button></a>
