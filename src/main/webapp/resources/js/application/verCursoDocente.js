@@ -198,6 +198,24 @@ $(document).ready(function() {
 			$(".infoDialog").remove();
 			$('#nuevoGrupoForm').trigger("reset");
 			$("#nuevoGrupoForm").find(".form-group").removeClass("has-error");
+			
+			var cursoId = $("#crearGrupoDialog input[name=idcurso]").val();
+			
+			$.ajax({
+				url: "/repouniversity/docente/alumnosSinGrupo",
+				type: "GET",
+				data: {"cursoId" : cursoId},
+				success: function(data){
+					$("select[name=alumnosIds]").empty();
+					
+					for(var i = 0; i < data.length; i++) {
+						$("select[name=alumnosIds]").append("<option value='" + data[i].id + "'>" + 
+								data[i].persona.nombre + ", " + data[i].persona.apellido + "</option>");
+					}
+					
+					$("select[name=alumnosIds]").trigger("chosen:updated");
+				}
+			})
 		},
 		close: function(event, ui) {
 		}

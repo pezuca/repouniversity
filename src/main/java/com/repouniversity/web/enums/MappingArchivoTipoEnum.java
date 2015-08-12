@@ -15,8 +15,12 @@ public enum MappingArchivoTipoEnum {
     ODS(3L, "ods"),
     JPG(4L, "jpg"),
     PNG(4L, "png"),
-    BMP(4L, "bmp");
-
+    BMP(4L, "bmp"),
+    ODP(5L, "odp"),
+    PPT(5L, "ppt"),
+    PPTX(5L, "pptx");
+    
+    
     private Long tipoId;
     private String extension;
 
@@ -45,6 +49,6 @@ public enum MappingArchivoTipoEnum {
 
         List<MappingArchivoTipoEnum> values = Arrays.asList(MappingArchivoTipoEnum.values());
 
-        return values.stream().filter(element -> element.getExtension().equals(extension)).findFirst().orElse(null);
+        return values.stream().filter(element -> element.getExtension().equals(extension.toLowerCase())).findFirst().orElse(null);
     }
 }

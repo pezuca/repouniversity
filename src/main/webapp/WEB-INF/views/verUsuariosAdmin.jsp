@@ -65,7 +65,7 @@
 										</c:forEach>
 										
 										<td data-carreraId="${usuario.alumno.idCarrera}">${carreraName}</td>
-										<td class="text-center">
+										<td>
 											<a href="#" name="editUser" data-userId="${usuario.id}"><button class="btn btn-primary btn-circle" type="button"><i class="fa fa-pencil"></i></button></a>
 											<a href="#" name="deleteUser" data-userId="${usuario.id}" ><button class="btn btn-danger btn-circle" type="button"><i class="fa fa-times"></i></button></a>
 										</td>

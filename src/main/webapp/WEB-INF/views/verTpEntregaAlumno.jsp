@@ -27,14 +27,17 @@
 	                        <h5>Entrega ${tpEntrega.descripcion}</h5>
 	                    </div>
 	                    <div class="ibox-content">
-	                    	<figure>
+	                    	<figure style="text-align:center;">
 								<c:choose>
-									<c:when test="${archivo.idTipo == 1}">
+									<c:when test="${extension == 'odt' or extension == 'pdf' or extension == 'ods'}">
 										<iframe style="width: 100%;height: 500px;" src="/repouniversity/resources/js/ViewerJS/index.html#documents/previews/${archivo.path}" allowfullscreen webkitallowfullscreen></iframe>
 									</c:when>
 									<c:when test="${archivo.idTipo == 4}">
 										<img style="width: 100%;height: 500px;" src="/repouniversity/resources/js/ViewerJS/documents/previews/${archivo.path}"></iframe>
 									</c:when>
+									<c:otherwise>
+										<img style="width: 50%;height: 50%;" src="/repouniversity/resources/img/noDocumentPreview.png"></iframe>
+									</c:otherwise>
 								</c:choose>
 	                    	</figure>
 	                    </div>

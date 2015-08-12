@@ -56,6 +56,9 @@
 				<br/><br/>
 				<a href="loginAnonimo">Ingreso sin Usuario</a><br/>
             </form>
+			<c:if test="${not empty loginexception}">
+				<label  class="m-t" style="color: red"> <small>Usuario o password son incorrectos</small></label>
+			</c:if>
             <p class="m-t"> <small>Reposuinversity trabajo practico final CAECE &copy; 2015</small> </p>
         </div>
     </div>
