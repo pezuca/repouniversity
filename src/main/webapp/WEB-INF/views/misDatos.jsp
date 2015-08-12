@@ -85,10 +85,10 @@
 										type="email" value="${usuario.persona.mail}" required>
 								</div>
 							</div>
-							<div class="form-group">
+							<div class="form-group" ${userLog.rol == 'administrador' ? 'style=display:none' : ''}>
 				                <label for="mailInput" class="col-sm-2 control-label"> Carrera</label>
 				                <div class="col-sm-10">
-				                	<select class="form-control m-b" name="carrera">
+				                	<select class="form-control m-b" name="carrera" disabled>
 										<c:forEach items="${listacarreras}" var="carrera" varStatus="status">
 											<option value="${carrera.id}">${carrera.nombre}</option>
 										</c:forEach>
