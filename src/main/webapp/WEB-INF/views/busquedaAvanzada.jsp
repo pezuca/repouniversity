@@ -29,7 +29,7 @@
 			                        <h5>Busqueda avanzada</h5>
 			                    </div>
 			                    <div class="ibox-content">
-	                        		<form method="post" class="form-horizontal" action="/repouniversity/busquedaAvanzadaAnonimo" role="form">
+	                        		<form method="post" class="form-horizontal" action="/repouniversity/busquedaAvanzada" role="form">
 										<div class="form-group"><label class="col-sm-2 control-label">Materia</label>
 											 <div class="col-sm-6">
 		                                        <div class="row">
@@ -67,7 +67,7 @@
 				                                    <span class="input-group-addon">-</span>
 				                                    <input type="text" class="form-control input-sm" name="fechaHta" placeholder="Fecha hasta"/>
 				                                </div>
-				                            </div>		
+				                            </dbusquedaAvanzadaAnonimoiv>		
 		                                </div>
 		                                <div class="form-group">
 		                                    <div class="col-sm-4 col-sm-offset-2">
