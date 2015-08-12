@@ -251,11 +251,8 @@ h3, h4, h5 {
 
 .arrow {
 	float: right;
-	overflow: inherit !important;
 	position: inherit !important;
-	margin-left: inherit !important;
 	height: inherit !important;
-	width: inherit !important;
 }
 
 .fa.arrow:before {

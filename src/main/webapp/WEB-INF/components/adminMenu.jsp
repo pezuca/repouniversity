@@ -53,6 +53,17 @@
 
 
  var tour = new Tour({
+	 template: "<div class='popover tour'>" + 
+		    "<div class='arrow'></div>" + 
+		    "<h3 class='popover-title'></h3>" +
+		    "<div class='popover-content'></div>" +
+		    "<div class='popover-navigation'>" +
+			    "<div class='btn-group'>" +
+			        "<button class='btn btn-sm btn-primary' data-role='prev'>« Previo</button>" +
+			        "<button class='btn btn-sm btn-primary' data-role='next'>Siguiente »</button>" +
+				    "<button class='btn btn-sm btn-primary' data-role='end'>Fin</button>" +
+			    "</div>" +
+			"</div>",
      steps: [{
          element: ".logo-name-menu",
          title: "Inicio del Tutorial Repouniversity",

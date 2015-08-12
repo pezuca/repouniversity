@@ -57,7 +57,7 @@ public class UsuarioService {
         usuarioDAO.update(usuario);
         
         UsuarioRol usuarioRol = usuarioRolService.getUsuarioById(id);
-        if(usuarioRol.getRol().equals("alumno")) {
+        if(usuarioRol.getRol().equals("alumno") && carreraId != null) {
             Alumno alumno = alumnoService.getAlumnoByIdDao(usuarioRol.getIdAluDoc());
             alumno.setIdCarrera(carreraId);
             
