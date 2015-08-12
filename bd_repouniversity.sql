@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `repouniversity` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `repouniversity`;
--- MySQL dump 10.13  Distrib 5.6.17, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.5.44, for debian-linux-gnu (x86_64)
 --
 -- Host: 127.0.0.1    Database: repouniversity
 -- ------------------------------------------------------
--- Server version	5.6.20
+-- Server version	5.5.44-0ubuntu0.14.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -626,7 +626,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (5,'repo','repo',1,'2014-01-08 03:00:00',2),(6,'alumno','alumno',1,'2014-09-21 01:28:39',31),(7,'admin','admin',1,'2014-09-21 01:36:06',32),(8,'doc','doc',1,'2014-11-01 16:52:13',4);
+INSERT INTO `usuario` VALUES (5,'repo','32a6fcbaa4543f0718079837a574f5835f3143fe',1,'2014-01-08 03:00:00',2),(6,'alumno','684b10ab8da41b83690bd96f9a846b9814d8a288',1,'2014-09-21 01:28:39',31),(7,'admin','d033e22ae348aeb5660fc2140aec35850c4da997',1,'2014-09-21 01:36:06',32),(8,'doc','f7f029ecb98abe979074a3ab45b74dbd9af02d42',1,'2014-11-01 16:52:13',4);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -713,4 +713,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-12 12:25:24
+-- Dump completed on 2015-08-12 14:40:30
