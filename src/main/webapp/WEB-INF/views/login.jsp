@@ -24,7 +24,7 @@
 	href="/repouniversity/resources/css/animate.css" />
 <link rel="stylesheet" type="text/css" 
 	href="/repouniversity/resources/css/style.css" />
-
+<link rel="icon" type="image/png" href="/repouniversity/resources/images/icon.png">
 </head>
 
 <body class="gray-bg">
