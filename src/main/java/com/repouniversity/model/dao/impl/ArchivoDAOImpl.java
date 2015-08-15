@@ -114,14 +114,26 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
         List<Archivo> resultList = new ArrayList<Archivo>();
         List<String> parametrosBusqueda = new ArrayList<String>();
         // quitamos las noise word
+        if(StringUtils.isEmpty(parametro)) {
+            return resultList;
+        }
+        
         parametro = parametro.toUpperCase();
         parametrosBusqueda = quitarNoiseWords(parametro);
 
         // agregamos las palabras equivalentes
         parametrosBusqueda = agregarEquivalencias(parametrosBusqueda);
-
+        
         // realizamos la busqueda a los archivos que sean publicos o bien la persona este en ese curso sea alumno o docente
-        resultList = generarBusqueda(parametrosBusqueda, usuario);
+        if(parametrosBusqueda != null && !parametrosBusqueda.isEmpty()) {
+            resultList = generarBusqueda(parametrosBusqueda, usuario);            
+        } else {
+            List<String> lista = new ArrayList<String>();
+            lista.add(parametro);
+            
+            resultList = generarBusqueda(lista, usuario);            
+        }
+        
         return resultList;
     }
 
@@ -200,14 +212,30 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
         String tags = "tags like \'%%\' ";
 
         List<String> laDescripcion = new ArrayList<String>();
+        List<Archivo> resultList = new ArrayList<Archivo>();
+        
+        if(StringUtils.isEmpty(materia) && StringUtils.isEmpty(docente) && StringUtils.isEmpty(descripcion)) {
+            return resultList;
+        }
+        
         // quitamos las noise word
         if (StringUtils.isNotBlank(descripcion)) {
             descripcion = descripcion.toUpperCase();
             laDescripcion = quitarNoiseWords(descripcion);
 
-            // agregamos las palabras equivalentes
-            laDescripcion = agregarEquivalencias(laDescripcion);
+            
+            if(laDescripcion != null && !laDescripcion.isEmpty()) {
+             // agregamos las palabras equivalentes
+                laDescripcion = agregarEquivalencias(laDescripcion);
+    
+            } else {
+                List<String> lista = new ArrayList<String>();
+                lista.add(descripcion.toLowerCase());
+             // agregamos las palabras equivalentes
+                laDescripcion = lista;
 
+            }
+            
             tags = "";
             for (String parametro : laDescripcion) {
                 tags = tags.concat(" tags like \'%" + parametro.trim() + "%\' OR descripcion like \'%" + parametro.trim() + "%\' OR ");
@@ -232,7 +260,7 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
                 + new SimpleDateFormat("yyyy/MM/dd").format(fechaHta) + "\'");
         sql.append(acotarBusquedaXTipoUsuario(usuario));
 
-        List<Archivo> resultList = doQuery(new SQLStatement(sql.toString()) {
+        resultList = doQuery(new SQLStatement(sql.toString()) {
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
                 // ps.setString (1, parametro);

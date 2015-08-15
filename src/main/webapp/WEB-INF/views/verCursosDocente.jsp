@@ -11,8 +11,6 @@
 <meta charset="utf-8" />
 <title>Repouniversity</title>
 <%@include file="../components/common-statics-imports.jsp"%>
-
-<script type="text/javascript" src="resources/js/application/dashboard.js"></script>
 </head>
 <body class=" pace-done">
 	<div id="wrapper">
@@ -24,68 +22,60 @@
 		<tag:breadcrumb label="Ver cursos"/>
 		
 		<div class="wrapper wrapper-content animated fadeInRight">
-			<div class="row">
+	         <div class="row">
 	             <div class="col-lg-12">
-					<div class="usuarioInformation">
-							<h3><b>Lista Cursos</b></h3>
-						
-					</div>
-					
-					<table id="cursosDocente" class="table table-striped hover">
-						<thead class="encabezado">
-							<tr>
-								<th>Codigo Mat</th>
-								<th>Materia</th>
-								<th>Descripcion</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${cursosMaterias}" var="cursoMat"
-								varStatus="status">
-								<c:choose>
-									<c:when test="${status.count mod 2 == 0}">
-										<tr class="even">
-									</c:when>
-									<c:otherwise>
-										<div class="odd">
-									</c:otherwise>
-								</c:choose>
-			
-								<td>${cursoMat.codigoCurso}</td>
-								<td>${cursoMat.nombreMateria}</td>
-								<td>${cursoMat.descripcionCurso}</td>
-								<td><a href="/repouniversity/docente/verCurso?cursoId=${cursoMat.id}&bread=Curso-2"><button class="btn btn-primary btn-circle" type="button"><i class="fa fa-arrow-right"></i></button></a></td>
-								</tr>
-							</c:forEach>
-						</tbody>
-						<tfoot>
-							<tr class="head">
-								<th></th>
-								<th></th>
-								<th></th>
-							</tr>
-						</tfoot>
-					</table>
-				</div>
-	        </div>
-		</div>
+	              <div class="ibox float-e-margins">
+	                  <div class="ibox-title">
+	                      <h5>Lista Cursos</h5>
+		              </div>
+	                  <div class="ibox-content">
+							<table id="cursosDocente" class="table table-striped table-hover">
+								<thead class="encabezado">
+									<tr>
+										<th>Codigo Mat</th>
+										<th>Materia</th>
+										<th>Descripcion</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${cursosMaterias}" var="cursoMat"
+										varStatus="status">
+										<tr>					
+											<td>${cursoMat.codigoCurso}</td>
+											<td>${cursoMat.nombreMateria}</td>
+											<td>${cursoMat.descripcionCurso}</td>
+											<td><a href="/repouniversity/docente/verCurso?cursoId=${cursoMat.id}&bread=Curso-2"><button class="btn btn-primary btn-circle" type="button"><i class="fa fa-arrow-right"></i></button></a></td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+	                  </div>
+	              </div>
+	      		</div>
+	         </div>
+	     </div>
 		
 		<%@include file="../components/footer.jsp"%>
 	</div>
 
 	<script>
 		$(document).ready(function() {
-			$('#clientTable').dataTable({
+			table = $('#cursosDocente').DataTable({
 				retrieve: true,
 				"processing" : false,
 				"serverSide" : false,
-				"paging": false,
+				"paging" : false,
 				"language": {
-		            "search": "Búsqueda"
+		            "lengthMenu": "Mostrar _MENU_ resultados por página",
+		            "zeroRecords": "No fueron encontrados resultados.",
+		            "info": "Pagina _PAGE_ of _PAGES_",
+		            "infoEmpty": "No hay resultados disponibles.",
+		            "infoFiltered": "(filtered from _MAX_ total records)",
+		            "search": "Búsqueda: "
 		        }
 			});
-	
+			
 			$("#clientTable_length").remove();
 		});
 	</script>
