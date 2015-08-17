@@ -80,7 +80,7 @@
 		                                <h5><a href="#">fecha publicacion: ${result.fechaPublicacion}</a></h5>
 		                                <p>
 		                                    ${result.descripcion}<br><br>
-		                                    <a  name="verArchivo" data-archivoId="${result.id}" href="/repouniversity/vistaPreviaAnonimo?archivoId=${result.id}">
+		                                    <a  name="verArchivo" data-archivoId="${result.id}" href="/repouniversity/vistaPreviaAnonimo?archivoId=${result.id}&bread=Vista previa-2">
 												<button class="btn btn-primary btn-xs" type="button">vista previa</button>
 											</a>
 		                                </p>

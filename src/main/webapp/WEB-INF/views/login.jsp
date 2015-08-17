@@ -54,7 +54,7 @@
                 
                 <button type="submit" class="btn btn-lg btn-primary btn-block" id="entrar">Entrar</button>
 				<br/><br/>
-				<a href="loginAnonimo">Ingreso sin Usuario</a><br/>
+				<a href="loginAnonimo?&bread=Busqueda-1">Ingreso sin Usuario</a><br/>
             </form>
 			<c:if test="${not empty loginexception}">
 				<label  class="m-t" style="color: red"> <small>Usuario o password son incorrectos</small></label>
