@@ -50,9 +50,10 @@ var errorAdmin = {
 	validacionFormlario: function(formularioSelector) {
 		var elementos = $(formularioSelector).find("input[required], select[required]");
 		var flag = true;
+		var inValid = /([^\s])/;
 
 		elementos.each(function(index) {
-			if($(this).val() == '') {
+			if(!inValid.test($(this).val())) {
 				$(this).parents(".form-group").addClass(" has-error");
 				flag = false;
 			} else {
