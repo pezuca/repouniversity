@@ -138,7 +138,7 @@ public class ArchivoController {
 
         List<Archivo> listaResultados = new ArrayList<Archivo>();
         listaResultados = busquedaAvanzada(materia, docente, descripcion, desde, hasta, usuario);
-        return new ModelAndView("resultList").addObject("listaResultados", listaResultados);
+        return new ModelAndView("resultListBusquedaAvanzada").addObject("listaResultados", listaResultados);
     }
 
     @RequestMapping(value = "/busquedaAvanzada", method = {RequestMethod.GET})
