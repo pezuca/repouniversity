@@ -177,4 +177,21 @@
 	<noise-word>voy</noise-word>
 	<noise-word>yo</noise-word>
 	<noise-word>y</noise-word>
+	<noise-word>'</noise-word>
+	<noise-word>&</noise-word>
+	<noise-word>/</noise-word>
+	<noise-word>\</noise-word>
+	<noise-word>?</noise-word>
+	<noise-word>¿</noise-word>
+	<noise-word>¡</noise-word>
+	<noise-word>!</noise-word>
+	<noise-word>|</noise-word>
+	<noise-word>#</noise-word>
+	<noise-word>$</noise-word>
+	<noise-word>%</noise-word>
+	<noise-word>(</noise-word>
+	<noise-word>)</noise-word>
+	<noise-word>=</noise-word>
+	<noise-word>*</noise-word>
+	<noise-word>*</noise-word>
 </noise-words>
