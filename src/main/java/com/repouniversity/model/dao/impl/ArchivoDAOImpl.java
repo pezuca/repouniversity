@@ -240,7 +240,8 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
 
             tags = "";
             for (String parametro : laDescripcion) {
-                tags = tags.concat(" tags like \'%" + parametro.trim() + "%\' OR descripcion like \'%" + parametro.trim() + "%\' OR ");
+                String parametroEscaped = parametro.replaceAll(ESCAPED_REGEX, "\\\\$1");
+                tags = tags.concat(" tags like \'%" + parametroEscaped.trim() + "%\' OR descripcion like \'%" + parametroEscaped.trim() + "%\' OR ");
             }
             tags = tags.substring(0, tags.length() - 3);
         }
@@ -250,12 +251,12 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
         sql.append("select * from repouniversity.vw_archivos ");
         sql.append("where (" + tags + ")AND");
         if (StringUtils.isNotBlank(docente)) {
-            sql.append(" id_docente= " + docente + " AND");
+            sql.append(" id_docente= " + docente.replaceAll(ESCAPED_REGEX, "\\\\$1") + " AND");
         }
         // sql.append(" apellidoDocente like \'%"+ apeDocente.trim() + "%\' AND");
         // sql.append(" carrera like \'%"+ carrera.trim() + "%\' AND");
         if (StringUtils.isNotBlank(materia)) {
-            sql.append(" id_materia = " + materia + " AND");
+            sql.append(" id_materia = " + materia.replaceAll(ESCAPED_REGEX, "\\\\$1") + " AND");
         }
 
         sql.append(" fecha_publicacion between \'" + new SimpleDateFormat("yyyy/MM/dd").format(fechaDde) + "\' AND \'"
