@@ -117,7 +117,7 @@
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Archivo*:</label>
-                <input name="file" type="file" />	
+                <input name="file" type="file" required="required"/>	
             </div> 
 		</form>
 	</div>

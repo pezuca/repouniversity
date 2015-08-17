@@ -30,7 +30,7 @@
 	                        	<c:choose>
 	                        		<c:when test="${listaResultados.size() == 1 and not parametroBusqueda.isEmpty()}">
 								        <h2>
-			                                Se encontro ${listaResultados.size()} resultado con: <span class="text-navy">${parametroBusqueda}</span>
+			                                Se encontro ${listaResultados.size()} resultado
 			                            </h2>
 								    </c:when>
 								    <c:when test="${listaResultados.size() == 1 and parametroBusqueda.isEmpty()}">
@@ -40,7 +40,7 @@
 								    </c:when>    
 								    <c:when test="${listaResultados.size() > 0 and not parametroBusqueda.isEmpty()}">
 								        <h2>
-			                                Se encontraron ${listaResultados.size()} resultados con: <span class="text-navy">${parametroBusqueda}</span>
+			                                Se encontraron ${listaResultados.size()} resultados
 			                            </h2>
 								    </c:when>
 								    <c:when test="${listaResultados.size() > 0 and not parametroBusqueda.isEmpty()}">
@@ -50,7 +50,7 @@
 								    </c:when>
 								    <c:when test="${listaResultados.size()>0 and parametroBusqueda.isEmpty()}">
 								        <h2>
-			                                Se encontraron ${listaResultados.size()} resultados con: <span class="text-navy">${parametroBusqueda}</span>
+			                                Se encontraron ${listaResultados.size()} resultados
 			                            </h2>
 								    </c:when>    
 								    <c:otherwise>
