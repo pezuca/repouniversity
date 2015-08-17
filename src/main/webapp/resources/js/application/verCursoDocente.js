@@ -15,7 +15,7 @@ var GruposAdmin = {
                       data.nombre,
                       data.fechasys,
 					  "<a href='#' name='deleteGrupo' data-grupoid='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a>" +
-					  "<a class='verCurso' href='/repouniversity/docente/verGrupo?grupoId=" + data.id + "&bread=Ver grupo-2'><button class='btn btn-primary btn-circle'><i class='fa fa-arrow-right'></i></button></a>"
+					  "<a class='verCurso' href='/repouniversity/docente/verGrupo?grupoId=" + data.id + "&bread=Ver grupo-3'><button class='btn btn-primary btn-circle'><i class='fa fa-arrow-right'></i></button></a>"
                  ]).draw();
 				
 				//Agrego el evento de delete
