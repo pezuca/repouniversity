@@ -29,6 +29,8 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    public static final String ESCAPED_REGEX = "(['~!@#$\\?%{}\\[\\]\\(\\)])";
+
     @Override
     protected InsertSQLStatement buildInsertSQLStatement(final Archivo a) {
         return new InsertSQLStatement(
@@ -114,26 +116,26 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
         List<Archivo> resultList = new ArrayList<Archivo>();
         List<String> parametrosBusqueda = new ArrayList<String>();
         // quitamos las noise word
-        if(StringUtils.isEmpty(parametro)) {
+        if (StringUtils.isEmpty(parametro)) {
             return resultList;
         }
-        
+
         parametro = parametro.toUpperCase();
         parametrosBusqueda = quitarNoiseWords(parametro);
 
         // agregamos las palabras equivalentes
         parametrosBusqueda = agregarEquivalencias(parametrosBusqueda);
-        
+
         // realizamos la busqueda a los archivos que sean publicos o bien la persona este en ese curso sea alumno o docente
-        if(parametrosBusqueda != null && !parametrosBusqueda.isEmpty()) {
-            resultList = generarBusqueda(parametrosBusqueda, usuario);            
+        if (parametrosBusqueda != null && !parametrosBusqueda.isEmpty()) {
+            resultList = generarBusqueda(parametrosBusqueda, usuario);
         } else {
             List<String> lista = new ArrayList<String>();
             lista.add(parametro);
-            
-            resultList = generarBusqueda(lista, usuario);            
+
+            resultList = generarBusqueda(lista, usuario);
         }
-        
+
         return resultList;
     }
 
@@ -165,10 +167,11 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
         if (parametrosBusqueda.size() > 0) {
             tags = "";
             for (String parametro : parametrosBusqueda) {
-                tags = tags.concat(" tags like \'%" + parametro.trim() + "%\' OR descripcion like \'%" + parametro.trim() + "%\' OR ");
-                nbreDocente = nbreDocente.concat(" nombreDocente like \'%" + parametro.trim() + "%\' OR ");
-                apeDocente = apeDocente.concat(" apellidoDocente like \'%" + parametro.trim() + "%\' OR ");
-                materia = materia.concat(" materia like \'%" + parametro.trim() + "%\' OR ");
+                String parametroScaped = parametro.replaceAll(ESCAPED_REGEX, "\\\\$1");
+                tags = tags.concat(" tags like \'%" + parametroScaped.trim() + "%\' OR descripcion like \'%" + parametroScaped.trim() + "%\' OR ");
+                nbreDocente = nbreDocente.concat(" nombreDocente like \'%" + parametroScaped.trim() + "%\' OR ");
+                apeDocente = apeDocente.concat(" apellidoDocente like \'%" + parametroScaped.trim() + "%\' OR ");
+                materia = materia.concat(" materia like \'%" + parametroScaped.trim() + "%\' OR ");
             }
             tags = tags.substring(0, tags.length() - 3);
             nbreDocente = nbreDocente.substring(0, nbreDocente.length() - 3);
@@ -213,32 +216,32 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
 
         List<String> laDescripcion = new ArrayList<String>();
         List<Archivo> resultList = new ArrayList<Archivo>();
-        
-        if(StringUtils.isEmpty(materia) && StringUtils.isEmpty(docente) && StringUtils.isEmpty(descripcion)) {
+
+        if (StringUtils.isEmpty(materia) && StringUtils.isEmpty(docente) && StringUtils.isEmpty(descripcion)) {
             return resultList;
         }
-        
+
         // quitamos las noise word
         if (StringUtils.isNotBlank(descripcion)) {
             descripcion = descripcion.toUpperCase();
             laDescripcion = quitarNoiseWords(descripcion);
 
-            
-            if(laDescripcion != null && !laDescripcion.isEmpty()) {
-             // agregamos las palabras equivalentes
+            if (laDescripcion != null && !laDescripcion.isEmpty()) {
+                // agregamos las palabras equivalentes
                 laDescripcion = agregarEquivalencias(laDescripcion);
-    
+
             } else {
                 List<String> lista = new ArrayList<String>();
                 lista.add(descripcion.toLowerCase());
-             // agregamos las palabras equivalentes
+                // agregamos las palabras equivalentes
                 laDescripcion = lista;
 
             }
-            
+
             tags = "";
             for (String parametro : laDescripcion) {
-                tags = tags.concat(" tags like \'%" + parametro.trim() + "%\' OR descripcion like \'%" + parametro.trim() + "%\' OR ");
+                String parametroEscaped = parametro.replaceAll(ESCAPED_REGEX, "\\\\$1");
+                tags = tags.concat(" tags like \'%" + parametroEscaped.trim() + "%\' OR descripcion like \'%" + parametroEscaped.trim() + "%\' OR ");
             }
             tags = tags.substring(0, tags.length() - 3);
         }
@@ -248,14 +251,14 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
         sql.append("select * from repouniversity.vw_archivos ");
         sql.append("where (" + tags + ")AND");
         if (StringUtils.isNotBlank(docente)) {
-            sql.append(" id_docente= " + docente + " AND");
+            sql.append(" id_docente= " + docente.replaceAll(ESCAPED_REGEX, "\\\\$1") + " AND");
         }
         // sql.append(" apellidoDocente like \'%"+ apeDocente.trim() + "%\' AND");
         // sql.append(" carrera like \'%"+ carrera.trim() + "%\' AND");
         if (StringUtils.isNotBlank(materia)) {
-            sql.append(" id_materia = " + materia + " AND");
+            sql.append(" id_materia = " + materia.replaceAll(ESCAPED_REGEX, "\\\\$1") + " AND");
         }
-        
+
         sql.append(" fecha_publicacion between \'" + new SimpleDateFormat("yyyy/MM/dd").format(fechaDde) + "\' AND \'"
                 + new SimpleDateFormat("yyyy/MM/dd").format(fechaHta) + "\'");
         sql.append(acotarBusquedaXTipoUsuario(usuario));
