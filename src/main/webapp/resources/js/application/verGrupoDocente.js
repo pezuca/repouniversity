@@ -154,8 +154,8 @@ var tpAdmin = {
 			data: $("#nuevoAlumnoForm").serialize(),
 			success: function(data){
 				$.gritter.add({
-					title:'Alumno agregado',
-					text: 'El alumno se ha agregado de forma exitosa.',
+					title:'Grupo modificado',
+					text: 'El grupo fue modificado de forma exitosa.',
 					sticky: false
 				});
 				
@@ -176,6 +176,8 @@ var tpAdmin = {
 						.dialog("open");
 					});
 				}
+				
+				$(".grupo-titulo h5").text("Nombre de grupo: " + data.nombre);
 				
 				$("#agregarAlumnoDialog").dialog("close");						
 			},
@@ -293,6 +295,7 @@ $(document).ready(function() {
 			$('#nuevoAlumnoForm').trigger("reset");
 			$("#nuevoAlumnoForm").find(".form-group").removeClass("has-error");
 			var grupoId = $("#nuevoAlumnoForm input[name=grupoId]").val();
+			$("#nuevoAlumnoForm input[name=nombreGrupo]").val($("#agregarAlumnoDialog").data("nombreGrupo"));
 			
 			$.ajax({
 				url: "/repouniversity/docente/alumnosSinGrupo",
@@ -415,7 +418,7 @@ $(document).ready(function() {
 	});
 	
 	$("#agregarAlumnoButton").click(function() {
-		$("#agregarAlumnoDialog").dialog("open");
+		$("#agregarAlumnoDialog").data("nombreGrupo", $(".grupo-titulo h5").text().split(": ")[1]).dialog("open");
 	});
 	$("a[name=deleteTp] button").click(function(){
 		$("#deleteTpDialog").data('tpId', $(this).parent().attr("data-tpgrupoId")).dialog("open");

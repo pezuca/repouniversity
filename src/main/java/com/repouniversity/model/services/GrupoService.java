@@ -96,20 +96,22 @@ public class GrupoService {
 
         return grupos;
     }
+
     public GrupoTO getGrupoForCursoAlumno(Long idCurso, Long idAlumno) {
         List<Grupo> grupos = grupoDao.findGrupoByCursoAlumno(idCurso, idAlumno);
-         List<GrupoTO> gruposTo = new ArrayList<GrupoTO>();
-        
-         for (Grupo grupo : grupos) {
-         gruposTo.add(buildGrupo(grupo));
-         }
+        List<GrupoTO> gruposTo = new ArrayList<GrupoTO>();
+
+        for (Grupo grupo : grupos) {
+            gruposTo.add(buildGrupo(grupo));
+        }
 
         return gruposTo.get(0);
     }
-    public GrupoTO agregarAlumnosGrupo(Long idGrupo, Long[] listaAlumnoId) {
-        // TODO Auto-generated method stub
 
-        saveGrupoAlumnoCurso(idGrupo, getGrupoById(idGrupo).getIdCurso(), listaAlumnoId);
+    public GrupoTO agregarAlumnosGrupo(Long idGrupo, Long[] listaAlumnoId) {
+        if(listaAlumnoId != null) {
+            saveGrupoAlumnoCurso(idGrupo, getGrupoById(idGrupo).getIdCurso(), listaAlumnoId);
+        }
 
         return getGrupoById(idGrupo);
     }
@@ -118,24 +120,31 @@ public class GrupoService {
         // TODO Auto-generated method stub
         cursoDao.saveAlumnoCursoGrupo(1L, cursoId, alumnoId);
     }
-    
+
     public List<GrupoTO> getGruposDeAlumno(long idAlumno) {
 
         List<Grupo> grupos = grupoDao.findGruposDeAlumno(idAlumno);
         List<GrupoTO> gruposTo = new ArrayList<GrupoTO>();
-       
+
         for (Grupo grupo : grupos) {
-        gruposTo.add(buildGrupo(grupo));
+            gruposTo.add(buildGrupo(grupo));
         }
 
         return gruposTo;
 
     }
 
-	public void eliminarGrupo(Long grupoId) {
-		grupoDao.delete(grupoDao.findById(grupoId));
+    public void eliminarGrupo(Long grupoId) {
+        grupoDao.delete(grupoDao.findById(grupoId));
         grupoDao.eliminarAlumnosGrupo(grupoId);
+
+    }
+
+    public void update(Long grupoId, String nombreGrupo) {
+        Grupo grupo = grupoDao.findById(grupoId);
+        grupo.setNombre(nombreGrupo);
         
-	}
-    
+        grupoDao.update(grupo);
+    }
+
 }

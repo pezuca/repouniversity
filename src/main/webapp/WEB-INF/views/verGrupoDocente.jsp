@@ -27,10 +27,10 @@
 	         <div class="row">
 	             <div class="col-lg-12">
 	              <div class="ibox float-e-margins">				
-	                  <div class="ibox-title">
+	                  <div class="ibox-title grupo-titulo">
 	                      <h5>Nombre de grupo: ${grupo.nombre}</h5>
 		                  <div class="ibox-tools" id="agregarAlumnoButton">
-		                       <a class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  Alumno</a>
+		                       <a class="btn btn-primary btn-xs"><i class="fa fa-edit"></i>  Grupo</a>
 	                      </div>
 	                  </div>
 	                  <div class="ibox-content">
@@ -128,15 +128,6 @@
 				<label class="col-sm-2 control-label">Descripcion*:</label>
                 <div class="col-sm-10"><input name="descripcion" type="text" class="form-control" required="required"></div>
             </div>
-<!--             <div class="form-group"> -->
-<!--                 <label class="col-sm-2 control-label">Archivo*:</label> -->
-<!--                 <div class="col-sm-10"><input name="archivoId" type="text" class="form-control" required="required"></div> -->
-<!--             </div> -->
-<!--             <div class="form-group"> -->
-<!--                 <label class="col-sm-2 control-label">Nota:</label> -->
-<!--                 <div class="col-sm-10"><input name="nota" type="text" class="form-control" required="required"></div> -->
-                
-<!--             </div> -->
             <div class="form-group">
                 <label class="col-sm-2 control-label">Nota:</label>
                 <div class="col-sm-10">
@@ -151,12 +142,18 @@
             </div>
         </form>
 	</div>
-	<div id="agregarAlumnoDialog" title="Nuevo Alumno">
+	
+	<div id="agregarAlumnoDialog" title="Editar Grupo">
 		<form id="nuevoAlumnoForm" class="form-horizontal">
-			
 			<input name="grupoId" type="hidden" class="form-control" value="${param.grupoId}">
 				<div class="form-group">
-					<label class="col-sm-2 control-label">Lista de Alumnos*:</label>
+					<label class="col-sm-2 control-label">Nombre de grupo*:</label>
+					<div class="col-sm-10">
+						<input type="text" name="nombreGrupo" class="form-control" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Agregar alumnos*:</label>
 						<div class="col-sm-10">
 							<select data-placeholder="Elija un alumno" name="alumnosIds"
 								multiple class="chosen-select" required="required"

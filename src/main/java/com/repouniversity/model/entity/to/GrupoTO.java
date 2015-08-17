@@ -3,8 +3,6 @@ package com.repouniversity.model.entity.to;
 import java.util.Date;
 import java.util.List;
 
-import com.repouniversity.model.entity.Curso;
-
 public class GrupoTO {
     private Long id;
     private String nombre;

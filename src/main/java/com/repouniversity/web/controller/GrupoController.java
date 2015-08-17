@@ -29,78 +29,75 @@ import com.repouniversity.model.services.TpGrupoService;
 @SessionAttributes("login")
 public class GrupoController {
 
-	@Autowired
-	private CursoService cursoService;
+    @Autowired
+    private CursoService cursoService;
 
-	@Autowired
-	private DocenteService docenteService;
+    @Autowired
+    private DocenteService docenteService;
 
-	@Autowired
-	private GrupoService grupoService;
+    @Autowired
+    private GrupoService grupoService;
 
-	@Autowired
-	private TpGrupoService tpGrupoService;
-	
-	@Autowired
-	private AlumnoService alumnoService;
+    @Autowired
+    private TpGrupoService tpGrupoService;
 
-	
-//	@RequestMapping(value = "curso/crearGrupo", method = { RequestMethod.POST })
-//	@ResponseBody
-//	public void solicitarCursoAjax(
-//			@RequestParam(value = "cursos", required = true) Integer cursos,
-//			@RequestParam(value = "alumnoId", required = true) Integer alumnos,
-//			@RequestParam(value = "nombreGrupo", required = true) String nombre) {
-//
-//		
-//		notificacionService.insertarNotificacion(alumnoService.getAlumnoById(alumnoId),
-//				cursoService.getCursoById(cursoId), null, tipoNotificacion);
-//	}
-	
-	  @RequestMapping(value = "docente/verTrabajosPracticos", method = {RequestMethod.GET})
-	    public ModelAndView verTrabajosPracticos(HttpServletRequest request, @RequestParam("tpId") Long tpId) {
-	        TpGrupoTO tpgrupo = tpGrupoService.getTpGrupoById(tpId);
+    @Autowired
+    private AlumnoService alumnoService;
 
-	        return new ModelAndView("verTpGrupoDocente").addObject("tpgrupo", tpgrupo);
-	    }
+    // @RequestMapping(value = "curso/crearGrupo", method = { RequestMethod.POST })
+    // @ResponseBody
+    // public void solicitarCursoAjax(
+    // @RequestParam(value = "cursos", required = true) Integer cursos,
+    // @RequestParam(value = "alumnoId", required = true) Integer alumnos,
+    // @RequestParam(value = "nombreGrupo", required = true) String nombre) {
+    //
+    //
+    // notificacionService.insertarNotificacion(alumnoService.getAlumnoById(alumnoId),
+    // cursoService.getCursoById(cursoId), null, tipoNotificacion);
+    // }
 
-	  @RequestMapping(value = "grupo/agregarAlumnos", method = {RequestMethod.POST})
-		@ResponseBody
-	    @ResponseStatus(value = HttpStatus.OK)
-	  public GrupoTO agregarAlumnosGrupo(@RequestParam(value = "grupoId", required = true) Long grupoId,
-	            @RequestParam(value = "alumnosIds", required = true) Long[] listaAlumnoId) {
+    @RequestMapping(value = "docente/verTrabajosPracticos", method = {RequestMethod.GET})
+    public ModelAndView verTrabajosPracticos(HttpServletRequest request, @RequestParam("tpId") Long tpId) {
+        TpGrupoTO tpgrupo = tpGrupoService.getTpGrupoById(tpId);
 
-	        return grupoService.agregarAlumnosGrupo(grupoId, listaAlumnoId);
-     
-	   }
-		@RequestMapping(value = "docente/eliminarGrupo", method = { RequestMethod.POST })
-		@ResponseBody
-	    @ResponseStatus(value = HttpStatus.OK)
-		public void eliminarGrupoAjax(
-				@RequestParam(value = "grupoId", required = true) Long grupoId) {
+        return new ModelAndView("verTpGrupoDocente").addObject("tpgrupo", tpgrupo);
+    }
 
-			grupoService.eliminarGrupo(grupoId);
-			
+    @RequestMapping(value = "grupo/agregarAlumnos", method = {RequestMethod.POST})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public GrupoTO agregarAlumnosGrupo(@RequestParam(value = "grupoId", required = true) Long grupoId,
+            @RequestParam(value = "alumnosIds", required = false) Long[] listaAlumnoId, @RequestParam(value = "nombreGrupo", required = true) String nombreGrupo) {
 
-		}
-		
-		@RequestMapping(value = "grupo/eliminarAlumno", method = { RequestMethod.POST })
-		@ResponseBody
-	    @ResponseStatus(value = HttpStatus.OK)
-		public void eliminarAlumnoAjax(
-				@RequestParam(value = "alumnoId", required = true) Long alumnoId,
-				@RequestParam(value = "cursoId", required = true) Long cursoId) {
+        grupoService.update(grupoId, nombreGrupo);
+        
+        return grupoService.agregarAlumnosGrupo(grupoId, listaAlumnoId);
+    }
 
-			grupoService.eliminarAlumno(alumnoId, cursoId);
-		}
-		
-	    @RequestMapping(value = "alumno/verGrupos", method = {RequestMethod.GET})
-	    public ModelAndView verGrupos(HttpServletRequest request, @ModelAttribute("login") UsuarioRol usuario) {
+    @RequestMapping(value = "docente/eliminarGrupo", method = {RequestMethod.POST})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public void eliminarGrupoAjax(@RequestParam(value = "grupoId", required = true) Long grupoId) {
 
-	        List<GrupoTO> grupos = grupoService.getGruposDeAlumno(usuario.getIdAluDoc());
+        grupoService.eliminarGrupo(grupoId);
 
-	        return new ModelAndView("verGrupos").addObject("grupos", grupos);
-	    }
+    }
 
+    @RequestMapping(value = "grupo/eliminarAlumno", method = {RequestMethod.POST})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public void eliminarAlumnoAjax(@RequestParam(value = "alumnoId", required = true) Long alumnoId,
+            @RequestParam(value = "cursoId", required = true) Long cursoId) {
+
+        grupoService.eliminarAlumno(alumnoId, cursoId);
+    }
+
+    @RequestMapping(value = "alumno/verGrupos", method = {RequestMethod.GET})
+    public ModelAndView verGrupos(HttpServletRequest request, @ModelAttribute("login") UsuarioRol usuario) {
+
+        List<GrupoTO> grupos = grupoService.getGruposDeAlumno(usuario.getIdAluDoc());
+
+        return new ModelAndView("verGrupos").addObject("grupos", grupos);
+    }
 
 }

@@ -140,13 +140,12 @@ public class GrupoDAOImpl extends GenericDAOImpl<Grupo> implements GrupoDAO {
 
     @Override
     protected SQLStatement buildUpdateSQLStatement(final Grupo t) {
-        return new SQLStatement("UPDATE grupo SET nombre = ?, activo = ?, fecsys = now() WHERE id = ?") {
+        return new SQLStatement("UPDATE grupo SET nombre = ?, fecsys = now() WHERE id_grupo = ?") {
 
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
                 ps.setString(1, t.getNombre());
-                ps.setBoolean(2, t.isActivo());
-                ps.setLong(4, t.getId());
+                ps.setLong(2, t.getId());
             }
 
             @Override
