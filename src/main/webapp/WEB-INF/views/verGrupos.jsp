@@ -21,7 +21,7 @@
 		
 		<%@include file="../components/search-nav-bar.jsp"%>
 		
-		<tag:breadcrumb label="Ver archivos"/>
+		<tag:breadcrumb label="Ver grupos"/>
 		
 		<div class="wrapper wrapper-content animated fadeInRight">
 			

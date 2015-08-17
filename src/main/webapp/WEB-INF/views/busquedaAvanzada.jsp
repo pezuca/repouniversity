@@ -68,9 +68,9 @@
 		                                	<div class="col-sm-6">
 		                                		<div class="row">
 			                                		<div class="input-daterange input-group" id="datepicker">
-					                                    <input type="text" class="form-control input-sm" name="fechaDde" placeholder="Fecha desde"/>
+					                                    <input type="text" class="form-control input-sm" name="fechaDde" placeholder="Fecha desde" readonly = "readonly"/>
 					                                    <span class="input-group-addon">-</span>
-					                                    <input type="text" class="form-control input-sm" name="fechaHta" placeholder="Fecha hasta"/>
+					                                    <input type="text" class="form-control input-sm" name="fechaHta" placeholder="Fecha hasta" readonly = "readonly"/>
 					                                </div>
 				                                </div>
 		                                	</div>

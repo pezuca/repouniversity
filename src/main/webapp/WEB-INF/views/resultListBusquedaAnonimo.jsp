@@ -20,7 +20,7 @@
 	<div id="page-wrapper" class="gray-bg dashbard-1">
 	<tag:breadcrumb label="Busqueda avanzada"/>
 				
-		        <div class="wrapper wrapper-content animated fadeIn">
+		      
 		            <div class="row">
 		                <div class="col-lg-12">
 							<div class="ibox float-e-margins">
@@ -70,9 +70,9 @@
 											<div class="form-group" id="data_5"><label class="col-sm-2 control-label"><b>Fecha publicaci&oacute;n</b></label>
 												<div class="col-sm-6">
 													<div class="input-daterange input-group" id="datepicker">
-														<input type="text" class="form-control input-sm" name="fechaDde" placeholder="Fecha desde"/>
+														<input type="text" class="form-control input-sm" name="fechaDde" placeholder="Fecha desde" readonly = "readonly"/>
 														<span class="input-group-addon">-</span>
-														<input type="text" class="form-control input-sm" name="fechaHta" placeholder="Fecha hasta"/>
+														<input type="text" class="form-control input-sm" name="fechaHta" placeholder="Fecha hasta" readonly = "readonly"/>
 													</div>
 												</div>		
 											</div>
@@ -87,7 +87,7 @@
 			            	</div>
 						</div>
 					</div>
-		    	 </div>
+		    	
 				<div class="row">
 	                <div class="col-lg-12">
 	                    <div class="ibox float-e-margins">
