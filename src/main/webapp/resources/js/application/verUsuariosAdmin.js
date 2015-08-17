@@ -148,10 +148,10 @@ var usuariosAdmin = {
 	validacionFormlario: function(formularioSelector) {
 		var elementos = $(formularioSelector).find("input[required], select[required]");
 		var flag = true;
-		var inValid = new RegExp("[\\s]");
+		var inValid = /([^\s])/;
 
 		elementos.each(function(index) {
-			if(inValid.test($(this).val())) {
+			if(!inValid.test($(this).val())) {
 				$(this).parents(".form-group").addClass(" has-error");
 				flag = false;
 			} else {
