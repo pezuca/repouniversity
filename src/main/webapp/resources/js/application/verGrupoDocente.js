@@ -255,7 +255,7 @@ $(document).ready(function() {
 		hide: {effect: "fade", duration: 300},
 		show: {effect: "fade", duration: 300},
 		buttons: {
-			"Editar": function() {
+			"Crear": function() {
 				if(tpAdmin.validacionFormlario("#nuevoTpForm")) {
 					tpAdmin.crearNuevoTpAjax();
 				}
