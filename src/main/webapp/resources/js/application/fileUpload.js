@@ -62,7 +62,12 @@ $(document).ready(function () {
 			inputTitle.attr("data-value", file.name.substring(0,file.name.lastIndexOf(".")));
 		}
 		
-		formData.append("tags", inputTags.val().split(","));
+		if(inputTags.val() != null) {
+			formData.append("tags", inputTags.val().split(","));
+		} else {
+			formData.append("tags","");
+		}
+
 		formData.append("estado", inputEstado);
 	});
 

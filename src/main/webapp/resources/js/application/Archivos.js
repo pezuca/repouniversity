@@ -135,7 +135,10 @@ $(document).ready(function() {
 			$("#editarArchivoForm").find(".form-group").removeClass("has-error");
 			
 			$('#editarArchivoForm input[name=archivoId]').val($("#editarArchivoDialog").data('archivoId'));
-			$('#editarArchivoForm input[name=descripcion]').val($("#editarArchivoDialog").data('descripcion'));
+			
+			if($("#editarArchivoDialog").data('descripcion') != null) {
+				$('#editarArchivoForm input[name=descripcion]').val($("#editarArchivoDialog").data('descripcion'));				
+			}
 			
 			var estado = $("#editarArchivoDialog").data('estadoArchivo');
 			if(estado == 1) {
