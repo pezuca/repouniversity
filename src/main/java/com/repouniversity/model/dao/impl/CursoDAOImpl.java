@@ -121,6 +121,7 @@ public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
         sql.append("JOIN carrera_materia cm on cm.idmateria = m.id_materia ");
         sql.append("LEFT JOIN notificacion n ON n.idcurso = c.id_curso AND tiponotificacion = 1 AND n.activo = 1 AND n.idalumno = ? ");
         sql.append("WHERE c.id_curso not in (SELECT alumno_curso.id_curso from alumno_curso WHERE alumno_curso.id_alumno = ?) ");
+        sql.append("AND cm.idcarrera = (SELECT Idcarrera from alumno WHERE id_alumno = ? limit 1) ");
         sql.append("AND c.activo = 1 AND m.activo = 1");
         
         List<CursoMateria> list = doQuery(new SQLStatement(sql.toString()) {
@@ -128,16 +129,13 @@ public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
                 ps.setLong(1, alumnoId);
                 ps.setLong(2, alumnoId);
+                ps.setLong(3, alumnoId);
             }
 
             @Override
             public void doAfterTransaction(int result) {
             }
         }, new CursoMateriaRowMapper(), "findCursosMateriaDisponiblesParaAlumno: " + alumnoId);
-
-        if (list.isEmpty()) {
-            return null;
-        }
 
         return list;
     }
