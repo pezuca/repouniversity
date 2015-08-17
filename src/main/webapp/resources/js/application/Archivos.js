@@ -72,7 +72,7 @@ var archivosAdmin = {
 		var inValid = /([^\s])/;
 
 		elementos.each(function(index) {
-			if(!inValid.test($(this).val())) {
+			if(!inValid.test($(this).val()) || $(this).val() == null) {
 				$(this).parents(".form-group").addClass(" has-error");
 				flag = false;
 			} else {
