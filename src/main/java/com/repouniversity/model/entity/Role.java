@@ -4,17 +4,14 @@ import java.util.Date;
 
 import com.repouniversity.model.dao.IdentifiedObject;
 
-public class Usuario implements IdentifiedObject {
+public class Role implements IdentifiedObject {
 
     private static final long serialVersionUID = 3355104975694628742L;
     private Long id;
-    private String user;
-    private String pass;
-    private boolean activo;
-    private Long idPersona;
-    private Date fechasys;
-    private Long role;
+    private String role;
     
+    private boolean activo;
+    private Date fechasys;
     public Long getId() {
         return id;
     }
@@ -23,22 +20,7 @@ public class Usuario implements IdentifiedObject {
         this.id = id;
     }
 
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public String getPass() {
-        return pass;
-    }
-
-    public void setPass(String pass) {
-        this.pass = pass;
-    }
-
+   
     public boolean isActivo() {
         return activo;
     }
@@ -55,19 +37,11 @@ public class Usuario implements IdentifiedObject {
         this.fechasys = fechasys;
     }
 
-    public Long getIdPersona() {
-        return idPersona;
-    }
-
-    public void setPersona(Long idPersona) {
-        this.idPersona = idPersona;
-    }
-
-	public Long getRole() {
+    public String getRole() {
 		return role;
 	}
 
-	public void setRole(Long role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 }
