@@ -89,7 +89,7 @@ var carrerasAdmin = {
 				$("#editarCarreraDialog").dialog("close");						
 			},
 			error: function(data) {
-				$("#nuevaCarreraForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de crear el usuario, inténtelo mas tarde.</p></div>")
+				$("#nuevoCarreraForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de crear el usuario, inténtelo mas tarde.</p></div>")
 				setTimeout(function(){
 					$("#agregarCarreraDialog .infoDialog").hide(function(){
 						$(this).remove();
@@ -182,7 +182,7 @@ $(document).ready(function() {
 		show: {effect: "fade", duration: 300},
 		buttons: {
 			"Crear": function() {
-				if(carrerasAdmin.validacionFormlario("#nuevaCarreraForm")) {
+				if(carrerasAdmin.validacionFormlario("#nuevoCarreraForm")) {
 					carrerasAdmin.crearNuevaCarreraAjax();
 				}
 			},
@@ -192,8 +192,9 @@ $(document).ready(function() {
 		},
 		open: function(event, ui) {
 			$(".infoDialog").remove();
-			$('#nuevaCarreraForm').trigger("reset");
-			$("#nuevaCarreraForm").find(".form-group").removeClass("has-error");
+			$('#nuevoCarreraForm').trigger("reset");
+			$('#nuevoCarreraForm select[name=materias]').trigger("chosen:updated");
+			$("#nuevoCarreraForm").find(".form-group").removeClass("has-error");
 		},
 		close: function(event, ui) {
 		}
@@ -262,7 +263,7 @@ $(document).ready(function() {
 		},
 		open: function(event, ui) {
 			$(".infoDialog").remove();
-			$('#nuevaCarreraForm').trigger("reset");
+			$('#nuevoCarreraForm').trigger("reset");
 		},
 		close: function(event, ui) {
 		}
