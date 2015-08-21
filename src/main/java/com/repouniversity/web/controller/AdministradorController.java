@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.repouniversity.model.entity.Carrera;
 import com.repouniversity.model.entity.Curso;
 import com.repouniversity.model.entity.Materia;
+import com.repouniversity.model.entity.Role;
 import com.repouniversity.model.entity.Usuario;
 import com.repouniversity.model.entity.UsuarioRol;
 import com.repouniversity.model.entity.VwArchivo;
@@ -33,6 +34,7 @@ import com.repouniversity.model.services.DocenteService;
 import com.repouniversity.model.services.ErrorArchivoService;
 import com.repouniversity.model.services.MateriaService;
 import com.repouniversity.model.services.PersonaService;
+import com.repouniversity.model.services.RoleService;
 import com.repouniversity.model.services.UsuarioRolService;
 import com.repouniversity.model.services.UsuarioService;
 
@@ -67,6 +69,9 @@ public class AdministradorController {
     public ArchivoService archivoService;
 
     @Autowired
+    public RoleService roleService;
+
+    @Autowired
     public ErrorArchivoService errorArchivoService;
 
     @RequestMapping(value = "admin/verUsuarios", method = {RequestMethod.GET})
@@ -74,7 +79,10 @@ public class AdministradorController {
 
         List<UsuarioTO> listaUsuarios = usuarioService.getAll();
         List<Carrera> listacarreras = carreraService.getAll();
-        return new ModelAndView("verUsuariosAdmin").addObject("usuarios", listaUsuarios).addObject("listacarreras", listacarreras);
+        List<Role> listaRoles = roleService.getAll();
+
+        return new ModelAndView("verUsuariosAdmin").addObject("usuarios", listaUsuarios).addObject("listacarreras", listacarreras)
+                .addObject("listaRoles", listaRoles);
     }
 
     @RequestMapping(value = "admin/verCursos", method = {RequestMethod.GET})

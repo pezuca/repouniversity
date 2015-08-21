@@ -42,11 +42,10 @@
             </p>
             <p>Ingrese su Usuario y Contraseña</p>
                
-            <form class="m-t" role="form" action="login" method="post" id="login">
+            <form class="m-t" role="form" action="login" method="post" id="login" autocomplete="false">
             
                 <div class="form-group">
-                    <input name="user" type="text" class="form-control" placeholder="Usuario"
-				required autofocus />
+                    <input name="user" type="text" class="form-control" placeholder="Usuario" required autofocus/>
                 </div>
                 <div class="form-group">
                    <input name="password" type="password" class="form-control" placeholder="Contraseña" required />
@@ -55,6 +54,9 @@
                 <button type="submit" class="btn btn-lg btn-primary btn-block" id="entrar">Entrar</button>
 				<br/><br/>
 				<a href="loginAnonimo?&bread=Busqueda-1">Ingreso sin Usuario</a><br/>
+				
+				<input type="text" name="prevent_autofill" id="prevent_autofill" value="" style="display:none;" />
+				<input type="password" name="password_fake" id="password_fake" value="" style="display:none;" />
             </form>
 			<c:if test="${not empty loginexception}">
 				<label  class="m-t" style="color: red"> <small>Usuario o password son incorrectos</small></label>
@@ -62,6 +64,14 @@
             <p class="m-t"> <small>Reposuinversity trabajo practico final CAECE &copy; 2015</small> </p>
         </div>
     </div>
+    
+    <script>
+    	$(document).ready(function(){
+    		$('input[name=user]').replaceWith('<input type="password" name="user" class="form-control" placeholder="Usuario" required autofocus />');
+    		$('input[name=password]').replaceWith('<input type="password" name="password" class="form-control" placeholder="Contraseña" required/>');
+    		setTimeout("$('#login').trigger('reset')", 100);
+    	});
+    </script>
 
 </body>
 

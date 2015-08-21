@@ -7,7 +7,4 @@ import com.repouniversity.model.entity.UsuarioParametro;
  */
 public interface UsuarioParametroDAO extends GenericDAO<UsuarioParametro> {
 
-
-   
-    
 }

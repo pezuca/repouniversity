@@ -73,7 +73,7 @@ public class UsuarioDAOImpl extends GenericDAOImpl<Usuario> implements UsuarioDA
 
     @Override
     protected InsertSQLStatement buildInsertSQLStatement(final Usuario t) {
-        return new InsertSQLStatement("INSERT INTO usuario (user, pass, activo, fecsys, id_persona) values (?, SHA1(?), 1, now(), ?)") {
+        return new InsertSQLStatement("INSERT INTO usuario (user, pass, activo, fecsys, id_persona, id_role) values (?, SHA1(?), 1, now(), ?, ?)") {
 
             @Override
             public void doAfterInsert(Long id) {
@@ -84,6 +84,7 @@ public class UsuarioDAOImpl extends GenericDAOImpl<Usuario> implements UsuarioDA
                 ps.setString(1, t.getUser());
                 ps.setString(2, t.getPass());
                 ps.setLong(3, t.getIdPersona());
+                ps.setLong(4, t.getRole());
             }
 
             @Override

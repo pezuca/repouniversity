@@ -204,7 +204,12 @@ $(document).ready(function() {
 			$(".infoDialog").remove();
 			$('#nuevoAlumnoForm').trigger("reset");
 			$("#nuevoAlumnoForm").find(".form-group").removeClass("has-error");
-			$('#nuevoAlumnoForm .carreraSelect').show();
+			
+			if($('#nuevoAlumnoForm .carreraSelect').val() == 'alumno'){
+				$('#nuevoAlumnoForm .carreraSelect').show();
+			} else {
+				$('#nuevoAlumnoForm .carreraSelect').hide();
+			}
 		},
 		close: function(event, ui) {
 		}
