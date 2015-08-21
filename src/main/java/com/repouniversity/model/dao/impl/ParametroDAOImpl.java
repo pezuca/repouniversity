@@ -47,7 +47,7 @@ public class ParametroDAOImpl extends GenericDAOImpl<Parametro> implements Param
 
     @Override
     protected InsertSQLStatement buildInsertSQLStatement(final Parametro t) {
-        return new InsertSQLStatement("INSERT INTO Parametro (id_role, parametro, descripcion, variable, activo, fecsys) values (?, ?, ?, ?, 1, now())") {
+        return new InsertSQLStatement("INSERT INTO parametro (id_role, parametro, descripcion, variable, activo, fecsys) values (?, ?, ?, ?, 1, now())") {
  
             @Override
             public void doAfterInsert(Long id) {
@@ -69,7 +69,7 @@ public class ParametroDAOImpl extends GenericDAOImpl<Parametro> implements Param
 
     @Override
     protected SQLStatement buildUpdateSQLStatement(final Parametro t) {
-        return new SQLStatement("UPDATE usuario SET id_role = ?, parametro = ?, descripcion = ?, variable = ?, fecsys = now()  WHERE id_parametro = ?") {
+        return new SQLStatement("UPDATE parametro SET id_role = ?, parametro = ?, descripcion = ?, variable = ?, fecsys = now()  WHERE id_parametro = ?") {
 
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
@@ -89,6 +89,6 @@ public class ParametroDAOImpl extends GenericDAOImpl<Parametro> implements Param
    
     @Override
     protected String getColumnIdName() {
-        return "id_Parametro";
+        return "id_parametro";
     }
 }
