@@ -146,16 +146,20 @@ public class DashboardController {
 
 		int usuarios = usuarioService.getAll().size();
 		int cursos = cursoService.getAll().size();
-		int docentes = docenteService.getAll().size();
-		int alumnos = alumnoService.getAll().size();
+	//	int docentes = docenteService.getAll().size();
+	//	int alumnos = alumnoService.getAll().size();
 		int materias = materiaService.getAll().size();
 		int carreras = carreraService.getAll().size();
 		int archivos = archivoService.getAll().size();
 		int notificaciones = errorArchivoService.getErrores().size();
 
 		Map<Integer,Integer> mapa = new HashMap<Integer,Integer>();
-		mapa.put(0, usuarios);
-		mapa.put(1, cursos);
+		mapa.put(2, usuarios);
+		mapa.put(3, cursos);
+		mapa.put(0, materias);
+		mapa.put(5, carreras);
+		mapa.put(4, archivos);
+		mapa.put(1, notificaciones);
     	
 	return	mapa;
 		

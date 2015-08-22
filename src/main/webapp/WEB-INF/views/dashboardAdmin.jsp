@@ -39,7 +39,7 @@
 										<div class="widget ${usuarioParametro.color.colorPantalla}-bg p-lg text-center">
 											<div class="m-b-md">
 												<i class="${usuarioParametro.parametro.icono}"></i>
-												<h1 class="m-xs" id = "cuadrado-${usuarioParametro.parametro.variable}">0</h1>
+												<h1 class="m-xs" id = "cuadrado-${usuarioParametro.parametro.variable}">100</h1>
 												<h3 class="font-bold no-margins">
 													${usuarioParametro.parametro.parametro}
 												</h3>
@@ -72,15 +72,26 @@ $(document).ready(function(){
 		  type: "GET",
 		  url: "/repouniversity/dashboard/datos",
 		  success: function(datita){
-			  for (var i = 0; i<datita.lenght; i++)
-			  {
-				  //if ($("#cuadrado-" + i).size()!=0)
-				  //{
-					  $("#cuadrado-" + i).text(datita[i])
-				//  }
-			  }
+		//	  for (var i = 0; i<datita.lenght; i++)
+		//	  {
+		//		  if ($("#cuadrado-" + i).size()!=0)
+		//		  {
+		//			  $("#cuadrado-" + i).text(datita[i])
+		//		  }
+		//	  }
+		
+		for (var m in datita){
+   			 for (var i=0;i<datita[m].length;i++){
+   				 
+   				 //if ($("#cuadrado-" + i).size()!=0)
+   				//	{
+   					  $("#cuadrado-1").text(datita[m][i])
+   				//	}
 
-		  }
+    		}
+		} 
+
+	}
 	});
 });
 </script>
