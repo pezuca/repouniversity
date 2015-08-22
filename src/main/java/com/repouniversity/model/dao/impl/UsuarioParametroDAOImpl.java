@@ -65,7 +65,7 @@ public class UsuarioParametroDAOImpl extends GenericDAOImpl<UsuarioParametro> im
 
     @Override
     protected InsertSQLStatement buildInsertSQLStatement(final UsuarioParametro t) {
-        return new InsertSQLStatement("INSERT INTO usuario_parametro (id_usuario, id_parametro, orden, color, fecsys, activo) values (?, ?, ?, ?, now(), 1)") {
+        return new InsertSQLStatement("INSERT INTO usuario_parametro (id_usuario, id_parametro, orden, color, fesys, activo) values (?, ?, ?, ?, now(), 1)") {
         	
             @Override
             public void doAfterInsert(Long id) {
@@ -87,7 +87,7 @@ public class UsuarioParametroDAOImpl extends GenericDAOImpl<UsuarioParametro> im
 
     @Override
     protected SQLStatement buildUpdateSQLStatement(final UsuarioParametro t) {
-        return new SQLStatement("UPDATE usuario_parametro SET id_usuario = ?, id_parametro = ?, orden = ?, color = ?, activo = ?, fecsys = now()  WHERE id_usuario_parametro = ?") {
+        return new SQLStatement("UPDATE usuario_parametro SET id_usuario = ?, id_parametro = ?, orden = ?, color = ?, activo = ?, fesys = now()  WHERE id_usuario_parametro = ?") {
 
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {

@@ -21,7 +21,8 @@ public class ParametroRowMapper implements RowMapper<Parametro> {
         result.setVariable(rs.getString("variable"));
         result.setActivo(rs.getBoolean("activo"));
         result.setFechasys(rs.getDate("fesys"));
-      
+        result.setIcono(rs.getString("icono"));
+        result.setLink(rs.getString("link"));
         return result;
     }
 

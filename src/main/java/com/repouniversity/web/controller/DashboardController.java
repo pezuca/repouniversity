@@ -1,16 +1,24 @@
 package com.repouniversity.web.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.repouniversity.model.entity.UsuarioRol;
+import com.repouniversity.model.entity.to.UsuarioParametroTO;
 import com.repouniversity.model.services.AlumnoService;
 import com.repouniversity.model.services.ArchivoService;
 import com.repouniversity.model.services.CarreraService;
@@ -21,6 +29,7 @@ import com.repouniversity.model.services.GrupoService;
 import com.repouniversity.model.services.MateriaService;
 import com.repouniversity.model.services.NotificacionService;
 import com.repouniversity.model.services.TpGrupoService;
+import com.repouniversity.model.services.UsuarioParametroService;
 import com.repouniversity.model.services.UsuarioService;
 
 @Controller
@@ -49,12 +58,14 @@ public class DashboardController {
 	private AlumnoService alumnoService;
 	@Autowired
 	private TpGrupoService tpGrupoService;
+	@Autowired
+	private UsuarioParametroService usuarioParametroService;
 
 	@RequestMapping(value = "/dashboard", method = { RequestMethod.GET })
 	public ModelAndView dashboard(HttpServletRequest request,
 			@ModelAttribute("login") UsuarioRol usuario) {
 		ModelAndView model = new ModelAndView("dashboard");
-
+	
 		if (usuario.getRol().equals("alumno")) {
 			model = new ModelAndView("dashboardAlumno");
 			int notificaciones = notificacionService
@@ -102,7 +113,10 @@ public class DashboardController {
 
 		if (usuario.getRol().equals("administrador")) {
 
+					
 			model = new ModelAndView("dashboardAdmin");
+			List<UsuarioParametroTO> usuarioParametros = usuarioParametroService.getUsuarioParametroforUsuario(usuario.getId());
+			
 			int usuarios = usuarioService.getAll().size();
 			int cursos = cursoService.getAll().size();
 			int docentes = docenteService.getAll().size();
@@ -118,9 +132,34 @@ public class DashboardController {
 					.addObject("materias", materias)
 					.addObject("docentes", docentes)
 					.addObject("usuarios", usuarios)
-					.addObject("carreras", carreras);
+					.addObject("carreras", carreras)
+					.addObject("usuarioParametros", usuarioParametros);
 		}
 		return model;
+	}
+	
+    @RequestMapping(value = "dashboard/datos", method = { RequestMethod.GET })
+	@ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+	public Map<Integer,Integer> datosAjax(HttpServletRequest request,
+					@ModelAttribute("login") UsuarioRol usuario) {
+
+		int usuarios = usuarioService.getAll().size();
+		int cursos = cursoService.getAll().size();
+		int docentes = docenteService.getAll().size();
+		int alumnos = alumnoService.getAll().size();
+		int materias = materiaService.getAll().size();
+		int carreras = carreraService.getAll().size();
+		int archivos = archivoService.getAll().size();
+		int notificaciones = errorArchivoService.getErrores().size();
+
+		Map<Integer,Integer> mapa = new HashMap<Integer,Integer>();
+		mapa.put(0, usuarios);
+		mapa.put(1, cursos);
+    	
+	return	mapa;
+		
+
 	}
 
 }

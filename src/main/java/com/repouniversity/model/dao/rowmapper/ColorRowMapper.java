@@ -16,7 +16,7 @@ public class ColorRowMapper implements RowMapper<Color> {
         result.setId(rs.getLong("id_color"));
         result.setColor(rs.getString("color"));
         result.setActivo(rs.getBoolean("activo"));
-        
+        result.setColorPantalla(rs.getString("colorPantalla"));
         
         return result;
     }

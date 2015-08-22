@@ -1,5 +1,7 @@
 package com.repouniversity.model.dao;
 
+import java.util.List;
+
 import com.repouniversity.model.entity.Parametro;
 
 /**
@@ -7,7 +9,7 @@ import com.repouniversity.model.entity.Parametro;
  */
 public interface ParametroDAO extends GenericDAO<Parametro> {
 
+	List<Parametro> findParametrosByRole(Long roleId);
 
-   
-    
+
 }

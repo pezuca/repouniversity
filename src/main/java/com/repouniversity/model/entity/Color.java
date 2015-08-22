@@ -1,7 +1,5 @@
 package com.repouniversity.model.entity;
 
-import java.util.Date;
-
 import com.repouniversity.model.dao.IdentifiedObject;
 
 public class Color implements IdentifiedObject {
@@ -10,7 +8,8 @@ public class Color implements IdentifiedObject {
     private Long id;
     private String color;
     private boolean activo;
-
+    private String colorPantalla;
+    
     public Long getId() {
         return id;
     }
@@ -34,5 +33,13 @@ public class Color implements IdentifiedObject {
 
 	public void setColor(String color) {
 		this.color = color;
+	}
+
+	public String getColorPantalla() {
+		return colorPantalla;
+	}
+
+	public void setColorPantalla(String colorPantalla) {
+		this.colorPantalla = colorPantalla;
 	}
 }

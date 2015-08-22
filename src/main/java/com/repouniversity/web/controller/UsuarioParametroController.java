@@ -55,12 +55,12 @@ public class UsuarioParametroController {
 	@ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
 	public UsuarioParametroTO editarParametroAjax(
-			@RequestParam(value = "userParamId", required = false) Long userParamId,
-			@RequestParam(value = "orden", required = false) Long orden,
-			@RequestParam(value = "color", required = false) Long color,
-			@RequestParam(value = "activo", required = false) Long activo) {
+			@RequestParam(value = "userParamId", required = true) Long userParamId,
+			@RequestParam(value = "orden", required = true) Long orden,
+			@RequestParam(value = "color", required = true) Long color,
+			@RequestParam(value = "activo", required = true) boolean activo) {
 
-	return	usuarioParametroService.editarParametro(userParamId, orden, color, true);
+	return	usuarioParametroService.editarParametro(userParamId, orden, color, activo);
 		
 
 	}

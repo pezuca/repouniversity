@@ -41,7 +41,7 @@ public class ColorDAOImpl extends GenericDAOImpl<Color> implements ColorDAO {
 
     @Override
     protected InsertSQLStatement buildInsertSQLStatement(final Color t) {
-        return new InsertSQLStatement("INSERT INTO color (color, activo) values (?, 1)") {
+        return new InsertSQLStatement("INSERT INTO color (color, colorPantalla, activo) values (?, ?, 1)") {
  
             @Override
             public void doAfterInsert(Long id) {
@@ -50,6 +50,7 @@ public class ColorDAOImpl extends GenericDAOImpl<Color> implements ColorDAO {
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
             	ps.setString(1, t.getColor());
+            	ps.setString(2, t.getColorPantalla());
         
             }
 
@@ -61,12 +62,13 @@ public class ColorDAOImpl extends GenericDAOImpl<Color> implements ColorDAO {
 
     @Override
     protected SQLStatement buildUpdateSQLStatement(final Color t) {
-        return new SQLStatement("UPDATE parametro SET color = ?  WHERE id_color = ?") {
+        return new SQLStatement("UPDATE parametro SET color = ?, colorPantalla = ?  WHERE id_color = ?") {
 
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
             	ps.setString(1, t.getColor());
-                ps.setLong(2, t.getId());
+            	ps.setString(2, t.getColorPantalla());
+                ps.setLong(3, t.getId());
             }
 
             @Override
