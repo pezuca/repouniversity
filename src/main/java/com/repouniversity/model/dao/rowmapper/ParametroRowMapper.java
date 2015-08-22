@@ -17,10 +17,10 @@ public class ParametroRowMapper implements RowMapper<Parametro> {
         result.setId(rs.getLong("id_parametro"));
         result.setRole(rs.getLong("id_role"));
         result.setParametro(rs.getString("parametro"));
-        result.setDescricpion(rs.getString("descricpion"));
+        result.setDescricpion(rs.getString("descripcion"));
         result.setVariable(rs.getString("variable"));
         result.setActivo(rs.getBoolean("activo"));
-        result.setFechasys(rs.getDate("fecsys"));
+        result.setFechasys(rs.getDate("fesys"));
       
         return result;
     }

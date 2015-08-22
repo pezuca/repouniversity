@@ -3,6 +3,7 @@ package com.repouniversity.model.dao.impl;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -38,6 +39,29 @@ public class UsuarioParametroDAOImpl extends GenericDAOImpl<UsuarioParametro> im
     protected UsuarioParametro extractEntityFromResultSet(ResultSet rs, int line) throws SQLException {
         return (new UsuarioParametroRowMapper()).mapRow(rs, line);
     }
+    
+    @Override
+    public List<UsuarioParametro> findUsuarioParametroforUsuario(final Long usuarioId) {
+        StringBuilder sql = new StringBuilder();
+
+        sql.append("SELECT * FROM repouniversity.usuario_parametro ");
+        sql.append("WHERE id_usuario = ? ");
+        sql.append("Order by orden ");
+        
+
+        List<UsuarioParametro> list = doQueryById(new SQLStatement(sql.toString()) {
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+                ps.setLong(1, usuarioId);
+            }
+
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+        }, "findUsuarioParametroforusuario: " + usuarioId);
+
+        return list;
+    }
 
     @Override
     protected InsertSQLStatement buildInsertSQLStatement(final UsuarioParametro t) {
@@ -63,7 +87,7 @@ public class UsuarioParametroDAOImpl extends GenericDAOImpl<UsuarioParametro> im
 
     @Override
     protected SQLStatement buildUpdateSQLStatement(final UsuarioParametro t) {
-        return new SQLStatement("UPDATE usuario_parametro SET id_usuario = ?, id_parametro = ?, orden = ?, color = ?, fecsys = now()  WHERE id_parametro = ?") {
+        return new SQLStatement("UPDATE usuario_parametro SET id_usuario = ?, id_parametro = ?, orden = ?, color = ?, activo = ?, fecsys = now()  WHERE id_usuario_parametro = ?") {
 
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
@@ -71,7 +95,8 @@ public class UsuarioParametroDAOImpl extends GenericDAOImpl<UsuarioParametro> im
             	ps.setLong(2, t.getParametro());
                 ps.setLong(3, t.getOrden());
                 ps.setLong(4, t.getColor());
-                ps.setLong(5, t.getId());
+                ps.setBoolean(5, t.isActivo());
+                ps.setLong(6, t.getId());
             }
 
             @Override

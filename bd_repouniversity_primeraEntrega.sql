@@ -201,6 +201,31 @@ INSERT INTO `carrera_materia` VALUES (31,1),(35,1),(37,1),(38,1),(39,1),(40,1),(
 UNLOCK TABLES;
 
 --
+-- Table structure for table `color`
+--
+
+DROP TABLE IF EXISTS `color`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `color` (
+  `id_color` int(10) NOT NULL AUTO_INCREMENT,
+  `color` varchar(30) NOT NULL,
+  `activo` tinyint(4) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id_color`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `color`
+--
+
+LOCK TABLES `color` WRITE;
+/*!40000 ALTER TABLE `color` DISABLE KEYS */;
+INSERT INTO `color` VALUES (1,'Verde',1),(2,'Azul',1),(3,'Rojo',1),(4,'Amarillo',1);
+/*!40000 ALTER TABLE `color` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `comentario`
 --
 
@@ -475,10 +500,14 @@ CREATE TABLE `parametro` (
   `id_parametro` int(10) NOT NULL AUTO_INCREMENT,
   `id_role` int(10) NOT NULL,
   `parametro` varchar(100) NOT NULL,
+  `descripcion` varchar(100) NOT NULL,
+  `variable` varchar(100) NOT NULL,
+  `activo` tinyint(1) NOT NULL DEFAULT '1',
+  `fesys` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_parametro`),
   KEY `fk_parametro_role_idx` (`id_role`),
   CONSTRAINT `fk_parametro_role` FOREIGN KEY (`id_role`) REFERENCES `role` (`id_role`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -487,6 +516,7 @@ CREATE TABLE `parametro` (
 
 LOCK TABLES `parametro` WRITE;
 /*!40000 ALTER TABLE `parametro` DISABLE KEYS */;
+INSERT INTO `parametro` VALUES (1,1,'Materias disponibles','materias creadas','${materias}',1,'2015-08-22 00:12:35'),(2,1,'Notificaciones','errores reportados','${notificaciones}',1,'2015-08-22 00:12:35'),(7,1,'Usuarios del sistema','usuarios activos','0',1,'2015-08-22 00:19:09'),(8,1,'Cursos disponibles','cursos creados','1',1,'2015-08-22 00:19:09'),(9,1,'Archivos disponibles','Archivos del repositorio','${archivos}',1,'2015-08-22 00:19:09'),(10,1,'Carreras disponibles','carreras creados','${carreras}',1,'2015-08-22 00:19:09');
 /*!40000 ALTER TABLE `parametro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -696,11 +726,12 @@ CREATE TABLE `usuario_parametro` (
   `id_usuario_parametro` int(10) NOT NULL AUTO_INCREMENT,
   `id_usuario` int(10) NOT NULL,
   `id_parametro` int(10) NOT NULL,
-  `orden` int(11) NOT NULL DEFAULT '1',
+  `orden` int(10) NOT NULL DEFAULT '1',
+  `color` int(10) NOT NULL DEFAULT '1',
   `fesys` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `activo` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id_usuario_parametro`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -709,6 +740,7 @@ CREATE TABLE `usuario_parametro` (
 
 LOCK TABLES `usuario_parametro` WRITE;
 /*!40000 ALTER TABLE `usuario_parametro` DISABLE KEYS */;
+INSERT INTO `usuario_parametro` VALUES (1,7,1,1,1,'2015-08-22 00:23:05',1),(2,7,2,2,1,'2015-08-22 00:23:05',1),(3,7,7,3,1,'2015-08-22 00:23:05',1),(4,7,8,4,1,'2015-08-22 00:23:05',1),(5,7,9,5,1,'2015-08-22 00:23:05',1),(6,7,10,6,1,'2015-08-22 00:23:05',1);
 /*!40000 ALTER TABLE `usuario_parametro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -795,4 +827,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-20  0:54:36
+-- Dump completed on 2015-08-22  0:24:00
