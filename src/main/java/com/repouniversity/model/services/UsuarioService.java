@@ -33,6 +33,9 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRolService usuarioRolService;
+    
+    @Autowired
+    private RoleService roleService;
 
     @Transactional
     public Usuario updateUser(Long id, String nombre, String apellido, String mail, String user, String newPassword, String repeatPassword, Long carreraId) {
@@ -80,7 +83,6 @@ public class UsuarioService {
 
     @Transactional
     public Usuario saveUser(String nombre, String apellido, String mail, String user, String password, String rol, Long carreraId) {
-
         Persona persona = new Persona();
         persona.setNombre(nombre);
         persona.setApellido(apellido);
@@ -92,6 +94,8 @@ public class UsuarioService {
         usuario.setUser(user);
         usuario.setPass(password);
         usuario.setPersona(persona.getId());
+        usuario.setRole(roleService.findByRoleName(rol).getId());
+        
         usuarioDAO.insert(usuario);
 
         if (rol.equalsIgnoreCase("alumno")) {

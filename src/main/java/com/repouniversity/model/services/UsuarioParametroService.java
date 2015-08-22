@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.repouniversity.model.dao.UsuarioParametroDAO;
 import com.repouniversity.model.entity.UsuarioParametro;
-import com.repouniversity.model.entity.UsuarioRol;
 import com.repouniversity.model.entity.to.UsuarioParametroTO;
 import com.repouniversity.model.entity.to.UsuarioTO;
 

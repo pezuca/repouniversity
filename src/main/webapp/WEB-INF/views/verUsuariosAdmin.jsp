@@ -108,10 +108,10 @@
                 <label class="col-sm-2 control-label">Rol*:</label>
                 <div class="col-sm-10">
                 	<select class="form-control m-b" name="rol" required="required">
-                         <option value="alumno">Alumno</option>
-                         <option value="docente">Docente</option>
-                         <option value="administrador">Administrador</option>
-                     </select>
+	                	<c:forEach items="${listaRoles}" var="role" varStatus="status">
+							<option value="${role.role}">${role.role}</option>
+						</c:forEach>
+                    </select>
                 </div>
             </div>
             <div class="form-group carreraSelect">
@@ -153,11 +153,11 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">Rol*:</label>
                 <div class="col-sm-10">
-                	<select class="form-control m-b" name="rol" disabled readonly>
-                         <option value="alumno">Alumno</option>
-                         <option value="docente">Docente</option>
-                         <option value="administrador">Administrador</option>
-                     </select>
+                	<select class="form-control m-b" name="rol" required="required">
+	                	<c:forEach items="${listaRoles}" var="role" varStatus="status">
+							<option value="${role.role}">${role.role}</option>
+						</c:forEach>
+                    </select>
                 </div>
             </div>
             <div class="form-group carreraSelect">
