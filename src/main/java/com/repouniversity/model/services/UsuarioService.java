@@ -179,7 +179,7 @@ public class UsuarioService {
         Role role = roleService.findByRoleName(rol);
         Usuario user = usuarioDAO.findById(userId);
         
-        if(user.getRole() == 2L || (user.getRole() == 4L && role.getId() == 3L)) {
+        if(user.getRole() == 2L || ((user.getRole() == 4L || user.getRole() == 1L) && role.getId() == 3L)) {
             docenteService.delete(usuarioRolService.getUsuarioById(userId).getIdAluDoc());
             
             if(role.getId() == 3L) {
@@ -195,7 +195,7 @@ public class UsuarioService {
             }
         }
         
-        if(user.getRole() == 3L || (user.getRole() == 4L && role.getId() == 2L)) {
+        if(user.getRole() == 3L || ((user.getRole() == 4L || user.getRole() == 1L) && role.getId() == 2L)) {
             alumnoService.delete(usuarioRolService.getUsuarioById(userId).getIdAluDoc());
 
             if(role.getId() == 2L) {
