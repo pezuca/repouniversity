@@ -14,68 +14,66 @@ import com.repouniversity.web.exceptions.LoginFailException;
 import com.repouniversity.web.utils.HTTPSessionManagerUtil;
 
 /**
- * 
  * @author federico triay
- *
  */
 @Service
 public class LoginService {
 
-	@Autowired
-	private UsuarioDAO userDao;
-	
-	@Autowired
-	private UsuarioRolDAO usuarioRolDao;
-	
-	@Autowired
-	private UsuarioRolService usuarioRolService;
+    @Autowired
+    private UsuarioDAO userDao;
 
-	/**
-	 * Attempts to perform user login with username and password given, setting
-	 * up session if successful
-	 * 
-	 * @param username
-	 * @param pass
-	 * @param request
-	 * @return Redirect url for login
-	 */
-	public String login(String username, String pass, HttpServletRequest request) {
+    @Autowired
+    private UsuarioRolDAO usuarioRolDao;
 
-		String result = UrlsApplicationEmun.DASHBOARD.getUrl();
-		Usuario user = this.userDao.getUserByUsernameAndPass(username, pass);
+    @Autowired
+    private UsuarioRolService usuarioRolService;
 
-		if (user == null) {
-			throw new LoginFailException("User or password are not correct.");
-		}
+    @Autowired
+    private UsuarioService usuarioService;
 
-		UsuarioRol usuarioRol = usuarioRolService.getUsuarioById(user.getId());
-		HTTPSessionManagerUtil.setSessionAttribute(request,
-				HTTPSessionManagerUtil.ATTR_LOGIN, usuarioRol);
-		return result;
-	}
+    /**
+     * Attempts to perform user login with username and password given, setting
+     * up session if successful
+     * @param username
+     * @param pass
+     * @param request
+     * @return Redirect url for login
+     */
+    public String login(String username, String pass, HttpServletRequest request) {
 
-	/**
-	 * Reacts to user logout, removing user data/session
-	 * 
-	 * @param request
-	 */
-	public void logout(HttpServletRequest request) {
-		HTTPSessionManagerUtil.removeSessionAttribute(request,
-				HTTPSessionManagerUtil.ATTR_LOGIN);
-	}
+        String result = UrlsApplicationEmun.DASHBOARD.getUrl();
+        Long userId = usuarioService.findByUserName(username).getIdPersona();
 
-	public void loginAnonimo(HttpServletRequest request) {
-		// TODO Auto-generated method stub
+        Usuario user = this.userDao.getUserByUsernameAndPass(username, userId + pass);
 
-		UsuarioRol usuarioRol = new UsuarioRol();
-		usuarioRol.setId(-1L);
-		usuarioRol.setIdAluDoc(-1L);
-		usuarioRol.setIdPersona(-1L);
-		usuarioRol.setNombreUsuario("anonimo");
-		usuarioRol.setRol("anonimo");
-		
-		HTTPSessionManagerUtil.setSessionAttribute(request,
-				HTTPSessionManagerUtil.ATTR_LOGIN, usuarioRol);
-		
-	}
+        if (user == null) {
+            throw new LoginFailException("User or password are not correct.");
+        }
+
+        UsuarioRol usuarioRol = usuarioRolService.getUsuarioById(user.getId());
+        HTTPSessionManagerUtil.setSessionAttribute(request, HTTPSessionManagerUtil.ATTR_LOGIN, usuarioRol);
+        return result;
+    }
+
+    /**
+     * Reacts to user logout, removing user data/session
+     * @param request
+     */
+    public void logout(HttpServletRequest request) {
+        HTTPSessionManagerUtil.removeSessionAttribute(request, HTTPSessionManagerUtil.ATTR_LOGIN);
+    }
+
+    public void loginAnonimo(HttpServletRequest request) {
+        // TODO Auto-generated method stub
+
+        UsuarioRol usuarioRol = new UsuarioRol();
+        usuarioRol.setId(-1L);
+        usuarioRol.setIdAluDoc(-1L);
+        usuarioRol.setIdPersona(-1L);
+        usuarioRol.setNombreUsuario("anonimo");
+        usuarioRol.setRol("anonimo");
+
+        HTTPSessionManagerUtil.setSessionAttribute(request, HTTPSessionManagerUtil.ATTR_LOGIN, usuarioRol);
+
+    }
 }
