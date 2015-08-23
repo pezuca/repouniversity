@@ -12,6 +12,7 @@ public class Seguridad implements IdentifiedObject {
     private Long minusculas;
     private Long especiales;
     private Long longMinima;
+    private Long numeros;
     private boolean activo;
     private Date fechasys;
     
@@ -70,6 +71,14 @@ public class Seguridad implements IdentifiedObject {
 
 	public void setFechasys(Date fechasys) {
 		this.fechasys = fechasys;
+	}
+
+	public Long getNumeros() {
+		return numeros;
+	}
+
+	public void setNumeros(Long numeros) {
+		this.numeros = numeros;
 	}
 
 

@@ -19,8 +19,9 @@ public class SeguridadRowMapper implements RowMapper<Seguridad> {
         result.setMinusculas(rs.getLong("minusculas"));
         result.setEspeciales(rs.getLong("especiales"));
         result.setLongMinima(rs.getLong("longMinima"));
+        result.setNumeros(rs.getLong("numeros"));
         result.setActivo(rs.getBoolean("activo"));
-        result.setFechasys(rs.getDate("fecsys"));
+        result.setFechasys(rs.getDate("fesys"));
 
         return result;
     }

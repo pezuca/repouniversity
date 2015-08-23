@@ -1,6 +1,5 @@
 package com.repouniversity.web.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.repouniversity.model.entity.Carrera;
 import com.repouniversity.model.entity.Role;
+import com.repouniversity.model.entity.Seguridad;
 import com.repouniversity.model.entity.Usuario;
 import com.repouniversity.model.entity.UsuarioRol;
 import com.repouniversity.model.entity.to.UsuarioTO;
@@ -29,6 +29,7 @@ import com.repouniversity.model.services.ErrorArchivoService;
 import com.repouniversity.model.services.MateriaService;
 import com.repouniversity.model.services.PersonaService;
 import com.repouniversity.model.services.RoleService;
+import com.repouniversity.model.services.SeguridadService;
 import com.repouniversity.model.services.UsuarioRolService;
 import com.repouniversity.model.services.UsuarioService;
 
@@ -64,6 +65,9 @@ public class SeguridadController {
     public ArchivoService archivoService;
 
     @Autowired
+    public SeguridadService seguridadService;
+
+    @Autowired
     public RoleService roleService;
 
     @Autowired
@@ -91,4 +95,29 @@ public class SeguridadController {
         UsuarioTO usuarioTo = usuarioService.getUserById(usuario.getId());
         return usuarioTo;
     }
+    
+    @RequestMapping(value = "seguridad/seguridadPass", method = {RequestMethod.GET})
+    public ModelAndView getSeguridadPass(@ModelAttribute("login") UsuarioRol usuario) {
+
+        List<Seguridad> lista = seguridadService.getAll();
+        Seguridad seguridad = lista.get(0);
+
+        return new ModelAndView("seguridadPass").addObject("seguridad", seguridad);
+    }
+    
+    @RequestMapping(value = "seguridad/editarSeguridadPass", method = { RequestMethod.POST })
+	@ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+	public Seguridad editarSeguridadPassAjax(
+			@RequestParam(value = "seguridadId", required = true) Long seguridadId,
+			@RequestParam(value = "mayusculas", required = true) Long mayusculas,
+			@RequestParam(value = "minusculas", required = true) Long minusculas,
+			@RequestParam(value = "especiales", required = true) Long especiales,
+			@RequestParam(value = "numeros", required = true) Long numeros,
+			@RequestParam(value = "longMinima", required = true) Long longMinima) {
+
+	return	seguridadService.editarSeguridadPass(seguridadId, mayusculas, minusculas, especiales, numeros, longMinima);
+    
+    }		
+    
 }
