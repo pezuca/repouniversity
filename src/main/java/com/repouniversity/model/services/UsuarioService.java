@@ -37,6 +37,9 @@ public class UsuarioService {
     
     @Autowired
     private RoleService roleService;
+    
+    @Autowired
+    private UsuarioParametroService usuarioParametroService;
 
     @Transactional
     public Usuario updateUser(Long id, String nombre, String apellido, String mail, String user, String newPassword, String repeatPassword, Long carreraId) {
@@ -111,7 +114,9 @@ public class UsuarioService {
             docente.setPersonaId(persona.getId());
             docenteService.save(docente);
         }
-
+        
+        usuarioParametroService.crearParametro(usuario.getId(), usuario.getRole());
+        
         return usuario;
     }
 
@@ -215,6 +220,9 @@ public class UsuarioService {
         
         user.setRole(role.getId());
         usuarioDAO.updateUserWithoutPass(user);
+        
+        usuarioParametroService.eliminarParametro(user.getId());
+        usuarioParametroService.crearParametro(user.getId(), role.getId());
         
         return user;
     }

@@ -7,11 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.repouniversity.model.dao.UsuarioParametroDAO;
-import com.repouniversity.model.entity.CursoMateria;
 import com.repouniversity.model.entity.Parametro;
 import com.repouniversity.model.entity.UsuarioParametro;
 import com.repouniversity.model.entity.to.UsuarioParametroTO;
-import com.repouniversity.model.entity.to.UsuarioTO;
 
 @Service
 public class UsuarioParametroService {
@@ -88,7 +86,7 @@ public class UsuarioParametroService {
         return usuarioParametroList;
     }
     
-    private void eliminarParametro(Long idusuario) {
+    public void eliminarParametro(Long idusuario) {
         
     	usuarioParametroDAO.eliminarParametro(idusuario);
         
@@ -112,7 +110,7 @@ public class UsuarioParametroService {
 		return buildUsuarioParametro(usuarioParametroDAO.findById(userParamId));
 	}
 
-	public void CrearParametro(Long userId, Long roleId) {
+	public void crearParametro(Long userId, Long roleId) {
 		
 		Long i = 1L;
 		List<Parametro> parametros = parametroService.getParametrosByRole(roleId);

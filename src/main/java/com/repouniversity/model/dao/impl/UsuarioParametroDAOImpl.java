@@ -42,7 +42,7 @@ public class UsuarioParametroDAOImpl extends GenericDAOImpl<UsuarioParametro> im
 	@Override
 	public void eliminarParametro(final Long idUsuario) {
 	        StringBuilder sql = new StringBuilder();
-	        sql.append("DELETE from alumno_curso ");
+	        sql.append("DELETE from usuario_parametro ");
 	        sql.append("WHERE (id_usuario = " + idUsuario + ")");
 
 	        jdbcTemplate.update(sql.toString());
