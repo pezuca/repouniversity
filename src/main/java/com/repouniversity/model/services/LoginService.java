@@ -42,14 +42,14 @@ public class LoginService {
     public String login(String username, String pass, HttpServletRequest request) {
 
         String result = UrlsApplicationEmun.DASHBOARD.getUrl();
-        Long userId = usuarioService.findByUserName(username).getIdPersona();
+        Usuario userToCheck = usuarioService.findByUserName(username);
 
-        Usuario user = this.userDao.getUserByUsernameAndPass(username, userId + pass);
-
-        if (user == null) {
+        if (userToCheck == null) {
             throw new LoginFailException("User or password are not correct.");
         }
 
+        Long userId = userToCheck.getIdPersona();
+        Usuario user = this.userDao.getUserByUsernameAndPass(username, userId + pass);
         UsuarioRol usuarioRol = usuarioRolService.getUsuarioById(user.getId());
         HTTPSessionManagerUtil.setSessionAttribute(request, HTTPSessionManagerUtil.ATTR_LOGIN, usuarioRol);
         return result;
