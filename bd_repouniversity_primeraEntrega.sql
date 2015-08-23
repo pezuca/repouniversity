@@ -597,6 +597,34 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Table structure for table `seguridad`
+--
+
+DROP TABLE IF EXISTS `seguridad`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `seguridad` (
+  `id_seguridad` int(10) NOT NULL AUTO_INCREMENT,
+  `mayusculas` int(10) NOT NULL DEFAULT '0',
+  `minusculas` int(10) NOT NULL DEFAULT '0',
+  `especiales` int(10) NOT NULL DEFAULT '0',
+  `longMinima` int(10) NOT NULL DEFAULT '0',
+  `activo` tinyint(1) NOT NULL DEFAULT '1',
+  `fesys` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_seguridad`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `seguridad`
+--
+
+LOCK TABLES `seguridad` WRITE;
+/*!40000 ALTER TABLE `seguridad` DISABLE KEYS */;
+/*!40000 ALTER TABLE `seguridad` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tipo_notificacion`
 --
 
@@ -714,7 +742,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (5,'repo','32a6fcbaa4543f0718079837a574f5835f3143fe',1,'2014-01-08 03:00:00',2,2),(6,'alumno','684b10ab8da41b83690bd96f9a846b9814d8a288',1,'2014-09-21 01:28:39',31,3),(7,'admin','d033e22ae348aeb5660fc2140aec35850c4da997',1,'2014-09-21 01:36:06',32,1),(8,'doc','f7f029ecb98abe979074a3ab45b74dbd9af02d42',1,'2014-11-01 16:52:13',4,2);
+INSERT INTO `usuario` VALUES (5,'repo','0c267daf663b5caca2036ae9a3f05e6432e97a56',1,'2014-01-08 03:00:00',2,2),(6,'alumno','acc00dce8622b05645d97f1a11111eec6b12dcb0',1,'2014-09-21 01:28:39',31,3),(7,'admin','294b81569ea0d3b72d39290df36c68412ee33e9b',1,'2014-09-21 01:36:06',32,1),(8,'doc','1fe437a42e34c3c3d4dfe02b2528a14b6128e0a9',1,'2014-11-01 16:52:13',4,2);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -743,7 +771,7 @@ CREATE TABLE `usuario_parametro` (
 
 LOCK TABLES `usuario_parametro` WRITE;
 /*!40000 ALTER TABLE `usuario_parametro` DISABLE KEYS */;
-INSERT INTO `usuario_parametro` VALUES (1,7,1,1,1,'2015-08-22 19:58:45',1),(2,7,2,2,1,'2015-08-22 00:23:05',1),(3,7,7,3,1,'2015-08-22 00:23:05',1),(4,7,8,4,1,'2015-08-22 20:12:23',0),(5,7,9,5,3,'2015-08-22 19:45:44',1),(6,7,10,7,1,'2015-08-22 19:46:32',1),(7,8,11,1,1,'2015-08-22 22:37:36',1),(8,8,12,2,1,'2015-08-22 22:37:37',1),(9,8,13,3,1,'2015-08-22 22:37:37',1),(10,8,14,4,1,'2015-08-22 22:37:37',1),(11,8,15,5,1,'2015-08-22 22:37:37',1),(12,5,11,1,1,'2015-08-22 22:40:01',1),(13,5,12,2,1,'2015-08-22 22:40:01',1),(14,5,13,3,1,'2015-08-22 22:40:01',1),(15,5,14,4,1,'2015-08-22 22:40:01',1),(16,5,15,5,1,'2015-08-22 22:40:01',1),(17,6,16,1,1,'2015-08-22 22:40:56',1),(18,6,17,2,1,'2015-08-22 22:40:56',1),(19,6,18,3,1,'2015-08-22 22:40:56',1),(20,6,19,4,1,'2015-08-22 22:40:56',1),(21,6,20,5,1,'2015-08-22 22:40:56',1);
+INSERT INTO `usuario_parametro` VALUES (1,7,1,1,1,'2015-08-22 19:58:45',1),(2,7,2,2,1,'2015-08-22 00:23:05',1),(3,7,7,3,1,'2015-08-22 00:23:05',1),(4,7,8,4,1,'2015-08-22 20:12:23',0),(5,7,9,5,3,'2015-08-22 19:45:44',1),(6,7,10,8,1,'2015-08-23 19:46:45',0),(7,8,11,1,1,'2015-08-22 22:37:36',1),(8,8,12,2,1,'2015-08-22 22:37:37',1),(9,8,13,3,1,'2015-08-22 22:37:37',1),(10,8,14,4,1,'2015-08-22 22:37:37',1),(11,8,15,5,1,'2015-08-22 22:37:37',1),(12,5,11,1,1,'2015-08-22 22:40:01',1),(13,5,12,2,1,'2015-08-22 22:40:01',1),(14,5,13,3,1,'2015-08-22 22:40:01',1),(15,5,14,4,1,'2015-08-22 22:40:01',1),(16,5,15,5,1,'2015-08-22 22:40:01',1),(17,6,16,1,1,'2015-08-22 22:40:56',1),(18,6,17,2,1,'2015-08-22 22:40:56',1),(19,6,18,3,1,'2015-08-22 22:40:56',1),(20,6,19,4,1,'2015-08-22 22:40:56',1),(21,6,20,5,1,'2015-08-22 22:40:56',1);
 /*!40000 ALTER TABLE `usuario_parametro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -830,4 +858,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-22 19:44:14
+-- Dump completed on 2015-08-23 17:19:51

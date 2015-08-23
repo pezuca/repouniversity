@@ -115,7 +115,7 @@ public class DashboardController {
 
 					
 			model = new ModelAndView("dashboardAdmin");
-			List<UsuarioParametroTO> usuarioParametros = usuarioParametroService.getUsuarioParametroforUsuario(usuario.getId());
+			List<UsuarioParametroTO> usuarioParametros = usuarioParametroService.getUsuarioParametroActivoforUsuario(usuario.getId());
 			
 			int usuarios = usuarioService.getAll().size();
 			int cursos = cursoService.getAll().size();

@@ -64,6 +64,17 @@ public class UsuarioParametroService {
 
         return usuarioParametroList;
     }
+    
+    public List<UsuarioParametroTO> getUsuarioParametroActivoforUsuario(Long usuarioId) {
+        List<UsuarioParametroTO> usuarioParametroList = new ArrayList<UsuarioParametroTO>();
+
+        for (UsuarioParametro usuarioParametro : usuarioParametroDAO.findUsuarioParametroActivoforUsuario(usuarioId)) {
+        	usuarioParametroList.add(buildUsuarioParametro(usuarioParametro));
+        }
+
+        return usuarioParametroList;
+    }
+    
 
     public List<UsuarioParametroTO> getAll() {
         List<UsuarioParametroTO> usuarioParametroList = new ArrayList<UsuarioParametroTO>();

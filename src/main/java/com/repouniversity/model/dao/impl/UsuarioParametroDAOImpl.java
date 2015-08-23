@@ -62,6 +62,30 @@ public class UsuarioParametroDAOImpl extends GenericDAOImpl<UsuarioParametro> im
 
         return list;
     }
+    
+    @Override
+    public List<UsuarioParametro> findUsuarioParametroActivoforUsuario(final Long usuarioId) {
+        StringBuilder sql = new StringBuilder();
+
+        sql.append("SELECT * FROM repouniversity.usuario_parametro ");
+        sql.append("WHERE id_usuario = ? ");
+        sql.append("AND activo = 1 ");
+        sql.append("Order by orden ");
+        
+
+        List<UsuarioParametro> list = doQueryById(new SQLStatement(sql.toString()) {
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+                ps.setLong(1, usuarioId);
+            }
+
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+        }, "findUsuarioParametroActivoforUsuario: " + usuarioId);
+
+        return list;
+    }
 
     @Override
     protected InsertSQLStatement buildInsertSQLStatement(final UsuarioParametro t) {

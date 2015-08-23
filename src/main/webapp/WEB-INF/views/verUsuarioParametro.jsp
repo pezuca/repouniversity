@@ -69,7 +69,7 @@
 			<input name="userParamId" type="hidden">
             <div class="form-group">
                 <label class="col-sm-2 control-label">Orden*:</label>
-                <div class="col-sm-10"><input name="orden" type="numeric" class="form-control" required="required"></div>
+                <div class="col-sm-10"><input name="orden" type="number" min = 1 class="form-control" required="required"></div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Color*:</label>
