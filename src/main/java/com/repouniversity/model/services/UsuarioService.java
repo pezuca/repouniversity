@@ -48,6 +48,7 @@ public class UsuarioService {
         userToUpdate.setUser(usuario.getUser());
         userToUpdate.setFechasys(usuario.getFechasys());
         userToUpdate.setActivo(usuario.isActivo());
+        userToUpdate.setRole(usuario.getRole());
         userToUpdate.setPersona(usuario.getIdPersona());
 
 

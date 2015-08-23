@@ -94,7 +94,7 @@
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Mail*:</label>
-                <div class="col-sm-10"><input name="mail" type="text" class="form-control" required="required"></div>
+                <div class="col-sm-10"><input name="mail" type="mail" class="form-control" required="required"></div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Username*:</label>
@@ -140,7 +140,7 @@
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Mail*:</label>
-                <div class="col-sm-10"><input name="mail" type="text" class="form-control" required="required"></div>
+                <div class="col-sm-10"><input name="mail" type="mail" class="form-control" required="required"></div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Username*:</label>

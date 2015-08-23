@@ -62,7 +62,7 @@ var usuariosAdmin = {
 	},
 	editarUsuarioAjax : function() {
 		$.ajax({
-			url: "editarUsuario",
+			url: "/repouniversity/admin/editoUsuario",
 			type: "POST",
 			data: $("#editarAlumnoForm").serialize(),
 			success: function(data){
@@ -151,7 +151,7 @@ var usuariosAdmin = {
 		var inValid = /([^\s])/;
 
 		elementos.each(function(index) {
-			if(!inValid.test($(this).val()) || $(this).val() == null || ($(this).attr("type") == "mail" && usuariosAdmin.validateEmail($(this).val()))) {
+			if(!inValid.test($(this).val()) || $(this).val() == null || ($(this).attr("type") == "mail" && !usuariosAdmin.validateEmail($(this).val()))) {
 				$(this).parents(".form-group").addClass(" has-error");
 				flag = false;
 			} else {
@@ -160,7 +160,8 @@ var usuariosAdmin = {
 		});
 		
 		return flag;
-	},
+	}
+	,
 	validateEmail : function(email) {
 	    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 	    return re.test(email);
