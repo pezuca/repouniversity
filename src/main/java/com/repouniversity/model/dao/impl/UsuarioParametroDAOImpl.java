@@ -39,6 +39,15 @@ public class UsuarioParametroDAOImpl extends GenericDAOImpl<UsuarioParametro> im
     protected UsuarioParametro extractEntityFromResultSet(ResultSet rs, int line) throws SQLException {
         return (new UsuarioParametroRowMapper()).mapRow(rs, line);
     }
+	@Override
+	public void eliminarParametro(final Long idUsuario) {
+	        StringBuilder sql = new StringBuilder();
+	        sql.append("DELETE from alumno_curso ");
+	        sql.append("WHERE (id_usuario = " + idUsuario + ")");
+
+	        jdbcTemplate.update(sql.toString());
+
+	    }
     
     @Override
     public List<UsuarioParametro> findUsuarioParametroforUsuario(final Long usuarioId) {

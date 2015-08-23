@@ -68,6 +68,37 @@ public class DashboardController {
 	
 		if (usuario.getRol().equals("alumno")) {
 			model = new ModelAndView("dashboardAlumno");
+		}
+
+		if (usuario.getRol().equals("docente")) {
+			// List<NotificacionTO> notificaciones = null;
+			model = new ModelAndView("dashboardDocente");
+		}
+
+		if (usuario.getRol().equals("administrador")) {
+
+					
+			model = new ModelAndView("dashboardAdmin");
+			
+		}
+		
+		List<UsuarioParametroTO> usuarioParametros = usuarioParametroService.getUsuarioParametroActivoforUsuario(usuario.getId());
+		
+		model.addObject("usuarioParametros", usuarioParametros);
+		return model;
+	}
+	
+    @RequestMapping(value = "dashboard/datos", method = { RequestMethod.GET })
+	@ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+	public Map<Integer,Integer> datosAjax(HttpServletRequest request,
+					@ModelAttribute("login") UsuarioRol usuario) {
+    	
+    	Map<Integer,Integer> mapa = new HashMap<Integer,Integer>();
+		
+    	
+    	if (usuario.getRol().equals("alumno")) {
+			
 			int notificaciones = notificacionService
 					.getNotificacionesForAlumno(usuario.getIdAluDoc()).size();
 
@@ -82,15 +113,18 @@ public class DashboardController {
 
 			long tps = tpGrupoService.getTPsAprobadoForAlumno(usuario
 					.getIdAluDoc());
-
-			model.addObject("notificaciones", notificaciones)
-					.addObject("cursos", cursos).addObject("grupos", grupos)
-					.addObject("archivos", archivos).addObject("tps", tps);
+			
+			mapa.put(12, notificaciones);
+			mapa.put(11, cursos);
+			mapa.put(13, grupos);
+			mapa.put(15, (int)tps);
+			mapa.put(14, archivos);
+			
+			
 		}
 
 		if (usuario.getRol().equals("docente")) {
-			// List<NotificacionTO> notificaciones = null;
-			model = new ModelAndView("dashboardDocente");
+			
 			int notificaciones = notificacionService
 					.getNotificacionesForDocente(usuario.getIdAluDoc()).size();
 
@@ -106,62 +140,35 @@ public class DashboardController {
 			long tps = tpGrupoService.getTPSinNotaForDocente(usuario
 					.getIdAluDoc());
 
-			model.addObject("notificaciones", notificaciones)
-					.addObject("cursos", cursos).addObject("alumnos", alumnos)
-					.addObject("archivos", archivos).addObject("tps", tps);
+			mapa.put(7, notificaciones);
+			mapa.put(6, cursos);
+			mapa.put(8, (int)alumnos);
+			mapa.put(10, (int)tps);
+			mapa.put(9, archivos);
+
 		}
-
 		if (usuario.getRol().equals("administrador")) {
-
-					
-			model = new ModelAndView("dashboardAdmin");
-			List<UsuarioParametroTO> usuarioParametros = usuarioParametroService.getUsuarioParametroActivoforUsuario(usuario.getId());
-			
+	
 			int usuarios = usuarioService.getAll().size();
 			int cursos = cursoService.getAll().size();
-			int docentes = docenteService.getAll().size();
-			int alumnos = alumnoService.getAll().size();
+		//	int docentes = docenteService.getAll().size();
+		//	int alumnos = alumnoService.getAll().size();
 			int materias = materiaService.getAll().size();
 			int carreras = carreraService.getAll().size();
 			int archivos = archivoService.getAll().size();
 			int notificaciones = errorArchivoService.getErrores().size();
-
-			model.addObject("notificaciones", notificaciones)
-					.addObject("cursos", cursos).addObject("alumnos", alumnos)
-					.addObject("archivos", archivos)
-					.addObject("materias", materias)
-					.addObject("docentes", docentes)
-					.addObject("usuarios", usuarios)
-					.addObject("carreras", carreras)
-					.addObject("usuarioParametros", usuarioParametros);
-		}
-		return model;
-	}
 	
-    @RequestMapping(value = "dashboard/datos", method = { RequestMethod.GET })
-	@ResponseBody
-    @ResponseStatus(value = HttpStatus.OK)
-	public Map<Integer,Integer> datosAjax(HttpServletRequest request,
-					@ModelAttribute("login") UsuarioRol usuario) {
-
-		int usuarios = usuarioService.getAll().size();
-		int cursos = cursoService.getAll().size();
-	//	int docentes = docenteService.getAll().size();
-	//	int alumnos = alumnoService.getAll().size();
-		int materias = materiaService.getAll().size();
-		int carreras = carreraService.getAll().size();
-		int archivos = archivoService.getAll().size();
-		int notificaciones = errorArchivoService.getErrores().size();
-
-		Map<Integer,Integer> mapa = new HashMap<Integer,Integer>();
-		mapa.put(2, usuarios);
-		mapa.put(3, cursos);
-		mapa.put(0, materias);
-		mapa.put(5, carreras);
-		mapa.put(4, archivos);
-		mapa.put(1, notificaciones);
-    	
-	return	mapa;
+			//Map<Integer,Integer> mapa = new HashMap<Integer,Integer>();
+			mapa.put(2, usuarios);
+			mapa.put(3, cursos);
+			mapa.put(0, materias);
+			mapa.put(5, carreras);
+			mapa.put(4, archivos);
+			mapa.put(1, notificaciones);
+			
+		}	
+	
+		return	mapa;
 		
 
 	}
