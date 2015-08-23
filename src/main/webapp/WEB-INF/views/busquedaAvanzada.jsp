@@ -107,9 +107,11 @@
                   $("#datepicker input[name=fechaDde]").datepicker("option", "maxDate", selectedDate);
                 }
               });
+              
+              $("#datepicker input[name=fechaDde]").datepicker("option", "maxDate", "12/12/2100");
+              $("#datepicker input[name=fechaDde]").datepicker("option", "minDate", "01/01/2000");
              
-            $("select[name=materia]").chosen({no_results_text:'No hay resultados para: '});
-            $("select[name=docente]").chosen({no_results_text:'No hay resultados para: '});
+              $("select[name=docente], select[name=materia]").chosen({no_results_text:'No hay resultados para: '});
         });
     </script>
 </body>
