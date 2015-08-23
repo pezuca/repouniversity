@@ -13,6 +13,8 @@ public interface UsuarioParametroDAO extends GenericDAO<UsuarioParametro> {
 	List<UsuarioParametro> findUsuarioParametroforUsuario(Long usuarioId);
 
 	List<UsuarioParametro> findUsuarioParametroActivoforUsuario(Long usuarioId);
+
+	void eliminarParametro(Long idUsuario);
   
     
 }

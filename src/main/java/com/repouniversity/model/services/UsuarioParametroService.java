@@ -65,6 +65,8 @@ public class UsuarioParametroService {
         return usuarioParametroList;
     }
     
+    
+    
     public List<UsuarioParametroTO> getUsuarioParametroActivoforUsuario(Long usuarioId) {
         List<UsuarioParametroTO> usuarioParametroList = new ArrayList<UsuarioParametroTO>();
 
@@ -85,7 +87,13 @@ public class UsuarioParametroService {
 
         return usuarioParametroList;
     }
-
+    
+    private void eliminarParametro(Long idusuario) {
+        
+    	usuarioParametroDAO.eliminarParametro(idusuario);
+        
+    }
+    
     private void delete(Long userParamId) {
       
     	UsuarioParametro usuarioParametro = usuarioParametroDAO.findById(userParamId);
