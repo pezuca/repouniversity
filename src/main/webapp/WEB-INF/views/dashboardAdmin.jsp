@@ -66,34 +66,21 @@
 	</div>	
 	<script>
 
-$(document).ready(function(){
-	$(".ui-dialog, .ui-dialog-content").css("overflow","visible");
-	$.ajax({
-		  type: "GET",
-		  url: "/repouniversity/dashboard/datos",
-		  success: function(datita){
-		//	  for (var i = 0; i<datita.lenght; i++)
-		//	  {
-		//		  if ($("#cuadrado-" + i).size()!=0)
-		//		  {
-		//			  $("#cuadrado-" + i).text(datita[i])
-		//		  }
-		//	  }
-		
-		for (var m in datita){
-   			 for (var i=0;i<datita[m].length;i++){
-   				 
-   				 //if ($("#cuadrado-" + i).size()!=0)
-   				//	{
-   					  $("#cuadrado-1").text(datita[m][i])
-   				//	}
 
-    		}
-		} 
-
-	}
-	});
-});
-</script>
+		$(document).ready(function() {
+			$(".ui-dialog, .ui-dialog-content").css("overflow", "visible");
+			$.ajax({
+				type : "GET",
+				url : "/repouniversity/dashboard/datos",
+				success : function(datita) {
+					for (var i = 0; i < Object.keys(datita).length; i++) {
+						if ($("#cuadrado-" + i).size() != 0) {
+							$("#cuadrado-" + i).text(datita[i])
+						}
+					}
+				}
+			});
+		});
+	</script>
 </body>
 </html>
