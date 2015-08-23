@@ -2,6 +2,7 @@ package com.repouniversity.model.entity.to;
 
 import java.util.Date;
 
+import com.repouniversity.model.entity.Color;
 import com.repouniversity.model.entity.Parametro;
 
 public class UsuarioParametroTO {
@@ -10,7 +11,7 @@ public class UsuarioParametroTO {
     private Long idUsuario;
     private Parametro parametro;
     private Long orden;
-    private Long color;
+    private Color color;
     private boolean activo;
     private Date fechasys;
 
@@ -63,11 +64,11 @@ public class UsuarioParametroTO {
 		this.orden = orden;
 	}
 
-	public Long getColor() {
+	public Color getColor() {
 		return color;
 	}
 
-	public void setColor(Long color) {
+	public void setColor(Color color) {
 		this.color = color;
 	}
 }

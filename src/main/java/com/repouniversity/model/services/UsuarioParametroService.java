@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.repouniversity.model.dao.UsuarioParametroDAO;
+import com.repouniversity.model.entity.CursoMateria;
+import com.repouniversity.model.entity.Parametro;
 import com.repouniversity.model.entity.UsuarioParametro;
 import com.repouniversity.model.entity.to.UsuarioParametroTO;
 import com.repouniversity.model.entity.to.UsuarioTO;
@@ -21,10 +23,10 @@ public class UsuarioParametroService {
     private PersonaService personaService;
 
     @Autowired
-    private AlumnoService alumnoService;
+    private ParametroService parametroService;
 
     @Autowired
-    private DocenteService docenteService;
+    private ColorService colorService;
 
     @Autowired
     private UsuarioRolService usuarioRolService;
@@ -38,27 +40,80 @@ public class UsuarioParametroService {
     }
 
     private UsuarioParametroTO buildUsuarioParametro(UsuarioParametro usuarioParametroId) {
-       
+      
+    	UsuarioParametroTO usuarioParametroTO = new UsuarioParametroTO();
+        
+    	usuarioParametroTO.setId(usuarioParametroId.getId());
+    	usuarioParametroTO.setUsuario(usuarioParametroId.getUsuario());
+    	usuarioParametroTO.setFechasys(usuarioParametroId.getFechasys());
+    	usuarioParametroTO.setActivo(usuarioParametroId.isActivo());
+    	usuarioParametroTO.setParametro(parametroService.getParametroById(usuarioParametroId.getParametro()));
+    	usuarioParametroTO.setOrden(usuarioParametroId.getOrden());
+    	usuarioParametroTO.setColor(colorService.getColorById(usuarioParametroId.getColor()));
+        
+        return usuarioParametroTO;
 
-        return null;
     }
+    
+    public List<UsuarioParametroTO> getUsuarioParametroforUsuario(Long usuarioId) {
+        List<UsuarioParametroTO> usuarioParametroList = new ArrayList<UsuarioParametroTO>();
 
-    public List<UsuarioTO> getAll() {
-        List<UsuarioTO> usuarioList = new ArrayList<UsuarioTO>();
-
-     /*   for (Usuario usuario : usuarioDAO.findAll()) {
-            usuarioList.add(buildUsuario(usuario));
+        for (UsuarioParametro usuarioParametro : usuarioParametroDAO.findUsuarioParametroforUsuario(usuarioId)) {
+        	usuarioParametroList.add(buildUsuarioParametro(usuarioParametro));
         }
 
-       */ return usuarioList;
+        return usuarioParametroList;
+    }
+
+    public List<UsuarioParametroTO> getAll() {
+        List<UsuarioParametroTO> usuarioParametroList = new ArrayList<UsuarioParametroTO>();
+
+        for (UsuarioParametro usuarioParametro : usuarioParametroDAO.findAll()) {
+        	usuarioParametroList.add(buildUsuarioParametro(usuarioParametro));
+        }
+
+        return usuarioParametroList;
     }
 
     private void delete(Long userParamId) {
-      /*
-    	Usuario usuario = usuarioDAO.findById(userId);
-        usuarioDAO.delete(usuario);
-        */
+      
+    	UsuarioParametro usuarioParametro = usuarioParametroDAO.findById(userParamId);
+    	usuarioParametroDAO.delete(usuarioParametro);
+        
     }
 
+	public UsuarioParametroTO editarParametro(Long userParamId, Long orden, Long color, boolean activo) {
+		UsuarioParametro usuarioParametro = usuarioParametroDAO.findById(userParamId);
+		usuarioParametro.setOrden(orden);
+		usuarioParametro.setColor(color);
+		usuarioParametro.setActivo(activo);
+		
+		usuarioParametroDAO.update(usuarioParametro);
+				
+		return buildUsuarioParametro(usuarioParametroDAO.findById(userParamId));
+	}
+
+	public void CrearParametro(Long userId, Long roleId) {
+		
+		Long i = 1L;
+		List<Parametro> parametros = parametroService.getParametrosByRole(roleId);
+		
+		for (Parametro parametro : parametros) {
+			UsuarioParametro usuarioParametro = new UsuarioParametro();
+			
+			usuarioParametro.setUsuario(userId);
+			usuarioParametro.setParametro(parametro.getId());
+			usuarioParametro.setOrden(i);
+			usuarioParametro.setColor(1L);
+			usuarioParametro.setActivo(true);
+			
+			usuarioParametroDAO.insert(usuarioParametro);
+			
+			i++;
+		
+		}
+	
+	}
+	
     
 }

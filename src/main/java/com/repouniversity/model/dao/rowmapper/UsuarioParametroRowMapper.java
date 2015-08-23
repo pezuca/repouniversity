@@ -20,7 +20,7 @@ public class UsuarioParametroRowMapper implements RowMapper<UsuarioParametro> {
         result.setOrden(rs.getLong("orden"));
         result.setColor(rs.getLong("color"));
         result.setActivo(rs.getBoolean("activo"));
-        result.setFechasys(rs.getDate("fecsys"));
+        result.setFechasys(rs.getDate("fesys"));
 
         return result;
     }

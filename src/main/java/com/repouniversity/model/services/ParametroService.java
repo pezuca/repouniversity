@@ -34,6 +34,11 @@ public class ParametroService {
         return parametro;
     }
 
+    public List<Parametro> getParametrosByRole(Long roleId) {
+    	List<Parametro> parametros = parametroDAO.findParametrosByRole(roleId);
+
+        return parametros;
+    }
 
     public List<Parametro> getAll() {
 

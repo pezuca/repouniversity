@@ -14,7 +14,9 @@ public class Parametro implements IdentifiedObject {
     private String parametro;
     private boolean activo;
     private Date fechasys;
-    
+    private String icono;
+    private String link;
+        
     
     public Long getId() {
         return id;
@@ -71,6 +73,22 @@ public class Parametro implements IdentifiedObject {
 
 	public void setParametro(String parametro) {
 		this.parametro = parametro;
+	}
+
+	public String getIcono() {
+		return icono;
+	}
+
+	public void setIcono(String icono) {
+		this.icono = icono;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
 	}
 
 	

@@ -41,6 +41,13 @@
         </li>     
 				</ul>
              </li>
+             <li ${activeTab eq 'verUsuarioParametro' ? 'active':''}>
+                 <a id="miscursos"><i class="fa fa-cogs"></i> <span class="nav-label">Configuracion</span> <span class="fa arrow"></span></a>
+                 <ul class="nav nav-second-level">
+                     <li><a href="/repouniversity/usuario/misParametros?bread=Ver Parametros-1">Parametros</a></li>
+                                   
+                 </ul>
+             </li>
              <li class="${activeTab eq 'Busqueda' ? 'active':''}"><a id="busqueda" href="/repouniversity/busquedaAvanzada?bread=Busqueda avanzada-1"><i
 					class="fa fa-search"></i> <span class="nav-label"> Busqueda Avanzada </span></a></li>
 		</ul>
