@@ -70,6 +70,10 @@
     		$('input[name=user]').replaceWith('<input type="text" name="user" class="form-control" placeholder="Usuario" required autofocus />');
     		$('input[name=password]').replaceWith('<input type="password" name="password" class="form-control" placeholder="Contraseña" required/>');
     		setTimeout("$('#login').trigger('reset')", 100);
+    		
+    		$('#login input[name=user]').change(function(){
+    			$("#login input[name=password]").trigger("reset");
+    		});
     	});
     </script>
 
