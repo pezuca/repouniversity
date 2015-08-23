@@ -111,4 +111,30 @@ public class DocenteDAOImpl extends GenericDAOImpl<Docente> implements DocenteDA
         return TPs;
     }
 
+    @Override
+    public Docente findByPersonaId(Long personaId, Boolean activo) {
+        StringBuilder sql = new StringBuilder();
+
+        sql.append("SELECT * from docente WHERE docente.id_persona = ? ");
+        sql.append("AND activo = ?");
+
+        List<Docente> list = doQuery(new SQLStatement(sql.toString()) {
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+                ps.setBoolean(1, activo);
+                ps.setLong(2, personaId);
+            }
+
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+        }, new DocenteRowMapper(), "findByPersonaId: " + personaId);
+
+        if (list.isEmpty()) {
+            return null;
+        }
+
+        return list.get(0);
+    }
+
 }

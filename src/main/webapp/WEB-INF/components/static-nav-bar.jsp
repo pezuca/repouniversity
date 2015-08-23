@@ -10,6 +10,9 @@
 			<c:when test="${login.rol == 'administrador'}">
 				<%@include file="adminMenu.jsp"%>
 			</c:when>
+			<c:when test="${login.rol == 'seguridad'}">
+				<%@include file="seguridadMenu.jsp"%>
+			</c:when>
 			<c:otherwise>
 				<%@ include file="anonimoMenu.jsp" %>
 			</c:otherwise>

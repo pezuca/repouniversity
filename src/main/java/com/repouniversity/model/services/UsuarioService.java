@@ -12,6 +12,7 @@ import com.repouniversity.model.dao.UsuarioDAO;
 import com.repouniversity.model.entity.Alumno;
 import com.repouniversity.model.entity.Docente;
 import com.repouniversity.model.entity.Persona;
+import com.repouniversity.model.entity.Role;
 import com.repouniversity.model.entity.Usuario;
 import com.repouniversity.model.entity.UsuarioRol;
 import com.repouniversity.model.entity.to.UsuarioTO;
@@ -172,5 +173,60 @@ public class UsuarioService {
         delete(usuarioRol.getId());
 
         personaService.delete(usuarioRol.getIdPersona());
+    }
+
+    public Usuario updateRol(Long userId, String rol) {
+        Role role = roleService.findByRoleName(rol);
+        Usuario user = usuarioDAO.findById(userId);
+        
+        if(user.getRole() == 2L || (user.getRole() == 4L && role.getId() == 3L)) {
+            docenteService.delete(usuarioRolService.getUsuarioById(userId).getIdAluDoc());
+            
+            if(role.getId() == 3L) {
+                Alumno alumno = alumnoService.findByPersonaId(user.getIdPersona(), Boolean.FALSE);
+                
+                if(alumno != null){
+                    alumnoService.unDelete(alumno.getId());
+                } else {
+                    alumno = new Alumno();
+                    alumno.setIdPersona(user.getIdPersona());
+                    alumnoService.save(alumno);
+                }
+            }
+        }
+        
+        if(user.getRole() == 3L || (user.getRole() == 4L && role.getId() == 2L)) {
+            alumnoService.delete(usuarioRolService.getUsuarioById(userId).getIdAluDoc());
+
+            if(role.getId() == 2L) {
+                Docente docente = docenteService.findByPersonaId(user.getIdPersona(), Boolean.FALSE);
+                
+                if(docente != null){
+                    docenteService.unDelete(docente.getId());
+                } else {
+                    docente = new Docente();
+                    docente.setPersonaId(user.getIdPersona());
+                    docenteService.save(docente);
+                }
+            }
+        }
+        
+        
+        user.setRole(role.getId());
+        usuarioDAO.updateUserWithoutPass(user);
+        
+        return user;
+    }
+
+    public List<UsuarioTO> getAllForSeguridad(UsuarioRol usuario) {
+        List<UsuarioTO> listaUsuariosSeguridad = new ArrayList<UsuarioTO>();
+        
+        for (UsuarioTO usuarioTO : getAll()) {
+            if(usuarioTO.getId() != usuario.getId()) {
+                listaUsuariosSeguridad.add(usuarioTO);
+            }
+        }
+        
+        return listaUsuariosSeguridad;
     }
 }

@@ -170,4 +170,29 @@ public class AlumnoDAOImpl extends GenericDAOImpl<Alumno> implements AlumnoDAO {
         return list;
     }
 
+    @Override
+    public Alumno findByPersonaId(Long personaId, Boolean activo) {
+        StringBuilder sql = new StringBuilder();
+
+        sql.append("SELECT * from alumno WHERE alumno.id_persona = ? ");
+        sql.append("AND activo = ?");
+
+        List<Alumno> list = doQuery(new SQLStatement(sql.toString()) {
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+                ps.setLong(1, personaId);
+                ps.setBoolean(2, activo);
+            }
+
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+        }, new AlumnoRowMapper(), "findByPersonaId: " + personaId);
+
+        if (list.isEmpty()) {
+            return null;
+        }
+
+        return list.get(0);
+    }
 }

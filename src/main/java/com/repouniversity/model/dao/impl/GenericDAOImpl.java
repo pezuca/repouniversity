@@ -205,6 +205,28 @@ public abstract class GenericDAOImpl<E extends IdentifiedObject> implements Gene
             throw e;
         }
     }
+    
+    @Override
+    public boolean unDelete(final E t) {
+        try {
+            int result = 0;
+
+            result = jdbcTemplate.update(new PreparedStatementCreator() {
+
+                @Override
+                public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+                    PreparedStatement ps = connection.prepareStatement("UPDATE " + getTableName() + " SET activo = ? WHERE " + getColumnIdName() + "= ? ");
+                    ps.setBoolean(1, true);
+                    ps.setLong(2, t.getId());
+                    return ps;
+                }
+            });
+
+            return result == 1;
+        } catch (RuntimeException e) {
+            throw e;
+        }
+    }
 
     @Override
     public List<E> findAll() {

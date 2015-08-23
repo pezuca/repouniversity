@@ -16,6 +16,8 @@ public interface GenericDAO<E> {
 
     boolean delete(E e);
 
+    boolean unDelete(E t);
+
     E findById(Long id);
     
     List<E> findByIds(final Long... keys);

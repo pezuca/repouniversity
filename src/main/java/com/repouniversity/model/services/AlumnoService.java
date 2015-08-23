@@ -118,5 +118,14 @@ public class AlumnoService {
         
         return alumnoToList;
     }
+
+    public void unDelete(Long alumnoId) {
+        Alumno alumno = alumnoDao.findById(alumnoId);
+        alumnoDao.unDelete(alumno);
+    }
+
+    public Alumno findByPersonaId(Long idPersona, Boolean activo) {
+        return alumnoDao.findByPersonaId(idPersona, activo);
+    }
     
 }

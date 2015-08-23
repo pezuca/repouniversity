@@ -9,7 +9,7 @@
 	<meta charset="utf-8" />
 	<title>Repouniversity</title>
 	<%@include file="../components/common-statics-imports.jsp"%>
-	<script src="/repouniversity/resources/js/application/verUsuariosAdmin.js"></script>
+	<script src="/repouniversity/resources/js/application/listaUsuariosSeguridad.js"></script>
 	<script src="/repouniversity/resources/js/plugins/chosen/chosen.jquery.js"></script>
 	<link rel="stylesheet" type="text/css" 
 				href="/repouniversity/resources/css/plugins/chosen/chosen.css" />
@@ -29,9 +29,6 @@
 	              <div class="ibox float-e-margins">
 	                  <div class="ibox-title">
 	                      <h5>Lista de usuarios</h5>
-		                  <div class="ibox-tools" id="agregarAlumnoButton">
-	                          <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  Usuario</a>
-	                      </div>
 	                  </div>
 	                  <div class="ibox-content">
 	                  	<table id="listaPersonas" class="table table-striped table-hover" >
@@ -67,7 +64,6 @@
 										<td data-carreraId="${usuario.alumno.idCarrera}">${carreraName}</td>
 										<td>
 											<a href="#" name="editUser" data-userId="${usuario.id}"><button class="btn btn-primary btn-circle" type="button"><i class="fa fa-pencil"></i></button></a>
-											<a href="#" name="deleteUser" data-userId="${usuario.id}" ><button class="btn btn-danger btn-circle" type="button"><i class="fa fa-times"></i></button></a>
 										</td>
 									</tr>
 								</c:forEach>
@@ -82,27 +78,29 @@
 		<%@include file="../components/footer.jsp"%>
 	</div>
 <!-- 	Ventanas -->
-	<div id="agregarAlumnoDialog" title="Nuevo Usuario" class="modal fade in">
-		<form id="nuevoAlumnoForm" class="form-horizontal">
+	
+	<div id="editarAlumnoDialog" title="Editar Usuario">
+		<form id="editarAlumnoForm" class="form-horizontal">
+			<input name="userId" type="hidden">
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Nombre*:</label>
-                <div class="col-sm-10"><input name="nombre" type="text" class="form-control" required="required"></div>
+                <div class="col-sm-10"><input name="nombre" type="text" class="form-control" disabled readonly></div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Apellido*:</label>
-                <div class="col-sm-10"><input name="apellido" type="text" class="form-control" required="required"></div>
+                <div class="col-sm-10"><input name="apellido" type="text" class="form-control" disabled readonly></div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Mail*:</label>
-                <div class="col-sm-10"><input name="mail" type="text" class="form-control" required="required"></div>
+                <div class="col-sm-10"><input name="mail" type="text" class="form-control" disabled readonly></div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Username*:</label>
-                <div class="col-sm-10"><input name="user" type="text" class="form-control" required="required"></div>
+                <div class="col-sm-10"><input name="user" type="text" class="form-control" disabled readonly></div>
             </div>
 			<div class="form-group">
-                <label class="col-sm-2 control-label">Contraseña*:</label>
-                <div class="col-sm-10"><input name="password" type="password" class="form-control" required="required"></div>
+                <label class="col-sm-2 control-label">Contraseña:</label>
+                <div class="col-sm-10"><input name="password" type="text" class="form-control" disabled readonly></div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Rol*:</label>
@@ -117,7 +115,7 @@
             <div class="form-group carreraSelect">
                 <label class="col-sm-2 control-label">Carrera*:</label>
                 <div class="col-sm-10">
-                	<select class="form-control m-b" name="carrera">
+                	<select class="form-control m-b" name="carrera" disabled readonly>
 						<c:forEach items="${listacarreras}" var="carrera" varStatus="status">
 							<option value="${carrera.id}">${carrera.nombre}</option>
 						</c:forEach>
@@ -125,56 +123,6 @@
                 </div>
             </div>
 		</form>
-	</div>
-	
-	<div id="editarAlumnoDialog" title="Editar Usuario">
-		<form id="editarAlumnoForm" class="form-horizontal">
-			<input name="userId" type="hidden">
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Nombre*:</label>
-                <div class="col-sm-10"><input name="nombre" type="text" class="form-control" required="required"></div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Apellido*:</label>
-                <div class="col-sm-10"><input name="apellido" type="text" class="form-control" required="required"></div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Mail*:</label>
-                <div class="col-sm-10"><input name="mail" type="text" class="form-control" required="required"></div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Username*:</label>
-                <div class="col-sm-10"><input name="user" type="text" class="form-control" required="required"></div>
-            </div>
-			<div class="form-group">
-                <label class="col-sm-2 control-label">Contraseña:</label>
-                <div class="col-sm-10"><input name="password" type="text" class="form-control"></div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Rol*:</label>
-                <div class="col-sm-10">
-                	<select class="form-control m-b" name="rol" disabled readonly>
-	                	<c:forEach items="${listaRoles}" var="role" varStatus="status">
-							<option value="${role.role}">${role.role}</option>
-						</c:forEach>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group carreraSelect">
-                <label class="col-sm-2 control-label">Carrera*:</label>
-                <div class="col-sm-10">
-                	<select class="form-control m-b" name="carrera">
-						<c:forEach items="${listacarreras}" var="carrera" varStatus="status">
-							<option value="${carrera.id}">${carrera.nombre}</option>
-						</c:forEach>
-                     </select>
-                </div>
-            </div>
-		</form>
-	</div>
-	
-	<div id="deleteAlumnoDialog" title="Eliminar Usuario">
-		<p>¿Esta seguro que desea eliminar el usuario?</p>
 	</div>
 	</div>
 	
