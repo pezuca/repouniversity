@@ -32,6 +32,8 @@
 				href="/repouniversity/seguridad/listaUsuarios?bread=Usuarios-1"><i
 					class="fa fa-book"></i> <span class="nav-label">Administrar
 						Roles</span></a></li>
+			<li class="${activeTab eq 'seguridadPass' ? 'active':''}"><a id="seguridadPass" href="/repouniversity/seguridad/seguridadPass?bread=seguridad Pass-1"><i
+					class="fa fa-asterisk"></i> <span class="nav-label"> Seguridad Pass </span></a></li>
 		</ul>
 		<ul class="nav">
 			<li style="border-top: solid 1px #504f40"><a id="ayuda"
