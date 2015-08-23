@@ -74,7 +74,7 @@ CREATE TABLE `alumno_curso` (
 
 LOCK TABLES `alumno_curso` WRITE;
 /*!40000 ALTER TABLE `alumno_curso` DISABLE KEYS */;
-INSERT INTO `alumno_curso` VALUES (1,6,1),(1,7,14);
+INSERT INTO `alumno_curso` VALUES (1,6,1);
 /*!40000 ALTER TABLE `alumno_curso` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -334,7 +334,7 @@ CREATE TABLE `docente` (
   PRIMARY KEY (`id_docente`),
   KEY `fk_docente_1` (`id_docente`),
   CONSTRAINT `fk_docente_1` FOREIGN KEY (`id_docente`) REFERENCES `persona` (`id_persona`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -343,7 +343,7 @@ CREATE TABLE `docente` (
 
 LOCK TABLES `docente` WRITE;
 /*!40000 ALTER TABLE `docente` DISABLE KEYS */;
-INSERT INTO `docente` VALUES (1,1,1,'2015-08-11 18:46:39'),(2,2,1,'2015-08-11 18:46:39'),(3,3,1,'2015-08-11 18:46:39'),(4,4,1,'2015-08-11 18:46:39'),(5,5,1,'2015-08-11 18:46:39'),(6,6,1,'2015-08-11 18:46:39'),(7,7,1,'2015-08-11 18:46:39'),(8,8,1,'2015-08-11 18:46:39'),(9,9,1,'2015-08-11 18:46:39'),(10,10,1,'2015-08-11 18:46:39'),(11,11,1,'2015-08-11 18:46:39'),(12,12,1,'2015-08-11 18:46:39'),(13,13,1,'2015-08-11 18:46:39'),(14,14,1,'2015-08-11 18:46:39'),(15,15,1,'2015-08-11 18:46:39'),(16,16,1,'2015-08-11 18:46:39'),(17,17,1,'2015-08-11 18:46:39'),(18,18,1,'2015-08-11 18:46:39'),(19,19,1,'2015-08-11 18:46:39'),(20,20,1,'2015-08-11 18:46:39'),(21,21,1,'2015-08-11 18:46:39'),(22,22,1,'2015-08-11 18:46:39'),(23,23,1,'2015-08-11 18:46:39'),(24,24,1,'2015-08-11 18:46:39'),(25,25,1,'2015-08-11 18:46:39'),(26,26,1,'2015-08-11 18:46:39'),(27,27,1,'2015-08-11 18:46:39'),(28,28,1,'2015-08-11 18:46:39'),(29,29,1,'2015-08-11 18:46:39'),(30,30,1,'2015-08-11 18:46:39');
+INSERT INTO `docente` VALUES (1,1,1,'2015-08-11 18:46:39'),(2,2,1,'2015-08-11 18:46:39'),(3,3,1,'2015-08-11 18:46:39'),(4,4,1,'2015-08-11 18:46:39'),(5,5,1,'2015-08-11 18:46:39'),(6,6,1,'2015-08-11 18:46:39'),(7,7,1,'2015-08-11 18:46:39'),(8,8,1,'2015-08-11 18:46:39'),(9,9,1,'2015-08-11 18:46:39'),(10,10,1,'2015-08-11 18:46:39'),(11,11,1,'2015-08-11 18:46:39'),(12,12,1,'2015-08-11 18:46:39'),(13,13,1,'2015-08-11 18:46:39'),(14,14,1,'2015-08-11 18:46:39'),(15,15,1,'2015-08-11 18:46:39'),(16,16,1,'2015-08-11 18:46:39'),(17,17,1,'2015-08-11 18:46:39'),(18,18,1,'2015-08-11 18:46:39'),(19,19,1,'2015-08-11 18:46:39'),(20,20,1,'2015-08-11 18:46:39'),(21,21,1,'2015-08-11 18:46:39'),(22,22,1,'2015-08-11 18:46:39'),(23,23,1,'2015-08-11 18:46:39'),(24,24,1,'2015-08-11 18:46:39'),(25,25,1,'2015-08-11 18:46:39'),(26,26,1,'2015-08-11 18:46:39'),(27,27,1,'2015-08-11 18:46:39'),(28,28,1,'2015-08-11 18:46:39'),(29,29,1,'2015-08-11 18:46:39'),(30,30,1,'2015-08-11 18:46:39'),(31,33,1,'2015-08-23 21:00:08');
 /*!40000 ALTER TABLE `docente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -538,7 +538,7 @@ CREATE TABLE `persona` (
   `activo` tinyint(1) NOT NULL DEFAULT '1',
   `fecsys` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_persona`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -547,7 +547,7 @@ CREATE TABLE `persona` (
 
 LOCK TABLES `persona` WRITE;
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
-INSERT INTO `persona` VALUES (1,'Maria Claudia','Abeledo','ariaClaudia.Abeledo@caece.edu.ar',1,'2015-08-11 18:30:15'),(2,'Alberto','Acosta','costa@caece.edu.ar',1,'2015-08-11 18:30:56'),(3,'Ariel','Acuña','cuña@caece.edu.ar',1,'2015-08-11 18:30:56'),(4,'Ignacio','Albalustri Chaparro','lbalustriChaparro@caece.edu.ar',1,'2015-08-11 18:30:56'),(5,'Gustavo','Alonso','G.Alonso@caece.edu.ar',1,'2015-08-11 18:30:56'),(6,'Fabian','Altieri','ltieri@caece.edu.ar',1,'2015-08-11 18:30:56'),(7,'Claudio','Amador Rodriguez','madorRodriguez@caece.edu.ar',1,'2015-08-11 18:30:56'),(8,' Sergio Gabriel','Amitrano','Sergio.Gabriel.Amitrano@caece.edu.ar',1,'2015-08-11 18:30:56'),(9,'Oscar','Andorno','O.Andorno@caece.edu.ar',1,'2015-08-11 18:30:56'),(10,'Nora','Andrade','ndrade@caece.edu.ar',1,'2015-08-11 18:30:56'),(11,'Nadia','Andreau','ndreau@caece.edu.ar',1,'2015-08-11 18:30:56'),(12,' Jorge Daniel','Antoniotti','Jorge.Daniel.Antoniotti@caece.edu.ar',1,'2015-08-11 18:30:56'),(13,'Graciela','Anzivino','G.Anzivino@caece.edu.ar',1,'2015-08-11 18:30:56'),(14,'Sergio','Apesteguia','S.Apesteguia@caece.edu.ar',1,'2015-08-11 18:30:56'),(15,'Damian','Atar','D.Atar@caece.edu.ar',1,'2015-08-11 18:30:56'),(16,'German','Badaloni Fernandez','G.Badaloni.Fernandez@caece.edu.ar',1,'2015-08-11 18:30:56'),(17,'Liliana Maria','Balboa','Liliana.Maria.Balboa@caece.edu.ar',1,'2015-08-11 18:30:56'),(18,'Ricardo','Barca','Ricardo.Barca@caece.edu.ar',1,'2015-08-11 18:30:56'),(19,'Erik','Barreto','E.Barreto@caece.edu.ar',1,'2015-08-11 18:30:56'),(20,'Hernan','Bedorrou Garcia','Bedorrou.Garcia@caece.edu.ar',1,'2015-08-11 18:30:56'),(21,'Federico','Blanco','F.Blanco@caece.edu.ar',1,'2015-08-11 18:30:56'),(22,'Diego','Boggetti ','Boggetti.@caece.edu.ar',1,'2015-08-11 18:30:56'),(23,'Hernan Diego','Bosco','Hernan.Diego.Bosco@caece.edu.ar',1,'2015-08-11 18:30:56'),(24,'Maria Candela','Bracalente','Maria.Candela.Bracalente@caece.edu.ar',1,'2015-08-11 18:30:56'),(25,'Maria Fernanda','Braica','Maria.Fernanda.Braica@caece.edu.ar',1,'2015-08-11 18:30:56'),(26,'Gustavo','Bravin','Bravin@caece.edu.ar',1,'2015-08-11 18:30:56'),(27,'Andres','Broitman Buzarquis Garcia','A.Broitman.Buzarquis.Garcia@caece.edu.ar',1,'2015-08-11 18:30:56'),(28,'Andres','Buchner','A.Buchner@caece.edu.ar',1,'2015-08-11 18:30:56'),(29,'Alejandro Gabrie','Buonomo','Alejandro.Gabrie.Buonomo@caece.edu.ar',1,'2015-08-11 18:30:56'),(30,'Agustina','Buzarquis Garcia','A.Buzarquis.Garcia@caece.edu.ar',1,'2015-08-11 18:30:56'),(31,'Alumno','Test','alumno.test@caece.edu.ar',1,'2015-08-11 18:30:56'),(32,'Admin','Test','Admin.test@caece.edu.ar',1,'2015-08-11 18:30:56');
+INSERT INTO `persona` VALUES (1,'Maria Claudia','Abeledo','ariaClaudia.Abeledo@caece.edu.ar',1,'2015-08-11 18:30:15'),(2,'claudio','Acosta','costa@caece.edu.ar',1,'2015-08-23 20:59:35'),(3,'Ariel','Acuña','cuña@caece.edu.ar',1,'2015-08-11 18:30:56'),(4,'Ignacio','Albalustri Chaparro','lbalustriChaparro@caece.edu.ar',1,'2015-08-11 18:30:56'),(5,'Gustavo','Alonso','G.Alonso@caece.edu.ar',1,'2015-08-11 18:30:56'),(6,'Fabian','Altieri','ltieri@caece.edu.ar',1,'2015-08-11 18:30:56'),(7,'Claudio','Amador Rodriguez','madorRodriguez@caece.edu.ar',1,'2015-08-11 18:30:56'),(8,' Sergio Gabriel','Amitrano','Sergio.Gabriel.Amitrano@caece.edu.ar',1,'2015-08-11 18:30:56'),(9,'Oscar','Andorno','O.Andorno@caece.edu.ar',1,'2015-08-11 18:30:56'),(10,'Nora','Andrade','ndrade@caece.edu.ar',1,'2015-08-11 18:30:56'),(11,'Nadia','Andreau','ndreau@caece.edu.ar',1,'2015-08-11 18:30:56'),(12,' Jorge Daniel','Antoniotti','Jorge.Daniel.Antoniotti@caece.edu.ar',1,'2015-08-11 18:30:56'),(13,'Graciela','Anzivino','G.Anzivino@caece.edu.ar',1,'2015-08-11 18:30:56'),(14,'Sergio','Apesteguia','S.Apesteguia@caece.edu.ar',1,'2015-08-11 18:30:56'),(15,'Damian','Atar','D.Atar@caece.edu.ar',1,'2015-08-11 18:30:56'),(16,'German','Badaloni Fernandez','G.Badaloni.Fernandez@caece.edu.ar',1,'2015-08-11 18:30:56'),(17,'Liliana Maria','Balboa','Liliana.Maria.Balboa@caece.edu.ar',1,'2015-08-11 18:30:56'),(18,'Ricardo','Barca','Ricardo.Barca@caece.edu.ar',1,'2015-08-11 18:30:56'),(19,'Erik','Barreto','E.Barreto@caece.edu.ar',1,'2015-08-11 18:30:56'),(20,'Hernan','Bedorrou Garcia','Bedorrou.Garcia@caece.edu.ar',1,'2015-08-11 18:30:56'),(21,'Federico','Blanco','F.Blanco@caece.edu.ar',1,'2015-08-11 18:30:56'),(22,'Diego','Boggetti ','Boggetti.@caece.edu.ar',1,'2015-08-11 18:30:56'),(23,'Hernan Diego','Bosco','Hernan.Diego.Bosco@caece.edu.ar',1,'2015-08-11 18:30:56'),(24,'Maria Candela','Bracalente','Maria.Candela.Bracalente@caece.edu.ar',1,'2015-08-11 18:30:56'),(25,'Maria Fernanda','Braica','Maria.Fernanda.Braica@caece.edu.ar',1,'2015-08-11 18:30:56'),(26,'Gustavo','Bravin','Bravin@caece.edu.ar',1,'2015-08-11 18:30:56'),(27,'Andres','Broitman Buzarquis Garcia','A.Broitman.Buzarquis.Garcia@caece.edu.ar',1,'2015-08-11 18:30:56'),(28,'Andres','Buchner','A.Buchner@caece.edu.ar',1,'2015-08-11 18:30:56'),(29,'Alejandro Gabrie','Buonomo','Alejandro.Gabrie.Buonomo@caece.edu.ar',1,'2015-08-11 18:30:56'),(30,'Agustina','Buzarquis Garcia','A.Buzarquis.Garcia@caece.edu.ar',1,'2015-08-11 18:30:56'),(31,'sssg','Test','alumno.test@caece.edu.ar',1,'2015-08-23 23:32:00'),(32,'Admin','Test','Admin.test@caece.edu.ar',1,'2015-08-11 18:30:56'),(33,'sasrassa','sasa','aassa@saddf.com',1,'2015-08-23 21:00:08'),(34,'seguridad','seguridada','asss@asas.com',1,'2015-08-23 23:32:34');
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -611,8 +611,9 @@ CREATE TABLE `seguridad` (
   `longMinima` int(10) NOT NULL DEFAULT '0',
   `activo` tinyint(1) NOT NULL DEFAULT '1',
   `fesys` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `numeros` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_seguridad`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -621,6 +622,7 @@ CREATE TABLE `seguridad` (
 
 LOCK TABLES `seguridad` WRITE;
 /*!40000 ALTER TABLE `seguridad` DISABLE KEYS */;
+INSERT INTO `seguridad` VALUES (1,1,1,1,1,1,'2015-08-23 23:24:03',1);
 /*!40000 ALTER TABLE `seguridad` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -733,7 +735,7 @@ CREATE TABLE `usuario` (
   KEY `fk_usuario_role_idx` (`id_role`),
   CONSTRAINT `fk_usuario_persona1` FOREIGN KEY (`id_persona`) REFERENCES `persona` (`id_persona`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_usuario_role` FOREIGN KEY (`id_role`) REFERENCES `role` (`id_role`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -742,7 +744,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (5,'repo','0c267daf663b5caca2036ae9a3f05e6432e97a56',1,'2014-01-08 03:00:00',2,2),(6,'alumno','acc00dce8622b05645d97f1a11111eec6b12dcb0',1,'2014-09-21 01:28:39',31,3),(7,'admin','294b81569ea0d3b72d39290df36c68412ee33e9b',1,'2014-09-21 01:36:06',32,1),(8,'doc','1fe437a42e34c3c3d4dfe02b2528a14b6128e0a9',1,'2014-11-01 16:52:13',4,2);
+INSERT INTO `usuario` VALUES (5,'repo','0c267daf663b5caca2036ae9a3f05e6432e97a56',1,'2014-01-08 03:00:00',2,2),(6,'alumno','acc00dce8622b05645d97f1a11111eec6b12dcb0',1,'2014-09-21 01:28:39',31,3),(7,'admin','294b81569ea0d3b72d39290df36c68412ee33e9b',1,'2014-09-21 01:36:06',32,1),(8,'doc','1fe437a42e34c3c3d4dfe02b2528a14b6128e0a9',1,'2014-11-01 16:52:13',4,2),(9,'seg','b6fcc775cf6257a149dd47b83c2a354bcba2db17',1,'2015-08-23 21:00:08',33,4),(10,'seguridad','74d8048fae5866ec6197033bb864423e738eff6a',1,'2015-08-23 23:32:34',34,4);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -858,4 +860,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-23 17:19:51
+-- Dump completed on 2015-08-23 20:36:18
