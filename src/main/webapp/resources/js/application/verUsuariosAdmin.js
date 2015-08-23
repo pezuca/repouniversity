@@ -27,7 +27,7 @@ var usuariosAdmin = {
 	                      data.user,
 	                      data.persona.mail,
 	                      data.rol,
-	                      data.rol == 'alumno' ? carreraNuevo : '',
+	                      carreraNuevo,
 	                      "<a href='#' name='editUser' data-userid='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a>" + 
 						  "<a href='#' name='deleteUser' data-userid='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a>"
                 ]).draw();

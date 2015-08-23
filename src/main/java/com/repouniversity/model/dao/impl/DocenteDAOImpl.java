@@ -121,8 +121,8 @@ public class DocenteDAOImpl extends GenericDAOImpl<Docente> implements DocenteDA
         List<Docente> list = doQuery(new SQLStatement(sql.toString()) {
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
-                ps.setBoolean(1, activo);
-                ps.setLong(2, personaId);
+                ps.setLong(1, personaId);
+                ps.setBoolean(2, activo);
             }
 
             @Override

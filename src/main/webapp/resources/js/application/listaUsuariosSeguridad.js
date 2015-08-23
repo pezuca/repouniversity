@@ -18,15 +18,6 @@ var usuariosAdmin = {
 				celdas.get(4).innerHTML = data.persona.mail;
 				celdas.get(5).innerHTML = data.rol;
 				
-				var options = $("#editarAlumnoForm select[name=carrera] option");
-				for(var i = 0; i < options.size(); i++) {
-					if(data.rol == 'alumno' && options.get(i).getAttribute("value") == data.alumno.idCarrera) {
-						celdas.get(6).setAttribute("data-carreraId", data.alumno.idCarrera);
-						celdas.get(6).innerHTML = options.get(i).innerHTML;
-						break;
-					}
-				}
-				
 				$("a[name=editUser][data-userid=" + data.id + "] button").click(function(){
 					$("#editarAlumnoDialog").data('userId', $(this).parent().attr("data-userid"))
 						.data('nombre', $(this).parents("tr").find("td").get(1).innerHTML)
