@@ -33,7 +33,7 @@ public class UsuarioDAOImpl extends GenericDAOImpl<Usuario> implements UsuarioDA
         StringBuilder sql = new StringBuilder();
         
         sql.append("SELECT * FROM usuario u ");
-        sql.append("WHERE u.user = ? AND u.pass = SHA1(?)" );
+        sql.append("WHERE u.user = ? AND u.pass = SHA1(?) AND u.activo = 1");
                 
         List<Usuario> list = doQuery(new SQLStatement(sql.toString()) {
             
@@ -144,5 +144,32 @@ public class UsuarioDAOImpl extends GenericDAOImpl<Usuario> implements UsuarioDA
     @Override
     protected String getColumnIdName() {
         return "id_usuario";
+    }
+
+    @Override
+    public Usuario findByUserName(String user) {
+        StringBuilder sql = new StringBuilder();
+        
+        sql.append("SELECT * FROM usuario u ");
+        sql.append("WHERE u.user = ? AND u.activo = 1"  );
+                
+        List<Usuario> list = doQuery(new SQLStatement(sql.toString()) {
+            
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+               ps.setString(1, user);
+            }
+
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+            
+        }, new UsuarioRowMapper(), "user: " + user);
+        
+        if (list.isEmpty()){
+            return null;
+        }
+        
+        return list.get(0);
     }
 }

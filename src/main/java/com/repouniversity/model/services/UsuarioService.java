@@ -93,7 +93,7 @@ public class UsuarioService {
 
         Usuario usuario = new Usuario();
         usuario.setUser(user);
-        usuario.setPass(password);
+        usuario.setPass(persona.getId() + password);
         usuario.setPersona(persona.getId());
         usuario.setRole(roleService.findByRoleName(rol).getId());
         
@@ -228,5 +228,9 @@ public class UsuarioService {
         }
         
         return listaUsuariosSeguridad;
+    }
+    
+    public Usuario findByUserName(String user) {
+        return usuarioDAO.findByUserName(user);
     }
 }
