@@ -29,23 +29,23 @@
 						<input name="seguridadId" value = "${seguridad.id}" type="hidden">
 			            <div class="form-group">
 			                <label class="col-sm-3 control-label">Cantidad Mayusculas:</label>
-			                <div class="col-sm-6"><input value = "${seguridad.mayusculas}" name="mayusculas" type="number" min = 0 class="form-control" required="required"></div>
+			                <div class="col-sm-6"><input value = "${seguridad.mayusculas}" name="mayusculas" type="number" min = 0 max = 100 class="form-control" required="required"></div>
 			            </div>
 			           	<div class="form-group">
 			                <label class="col-sm-3 control-label">Cantidad Minusculas:</label>
-			                <div class="col-sm-6"><input value = "${seguridad.minusculas}" name="minusculas" type="number" min = 0 class="form-control" required="required"></div>
+			                <div class="col-sm-6"><input value = "${seguridad.minusculas}" name="minusculas" type="number" min = 0 max = 100 class="form-control" required="required"></div>
 			            </div>
 			           	<div class="form-group">
 			                <label class="col-sm-3 control-label">Cantidad Especiales:</label>
-			                <div class="col-sm-6"><input value = "${seguridad.especiales}" name="especiales" type="number" min = 0 class="form-control" required="required"></div>
+			                <div class="col-sm-6"><input value = "${seguridad.especiales}" name="especiales" type="number" min = 0 max = 100 class="form-control" required="required"></div>
 			            </div>
 			           	<div class="form-group">
 			                <label class="col-sm-3 control-label">Cantidad Numeros:</label>
-			                <div class="col-sm-6"><input value = "${seguridad.numeros}" name="numeros" type="number" min = 0 class="form-control" required="required"></div>
+			                <div class="col-sm-6"><input value = "${seguridad.numeros}" name="numeros" type="number" min = 0 max = 100 class="form-control" required="required"></div>
 			            </div>
 			           	<div class="form-group">
 			                <label class="col-sm-3 control-label">Longitud minima:</label>
-			                <div class="col-sm-6"><input value = "${seguridad.longMinima}" name="longMinima" type="number" min=5 class="form-control" required="required"></div>
+			                <div class="col-sm-6"><input value = "${seguridad.longMinima}" name="longMinima" type="number" min=5 max = 100 class="form-control" required="required"></div>
 			            </div>
 			            <div class="form-group">
 				             <div class="col-sm-8 col-sm-offset-3">
@@ -60,37 +60,6 @@
 	     </div>
         
 		<%@include file="../components/footer.jsp"%>
-	</div>
-<!-- 	Ventanas -->
-
-	<div id="editarUsuarioParametroDialog" title="Editar Usuario Parametro">
-		<form id="editarUsuarioParametroForm" class="form-horizontal">
-			<input name="userParamId" type="hidden">
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Orden*:</label>
-                <div class="col-sm-10"><input name="orden" type="number" min = 1 class="form-control" required="required"></div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Color*:</label>
-                <div class="col-sm-10">
-                	<select name="color" class="form-control" required="required">
-                		<c:forEach items="${colores}" var="color" varStatus="status">
-                			<option value="${color.id}">${color.color}</option>
-                		</c:forEach>
-                	</select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Activo*:</label>
-                <div class="col-sm-10">
-                	<select name="activo" class="form-control" required="required">
-                		<option value="1">SI</option>
-                		<option value="0">NO</option>
-                	</select>
-                </div>
-            </div>
-		</form>
-	</div>
 	</div>
 	
     <script>
