@@ -50,6 +50,11 @@ public class LoginService {
 
         Long userId = userToCheck.getIdPersona();
         Usuario user = this.userDao.getUserByUsernameAndPass(username, userId + pass);
+        
+        if (user == null) {
+            throw new LoginFailException("User or password are not correct.");
+        }
+        
         UsuarioRol usuarioRol = usuarioRolService.getUsuarioById(user.getId());
         HTTPSessionManagerUtil.setSessionAttribute(request, HTTPSessionManagerUtil.ATTR_LOGIN, usuarioRol);
         return result;
