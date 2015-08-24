@@ -95,7 +95,7 @@ public class SeguridadController {
         UsuarioTO usuarioTo = usuarioService.getUserById(usuario.getId());
         return usuarioTo;
     }
-    
+
     @RequestMapping(value = "seguridad/seguridadPass", method = {RequestMethod.GET})
     public ModelAndView getSeguridadPass(@ModelAttribute("login") UsuarioRol usuario) {
 
@@ -104,20 +104,15 @@ public class SeguridadController {
 
         return new ModelAndView("seguridadPass").addObject("seguridad", seguridad);
     }
-    
-    @RequestMapping(value = "seguridad/editarSeguridadPass", method = { RequestMethod.POST })
-	@ResponseBody
-    @ResponseStatus(value = HttpStatus.OK)
-	public Seguridad editarSeguridadPassAjax(
-			@RequestParam(value = "seguridadId", required = true) Long seguridadId,
-			@RequestParam(value = "mayusculas", required = true) Long mayusculas,
-			@RequestParam(value = "minusculas", required = true) Long minusculas,
-			@RequestParam(value = "especiales", required = true) Long especiales,
-			@RequestParam(value = "numeros", required = true) Long numeros,
-			@RequestParam(value = "longMinima", required = true) Long longMinima) {
 
-	return	seguridadService.editarSeguridadPass(seguridadId, mayusculas, minusculas, especiales, numeros, longMinima);
-    
-    }		
-    
+    @RequestMapping(value = "seguridad/editarSeguridadPass", method = {RequestMethod.POST})
+    public ModelAndView editarSeguridadPassAjax(@RequestParam(value = "seguridadId", required = true) Long seguridadId,
+            @RequestParam(value = "mayusculas", required = true) Long mayusculas, @RequestParam(value = "minusculas", required = true) Long minusculas,
+            @RequestParam(value = "especiales", required = true) Long especiales, @RequestParam(value = "numeros", required = true) Long numeros,
+            @RequestParam(value = "longMinima", required = true) Long longMinima) {
+
+        seguridadService.editarSeguridadPass(seguridadId, mayusculas, minusculas, especiales, numeros, longMinima);
+        
+        return new ModelAndView("redirect:/dashboard");
+    }
 }

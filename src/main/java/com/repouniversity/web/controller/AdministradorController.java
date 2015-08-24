@@ -40,7 +40,7 @@ import com.repouniversity.model.services.UsuarioService;
 
 @Controller
 public class AdministradorController {
-
+    
     @Autowired
     public PersonaService personaService;
 

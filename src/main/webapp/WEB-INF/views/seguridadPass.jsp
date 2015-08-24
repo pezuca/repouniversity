@@ -23,36 +23,40 @@
 		<tag:breadcrumb label="Seguridad Pass"/>
 	
 	 	<div class="wrapper wrapper-content animated fadeInRight">
-			<form method="post" class="form-horizontal" action="/repouniversity/seguridad/editarSeguridadPass" role="form">
-				<input name="seguridadId" value = "${seguridad.id}" type="hidden">
-	            <div class="form-group">
-	                <label class="col-sm-2 control-label">Cantidad Mayusculas:</label>
-	                <div class="col-sm-10"><input value = "${seguridad.mayusculas}" name="mayusculas" type="number" min = 0 class="form-control" required="required"></div>
-	            </div>
-	           	<div class="form-group">
-	                <label class="col-sm-2 control-label">Cantidad Minusculas:</label>
-	                <div class="col-sm-10"><input value = "${seguridad.minusculas}" name="minusculas" type="number" min = 0 class="form-control" required="required"></div>
-	            </div>
-	           	<div class="form-group">
-	                <label class="col-sm-2 control-label">Cantidad Especiales:</label>
-	                <div class="col-sm-10"><input value = "${seguridad.especiales}" name="especiales" type="number" min = 0 class="form-control" required="required"></div>
-	            </div>
-	           	<div class="form-group">
-	                <label class="col-sm-2 control-label">Cantidad Numeros:</label>
-	                <div class="col-sm-10"><input value = "${seguridad.numeros}" name="numeros" type="number" min = 0 class="form-control" required="required"></div>
-	            </div>
-	           	<div class="form-group">
-	                <label class="col-sm-2 control-label">Longitud minima:</label>
-	                <div class="col-sm-10"><input value = "${seguridad.longMinima}" name="longMinima" type="number" min = 0 class="form-control" required="required"></div>
-	            </div>
-	            <div class="form-group">
-		             <div class="col-sm-4 col-sm-offset-2">
-		                   	<div class="row">
-		                       	<button class="btn btn-primary" type="submit">Guardar</button>
-		                    </div>
-		             </div>
-		        </div>
-	      	</form>
+	 		<div class="row">
+				<div class="col-lg-9">
+					<form id="strongPass" method="post" class="form-horizontal" action="/repouniversity/seguridad/editarSeguridadPass" role="form">
+						<input name="seguridadId" value = "${seguridad.id}" type="hidden">
+			            <div class="form-group">
+			                <label class="col-sm-3 control-label">Cantidad Mayusculas:</label>
+			                <div class="col-sm-6"><input value = "${seguridad.mayusculas}" name="mayusculas" type="number" min = 0 class="form-control" required="required"></div>
+			            </div>
+			           	<div class="form-group">
+			                <label class="col-sm-3 control-label">Cantidad Minusculas:</label>
+			                <div class="col-sm-6"><input value = "${seguridad.minusculas}" name="minusculas" type="number" min = 0 class="form-control" required="required"></div>
+			            </div>
+			           	<div class="form-group">
+			                <label class="col-sm-3 control-label">Cantidad Especiales:</label>
+			                <div class="col-sm-6"><input value = "${seguridad.especiales}" name="especiales" type="number" min = 0 class="form-control" required="required"></div>
+			            </div>
+			           	<div class="form-group">
+			                <label class="col-sm-3 control-label">Cantidad Numeros:</label>
+			                <div class="col-sm-6"><input value = "${seguridad.numeros}" name="numeros" type="number" min = 0 class="form-control" required="required"></div>
+			            </div>
+			           	<div class="form-group">
+			                <label class="col-sm-3 control-label">Longitud minima:</label>
+			                <div class="col-sm-6"><input value = "${seguridad.longMinima}" name="longMinima" type="number" min=5 class="form-control" required="required"></div>
+			            </div>
+			            <div class="form-group">
+				             <div class="col-sm-8 col-sm-offset-3">
+				                   	<div class="row">
+				                       	<button class="btn btn-primary" type="submit">Guardar</button>
+				                    </div>
+				             </div>
+				        </div>
+			      	</form>
+	      		</div>
+	      	</div>
 	     </div>
         
 		<%@include file="../components/footer.jsp"%>
@@ -87,9 +91,26 @@
             </div>
 		</form>
 	</div>
-	
-
 	</div>
 	
+    <script>
+    	$(document).ready(function(){
+    		$('input[name=mayusculas], input[name=minusculas], input[name=especiales], input[name=numeros]').change(function() {
+    			var longuitud = 0;
+    			
+    			longuitud += parseInt($('input[name=mayusculas]').val());
+    			longuitud += parseInt($('input[name=minusculas]').val());
+    			longuitud += parseInt($('input[name=especiales]').val());
+    			longuitud += parseInt($('input[name=numeros]').val());
+    			
+    			if(longuitud >= $('input[name=longMinima]').attr("min")){
+	    			$('input[name=longMinima]').val(longuitud);
+    			} else {
+    				$(this).val(parseInt($(this).val()) + 1);
+    				alert("No puede establecer menos caracteres que la longuitud mínima.");
+    			}
+    		});
+    	});
+    </script>
 </body>
 </html>
