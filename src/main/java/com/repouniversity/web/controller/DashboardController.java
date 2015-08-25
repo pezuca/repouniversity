@@ -114,11 +114,11 @@ public class DashboardController {
 			long tps = tpGrupoService.getTPsAprobadoForAlumno(usuario
 					.getIdAluDoc());
 			
-			mapa.put(12, notificaciones);
-			mapa.put(11, cursos);
-			mapa.put(13, grupos);
-			mapa.put(15, (int)tps);
-			mapa.put(14, archivos);
+			mapa.put(1, notificaciones);
+			mapa.put(0, cursos);
+			mapa.put(2, grupos);
+			mapa.put(3, (int)tps);
+			mapa.put(4, archivos);
 			
 			
 		}
@@ -140,11 +140,11 @@ public class DashboardController {
 			long tps = tpGrupoService.getTPSinNotaForDocente(usuario
 					.getIdAluDoc());
 
-			mapa.put(7, notificaciones);
-			mapa.put(6, cursos);
-			mapa.put(8, (int)alumnos);
-			mapa.put(10, (int)tps);
-			mapa.put(9, archivos);
+			mapa.put(1, notificaciones);
+			mapa.put(0, cursos);
+			mapa.put(2, (int)alumnos);
+			mapa.put(4, (int)tps);
+			mapa.put(3, archivos);
 
 		}
 		if (usuario.getRol().equals("administrador")) {

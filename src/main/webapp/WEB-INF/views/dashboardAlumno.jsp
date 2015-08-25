@@ -25,110 +25,84 @@
 			
 			<div class="wrapper wrapper-content animated fadeInRight">
 				<div class="row">
-		             <div class="col-lg-12">
-						<div class="col-lg-4">
-							<a href="/repouniversity/alumno/cursos?bread=Ver cursos-1">
-								<div class="widget navy-bg p-lg text-center">
-									<div class="m-b-md">
-										<i class="fa fa-pencil-square-o fa-4x"></i>
-										<h1 class="m-xs">${cursos}</h1>
-										<h3 class="font-bold no-margins">
-											Cursos inscripto
-										</h3>
-										<small>mis cursos</small>
+					<div class="col-lg-12">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="col-lg-4">
+									<div id="agregarErrorDashboardButton">
+										<a href="#">
+										   <div class="widget yellow-bg p-lg  text-center">
+												<div class="m-b-md">
+													<i class="fa fa-warning fa-4x"></i>
+													<h1 class="m-xs">Reportar</h1>
+													<h3 class="font-bold no-margins">
+														nuevo
+													</h3>
+													<small>error</small>
+												</div>
+											</div>
+										</a>
 									</div>
 								</div>
-							</a>
-						</div>
-					
-						<div class="col-lg-4">
-							<a href="/repouniversity/alumno/notificaciones?bread=Notificaciones-1">
-								<div class="widget red-bg p-lg text-center">
-									<div class="m-b-md">
-										<i class="fa fa-bell fa-4x"></i>
-										<h1 class="m-xs">${notificaciones}</h1>
-										<h3 class="font-bold no-margins">
-											Notificaciones
-										</h3>
-										<small>tiene nuevas novedades</small>
-									</div>
-								</div>
-							</a>
-						</div>
-
-					
-						<div class="col-lg-4">
-							<div id="agregarErrorDashboardButton">
-								<a href="#">
-								   <div class="widget yellow-bg p-lg  text-center">
-										<div class="m-b-md">
-											<i class="fa fa-warning fa-4x"></i>
-											<h1 class="m-xs">Reportar</h1>
-											<h3 class="font-bold no-margins">
-												nuevo
-											</h3>
-											<small>error</small>
+				<c:forEach items="${usuarioParametros}" var="usuarioParametro" varStatus="status">
+							<c:if test = "${status.count + 1 mod 3 == 1}" >
+								<div class="row">
+									<div class="col-lg-12">
+							</c:if>
+								<div class="col-lg-4">
+									<c:if test = "${usuarioParametro.parametro.link != ''}" >
+										<a href="${usuarioParametro.parametro.link}">
+									</c:if>
+										<div class="widget ${usuarioParametro.color.colorPantalla}-bg p-lg text-center">
+											<div class="m-b-md">
+												<i class="${usuarioParametro.parametro.icono}"></i>
+												<h1 class="m-xs" id = "cuadrado-${usuarioParametro.parametro.variable}"></h1>
+												<h3 class="font-bold no-margins">
+													${usuarioParametro.parametro.parametro}
+												</h3>
+												<small>${usuarioParametro.parametro.descricpion}</small>
+											</div>
 										</div>
-									</div>
-								</a>
-							</div>
-						</div>
-					 
-					 </div>
-		        </div>
-		        <div class="row">
-		             <div class="col-lg-12">
-						<div class="col-lg-4">
-							<a  href="/repouniversity/alumno/verGrupos?bread=Ver Grupos-1">
-								<div class="widget navy-bg p-lg text-center">
-									<div class="m-b-md">
-										<i class="fa fa-group fa-4x"></i>
-										<h1 class="m-xs">${grupos}</h1>
-										<h3 class="font-bold no-margins">
-											Grupos inscripto
-										</h3>
-										<small>mis grupos</small>
+									<c:if test = "${usuarioParametro.parametro.link != ''}" >
+										</a>
+									</c:if>
+								</div>
+							<c:if test = "${status.count + 1 mod 3 == 0}" >
 									</div>
 								</div>
-							</a>
-						</div>
-					
-						<div class="col-lg-4">
-							<a href="/repouniversity/verArchivos?bread=Ver archivos-1">
-								<div class="widget blue-bg p-lg text-center">
-									<div class="m-b-md">
-										<i class="fa fa-file-pdf-o fa-4x"></i>
-										<h1 class="m-xs">${archivos}</h1>
-										<h3 class="font-bold no-margins">
-											Archivos subidos
-										</h3>
-										<small>mis archivos</small>
-									</div>
-								</div>
-							</a>
-						</div>
-
-					
-						<div class="col-lg-4">
-							  <div class="widget blue-bg p-lg  text-center">
-									<div class="m-b-md">
-										<i class="fa fa-thumbs-up fa-4x"></i>
-										<h1 class="m-xs">${tps}</h1>
-										<h3 class="font-bold no-margins">
-											TP
-										</h3>
-										<small>aprobados</small>
-									</div>
-								</div>
-							
-						</div>
-					 
-					 </div>
-		        </div>
+							</c:if>	
+		                </c:forEach>
+					</div>
+				</div>
 
 			</div>
 			<%@include file="../components/footer.jsp"%>
 		</div>
+		<!-- 	Ventanas -->
+			<div id="agregarErrorDialog" title="Nuevo Error">
+				<form id="nuevoErrorForm" class="form-horizontal">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Descripcion*:</label>
+						<div class="col-sm-10"><textarea name="descripcion" class="form-control" placeholder="Reporte error.." required="required"></textarea></div>
+					</div>
+				   
+				</form>
+			</div>
 	</div>	
+	<script>
+	$(document).ready(function() {
+		$.ajax({
+			type : "GET",
+			url : "/repouniversity/dashboard/datos",
+			success : function(datita) {
+				for (var i = 0; i < Object.keys(datita).length; i++) {
+					if ($("#cuadrado-" + i).size() != 0) {
+						$("#cuadrado-" + i).text(datita[i])
+					}
+				}
+			}
+		});
+	});
+</script>
 </body>
 </html>

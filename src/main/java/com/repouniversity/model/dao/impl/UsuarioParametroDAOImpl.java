@@ -79,7 +79,7 @@ public class UsuarioParametroDAOImpl extends GenericDAOImpl<UsuarioParametro> im
         sql.append("SELECT * FROM repouniversity.usuario_parametro ");
         sql.append("WHERE id_usuario = ? ");
         sql.append("AND activo = 1 ");
-        sql.append("Order by orden ");
+        sql.append("Order by orden asc");
         
 
         List<UsuarioParametro> list = doQueryById(new SQLStatement(sql.toString()) {

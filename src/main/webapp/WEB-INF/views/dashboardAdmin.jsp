@@ -28,7 +28,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 			        	<c:forEach items="${usuarioParametros}" var="usuarioParametro" varStatus="status">
-							<c:if test = "${status.count mod 2 != 0}" >
+							<c:if test = "${status.count mod 3 == 1}" >
 								<div class="row">
 									<div class="col-lg-12">
 							</c:if>
@@ -39,7 +39,7 @@
 										<div class="widget ${usuarioParametro.color.colorPantalla}-bg p-lg text-center">
 											<div class="m-b-md">
 												<i class="${usuarioParametro.parametro.icono}"></i>
-												<h1 class="m-xs" id = "cuadrado-${usuarioParametro.parametro.variable}">100</h1>
+												<h1 class="m-xs" id = "cuadrado-${usuarioParametro.parametro.variable}"></h1>
 												<h3 class="font-bold no-margins">
 													${usuarioParametro.parametro.parametro}
 												</h3>
@@ -50,7 +50,7 @@
 										</a>
 									</c:if>
 								</div>
-							<c:if test = "${status.count mod 2 == 0}" >
+							<c:if test = "${status.count mod 3 == 0}" >
 									</div>
 								</div>
 							</c:if>	
