@@ -67,7 +67,7 @@ var cursosAdmin = {
 				celdas.get(4).innerHTML = data.materia.nombre;
 				celdas.get(4).setAtributte('data-materiaId', data.materia.id);
 				celdas.get(5).innerHTML = data.docente.persona.nombre + ", " + data.docente.persona.apellido;
-				celdas.get(4).setAtributte('data-docenteId', data.docente.id);
+				celdas.get(5).setAtributte('data-docenteId', data.docente.id);
 				
 				//Agrego el evento de delete
 				$("a[name='deleteCurso'][data-cursoId=" + data.id + "] button").click(function(){
@@ -183,8 +183,11 @@ $(document).ready(function() {
 			$(".infoDialog").remove();
 			$('#nuevoCursoForm').trigger("reset");
 			$("#nuevoCursoForm").find(".form-group").removeClass("has-error");
+			$('#editarCursoForm select[name=materia]').trigger("chosen:updated");
+			$('#editarCursoForm select[name=docente]').trigger("chosen:updated");
 		},
 		close: function(event, ui) {
+			$('#nuevoCursoForm').trigger("reset");
 		}
 	});
 	
@@ -218,8 +221,11 @@ $(document).ready(function() {
 			$('#editarCursoForm input[name=codigo]').val($("#editarCursoDialog").data('codigo'));
 			$("#editarCursoForm select[name=materia] option[value=" + $("#editarCursoDialog").data('materiaId') + "]").attr("selected", "selected");
 			$("#editarCursoForm select[name=docente] option[value=" + $("#editarCursoDialog").data('docenteId') + "]").attr("selected", "selected");
+			$('#editarCursoForm select[name=materia]').trigger("chosen:updated");
+			$('#editarCursoForm select[name=docente]').trigger("chosen:updated");
 		},
 		close: function(event, ui) {
+			$('#nuevoCursoForm').trigger("reset");
 		}
 	});
 	
