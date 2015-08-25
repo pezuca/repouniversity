@@ -113,5 +113,9 @@
 	<div id="errorPass" title="Error">
 		<p>Las contraseñas deben ser iguales</p>
 	</div>
+	
+	<div id="passErrorDailog" title="Error de password">
+		<p class="message"></p>
+	</div>
 </body>
 </html>

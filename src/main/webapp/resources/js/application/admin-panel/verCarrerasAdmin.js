@@ -201,7 +201,6 @@ $(document).ready(function() {
 	});
 	
 	$("#editarCarreraDialog").dialog({
-		position: "top",
 		resizable: false,
 		width:700,
 		modal: true,

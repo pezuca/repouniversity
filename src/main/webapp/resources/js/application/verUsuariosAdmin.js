@@ -107,12 +107,12 @@ var usuariosAdmin = {
 				$("#editarAlumnoDialog").dialog("close");						
 			},
 			error: function(data) {
-				$("#nuevoAlumnoForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de crear el usuario, inténtelo mas tarde.</p></div>")
+				$("#editarAlumnoForm").after("<div class='infoDialog'><p class='infoPara'>" + data.responseText + "</p></div>")
 				setTimeout(function(){
-					$("#agregarAlumnoDialog .infoDialog").hide(function(){
+					$("#editarAlumnoDialog .infoDialog").hide(function(){
 						$(this).remove();
 					});
-				}, 3000);	
+				}, 5000);	
 			}
 		})
 	},

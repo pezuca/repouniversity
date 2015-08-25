@@ -53,7 +53,7 @@
                 
                 <button type="submit" class="btn btn-lg btn-primary btn-block" id="entrar">Entrar</button>
 				<br/><br/>
-				<a href="loginAnonimo?&bread=Busqueda-1">Ingreso sin Usuario</a><br/>
+				<a href="loginAnonimo?&bread=Busqueda-0">Ingreso sin Usuario</a><br/>
 				
 				<input type="text" name="prevent_autofill" id="prevent_autofill" value="" style="display:none;" />
 				<input type="password" name="password_fake" id="password_fake" value="" style="display:none;" />

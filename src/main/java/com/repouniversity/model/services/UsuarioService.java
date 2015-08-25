@@ -22,7 +22,7 @@ import com.repouniversity.web.exceptions.StrongPasswordException;
 @Service
 public class UsuarioService {
 
-    public static final String STRONG_PASS_REGEX = "(?=.*[0-9]){%d%}(?=.*[a-z]){%s%}(?=.*[A-Z]){%S%}(?=.*[@#$%^&+=]){%c%}(?=\\S+$).{%min%,}";
+    public static final String STRONG_PASS_REGEX = "(?=.*[0-9]){%d%}(?=.*[a-z]){%s%}(?=.*[A-Z]){%S%}(?=.*[@#$\"\\\\!\\?%^&+=]){%c%}(?=\\S+$).{%min%,}";
 
     @Autowired
     private UsuarioDAO usuarioDAO;
@@ -141,10 +141,10 @@ public class UsuarioService {
         regexOrg = regexOrg.replaceAll("%min%", seguridad.getLongMinima().toString());
 
         if(!password.matches(regexOrg)) {
-           throw new StrongPasswordException("La contrseña no cumple con: \nContidad de numeros: " + seguridad.getNumeros() 
-                   + "\nCantidad de mayusculas: " + seguridad.getMinusculas() + "\nCantidad de minusculas: "
-                   + "\nCantidad de caracteres especiales: " + seguridad.getEspeciales()
-                   + "\nCantidad minima de caracteres: " + seguridad.getLongMinima()); 
+           throw new StrongPasswordException("La contrseña no cumple con los criterios de cantidad minimas de numeros (" + seguridad.getNumeros() 
+                   + "), cantidad minima de mayusculas (" + seguridad.getMinusculas() + "), cantidad minima de minusculas ("
+                   + "), cantidad minima de caracteres especiales (" + seguridad.getEspeciales()
+                   + "), cantidad minima de caracteres (" + seguridad.getLongMinima() + ")."); 
         }
     }
 

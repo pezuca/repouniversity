@@ -30,5 +30,40 @@ $(document).ready(function() {
 			
 			return false;
 		}
+		
+		$.ajax({
+			url: "/repouniversity/usuario/misdatos/update",
+			type: "POST",
+			data: $("#userUpdate").serialize(),
+			success: function(data){
+				window.location.href = "/repouniversity/dashboard?bread=Home-0"	
+			},
+			error: function(data) {
+				$("#passErrorDailog").data("message", data.responseText).dialog("open");
+			}
+		});
+		
+		return false;
+	});
+	
+	$("#passErrorDailog").dialog({
+		position: "top",
+		resizable: false,
+		width:450,
+		modal: true,
+		autoOpen: false,
+		hide: {effect: "fade", duration: 300},
+		show: {effect: "fade", duration: 300},
+		buttons: {
+			"Aceptar": function() {
+				$(this).dialog("close");
+			}
+		},
+		open: function(event, ui) {
+			$("#passErrorDailog .message").append($("#passErrorDailog").data('message'));
+		},
+		close: function(event, ui) {
+			$("#passErrorDailog .message").empty();
+		}
 	});
 });

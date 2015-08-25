@@ -1,11 +1,15 @@
 package com.repouniversity.web.controller;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,6 +41,7 @@ import com.repouniversity.model.services.PersonaService;
 import com.repouniversity.model.services.RoleService;
 import com.repouniversity.model.services.UsuarioRolService;
 import com.repouniversity.model.services.UsuarioService;
+import com.repouniversity.web.exceptions.StrongPasswordException;
 
 @Controller
 public class AdministradorController {
@@ -275,5 +280,12 @@ public class AdministradorController {
         List<ErrorArchivoTO> errorArchivo = errorArchivoService.getErrores();
 
         return new ModelAndView("verErroresArchivosAdmin").addObject("errorArchivo", errorArchivo);
+    }
+    
+    @ExceptionHandler(StrongPasswordException.class)
+    public void strongPasswordExceptionHandler(StrongPasswordException ex, HttpServletResponse response) throws IOException {
+        response.getWriter().write(ex.getMessage());
+        response.setStatus(HttpStatus.CONFLICT.value());
+        response.flushBuffer();
     }
 }

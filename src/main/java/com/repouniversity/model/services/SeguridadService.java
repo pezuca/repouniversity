@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.repouniversity.model.dao.SeguridadDAO;
-import com.repouniversity.model.entity.Role;
 import com.repouniversity.model.entity.Seguridad;
-import com.repouniversity.model.entity.UsuarioParametro;
-import com.repouniversity.model.entity.to.UsuarioParametroTO;
 
 @Service
 public class SeguridadService {
