@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.repouniversity.model.dao.IdentifiedObject;
 
-public class UsuarioParametro implements IdentifiedObject {
+public class UsuarioParametro implements IdentifiedObject, Comparable<UsuarioParametro> {
 
     private static final long serialVersionUID = 3355104975694628742L;
     private Long id;
@@ -71,6 +71,17 @@ public class UsuarioParametro implements IdentifiedObject {
 
 	public void setColor(Long color) {
 		this.color = color;
+	}
+
+	@Override
+	public int compareTo(UsuarioParametro o) {
+		if (orden < o.orden) {
+            return -1;
+        }
+        if (orden > o.orden) {
+            return 1;
+        }
+        return 0;
 	}
 
     

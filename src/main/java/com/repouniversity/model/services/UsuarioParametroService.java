@@ -1,6 +1,7 @@
 package com.repouniversity.model.services;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,8 +68,11 @@ public class UsuarioParametroService {
     
     public List<UsuarioParametroTO> getUsuarioParametroActivoforUsuario(Long usuarioId) {
         List<UsuarioParametroTO> usuarioParametroList = new ArrayList<UsuarioParametroTO>();
-
-        for (UsuarioParametro usuarioParametro : usuarioParametroDAO.findUsuarioParametroActivoforUsuario(usuarioId)) {
+        List<UsuarioParametro> usuarioParametroLi = usuarioParametroDAO.findUsuarioParametroActivoforUsuario(usuarioId);
+        
+        Collections.sort(usuarioParametroLi);
+        
+        for (UsuarioParametro usuarioParametro : usuarioParametroLi) {
         	usuarioParametroList.add(buildUsuarioParametro(usuarioParametro));
         }
 

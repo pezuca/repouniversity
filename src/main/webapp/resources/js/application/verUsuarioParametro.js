@@ -15,8 +15,9 @@ var usuarioParametroAdmin = {
 				celdas.get(0).innerHTML = data.parametro.parametro;
 				celdas.get(1).innerHTML = data.orden;
 				celdas.get(2).innerHTML = data.color.color;
+				celdas.get(2).setAttribute('data-colorId', data.color.id);
 				celdas.get(3).innerHTML = data.activo == true?'SI':'NO';
-				
+				celdas.get(3).setAttribute('data-activoId', data.activo == true?'1':'0');
 				
 				$("a[name=editUsuarioParametro][data-ususarioParametroId=" + data.id + "] button").click(function(){
 					$("#editarUsuarioParametroDialog").data('userParamId', $(this).parent().attr("data-ususarioParametroId"))
@@ -101,17 +102,20 @@ $(document).ready(function() {
 		},
 		open: function(event, ui) {
 			$(".infoDialog").remove();
-			$('#editarUsuarioParametroForm').trigger("reset");
 			$("#editarUsuarioParametroForm").find(".form-group").removeClass("has-error");
 			$("#editarUsuarioParametroForm select option").removeAttr("selected");
+			$('#editarUsuarioParametroForm').trigger("reset");
 			
 			$('#editarUsuarioParametroForm input[name=userParamId]').val($("#editarUsuarioParametroDialog").data('userParamId'));
 			//$('#editarUsuarioParametroForm input[name=parametroId]').val($("#editarUsuarioParametroDialog").data('parametroId'));
 			$('#editarUsuarioParametroForm input[name=orden]').val($("#editarUsuarioParametroDialog").data('orden'));
 			$("#editarUsuarioParametroForm select[name=color] option[value=" + $("#editarUsuarioParametroDialog").data('colorId') + "]").attr("selected", "selected");
 			$("#editarUsuarioParametroForm select[name=activo] option[value=" + $("#editarUsuarioParametroDialog").data('activoId') + "]").attr("selected", "selected");
+			$('#editarUsuarioParametroForm select[name=color]').trigger("chosen:updated");
+			$('#editarUsuarioParametroForm select[name=activo]').trigger("chosen:updated");
 		},
 		close: function(event, ui) {
+			$('#editarUsuarioParametroForm').trigger("reset");
 		}
 	});
 	

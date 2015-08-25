@@ -65,7 +65,9 @@ var cursosAdmin = {
 				celdas.get(2).innerHTML = data.codigo;
 				celdas.get(3).innerHTML = data.descripcion;
 				celdas.get(4).innerHTML = data.materia.nombre;
+				celdas.get(4).setAtributte('data-materiaId', data.materia.id);
 				celdas.get(5).innerHTML = data.docente.persona.nombre + ", " + data.docente.persona.apellido;
+				celdas.get(4).setAtributte('data-docenteId', data.docente.id);
 				
 				//Agrego el evento de delete
 				$("a[name='deleteCurso'][data-cursoId=" + data.id + "] button").click(function(){

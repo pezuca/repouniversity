@@ -38,7 +38,7 @@
 			<li class="${activeTab eq 'verErroresArchivos' ? 'active':''}"><a id="reporte" href="/repouniversity/admin/verReporteErrores?bread=Ver reportes de errores-1"><i
 					class="fa fa-warning"></i> <span class="nav-label">Reportes errores</span></a></li>
 			<li class="${activeTab eq 'verUsuarioParametro' ? 'active':''}">
-                 <a id="miscursos"><i class="fa fa-cogs"></i> <span class="nav-label">Configuracion</span> <span class="fa arrow"></span></a>
+                 <a id="miscursos"><i class="fa fa-cog"></i> <span class="nav-label">Configuracion</span> <span class="fa arrow"></span></a>
                  <ul class="nav nav-second-level">
                      <li><a href="/repouniversity/usuario/misParametros?bread=Ver Parametros-1">Parametros</a></li>
                                    
