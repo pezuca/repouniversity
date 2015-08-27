@@ -201,6 +201,7 @@ $(document).ready(function() {
 	});
 	
 	$("#editarCarreraDialog").dialog({
+		position: "top",
 		resizable: false,
 		width:700,
 		modal: true,
@@ -243,6 +244,46 @@ $(document).ready(function() {
 		close: function(event, ui) {
 		}
 	});
+	$("#verCarreraDialog").dialog({
+		position: "top",
+		resizable: false,
+		width:900,
+		modal: true,
+		autoOpen: false,
+		hide: {effect: "fade", duration: 300},
+		hide: {effect: "fade", duration: 300},
+		buttons: {
+			"Ok": function() {
+				$(this).dialog("close");
+			}
+		
+		},
+		open: function(event, ui) {
+			$(".infoDialog").remove();
+			$('#verCarreraForm').trigger("reset");
+			$("#verCarreraForm").find(".form-group").removeClass("has-error");
+			
+			$('#verCarreraForm input[name=carreraId]').val($("#verCarreraDialog").data('carreraId'));
+			$('#verCarreraForm input[name=nombre]').val($("#verCarreraDialog").data('nombre'));
+			
+			var materias = $("#verCarreraDialog").data('materias').split("|");
+			var arrayMat = [];
+			
+			for (var int = 0; int < materias.length; int++) {
+				var element = materias[int];
+				$('#verCarreraForm select[name=materias] option').each(function(index){
+					if($(this).text() == element.trim()) {
+						arrayMat.push($(this).val());
+					}
+				});
+			}
+			
+			$('#verCarreraForm select[name=materias]').val(arrayMat);
+			$('#verCarreraForm select[name=materias]').trigger("chosen:updated");
+		},
+		close: function(event, ui) {
+		}
+	});
 	
 	$("#deleteCarreraDialog").dialog({
 		position: "top",
@@ -278,6 +319,14 @@ $(document).ready(function() {
 	
 	$("a[name=editCarrera] button").click(function(){
 		$("#editarCarreraDialog").data('carreraId', $(this).parent().attr("data-carreraid"))
+			.data('carreraId', $(this).parents("tr").find("td").get(0).innerHTML)
+			.data('nombre', $(this).parents("tr").find("td").get(1).innerHTML)
+			.data('materias', $(this).parents("tr").find("td").get(2).innerHTML)
+			.dialog("open");
+	});
+	
+	$("a[name=verCarrera] button").click(function(){
+		$("#verCarreraDialog").data('carreraId', $(this).parent().attr("data-carreraid"))
 			.data('carreraId', $(this).parents("tr").find("td").get(0).innerHTML)
 			.data('nombre', $(this).parents("tr").find("td").get(1).innerHTML)
 			.data('materias', $(this).parents("tr").find("td").get(2).innerHTML)

@@ -41,15 +41,16 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label" for="userInput">
 									Usuario</label>
-								<div class="col-sm-10">
+								<div class="col-sm-2">
 									<input name="user" class="form-control" id="userInput" type="text"
 										value="${usuario.user}" disabled>
 								</div>
+								
 							</div>
 							<div class="form-group">
 								<label for="passwordInput" class="col-sm-2 control-label">
 									Nueva Contraseña</label>
-								<div class="col-sm-10">
+								<div class="col-sm-3">
 									<input name="newPassword" class="form-control" id="passwordInput"
 										type="password">
 								</div>
@@ -57,7 +58,7 @@
 							<div class="form-group">
 								<label for="repeatPasswordInput" class="col-sm-2 control-label">
 									Confirmar Contraseña</label>
-								<div class="col-sm-10">
+								<div class="col-sm-3">
 									<input name="repeatPassword" class="form-control"
 										id="repeatPasswordInput" type="password">
 								</div>
@@ -65,22 +66,20 @@
 							<div class="form-group">
 								<label for="nameInput" class="col-sm-2 control-label">
 									Nombre</label>
-								<div class="col-sm-10">
+								<div class="col-sm-3">
 									<input name="nombre" class="form-control" id="nameInput" type="text"
 										value="${usuario.persona.nombre}" required>
 								</div>
-							</div>
-							<div class="form-group">
 								<label for="apellidoInput" class="col-sm-2 control-label">
 									Apellido</label>
-								<div class="col-sm-10">
+								<div class="col-sm-3">
 									<input name="apellido" class="form-control" id="apellidoInput"
 										type="text" value="${usuario.persona.apellido}" required>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="mailInput" class="col-sm-2 control-label"> Mail</label>
-								<div class="col-sm-10">
+								<div class="col-sm-8">
 									<input name="mail" class="form-control" id="mailInput"
 										type="email" value="${usuario.persona.mail}" required>
 								</div>

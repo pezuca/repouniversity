@@ -55,8 +55,16 @@
 												<td>${carrera.nombre}</td>
 												<td>
 													<c:forEach items="${carrera.materias}" var="materia" varStatus="status">
-														${materia.nombre}  |  
+														 <c:if test="${status.count <=3}">
+													       	${materia.nombre}  |  
+													    </c:if>
+														
 													</c:forEach>
+													<a href="#" name="verCarrera"
+													data-carreraId="${carrera.id}"><button
+															class="btn btn-primary btn-circle" type="button">
+															<i class="fa fa-search"></i>
+														</button></a>
 												</td>
 												<td><a href="#" name="editCarrera"
 													data-carreraId="${carrera.id}"><button
@@ -129,6 +137,31 @@
 			</form>
 		</div>
 
+		<div id="verCarreraDialog" title="ver Carrera">
+			<form id="verCarreraForm" class="form-horizontal">
+				<input name="carreraId" type="hidden">
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Nombre:</label>
+					<div class="col-sm-10">
+						<input name="nombre" type="text" class="form-control"
+							readonly disabled>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Materias*:</label>
+					<div class="col-sm-10">
+						<select data-placeholder="Elija una materia" name="materias" readonly disabled multiple class="chosen-select"
+							required="required" tabindex="-1">
+							<c:forEach items="${materias}" var="materia" varStatus="status">
+								<option value="${materia.id}">${materia.nombre}</option>
+							</c:forEach>
+					</select>
+					</div>
+				</div>
+				
+			</form>
+		</div>
+		
 		<div id="deleteCarreraDialog" title="Eliminar Carrera">
 			<p>¿Esta seguro que desea eliminar la carrera?</p>
 		</div>
