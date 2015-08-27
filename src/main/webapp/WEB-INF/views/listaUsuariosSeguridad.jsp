@@ -114,6 +114,16 @@
                     </select>
                 </div>
             </div>
+            <div class="form-group permisoSelect">
+                <label class="col-sm-2 control-label">Permiso*:</label>
+                <div class="col-sm-10">
+                	<select class="form-control m-b" name="permiso">
+						<c:forEach items="${listaPermisos}" var="permiso" varStatus="status">
+							<option value="${permiso.id}">${permiso.permiso}</option>
+						</c:forEach>
+                     </select>
+                </div>
+            </div>
             <div class="form-group carreraSelect">
                 <label class="col-sm-2 control-label">Carrera*:</label>
                 <div class="col-sm-10">
@@ -124,16 +134,7 @@
                      </select>
                 </div>
             </div>
-             <div class="form-group permisoSelect">
-                <label class="col-sm-2 control-label">Permiso*:</label>
-                <div class="col-sm-10">
-                	<select class="form-control m-b" name="permiso">
-						<c:forEach items="${listaPermisos}" var="permiso" varStatus="status">
-							<option value="${permiso.id}">${permiso.permiso}</option>
-						</c:forEach>
-                     </select>
-                </div>
-            </div>
+         
               
 		</form>
 	</div>

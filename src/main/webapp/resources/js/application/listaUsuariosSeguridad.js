@@ -19,6 +19,7 @@ var usuariosAdmin = {
 				celdas.get(5).innerHTML = data.rol;
 				//celdas.get(6).innerHTML = data.carrera;
 				celdas.get(7).innerHTML = data.permiso.permiso;
+				celdas.get(7).setAttribute('data-permisoId', data.permiso.id);
 				
 				$("a[name=editUser][data-userid=" + data.id + "] button").click(function(){
 					$("#editarAlumnoDialog").data('userId', $(this).parent().attr("data-userid"))
@@ -114,6 +115,10 @@ $(document).ready(function() {
 			$('#editarAlumnoForm input[name=mail]').val($("#editarAlumnoDialog").data('mail'));
 			$('#editarAlumnoForm input[name=user]').val($("#editarAlumnoDialog").data('user'));
 			$('#editarAlumnoForm select[name=rol]').val($("#editarAlumnoDialog").data('rol'));
+			$('#editarAlumnoForm .permisoSelect').show();
+			$('#editarAlumnoForm select[name=permiso] option').removeAttr("selected");
+			$("#editarAlumnoForm select[name=permiso] option[value=" + $("#editarAlumnoDialog").data('permiso')  + "]").attr("selected", "selected");
+			$("#editarAlumnoForm select[name=permiso]").trigger('chosen:updated');
 			
 			if($("#editarAlumnoDialog").data('rol') == 'alumno'){
 				$('#editarAlumnoForm .carreraSelect').show();
@@ -124,10 +129,6 @@ $(document).ready(function() {
 				$('#editarAlumnoForm .carreraSelect').hide();
 			}
 			
-			$('#editarAlumnoForm .permisoSelect').show();
-			$('#editarAlumnoForm select[name=permiso] option').removeAttr("selected");
-			$("#editarAlumnoForm select[name=permiso] option[value=" + $("#editarAlumnoDialog").data('permiso')  + "]").attr("selected", "selected");
-			$("#editarAlumnoForm select[name=permiso]").trigger('chosen:updated');
 			
 		},
 		close: function(event, ui) {

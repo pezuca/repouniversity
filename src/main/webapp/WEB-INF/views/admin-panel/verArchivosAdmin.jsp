@@ -66,15 +66,27 @@
 												<td>${archivo.persona}</td>
 												<td>${archivo.tags}</td>
 												<td>${archivo.grupo}</td>
-												<td><a  name="editArchivo"
-													data-archivoId="${archivo.id}"><button
-															class="btn btn-info btn-circle" type="button">
-															<i class="fa fa-pencil"></i>
-														</button></a> <a  name="deleteArchivo"
-													data-archivoId="${archivo.id}"><button
-															class="btn btn-danger btn-circle" type="button">
-															<i class="fa fa-times"></i>
-														</button></a>
+												<td>
+												<c:choose>
+													<c:when test="${login.permiso == '1'}">
+														<a  name="editArchivo"
+															data-archivoId="${archivo.id}"><button
+																	class="btn btn-info btn-circle" type="button">
+																	<i class="fa fa-pencil"></i>
+																</button></a> <a  name="deleteArchivo"
+															data-archivoId="${archivo.id}"><button
+																	class="btn btn-danger btn-circle" type="button">
+																	<i class="fa fa-times"></i>
+																</button></a>
+													</c:when>
+													<c:when test="${login.permiso == '2'}">
+														<a  name="editArchivo"
+															data-archivoId="${archivo.id}"><button
+																	class="btn btn-info btn-circle" type="button">
+																	<i class="fa fa-pencil"></i>
+																</button></a> 
+													</c:when>
+												</c:choose>
 														<a  name="dowloadArchivo"
 													data-archivoId="${archivo.id}" href="/repouniversity/vistaPrevia?archivoId=${archivo.id}&bread=Vista previa-2"><button
 															class="btn btn-primary btn-circle" type="button">
