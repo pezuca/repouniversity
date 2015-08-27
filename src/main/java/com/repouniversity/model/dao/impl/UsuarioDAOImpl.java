@@ -73,7 +73,7 @@ public class UsuarioDAOImpl extends GenericDAOImpl<Usuario> implements UsuarioDA
 
     @Override
     protected InsertSQLStatement buildInsertSQLStatement(final Usuario t) {
-        return new InsertSQLStatement("INSERT INTO usuario (user, pass, activo, fecsys, id_persona, id_role) values (?, SHA1(?), 1, now(), ?, ?)") {
+        return new InsertSQLStatement("INSERT INTO usuario (user, pass, activo, fecsys, id_persona, id_role, id_permiso) values (?, SHA1(?), 1, now(), ?, ?, ?)") {
 
             @Override
             public void doAfterInsert(Long id) {
@@ -85,6 +85,7 @@ public class UsuarioDAOImpl extends GenericDAOImpl<Usuario> implements UsuarioDA
                 ps.setString(2, t.getPass());
                 ps.setLong(3, t.getIdPersona());
                 ps.setLong(4, t.getRole());
+                ps.setLong(5, t.getIdPermiso());
             }
 
             @Override
@@ -95,7 +96,7 @@ public class UsuarioDAOImpl extends GenericDAOImpl<Usuario> implements UsuarioDA
 
     @Override
     protected SQLStatement buildUpdateSQLStatement(final Usuario t) {
-        return new SQLStatement("UPDATE usuario SET user = ?, pass = SHA1(?), id_persona = ?, fecsys = now(), id_role = ?  WHERE id_usuario = ?") {
+        return new SQLStatement("UPDATE usuario SET user = ?, pass = SHA1(?), id_persona = ?, fecsys = now(), id_role = ?, id_permiso = ?  WHERE id_usuario = ?") {
 
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
@@ -103,7 +104,8 @@ public class UsuarioDAOImpl extends GenericDAOImpl<Usuario> implements UsuarioDA
                 ps.setString(2, t.getPass());
                 ps.setLong(3, t.getIdPersona());
                 ps.setLong(4, t.getRole());
-                ps.setLong(5, t.getId());
+                ps.setLong(5, t.getIdPermiso());
+                ps.setLong(6, t.getId());
             }
 
             @Override
@@ -116,7 +118,7 @@ public class UsuarioDAOImpl extends GenericDAOImpl<Usuario> implements UsuarioDA
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
         final InsertSQLStatement sqlStatement = new InsertSQLStatement(
-                "UPDATE usuario SET user = ?, id_persona = ?, id_role = ? where id_usuario = ? ") {
+                "UPDATE usuario SET user = ?, id_persona = ?, id_role = ?, id_permiso = ? where id_usuario = ? ") {
             @Override
             public void doAfterInsert(Long id) {
             }
@@ -125,7 +127,8 @@ public class UsuarioDAOImpl extends GenericDAOImpl<Usuario> implements UsuarioDA
                 ps.setString(1, t.getUser());
                 ps.setLong(2, t.getIdPersona());
                 ps.setLong(3, t.getRole());
-                ps.setLong(4, t.getId());
+                ps.setLong(4, t.getIdPermiso());
+                ps.setLong(5, t.getId());
             }
             @Override
             public void doAfterTransaction(int result) {

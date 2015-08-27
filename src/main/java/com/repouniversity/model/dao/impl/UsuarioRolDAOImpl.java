@@ -35,7 +35,8 @@ public class UsuarioRolDAOImpl extends GenericDAOImpl<UsuarioRol> implements Usu
         result.setIdPersona(rs.getLong("id_persona"));
         result.setIdAluDoc(rs.getLong("id_alu_doc"));
         result.setRol(rs.getString("rol"));
-
+        result.setPermiso(rs.getLong("permiso"));
+        
         return result;
     }
 

@@ -20,6 +20,7 @@ public class UsuarioRowMapper implements RowMapper<Usuario> {
         result.setFechasys(rs.getDate("fecsys"));
         result.setPersona(rs.getLong("id_persona"));
         result.setRole(rs.getLong("id_role"));
+        result.setIdPermiso(rs.getLong("id_permiso"));
 
         return result;
     }

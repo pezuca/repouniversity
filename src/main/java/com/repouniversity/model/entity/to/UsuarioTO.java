@@ -2,6 +2,7 @@ package com.repouniversity.model.entity.to;
 
 import java.util.Date;
 
+import com.repouniversity.model.entity.Permiso;
 import com.repouniversity.model.entity.Persona;
 
 public class UsuarioTO {
@@ -14,7 +15,8 @@ public class UsuarioTO {
     private Date fechasys;
     private String rol;
     private AlumnoTO alumno;
-
+    private Permiso permiso;
+    
     public Long getId() {
         return id;
     }
@@ -78,4 +80,12 @@ public class UsuarioTO {
     public void setAlumno(AlumnoTO alumno) {
         this.alumno = alumno;
     }
+
+	public Permiso getPermiso() {
+		return permiso;
+	}
+
+	public void setPermiso(Permiso permiso) {
+		this.permiso = permiso;
+	}
 }

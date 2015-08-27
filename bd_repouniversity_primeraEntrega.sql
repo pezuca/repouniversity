@@ -315,7 +315,7 @@ CREATE TABLE `curso` (
 
 LOCK TABLES `curso` WRITE;
 /*!40000 ALTER TABLE `curso` DISABLE KEYS */;
-INSERT INTO `curso` VALUES (6,'Algebra','P-400','Algebra 2015',NULL,1,'2015-08-11 19:01:17',4,6),(7,'Calculo en una variable','CU001','Calculo en una variable',NULL,1,'2015-08-12 01:14:45',4,22),(8,'Calculo en varias variables','CV001','Calculo en varias variables',NULL,1,'2015-08-12 01:18:02',4,25),(9,'Calculo numerico','CA002','Calculo numerico',NULL,1,'2015-08-12 01:20:03',4,26);
+INSERT INTO `curso` VALUES (6,'Algebra','P-400','Algebra 2015',NULL,1,'2015-08-11 19:01:17',4,6),(7,'Calculo en una variable','CU001','Calculo en una variable',NULL,1,'2015-08-24 23:04:11',4,22),(8,'Calculo en varias variables','CV001','Calculo en varias variables',NULL,1,'2015-08-12 01:18:02',4,25),(9,'Calculo numerico','CA002','Calculo numerico',NULL,1,'2015-08-12 01:20:03',4,26);
 /*!40000 ALTER TABLE `curso` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -343,7 +343,7 @@ CREATE TABLE `docente` (
 
 LOCK TABLES `docente` WRITE;
 /*!40000 ALTER TABLE `docente` DISABLE KEYS */;
-INSERT INTO `docente` VALUES (1,1,1,'2015-08-11 18:46:39'),(2,2,1,'2015-08-11 18:46:39'),(3,3,1,'2015-08-11 18:46:39'),(4,4,1,'2015-08-11 18:46:39'),(5,5,1,'2015-08-11 18:46:39'),(6,6,1,'2015-08-11 18:46:39'),(7,7,1,'2015-08-11 18:46:39'),(8,8,1,'2015-08-11 18:46:39'),(9,9,1,'2015-08-11 18:46:39'),(10,10,1,'2015-08-11 18:46:39'),(11,11,1,'2015-08-11 18:46:39'),(12,12,1,'2015-08-11 18:46:39'),(13,13,1,'2015-08-11 18:46:39'),(14,14,1,'2015-08-11 18:46:39'),(15,15,1,'2015-08-11 18:46:39'),(16,16,1,'2015-08-11 18:46:39'),(17,17,1,'2015-08-11 18:46:39'),(18,18,1,'2015-08-11 18:46:39'),(19,19,1,'2015-08-11 18:46:39'),(20,20,1,'2015-08-11 18:46:39'),(21,21,1,'2015-08-11 18:46:39'),(22,22,1,'2015-08-11 18:46:39'),(23,23,1,'2015-08-11 18:46:39'),(24,24,1,'2015-08-11 18:46:39'),(25,25,1,'2015-08-11 18:46:39'),(26,26,1,'2015-08-11 18:46:39'),(27,27,1,'2015-08-11 18:46:39'),(28,28,1,'2015-08-11 18:46:39'),(29,29,1,'2015-08-11 18:46:39'),(30,30,1,'2015-08-11 18:46:39'),(31,33,1,'2015-08-23 21:00:08');
+INSERT INTO `docente` VALUES (1,1,1,'2015-08-11 18:46:39'),(2,2,0,'2015-08-11 18:46:39'),(3,3,1,'2015-08-11 18:46:39'),(4,4,1,'2015-08-11 18:46:39'),(5,5,0,'2015-08-11 18:46:39'),(6,6,1,'2015-08-11 18:46:39'),(7,7,1,'2015-08-11 18:46:39'),(8,8,1,'2015-08-11 18:46:39'),(9,9,1,'2015-08-11 18:46:39'),(10,10,1,'2015-08-11 18:46:39'),(11,11,1,'2015-08-11 18:46:39'),(12,12,1,'2015-08-11 18:46:39'),(13,13,1,'2015-08-11 18:46:39'),(14,14,1,'2015-08-11 18:46:39'),(15,15,1,'2015-08-11 18:46:39'),(16,16,1,'2015-08-11 18:46:39'),(17,17,1,'2015-08-11 18:46:39'),(18,18,1,'2015-08-11 18:46:39'),(19,19,1,'2015-08-11 18:46:39'),(20,20,1,'2015-08-11 18:46:39'),(21,21,1,'2015-08-11 18:46:39'),(22,22,1,'2015-08-11 18:46:39'),(23,23,1,'2015-08-11 18:46:39'),(24,24,1,'2015-08-11 18:46:39'),(25,25,1,'2015-08-11 18:46:39'),(26,26,1,'2015-08-11 18:46:39'),(27,27,1,'2015-08-11 18:46:39'),(28,28,1,'2015-08-11 18:46:39'),(29,29,1,'2015-08-11 18:46:39'),(30,30,1,'2015-08-11 18:46:39'),(31,33,1,'2015-08-23 21:00:08');
 /*!40000 ALTER TABLE `docente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -524,6 +524,32 @@ INSERT INTO `parametro` VALUES (1,1,'Materias disponibles','materias creadas','0
 UNLOCK TABLES;
 
 --
+-- Table structure for table `permiso`
+--
+
+DROP TABLE IF EXISTS `permiso`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `permiso` (
+  `id_permiso` int(10) NOT NULL AUTO_INCREMENT,
+  `permiso` varchar(30) NOT NULL DEFAULT '',
+  `activo` tinyint(1) NOT NULL DEFAULT '1',
+  `fecsys` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_permiso`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `permiso`
+--
+
+LOCK TABLES `permiso` WRITE;
+/*!40000 ALTER TABLE `permiso` DISABLE KEYS */;
+INSERT INTO `permiso` VALUES (1,'Alto',1,'2015-08-27 13:43:03'),(2,'Medio',1,'2015-08-27 13:43:03'),(3,'Bajo',1,'2015-08-27 13:43:03');
+/*!40000 ALTER TABLE `permiso` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `persona`
 --
 
@@ -561,7 +587,7 @@ DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role` (
   `id_role` int(10) NOT NULL AUTO_INCREMENT,
   `role` varchar(100) NOT NULL,
-  `activo` tinyint(4) NOT NULL DEFAULT '1',
+  `activo` tinyint(1) NOT NULL DEFAULT '1',
   `fecsys` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_role`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
@@ -592,7 +618,8 @@ SET character_set_client = utf8;
   `activo` tinyint NOT NULL,
   `rol` tinyint NOT NULL,
   `id_persona` tinyint NOT NULL,
-  `id_alu_doc` tinyint NOT NULL
+  `id_alu_doc` tinyint NOT NULL,
+  `permiso` tinyint NOT NULL
 ) ENGINE=MyISAM */;
 SET character_set_client = @saved_cs_client;
 
@@ -622,7 +649,7 @@ CREATE TABLE `seguridad` (
 
 LOCK TABLES `seguridad` WRITE;
 /*!40000 ALTER TABLE `seguridad` DISABLE KEYS */;
-INSERT INTO `seguridad` VALUES (1,1,1,1,1,1,'2015-08-23 23:24:03',1);
+INSERT INTO `seguridad` VALUES (1,1,1,1,5,1,'2015-08-24 02:58:24',1);
 /*!40000 ALTER TABLE `seguridad` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -729,6 +756,7 @@ CREATE TABLE `usuario` (
   `fecsys` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `id_persona` int(10) DEFAULT NULL,
   `id_role` int(10) DEFAULT NULL,
+  `id_permiso` int(10) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id_usuario`),
   UNIQUE KEY `user_UNIQUE` (`user`),
   KEY `fk_usuario_persona1` (`id_persona`),
@@ -744,7 +772,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (5,'repo','0c267daf663b5caca2036ae9a3f05e6432e97a56',1,'2014-01-08 03:00:00',2,2),(6,'alumno','acc00dce8622b05645d97f1a11111eec6b12dcb0',1,'2014-09-21 01:28:39',31,3),(7,'admin','294b81569ea0d3b72d39290df36c68412ee33e9b',1,'2014-09-21 01:36:06',32,1),(8,'doc','1fe437a42e34c3c3d4dfe02b2528a14b6128e0a9',1,'2014-11-01 16:52:13',4,2),(9,'seg','b6fcc775cf6257a149dd47b83c2a354bcba2db17',1,'2015-08-23 21:00:08',33,4),(10,'seguridad','74d8048fae5866ec6197033bb864423e738eff6a',1,'2015-08-23 23:32:34',34,4);
+INSERT INTO `usuario` VALUES (5,'repo','0c267daf663b5caca2036ae9a3f05e6432e97a56',1,'2014-01-08 03:00:00',2,2,1),(6,'alumno','acc00dce8622b05645d97f1a11111eec6b12dcb0',1,'2014-09-21 01:28:39',31,3,1),(7,'admin','294b81569ea0d3b72d39290df36c68412ee33e9b',1,'2014-09-21 01:36:06',32,1,1),(8,'doc','1fe437a42e34c3c3d4dfe02b2528a14b6128e0a9',1,'2014-11-01 16:52:13',4,2,1),(9,'seg','b6fcc775cf6257a149dd47b83c2a354bcba2db17',1,'2015-08-23 21:00:08',33,4,1),(10,'seguridad','74d8048fae5866ec6197033bb864423e738eff6a',1,'2015-08-23 23:32:34',34,4,1);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -764,7 +792,7 @@ CREATE TABLE `usuario_parametro` (
   `fesys` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `activo` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id_usuario_parametro`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -773,7 +801,7 @@ CREATE TABLE `usuario_parametro` (
 
 LOCK TABLES `usuario_parametro` WRITE;
 /*!40000 ALTER TABLE `usuario_parametro` DISABLE KEYS */;
-INSERT INTO `usuario_parametro` VALUES (1,7,1,1,1,'2015-08-22 19:58:45',1),(2,7,2,2,1,'2015-08-22 00:23:05',1),(3,7,7,3,1,'2015-08-22 00:23:05',1),(4,7,8,4,1,'2015-08-22 20:12:23',0),(5,7,9,5,3,'2015-08-22 19:45:44',1),(6,7,10,8,1,'2015-08-23 19:46:45',0),(7,8,11,2,3,'2015-08-24 02:50:36',1),(8,8,12,1,2,'2015-08-24 02:50:11',1),(9,8,13,3,1,'2015-08-22 22:37:37',1),(10,8,14,4,1,'2015-08-22 22:37:37',1),(11,8,15,5,1,'2015-08-22 22:37:37',1),(12,5,11,1,1,'2015-08-22 22:40:01',1),(13,5,12,2,1,'2015-08-22 22:40:01',1),(14,5,13,3,1,'2015-08-22 22:40:01',1),(15,5,14,4,1,'2015-08-22 22:40:01',1),(16,5,15,5,1,'2015-08-22 22:40:01',1),(17,6,16,1,1,'2015-08-22 22:40:56',1),(18,6,17,2,1,'2015-08-22 22:40:56',1),(19,6,18,3,1,'2015-08-22 22:40:56',1),(20,6,19,4,1,'2015-08-22 22:40:56',1),(21,6,20,5,1,'2015-08-22 22:40:56',1);
+INSERT INTO `usuario_parametro` VALUES (7,8,11,2,3,'2015-08-24 02:50:36',1),(8,8,12,1,3,'2015-08-24 22:46:04',1),(9,8,13,3,1,'2015-08-22 22:37:37',1),(10,8,14,4,1,'2015-08-22 22:37:37',1),(11,8,15,5,2,'2015-08-24 22:38:35',0),(17,6,16,1,1,'2015-08-22 22:40:56',1),(18,6,17,2,1,'2015-08-25 00:36:22',0),(19,6,18,3,1,'2015-08-22 22:40:56',1),(20,6,19,4,1,'2015-08-22 22:40:56',1),(21,6,20,5,1,'2015-08-25 00:36:16',1),(37,5,11,1,1,'2015-08-27 16:38:02',1),(38,5,12,2,1,'2015-08-27 16:38:03',1),(39,5,13,3,1,'2015-08-27 16:38:03',1),(40,5,14,4,1,'2015-08-27 16:38:03',1),(41,5,15,5,1,'2015-08-27 16:38:03',1),(42,7,1,1,1,'2015-08-27 16:38:37',1),(43,7,2,2,1,'2015-08-27 16:38:37',1),(44,7,7,3,1,'2015-08-27 16:38:37',1),(45,7,8,4,1,'2015-08-27 16:38:37',1),(46,7,9,5,1,'2015-08-27 16:38:37',1),(47,7,10,6,1,'2015-08-27 16:38:37',1);
 /*!40000 ALTER TABLE `usuario_parametro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -827,7 +855,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `roles` AS select `u`.`id_usuario` AS `id_usuario`,`u`.`user` AS `user`,`u`.`pass` AS `pass`,`u`.`activo` AS `activo`,`r`.`role` AS `rol`,`p`.`id_persona` AS `id_persona`,`a`.`id_docente` AS `id_alu_doc` from (((`usuario` `u` join `persona` `p` on((`p`.`id_persona` = `u`.`id_persona`))) join `docente` `a` on(((`a`.`id_persona` = `p`.`id_persona`) and (`a`.`activo` = 1)))) join `role` `r` on((`r`.`id_role` = `u`.`id_role`))) union select `u`.`id_usuario` AS `id_usuario`,`u`.`user` AS `user`,`u`.`pass` AS `pass`,`u`.`activo` AS `activo`,`r`.`role` AS `rol`,`p`.`id_persona` AS `id_persona`,`a`.`id_alumno` AS `id_alu_doc` from (((`usuario` `u` join `persona` `p` on((`p`.`id_persona` = `u`.`id_persona`))) join `alumno` `a` on(((`a`.`id_persona` = `p`.`id_persona`) and (`a`.`activo` = 1)))) join `role` `r` on((`r`.`id_role` = `u`.`id_role`))) union select `u`.`id_usuario` AS `id_usuario`,`u`.`user` AS `user`,`u`.`pass` AS `pass`,`u`.`activo` AS `activo`,`r`.`role` AS `rol`,`u`.`id_persona` AS `id_persona`,`u`.`id_usuario` AS `id_alu_doc` from (`usuario` `u` join `role` `r` on((`r`.`id_role` = `u`.`id_role`))) where ((not(`u`.`id_persona` in (select `alumno`.`id_persona` AS `id_persona` from `alumno` where (`alumno`.`activo` = 1)))) and (not(`u`.`id_persona` in (select `docente`.`id_persona` AS `id_persona` from `docente` where (`docente`.`activo` = 1)))) and (`u`.`activo` = 1)) */;
+/*!50001 VIEW `roles` AS select `u`.`id_usuario` AS `id_usuario`,`u`.`user` AS `user`,`u`.`pass` AS `pass`,`u`.`activo` AS `activo`,`r`.`role` AS `rol`,`p`.`id_persona` AS `id_persona`,`a`.`id_docente` AS `id_alu_doc`,`u`.`id_permiso` AS `permiso` from (((`usuario` `u` join `persona` `p` on((`p`.`id_persona` = `u`.`id_persona`))) join `docente` `a` on(((`a`.`id_persona` = `p`.`id_persona`) and (`a`.`activo` = 1)))) join `role` `r` on((`r`.`id_role` = `u`.`id_role`))) union select `u`.`id_usuario` AS `id_usuario`,`u`.`user` AS `user`,`u`.`pass` AS `pass`,`u`.`activo` AS `activo`,`r`.`role` AS `rol`,`p`.`id_persona` AS `id_persona`,`a`.`id_alumno` AS `id_alu_doc`,`u`.`id_permiso` AS `permiso` from (((`usuario` `u` join `persona` `p` on((`p`.`id_persona` = `u`.`id_persona`))) join `alumno` `a` on(((`a`.`id_persona` = `p`.`id_persona`) and (`a`.`activo` = 1)))) join `role` `r` on((`r`.`id_role` = `u`.`id_role`))) union select `u`.`id_usuario` AS `id_usuario`,`u`.`user` AS `user`,`u`.`pass` AS `pass`,`u`.`activo` AS `activo`,`r`.`role` AS `rol`,`u`.`id_persona` AS `id_persona`,`u`.`id_usuario` AS `id_alu_doc`,`u`.`id_permiso` AS `permiso` from (`usuario` `u` join `role` `r` on((`r`.`id_role` = `u`.`id_role`))) where ((not(`u`.`id_persona` in (select `alumno`.`id_persona` AS `id_persona` from `alumno` where (`alumno`.`activo` = 1)))) and (not(`u`.`id_persona` in (select `docente`.`id_persona` AS `id_persona` from `docente` where (`docente`.`activo` = 1)))) and (`u`.`activo` = 1)) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -860,4 +888,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-23 23:54:28
+-- Dump completed on 2015-08-27 13:59:16

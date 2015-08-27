@@ -17,6 +17,8 @@ var usuariosAdmin = {
 				celdas.get(3).innerHTML = data.user;
 				celdas.get(4).innerHTML = data.persona.mail;
 				celdas.get(5).innerHTML = data.rol;
+				//celdas.get(6).innerHTML = data.carrera;
+				celdas.get(7).innerHTML = data.permiso.permiso;
 				
 				$("a[name=editUser][data-userid=" + data.id + "] button").click(function(){
 					$("#editarAlumnoDialog").data('userId', $(this).parent().attr("data-userid"))
@@ -26,6 +28,7 @@ var usuariosAdmin = {
 						.data('mail', $(this).parents("tr").find("td").get(4).innerHTML)
 						.data('rol', $(this).parents("tr").find("td").get(5).innerHTML)
 						.data('carrera', $(this).parents("tr").find("td[data-carreraId]").attr("data-carreraId"))
+						.data('permiso', $(this).parents("tr").find("td[data-permisoId]").attr("data-permisoId"))
 						.dialog("open");
 				});
 				
@@ -120,6 +123,12 @@ $(document).ready(function() {
 			} else {
 				$('#editarAlumnoForm .carreraSelect').hide();
 			}
+			
+			$('#editarAlumnoForm .permisoSelect').show();
+			$('#editarAlumnoForm select[name=permiso] option').removeAttr("selected");
+			$("#editarAlumnoForm select[name=permiso] option[value=" + $("#editarAlumnoDialog").data('permiso')  + "]").attr("selected", "selected");
+			$("#editarAlumnoForm select[name=permiso]").trigger('chosen:updated');
+			
 		},
 		close: function(event, ui) {
 		}
@@ -134,8 +143,10 @@ $(document).ready(function() {
 			.data('mail', $(this).parents("tr").find("td").get(4).innerHTML)
 			.data('rol', $(this).parents("tr").find("td").get(5).innerHTML)
 			.data('carrera', $(this).parents("tr").find("td[data-carreraId]").attr("data-carreraId"))
+			.data('permiso', $(this).parents("tr").find("td[data-permisoId]").attr("data-permisoId"))
 			.dialog("open");
 	});
 	
 	$("select[name=carrera]").chosen({no_results_text:'No hay resultados para: '});
+	$("select[name=permiso]").chosen({no_results_text:'No hay resultados para: '});
 });

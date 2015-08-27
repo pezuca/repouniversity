@@ -14,6 +14,7 @@ public class Usuario implements IdentifiedObject {
     private Long idPersona;
     private Date fechasys;
     private Long role;
+    private Long idPermiso;
     
     public Long getId() {
         return id;
@@ -69,5 +70,13 @@ public class Usuario implements IdentifiedObject {
 
 	public void setRole(Long role) {
 		this.role = role;
+	}
+
+	public Long getIdPermiso() {
+		return idPermiso;
+	}
+
+	public void setIdPermiso(Long idPermiso) {
+		this.idPermiso = idPermiso;
 	}
 }

@@ -9,6 +9,7 @@ public class UsuarioRol implements IdentifiedObject {
     private String nombreUsuario;
     private String rol;
     private Long idAluDoc;
+    private Long permiso;
 
     public Long getIdAluDoc() {
         return idAluDoc;
@@ -49,5 +50,13 @@ public class UsuarioRol implements IdentifiedObject {
     public void setRol(String rol) {
         this.rol = rol;
     }
+
+	public Long getPermiso() {
+		return permiso;
+	}
+
+	public void setPermiso(Long permiso) {
+		this.permiso = permiso;
+	}
 
 }

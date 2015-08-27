@@ -47,6 +47,10 @@ public class UsuarioService {
 
     @Autowired
     public SeguridadService seguridadService;
+    
+    @Autowired
+    public PermisoService permisoService;
+    
 
     @Transactional
     public Usuario updateUser(Long id, String nombre, String apellido, String mail, String user, String newPassword, String repeatPassword, Long carreraId) {
@@ -173,7 +177,8 @@ public class UsuarioService {
         usuarioTo.setActivo(usuario.isActivo());
         usuarioTo.setPersona(personaService.findById(usuarioRol.getIdPersona()));
         usuarioTo.setRol(usuarioRol.getRol());
-
+        usuarioTo.setPermiso(permisoService.findById(usuarioRol.getPermiso()));
+        
         if (usuarioRol.getRol().equals("alumno")) {
             usuarioTo.setAlumno(alumnoService.getAlumnoById(usuarioRol.getIdAluDoc()));
         }
@@ -209,7 +214,7 @@ public class UsuarioService {
         personaService.delete(usuarioRol.getIdPersona());
     }
 
-    public Usuario updateRol(Long userId, String rol) {
+    public Usuario updateRol(Long userId, String rol, Long permiso) {
         Role role = roleService.findByRoleName(rol);
         Usuario user = usuarioDAO.findById(userId);
 
@@ -246,10 +251,14 @@ public class UsuarioService {
         }
 
         user.setRole(role.getId());
+        user.setIdPermiso(permiso);
+        
         usuarioDAO.updateUserWithoutPass(user);
 
         usuarioParametroService.eliminarParametro(user.getId());
         usuarioParametroService.crearParametro(user.getId(), role.getId());
+        
+        
 
         return user;
     }

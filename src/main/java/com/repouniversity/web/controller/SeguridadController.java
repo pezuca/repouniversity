@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.repouniversity.model.entity.Carrera;
+import com.repouniversity.model.entity.Permiso;
 import com.repouniversity.model.entity.Role;
 import com.repouniversity.model.entity.Seguridad;
 import com.repouniversity.model.entity.Usuario;
@@ -27,6 +28,7 @@ import com.repouniversity.model.services.CursoService;
 import com.repouniversity.model.services.DocenteService;
 import com.repouniversity.model.services.ErrorArchivoService;
 import com.repouniversity.model.services.MateriaService;
+import com.repouniversity.model.services.PermisoService;
 import com.repouniversity.model.services.PersonaService;
 import com.repouniversity.model.services.RoleService;
 import com.repouniversity.model.services.SeguridadService;
@@ -69,6 +71,9 @@ public class SeguridadController {
 
     @Autowired
     public RoleService roleService;
+    
+    @Autowired
+    public PermisoService permisoService;
 
     @Autowired
     public ErrorArchivoService errorArchivoService;
@@ -80,18 +85,21 @@ public class SeguridadController {
 
         List<Carrera> listacarreras = carreraService.getAll();
         List<Role> listaRoles = roleService.getAll();
+        
+        List<Permiso> listaPermisos = permisoService.getAll();
+        
 
         return new ModelAndView("listaUsuariosSeguridad").addObject("usuarios", listaUsuarios).addObject("listacarreras", listacarreras)
-                .addObject("listaRoles", listaRoles);
+                .addObject("listaRoles", listaRoles).addObject("listaPermisos", listaPermisos);
     }
 
     @RequestMapping(value = "seguridad/editarUsuarioRol", method = {RequestMethod.POST})
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
-    public UsuarioTO editarUsuarioAjax(@RequestParam(value = "userId") Long userId, @RequestParam(value = "rol") String rol) {
+    public UsuarioTO editarUsuarioAjax(@RequestParam(value = "userId") Long userId, @RequestParam(value = "rol") String rol, @RequestParam(value = "permiso") Long permiso) {
 
-        Usuario usuario = usuarioService.updateRol(userId, rol);
-
+        Usuario usuario = usuarioService.updateRol(userId, rol, permiso);
+        
         UsuarioTO usuarioTo = usuarioService.getUserById(usuario.getId());
         return usuarioTo;
     }

@@ -41,6 +41,7 @@
 									<th>Mail</th>
 									<th>Rol</th>
 									<th>Carrera</th>
+									<th>Permiso</th>
 									<th></th>
 								</tr>
 							</thead>
@@ -62,6 +63,7 @@
 										</c:forEach>
 										
 										<td data-carreraId="${usuario.alumno.idCarrera}">${carreraName}</td>
+										<td data-permisoId="${usuario.permiso.id}">${usuario.permiso.permiso}</td>
 										<td>
 											<a href="#" name="editUser" data-userId="${usuario.id}"><button class="btn btn-primary btn-circle" type="button"><i class="fa fa-pencil"></i></button></a>
 										</td>
@@ -122,6 +124,17 @@
                      </select>
                 </div>
             </div>
+             <div class="form-group permisoSelect">
+                <label class="col-sm-2 control-label">Permiso*:</label>
+                <div class="col-sm-10">
+                	<select class="form-control m-b" name="permiso">
+						<c:forEach items="${listaPermisos}" var="permiso" varStatus="status">
+							<option value="${permiso.id}">${permiso.permiso}</option>
+						</c:forEach>
+                     </select>
+                </div>
+            </div>
+              
 		</form>
 	</div>
 	</div>
