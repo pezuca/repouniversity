@@ -142,7 +142,7 @@ public class UsuarioService {
 
         if(!password.matches(regexOrg)) {
            throw new StrongPasswordException("La contrseña no cumple con los criterios de cantidad minimas de numeros (" + seguridad.getNumeros() 
-                   + "), cantidad minima de mayusculas (" + seguridad.getMinusculas() + "), cantidad minima de minusculas ("
+                   + "), cantidad minima de mayusculas (" + seguridad.getMayusculas() + "), cantidad minima de minusculas (" + seguridad.getMayusculas()
                    + "), cantidad minima de caracteres especiales (" + seguridad.getEspeciales()
                    + "), cantidad minima de caracteres (" + seguridad.getLongMinima() + ")."); 
         }
