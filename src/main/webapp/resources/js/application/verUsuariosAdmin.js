@@ -20,7 +20,8 @@ var usuariosAdmin = {
 					}
 				}
 				
-				table.row.add([
+				if($('input[name=miPermiso]').val() == '1'){
+	                table.row.add([
 	                      data.id,
 	                      data.persona.nombre,
 	                      data.persona.apellido,
@@ -30,7 +31,32 @@ var usuariosAdmin = {
 	                      carreraNuevo,
 	                      "<a href='#' name='editUser' data-userid='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a>" + 
 						  "<a href='#' name='deleteUser' data-userid='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a>"
-                ]).draw();
+					]).draw();
+				}
+				else if($('input[name=miPermiso]').val() == '2'){
+	                table.row.add([
+	                      data.id,
+	                      data.persona.nombre,
+	                      data.persona.apellido,
+	                      data.user,
+	                      data.persona.mail,
+	                      data.rol,
+	                      carreraNuevo,
+	                      "<a href='#' name='editUser' data-userid='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a>"
+					]).draw();
+				}
+				else{
+	                table.row.add([
+	                      data.id,
+	                      data.persona.nombre,
+	                      data.persona.apellido,
+	                      data.user,
+	                      data.persona.mail,
+	                      data.rol,
+	                      carreraNuevo,
+	                      ""
+					]).draw();
+	     		}
 				
 				//Agrego el evento de delete
 				$("a[name='deleteUser'][data-userid=" + data.id + "] button").click(function(){

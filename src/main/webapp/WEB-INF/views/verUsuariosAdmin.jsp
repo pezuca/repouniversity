@@ -66,8 +66,15 @@
 										
 										<td data-carreraId="${usuario.alumno.idCarrera}">${carreraName}</td>
 										<td>
-											<a href="#" name="editUser" data-userId="${usuario.id}"><button class="btn btn-primary btn-circle" type="button"><i class="fa fa-pencil"></i></button></a>
-											<a href="#" name="deleteUser" data-userId="${usuario.id}" ><button class="btn btn-danger btn-circle" type="button"><i class="fa fa-times"></i></button></a>
+											<c:choose>
+												<c:when test="${login.permiso == '1'}">
+													<a href="#" name="editUser" data-userId="${usuario.id}"><button class="btn btn-primary btn-circle" type="button"><i class="fa fa-pencil"></i></button></a>
+													<a href="#" name="deleteUser" data-userId="${usuario.id}" ><button class="btn btn-danger btn-circle" type="button"><i class="fa fa-times"></i></button></a>		
+												</c:when>
+												<c:when test="${login.permiso == '2'}">
+													<a href="#" name="editUser" data-userId="${usuario.id}"><button class="btn btn-primary btn-circle" type="button"><i class="fa fa-pencil"></i></button></a>
+												</c:when>
+											</c:choose>	
 										</td>
 									</tr>
 								</c:forEach>
@@ -78,7 +85,9 @@
 	      		</div>
 	         </div>
 	     </div>
-        
+        <div id="hiddenInputs" class="hidden">
+				<input type="hidden" name="miPermiso" value="${login.permiso}"/>
+		</div>
 		<%@include file="../components/footer.jsp"%>
 	</div>
 <!-- 	Ventanas -->

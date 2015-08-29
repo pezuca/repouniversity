@@ -11,7 +11,7 @@ var materiasAdmin = {
 					sticky: false
 				});
 				
-				
+				if($('input[name=miPermiso]').val() == '1'){
 				table.row.add([
 				                                          data.id,
 				                                          data.nombre,
@@ -19,6 +19,22 @@ var materiasAdmin = {
 				                                          "<a href='#' name='editMateria' data-materiaid='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a>" + 
 				  										  "<a href='#' name='deleteMateria' data-materiaid='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a>"
 				                                     ]).draw();
+				}
+				else if($('input[name=miPermiso]').val() == '2'){
+					table.row.add([
+                                   data.id,
+                                   data.nombre,
+                                   data.descripcion,
+                                   "<a href='#' name='editMateria' data-materiaid='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a>" 
+					          ]).draw();
+				}else{
+					table.row.add([
+                                   data.id,
+                                   data.nombre,
+                                   data.descripcion,
+                                   ""
+                              ]).draw();
+				}
 				
 				//Agrego el evento de delete
 				$("a[name='deleteMateria'][data-materiaid=" + data.id + "] button").click(function(){

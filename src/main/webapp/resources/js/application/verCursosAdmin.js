@@ -11,7 +11,7 @@ var cursosAdmin = {
 					sticky: false
 				});
 				
-				
+				if($('input[name=miPermiso]').val() == '1'){
 				table.row.add([
 				                                          data.id,
 				                                          data.nombre,
@@ -22,6 +22,27 @@ var cursosAdmin = {
 				                                          "<a href='#' name='editCurso' data-cursoId='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a>" + 
 				  										  "<a href='#' name='deleteCurso' data-cursoId='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a>"
 				                                     ]).draw();
+				}else if($('input[name=miPermiso]').val() == '2'){
+					table.row.add([
+                                   data.id,
+                                   data.nombre,
+                                   data.codigo,
+                                   data.descripcion,
+                   				  data.materia.nombre,
+                   				  data.docente.persona.nombre + ", " + data.docente.persona.apellido,
+                                   "<a href='#' name='editCurso' data-cursoId='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a>" 
+							]).draw();
+				}else{
+					table.row.add([
+                                   data.id,
+                                   data.nombre,
+                                   data.codigo,
+                                   data.descripcion,
+                   				  data.materia.nombre,
+                   				  data.docente.persona.nombre + ", " + data.docente.persona.apellido,
+                                  ""
+                              ]).draw();
+				}
 				
 				//Agrego el evento de delete
 				$("a[name='deleteCurso'][data-cursoId=" + data.id + "] button").click(function(){

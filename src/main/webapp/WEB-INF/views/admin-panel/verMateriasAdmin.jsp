@@ -50,15 +50,20 @@
 												<td>${materia.id}</td>
 												<td>${materia.nombre}</td>
 												<td>${materia.descripcion}</td>
-												<td><a href="#" name="editMateria"
-													data-materiaId="${materia.id}"><button
-															class="btn btn-primary btn-circle" type="button">
-															<i class="fa fa-pencil"></i>
-														</button></a> <a href="#" name="deleteMateria"
-													data-materiaId="${materia.id}"><button
-															class="btn btn-danger btn-circle" type="button">
-															<i class="fa fa-times"></i>
-														</button></a></td>
+												<td>
+													<c:choose>
+														<c:when test="${login.permiso == '1'}">
+															<a href="#" name="editMateria" data-materiaId="${materia.id}"><button class="btn btn-primary btn-circle" type="button">
+																	<i class="fa fa-pencil"></i></button></a>
+															<a href="#" name="deleteMateria" data-materiaId="${materia.id}"><button	class="btn btn-danger btn-circle" type="button">
+																	<i class="fa fa-times"></i></button></a>
+														</c:when>
+														<c:when test="${login.permiso == '2'}">
+															<a href="#" name="editMateria" data-materiaId="${materia.id}"><button class="btn btn-primary btn-circle" type="button">
+																	<i class="fa fa-pencil"></i></button></a>
+														</c:when>
+													</c:choose>
+												</td>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -68,7 +73,9 @@
 					</div>
 				</div>
 			</div>
-
+			<div id="hiddenInputs" class="hidden">
+				<input type="hidden" name="miPermiso" value="${login.permiso}"/>
+			</div>
 			<%@include file="../../components/footer.jsp"%>
 		</div>
 		<!-- 	Ventanas -->

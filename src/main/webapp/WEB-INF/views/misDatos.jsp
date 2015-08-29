@@ -39,15 +39,43 @@
 							id="userUpdate" method="post">
 							<input name="id" type="hidden" value="${usuario.id}" />
 							<div class="form-group">
-								<label class="col-sm-2 control-label" for="userInput">
-									Usuario</label>
-								<div class="col-sm-2">
-									<input name="user" class="form-control" id="userInput" type="text"
-										value="${usuario.user}" disabled>
+								<label for="nameInput" class="col-sm-2 control-label">
+									Nombre</label>
+								<div class="col-sm-3">
+									<input name="nombre" class="form-control" id="nameInput" type="text"
+										value="${usuario.persona.nombre}" required>
 								</div>
-								
+								<label for="apellidoInput" class="col-sm-1 control-label">
+									Apellido</label>
+								<div class="col-sm-3">
+									<input name="apellido" class="form-control" id="apellidoInput"
+										type="text" value="${usuario.persona.apellido}" required>
+								</div>
 							</div>
 							<div class="form-group">
+								<label class="col-sm-2 control-label" for="userInput">
+										Usuario</label>
+									<div class="col-sm-2">
+										<input name="user" class="form-control" id="userInput" type="text"
+											value="${usuario.user}" disabled>
+									</div>
+								<label for="mailInput" class="col-sm-1 control-label"> Mail</label>
+								<div class="col-sm-4">
+									<input name="mail" class="form-control" id="mailInput"
+										type="email" value="${usuario.persona.mail}" required>
+								</div>
+							</div>
+							<div class="form-group" ${userLog.rol == 'administrador' or userLog.rol == 'seguridad' or userLog.rol == 'docente' ? 'style=display:none' : ''}>
+				                <label for="mailInput" class="col-sm-2 control-label"> Carrera</label>
+				                <div class="col-sm-10">
+				                	<select class="form-control m-b" name="carrera" disabled>
+										<c:forEach items="${listacarreras}" var="carrera" varStatus="status">
+											<option value="${carrera.id}">${carrera.nombre}</option>
+										</c:forEach>
+				                     </select>
+				                </div>
+				            </div>
+				            <div class="form-group">
 								<label for="passwordInput" class="col-sm-2 control-label">
 									Nueva Contraseña</label>
 								<div class="col-sm-3">
@@ -63,37 +91,6 @@
 										id="repeatPasswordInput" type="password">
 								</div>
 							</div>
-							<div class="form-group">
-								<label for="nameInput" class="col-sm-2 control-label">
-									Nombre</label>
-								<div class="col-sm-3">
-									<input name="nombre" class="form-control" id="nameInput" type="text"
-										value="${usuario.persona.nombre}" required>
-								</div>
-								<label for="apellidoInput" class="col-sm-2 control-label">
-									Apellido</label>
-								<div class="col-sm-3">
-									<input name="apellido" class="form-control" id="apellidoInput"
-										type="text" value="${usuario.persona.apellido}" required>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="mailInput" class="col-sm-2 control-label"> Mail</label>
-								<div class="col-sm-8">
-									<input name="mail" class="form-control" id="mailInput"
-										type="email" value="${usuario.persona.mail}" required>
-								</div>
-							</div>
-							<div class="form-group" ${userLog.rol == 'administrador' or userLog.rol == 'seguridad' or userLog.rol == 'docente' ? 'style=display:none' : ''}>
-				                <label for="mailInput" class="col-sm-2 control-label"> Carrera</label>
-				                <div class="col-sm-10">
-				                	<select class="form-control m-b" name="carrera" disabled>
-										<c:forEach items="${listacarreras}" var="carrera" varStatus="status">
-											<option value="${carrera.id}">${carrera.nombre}</option>
-										</c:forEach>
-				                     </select>
-				                </div>
-				            </div>
 							<div class="form-group">
 								<div class="col-sm-offset-2 col-sm-10">
 									<button type="submit" class="btn btn-primary">Salvar</button>

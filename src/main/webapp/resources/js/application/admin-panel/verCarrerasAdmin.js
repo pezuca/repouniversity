@@ -12,19 +12,52 @@ var carrerasAdmin = {
 				});
 				
 				var materias = "";
-				for (var int = 0; int < data.materias.length; int++) {
-					var element = data.materias[int];
+				var tresMaterias = "";
+				
+				for (var j = 0; j < data.materias.length; j++) {
+					var element = data.materias[j];
 					materias = materias + element.nombre + "  |  ";
+					 if (j <3){
+						 tresMaterias = tresMaterias + element.nombre + "  |  ";
+					 }
+						 
 				}
 				materias = materias.trim().substring(0, materias.length - 4)
+				tresMaterias = tresMaterias.trim().substring(0, tresMaterias.length - 4)
 				
-				table.row.add([
-                      data.id,
-                      data.nombre,
-                      materias,
-                      "<a href='#' name='editCarrera' data-carreraid='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a>" + 
-					  "<a href='#' name='deleteCarrera' data-carreraid='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a>"
-                 ]).draw();
+				
+				if($('input[name=miPermiso]').val() == '1'){
+	                table.row.add([
+	                      data.id,
+	                      data.nombre,
+	                      tresMaterias + "<a href='#' name='verCarrera' data-carreraId='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-search'></i></button></a>",
+	                      materias,
+	                      "<a href='#' name='editCarrera' data-carreraid='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a>" + 
+						  "<a href='#' name='deleteCarrera' data-carreraid='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a>"
+						  
+	                 ]).draw();
+				}
+				else if($('input[name=miPermiso]').val() == '2'){
+	                table.row.add([
+	                      data.id,
+	                      data.nombre,
+	                      tresMaterias + "<a href='#' name='verCarrera' data-carreraId='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-search'></i></button></a>",
+	                      materias,
+	                      "<a href='#' name='editCarrera' data-carreraid='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a>" 
+						  ]).draw();
+				}
+				else{
+	                table.row.add([
+	     	                      data.id,
+	     	                      data.nombre,
+	     	                      tresMaterias + "<a href='#' name='verCarrera' data-carreraId='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-search'></i></button></a>",
+	     	                      materias,
+	     	                      ""
+	     	                 ]).draw();
+	     				}
+				
+				var celdas = $("#listaCarreras td a[data-carreraid=" + data.id + "]").parents("tr").find("td");
+				celdas.get(3).setAttribute('style', 'display: none;');
 				
 				//Agrego el evento de delete
 				$("a[name='deleteCarrera'][data-carreraid=" + data.id + "] button").click(function(){
@@ -34,7 +67,7 @@ var carrerasAdmin = {
 				$("a[name=editCarrera][data-carreraid=" + data.id + "] button").click(function(){
 					$("#editarCarreraDialog").data('carreraId', $(this).parent().attr("data-carreraid"))
 						.data('nombre', $(this).parents("tr").find("td").get(1).innerHTML)
-						.data('materias', $(this).parents("tr").find("td").get(2).innerHTML)
+						.data('materias', $(this).parents("tr").find("td").get(3).innerHTML)
 						.dialog("open");
 				});
 				
@@ -66,13 +99,21 @@ var carrerasAdmin = {
 				celdas.get(1).innerHTML = data.nombre;
 				
 				var materias = "";
-				for (var int = 0; int < data.materias.length; int++) {
-					var element = data.materias[int];
+				var tresMaterias = "";
+				
+				for (var i = 0; i < data.materias.length; i++) {
+					var element = data.materias[i];
 					materias = materias + element.nombre + "  |  ";
+					 if (i <3){
+						 tresMaterias = tresMaterias + element.nombre + "  |  ";
+					 }
+						 
 				}
 				materias = materias.trim().substring(0, materias.length - 4)
+				tresMaterias = tresMaterias.trim().substring(0, tresMaterias.length - 4)
 				
-				celdas.get(2).innerHTML = materias;
+				celdas.get(3).innerHTML = materias;
+				celdas.get(2).innerHTML = tresMaterias;
 				
 				//Agrego el evento de delete
 				$("a[name='deleteCarrera'][data-carreraid=" + data.id + "] button").click(function(){
@@ -82,7 +123,7 @@ var carrerasAdmin = {
 				$("a[name=editCarrera][data-carreraid=" + data.id + "] button").click(function(){
 					$("#editarCarreraDialog").data('carreraId', $(this).parent().attr("data-carreraid"))
 						.data('nombre', $(this).parents("tr").find("td").get(1).innerHTML)
-						.data('materias', $(this).parents("tr").find("td").get(2).innerHTML)
+						.data('materias', $(this).parents("tr").find("td").get(3).innerHTML)
 						.dialog("open");
 				});
 				
@@ -166,7 +207,10 @@ $(document).ready(function() {
                        {"width": "15%", "targets": 3}
                       ]
 	});
+	//table.column(3).visible(false);
+	//table.columns.adjust().draw();
 
+	
 	$("#listaCarrerasTable_length").remove();
 	$("#listaCarreras_info").remove();
 	
@@ -321,7 +365,7 @@ $(document).ready(function() {
 		$("#editarCarreraDialog").data('carreraId', $(this).parent().attr("data-carreraid"))
 			.data('carreraId', $(this).parents("tr").find("td").get(0).innerHTML)
 			.data('nombre', $(this).parents("tr").find("td").get(1).innerHTML)
-			.data('materias', $(this).parents("tr").find("td").get(2).innerHTML)
+			.data('materias', $(this).parents("tr").find("td").get(3).innerHTML)
 			.dialog("open");
 	});
 	
@@ -329,7 +373,7 @@ $(document).ready(function() {
 		$("#verCarreraDialog").data('carreraId', $(this).parent().attr("data-carreraid"))
 			.data('carreraId', $(this).parents("tr").find("td").get(0).innerHTML)
 			.data('nombre', $(this).parents("tr").find("td").get(1).innerHTML)
-			.data('materias', $(this).parents("tr").find("td").get(2).innerHTML)
+			.data('materias', $(this).parents("tr").find("td").get(3).innerHTML)
 			.dialog("open");
 	});
 	
