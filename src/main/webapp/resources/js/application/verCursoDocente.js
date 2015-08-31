@@ -144,7 +144,7 @@ $(document).ready(function() {
             "info": "Pagina _PAGE_ of _PAGES_",
             "infoEmpty": "No hay resultados disponibles.",
             "infoFiltered": "(filtered from _MAX_ total records)",
-            "search": "Búsqueda: "
+            "search": "Filtrar por: "
         },
         "columnDefs": [
                        {"width": "40%", "targets": 0},
@@ -166,7 +166,7 @@ $(document).ready(function() {
             "info": "Pagina _PAGE_ of _PAGES_",
             "infoEmpty": "No hay resultados disponibles.",
             "infoFiltered": "(filtered from _MAX_ total records)",
-            "search": "Búsqueda: "
+            "search": "Filtrar por: "
         },
         "columnDefs": [
                        {"width": "35%", "targets": 0},
