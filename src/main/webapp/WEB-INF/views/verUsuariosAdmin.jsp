@@ -30,7 +30,7 @@
 	                  <div class="ibox-title">
 	                      <h5>Lista de usuarios</h5>
 		                  <div class="ibox-tools" id="agregarAlumnoButton">
-	                          <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  Usuario</a>
+	                          <a href="#" class="btn btn-primary btn-xs" title="Crear usuario"><i class="fa fa-magic"></i>  Usuario</a>
 	                      </div>
 	                  </div>
 	                  <div class="ibox-content">
@@ -68,11 +68,11 @@
 										<td>
 											<c:choose>
 												<c:when test="${login.permiso == '1'}">
-													<a href="#" name="editUser" data-userId="${usuario.id}"><button class="btn btn-primary btn-circle" type="button"><i class="fa fa-pencil"></i></button></a>
-													<a href="#" name="deleteUser" data-userId="${usuario.id}" ><button class="btn btn-danger btn-circle" type="button"><i class="fa fa-times"></i></button></a>		
+													<a href="#" name="editUser" data-userId="${usuario.id}"><button class="btn btn-primary btn-circle" type="button" title="Editar usuario"><i class="fa fa-pencil"></i></button></a>
+													<a href="#" name="deleteUser" data-userId="${usuario.id}" ><button class="btn btn-danger btn-circle" type="button" title="Eliminar usurio"><i class="fa fa-times"></i></button></a>		
 												</c:when>
 												<c:when test="${login.permiso == '2'}">
-													<a href="#" name="editUser" data-userId="${usuario.id}"><button class="btn btn-primary btn-circle" type="button"><i class="fa fa-pencil"></i></button></a>
+													<a href="#" name="editUser" data-userId="${usuario.id}"><button class="btn btn-primary btn-circle" type="button" title="Editar usuario"><i class="fa fa-pencil"></i></button></a>
 												</c:when>
 											</c:choose>	
 										</td>

@@ -32,7 +32,7 @@
 							<div class="ibox-title">
 								<h5>Lista de carreras</h5>
 								<div class="ibox-tools" id="agregarCarreraButton">
-									<a href="#" class="btn btn-primary btn-xs"><i
+									<a href="#" class="btn btn-primary btn-xs" title="Crear carrera"><i
 										class="fa fa-magic"></i> Carrera</a>
 								</div>
 							</div>
@@ -62,10 +62,8 @@
 														
 													</c:forEach>
 													<a href="#" name="verCarrera"
-													data-carreraId="${carrera.id}"><button
-															class="btn btn-primary btn-circle" type="button">
-															<i class="fa fa-search"></i>
-														</button></a>
+													data-carreraId="${carrera.id}">
+													<button class="btn btn-primary btn-circle" type="button"><i class="fa fa-search"></i></button></a>
 												</td>
 												<td style="display: none">
 													<c:forEach items="${carrera.materias}" var="materia" varStatus="status">
@@ -76,13 +74,13 @@
 												<td>
 													<c:choose>
 														<c:when test="${login.permiso == '1'}">
-															<a href="#" name="editCarrera" data-carreraId="${carrera.id}"><button class="btn btn-primary btn-circle" type="button">
+															<a href="#" name="editCarrera" data-carreraId="${carrera.id}"><button class="btn btn-primary btn-circle" type="button" title="Editar carrera">
 																	<i class="fa fa-pencil"></i> </button></a>
-															<a href="#" name="deleteCarrera" data-carreraId="${carrera.id}"><button class="btn btn-danger btn-circle" type="button">
+															<a href="#" name="deleteCarrera" data-carreraId="${carrera.id}"><button class="btn btn-danger btn-circle" type="button" title="Eliminar carrera">
 																	<i class="fa fa-times"></i></button></a>
 														</c:when>
 														<c:when test="${login.permiso == '2'}">
-															<a href="#" name="editCarrera" data-carreraId="${carrera.id}"><button class="btn btn-primary btn-circle" type="button">
+															<a href="#" name="editCarrera" data-carreraId="${carrera.id}"><button class="btn btn-primary btn-circle" type="button" title="Editar carrera">
 																	<i class="fa fa-pencil"></i> </button></a>
 														</c:when>
 													</c:choose>				

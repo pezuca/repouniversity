@@ -28,7 +28,7 @@
 							<div class="ibox-title">
 								<h5>Lista de materias</h5>
 								<div class="ibox-tools" id="agregarMateriaButton">
-									<a href="#" class="btn btn-primary btn-xs"><i
+									<a href="#" class="btn btn-primary btn-xs" title="crear materia"><i
 										class="fa fa-magic"></i> Materia</a>
 								</div>
 							</div>
@@ -53,13 +53,13 @@
 												<td>
 													<c:choose>
 														<c:when test="${login.permiso == '1'}">
-															<a href="#" name="editMateria" data-materiaId="${materia.id}"><button class="btn btn-primary btn-circle" type="button">
+															<a href="#" name="editMateria" data-materiaId="${materia.id}"><button class="btn btn-primary btn-circle" type="button" title="editar materia">
 																	<i class="fa fa-pencil"></i></button></a>
-															<a href="#" name="deleteMateria" data-materiaId="${materia.id}"><button	class="btn btn-danger btn-circle" type="button">
+															<a href="#" name="deleteMateria" data-materiaId="${materia.id}"><button	class="btn btn-danger btn-circle" type="button" title="borrar materia">
 																	<i class="fa fa-times"></i></button></a>
 														</c:when>
 														<c:when test="${login.permiso == '2'}">
-															<a href="#" name="editMateria" data-materiaId="${materia.id}"><button class="btn btn-primary btn-circle" type="button">
+															<a href="#" name="editMateria" data-materiaId="${materia.id}"><button class="btn btn-primary btn-circle" type="button" title="editar materia">
 																	<i class="fa fa-pencil"></i></button></a>
 														</c:when>
 													</c:choose>

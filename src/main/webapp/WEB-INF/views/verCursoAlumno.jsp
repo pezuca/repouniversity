@@ -36,10 +36,10 @@
 						<th><a data-toggle="modal" href="#fileUpload" class="btn btn-success"><i class="fa fa-upload"></i> Subir Archivo</a></th>
 						<c:choose>
 							<c:when test="${curso.grupoAlumno.id != 1}">
-								<th><a href="/repouniversity/alumno/verGrupo?grupoId=${curso.grupoAlumno.id}&bread=Ver grupo-3" name="Ver" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver grupo" class="btn btn-success"><i class="fa fa-arrow-right"></i> Ver Grupo (${curso.grupoAlumno.nombre}) </a></th>
+								<th><a href="/repouniversity/alumno/verGrupo?grupoId=${curso.grupoAlumno.id}&bread=Ver grupo-3" name="Ver" type="button" title="Ver grupo" class="btn btn-success"><i class="fa fa-arrow-right"></i> Ver Grupo (${curso.grupoAlumno.nombre}) </a></th>
 							</c:when>
 							<c:otherwise>
-								<th><a href="/repouniversity/alumno/verGrupo?grupoId=${curso.grupoAlumno.id}&bread=Ver grupo-3" name="Ver" type="button" disabled="disabled" data-toggle="tooltip" data-placement="top" data-original-title="Ver grupo" class="btn btn-success"><i class="fa fa-arrow-right"></i> Ver Grupo (${curso.grupoAlumno.nombre}) </a></th>
+								<th><a href="/repouniversity/alumno/verGrupo?grupoId=${curso.grupoAlumno.id}&bread=Ver grupo-3" name="Ver" type="button" disabled="disabled" title="Ver grupo" class="btn btn-success"><i class="fa fa-arrow-right"></i> Ver Grupo (${curso.grupoAlumno.nombre}) </a></th>
 							</c:otherwise>
 						</c:choose>
 
@@ -88,15 +88,15 @@
 					            	    </div>
 										<h5>
 											<c:if test="${archivo.idPersona == login.idPersona}">
-												<a  name="editArchivo" data-archivoId="${archivo.id}"><button class="btn btn-info btn-circle" type="button"><i class="fa fa-pencil"></i></button></a>
-												<a  name="deleteArchivo" data-archivoId="${archivo.id}"><button class="btn btn-danger btn-circle" type="button"><i class="fa fa-times"></i> </button></a>
+												<a  name="editArchivo" data-archivoId="${archivo.id}"><button class="btn btn-info btn-circle" type="button" title="Editar archivo"><i class="fa fa-pencil"></i></button></a>
+												<a  name="deleteArchivo" data-archivoId="${archivo.id}"><button class="btn btn-danger btn-circle" type="button" title="Eliminar archivo"><i class="fa fa-times"></i> </button></a>
 											</c:if>
 											<a  name="verArchivo" data-archivoId="${archivo.id}" href="/repouniversity/vistaPrevia?archivoId=${archivo.id}">
-												<button class="btn btn-primary btn-circle" type="button"><i class="fa fa-search"></i>
+												<button class="btn btn-primary btn-circle" type="button" title="Previsualizar archivo"><i class="fa fa-search"></i>
 												</button>
 											</a>
 											<a  name="dowloadArchivo" data-archivoId="${archivo.id}" href="/repouniversity/bajarArchivo?archivoId=${archivo.id}">
-												<button class="btn btn-success btn-circle" type="button"><i class="fa fa-download"></i>
+												<button class="btn btn-success btn-circle" type="button" title="Descargar archivo"><i class="fa fa-download"></i>
 												</button>
 											</a>
 										</h5>

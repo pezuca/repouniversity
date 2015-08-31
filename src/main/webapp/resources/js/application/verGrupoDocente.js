@@ -267,11 +267,11 @@ $(document).ready(function() {
             "search": "Filtrar por: "
         },
         "columnDefs": [
-                       {"width": "15%", "targets": 0},
-                       {"width": "30%", "targets": 1},
-                       {"width": "30%", "targets": 2},
-                       {"width": "25%", "targets": 3},
-                       { orderable: false, targets: [3] }
+                       {"width": "10%", "targets": 0},
+                       {"width": "28%", "targets": 1},
+                       {"width": "28%", "targets": 2},
+                       {"width": "14%", "targets": 3},
+                       { orderable: false, targets: [4] }
                       ],
                       "order": [[ 0, "desc" ]]
 	});
@@ -290,8 +290,10 @@ $(document).ready(function() {
             "search": "Filtrar por: "
         },
         "columnDefs": [
-                       {"width": "15%", "targets": 0},
-                       {"width": "85%", "targets": 1},
+                       {"width": "10%", "targets": 0},
+                       {"width": "40%", "targets": 1},
+                       {"width": "40%", "targets": 2},
+                       { orderable: false, targets: [3] }
                       ],
                       "order": [[ 0, "desc" ]]
 	});

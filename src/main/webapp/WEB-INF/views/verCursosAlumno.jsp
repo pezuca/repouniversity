@@ -46,8 +46,8 @@
 										<td>${curso.codigo}</td>
 										<td>${curso.descripcion}</td>
 										<td>
-											<a href="#" name="deleteCurso" data-cursoId="${curso.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar curso"><i class="fa fa-times"></i></button></a>
-											<a href="/repouniversity/alumno/verCurso?cursoId=${curso.id}&bread=Curso-2"><button class="btn btn-primary btn-circle" type="button"><i class="fa fa-arrow-right"></i></button></a>
+											<a href="#" name="deleteCurso" data-cursoId="${curso.id}" ><button class="btn btn-danger btn-circle" type="button" title="Eliminar curso"><i class="fa fa-times"></i></button></a>
+											<a href="/repouniversity/alumno/verCurso?cursoId=${curso.id}&bread=Curso-2"><button class="btn btn-primary btn-circle" type="button" title="Editar curso"><i class="fa fa-arrow-right"></i></button></a>
 										</td>
 									</tr>
 								</c:forEach>

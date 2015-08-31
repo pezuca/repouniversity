@@ -29,7 +29,7 @@
 	                  <div class="ibox-title">
 	                      <h5>Lista de cursos</h5>
 		                  <div class="ibox-tools" id="agregarCursoButton">
-	                          <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-magic"></i>  Curso</a>
+	                          <a href="#" class="btn btn-primary btn-xs" title="Crear curso"><i class="fa fa-magic"></i>  Curso</a>
 	                      </div>
 	                  </div>
 	                  <div class="ibox-content">
@@ -61,11 +61,11 @@
 									<td>
 										<c:choose>
 											<c:when test="${login.permiso == '1'}">
-												<a href="#" name="editCurso" data-cursoId="${curso.id}"><button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Editar curso"><i class="fa fa-pencil"></i></button></a>
-												<a href="#" name="deleteCurso" data-cursoId="${curso.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar curso"><i class="fa fa-times"></i></button></a>
+												<a href="#" name="editCurso" data-cursoId="${curso.id}"><button class="btn btn-primary btn-circle" type="button" title="Editar curso"><i class="fa fa-pencil"></i></button></a>
+												<a href="#" name="deleteCurso" data-cursoId="${curso.id}" ><button class="btn btn-danger btn-circle" type="button" title="Eliminar curso"><i class="fa fa-times"></i></button></a>
 											</c:when>
 											<c:when test="${login.permiso == '2'}">
-												<a href="#" name="editCurso" data-cursoId="${curso.id}"><button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Editar curso"><i class="fa fa-pencil"></i></button></a>
+												<a href="#" name="editCurso" data-cursoId="${curso.id}"><button class="btn btn-primary btn-circle" type="button" title="Editar curso"><i class="fa fa-pencil"></i></button></a>
 											</c:when>
 										</c:choose>												
 									</td>

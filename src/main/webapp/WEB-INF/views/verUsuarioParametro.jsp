@@ -48,7 +48,7 @@
 									<td data-colorId="${usuarioParametro.color.id}">${usuarioParametro.color.color}</td>
 									<td data-activoId = ${usuarioParametro.activo == true?'1':'0'}>${usuarioParametro.activo == true?'SI':'NO'}</td>
 									<td>
-										<a href="#" name="editUsuarioParametro" data-ususarioParametroId="${usuarioParametro.id}"><button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Editar Usuario Parametro"><i class="fa fa-pencil"></i></button></a>
+										<a href="#" name="editUsuarioParametro" data-ususarioParametroId="${usuarioParametro.id}"><button class="btn btn-primary btn-circle" type="button" title="Editar Usuario Parametro"><i class="fa fa-pencil"></i></button></a>
 									</td>
 								</tr>
 							</c:forEach>

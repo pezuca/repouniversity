@@ -220,40 +220,44 @@ public class UsuarioService {
     public Usuario updateRol(Long userId, String rol, Long permiso) {
         Role role = roleService.findByRoleName(rol);
         Usuario user = usuarioDAO.findById(userId);
-
-        if (user.getRole() == 2L || ((user.getRole() == 4L || user.getRole() == 1L) && role.getId() == 3L)) {
-            docenteService.delete(usuarioRolService.getUsuarioById(userId).getIdAluDoc());
-
-            if (role.getId() == 3L) {
-                Alumno alumno = alumnoService.findByPersonaId(user.getIdPersona(), Boolean.FALSE);
-
-                if (alumno != null) {
-                    alumnoService.unDelete(alumno.getId());
-                } else {
-                    alumno = new Alumno();
-                    alumno.setIdPersona(user.getIdPersona());
-                    alumnoService.save(alumno);
-                }
-            }
-        }
-
-        if (user.getRole() == 3L || ((user.getRole() == 4L || user.getRole() == 1L) && role.getId() == 2L)) {
-            alumnoService.delete(usuarioRolService.getUsuarioById(userId).getIdAluDoc());
-
-            if (role.getId() == 2L) {
-                Docente docente = docenteService.findByPersonaId(user.getIdPersona(), Boolean.FALSE);
-
-                if (docente != null) {
-                    docenteService.unDelete(docente.getId());
-                } else {
-                    docente = new Docente();
-                    docente.setPersonaId(user.getIdPersona());
-                    docenteService.save(docente);
-                }
-            }
-        }
-
-        user.setRole(role.getId());
+        
+        if (role.getId() != user.getRole()){
+	
+	
+	        if (user.getRole() == 2L || ((user.getRole() == 4L || user.getRole() == 1L) && role.getId() == 3L)) {
+	            docenteService.delete(usuarioRolService.getUsuarioById(userId).getIdAluDoc());
+	
+	            if (role.getId() == 3L) {
+	                Alumno alumno = alumnoService.findByPersonaId(user.getIdPersona(), Boolean.FALSE);
+	
+	                if (alumno != null) {
+	                    alumnoService.unDelete(alumno.getId());
+	                } else {
+	                    alumno = new Alumno();
+	                    alumno.setIdPersona(user.getIdPersona());
+	                    alumnoService.save(alumno);
+	                }
+	            }
+	        }
+	
+	        if (user.getRole() == 3L || ((user.getRole() == 4L || user.getRole() == 1L) && role.getId() == 2L)) {
+	            alumnoService.delete(usuarioRolService.getUsuarioById(userId).getIdAluDoc());
+	
+	            if (role.getId() == 2L) {
+	                Docente docente = docenteService.findByPersonaId(user.getIdPersona(), Boolean.FALSE);
+	
+	                if (docente != null) {
+	                    docenteService.unDelete(docente.getId());
+	                } else {
+	                    docente = new Docente();
+	                    docente.setPersonaId(user.getIdPersona());
+	                    docenteService.save(docente);
+	                }
+	            }
+	        }
+	
+	        user.setRole(role.getId());
+	}
         user.setIdPermiso(permiso);
         
         usuarioDAO.updateUserWithoutPass(user);
