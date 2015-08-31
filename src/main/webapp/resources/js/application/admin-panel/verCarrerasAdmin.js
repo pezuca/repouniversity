@@ -211,6 +211,7 @@ $(document).ready(function() {
 	});
 
 	$("#agregarCarreraDialog").dialog({
+		position: "top",
 		resizable: false,
 		width:700,
 		modal: true,
@@ -238,6 +239,7 @@ $(document).ready(function() {
 	});
 	
 	$("#editarCarreraDialog").dialog({
+		position: "top",
 		resizable: false,
 		width:700,
 		modal: true,
@@ -281,6 +283,7 @@ $(document).ready(function() {
 		}
 	});
 	$("#verCarreraDialog").dialog({
+		position: "top",
 		resizable: false,
 		width:900,
 		modal: true,
