@@ -114,7 +114,9 @@ public class UsuarioService {
         usuario.setPass(persona.getId() + password);
         usuario.setPersona(persona.getId());
         usuario.setRole(roleService.findByRoleName(rol).getId());
-
+        //se le asigna el maximo permiso.
+        usuario.setIdPermiso(1L);
+        
         usuarioDAO.insert(usuario);
 
         if (rol.equalsIgnoreCase("alumno")) {

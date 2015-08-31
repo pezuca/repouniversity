@@ -1,7 +1,7 @@
 var usuariosAdmin = {
 	crearNuevoUsuarioAjax : function() {
 		$.ajax({
-			url: "nuevoUsuario",
+			url: "/repouniversity/admin/nuevoUsuario",
 			type: "POST",
 			data: $("#nuevoAlumnoForm").serialize(),
 			success: function(data){
@@ -144,7 +144,7 @@ var usuariosAdmin = {
 	},
 	deleteUsuarioAjax : function(userId) {
 		$.ajax({
-			url: "eliminarUsuario",
+			url: "/repouniversity/admin/eliminarUsuario",
 			type: "POST",
 			data: {"userId" : userId},
 			success: function(data){
