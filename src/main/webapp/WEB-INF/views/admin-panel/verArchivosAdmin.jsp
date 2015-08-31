@@ -71,31 +71,31 @@
 													<c:when test="${login.permiso == '1'}">
 														<a  name="editArchivo"
 															data-archivoId="${archivo.id}"><button
-																	class="btn btn-info btn-circle" type="button">
+																	class="btn btn-info btn-circle" type="button" title="Editar archivo">
 																	<i class="fa fa-pencil"></i>
 																</button></a> <a  name="deleteArchivo"
 															data-archivoId="${archivo.id}"><button
-																	class="btn btn-danger btn-circle" type="button">
+																	class="btn btn-danger btn-circle" type="button" title="Eliminar archivo">
 																	<i class="fa fa-times"></i>
 																</button></a>
 													</c:when>
 													<c:when test="${login.permiso == '2'}">
 														<a  name="editArchivo"
 															data-archivoId="${archivo.id}"><button
-																	class="btn btn-info btn-circle" type="button">
+																	class="btn btn-info btn-circle" type="button" title="Editar archivo">
 																	<i class="fa fa-pencil"></i>
 																</button></a> 
 													</c:when>
 												</c:choose>
 														<a  name="dowloadArchivo"
 													data-archivoId="${archivo.id}" href="/repouniversity/vistaPrevia?archivoId=${archivo.id}&bread=Vista previa-2"><button
-															class="btn btn-primary btn-circle" type="button">
+															class="btn btn-primary btn-circle" type="button" title="Previsualizar archivo">
 															<i class="fa fa-search"></i>
 														</button></a>
 														
 														<a  name="dowloadArchivo"
 													data-archivoId="${archivo.id}" href="/repouniversity/bajarArchivo?archivoId=${archivo.id}"><button
-															class="btn btn-success btn-circle" type="button">
+															class="btn btn-success btn-circle" type="button" title="Descargar archivo">
 															<i class="fa fa-download"></i>
 														</button></a></td>
 											</tr>

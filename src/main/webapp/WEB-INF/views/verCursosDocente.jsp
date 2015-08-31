@@ -45,7 +45,7 @@
 											<td>${cursoMat.codigoCurso}</td>
 											<td>${cursoMat.nombreMateria}</td>
 											<td>${cursoMat.descripcionCurso}</td>
-											<td><a href="/repouniversity/docente/verCurso?cursoId=${cursoMat.id}&bread=Curso-2"><button class="btn btn-primary btn-circle" type="button"><i class="fa fa-arrow-right"></i></button></a></td>
+											<td><a href="/repouniversity/docente/verCurso?cursoId=${cursoMat.id}&bread=Curso-2"><button class="btn btn-primary btn-circle" type="button" title="Ver curso"><i class="fa fa-arrow-right"></i></button></a></td>
 										</tr>
 									</c:forEach>
 								</tbody>
