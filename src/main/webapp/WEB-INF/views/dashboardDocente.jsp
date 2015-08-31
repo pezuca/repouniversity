@@ -75,7 +75,6 @@
 					</div>
 				</div>
 			</div>
-			<%@include file="../components/footer.jsp"%>
 		</div>
 		<!-- 	Ventanas -->
 			<div id="agregarErrorDialog" title="Nuevo Error">
