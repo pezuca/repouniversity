@@ -76,13 +76,13 @@ var usuariosAdmin = {
 				
 				$("#agregarAlumnoDialog").dialog("close");						
 			},
-			error: function(data) {
-				$("#nuevoAlumnoForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de crear el usuario, inténtelo mas tarde.</p></div>")
+			error: function(data) {		
+				$("#nuevoAlumnoForm").after("<div class='infoDialog'><p class='infoPara'>" + data.responseText + "</p></div>")
 				setTimeout(function(){
-					$("#agregarAlumnoDialog .infoDialog").hide(function(){
+					$("#nuevoAlumnoForm .infoDialog").hide(function(){
 						$(this).remove();
 					});
-				}, 3000);	
+				}, 5000);	
 			}
 		})
 	},
