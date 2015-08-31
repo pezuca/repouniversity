@@ -86,7 +86,6 @@ $(document).ready(function() {
 	});
 
 	$("#agregarErrorDialog").dialog({
-		position: "top",
 		resizable: false,
 		width:700,
 		modal: true,
@@ -117,7 +116,6 @@ $(document).ready(function() {
 	});
 	
 	$("#deleteErrorDialog").dialog({
-		position: "top",
 		resizable: false,
 		width:400,
 		modal: true,

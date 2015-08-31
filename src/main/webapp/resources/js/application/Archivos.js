@@ -113,7 +113,6 @@ $(document).ready(function() {
 	listaArchivos.columns.adjust().draw();
 	
 	$("#editarArchivoDialog").dialog({
-		position: "top",
 		resizable: false,
 		width:700,
 		modal: true,
@@ -154,7 +153,6 @@ $(document).ready(function() {
 	});
 	
 	$("#deleteArchivoDialog").dialog({
-		position: "top",
 		resizable: false,
 		width:400,
 		modal: true,

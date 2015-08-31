@@ -89,7 +89,6 @@ $(document).ready(function() {
 	});
 		
 	$("#editarUsuarioParametroDialog").dialog({
-		position: "top",
 		resizable: false,
 		width:700,
 		modal: true,

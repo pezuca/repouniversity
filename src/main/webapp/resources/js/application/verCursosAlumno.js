@@ -72,7 +72,6 @@ $(document).ready(function() {
 	});
 	
 	$("#deleteCursoDialog").dialog({
-		position: "top",
 		resizable: false,
 		width:400,
 		modal: true,

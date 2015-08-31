@@ -185,7 +185,6 @@ $(document).ready(function() {
 	});
 
 	$("#agregarMateriaDialog").dialog({
-		position: "top",
 		resizable: false,
 		width:700,
 		modal: true,
@@ -212,7 +211,6 @@ $(document).ready(function() {
 	});
 	
 	$("#editarMateriaDialog").dialog({
-		position: "top",
 		resizable: false,
 		width:700,
 		modal: true,
@@ -243,7 +241,6 @@ $(document).ready(function() {
 	});
 	
 	$("#deleteMateriaDialog").dialog({
-		position: "top",
 		resizable: false,
 		width:400,
 		modal: true,

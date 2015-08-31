@@ -297,7 +297,6 @@ $(document).ready(function() {
 	});
 
 	$("#agregarTpDialog").dialog({
-		position: "top",
 		resizable: false,
 		width:700,
 		modal: true,
@@ -324,7 +323,6 @@ $(document).ready(function() {
 		}
 	});
 	$("#agregarAlumnoDialog").dialog({
-		position: "top",
 		resizable: false,
 		width:700,
 		modal: true,
@@ -369,7 +367,6 @@ $(document).ready(function() {
 		}
 	});	
 	$("#editarTpDialog").dialog({
-		position: "top",
 		resizable: false,
 		width:700,
 		modal: true,
@@ -404,7 +401,6 @@ $(document).ready(function() {
 	});
 	
 	$("#deleteTpDialog").dialog({
-		position: "top",
 		resizable: false,
 		width:400,
 		modal: true,

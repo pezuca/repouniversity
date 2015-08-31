@@ -241,7 +241,6 @@ $(document).ready(function() {
 	});
 	
 	$("#agregarEntregaTpDialog").dialog({
-		position: "top",
 		resizable: false,
 		width:700,
 		modal: true,
@@ -268,7 +267,6 @@ $(document).ready(function() {
 	});
 	
 	$("#agregarComentarioDialog").dialog({
-		position: "top",
 		resizable: false,
 		width:700,
 		modal: true,
@@ -294,7 +292,6 @@ $(document).ready(function() {
 		}
 	});
 	$("#editarEntregaTpDialog").dialog({
-		position: "top",
 		resizable: false,
 		width:700,
 		modal: true,
@@ -326,7 +323,6 @@ $(document).ready(function() {
 		}
 	});
 	$("#deleteComentarioDialog").dialog({
-		position: "top",
 		resizable: false,
 		width:400,
 		modal: true,
@@ -350,7 +346,6 @@ $(document).ready(function() {
 	});
 	
 	$("#deleteEntregaTpDialog").dialog({
-		position: "top",
 		resizable: false,
 		width:400,
 		modal: true,
