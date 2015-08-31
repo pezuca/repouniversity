@@ -99,6 +99,7 @@ CREATE TABLE `archivo` (
   `persona_id_persona` int(10) NOT NULL,
   `id_curso` int(10) NOT NULL,
   `Tags` varchar(500) DEFAULT NULL,
+  `binario` mediumblob not null,
   PRIMARY KEY (`id_archivo`,`persona_id_persona`),
   KEY `fk_archivo_1` (`id_tipo`),
   KEY `fk_archivo_estado1` (`estado`),
