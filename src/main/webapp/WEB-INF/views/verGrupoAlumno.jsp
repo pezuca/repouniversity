@@ -42,6 +42,8 @@
 							<tr>
 								<th>Id</th>
 								<th>Alumno</th>
+								<th>Mail</th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -49,6 +51,8 @@
 								<tr>
 									<td>${alumno.id}</td>
 									<td>${alumno.persona.apellido}, ${alumno.persona.nombre}</td>
+									<td>${alumno.persona.mail}</td>
+									<td></td>
 								</tr>
 							</c:forEach>
 						</tbody>

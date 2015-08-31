@@ -211,10 +211,10 @@ $(document).ready(function() {
             "search": "Filtrar por: "
         },
         "columnDefs": [
-                       {"width": "35%", "targets": 0},
+                       {"width": "10%", "targets": 0},
                        {"width": "40%", "targets": 1},
-                       {"width": "25%", "targets": 2},
-                       { orderable: false, targets: [11] }
+                       {"width": "30%", "targets": 2},
+                       { orderable: false, targets: [3] }
                       ],
                       "order": [[ 0, "desc" ]]
 	});
