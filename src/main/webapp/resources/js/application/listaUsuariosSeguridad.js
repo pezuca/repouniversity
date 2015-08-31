@@ -80,7 +80,7 @@ $(document).ready(function() {
             "info": "Pagina _PAGE_ of _PAGES_",
             "infoEmpty": "No hay resultados disponibles.",
             "infoFiltered": "(filtered from _MAX_ total records)",
-            "search": "Búsqueda: "
+            "search": "Filtrar por: "
         },
         "columnDefs": [
 	       { orderable: false, targets: [8] }
@@ -89,7 +89,6 @@ $(document).ready(function() {
 	});
 
 	$("#editarAlumnoDialog").dialog({
-		position: "top",
 		resizable: false,
 		width:700,
 		modal: true,

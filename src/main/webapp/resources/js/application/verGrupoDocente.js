@@ -264,7 +264,7 @@ $(document).ready(function() {
             "info": "Pagina _PAGE_ of _PAGES_",
             "infoEmpty": "No hay resultados disponibles.",
             "infoFiltered": "(filtered from _MAX_ total records)",
-            "search": "Búsqueda: "
+            "search": "Filtrar por: "
         },
         "columnDefs": [
                        {"width": "15%", "targets": 0},
@@ -287,7 +287,7 @@ $(document).ready(function() {
             "info": "Pagina _PAGE_ of _PAGES_",
             "infoEmpty": "No hay resultados disponibles.",
             "infoFiltered": "(filtered from _MAX_ total records)",
-            "search": "Búsqueda: "
+            "search": "Filtrar por: "
         },
         "columnDefs": [
                        {"width": "15%", "targets": 0},
@@ -297,7 +297,6 @@ $(document).ready(function() {
 	});
 
 	$("#agregarTpDialog").dialog({
-		position: "top",
 		resizable: false,
 		width:700,
 		modal: true,
@@ -324,7 +323,6 @@ $(document).ready(function() {
 		}
 	});
 	$("#agregarAlumnoDialog").dialog({
-		position: "top",
 		resizable: false,
 		width:700,
 		modal: true,
@@ -369,7 +367,6 @@ $(document).ready(function() {
 		}
 	});	
 	$("#editarTpDialog").dialog({
-		position: "top",
 		resizable: false,
 		width:700,
 		modal: true,
@@ -404,7 +401,6 @@ $(document).ready(function() {
 	});
 	
 	$("#deleteTpDialog").dialog({
-		position: "top",
 		resizable: false,
 		width:400,
 		modal: true,

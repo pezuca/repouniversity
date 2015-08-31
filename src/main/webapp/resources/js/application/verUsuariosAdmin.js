@@ -76,13 +76,13 @@ var usuariosAdmin = {
 				
 				$("#agregarAlumnoDialog").dialog("close");						
 			},
-			error: function(data) {
-				$("#nuevoAlumnoForm").after("<div class='infoDialog'><p class='infoPara'>Hubo un error al tratar de crear el usuario, inténtelo mas tarde.</p></div>")
+			error: function(data) {		
+				$("#nuevoAlumnoForm").after("<div class='infoDialog'><p class='infoPara'>" + data.responseText + "</p></div>")
 				setTimeout(function(){
-					$("#agregarAlumnoDialog .infoDialog").hide(function(){
+					$("#nuevoAlumnoForm .infoDialog").hide(function(){
 						$(this).remove();
 					});
-				}, 3000);	
+				}, 5000);	
 			}
 		})
 	},
@@ -206,7 +206,7 @@ $(document).ready(function() {
             "info": "Pagina _PAGE_ of _PAGES_",
             "infoEmpty": "No hay resultados disponibles.",
             "infoFiltered": "(filtered from _MAX_ total records)",
-            "search": "Búsqueda: "
+            "search": "Filtrar por: "
         },
         "columnDefs": [
                        {"width": "5%", "targets": 0},
@@ -222,7 +222,6 @@ $(document).ready(function() {
 	});
 	
 	$("#agregarAlumnoDialog").dialog({
-		position: "top",
 		resizable: false,
 		width:700,
 		modal: true,
@@ -259,7 +258,6 @@ $(document).ready(function() {
 	});
 	
 	$("#editarAlumnoDialog").dialog({
-		position: "top",
 		resizable: false,
 		width:700,
 		modal: true,

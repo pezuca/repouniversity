@@ -3,7 +3,6 @@ $(document).ready(function() {
 	$("#userUpdate select[name=carrera]").chosen({no_results_text:'No hay resultados para: '});
 	
 	$("#errorPass").dialog({
-		position: "top",
 		resizable: false,
 		width:400,
 		modal: true,
@@ -47,7 +46,6 @@ $(document).ready(function() {
 	});
 	
 	$("#passErrorDailog").dialog({
-		position: "top",
 		resizable: false,
 		width:450,
 		modal: true,

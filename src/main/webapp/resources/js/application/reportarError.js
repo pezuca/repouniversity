@@ -77,7 +77,7 @@ $(document).ready(function() {
             "info": "Pagina _PAGE_ of _PAGES_",
             "infoEmpty": "No hay resultados disponibles.",
             "infoFiltered": "(filtered from _MAX_ total records)",
-            "search": "Búsqueda: "
+            "search": "Filtrar por: "
         },
         "columnDefs": [
 	       { orderable: false, targets: [4] }
@@ -86,7 +86,6 @@ $(document).ready(function() {
 	});
 
 	$("#agregarErrorDialog").dialog({
-		position: "top",
 		resizable: false,
 		width:700,
 		modal: true,
@@ -117,7 +116,6 @@ $(document).ready(function() {
 	});
 	
 	$("#deleteErrorDialog").dialog({
-		position: "top",
 		resizable: false,
 		width:400,
 		modal: true,
