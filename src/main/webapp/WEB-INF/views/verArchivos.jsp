@@ -25,7 +25,7 @@
 		
 		<tag:breadcrumb label="Mis archivos"/>
 		
-		<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="wrapper wrapper-content animated fadeInRight pre-scrollable">
 				
 		<div class="row">
 			<div class="col-lg-12">
@@ -131,22 +131,27 @@
 		<%@include file="../components/footer.jsp"%>
 		</div>
 	</div>
-	<script>
-		$(document).ready(function() {
-			$('#clientTable').dataTable({
-				retrieve: true,
-				"processing" : false,
-				"serverSide" : false,
-				"paging": false,
-				"language": {
-		            "search": "Búsqueda"
-		        }
-			});
-	
-			$("#clientTable_length").remove();
-		});
+<!-- 	<script> -->
+// 		$(document).ready(function() {
+// 			$('#clientTable').dataTable({
+// 				retrieve: true,
+// 				"processing" : false,
+// 				"serverSide" : false,
+// 				"pagingType": "full_numbers",
+// 				"language": {
+// 		            "search": "Búsqueda"
+// 		        },
+// 		        "columnDefs": [
+// 		                       {"width": "35%", "targets": 0},
+// 		                       {"width": "40%", "targets": 1},
+// 		                       {"width": "25%", "targets": 2},
+// 		                       { orderable: false, targets: [11] }
+// 		                      ],
+// 		                      "order": [[ 0, "desc" ]]
+// 			});
+// 		});
 		
-	}
-	</script>	
+// 	}
+<!-- 	</script>	 -->
 </body>
 </html>

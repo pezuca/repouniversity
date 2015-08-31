@@ -21,7 +21,7 @@
 				
 				<tag:breadcrumb label="Busqueda avanzada"/>
 				
-		        <div class="wrapper wrapper-content animated fadeIn">
+		        <div class="wrapper wrapper-content animated fadeIn pre-scrollable">
 		            <div class="row">
 		                <div class="col-lg-12">
 			                <div class="ibox float-e-margins">
@@ -88,10 +88,10 @@
 		            	</div>
 					</div>
 		    	</div>
+				<%@include file="../components/footer.jsp"%>
 		    </div>	
 	    </div>	
    
-	<%@include file="../components/footer.jsp"%>
 
     <script>
         $(document).ready(function(){

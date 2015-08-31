@@ -23,11 +23,11 @@ var tpAdmin = {
 	                  data.archivoNombre,
 	                  //data.nota,
 	                  "          ",
-				                                          "<a name='editTp' data-tpgrupoId='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a> " + 
-				  										  "<a name='deleteTp' data-tpgrupoId='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a> " +
-														  "<a href='/repouniversity/grupo/verTrabajosPracticos?tpGrupoId=" + data.id + "' name='Ver' data-tpgrupoId=" + data.id + "><button class='btn btn-primary btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Ver TP'><i class='fa fa-arrow-right'></i></button></a>" +
-														  "<a href='/repouniversity/vistaPrevia?archivoId=" + data.archivo + "' name='verArchivo' data-tpgrupoId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Ver Archivo'><i class='fa fa-search'></i></button></a>" +
-														  "<a href='/repouniversity/bajarArchivo?archivoId=" + data.archivo + "' name='dowloadArchivo' data-tpgrupoId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Bajar Archivo'><i class='fa fa-download'></i></button></a>"
+                      "<a name='editTp' data-tpgrupoId='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a> " + 
+					  "<a name='deleteTp' data-tpgrupoId='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a> " +
+					  "<a href='/repouniversity/grupo/verTrabajosPracticos?tpGrupoId=" + data.id + "' name='Ver' data-tpgrupoId=" + data.id + "><button class='btn btn-primary btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Ver TP'><i class='fa fa-arrow-right'></i></button></a>" +
+					  "<a href='/repouniversity/vistaPrevia?archivoId=" + data.archivo + "' name='verArchivo' data-tpgrupoId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Ver Archivo'><i class='fa fa-search'></i></button></a>" +
+					  "<a href='/repouniversity/bajarArchivo?archivoId=" + data.archivo + "' name='dowloadArchivo' data-tpgrupoId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Bajar Archivo'><i class='fa fa-download'></i></button></a>"
 												  			
 	             ]).draw();
 				
@@ -219,7 +219,7 @@ $(document).ready(function() {
 		retrieve: true,
 		"processing" : false,
 		"serverSide" : false,
-		"paging" : false,
+		"pagingType": "full_numbers",
 		"language": {
             "lengthMenu": "Mostrar _MENU_ resultados por página",
             "zeroRecords": "No fueron encontrados resultados.",
@@ -227,14 +227,22 @@ $(document).ready(function() {
             "infoEmpty": "No hay resultados disponibles.",
             "infoFiltered": "(filtered from _MAX_ total records)",
             "search": "Búsqueda: "
-        }
+        },
+        "columnDefs": [
+                       {"width": "15%", "targets": 0},
+                       {"width": "30%", "targets": 1},
+                       {"width": "30%", "targets": 2},
+                       {"width": "25%", "targets": 3},
+                       { orderable: false, targets: [3] }
+                      ],
+                      "order": [[ 0, "desc" ]]
 	});
 	
 	tableGrupo = $('#GruposAlumnos').DataTable({
 		retrieve: true,
 		"processing" : false,
 		"serverSide" : false,
-		"paging" : false,
+		"pagingType": "full_numbers",
 		"language": {
             "lengthMenu": "Mostrar _MENU_ resultados por página",
             "zeroRecords": "No fueron encontrados resultados.",
@@ -242,7 +250,12 @@ $(document).ready(function() {
             "infoEmpty": "No hay resultados disponibles.",
             "infoFiltered": "(filtered from _MAX_ total records)",
             "search": "Búsqueda: "
-        }
+        },
+        "columnDefs": [
+                       {"width": "15%", "targets": 0},
+                       {"width": "85%", "targets": 1},
+                      ],
+                      "order": [[ 0, "desc" ]]
 	});
 
 	$("#agregarTpDialog").dialog({

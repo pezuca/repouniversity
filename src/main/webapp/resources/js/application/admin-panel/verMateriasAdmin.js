@@ -13,13 +13,13 @@ var materiasAdmin = {
 				
 				
 				table.row.add([
-				                                          data.id,
-				                                          data.nombre,
-				                                          data.descripcion,
-				                                          "<a href='#' name='editMateria' data-materiaid='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a>" + 
-				  										  "<a href='#' name='deleteMateria' data-materiaid='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a>"
-				                                     ]).draw();
-				
+                      data.id,
+                      data.nombre,
+                      data.descripcion,
+                      "<a href='#' name='editMateria' data-materiaid='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a>" + 
+					  "<a href='#' name='deleteMateria' data-materiaid='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a>"
+                 ]).draw();
+
 				//Agrego el evento de delete
 				$("a[name='deleteMateria'][data-materiaid=" + data.id + "] button").click(function(){
 					$("#deleteMateriaDialog").data('materiaId', $(this).parent().attr("data-materiaid")).dialog("open");
@@ -128,6 +128,19 @@ var materiasAdmin = {
 		});
 		
 		return flag;
+	},
+	botones : function() {
+		$("a[name=editMateria] button").click(function(){
+			$("#editarMateriaDialog").data('materiaId', $(this).parent().attr("data-materiaid"))
+				.data('materiaId', $(this).parents("tr").find("td").get(0).innerHTML)
+				.data('nombre', $(this).parents("tr").find("td").get(1).innerHTML)
+				.data('descripcion', $(this).parents("tr").find("td").get(2).innerHTML)
+				.dialog("open");
+		});
+		
+		$("a[name=deleteMateria] button").click(function(){
+			$("#deleteMateriaDialog").data('materiaId', $(this).parent().attr("data-materiaid")).dialog("open");
+		});
 	}
 };
 
@@ -136,20 +149,25 @@ $(document).ready(function() {
 		retrieve: true,
 		"processing" : false,
 		"serverSide" : false,
-		"paging" : false,
+		"pagingType": "full_numbers",
 		"language": {
             "lengthMenu": "Mostrar _MENU_ resultados por página",
             "zeroRecords": "No fueron encontrados resultados.",
             "info": "Pagina _PAGE_ of _PAGES_",
             "infoEmpty": "No hay resultados disponibles.",
             "infoFiltered": "(filtered from _MAX_ total records)",
-            "search": "Búsqueda: "
-        }
+            "search": "Filtrar por: "
+        },
+        "columnDefs": [
+	       {"width": "5%", "targets": 0},
+	       {"width": "35%", "targets": 1},
+	       {"width": "40%", "targets": 2},
+	       {"width": "10%", "targets": 3},
+	       { orderable: false, targets: [3] }
+	     ],
+	     "order": [[ 0, "desc" ]]
 	});
 
-	$("#clientTable_length").remove();
-	
-	
 	$("#agregarMateriaDialog").dialog({
 		position: "top",
 		resizable: false,
@@ -236,15 +254,9 @@ $(document).ready(function() {
 		$("#agregarMateriaDialog").dialog("open");
 	});
 	
-	$("a[name=deleteMateria] button").click(function(){
-		$("#deleteMateriaDialog").data('materiaId', $(this).parent().attr("data-materiaid")).dialog("open");
-	});
+	materiasAdmin.botones();
 	
-	$("a[name=editMateria] button").click(function(){
-		$("#editarMateriaDialog").data('materiaId', $(this).parent().attr("data-materiaid"))
-			.data('materiaId', $(this).parents("tr").find("td").get(0).innerHTML)
-			.data('nombre', $(this).parents("tr").find("td").get(1).innerHTML)
-			.data('descripcion', $(this).parents("tr").find("td").get(2).innerHTML)
-			.dialog("open");
+	$("#listaMaterias_paginate").click(function() {
+		materiasAdmin.botones();
 	});
 });

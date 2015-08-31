@@ -137,7 +137,7 @@ $(document).ready(function() {
 		retrieve: true,
 		"processing" : false,
 		"serverSide" : false,
-		"paging" : false,
+		"pagingType": "full_numbers",
 		"language": {
             "lengthMenu": "Mostrar _MENU_ resultados por página",
             "zeroRecords": "No fueron encontrados resultados.",
@@ -147,18 +147,19 @@ $(document).ready(function() {
             "search": "Búsqueda: "
         },
         "columnDefs": [
-                       {"width": "35%", "targets": 0},
+                       {"width": "40%", "targets": 0},
                        {"width": "40%", "targets": 1},
-                       {"width": "25%", "targets": 2},
-                      ]
+                       {"width": "20%", "targets": 2},
+                       { orderable: false, targets: [2] }
+                      ],
+                      "order": [[ 0, "desc" ]]
 	});
-	$("#cursosGruposTable_length").remove();
 	
 	notificacionesTable = $('#notificaciones').DataTable({
 		retrieve: true,
 		"processing" : false,
 		"serverSide" : false,
-		"paging" : false,
+		"pagingType": "full_numbers",
 		"language": {
             "lengthMenu": "Mostrar _MENU_ resultados por página",
             "zeroRecords": "No fueron encontrados resultados.",
@@ -171,10 +172,10 @@ $(document).ready(function() {
                        {"width": "35%", "targets": 0},
                        {"width": "40%", "targets": 1},
                        {"width": "25%", "targets": 2},
-                      ]
+                       { orderable: false, targets: [2] }
+                      ],
+                      "order": [[ 0, "desc" ]]
 	});
-	$("#notificacionesTable_length").remove();
-
 	
 	$("#crearGrupoDialog").dialog({
 		position: "top",

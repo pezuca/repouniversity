@@ -23,7 +23,7 @@
 			
 			<tag:breadcrumb label="Home"/>
 			
-			<div class="wrapper wrapper-content animated fadeInRight">
+			<div class="wrapper wrapper-content animated fadeInRight pre-scrollable">
 				
 				<div class="row">
 					<div class="col-lg-12">

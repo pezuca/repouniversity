@@ -93,7 +93,7 @@ $(document).ready(function() {
 		retrieve: true,
 		"processing" : false,
 		"serverSide" : false,
-		"paging" : false,
+		"pagingType": "full_numbers",
 		"language": {
             "lengthMenu": "Mostrar _MENU_ resultados por página",
             "zeroRecords": "No fueron encontrados resultados.",
@@ -101,7 +101,18 @@ $(document).ready(function() {
             "infoEmpty": "No hay resultados disponibles.",
             "infoFiltered": "(filtered from _MAX_ total records)",
             "search": "Búsqueda: "
-        }
+        },
+        "columnDefs": [
+           {"width": "5%", "targets": 0},
+           {"width": "15%", "targets": 2},
+           {"width": "15%", "targets": 4},
+           {"width": "10%", "targets": 5},
+           {"width": "10%", "targets": 6},
+           {"width": "20%", "targets": 9},
+           {"width": "20%", "targets": 11},
+	       { orderable: false, targets: [11] }
+	     ],
+	     "order": [[ 0, "desc" ]]
 	});
 	
 	table.column(1).visible(false);
@@ -111,9 +122,6 @@ $(document).ready(function() {
 	table.column(10).visible(false);
 	table.columns.adjust().draw();
 
-	$("#listaArchivosTable_length").remove();
-	$("#listaArchivos_info").remove();
-	
 	$("#editarArchivoDialog").dialog({
 		position: "top",
 		resizable: false,

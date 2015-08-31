@@ -1969,7 +1969,6 @@ video {
 
 #page-wrapper {
 	padding: 0 15px;
-	min-height: 568px;
 	position: relative !important;
 }
 
@@ -4038,8 +4037,13 @@ body.skin-3 {
 	#page-wrapper {
 		position: inherit;
 		margin: 0 0 0 220px;
-		min-height: 1100px;
+		min-height: 650px;
 	}
+	
+	.wrapper.wrapper-content{
+		min-height: 440px;
+	}
+	
 	.navbar-static-side {
 		z-index: 101;
 		position: absolute;
@@ -4164,4 +4168,8 @@ body.skin-3 {
 
 #startTour {
 	border-radius: 0px !important;
+}
+
+.pre-scrollable {
+	overflow-x: hidden; 
 }

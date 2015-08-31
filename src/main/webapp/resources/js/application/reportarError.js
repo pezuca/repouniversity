@@ -70,7 +70,7 @@ $(document).ready(function() {
 		retrieve: true,
 		"processing" : false,
 		"serverSide" : false,
-		"paging" : false,
+		"pagingType": "full_numbers",
 		"language": {
             "lengthMenu": "Mostrar _MENU_ resultados por página",
             "zeroRecords": "No fueron encontrados resultados.",
@@ -78,7 +78,11 @@ $(document).ready(function() {
             "infoEmpty": "No hay resultados disponibles.",
             "infoFiltered": "(filtered from _MAX_ total records)",
             "search": "Búsqueda: "
-        }
+        },
+        "columnDefs": [
+	       { orderable: false, targets: [4] }
+	     ],
+	     "order": [[ 0, "desc" ]]
 	});
 
 	$("#agregarErrorDialog").dialog({

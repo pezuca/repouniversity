@@ -19,7 +19,7 @@
 		
 		<tag:breadcrumb label="Vista previa"/>
 	
-	 	<div class="wrapper wrapper-content animated fadeInRight">
+	 	<div class="wrapper wrapper-content animated fadeInRight pre-scrollable">
 	         <div class="row">
 	      		<div class="col-lg-9">
 	         		<div class="ibox">

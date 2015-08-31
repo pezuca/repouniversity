@@ -13,15 +13,15 @@ var cursosAdmin = {
 				
 				
 				table.row.add([
-				                                          data.id,
-				                                          data.nombre,
-				                                          data.codigo,
-				                                          data.descripcion,
-				                          				  data.materia.nombre,
-				                          				  data.docente.persona.nombre + ", " + data.docente.persona.apellido,
-				                                          "<a href='#' name='editCurso' data-cursoId='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a>" + 
-				  										  "<a href='#' name='deleteCurso' data-cursoId='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a>"
-				                                     ]).draw();
+                      data.id,
+                      data.nombre,
+                      data.codigo,
+                      data.descripcion,
+      				  data.materia.nombre,
+      				  data.docente.persona.nombre + ", " + data.docente.persona.apellido,
+                      "<a href='#' name='editCurso' data-cursoId='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a>" + 
+					  "<a href='#' name='deleteCurso' data-cursoId='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a>"
+                 ]).draw();
 				
 				//Agrego el evento de delete
 				$("a[name='deleteCurso'][data-cursoId=" + data.id + "] button").click(function(){
@@ -148,7 +148,7 @@ $(document).ready(function() {
 		retrieve: true,
 		"processing" : false,
 		"serverSide" : false,
-		"paging" : false,
+		"pagingType": "full_numbers",
 		"language": {
             "lengthMenu": "Mostrar _MENU_ resultados por página",
             "zeroRecords": "No fueron encontrados resultados.",
@@ -156,11 +156,20 @@ $(document).ready(function() {
             "infoEmpty": "No hay resultados disponibles.",
             "infoFiltered": "(filtered from _MAX_ total records)",
             "search": "Búsqueda: "
-        }
+        },
+        "columnDefs": [
+                       {"width": "5%", "targets": 0},
+                       {"width": "20%", "targets": 1},
+                       {"width": "10%", "targets": 2},
+                       {"width": "20%", "targets": 3},
+                       {"width": "20%", "targets": 4},
+                       {"width": "15%", "targets": 5},
+                       {"width": "10%", "targets": 6},
+                       { orderable: false, targets: [6] }
+                      ],
+                      "order": [[ 0, "desc" ]]
 	});
 
-	$("#clientTable_length").remove();
-	
 	$("#agregarCursoDialog").dialog({
 		position: "top",
 		resizable: false,

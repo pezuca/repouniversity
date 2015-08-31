@@ -150,7 +150,7 @@ $(document).ready(function() {
 		retrieve: true,
 		"processing" : false,
 		"serverSide" : false,
-		"paging" : false,
+		"pagingType": "full_numbers",
 		"language": {
             "lengthMenu": "Mostrar _MENU_ resultados por página",
             "zeroRecords": "No fueron encontrados resultados.",
@@ -160,17 +160,14 @@ $(document).ready(function() {
             "search": "Búsqueda: "
         },
         "columnDefs": [
-                       {"width": "5%", "targets": 0},
-                       {"width": "20%", "targets": 1},
-                       {"width": "60%", "targets": 2},
-                       {"width": "15%", "targets": 3}
-                      ]
+           {"width": "5%", "targets": 0},
+           {"width": "20%", "targets": 1},
+           {"width": "60%", "targets": 2},
+           {"width": "15%", "targets": 3},
+           { orderable: false, targets: [3] }
+          ],
+        "order": [[ 0, "desc" ]]
 	});
-
-	$("#listaCarrerasTable_length").remove();
-	$("#listaCarreras_info").remove();
-	
-	
 	
 	$("#agregarCarreraDialog").dialog({
 		position: "top",
@@ -201,7 +198,6 @@ $(document).ready(function() {
 	});
 	
 	$("#editarCarreraDialog").dialog({
-		position: "top",
 		resizable: false,
 		width:700,
 		modal: true,
@@ -245,7 +241,6 @@ $(document).ready(function() {
 		}
 	});
 	$("#verCarreraDialog").dialog({
-		position: "top",
 		resizable: false,
 		width:900,
 		modal: true,

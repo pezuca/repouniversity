@@ -22,7 +22,7 @@
 		
 		<tag:breadcrumb label="Solicitar curso"/>
 		
-		<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="wrapper wrapper-content animated fadeInRight pre-scrollable">
 			<div class="row">
 	             <div class="col-lg-12">
 					<div class="ibox float-e-margins">
@@ -84,7 +84,7 @@
 				retrieve: true,
 				"processing" : false,
 				"serverSide" : false,
-				"paging": false,
+				"pagingType": "full_numbers",
 				"language": {
 		            "lengthMenu": "Mostrar _MENU_ resultados por página",
 		            "zeroRecords": "No fueron encontrados resultados.",
@@ -92,10 +92,17 @@
 		            "infoEmpty": "No hay resultados disponibles.",
 		            "infoFiltered": "(filtered from _MAX_ total records)",
 		            "search": "Búsqueda: "
-		        }
+		        },
+		        "columnDefs": [
+		                       {"width": "15%", "targets": 0},
+		                       {"width": "25%", "targets": 1},
+		                       {"width": "25%", "targets": 2},
+		                       {"width": "20%", "targets": 3},
+		                       {"width": "10%", "targets": 4},
+		                       { orderable: false, targets: [4] }
+		                      ],
+		                      "order": [[ 0, "desc" ]]
 			});
-	
-			$("#clientTable_length").remove();
 		});
 		
 		function clickSolicitud(cursoId, alumnoId, docenteId, tipoNotif) {

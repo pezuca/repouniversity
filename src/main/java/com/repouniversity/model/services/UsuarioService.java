@@ -64,6 +64,7 @@ public class UsuarioService {
         userToUpdate.setActivo(usuario.isActivo());
         userToUpdate.setRole(usuario.getRole());
         userToUpdate.setPersona(usuario.getIdPersona());
+        userToUpdate.setIdPermiso(usuario.getIdPermiso());
 
         if (StringUtils.isNotBlank(user)) {
             userToUpdate.setUser(user);
