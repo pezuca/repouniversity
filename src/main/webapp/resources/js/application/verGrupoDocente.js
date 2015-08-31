@@ -15,21 +15,49 @@ var tpAdmin = {
 					text: 'La creacion del TP fue exitosa.',
 					sticky: false
 				});
-				
-				
-				table.row.add([
-	                  data.id,
-	                  data.descripcion,
-	                  data.archivoNombre,
-	                  //data.nota,
-	                  "          ",
-                      "<a name='editTp' data-tpgrupoId='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a> " + 
-					  "<a name='deleteTp' data-tpgrupoId='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a> " +
-					  "<a href='/repouniversity/grupo/verTrabajosPracticos?tpGrupoId=" + data.id + "' name='Ver' data-tpgrupoId=" + data.id + "><button class='btn btn-primary btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Ver TP'><i class='fa fa-arrow-right'></i></button></a>" +
-					  "<a href='/repouniversity/vistaPrevia?archivoId=" + data.archivo + "' name='verArchivo' data-tpgrupoId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Ver Archivo'><i class='fa fa-search'></i></button></a>" +
-					  "<a href='/repouniversity/bajarArchivo?archivoId=" + data.archivo + "' name='dowloadArchivo' data-tpgrupoId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Bajar Archivo'><i class='fa fa-download'></i></button></a>"
-												  			
-	             ]).draw();
+
+				if($('input[name=miPermiso]').val() == '1'){
+		               table.row.add([
+		                  data.id,
+		                  data.descripcion,
+		                  data.archivoNombre,
+		                  //data.nota,
+		                  "          ",
+					                                          "<a name='editTp' data-tpgrupoId='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a> " + 
+					  										  "<a name='deleteTp' data-tpgrupoId='" + data.id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a> " +
+															  "<a href='/repouniversity/grupo/verTrabajosPracticos?tpGrupoId=" + data.id + "' name='Ver' data-tpgrupoId=" + data.id + "><button class='btn btn-primary btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Ver TP'><i class='fa fa-arrow-right'></i></button></a>" +
+															  "<a href='/repouniversity/vistaPrevia?archivoId=" + data.archivo + "' name='verArchivo' data-tpgrupoId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Ver Archivo'><i class='fa fa-search'></i></button></a>" +
+															  "<a href='/repouniversity/bajarArchivo?archivoId=" + data.archivo + "' name='dowloadArchivo' data-tpgrupoId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Bajar Archivo'><i class='fa fa-download'></i></button></a>"
+													  			
+						]).draw();
+					}
+					else if($('input[name=miPermiso]').val() == '2'){
+		                table.row.add([
+		                  data.id,
+		                  data.descripcion,
+		                  data.archivoNombre,
+		                  //data.nota,
+		                  "          ",
+					                                          "<a name='editTp' data-tpgrupoId='" + data.id + "'><button class='btn btn-primary btn-circle' type='button'><i class='fa fa-pencil'></i></button></a> " + 
+					  										  "<a href='/repouniversity/grupo/verTrabajosPracticos?tpGrupoId=" + data.id + "' name='Ver' data-tpgrupoId=" + data.id + "><button class='btn btn-primary btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Ver TP'><i class='fa fa-arrow-right'></i></button></a>" +
+															  "<a href='/repouniversity/vistaPrevia?archivoId=" + data.archivo + "' name='verArchivo' data-tpgrupoId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Ver Archivo'><i class='fa fa-search'></i></button></a>" +
+															  "<a href='/repouniversity/bajarArchivo?archivoId=" + data.archivo + "' name='dowloadArchivo' data-tpgrupoId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Bajar Archivo'><i class='fa fa-download'></i></button></a>"
+													  			
+						]).draw();
+					}
+					else{
+						table.row.add([
+		                  data.id,
+		                  data.descripcion,
+		                  data.archivoNombre,
+		                  //data.nota,
+		                  "          ",
+															  "<a href='/repouniversity/grupo/verTrabajosPracticos?tpGrupoId=" + data.id + "' name='Ver' data-tpgrupoId=" + data.id + "><button class='btn btn-primary btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Ver TP'><i class='fa fa-arrow-right'></i></button></a>" +
+															  "<a href='/repouniversity/vistaPrevia?archivoId=" + data.archivo + "' name='verArchivo' data-tpgrupoId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Ver Archivo'><i class='fa fa-search'></i></button></a>" +
+															  "<a href='/repouniversity/bajarArchivo?archivoId=" + data.archivo + "' name='dowloadArchivo' data-tpgrupoId=" + data.id + "><button class='btn btn-success btn-circle' type='button' data-toggle='tooltip' data-placement='top' data-original-title='Bajar Archivo'><i class='fa fa-download'></i></button></a>"
+													  			
+						]).draw();
+		     		}
 				
 				//Agrego el evento de delete
 				$("a[name='deleteTp'][data-tpgrupoId=" + data.id + "] button").click(function(){
@@ -162,12 +190,22 @@ var tpAdmin = {
 				tableGrupo.clear().draw();
 				
 				for(var i= 0; i < data.alumnos.length; i++) {
-					tableGrupo.row.add([
-	                    data.alumnos[i].id,
-	                    data.alumnos[i].persona.apellido + ", " + data.alumnos[i].persona.nombre,
-	                    data.alumnos[i].persona.mail,
-	                   "<a name='deleteAlumno' data-alumnoId='" + data.alumnos[i].id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a> "
-		            ]).draw();
+					if($('input[name=miPermiso]').val() == '1'){
+			               tableGrupo.row.add([
+			                    data.alumnos[i].id,
+			                    data.alumnos[i].persona.apellido + ", " + data.alumnos[i].persona.nombre,
+			                    data.alumnos[i].persona.mail,
+			                   "<a name='deleteAlumno' data-alumnoId='" + data.alumnos[i].id + "'><button class='btn btn-danger btn-circle' type='button'><i class='fa fa-times'></i></button></a> "
+				            ]).draw();
+						}
+						else{
+							tableGrupo.row.add([
+			                    data.alumnos[i].id,
+			                    data.alumnos[i].persona.apellido + ", " + data.alumnos[i].persona.nombre,
+			                    data.alumnos[i].persona.mail,
+			                   ""
+				            ]).draw();
+			     	}
 					
 					//Agrego el evento de delete
 					$("a[name='deleteAlumno'][data-alumnoId=" + data.alumnos[i].id + "] button").click(function(){

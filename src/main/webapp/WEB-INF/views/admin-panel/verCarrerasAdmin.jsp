@@ -44,6 +44,7 @@
 											<th>Id</th>
 											<th>Nombre</th>
 											<th>Materias</th>
+											<th style="display: none">Todas</th>
 											<th></th>
 										</tr>
 									</thead>
@@ -66,15 +67,26 @@
 															<i class="fa fa-search"></i>
 														</button></a>
 												</td>
-												<td><a href="#" name="editCarrera"
-													data-carreraId="${carrera.id}"><button
-															class="btn btn-primary btn-circle" type="button">
-															<i class="fa fa-pencil"></i>
-														</button></a> <a href="#" name="deleteCarrera"
-													data-carreraId="${carrera.id}"><button
-															class="btn btn-danger btn-circle" type="button">
-															<i class="fa fa-times"></i>
-														</button></a></td>
+												<td style="display: none">
+													<c:forEach items="${carrera.materias}" var="materia" varStatus="status">
+														      	${materia.nombre}  |  
+													    
+													</c:forEach>
+												</td>
+												<td>
+													<c:choose>
+														<c:when test="${login.permiso == '1'}">
+															<a href="#" name="editCarrera" data-carreraId="${carrera.id}"><button class="btn btn-primary btn-circle" type="button">
+																	<i class="fa fa-pencil"></i> </button></a>
+															<a href="#" name="deleteCarrera" data-carreraId="${carrera.id}"><button class="btn btn-danger btn-circle" type="button">
+																	<i class="fa fa-times"></i></button></a>
+														</c:when>
+														<c:when test="${login.permiso == '2'}">
+															<a href="#" name="editCarrera" data-carreraId="${carrera.id}"><button class="btn btn-primary btn-circle" type="button">
+																	<i class="fa fa-pencil"></i> </button></a>
+														</c:when>
+													</c:choose>				
+												</td>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -84,7 +96,9 @@
 					</div>
 				</div>
 			</div>
-
+			<div id="hiddenInputs" class="hidden">
+				<input type="hidden" name="miPermiso" value="${login.permiso}"/>
+			</div>
 			<%@include file="../../components/footer.jsp"%>
 		</div>
 		<!-- 	Ventanas -->
