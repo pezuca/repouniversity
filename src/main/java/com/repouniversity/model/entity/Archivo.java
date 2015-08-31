@@ -1,5 +1,6 @@
 package com.repouniversity.model.entity;
 
+import java.io.InputStream;
 import java.util.Date;
 
 import com.repouniversity.model.dao.IdentifiedObject;
@@ -21,6 +22,7 @@ public class Archivo implements IdentifiedObject {
     private Long persona;
     private String tags;
     private Long grupo;
+    private InputStream binario;
 
     public Long getId() {
         return id;
@@ -132,5 +134,13 @@ public class Archivo implements IdentifiedObject {
 
     public void setGrupo(Long grupo) {
         this.grupo = grupo;
+    }
+
+    public InputStream getBinario() {
+        return binario;
+    }
+
+    public void setBinario(InputStream binario) {
+        this.binario = binario;
     }
 }

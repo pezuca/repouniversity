@@ -130,10 +130,6 @@
         
 		<%@include file="../components/footer.jsp"%>
 	</div>
-	
-	<div id="deleteCursoDialog" title="Eliminar Curso">
-		<p>¿Esta seguro que desea darse de baja en el curso?</p>
-	</div>
 	</div>
 	
 	<script>

@@ -34,7 +34,7 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
     @Override
     protected InsertSQLStatement buildInsertSQLStatement(final Archivo a) {
         return new InsertSQLStatement(
-                "INSERT INTO archivo (nombre,descripcion,fecha_despublicacion,fecha_publicacion,id_tipo,fecsys,activo,estado,path,persona_id_persona,id_curso,Tags) VALUES(?,?,now(),now(),?,now(),1,?,?,?,?,?)") {
+                "INSERT INTO archivo (nombre,descripcion,fecha_despublicacion,fecha_publicacion,id_tipo,fecsys,activo,estado,path,persona_id_persona,id_curso,Tags,binario) VALUES(?,?,now(),now(),?,now(),1,?,?,?,?,?,?)") {
 
             @Override
             public void doAfterInsert(Long id) {
@@ -50,6 +50,7 @@ public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDA
                 ps.setLong(6, a.getPersona());
                 ps.setLong(7, a.getCurso());
                 ps.setString(8, a.getTags());
+                ps.setBlob(9, a.getBinario());
             }
 
             @Override

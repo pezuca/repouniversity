@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
@@ -184,6 +185,7 @@ public class ArchivoService {
                 nuevoArchivo.setTags(etiqueta.toString());
                 nuevoArchivo.setCurso(cursoId);
                 nuevoArchivo.setArchivoTipo(MappingArchivoTipoEnum.getByExtension(fileName.split("\\.")[1]).getTipoId());
+                nuevoArchivo.setBinario(new FileInputStream(localFile));
 
                 listaArchivos.add(nuevoArchivo);
                 // if(grupoId != Integer.parseInt("1")){
@@ -206,8 +208,9 @@ public class ArchivoService {
     public Archivo bajarArchivo(Long archivoId, HttpServletResponse response, HttpServletRequest request) throws IOException {
         Archivo archivo = archivoDao.findById(archivoId);
 
-        File downloadFile = new File(systemFileUploadLocation + archivo.getPath());
-        FileInputStream inputStream = new FileInputStream(downloadFile);
+//        File downloadFile = new File(systemFileUploadLocation + archivo.getPath());
+//        FileInputStream inputStream = (FileInputStream) archivo.getBinario();
+        InputStream inputStream = archivo.getBinario();
 
         ServletContext context = request.getServletContext();
         String mimeType = context.getMimeType(systemFileUploadLocation + archivo.getPath());
@@ -216,10 +219,10 @@ public class ArchivoService {
             mimeType = "application/octet-stream";
         }
         response.setContentType(mimeType);
-        response.setContentLength((int) downloadFile.length());
+//        response.setContentLength((int) downloadFile.length());
 
         String headerKey = "Content-Disposition";
-        String headerValue = String.format("attachment; filename=\"%s\"", downloadFile.getName());
+        String headerValue = String.format("attachment; filename=\"%s\"", archivo.getNombre());
         response.setHeader(headerKey, headerValue);
 
         OutputStream outStream = response.getOutputStream();
