@@ -114,7 +114,7 @@
 	
 	        </div>
 		</div>
-        <%@include file="../components/footer.jsp"%>
+       
 			<!-- 	Ventanas -->
 				<div id="editarArchivoDialog" title="Editar Archivo">
 					<form id="editarArchivoForm" class="form-horizontal">
@@ -143,6 +143,9 @@
 								<input name="tags" type="text" class="form-control" >
 							</div>
 						</div>
+						<div>
+			                <small>(*) Datos obligatorios</small>
+			            </div>
 					</form>
 				</div>
 		

@@ -258,6 +258,9 @@
 					</select>
 				</div>
 			</div>
+			<div>
+                <small>(*) Datos obligatorios</small>
+            </div>
 		</form>
 	</div>
 	<div id="editarArchivoDialog" title="Editar Archivo">
@@ -288,6 +291,9 @@
 						required="required">
 				</div>
 			</div>
+			<div>
+                <small>(*) Datos obligatorios</small>
+            </div>
 		</form>
 	</div>
 
@@ -298,6 +304,5 @@
 		<p>¿Esta seguro que desea eliminar el Grupo?</p>
 	</div>
 				
-	<%@include file="../components/fileUpload.jsp"%>
 </body>
 </html>

@@ -241,7 +241,7 @@ $(document).ready(function() {
 	$("#editarCarreraDialog").dialog({
 		position: "top",
 		resizable: false,
-		width:700,
+		width:1100,
 		modal: true,
 		autoOpen: false,
 		hide: {effect: "fade", duration: 300},
@@ -285,7 +285,7 @@ $(document).ready(function() {
 	$("#verCarreraDialog").dialog({
 		position: "top",
 		resizable: false,
-		width:900,
+		width:1100,
 		modal: true,
 		autoOpen: false,
 		hide: {effect: "fade", duration: 300},

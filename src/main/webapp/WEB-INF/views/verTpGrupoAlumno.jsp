@@ -129,6 +129,9 @@
                 <input name="file" type="file" required="required"/>	
             </div> 
 		</form>
+		<div>
+            <small>(*) Datos obligatorios</small>
+        </div>
 	</div>
 	
 	<div id="editarEntregaTpDialog" title="Editar Entrega TP">
@@ -138,6 +141,9 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Descripcion*:</label>
                 <div class="col-sm-10"><input name="descripcion" type="text" class="form-control" required="required"></div>
+            </div>
+            <div>
+                <small>(*) Datos obligatorios</small>
             </div>
         </form>
 	</div>

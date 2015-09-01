@@ -121,6 +121,9 @@
 								<input name="tags" type="text" class="form-control" >
 							</div>
 						</div>
+						<div>
+			                <small>(*) Datos obligatorios</small>
+			            </div>
 					</form>
 				</div>
 		

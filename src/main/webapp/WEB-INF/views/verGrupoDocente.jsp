@@ -130,7 +130,9 @@
                 <label class="col-sm-2 control-label">Archivo*:</label>
                 <input name="file" type="file" required="required"/>	
             </div> 
-           
+           <div>
+               <small>(*) Datos obligatorios</small>
+           </div>
 		</form>
 	</div>
 	
@@ -153,6 +155,9 @@
                 		<option value="Revisar">Revisar</option>
                    	</select>
                 </div>
+            </div>
+            <div>
+                <small>(*) Datos obligatorios</small>
             </div>
         </form>
 	</div>
@@ -180,6 +185,9 @@
 							</select>
 						</div>
 				</div>
+				<div>
+                	<small>(*) Datos obligatorios</small>
+            	</div>
 		</form>
 	</div>
 	</div>

@@ -151,6 +151,9 @@
 						</select>
 					</div>
 				</div>
+				<div>
+	                <small>(*) Datos obligatorios</small>
+	            </div>
 			</form>
 		</div>
 

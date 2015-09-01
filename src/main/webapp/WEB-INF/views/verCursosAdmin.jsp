@@ -122,6 +122,9 @@
                 	</select>
                 </div>
             </div>
+            <div>
+                <small>(*) Datos obligatorios</small>
+            </div>
 		</form>
 	</div>
 	
@@ -163,6 +166,9 @@
                 		</c:forEach>
                 	</select>
                 </div>
+            </div>
+            <div>
+                <small>(*) Datos obligatorios</small>
             </div>
 		</form>
 	</div>

@@ -84,7 +84,9 @@
 						<label class="col-sm-2 control-label">Descripcion*:</label>
 						<div class="col-sm-10"><textarea name="descripcion" class="form-control" placeholder="Reporte error.." required="required"></textarea></div>
 					</div>
-				   
+				   	<div>
+		                <small>(*) Datos obligatorios</small>
+		            </div>
 				</form>
 			</div>
 	</div>	

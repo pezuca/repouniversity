@@ -95,6 +95,9 @@
 							required="required">
 					</div>
 				</div>
+				<div>
+	                <small>(*) Datos obligatorios</small>
+	            </div>
 			</form>
 		</div>
 
@@ -115,6 +118,9 @@
 							required="required">
 					</div>
 				</div>
+				<div>
+	                <small>(*) Datos obligatorios</small>
+	            </div>
 			</form>
 		</div>
 

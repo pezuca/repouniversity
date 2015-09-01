@@ -114,7 +114,9 @@
                 <label class="col-sm-2 control-label">Archivo*:</label>
                 <div class="col-sm-10"><input name="archivoId" type="text" class="form-control" required="required"></div>
             </div>
-           
+          	<div>
+                <small>(*) Datos obligatorios</small>
+            </div> 
 		</form>
 	</div>
 	
@@ -130,6 +132,9 @@
                 <label class="col-sm-2 control-label">Archivo*:</label>
                 <div class="col-sm-10"><input name="archivoId" type="text" class="form-control" required="required"></div>
             </div>
+            <div>
+                <small>(*) Datos obligatorios</small>
+             </div>
         </form>
 	</div>
 	
@@ -144,7 +149,9 @@
 				<label class="col-sm-2 control-label">Comentario*:</label>
                 <div class="col-sm-10"><input name="comentario" type="text" class="form-control" required="required"></div>
             </div>
-                     
+            <div>
+                <small>(*) Datos obligatorios</small>
+             </div>    
 		</form>
 	</div>
 
