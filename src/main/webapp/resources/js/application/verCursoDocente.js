@@ -177,6 +177,9 @@ $(document).ready(function() {
                       "order": [[ 0, "desc" ]]
 	});
 	
+	$("#notificaciones_length").remove();
+	$("#cursosGrupos_length").remove();
+	
 	$("#crearGrupoDialog").dialog({
 		resizable: false,
 		width:700,

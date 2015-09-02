@@ -190,6 +190,8 @@ $(document).ready(function() {
                       ],
                       "order": [[ 0, "desc" ]]
 	});
+	
+	$("#listaCursos_length").remove();
 
 	$("#agregarCursoDialog").dialog({
 		resizable: false,

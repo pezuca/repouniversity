@@ -221,6 +221,8 @@ $(document).ready(function() {
                       "order": [[ 0, "desc" ]]
 	});
 	
+	$("#listaPersonas_length").remove();
+	
 	$("#agregarAlumnoDialog").dialog({
 		resizable: false,
 		width:700,

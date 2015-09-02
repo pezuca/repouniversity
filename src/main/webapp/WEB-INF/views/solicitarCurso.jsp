@@ -103,6 +103,8 @@
 		                      ],
 		                      "order": [[ 0, "desc" ]]
 			});
+			
+			$("#clientTable_length").remove();
 		});
 		
 		function clickSolicitud(cursoId, alumnoId, docenteId, tipoNotif) {

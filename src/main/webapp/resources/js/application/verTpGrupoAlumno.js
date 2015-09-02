@@ -183,6 +183,8 @@ $(document).ready(function() {
                       "order": [[ 0, "desc" ]]
 	});
 	
+	$("#EntregaTP_length").remove();
+	
 	$("#agregarEntregaTpDialog").dialog({
 		resizable: false,
 		width:700,

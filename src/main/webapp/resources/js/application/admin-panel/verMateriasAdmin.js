@@ -183,6 +183,8 @@ $(document).ready(function() {
 	     ],
 	     "order": [[ 0, "desc" ]]
 	});
+	
+	$("#listaMaterias_length").remove();
 
 	$("#agregarMateriaDialog").dialog({
 		resizable: false,
