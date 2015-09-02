@@ -103,11 +103,11 @@
 		</div>
 	</div>
 	
-	<div id="errorPass" title="Error">
+	<div id="errorPass" title="">
 		<p>Las contraseñas deben ser iguales</p>
 	</div>
 	
-	<div id="passErrorDailog" title="Error de password">
+	<div id="passErrorDailog" title="">
 		<p class="message"></p>
 	</div>
 </body>
