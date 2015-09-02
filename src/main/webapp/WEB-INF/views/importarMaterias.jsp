@@ -25,6 +25,12 @@
 	              <div class="ibox float-e-margins">				
 	                  <div class="ibox-content">
 	                  	<div class="row">
+	                  		<div class="col-lg-12 well m-t">
+	                  			<p>Para importar materias desde un archivo excel <b>DEBE</b> utilizar el template proviste por la apliacación. Lo puede bajar haciendo click en el boton Download.</p>
+	                  			<p>Luego de completar el template lo puede subir haciendo click en el boton Upload, espere unos segundos y aparecerá un mensajes indicando que no hubo fallos. Con esto concluirá el proceso de importación de materias.</p>
+	                  		</div>
+	                  	</div>
+	                  	<div class="row">
 	                  		<div class="col-lg-6">
 					            <div class="form-group">
 						            <label class="col-sm-3 control-label">Descargue el template</label>
@@ -38,7 +44,7 @@
 								<form id="uploadTemplateMaterias" class="form-horizontal">
 						            <div class="form-group">
 						                <label class="col-sm-4 control-label">Elija un archivo:</label>
-						                <input name="file" type="file" required="required"/>	
+						                <input name="file" type="file" required="required" accept=".xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />	
 						            </div> 
 						            <div class="form-group">
 										<div class="col-sm-offset-1 col-sm-12">
