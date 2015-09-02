@@ -87,6 +87,8 @@ $(document).ready(function() {
 	     ],
 	     "order": [[ 0, "desc" ]]
 	});
+	
+	$("#listaPersonas_length").remove();
 
 	$("#editarAlumnoDialog").dialog({
 		resizable: false,

@@ -209,6 +209,8 @@ $(document).ready(function() {
           ],
         "order": [[ 0, "desc" ]]
 	});
+	
+	$("#listaCarreras_length").remove();
 
 	$("#agregarCarreraDialog").dialog({
 		position: "top",

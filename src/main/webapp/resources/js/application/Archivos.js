@@ -104,6 +104,8 @@ $(document).ready(function() {
 	     "order": [[ 0, "desc" ]]
 	});
 	
+	$("#listaArchivos_length").remove();
+	
 	listaArchivos.column(1).visible(false);
 	listaArchivos.column(3).visible(false);
 	listaArchivos.column(6).visible(false);

@@ -218,6 +218,9 @@ $(document).ready(function() {
                       ],
                       "order": [[ 0, "desc" ]]
 	});
+	
+	$("#EntregaTP_length").remove();
+	
 	tableComentario = $('#ComentarioTP').DataTable({
 		retrieve: true,
 		"processing" : false,
@@ -239,6 +242,8 @@ $(document).ready(function() {
                       ],
                       "order": [[ 0, "desc" ]]
 	});
+	
+	$("#ComentarioTP_length").remove();
 	
 	$("#agregarEntregaTpDialog").dialog({
 		resizable: false,

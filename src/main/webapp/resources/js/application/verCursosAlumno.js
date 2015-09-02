@@ -71,6 +71,8 @@ $(document).ready(function() {
                       "order": [[ 0, "desc" ]]
 	});
 	
+	$("#cursosAlumno_length").remove();
+	
 	$("#deleteCursoDialog").dialog({
 		resizable: false,
 		width:400,

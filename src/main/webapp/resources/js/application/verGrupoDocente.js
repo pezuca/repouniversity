@@ -276,6 +276,8 @@ $(document).ready(function() {
                       "order": [[ 0, "desc" ]]
 	});
 	
+	$("#GruposTP_length").remove();
+	
 	tableGrupo = $('#GruposAlumnos').DataTable({
 		retrieve: true,
 		"processing" : false,
@@ -297,6 +299,8 @@ $(document).ready(function() {
                       ],
                       "order": [[ 0, "desc" ]]
 	});
+	
+	$("#GruposAlumnos_length").remove();
 
 	$("#agregarTpDialog").dialog({
 		resizable: false,

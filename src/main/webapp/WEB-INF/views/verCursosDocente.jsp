@@ -83,6 +83,8 @@
 		                      ],
 		                      "order": [[ 0, "desc" ]]
 			});
+			
+			$("#cursosDocente_length").remove();
 		});
 	</script>
 </body>

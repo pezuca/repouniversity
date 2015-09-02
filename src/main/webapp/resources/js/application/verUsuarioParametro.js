@@ -87,6 +87,8 @@ $(document).ready(function() {
                       ],
                       "order": [[ 0, "desc" ]]
 	});
+	
+	$("#listaParametros_length").remove();
 		
 	$("#editarUsuarioParametroDialog").dialog({
 		resizable: false,

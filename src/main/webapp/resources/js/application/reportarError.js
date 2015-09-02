@@ -84,6 +84,8 @@ $(document).ready(function() {
 	     ],
 	     "order": [[ 0, "desc" ]]
 	});
+	
+	$("#listaErrores_length").remove();
 
 	$("#agregarErrorDialog").dialog({
 		resizable: false,
