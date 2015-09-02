@@ -61,9 +61,9 @@
 											type="email" value="${usuario.persona.mail}" required>
 									</div>
 								</div>
-								<div class="form-group" ${userLog.rol == 'administrador' or userLog.rol == 'seguridad' or userLog.rol == 'docente' ? 'style=display:none' : ''}>
+								<div class="form-group" ${userLog.rol == 'administrador' or userLog.rol == 'seguridad' or userLog.rol == 'docente' or userLog.rol == 'alumno' ? 'style=display:none' : ''}>
 					                <label for="mailInput" class="col-sm-2 control-label"> Carrera</label>
-					                <div class="col-sm-10">
+					                <div class="col-sm-4">
 					                	<select class="form-control m-b" name="carrera" disabled>
 											<c:forEach items="${listacarreras}" var="carrera" varStatus="status">
 												<option value="${carrera.id}">${carrera.nombre}</option>
