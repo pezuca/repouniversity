@@ -44,16 +44,20 @@
                                    
                  </ul>
              </li>
+			<li class="${activeTab eq 'importarMaterias' ? 'active':''}">
+                 <a id="miscursos"><i class="fa fa-puzzle-piece"></i> <span class="nav-label">Importar</span> <span class="fa arrow"></span></a>
+                 <ul class="nav nav-second-level">
+                     <li><a href="/repouniversity/import/uploadMaterias?bread=Importar Materias-1">Materias</a></li>
+                                   
+                 </ul>
+             </li>
 			<li class="${activeTab eq 'Busqueda' ? 'active':''}"><a id="avanzada" href="/repouniversity/busquedaAvanzada?bread=Busqueda avanzada-1"><i
 					class="fa fa-search"></i> <span class="nav-label">Busqueda Avanzada </span></a></li>					
+<!-- 	        <li style="border-top:solid 1px #504f40"> -->
+<!-- 	            <a data-pjax id='ayuda-link' href="/repouniversity/preguntasFrecuentes?bread=PreguntasFrecuentes-1"><i class="fa fa-question-circle"></i><span class="nav-label">Ayuda</span> </a> -->
+<!-- 	        </li>     -->
 		</ul>
-			</ul>
-		<ul class="nav">
-        <li style="border-top:solid 1px #504f40">
-            <a data-pjax id='ayuda-link' href="/repouniversity/preguntasFrecuentes?bread=PreguntasFrecuentes-1"><i class="fa fa-question-circle"></i><span class="nav-label">Ayuda</span> </a>
-        </li>      
-        </ul>
-        <a href="#" class="btn btn-block btn-primary" id="startTour">Start tour</a>
+        <a href="#" class="btn btn-block btn-primary" id="startTour"><span class="nav-label">Start tour</span></a>
 	</div>
 </nav>
 <script type="text/javascript">
