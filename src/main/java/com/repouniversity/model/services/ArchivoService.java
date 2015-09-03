@@ -208,9 +208,9 @@ public class ArchivoService {
     public Archivo bajarArchivo(Long archivoId, HttpServletResponse response, HttpServletRequest request) throws IOException {
         Archivo archivo = archivoDao.findById(archivoId);
 
-//        File downloadFile = new File(systemFileUploadLocation + archivo.getPath());
-//        FileInputStream inputStream = (FileInputStream) archivo.getBinario();
-        InputStream inputStream = archivo.getBinario();
+        File downloadFile = new File(systemFileUploadLocation + archivo.getPath());
+        FileInputStream inputStream = new FileInputStream(downloadFile);
+//        InputStream inputStream = archivo.getBinario();
 
         ServletContext context = request.getServletContext();
         String mimeType = context.getMimeType(systemFileUploadLocation + archivo.getPath());
@@ -219,10 +219,10 @@ public class ArchivoService {
             mimeType = "application/octet-stream";
         }
         response.setContentType(mimeType);
-//        response.setContentLength((int) downloadFile.length());
+        response.setContentLength((int) downloadFile.length());
 
         String headerKey = "Content-Disposition";
-        String headerValue = String.format("attachment; filename=\"%s\"", archivo.getNombre());
+        String headerValue = String.format("attachment; filename=\"%s\"", downloadFile.getName());
         response.setHeader(headerKey, headerValue);
 
         OutputStream outStream = response.getOutputStream();

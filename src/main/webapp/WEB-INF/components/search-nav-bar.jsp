@@ -87,7 +87,7 @@
 	</div>
 </div>
 <script>
-var myVar = setInterval(function () {misNotificaciones()}, 5000000);
+var myVar = setInterval(function () {misNotificaciones()}, 5000);
 function myTimer() {
 	alert('Hi')
 }

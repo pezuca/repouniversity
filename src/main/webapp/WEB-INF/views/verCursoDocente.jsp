@@ -303,6 +303,6 @@
 	<div id="deleteGrupoDialog" title="Eliminar Grupo">
 		<p>¿Esta seguro que desea eliminar el Grupo?</p>
 	</div>
-				
+	<%@include file="../components/fileUpload.jsp"%>
 </body>
 </html>

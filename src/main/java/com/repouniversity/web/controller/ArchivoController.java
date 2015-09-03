@@ -77,8 +77,14 @@ public class ArchivoController {
         try {
 
             List<Archivo> nuevoArchivo = archivoService.parseArchivo(file, tags, descripcion, cursoId, grupoId, estado, usuario);
-
-            return archivoService.subirArchivo(nuevoArchivo);
+            
+            nuevoArchivo =  archivoService.subirArchivo(nuevoArchivo);
+            
+            for (Archivo archivo : nuevoArchivo) {
+                archivo.setBinario(null);
+            }
+            
+            return nuevoArchivo;
         } catch (Exception e) {
             throw new SubirArchivoException("Ha ocurrido un error al intentar subir el archivo.", e);
         }
