@@ -31,6 +31,7 @@ import com.repouniversity.model.entity.to.ErrorArchivoTO;
 import com.repouniversity.model.services.ArchivoService;
 import com.repouniversity.model.services.DocenteService;
 import com.repouniversity.model.services.ErrorArchivoService;
+import com.repouniversity.model.services.LogArchivoService;
 import com.repouniversity.model.services.MateriaService;
 import com.repouniversity.model.services.PersonaService;
 import com.repouniversity.web.exceptions.SubirArchivoException;
@@ -52,6 +53,9 @@ public class ArchivoController {
     @Autowired
     private PersonaService personaService;
 
+    @Autowired
+    private LogArchivoService logArchivoService;
+    
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     /**
@@ -96,7 +100,9 @@ public class ArchivoController {
         try {
 
             archivoService.bajarArchivo(archivoId, response, request);
-
+            
+            logArchivoService.nuevoLog(archivoId, archivoService.getUnArchivoById(archivoId).getPersona(), usuario.getIdPersona());
+              
         } catch (Exception e) {
             throw new SubirArchivoException("Ha ocurrido un error al intentar subir el archivo.", e);
         }

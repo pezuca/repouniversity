@@ -432,6 +432,34 @@ INSERT INTO `grupo` VALUES (1,'Sin Grupo',1,'2014-04-14 19:35:53'),(12,'Grupo Te
 UNLOCK TABLES;
 
 --
+-- Table structure for table `log_archivo`
+--
+
+DROP TABLE IF EXISTS `log_archivo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `log_archivo` (
+  `id_logarchivo` int(10) NOT NULL AUTO_INCREMENT,
+  `id_archivo` int(10) NOT NULL,
+  `id_creador` int(10) NOT NULL,
+  `id_persona` int(10) DEFAULT NULL,
+  `activo` tinyint(1) NOT NULL DEFAULT '1',
+  `fecsys` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_logarchivo`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `log_archivo`
+--
+
+LOCK TABLES `log_archivo` WRITE;
+/*!40000 ALTER TABLE `log_archivo` DISABLE KEYS */;
+INSERT INTO `log_archivo` VALUES (1,10,4,4,1,'2015-09-03 19:18:46'),(2,10,4,4,1,'2015-09-03 19:18:46'),(3,10,4,5,1,'2015-09-03 19:18:46'),(4,11,4,4,1,'2015-09-03 19:18:46');
+/*!40000 ALTER TABLE `log_archivo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `materia`
 --
 
@@ -574,7 +602,7 @@ CREATE TABLE `persona` (
 
 LOCK TABLES `persona` WRITE;
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
-INSERT INTO `persona` VALUES (1,'Maria Claudia','Abeledo','ariaClaudia.Abeledo@caece.edu.ar',1,'2015-08-11 18:30:15'),(2,'claudio','Acosta','costa@caece.edu.ar',1,'2015-08-23 20:59:35'),(3,'Ariel','Acuña','cuña@caece.edu.ar',1,'2015-08-11 18:30:56'),(4,'Ignacio','Albalustri Chaparro','lbalustriChaparro@caece.edu.ar',1,'2015-08-11 18:30:56'),(5,'Gustavo','Alonso','G.Alonso@caece.edu.ar',1,'2015-08-11 18:30:56'),(6,'Fabian','Altieri','ltieri@caece.edu.ar',1,'2015-08-11 18:30:56'),(7,'Claudio','Amador Rodriguez','madorRodriguez@caece.edu.ar',1,'2015-08-11 18:30:56'),(8,' Sergio Gabriel','Amitrano','Sergio.Gabriel.Amitrano@caece.edu.ar',1,'2015-08-11 18:30:56'),(9,'Oscar','Andorno','O.Andorno@caece.edu.ar',1,'2015-08-11 18:30:56'),(10,'Nora','Andrade','ndrade@caece.edu.ar',1,'2015-08-11 18:30:56'),(11,'Nadia','Andreau','ndreau@caece.edu.ar',1,'2015-08-11 18:30:56'),(12,' Jorge Daniel','Antoniotti','Jorge.Daniel.Antoniotti@caece.edu.ar',1,'2015-08-11 18:30:56'),(13,'Graciela','Anzivino','G.Anzivino@caece.edu.ar',1,'2015-08-11 18:30:56'),(14,'Sergio','Apesteguia','S.Apesteguia@caece.edu.ar',1,'2015-08-11 18:30:56'),(15,'Damian','Atar','D.Atar@caece.edu.ar',1,'2015-08-11 18:30:56'),(16,'German','Badaloni Fernandez','G.Badaloni.Fernandez@caece.edu.ar',1,'2015-08-11 18:30:56'),(17,'Liliana Maria','Balboa','Liliana.Maria.Balboa@caece.edu.ar',1,'2015-08-11 18:30:56'),(18,'Ricardo','Barca','Ricardo.Barca@caece.edu.ar',1,'2015-08-11 18:30:56'),(19,'Erik','Barreto','E.Barreto@caece.edu.ar',1,'2015-08-11 18:30:56'),(20,'Hernan','Bedorrou Garcia','Bedorrou.Garcia@caece.edu.ar',1,'2015-08-11 18:30:56'),(21,'Federico','Blanco','F.Blanco@caece.edu.ar',1,'2015-08-11 18:30:56'),(22,'Diego','Boggetti ','Boggetti.@caece.edu.ar',1,'2015-08-11 18:30:56'),(23,'Hernan Diego','Bosco','Hernan.Diego.Bosco@caece.edu.ar',1,'2015-08-11 18:30:56'),(24,'Maria Candela','Bracalente','Maria.Candela.Bracalente@caece.edu.ar',1,'2015-08-11 18:30:56'),(25,'Maria Fernanda','Braica','Maria.Fernanda.Braica@caece.edu.ar',1,'2015-08-11 18:30:56'),(26,'Gustavo','Bravin','Bravin@caece.edu.ar',1,'2015-08-11 18:30:56'),(27,'Andres','Broitman Buzarquis Garcia','A.Broitman.Buzarquis.Garcia@caece.edu.ar',1,'2015-08-11 18:30:56'),(28,'Andres','Buchner','A.Buchner@caece.edu.ar',1,'2015-08-11 18:30:56'),(29,'Alejandro Gabrie','Buonomo','Alejandro.Gabrie.Buonomo@caece.edu.ar',1,'2015-08-11 18:30:56'),(30,'Agustina','Buzarquis Garcia','A.Buzarquis.Garcia@caece.edu.ar',1,'2015-08-11 18:30:56'),(31,'Alumno','Test','alumno.test@caece.edu.ar',1,'2015-09-01 03:28:45'),(32,'Admin','Test','Admin.test@caece.edu.ar',1,'2015-08-11 18:30:56'),(33,'sasrassa','sasa','aassa@saddf.com',1,'2015-08-23 21:00:08'),(34,'seguridad','seguridada','asss@asas.com',1,'2015-08-23 23:32:34'),(35,'Alumno2','Test','Alumno@test.com.ar',1,'2015-09-01 03:36:20'),(36,'Alumno3','Test','Alumno3@mail.com.ar',1,'2015-09-01 03:37:17');
+INSERT INTO `persona` VALUES (1,'Maria Claudia','Abeledo','ariaClaudia.Abeledo@caece.edu.ar',1,'2015-08-11 18:30:15'),(2,'claudio','Acosta','costa@caece.edu.ar',1,'2015-08-23 20:59:35'),(3,'Ariel','Acuña','cuña@caece.edu.ar',1,'2015-08-11 18:30:56'),(4,'Ignacio','Albalustri Chaparro','lbalustriChaparro@caece.edu.ar',1,'2015-08-11 18:30:56'),(5,'Gustavo','Alonso','G.Alonso@caece.edu.ar',1,'2015-08-11 18:30:56'),(6,'Fabian','Altieri','ltieri@caece.edu.ar',1,'2015-08-11 18:30:56'),(7,'Claudio','Amador Rodriguez','madorRodriguez@caece.edu.ar',1,'2015-08-11 18:30:56'),(8,' Sergio Gabriel','Amitrano','Sergio.Gabriel.Amitrano@caece.edu.ar',1,'2015-08-11 18:30:56'),(9,'Oscar','Andorno','O.Andorno@caece.edu.ar',1,'2015-08-11 18:30:56'),(10,'Nora','Andrade','ndrade@caece.edu.ar',1,'2015-08-11 18:30:56'),(11,'Nadia','Andreau','ndreau@caece.edu.ar',1,'2015-08-11 18:30:56'),(12,' Jorge Daniel','Antoniotti','Jorge.Daniel.Antoniotti@caece.edu.ar',1,'2015-08-11 18:30:56'),(13,'Graciela','Anzivino','G.Anzivino@caece.edu.ar',1,'2015-08-11 18:30:56'),(14,'Sergio','Apesteguia','S.Apesteguia@caece.edu.ar',1,'2015-08-11 18:30:56'),(15,'Damian','Atar','D.Atar@caece.edu.ar',1,'2015-08-11 18:30:56'),(16,'German','Badaloni Fernandez','G.Badaloni.Fernandez@caece.edu.ar',1,'2015-08-11 18:30:56'),(17,'Liliana Maria','Balboa','Liliana.Maria.Balboa@caece.edu.ar',1,'2015-08-11 18:30:56'),(18,'Ricardo','Barca','Ricardo.Barca@caece.edu.ar',1,'2015-08-11 18:30:56'),(19,'Erik','Barreto','E.Barreto@caece.edu.ar',1,'2015-08-11 18:30:56'),(20,'Hernan','Bedorrou Garcia','Bedorrou.Garcia@caece.edu.ar',1,'2015-08-11 18:30:56'),(21,'Federico','Blanco','F.Blanco@caece.edu.ar',1,'2015-08-11 18:30:56'),(22,'Diego','Boggetti ','Boggetti.@caece.edu.ar',1,'2015-08-11 18:30:56'),(23,'Hernan Diego','Bosco','Hernan.Diego.Bosco@caece.edu.ar',1,'2015-08-11 18:30:56'),(24,'Maria Candela','Bracalente','Maria.Candela.Bracalente@caece.edu.ar',1,'2015-08-11 18:30:56'),(25,'Maria Fernanda','Braica','Maria.Fernanda.Braica@caece.edu.ar',1,'2015-08-11 18:30:56'),(26,'Gustavo','Bravin','Bravin@caece.edu.ar',1,'2015-08-11 18:30:56'),(27,'Andres','Broitman Buzarquis Garcia','A.Broitman.Buzarquis.Garcia@caece.edu.ar',1,'2015-08-11 18:30:56'),(28,'Andres','Buchner','A.Buchner@caece.edu.ar',1,'2015-08-11 18:30:56'),(29,'Alejandro Gabrie','Buonomo','Alejandro.Gabrie.Buonomo@caece.edu.ar',1,'2015-08-11 18:30:56'),(30,'Agustina','Buzarquis Garcia','A.Buzarquis.Garcia@caece.edu.ar',1,'2015-08-11 18:30:56'),(31,'Alumnoo','Test','alumno.test@caece.edu.ar',1,'2015-09-02 15:50:05'),(32,'Admin','Test','Admin.test@caece.edu.ar',1,'2015-08-11 18:30:56'),(33,'sasrassa','sasa','aassa@saddf.com',1,'2015-08-23 21:00:08'),(34,'seguridad','seguridada','asss@asas.com',1,'2015-08-23 23:32:34'),(35,'Alumno2','Test','Alumno@test.com.ar',1,'2015-09-01 03:36:20'),(36,'Alumno3','Test','Alumno3@mail.com.ar',1,'2015-09-01 03:37:17');
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -843,6 +871,22 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Temporary table structure for view `vw_logarchivo`
+--
+
+DROP TABLE IF EXISTS `vw_logarchivo`;
+/*!50001 DROP VIEW IF EXISTS `vw_logarchivo`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `vw_logarchivo` (
+  `id_archivo` tinyint NOT NULL,
+  `nombre` tinyint NOT NULL,
+  `id_creador` tinyint NOT NULL,
+  `cantidadDownload` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Final view structure for view `roles`
 --
 
@@ -879,6 +923,25 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `vw_logarchivo`
+--
+
+/*!50001 DROP TABLE IF EXISTS `vw_logarchivo`*/;
+/*!50001 DROP VIEW IF EXISTS `vw_logarchivo`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vw_logarchivo` AS select `a`.`id_archivo` AS `id_archivo`,`a`.`nombre` AS `nombre`,`a`.`persona_id_persona` AS `id_creador`,count(`l`.`id_persona`) AS `cantidadDownload` from (`archivo` `a` left join `log_archivo` `l` on((`a`.`id_archivo` = `l`.`id_archivo`))) where (`a`.`activo` = 1) group by `a`.`id_archivo` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -889,4 +952,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-09-01  0:45:48
+-- Dump completed on 2015-09-03 18:56:05

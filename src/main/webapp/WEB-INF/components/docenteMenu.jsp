@@ -32,7 +32,8 @@
                  <a class="adminmenu" ><i class="fa fa-gears"></i> <span class="nav-label" >Administración</span> <span class="fa arrow"></span></a>
                  <ul class="nav nav-second-level">
 	                <li><a href="/repouniversity/docente/notificaciones?bread=Notificaciones-1">Mis notificaciones</a></li>
-                    <li><a href="/repouniversity/verArchivos?bread=Ver archivos-1">Mis archivos</a></li>        
+                    <li><a href="/repouniversity/verArchivos?bread=Ver archivos-1">Mis archivos</a></li>
+                    <li><a href="/repouniversity/logArchivos/verLogArchivos?bread=Ver log archivos-1">Log archivos</a></li>        
 				</ul>
              </li>
              <li class="${activeTab eq 'verUsuarioParametro' ? 'active':''}">

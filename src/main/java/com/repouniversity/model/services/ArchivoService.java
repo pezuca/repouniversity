@@ -73,6 +73,11 @@ public class ArchivoService {
 
         return archivoTo;
     }
+    public Archivo getUnArchivoById(Long archivoId) {
+        Archivo archivo = archivoDao.findById(archivoId);
+
+        return archivo;
+    }
 
     public List<ArchivoTO> buildArchivos(List<Archivo> archivos) {
         List<ArchivoTO> listaArchivos = new ArrayList<ArchivoTO>();
@@ -207,7 +212,7 @@ public class ArchivoService {
 
     public Archivo bajarArchivo(Long archivoId, HttpServletResponse response, HttpServletRequest request) throws IOException {
         Archivo archivo = archivoDao.findById(archivoId);
-
+        
         File downloadFile = new File(systemFileUploadLocation + archivo.getPath());
         FileInputStream inputStream = new FileInputStream(downloadFile);
 //        InputStream inputStream = archivo.getBinario();
