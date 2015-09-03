@@ -26,7 +26,7 @@ public class ArchivoRowMapper implements RowMapper<Archivo> {
         archivo.setEstado(rs.getLong("estado"));
         archivo.setPath(rs.getString("path"));
         archivo.setTags(rs.getString("tags"));
-        archivo.setBinario(rs.getBlob("binario").getBinaryStream());
+//        archivo.setBinario(rs.getBlob("binario").getBinaryStream());
         return archivo;
     }
 
