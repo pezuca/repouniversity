@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="activeTab" value="${'verLogArchivos'}" />
+<c:set var="activeTab" value="${'verLogArchivo'}" />
 <c:set var="userLog" value="${sessionScope.login}" />
 <html>
 <head>
@@ -18,7 +18,7 @@
 		<div id="page-wrapper" class="gray-bg dashbard-1">
 		<%@include file="../components/search-nav-bar.jsp"%>
 		
-		<tag:breadcrumb label="Ver LogArchivos"/>
+		<tag:breadcrumb label="Log Archivo"/>
 	
 	 	<div class="wrapper wrapper-content animated fadeInRight pre-scrollable">
 	         <div class="row">
