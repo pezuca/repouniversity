@@ -32,7 +32,7 @@
 	                  <div class="ibox-title">
 	                  </div>
 	                  <div class="ibox-content">
-	                  	<table id="LogArchivo" class="table table-striped table-hover" >
+	                  	<table id="logArchivoTable" class="table table-striped table-hover" >
 	                  		<thead class="encabezado">
 							<tr>
 								<th>Id</th>
@@ -42,13 +42,14 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${vwLogArchivo}" var="LogArchivo" varStatus="status">
+							<c:forEach items="${vwLogArchivo}" var="logArchivo" varStatus="status">
 								<tr>
-									<td>${LogArchivo.id}</td>
-									<td>${LogArchivo.nombre}</td>
-									<td>${LogArchivo.cantidadDownload}</td>
+									<td>${logArchivo.id}</td>
+									<td>${logArchivo.nombre}</td>
+									<td>${logArchivo.cantidadDownload}</td>
 									<td> 
-										<a href="/repouniversity/vistaPrevia?archivoId=${tpentrega.archivo}&bread=Vista previa-5" name="verArchivo" data-tpentregaId="${tpentrega.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver Archivo"><i class="fa fa-search"></i></button></a>
+										<a name="verLog" data-logArchivoId="${logArchivo.id}"><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="ver Log"><i class="fa fa-search"></i></button></a>
+										<a href="/repouniversity/logArchivos/verLogArchivo?archivoId=${logArchivo.id}&bread=Vista Previa-2" name="verArchivo" data-logArchivoId="${logArchivo.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver Log"><i class="fa fa-search"></i></button></a>
 									</td>
 								</tr>
 							</c:forEach>
@@ -67,40 +68,34 @@
 <%-- 		<%@include file="../components/footer.jsp"%> --%>
 	</div>
 <!-- 	Ventanas -->
-	<div id="agregarEntregaTpDialog" title="Nueva Entrega TP">
-		<form id="nuevoEntregaTpForm" class="form-horizontal">
-			<input name="tpGrupoId" type="hidden" class="form-control" value="${param.tpGrupoId}">
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Descripcion*:</label>
-                <div class="col-sm-10"><input name="descripcion" type="text" class="form-control" required="required"></div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Archivo*:</label>
-                <input name="file" type="file" required="required"/>	
-            </div> 
+	<div id="verLogDialog" title="Log Archivo">
+		<form id="verLogDialogForm" class="form-horizontal">
+ 			<div class="ibox-title">
+	        </div>
+	        <div class="ibox-content">
+	           	<table id="LogUnArchivo" class="table table-striped table-hover" >
+	          		<thead class="encabezado">
+					<tr>
+						<th>Id</th>
+						<th>Nombre </th>
+						<th>Fecha</th>
+					</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${logArchivoList}" var="unLogArchivo" varStatus="status">
+							<tr>
+								<td>${unLogArchivo.id}</td>
+								<td>${unLogArchivo.persona.apellido}, ${unLogArchivo.persona.nombre}</td>
+								<td>${unLogArchivo.fechasys}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+	        </div>
 		</form>
-		<div>
-            <small>(*) Datos obligatorios</small>
-        </div>
+	
 	</div>
 	
-	<div id="editarEntregaTpDialog" title="Editar Entrega TP">
-		<form id="editarEntregaTpForm" class="form-horizontal">
-			<input name="tpGrupoId" type="hidden" class="form-control" value="${param.tpGrupoId}">
-			<input name="tpEntregaId" type="hidden" class="form-control" value="">
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Descripcion*:</label>
-                <div class="col-sm-10"><input name="descripcion" type="text" class="form-control" required="required"></div>
-            </div>
-            <div>
-                <small>(*) Datos obligatorios</small>
-            </div>
-        </form>
-	</div>
-	
-	<div id="deleteEntregaTpDialog" title="Eliminar EntregaTP">
-		<p>¿Esta seguro que desea eliminar la entrega?</p>
-	</div>
 	
 	<input name="tpGrupoIdGlobal" type="hidden" value="${param.tpGrupoId}" />
 	</div>

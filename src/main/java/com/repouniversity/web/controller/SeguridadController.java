@@ -117,9 +117,9 @@ public class SeguridadController {
     public ModelAndView editarSeguridadPassAjax(@RequestParam(value = "seguridadId", required = true) Long seguridadId,
             @RequestParam(value = "mayusculas", required = true) Long mayusculas, @RequestParam(value = "minusculas", required = true) Long minusculas,
             @RequestParam(value = "especiales", required = true) Long especiales, @RequestParam(value = "numeros", required = true) Long numeros,
-            @RequestParam(value = "longMinima", required = true) Long longMinima) {
+            @RequestParam(value = "longMinima", required = true) Long longMinima, @RequestParam(value = "vigencia", required = true) Long vigencia) {
 
-        seguridadService.editarSeguridadPass(seguridadId, mayusculas, minusculas, especiales, numeros, longMinima);
+        seguridadService.editarSeguridadPass(seguridadId, mayusculas, minusculas, especiales, numeros, longMinima, vigencia);
         
         return new ModelAndView("redirect:/dashboard");
     }

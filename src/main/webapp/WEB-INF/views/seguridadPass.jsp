@@ -48,6 +48,10 @@
 			                <div class="col-sm-6"><input value = "${seguridad.longMinima}" name="longMinima" type="number" min=5 max = 100 class="form-control" required="required"></div>
 			            </div>
 			            <div class="form-group">
+			                <label class="col-sm-3 control-label">Vigencia(en dias):</label>
+			                <div class="col-sm-6"><input value = "${seguridad.vigencia}" name="vigencia" type="number" min=10 max = 100 class="form-control" required="required"></div>
+			            </div>
+			            <div class="form-group">
 				             <div class="col-sm-8 col-sm-offset-3">
 				                   	<div class="row">
 				                       	<button class="btn btn-primary" type="submit">Guardar</button>

@@ -25,7 +25,7 @@ public class SeguridadService {
 
 
 	public Seguridad editarSeguridadPass(Long seguridadId, Long mayusculas,
-			Long minusculas, Long especiales, Long numeros, Long longMinima) {
+			Long minusculas, Long especiales, Long numeros, Long longMinima, Long vigencia) {
 		
 		Seguridad seguridad = seguridadDAO.findById(seguridadId);
 		seguridad.setMayusculas(mayusculas);
@@ -33,6 +33,7 @@ public class SeguridadService {
 		seguridad.setEspeciales(especiales);
 		seguridad.setLongMinima(longMinima);
 		seguridad.setNumeros(numeros);
+		seguridad.setVigencia(vigencia);
 		
 		seguridadDAO.update(seguridad);
 		

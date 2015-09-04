@@ -22,7 +22,8 @@ public class SeguridadRowMapper implements RowMapper<Seguridad> {
         result.setNumeros(rs.getLong("numeros"));
         result.setActivo(rs.getBoolean("activo"));
         result.setFechasys(rs.getDate("fesys"));
-
+        result.setVigencia(rs.getLong("vigencia"));
+        
         return result;
     }
 

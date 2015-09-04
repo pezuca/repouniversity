@@ -39,7 +39,7 @@ public class SeguridadDAOImpl extends GenericDAOImpl<Seguridad> implements Segur
     }
 
     protected SQLStatement buildUpdateSQLStatement(final Seguridad t) {
-        return new SQLStatement("UPDATE seguridad SET mayusculas = ?, minusculas = ?, especiales = ?, longMinima = ?, numeros = ?, activo = 1, fesys = now() WHERE id_seguridad = ?") {
+        return new SQLStatement("UPDATE seguridad SET mayusculas = ?, minusculas = ?, especiales = ?, longMinima = ?, numeros = ?, vigencia = ?, activo = 1, fesys = now() WHERE id_seguridad = ?") {
         	
             @Override
             public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
@@ -48,7 +48,8 @@ public class SeguridadDAOImpl extends GenericDAOImpl<Seguridad> implements Segur
                 ps.setLong(3, t.getEspeciales());
                 ps.setLong(4, t.getLongMinima());
                 ps.setLong(5, t.getNumeros());
-                ps.setLong(6, t.getId());
+                ps.setLong(6, t.getVigencia());
+                ps.setLong(7, t.getId());
             }
 
             @Override

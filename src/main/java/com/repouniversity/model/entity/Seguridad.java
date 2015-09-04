@@ -15,6 +15,7 @@ public class Seguridad implements IdentifiedObject {
     private Long numeros;
     private boolean activo;
     private Date fechasys;
+    private Long vigencia;
     
     public Long getId() {
         return id;
@@ -79,6 +80,14 @@ public class Seguridad implements IdentifiedObject {
 
 	public void setNumeros(Long numeros) {
 		this.numeros = numeros;
+	}
+
+	public Long getVigencia() {
+		return vigencia;
+	}
+
+	public void setVigencia(Long vigencia) {
+		this.vigencia = vigencia;
 	}
 
 

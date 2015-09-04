@@ -59,7 +59,7 @@
 										<c:choose>
 											<c:when test="${login.permiso == '1'}">    				 
 												<a name="editEntregaTp" data-tpentregaId="${tpentrega.id}"><button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Editar EntregaTP"><i class="fa fa-pencil"></i></button></a>
-												<a name="deleteEntregaTp" data-tpentregaId="${tpentrega.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar EntregaTP"><i class="fa fa-times"></i></button></a>
+												<!--<a name="deleteEntregaTp" data-tpentregaId="${tpentrega.id}" ><button class="btn btn-danger btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar EntregaTP"><i class="fa fa-times"></i></button></a>-->
 											</c:when>
 											<c:when test="${login.permiso == '2'}">
 												<a name="editEntregaTp" data-tpentregaId="${tpentrega.id}"><button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Editar EntregaTP"><i class="fa fa-pencil"></i></button></a>
