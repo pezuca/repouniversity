@@ -26,7 +26,7 @@
 			<div class="wrapper wrapper-content animated fadeInRight pre-scrollable">
 
 			</div>
-			<%@include file="../components/footer.jsp"%>
+<%-- 			<%@include file="../components/footer.jsp"%> --%>
 		</div>
 			
 	</div>	

@@ -27,7 +27,7 @@
 		             <div class="col-lg-12"></div>
 		        </div>
 			</div>
-			<%@include file="../components/footer.jsp"%>
+<%-- 			<%@include file="../components/footer.jsp"%> --%>
 		</div>
 	</div>	
 </body>

@@ -75,7 +75,7 @@
 	        </div>
 		</div>
 		
-		<%@include file="../components/footer.jsp"%>
+<%-- 		<%@include file="../components/footer.jsp"%> --%>
 		</div>
 	</div>
 	<script>
@@ -101,8 +101,22 @@
 		                       {"width": "10%", "targets": 4},
 		                       { orderable: false, targets: [4] }
 		                      ],
-		                      "order": [[ 0, "desc" ]]
+                "order": [[ 0, "desc" ]],
+                "oLanguage": {
+                    "sInfoEmpty": "No hay resultados disponibles.",
+                    "sSearch": "Filtrar por: ",
+                    "sInfo": "Mostrando (_START_ a _END_) de _TOTAL_ resultados",
+                    "sZeroRecords": "No fueron encontrados resultados.",
+                    "oPaginate": {
+                        "sFirst": "Primera",
+                        "sLast": "Ultima",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Previa"
+                    }
+                  }
 			});
+			
+			$("#clientTable_wrapper .row").first().find(".col-sm-6").first().append($("#clientTable").parents(".ibox:first").find(".ibox-title"));
 			
 			$("#clientTable_length").remove();
 		});

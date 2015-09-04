@@ -85,8 +85,22 @@ $(document).ready(function() {
         "columnDefs": [
 	       { orderable: false, targets: [8] }
 	     ],
-	     "order": [[ 0, "desc" ]]
+	     "order": [[ 0, "desc" ]],
+	        "oLanguage": {
+	            "sInfoEmpty": "No hay resultados disponibles.",
+	            "sSearch": "Filtrar por: ",
+	            "sInfo": "Mostrando (_START_ a _END_) de _TOTAL_ resultados",
+	            "sZeroRecords": "No fueron encontrados resultados.",
+	            "oPaginate": {
+	                "sFirst": "Primera",
+	                "sLast": "Ultima",
+	                "sNext": "Siguiente",
+	                "sPrevious": "Previa"
+	            }
+	          }
 	});
+	
+	$("#listaPersonas_wrapper .row").first().find(".col-sm-6").first().append($("#listaPersonas").parents(".ibox:first").find(".ibox-title"));
 	
 	$("#listaPersonas_length").remove();
 

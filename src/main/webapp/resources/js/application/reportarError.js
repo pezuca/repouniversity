@@ -79,11 +79,25 @@ $(document).ready(function() {
             "infoFiltered": "(filtered from _MAX_ total records)",
             "search": "Filtrar por: "
         },
+        "oLanguage": {
+            "sInfoEmpty": "No hay resultados disponibles.",
+            "sSearch": "Filtrar por: ",
+            "sInfo": "Mostrando (_START_ a _END_) de _TOTAL_ resultados",
+            "sZeroRecords": "No fueron encontrados resultados.",
+            "oPaginate": {
+                "sFirst": "Primera",
+                "sLast": "Ultima",
+                "sNext": "Siguiente",
+                "sPrevious": "Previa"
+            }
+          },
         "columnDefs": [
 	       { orderable: false, targets: [4] }
 	     ],
 	     "order": [[ 0, "desc" ]]
 	});
+	
+	$("#listaErrores_wrapper .row").first().find(".col-sm-6").first().append($("#listaErrores").parents(".ibox:first").find(".ibox-title"));
 	
 	$("#listaErrores_length").remove();
 

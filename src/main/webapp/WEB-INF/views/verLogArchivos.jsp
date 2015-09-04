@@ -64,7 +64,7 @@
         <div id="hiddenInputs" class="hidden">
 				<input type="hidden" name="miPermiso" value="${login.permiso}"/>
 		</div>
-		<%@include file="../components/footer.jsp"%>
+<%-- 		<%@include file="../components/footer.jsp"%> --%>
 	</div>
 <!-- 	Ventanas -->
 	<div id="agregarEntregaTpDialog" title="Nueva Entrega TP">

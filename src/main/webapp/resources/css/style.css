@@ -1422,13 +1422,13 @@ table.dataTable thead .sorting:after {
 }
 
 .btn-circle {
-	width: 30px;
-	height: 30px;
-	padding: 6px 0;
+	width: 23px;
+	height: 23px;
+	padding: 4px 0 6px;
 	border-radius: 15px;
 	text-align: center;
 	font-size: 12px;
-	line-height: 1.428571429;
+	line-height: 0;
 }
 
 .btn-circle.btn-lg {
@@ -4041,7 +4041,7 @@ body.skin-3 {
 	}
 	
 	.wrapper.wrapper-content{
-		min-height: 440px;
+		min-height: 475px;
 	}
 	
 	.navbar-static-side {
@@ -4176,4 +4176,23 @@ body.skin-3 {
 
 p.message {
 	font-weight: bold;
+}
+
+.dataTables_wrapper .ibox-title h5{
+	padding-right: 20px;
+	display: inline-block;
+	font-size: 14px;
+	margin: 5px 0 7px;
+	text-overflow: ellipsis;
+	float: left;
+}
+
+.dataTables_wrapper .ibox-title {
+	height: auto;
+	padding: 0px;
+	border: 0px;
+}
+
+.dataTables_wrapper .ibox-title .ibox-tools {
+	float: none;
 }

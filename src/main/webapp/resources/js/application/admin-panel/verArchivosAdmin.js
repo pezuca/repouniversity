@@ -102,6 +102,18 @@ $(document).ready(function() {
             "infoFiltered": "(filtered from _MAX_ total records)",
             "search": "Búsqueda: "
         },
+        "oLanguage": {
+            "sInfoEmpty": "No hay resultados disponibles.",
+            "sSearch": "Filtrar por: ",
+            "sInfo": "Mostrando (_START_ a _END_) de _TOTAL_ resultados",
+            "sZeroRecords": "No fueron encontrados resultados.",
+            "oPaginate": {
+                "sFirst": "Primera",
+                "sLast": "Ultima",
+                "sNext": "Siguiente",
+                "sPrevious": "Previa"
+            }
+          },
         "columnDefs": [
            {"width": "5%", "targets": 0},
            {"width": "15%", "targets": 2},
@@ -114,6 +126,8 @@ $(document).ready(function() {
 	     ],
 	     "order": [[ 0, "desc" ]]
 	});
+	
+	$("#listaArchivos_wrapper .row").first().find(".col-sm-6").first().append($("#listaArchivos").parents(".ibox:first").find(".ibox-title"));
 	
 	$("#listaArchivos_length").remove();
 	

@@ -195,7 +195,7 @@ $(document).ready(function() {
 		"language": {
             "lengthMenu": "Mostrar _MENU_ resultados por página",
             "zeroRecords": "No fueron encontrados resultados.",
-            "info": "Pagina _PAGE_ of _PAGES_",
+            "sInfo": "Mostrando (_START_ a _END_) de _TOTAL_ resultados",
             "infoEmpty": "No hay resultados disponibles.",
             "infoFiltered": "(filtered from _MAX_ total records)",
             "search": "Filtrar por: "
@@ -207,8 +207,22 @@ $(document).ready(function() {
            {"width": "15%", "targets": 3},
            { orderable: false, targets: [3] }
           ],
-        "order": [[ 0, "desc" ]]
+        "order": [[ 0, "desc" ]],
+        "oLanguage": {
+            "sInfoEmpty": "No hay resultados disponibles.",
+            "sSearch": "Filtrar por: ",
+            "sInfo": "(_START_ a _END_) de _TOTAL_",
+            "sZeroRecords": "No fueron encontrados resultados.",
+            "oPaginate": {
+                "sFirst": "Primera",
+                "sLast": "Ultima",
+                "sNext": "Siguiente",
+                "sPrevious": "Previa"
+            }
+          }
 	});
+	
+	$("#listaCarreras_wrapper .row").first().find(".col-sm-6").first().append($("#listaCarreras").parents(".ibox:first").find(".ibox-title"));
 	
 	$("#listaCarreras_length").remove();
 
