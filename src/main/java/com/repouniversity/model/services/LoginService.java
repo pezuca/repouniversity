@@ -1,5 +1,9 @@
 package com.repouniversity.model.services;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.repouniversity.model.dao.UsuarioDAO;
 import com.repouniversity.model.dao.UsuarioRolDAO;
+import com.repouniversity.model.entity.Seguridad;
 import com.repouniversity.model.entity.Usuario;
 import com.repouniversity.model.entity.UsuarioRol;
 import com.repouniversity.web.enums.UrlsApplicationEmun;
@@ -30,7 +35,9 @@ public class LoginService {
 
     @Autowired
     private UsuarioService usuarioService;
-
+    
+    @Autowired
+    public SeguridadService seguridadService;
     /**
      * Attempts to perform user login with username and password given, setting
      * up session if successful
@@ -54,10 +61,32 @@ public class LoginService {
         if (user == null) {
             throw new LoginFailException("User or password are not correct.");
         }
+      
+        List<Seguridad> lista = seguridadService.getAll();
+        Long vigencia = lista.get(0).getVigencia();
         
-        UsuarioRol usuarioRol = usuarioRolService.getUsuarioById(user.getId());
-        HTTPSessionManagerUtil.setSessionAttribute(request, HTTPSessionManagerUtil.ATTR_LOGIN, usuarioRol);
-        return result;
+        Calendar fechaModificacion = Calendar.getInstance();
+        fechaModificacion.setTime(user.getFechasys());
+        fechaModificacion.add(Calendar.DATE, vigencia.intValue());
+        
+        Calendar hoy = Calendar.getInstance();
+               
+
+       
+        if (fechaModificacion.after(hoy)) {
+            UsuarioRol usuarioRol = usuarioRolService.getUsuarioById(user.getId());
+            HTTPSessionManagerUtil.setSessionAttribute(request, HTTPSessionManagerUtil.ATTR_LOGIN, usuarioRol);
+            return result;
+        }else{
+        	 return "cambiarPass?userId=" + user.getId();
+        }
+        
+        
+        
+        	
+        	
+
+       
     }
 
     /**

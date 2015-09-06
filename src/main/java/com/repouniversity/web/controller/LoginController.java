@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.repouniversity.model.entity.to.UsuarioTO;
 import com.repouniversity.model.services.LoginService;
+import com.repouniversity.model.services.UsuarioService;
 import com.repouniversity.web.enums.UrlsApplicationEmun;
 import com.repouniversity.web.exceptions.LoginFailException;
 
@@ -24,6 +26,9 @@ public class LoginController {
 
 	@Autowired
 	private LoginService loginService;
+
+    @Autowired
+    private UsuarioService usuarioService;
 
 	/**
 	 * @return Model and View for login
@@ -55,6 +60,15 @@ public class LoginController {
 		String redirectUrl = loginService.login(user, pass, request);
 
 		return new ModelAndView("redirect:" + redirectUrl);
+	}
+	
+	@RequestMapping(value = "/cambiarPass", method = { RequestMethod.GET })
+	public ModelAndView cambiarPass(HttpServletRequest request, @RequestParam(value = "userId", required = true) Long userId)
+	{
+		loginService.loginAnonimo(request);
+		UsuarioTO user = usuarioService.getUserById(userId);
+		
+		return new ModelAndView("CambiarPass").addObject("user", user);
 	}
 	
 	/**

@@ -17,6 +17,7 @@ import com.repouniversity.model.entity.Seguridad;
 import com.repouniversity.model.entity.Usuario;
 import com.repouniversity.model.entity.UsuarioRol;
 import com.repouniversity.model.entity.to.UsuarioTO;
+import com.repouniversity.web.exceptions.LoginFailException;
 import com.repouniversity.web.exceptions.StrongPasswordException;
 
 @Service
@@ -51,6 +52,32 @@ public class UsuarioService {
     @Autowired
     public PermisoService permisoService;
     
+    @Transactional
+    public Usuario updatePass(Long id, String newPassword, String repeatPassword) {
+    	
+    	Usuario usuario = usuarioDAO.findById(id);
+
+        Usuario userToUpdate = new Usuario();
+        userToUpdate.setId(usuario.getId());
+        userToUpdate.setUser(usuario.getUser());
+        userToUpdate.setFechasys(usuario.getFechasys());
+        userToUpdate.setActivo(usuario.isActivo());
+        userToUpdate.setRole(usuario.getRole());
+        userToUpdate.setPersona(usuario.getIdPersona());
+        userToUpdate.setIdPermiso(usuario.getIdPermiso());
+    	
+        Persona persona = personaService.findById(userToUpdate.getIdPersona());
+        
+    	 if (newPassword != null && checkChangePassword(newPassword, repeatPassword)) {
+             checkStrongPassword(newPassword);
+             cambioDePassword(newPassword, userToUpdate.getUser(), userToUpdate.getId());
+             userToUpdate.setPass(persona.getId() + newPassword);
+             usuarioDAO.update(userToUpdate);
+         } 
+    	 
+    	return userToUpdate;
+    }
+
 
     @Transactional
     public Usuario updateUser(Long id, String nombre, String apellido, String mail, String user, String newPassword, String repeatPassword, Long carreraId) {
@@ -155,6 +182,15 @@ public class UsuarioService {
         }
     }
 
+    private void cambioDePassword(String password, String username, Long idUser) {
+    	 
+    	Usuario user = this.usuarioDAO.getUserByUsernameAndPass(username, idUser + password);
+           
+           if (user != null) {
+               throw new StrongPasswordException("Es necesario cambiar la Password");
+           }
+    
+    }
     private boolean checkChangePassword(String newPassword, String repeatPassword) {
 
         if (StringUtils.isNotBlank(newPassword) && StringUtils.isNotBlank(repeatPassword) && StringUtils.equals(newPassword, repeatPassword)) {
