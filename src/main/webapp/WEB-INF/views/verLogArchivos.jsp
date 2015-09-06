@@ -48,7 +48,6 @@
 									<td>${logArchivo.nombre}</td>
 									<td>${logArchivo.cantidadDownload}</td>
 									<td> 
-										<a name="verLog" data-logArchivoId="${logArchivo.id}"><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="ver Log"><i class="fa fa-search"></i></button></a>
 										<a href="/repouniversity/logArchivos/verLogArchivo?archivoId=${logArchivo.id}&bread=Vista Previa-2" name="verArchivo" data-logArchivoId="${logArchivo.id}" ><button class="btn btn-success btn-circle" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Ver Log"><i class="fa fa-search"></i></button></a>
 									</td>
 								</tr>

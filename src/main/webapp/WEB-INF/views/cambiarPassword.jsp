@@ -20,7 +20,7 @@
 		
 </head>
 
-<body class=" pace-done">
+<body class=" gray-bg">
 
  <div class="wrapper wrapper-content animated fadeInRight pre-scrollable">
  	<p>Ingrese su nueva Contraseña</p>
