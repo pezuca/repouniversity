@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <html>
 <c:set var="userLog" value="${sessionScope.login}"/>
 <head>
@@ -9,26 +10,17 @@
 
 
     <title>Repouniversity | Cambiar Pass</title>
+	<%@include file="../components/common-statics-imports.jsp"%>
 
-   
-
-<%-- <%@include file="../components/common-statics-imports.jsp" %> --%>
-
-<script src="/repouniversity/resources/js/jquery-1.10.2.js"></script>
-<script type="text/javascript"
-	src="/repouniversity/resources/js/bootstrap.min.js" ></script>
-<link rel="stylesheet" type="text/css"
-	href="/repouniversity/resources/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" 
-	href="/repouniversity/resources/font-awesome/css/font-awesome.css" />
-<link rel="stylesheet" type="text/css" 
-	href="/repouniversity/resources/css/animate.css" />
-<link rel="stylesheet" type="text/css" 
-	href="/repouniversity/resources/css/style.css" />
-<link rel="icon" type="image/png" href="/repouniversity/resources/images/icon.png">
+	<script src="/repouniversity/resources/js/plugins/chosen/chosen.jquery.js"></script>
+	<link rel="stylesheet" type="text/css" 
+				href="/repouniversity/resources/css/plugins/chosen/chosen.css" />
+	<script type="text/javascript"
+		src="/repouniversity/resources/js/application/cambiarPassword.js"></script>
+		
 </head>
 
-<body class="gray-bg">
+<body class=" pace-done">
 
  <div class="wrapper wrapper-content animated fadeInRight pre-scrollable">
  	<p>Ingrese su nueva Contraseña</p>
@@ -73,7 +65,15 @@
 					</div>
 	             </div>
 	        </div>
+	<div id="errorPass" title="">
+		<p>Las contraseñas deben ser iguales</p>
+	</div>
+	
+	<div id="passErrorDailog" title="">
+		<p class="message"></p>
+	</div>
 		</div>
+	
     
     <script>
     	$(document).ready(function(){

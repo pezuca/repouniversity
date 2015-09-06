@@ -68,7 +68,7 @@ public class LoginController {
 		loginService.loginAnonimo(request);
 		UsuarioTO user = usuarioService.getUserById(userId);
 		
-		return new ModelAndView("CambiarPass").addObject("user", user);
+		return new ModelAndView("cambiarPassword").addObject("user", user);
 	}
 	
 	/**

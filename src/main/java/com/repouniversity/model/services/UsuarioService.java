@@ -66,12 +66,12 @@ public class UsuarioService {
         userToUpdate.setPersona(usuario.getIdPersona());
         userToUpdate.setIdPermiso(usuario.getIdPermiso());
     	
-        Persona persona = personaService.findById(userToUpdate.getIdPersona());
+       // Persona persona = personaService.findById(userToUpdate.getIdPersona());
         
     	 if (newPassword != null && checkChangePassword(newPassword, repeatPassword)) {
              checkStrongPassword(newPassword);
-             cambioDePassword(newPassword, userToUpdate.getUser(), userToUpdate.getId());
-             userToUpdate.setPass(persona.getId() + newPassword);
+             cambioDePassword(newPassword, userToUpdate.getUser(), userToUpdate.getIdPersona());
+             userToUpdate.setPass(userToUpdate.getIdPersona() + newPassword);
              usuarioDAO.update(userToUpdate);
          } 
     	 
@@ -182,12 +182,12 @@ public class UsuarioService {
         }
     }
 
-    private void cambioDePassword(String password, String username, Long idUser) {
+    private void cambioDePassword(String password, String username, Long idPersona) {
     	 
-    	Usuario user = this.usuarioDAO.getUserByUsernameAndPass(username, idUser + password);
+    	Usuario user = this.usuarioDAO.getUserByUsernameAndPass(username, idPersona + password);
            
            if (user != null) {
-               throw new StrongPasswordException("Es necesario cambiar la Password");
+               throw new StrongPasswordException("Es necesario ingresar una nueva Password distinta a la que tenia");
            }
     
     }
@@ -321,4 +321,6 @@ public class UsuarioService {
     public Usuario findByUserName(String user) {
         return usuarioDAO.findByUserName(user);
     }
+
+
 }
