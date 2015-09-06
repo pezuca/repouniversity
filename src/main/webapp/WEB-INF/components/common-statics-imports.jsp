@@ -71,9 +71,11 @@
 	    
 	    <script src="/repouniversity/resources/js/plugins/dataTables/jquery.dataTables.js"></script>
 	    <script src="/repouniversity/resources/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+	    <script src="/repouniversity/resources/js/plugins/dataTables/dataTables.tableTools.js"></script>
+	    
 	    <!-- Data Tables -->
 	    <link href="/repouniversity/resources/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
-	    
+	    <link href="/repouniversity/resources/css/plugins/dataTables/dataTables.tableTools.css" rel="stylesheet">
 	    
 <!-- 			Graficos -->
 <!-- 		<link rel="stylesheet" type="text/css"  -->

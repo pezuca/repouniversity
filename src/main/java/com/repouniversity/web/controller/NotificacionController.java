@@ -49,29 +49,33 @@ public class NotificacionController {
 
     @RequestMapping(value = "notificacion/confirmaaltancurso", method = {RequestMethod.POST})
     @ResponseBody
-    public void confirmAltaCursoAjax(HttpServletRequest request, @RequestParam(value = "notificacionId", required = true) Long notificacionId) {
+    public void confirmAltaCursoAjax(HttpServletRequest request, @RequestParam(value = "notificacionId") Long[] notificacionId) {
 
-        Notificacion noti = notificacionService.getById(notificacionId);
-        cursoService.registrarAlumnoACurso(noti);
+        for (Long id : notificacionId) {
+            Notificacion noti = notificacionService.getById(id);
+            // cursoService.registrarAlumnoACurso(noti);
+        }
+
     }
-    
+
     @RequestMapping(value = "notificacion/rechazaaltancurso", method = {RequestMethod.POST})
     @ResponseBody
-    public void rechazoAltaCursoAjax(HttpServletRequest request, @RequestParam(value = "notificacionId", required = true) Long notificacionId) {
+    public void rechazoAltaCursoAjax(HttpServletRequest request, @RequestParam(value = "notificacionId", required = true) Long[] notificacionId) {
 
-        Notificacion noti = notificacionService.getById(notificacionId);
-        cursoService.rechazarAlumnoACurso(noti);
+        for (Long id : notificacionId) {
+            Notificacion noti = notificacionService.getById(id);
+//            cursoService.rechazarAlumnoACurso(noti);
+        }
     }
+
     @RequestMapping(value = "notificacion/borrarNotificacion", method = {RequestMethod.POST})
     @ResponseBody
-    public void borrarNotificacionCursoAjax(HttpServletRequest request, @RequestParam(value = "notificacionId", required = true) Long notificacionId) {
-
-    	 Notificacion noti = notificacionService.getById(notificacionId);
-        notificacionService.remove(noti);
-        
+    public void borrarNotificacionCursoAjax(HttpServletRequest request, @RequestParam(value = "notificacionId", required = true) Long[] notificacionId) {
+        for (Long id : notificacionId) {
+            Notificacion noti = notificacionService.getById(id);
+            notificacionService.remove(noti);
+        }
     }
-
-    
 
     @RequestMapping(value = "alumno/solicitarCurso", method = {RequestMethod.POST})
     @ResponseBody
@@ -82,14 +86,6 @@ public class NotificacionController {
         notificacionService.insertarNotificacion(alumnoId, cursoId, docenteId, tipoNotificacion);
     }
 
-//    @RequestMapping(value = "alumno/notificaciones", method = {RequestMethod.GET})
-//    public ModelAndView listaNotificaciones(HttpServletRequest request, @ModelAttribute("login") UsuarioRol usuario) {
-//
-//        List<Notificacion> Notificaciones = notificacionService.getNotificacionesForAlumno(usuario.getIdAluDoc());
-//
-//        return new ModelAndView("verNotificaciones").addObject("notificaciones", Notificaciones);
-//    }
-    
     @RequestMapping(value = "alumno/notificaciones", method = {RequestMethod.GET})
     public ModelAndView listaNotificaciones(HttpServletRequest request, @ModelAttribute("login") UsuarioRol usuario) {
 
@@ -97,7 +93,7 @@ public class NotificacionController {
 
         return new ModelAndView("verNotificaciones").addObject("notificaciones", Notificaciones);
     }
-    
+
     @RequestMapping(value = "docente/notificaciones", method = {RequestMethod.GET})
     public ModelAndView laListaNotificaciones(HttpServletRequest request, @ModelAttribute("login") UsuarioRol usuario) {
 
@@ -105,29 +101,26 @@ public class NotificacionController {
 
         return new ModelAndView("verNotificaciones").addObject("notificaciones", Notificaciones);
     }
-    
+
     @RequestMapping(value = "/notificaciones", method = {RequestMethod.GET})
     @ResponseBody
     public int cantNotificaciones(HttpServletRequest request, @ModelAttribute("login") UsuarioRol usuario) {
-    	List<NotificacionTO> notificaciones = null;
-    	List<ErrorArchivoTO> errores = null;
-    	if (usuario.getRol().equals("alumno"))
-    	{
-    		notificaciones = notificacionService.getNotificacionesForAlumno(usuario.getIdAluDoc());
-    		return notificaciones.size();
-	   	}
-    	if (usuario.getRol().equals("docente"))
-    	{
-    		notificaciones = notificacionService.getNotificacionesForDocente(usuario.getIdAluDoc());
-    		return notificaciones.size();
-	   	}
-    	if (usuario.getRol().equals("administrador"))
-    	{
-    		errores = errorArchivoService.getErrores();
-    		return errores.size();
-	   	}	
-    	
-    	return 0;
-        //return notificaciones;
+        List<NotificacionTO> notificaciones = null;
+        List<ErrorArchivoTO> errores = null;
+        if (usuario.getRol().equals("alumno")) {
+            notificaciones = notificacionService.getNotificacionesForAlumno(usuario.getIdAluDoc());
+            return notificaciones.size();
+        }
+        if (usuario.getRol().equals("docente")) {
+            notificaciones = notificacionService.getNotificacionesForDocente(usuario.getIdAluDoc());
+            return notificaciones.size();
+        }
+        if (usuario.getRol().equals("administrador")) {
+            errores = errorArchivoService.getErrores();
+            return errores.size();
+        }
+
+        return 0;
+        // return notificaciones;
     }
 }
