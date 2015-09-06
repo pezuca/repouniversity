@@ -61,6 +61,19 @@ public class UsuarioController {
 
         return new ModelAndView("redirect:/dashboard");
     }
+    
+    @RequestMapping(value = "usuario/cambiarPass/update", method = RequestMethod.POST)
+    public ModelAndView updatePassInformation(HttpServletRequest request, @RequestParam(value = "id", required = true) Long id,
+            @RequestParam(value = "newPassword", defaultValue = "") String newPassword,
+            @RequestParam(value = "repeatPassword", defaultValue = "") String repeatPassword) {
+
+        Usuario usuario = usuarioService.updatePass(id, newPassword, repeatPassword);
+
+        UsuarioRol usuarioRol = usuarioRolService.getUsuarioById(usuario.getId());
+        HTTPSessionManagerUtil.setSessionAttribute(request, "login", usuarioRol);
+
+        return new ModelAndView("redirect:/dashboard");
+    }
 
     @RequestMapping(value = "/preguntasFrecuentes", method = RequestMethod.GET)
     public ModelAndView preguntasFrecuentes(HttpServletRequest request) {
