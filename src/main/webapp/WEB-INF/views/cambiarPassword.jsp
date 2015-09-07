@@ -29,7 +29,7 @@
 					<div class="ibox float-e-margins">
 						<div class="ibox-content">
 							<form action="usuario/cambiarPass/update" class="form-horizontal" role="form"
-								id="userUpdate" method="post">
+								id="userUpdate" method="post" name="elformulario">
 								<input name="id" type="hidden" value="${user.id}" />
 								<div class="form-group">
 									<label class="col-sm-2 control-label" for="userInput">
@@ -43,11 +43,11 @@
 									<label for="passwordInput" class="col-sm-2 control-label">
 										Nueva Contraseña</label>
 									<div class="col-sm-3">
-										<input name="newPassword" class="form-control" id="passwordInput"
-											type="password">
+										<span id="passwd_sitio"><input type="password" name="newPassword" id="passwordInput" value=""></span>&nbsp;&nbsp;
+										<input type="checkbox" title = "Mostrar Pass" name="input_ver" value="ver" onclick="ver_password();">
 									</div>
 								</div>
-								<div class="form-group">
+								<div class="form-group" id="repetirPass">
 									<label for="repeatPasswordInput" class="col-sm-2 control-label">
 										Confirmar Contraseña</label>
 									<div class="col-sm-3">
@@ -57,7 +57,7 @@
 								</div>
 								<div class="form-group">
 									<div class="col-sm-offset-2 col-sm-10">
-										<button type="submit" class="btn btn-primary">Salvar</button>
+										<button type="submit" class="btn btn-primary" onclick="mandarLaPass();">Salvar</button>
 									</div>
 								</div>
 							</form>
@@ -85,6 +85,33 @@
     		});
     	});
     </script>
+    <script language="JavaScript">
+		function ver_password() {
+		    var passwd_valor = document.elformulario.newPassword.value;
+		 
+		    document.getElementById('passwd_sitio').innerHTML
+		        = (document.elformulario.input_ver.checked)
+		        ? '<input type="text"     name="newPassword">'
+		        : '<input type="password" name="newPassword">'
+		        ;
+		 
+		        if(document.elformulario.input_ver.checked == true){
+		        	document.getElementById('repetirPass').style.display = 'none';
+		        } else {
+		        	document.getElementById('repetirPass').style.display = 'block';
+		        }
+		        
+		    	document.elformulario.newPassword.value = passwd_valor;
+		}
+		function mandarLaPass() {
+		    var passwd_valor = document.elformulario.newPassword.value;
+		         if(document.elformulario.input_ver.checked == true){
+		        	document.elformulario.repeatPassword.value = passwd_valor;
+		        }
+		        
+		    	document.elformulario.newPassword.value = passwd_valor;
+		}
+	</script>
 
 </body>
 
