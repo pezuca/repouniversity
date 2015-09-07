@@ -23,9 +23,30 @@ public class AlumnoDAOImpl extends GenericDAOImpl<Alumno> implements AlumnoDAO {
     protected static final String TABLE_NAME = "alumno";
 
     @Override
-    public Alumno findAlumnoByPersonaId(Integer personaId) {
-        // TODO Auto-generated method stub
-        return null;
+    public Alumno findAlumnoByPersonaId(Long personaId) {
+        StringBuilder sql = new StringBuilder();
+
+        sql.append("SELECT * FROM alumno a ");
+        sql.append("WHERE a.id_persona = ? ");
+        sql.append("AND a.activo = 1");
+
+        List<Alumno> list = doQuery(new SQLStatement(sql.toString()) {
+            @Override
+            public void buildPreparedStatement(PreparedStatement ps) throws SQLException {
+                ps.setLong(1, personaId);
+            }
+
+            @Override
+            public void doAfterTransaction(int result) {
+            }
+        }, new AlumnoRowMapper(), "findAlumnoForGrupo: " + personaId);
+
+
+        if(list.isEmpty()){
+            return null;
+        }
+        
+        return list.get(0);
     }
 
     @Override

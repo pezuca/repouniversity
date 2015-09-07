@@ -37,7 +37,6 @@
 									<th>Notificacion</th>
 									<th>Curso</th>
 									<th>Descripcion</th>
-<!-- 									<th></th> -->
 								</tr>
 							</thead>
 							<tbody>
@@ -161,6 +160,23 @@
 						}
 					}
 					rechazoAltaEnCurso(idsDatos);
+				}
+				
+			});
+			
+			$("#borrarTodo").click(function() {
+				var datos = table.rows('.selected').data();
+				var idsDatos = "";
+				
+				if(datos.length > 0) {
+					for(var i = 0; i< datos.length; i++){
+						idsDatos = idsDatos + datos[i][1];
+						
+						if(datos.length - 1 != i) {
+							idsDatos = idsDatos + ",";
+						}
+					}
+					borrarNotificacion(idsDatos);
 				}
 				
 			});

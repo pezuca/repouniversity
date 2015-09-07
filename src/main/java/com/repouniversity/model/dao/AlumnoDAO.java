@@ -7,7 +7,7 @@ import com.repouniversity.model.entity.Docente;
 
 public interface AlumnoDAO extends GenericDAO<Alumno>{
 
-    Alumno findAlumnoByPersonaId(Integer personaId);
+    Alumno findAlumnoByPersonaId(Long personaId);
 
     Docente findDocenteByPersonaId(Integer personaId);
 

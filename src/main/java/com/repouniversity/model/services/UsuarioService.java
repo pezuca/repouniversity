@@ -17,7 +17,6 @@ import com.repouniversity.model.entity.Seguridad;
 import com.repouniversity.model.entity.Usuario;
 import com.repouniversity.model.entity.UsuarioRol;
 import com.repouniversity.model.entity.to.UsuarioTO;
-import com.repouniversity.web.exceptions.LoginFailException;
 import com.repouniversity.web.exceptions.StrongPasswordException;
 
 @Service
@@ -214,12 +213,12 @@ public class UsuarioService {
         usuarioTo.setUser(usuario.getUser());
         usuarioTo.setFechasys(usuario.getFechasys());
         usuarioTo.setActivo(usuario.isActivo());
-        usuarioTo.setPersona(personaService.findById(usuarioRol.getIdPersona()));
-        usuarioTo.setRol(usuarioRol.getRol());
-        usuarioTo.setPermiso(permisoService.findById(usuarioRol.getPermiso()));
+        usuarioTo.setPersona(personaService.findById(usuario.getIdPersona()));
+        usuarioTo.setRol(roleService.findById(usuario.getRole()).getRole());
+        usuarioTo.setPermiso(permisoService.findById(usuario.getIdPermiso()));
         
-        if (usuarioRol.getRol().equals("alumno")) {
-            usuarioTo.setAlumno(alumnoService.getAlumnoById(usuarioRol.getIdAluDoc()));
+        if (roleService.findById(usuario.getRole()).getRole().equals("alumno")) {
+            usuarioTo.setAlumno(alumnoService.getAlumnoByPersonaId(usuario.getIdPersona()));
         }
 
         return usuarioTo;

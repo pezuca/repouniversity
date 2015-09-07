@@ -127,5 +127,11 @@ public class AlumnoService {
     public Alumno findByPersonaId(Long idPersona, Boolean activo) {
         return alumnoDao.findByPersonaId(idPersona, activo);
     }
+
+    public AlumnoTO getAlumnoByPersonaId(Long idPersona) {
+        Alumno alumno = alumnoDao.findAlumnoByPersonaId(idPersona);
+        
+        return buildAlumno(alumno);
+    }
     
 }

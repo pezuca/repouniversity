@@ -73,7 +73,7 @@ public class NotificacionController {
     public void borrarNotificacionCursoAjax(HttpServletRequest request, @RequestParam(value = "notificacionId", required = true) Long[] notificacionId) {
         for (Long id : notificacionId) {
             Notificacion noti = notificacionService.getById(id);
-            notificacionService.remove(noti);
+//            notificacionService.remove(noti);
         }
     }
 
