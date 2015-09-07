@@ -48,8 +48,8 @@ var archivosAdmin = {
 			data: {"archivoId" : archivoId},
 			success: function(data){
 				$.gritter.add({
-					title:'Archivo eliminada',
-					text: 'La archivo fue elimnada exitosamente.',
+					title:'Archivo eliminado',
+					text: 'La archivo fue elimnado exitosamente.',
 					sticky: false
 				});
 				
@@ -59,8 +59,8 @@ var archivosAdmin = {
 			},
 			error: function(data) {
 				$.gritter.add({
-					title: 'Eliminar usuario',
-					text: 'Hubo un problema al tratar de eliminar al usuario. Por favor inténtelo mas tarde.',
+					title: 'Eliminar Archivo',
+					text: 'Hubo un problema al tratar de eliminar el archivo. Por favor inténtelo mas tarde.',
 					class_name: 'gritter-light'
 				});	
 			}

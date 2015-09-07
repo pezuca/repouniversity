@@ -32,7 +32,7 @@
 					<div class="ibox float-e-margins">
 						<div class="ibox-content">
 							<form action="misdatos/update" class="form-horizontal" role="form"
-								id="userUpdate" method="post">
+								id="userUpdate" method="post" name="elformulario">
 								<input name="id" type="hidden" value="${usuario.id}" />
 								<div class="form-group">
 									<label for="nameInput" class="col-sm-2 control-label">
@@ -75,11 +75,11 @@
 									<label for="passwordInput" class="col-sm-2 control-label">
 										Nueva Contraseña</label>
 									<div class="col-sm-3">
-										<input name="newPassword" class="form-control" id="passwordInput"
-											type="password">
+										<span id="passwd_sitio"><input type="password" name="newPassword" id="passwordInput" value=""></span>&nbsp;&nbsp;
+										<input type="checkbox" title = "Mostrar Pass" name="input_ver" value="ver" onclick="ver_password();">
 									</div>
 								</div>
-								<div class="form-group">
+								<div class="form-group" name="repetirPass" >
 									<label for="repeatPasswordInput" class="col-sm-2 control-label">
 										Confirmar Contraseña</label>
 									<div class="col-sm-3">
@@ -110,5 +110,19 @@
 	<div id="passErrorDailog" title="">
 		<p class="message"></p>
 	</div>
+	
+	<script language="JavaScript">
+		function ver_password() {
+		    var passwd_valor = document.elformulario.newPassword.value;
+		 
+		    document.getElementById('passwd_sitio').innerHTML
+		        = (document.elformulario.input_ver.checked)
+		        ? '<input type="text"     name="newPassword">'
+		        : '<input type="password" name="newPassword">'
+		        ;
+		 
+		    document.elformulario.newPassword.value = passwd_valor;
+		}
+</script>
 </body>
 </html>

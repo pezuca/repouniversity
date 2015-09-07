@@ -36,14 +36,17 @@
             	<div class="col-lg-6 archivoPlaca">
                     <div class="ibox float-e-margins">
 							<div class="ibox-title">
-								<h5>${archivo.nombre}</h5>
+								<h5>${archivo.nombre} 
+									<a  name="verArchivo" data-archivoId="${archivo.id}" href="/repouniversity/vistaPrevia?archivoId=${archivo.id}"><button class="btn btn-primary btn-circle" type="button"><i class="fa fa-search" title="Previsualizar archivo"></i></button></a>
+									<a  name="dowloadArchivo" data-archivoId="${archivo.id}" href="/repouniversity/bajarArchivo?archivoId=${archivo.id}"><button class="btn btn-success btn-circle" type="button" title="Descargar archivo"><i class="fa fa-download"></i></button></a>
+								</h5>
 								<div class="ibox-tools">
 									<a class="collapse-link">
-										<i class="fa fa-chevron-up"></i>
+										<i class="fa fa-chevron-down"></i>
 									</a>
 							</div>
 							</div>
-							<div class="ibox-content profile-content">
+							<div class="ibox-content profile-content" style="display: none;">
 								<div class="archivoInfo ${archivo.id}">
 									<h4><strong>Materia: ${archivo.materia}</strong></h4>
 									<p><i class="fa fa-clock-o"></i> Publicado en ${archivo.fechaPublicacion}</p>
@@ -70,14 +73,6 @@
 										<h5>
 											<a  name="editArchivo" data-archivoId="${archivo.id}"><button class="btn btn-info btn-circle" type="button" title="Editar archivo"><i class="fa fa-pencil"></i></button></a>
 											<a  name="deleteArchivo" data-archivoId="${archivo.id}"><button class="btn btn-danger btn-circle" type="button" title="Eliminar archivo"><i class="fa fa-times"></i> </button></a>
-											<a  name="verArchivo" data-archivoId="${archivo.id}" href="/repouniversity/vistaPrevia?archivoId=${archivo.id}">
-												<button class="btn btn-primary btn-circle" type="button"><i class="fa fa-search" title="Previsualizar archivo"></i>
-												</button>
-											</a>
-											<a  name="dowloadArchivo" data-archivoId="${archivo.id}" href="/repouniversity/bajarArchivo?archivoId=${archivo.id}">
-												<button class="btn btn-success btn-circle" type="button" title="Descargar archivo"><i class="fa fa-download"></i>
-												</button>
-											</a>
 										</h5>
 									</div>
 								</div>
