@@ -207,7 +207,6 @@ public class UsuarioService {
 
     private UsuarioTO buildUsuario(Usuario usuario) {
         UsuarioTO usuarioTo = new UsuarioTO();
-        UsuarioRol usuarioRol = usuarioRolService.getUsuarioById(usuario.getId());
 
         usuarioTo.setId(usuario.getId());
         usuarioTo.setUser(usuario.getUser());
