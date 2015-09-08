@@ -20,6 +20,8 @@ public interface GenericDAO<E> {
 
     E findById(Long id);
     
+    List<Long> findAllIds();
+    
     List<E> findByIds(final Long... keys);
 
     /**

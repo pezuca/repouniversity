@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.repouniversity.model.cache.CacheManager;
 import com.repouniversity.model.dao.UsuarioDAO;
 import com.repouniversity.model.entity.Alumno;
 import com.repouniversity.model.entity.Docente;
@@ -51,6 +52,9 @@ public class UsuarioService {
     @Autowired
     public PermisoService permisoService;
     
+    @Autowired
+    public CacheManager cache;
+    
     @Transactional
     public Usuario updatePass(Long id, String newPassword, String repeatPassword) {
     	
@@ -73,6 +77,8 @@ public class UsuarioService {
              userToUpdate.setPass(userToUpdate.getIdPersona() + newPassword);
              usuarioDAO.update(userToUpdate);
          } 
+    	 
+    	cache.getUsuarioMap().remove(userToUpdate.getId());
     	 
     	return userToUpdate;
     }
@@ -119,6 +125,8 @@ public class UsuarioService {
 
             alumnoService.update(alumno);
         }
+        
+        cache.getUsuarioMap().remove(userToUpdate.getId());
 
         return userToUpdate;
     }
@@ -158,6 +166,7 @@ public class UsuarioService {
         }
 
         usuarioParametroService.crearParametro(usuario.getId(), usuario.getRole());
+        cache.getUsuarioMap().put(usuario.getId(), buildUsuario(usuario));
 
         return usuario;
     }
@@ -200,9 +209,15 @@ public class UsuarioService {
     }
 
     public UsuarioTO getUserById(Long usuarioId) {
-        Usuario usuario = usuarioDAO.findById(usuarioId);
-
-        return buildUsuario(usuario);
+        Usuario usuario = null;
+        UsuarioTO usuarioTO = cache.getUsuarioMap().get(usuarioId);
+        
+        if(usuarioTO == null) {
+            usuario = usuarioDAO.findById(usuarioId);
+            return buildUsuario(usuario);
+        } 
+        
+        return usuarioTO;
     }
 
     private UsuarioTO buildUsuario(Usuario usuario) {
@@ -225,8 +240,19 @@ public class UsuarioService {
 
     public List<UsuarioTO> getAll() {
         List<UsuarioTO> usuarioList = new ArrayList<UsuarioTO>();
+        List<Long> usuarioIdsTofind = new ArrayList<Long>();
+        
+        for (Long usuarioId : usuarioDAO.findAllIds()) {
+            UsuarioTO usuarioTO = cache.getUsuarioMap().get(usuarioId);
+            
+            if(usuarioTO == null) {
+                usuarioIdsTofind.add(usuarioId);
+            } else {
+                usuarioList.add(usuarioTO);
+            }
+        }
 
-        for (Usuario usuario : usuarioDAO.findAll()) {
+        for (Usuario usuario : usuarioDAO.findByIds((Long[]) usuarioIdsTofind.toArray(new Long[0]))) {
             usuarioList.add(buildUsuario(usuario));
         }
 

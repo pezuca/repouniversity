@@ -231,9 +231,13 @@ public abstract class GenericDAOImpl<E extends IdentifiedObject> implements Gene
     @Override
     public List<E> findAll() {
 
-        List<Long> ids = jdbcTemplate.query("SELECT * FROM " + getTableName() + " WHERE activo = 1", new LongRowMapper());
+        List<Long> ids = findAllIds();
 
         return findByIds(ids.toArray(new Long[ids.size()]));
+    }
+    
+    public List<Long> findAllIds() {
+        return jdbcTemplate.query("SELECT " + getColumnIdName() + " FROM " + getTableName() + " WHERE activo = 1", new LongRowMapper());
     }
 
     /* Auxiliary methods */
