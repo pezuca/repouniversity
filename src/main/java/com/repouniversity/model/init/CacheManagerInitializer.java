@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.repouniversity.model.cache.CacheManager;
 import com.repouniversity.model.entity.to.ArchivoTO;
+import com.repouniversity.model.entity.to.CursoTO;
 import com.repouniversity.model.entity.to.UsuarioTO;
 import com.repouniversity.model.services.ArchivoService;
+import com.repouniversity.model.services.CursoService;
 import com.repouniversity.model.services.UsuarioService;
 
 /**
@@ -27,11 +29,15 @@ public class CacheManagerInitializer implements ApplicationListener<ContextRefre
     
     @Autowired
     private ArchivoService archivoService;
+    
+    @Autowired
+    private CursoService cursoService;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         cache.setUsuarioMap(new HashMap<Long, UsuarioTO>());
         cache.setArchivoMap(new HashMap<Long, ArchivoTO>());
+        cache.setCursoMap(new HashMap<Long, CursoTO>());
         
         for (UsuarioTO usuario : usuarioService.getAll()) {
             cache.getUsuarioMap().put(usuario.getId(), usuario);
@@ -39,6 +45,10 @@ public class CacheManagerInitializer implements ApplicationListener<ContextRefre
         
         for (ArchivoTO archivo : archivoService.getAll()) {
             cache.getArchivoMap().put(archivo.getId(), archivo);
+        }
+        
+        for (CursoTO curso : cursoService.getAll()) {
+            cache.getCursoMap().put(curso.getId(), curso);
         }
     }
 }

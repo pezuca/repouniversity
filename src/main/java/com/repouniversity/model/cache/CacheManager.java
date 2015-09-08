@@ -4,15 +4,15 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
-import com.repouniversity.model.entity.Curso;
 import com.repouniversity.model.entity.to.ArchivoTO;
+import com.repouniversity.model.entity.to.CursoTO;
 import com.repouniversity.model.entity.to.UsuarioTO;
 
 @Component
 public class CacheManager {
 
     private Map<Long, UsuarioTO> usuarioMap;
-    private Map<Long, Curso> cursoMap;
+    private Map<Long, CursoTO> cursoMap;
     private Map<Long, ArchivoTO> archivoMap;
 
     public Map<Long, UsuarioTO> getUsuarioMap() {
@@ -23,11 +23,11 @@ public class CacheManager {
         this.usuarioMap = usuarioMap;
     }
 
-    public Map<Long, Curso> getCursoMap() {
+    public Map<Long, CursoTO> getCursoMap() {
         return cursoMap;
     }
 
-    public void setCursoMap(Map<Long, Curso> cursoMap) {
+    public void setCursoMap(Map<Long, CursoTO> cursoMap) {
         this.cursoMap = cursoMap;
     }
 
