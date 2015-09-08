@@ -36,15 +36,14 @@
             	<div class="col-lg-6 archivoPlaca">
                     <div class="ibox float-e-margins">
 							<div class="ibox-title">
-								<h5>${archivo.nombre} 
-									<a  name="verArchivo" data-archivoId="${archivo.id}" href="/repouniversity/vistaPrevia?archivoId=${archivo.id}"><button class="btn btn-primary btn-circle" type="button"><i class="fa fa-search" title="Previsualizar archivo"></i></button></a>
-									<a  name="dowloadArchivo" data-archivoId="${archivo.id}" href="/repouniversity/bajarArchivo?archivoId=${archivo.id}"><button class="btn btn-success btn-circle" type="button" title="Descargar archivo"><i class="fa fa-download"></i></button></a>
-								</h5>
+								<h5>${archivo.nombre}</h5>
 								<div class="ibox-tools">
 									<a class="collapse-link">
 										<i class="fa fa-chevron-down"></i>
 									</a>
-							</div>
+								</div>
+								<a  name="dowloadArchivo" class="pull-right" data-archivoId="${archivo.id}" href="/repouniversity/bajarArchivo?archivoId=${archivo.id}"><button class="btn btn-success btn-circle" type="button" title="Descargar archivo"><i class="fa fa-download"></i></button></a>
+								<a  name="verArchivo" class="pull-right" data-archivoId="${archivo.id}" href="/repouniversity/vistaPrevia?archivoId=${archivo.id}"><button class="btn btn-primary btn-circle" type="button"><i class="fa fa-search" title="Previsualizar archivo"></i></button></a>
 							</div>
 							<div class="ibox-content profile-content" style="display: none;">
 								<div class="archivoInfo ${archivo.id}">
@@ -125,31 +124,7 @@
 				<div id="deleteArchivoDialog" title="Eliminar Archivo">
 					<p>¿Esta seguro que desea eliminar la archivo?</p>
 				</div>
-		
-<%-- 		<%@include file="../components/footer.jsp"%> --%>
 		</div>
 	</div>
-<!-- 	<script> -->
-// 		$(document).ready(function() {
-// 			$('#clientTable').dataTable({
-// 				retrieve: true,
-// 				"processing" : false,
-// 				"serverSide" : false,
-// 				"pagingType": "full_numbers",
-// 				"language": {
-// 		            "search": "Búsqueda"
-// 		        },
-// 		        "columnDefs": [
-// 		                       {"width": "35%", "targets": 0},
-// 		                       {"width": "40%", "targets": 1},
-// 		                       {"width": "25%", "targets": 2},
-// 		                       { orderable: false, targets: [11] }
-// 		                      ],
-// 		                      "order": [[ 0, "desc" ]]
-// 			});
-// 		});
-		
-// 	}
-<!-- 	</script>	 -->
 </body>
 </html>
