@@ -168,44 +168,7 @@ $(document).ready(function() {
 	});
 	
 	$("#cursosGrupos_wrapper .row").first().find(".col-sm-6").first().append($("#cursosGrupos").parents(".ibox:first").find(".ibox-title"));
-	
-	notificacionesTable = $('#notificaciones').DataTable({
-		retrieve: true,
-		"processing" : false,
-		"serverSide" : false,
-		"pagingType": "full_numbers",
-		"language": {
-            "lengthMenu": "Mostrar _MENU_ resultados por página",
-            "zeroRecords": "No fueron encontrados resultados.",
-            "info": "Pagina _PAGE_ of _PAGES_",
-            "infoEmpty": "No hay resultados disponibles.",
-            "infoFiltered": "(filtered from _MAX_ total records)",
-            "search": "Filtrar por: "
-        },
-        "columnDefs": [
-                       {"width": "35%", "targets": 0},
-                       {"width": "40%", "targets": 1},
-                       {"width": "25%", "targets": 2},
-                       { orderable: false, targets: [2] }
-                      ],
-          "order": [[ 0, "desc" ]],
-          "oLanguage": {
-              "sInfoEmpty": "No hay resultados disponibles.",
-              "sSearch": "Filtrar por: ",
-              "sInfo": "Mostrando (_START_ a _END_) de _TOTAL_ resultados",
-              "sZeroRecords": "No fueron encontrados resultados.",
-              "oPaginate": {
-                  "sFirst": "Primera",
-                  "sLast": "Ultima",
-                  "sNext": "Siguiente",
-                  "sPrevious": "Previa"
-              }
-            }
-	});
-	
-	$("#notificaciones_wrapper .row").first().find(".col-sm-6").first().append($("#notificaciones").parents(".ibox:first").find(".ibox-title"));
-	
-	$("#notificaciones_length").remove();
+
 	$("#cursosGrupos_length").remove();
 	
 	$("#crearGrupoDialog").dialog({

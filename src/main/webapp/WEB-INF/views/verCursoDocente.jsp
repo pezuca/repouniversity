@@ -15,6 +15,8 @@
 	src="/repouniversity/resources/js/plugins/chosen/chosen.jquery.js"></script>
 <script
 	src="/repouniversity/resources/js/application/verCursoDocente.js"></script>
+<script
+	src="/repouniversity/resources/js/application/notificaciones.js"></script>
 	<script
 	src="/repouniversity/resources/js/application/Archivos.js"></script>
 <link rel="stylesheet" type="text/css"
@@ -30,6 +32,39 @@
 			<tag:breadcrumb label="Ver curso"/>
 
 			<div class="wrapper wrapper-content animated fadeInRight pre-scrollable">
+				<div class="row">
+		             <div class="col-lg-12">
+		              <div class="ibox float-e-margins">
+		                  <div class="ibox-content">
+		                  	<table id="notificaciones" class="table">
+		                  		<thead class="encabezado">
+									<tr>
+										<th><input type="checkbox" name="selectAll"/></th>
+										<th>Id</th>
+										<th>Nombre</th>
+										<th>Notificacion</th>
+										<th>Curso</th>
+										<th>Descripcion</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${curso.notificaciones}" var="notificacion" varStatus="status">
+										<tr>
+											<td></td>
+											<td>${notificacion.id}</td>
+											<td>${notificacion.alumno.persona.apellido}, ${notificacion.alumno.persona.nombre}</td>
+											<td>${notificacion.tipo.descripcion}</td>
+											<td>${notificacion.curso.nombre}</td>
+											<td>${notificacion.curso.descripcion}</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+		                  	</table>
+		                  </div>
+		              </div>
+		      		</div>
+		         </div>
+			
 				<div class="row">
 					<div class="col-lg-12">
 						<h3><b>${curso.nombre}</b></h3>
@@ -176,24 +211,6 @@
 
 	<script>
 		$(document).ready(function() {
-			
-// 			$('#clientTable').dataTable({
-// 				retrieve: true,
-// 				"processing" : false,
-// 				"serverSide" : false,
-// 				"pagingType": "full_numbers",
-// 				"language": {
-// 		            "search": "Filtrar por: "
-// 		        },
-// 		        "columnDefs": [
-// 		                       {"width": "35%", "targets": 0},
-// 		                       {"width": "40%", "targets": 1},
-// 		                       {"width": "25%", "targets": 2},
-// 		                       { orderable: false, targets: [11] }
-// 		                      ],
-// 		                      "order": [[ 0, "desc" ]]
-// 			});
-			
 			$('#fileUpload').on('hidden.bs.modal', function () {
 				var success = $("#fileUpload input[name=atLestOneSuccess]").val();
 				
@@ -202,28 +219,6 @@
 				}
 			})
 		});
-		
-		function altaEnCurso(notificacionId) {
-			$.ajax({
-				  type: "POST",
-				  url: "/repouniversity/notificacion/confirmaaltancurso",
-				  data: {"notificacionId" : notificacionId},
-				  success: function(){ 
-					 
-				  }
-			});
-		}
-		
-		function rechazoAltaEnCurso(notificacionId) {
-			$.ajax({
-				  type: "POST",
-				  url: "/repouniversity/notificacion/rechazaaltancurso",
-				  data: {"notificacionId" : notificacionId},
-				  success: function(){ 
-					
-				  }
-			});
-		}
 	</script>
 	<div id="hiddenInputs" class="hidden">
 		<input type="hidden" name="personaId" value="${userLog.idPersona}"/>
@@ -302,6 +297,13 @@
 	</div>
 	<div id="deleteGrupoDialog" title="Eliminar Grupo">
 		<p>¿Esta seguro que desea eliminar el Grupo?</p>
+	</div>
+	
+	<div id="successDialog" title="">
+		<p class="message"></p>
+	</div>
+	<div id="errorDialog" title="">
+		<p class="message"></p>
 	</div>
 	<%@include file="../components/fileUpload.jsp"%>
 </body>
