@@ -59,10 +59,6 @@
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
 	</listener>
 	
-	<listener>
-		<listener-class>com.repouniversity.model.manager.LoadXMLFilesApplicationListener</listener-class>
-	</listener>
-	
 	<error-page>
 		<error-code>500</error-code>
 		<location>/repouniversity/views/errors/generalError.jsp</location> 

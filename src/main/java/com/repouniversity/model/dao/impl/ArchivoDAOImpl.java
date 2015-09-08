@@ -22,7 +22,7 @@ import com.repouniversity.model.dao.rowmapper.VwArchivoRowMapper;
 import com.repouniversity.model.entity.Archivo;
 import com.repouniversity.model.entity.UsuarioRol;
 import com.repouniversity.model.entity.VwArchivo;
-import com.repouniversity.model.manager.LoadXMLFilesApplicationListener;
+import com.repouniversity.model.init.LoadXMLFilesApplicationListener;
 
 @Repository
 public class ArchivoDAOImpl extends GenericDAOImpl<Archivo> implements ArchivoDAO {

@@ -214,7 +214,7 @@ public class UsuarioService {
         
         if(usuarioTO == null) {
             usuario = usuarioDAO.findById(usuarioId);
-            return buildUsuario(usuario);
+            usuarioTO = buildUsuario(usuario);
         } 
         
         return usuarioTO;
@@ -262,6 +262,8 @@ public class UsuarioService {
     private void delete(Long userId) {
         Usuario usuario = usuarioDAO.findById(userId);
         usuarioDAO.delete(usuario);
+        
+        cache.getArchivoMap().remove(userId);
     }
 
     @Transactional

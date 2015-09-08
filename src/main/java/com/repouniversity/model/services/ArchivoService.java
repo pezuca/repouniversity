@@ -19,11 +19,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import com.repouniversity.model.cache.CacheManager;
 import com.repouniversity.model.dao.ArchivoDAO;
 import com.repouniversity.model.entity.Archivo;
+import com.repouniversity.model.entity.Usuario;
 import com.repouniversity.model.entity.UsuarioRol;
 import com.repouniversity.model.entity.VwArchivo;
 import com.repouniversity.model.entity.to.ArchivoTO;
+import com.repouniversity.model.entity.to.UsuarioTO;
 import com.repouniversity.web.enums.MappingArchivoTipoEnum;
 
 @Service
@@ -45,6 +48,9 @@ public class ArchivoService {
 
     @Autowired
     private ArchivoTipoService archivoTipoService;
+    
+    @Autowired
+    public CacheManager cache;
 
     public List<Archivo> subirArchivo(List<Archivo> listaArchivos) {
         for (Archivo archivo : listaArchivos) {
@@ -67,9 +73,13 @@ public class ArchivoService {
     }
 
     public ArchivoTO getArchivoById(Long archivoId) {
-        Archivo archivo = archivoDao.findById(archivoId);
+        Archivo archivo = null;
+        ArchivoTO archivoTo = cache.getArchivoMap().get(archivoId);
 
-        ArchivoTO archivoTo = buildArchivo(archivo);
+        if(archivoTo == null) {
+            archivoDao.findById(archivoId); 
+            archivoTo = buildArchivo(archivo);
+        }
 
         return archivoTo;
     }
@@ -91,6 +101,7 @@ public class ArchivoService {
 
     public void delete(Long archivoId) {
         archivoDao.delete(archivoDao.findById(archivoId));
+        cache.getArchivoMap().remove(archivoId);
     }
 
     public ArchivoTO buildArchivo(Archivo archivo) {
@@ -116,10 +127,20 @@ public class ArchivoService {
     }
 
     public List<ArchivoTO> getAll() {
-        List<Archivo> archivoList = archivoDao.findAll();
         List<ArchivoTO> archivoToList = new ArrayList<ArchivoTO>();
-
-        for (Archivo archivo : archivoList) {
+        List<Long> archivoIdsTofind = new ArrayList<Long>();
+        
+        for (Long archivoId : archivoDao.findAllIds()) {
+            ArchivoTO archivoTO = cache.getArchivoMap().get(archivoId);
+            
+            if(archivoTO == null) {
+                archivoIdsTofind.add(archivoId);
+            } else {
+                archivoToList.add(archivoTO);
+            }
+        }
+        
+        for (Archivo archivo : archivoDao.findByIds((Long[]) archivoIdsTofind.toArray(new Long[0]))) {
             archivoToList.add(buildArchivo(archivo));
         }
 
@@ -266,6 +287,8 @@ public class ArchivoService {
         archi.setDescripcion(desArchivo);
         archi.setEstado(estadoArchivo);
         archivoDao.update(archi);
+        
+        cache.getArchivoMap().get(archi.getId());
 
         return archivoDao.findVwArchivo(archivoId);
     }
