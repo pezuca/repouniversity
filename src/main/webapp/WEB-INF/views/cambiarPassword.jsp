@@ -35,7 +35,7 @@
 									<label class="col-sm-2 control-label" for="userInput">
 											Usuario</label>
 										<div class="col-sm-2">
-											<input name="user" class="form-control" id="userInput" type="text"
+											<input name="user" id="userInput" type="text"
 												value="${user.user}" disabled>
 										</div>
 								</div>
@@ -51,7 +51,7 @@
 									<label for="repeatPasswordInput" class="col-sm-2 control-label">
 										Confirmar Contraseña</label>
 									<div class="col-sm-3">
-										<input name="repeatPassword" class="form-control"
+										<input name="repeatPassword" 
 											id="repeatPasswordInput" type="password" placeholder="Repetir Contraseña">
 									</div>
 								</div>
@@ -77,7 +77,7 @@
     
     <script>
     	$(document).ready(function(){
-    		$('input[name=newPassword]').replaceWith('<input type="password" name="newPassword" class="form-control" placeholder="Contraseña" required/>');
+    		$('input[name=newPassword]').replaceWith('<input type="password" name="newPassword" placeholder="Contraseña" required/>');
     		setTimeout("$('#login').trigger('reset')", 100);
     		
     		$('#login input[name=user]').change(function(){
