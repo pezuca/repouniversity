@@ -53,7 +53,7 @@ public class NotificacionController {
 
         for (Long id : notificacionId) {
             Notificacion noti = notificacionService.getById(id);
-            // cursoService.registrarAlumnoACurso(noti);
+             cursoService.registrarAlumnoACurso(noti);
         }
 
     }
@@ -64,7 +64,7 @@ public class NotificacionController {
 
         for (Long id : notificacionId) {
             Notificacion noti = notificacionService.getById(id);
-//            cursoService.rechazarAlumnoACurso(noti);
+            cursoService.rechazarAlumnoACurso(noti);
         }
     }
 
@@ -73,7 +73,7 @@ public class NotificacionController {
     public void borrarNotificacionCursoAjax(HttpServletRequest request, @RequestParam(value = "notificacionId", required = true) Long[] notificacionId) {
         for (Long id : notificacionId) {
             Notificacion noti = notificacionService.getById(id);
-//            notificacionService.remove(noti);
+            notificacionService.remove(noti);
         }
     }
 

@@ -35,6 +35,10 @@
 				<div class="row">
 		             <div class="col-lg-12">
 		              <div class="ibox float-e-margins">
+		              	  <div class="ibox-title">
+		                      <h5>Notificaciones</h5>
+		                  </div>
+		              	  <input type="hidden" name="rolName" value="${userLog.rol}" />
 		                  <div class="ibox-content">
 		                  	<table id="notificaciones" class="table">
 		                  		<thead class="encabezado">
@@ -73,35 +77,6 @@
 				<div class="col-lg-12" style="margin: 10px 0px;">
 					<a data-toggle="modal" href="#fileUpload" class="btn btn-success"><i class="fa fa-upload"></i> Subir Archivo</a>
 				</div>
-				
-				<div class="row">
-					<div class="col-lg-12">
-			        	<c:forEach items="${curso.notificaciones}" var="notificacion" varStatus="status">
-			            <c:if test = "${status.count mod 2 != 0}" >
-							<div class="row">
-		            	</c:if>
-							<div class="col-lg-6">
-	                            <div class="alert alert-info alert-dismissable">
-	                                <p>El alumno ${notificacion.alumno.persona.apellido}, ${notificacion.alumno.persona.nombre}</p>
-	                               	<p>${notificacion.tipo.descripcion}</p>
-	                                <p>Curso: ${notificacion.curso.nombre}, ${notificacion.curso.descripcion}</p>
-									<button aria-hidden="true" data-dismiss="alert" class="altaNotificacion btn btn-primary"
-											onclick="altaEnCurso(${notificacion.id})">Confirmar</button>&nbsp;
-									<button aria-hidden="true" data-dismiss="alert" class="rechazoNotificacion btn btn-danger"
-											onclick="rechazoAltaEnCurso(${notificacion.id})">Rechazar</button>
-	                            </div>
-							</div>
-						
-						<c:if test = "${status.count mod 2 == 0}" >
-		            		</div>
-		            	</c:if>	
-		                </c:forEach>
-					</div>
-				</div>
-				
-			<c:if test = "${curso.notificaciones.size() mod 2 != 0}" >
-				</div>
-		    </c:if>	
 		    
 				<div class="row">
 					<div class="col-lg-12">
