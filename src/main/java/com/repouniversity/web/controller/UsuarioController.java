@@ -64,8 +64,8 @@ public class UsuarioController {
     
     @RequestMapping(value = "usuario/cambiarPass/update", method = RequestMethod.POST)
     public ModelAndView updatePassInformation(HttpServletRequest request, @RequestParam(value = "id", required = true) Long id,
-            @RequestParam(value = "newPassword", defaultValue = "") String newPassword,
-            @RequestParam(value = "repeatPassword", defaultValue = "") String repeatPassword) {
+            @RequestParam(value = "newPassword") String newPassword,
+            @RequestParam(value = "repeatPassword") String repeatPassword) {
 
         Usuario usuario = usuarioService.updatePass(id, newPassword, repeatPassword);
 

@@ -28,8 +28,7 @@
 				<div class="col-lg-12">
 					<div class="ibox float-e-margins">
 						<div class="ibox-content">
-							<form action="usuario/cambiarPass/update" class="form-horizontal" role="form"
-								id="userUpdate" method="post" name="elformulario">
+							<form class="form-horizontal" id="userUpdate" method="post" name="elformulario">
 								<input name="id" type="hidden" value="${user.id}" />
 								<div class="form-group">
 									<label class="col-sm-2 control-label" for="userInput">
@@ -52,7 +51,7 @@
 										Confirmar Contraseña</label>
 									<div class="col-sm-3">
 										<input name="repeatPassword" 
-											id="repeatPasswordInput" type="password" placeholder="Repetir Contraseña">
+											id="repeatPasswordInput" type="password" placeholder="Repetir Contraseña" required>
 									</div>
 								</div>
 								<div class="form-group">
@@ -91,8 +90,8 @@
 		 
 		    document.getElementById('passwd_sitio').innerHTML
 		        = (document.elformulario.input_ver.checked)
-		        ? '<input type="text"     name="newPassword">'
-		        : '<input type="password" name="newPassword">'
+		        ? '<input type="text"     name="newPassword" required>'
+		        : '<input type="password" name="newPassword" required>'
 		        ;
 		 
 		        if(document.elformulario.input_ver.checked == true){
