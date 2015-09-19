@@ -94,6 +94,10 @@ $(document).ready(function() {
 		"processing" : false,
 		"serverSide" : false,
 		"pagingType": "full_numbers",
+        deferRender:    true,
+        scrollY:        280,
+        scrollCollapse: false,
+        scroller:       true,
 		"language": {
             "lengthMenu": "Mostrar _MENU_ resultados por página",
             "zeroRecords": "No fueron encontrados resultados.",
@@ -214,6 +218,8 @@ $(document).ready(function() {
 			.data('tags', $(this).parents("tr").find("td").get(5).innerHTML)
 			.dialog("open");
 	});
+
+	$("#listaArchivos thead").remove();
 });
 
 

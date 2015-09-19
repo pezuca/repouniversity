@@ -22,7 +22,7 @@
 		
 		<tag:breadcrumb label="Seguridad Pass"/>
 	
-	 	<div class="wrapper wrapper-content animated fadeInRight pre-scrollable">
+	 	<div class="wrapper wrapper-content animated fadeInRight ">
 	 		<div class="row">
 				<div class="col-lg-9">
 					<form id="strongPass" method="post" class="form-horizontal" action="/repouniversity/seguridad/editarSeguridadPass" role="form">

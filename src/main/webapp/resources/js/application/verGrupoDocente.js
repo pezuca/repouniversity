@@ -258,6 +258,10 @@ $(document).ready(function() {
 		"processing" : false,
 		"serverSide" : false,
 		"pagingType": "full_numbers",
+        deferRender:    true,
+        scrollY:        280,
+        scrollCollapse: false,
+        scroller:       true,
 		"language": {
             "lengthMenu": "Mostrar _MENU_ resultados por página",
             "zeroRecords": "No fueron encontrados resultados.",
@@ -291,12 +295,17 @@ $(document).ready(function() {
 	$("#GruposTP_wrapper .row").first().find(".col-sm-6").first().append($("#GruposTP").parents(".ibox:first").find(".ibox-title"));
 	
 	$("#GruposTP_length").remove();
+	$("#GruposTP thead").remove();
 	
 	tableGrupo = $('#GruposAlumnos').DataTable({
 		retrieve: true,
 		"processing" : false,
 		"serverSide" : false,
 		"pagingType": "full_numbers",
+        deferRender:    true,
+        scrollY:        280,
+        scrollCollapse: false,
+        scroller:       true,
 		"language": {
             "lengthMenu": "Mostrar _MENU_ resultados por página",
             "zeroRecords": "No fueron encontrados resultados.",
@@ -329,6 +338,7 @@ $(document).ready(function() {
 	$("#GruposAlumnos_wrapper .row").first().find(".col-sm-6").first().append($("#GruposAlumnos").parents(".ibox:first").find(".ibox-title"));
 	
 	$("#GruposAlumnos_length").remove();
+	$("#GruposAlumnos thead").remove();
 
 	$("#agregarTpDialog").dialog({
 		resizable: false,

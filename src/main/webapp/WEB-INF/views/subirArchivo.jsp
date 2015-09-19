@@ -22,7 +22,7 @@
 		<%@include file="../components/static-nav-bar.jsp"%>
         	<div id="page-wrapper" class="gray-bg dashbard-1">
 				<%@include file="../components/search-nav-bar.jsp"%>
-		        <div class="wrapper wrapper-content animated fadeIn pre-scrollable">
+		        <div class="wrapper wrapper-content animated fadeIn ">
 		            <div class="row">
 		                <div class="col-lg-12">
 			                <div class="ibox float-e-margins">

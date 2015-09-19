@@ -20,7 +20,7 @@
 		
 		<tag:breadcrumb label="Ver LogArchivos"/>
 	
-	 	<div class="wrapper wrapper-content animated fadeInRight pre-scrollable">
+	 	<div class="wrapper wrapper-content animated fadeInRight ">
 	         <div class="row">
 	             <div class="col-lg-12">
 	              <div class="ibox float-e-margins">
@@ -66,35 +66,6 @@
 		</div>
 <%-- 		<%@include file="../components/footer.jsp"%> --%>
 	</div>
-<!-- 	Ventanas -->
-	<div id="verLogDialog" title="Log Archivo">
-		<form id="verLogDialogForm" class="form-horizontal">
- 			<div class="ibox-title">
-	        </div>
-	        <div class="ibox-content">
-	           	<table id="LogUnArchivo" class="table table-striped table-hover" >
-	          		<thead class="encabezado">
-					<tr>
-						<th>Id</th>
-						<th>Nombre </th>
-						<th>Fecha</th>
-					</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${logArchivoList}" var="unLogArchivo" varStatus="status">
-							<tr>
-								<td>${unLogArchivo.id}</td>
-								<td>${unLogArchivo.persona.apellido}, ${unLogArchivo.persona.nombre}</td>
-								<td>${unLogArchivo.fechasys}</td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-	        </div>
-		</form>
-	
-	</div>
-	
 	
 	<input name="tpGrupoIdGlobal" type="hidden" value="${param.tpGrupoId}" />
 	</div>

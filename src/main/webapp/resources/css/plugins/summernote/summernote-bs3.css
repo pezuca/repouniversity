@@ -659,7 +659,7 @@
   background-color: transparent;
   border-radius: 0;
 }
-.note-editor .pre-scrollable {
+.note-editor . {
   max-height: 340px;
   overflow-y: scroll;
 }

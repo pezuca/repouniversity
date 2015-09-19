@@ -22,7 +22,7 @@
 		
 		<tag:breadcrumb label="Solicitar curso"/>
 		
-		<div class="wrapper wrapper-content animated fadeInRight pre-scrollable">
+		<div class="wrapper wrapper-content animated fadeInRight ">
 			<div class="row">
 	             <div class="col-lg-12">
 					<div class="ibox float-e-margins">
@@ -85,6 +85,10 @@
 				"processing" : false,
 				"serverSide" : false,
 				"pagingType": "full_numbers",
+		        deferRender:    true,
+		        scrollY:        280,
+		        scrollCollapse: false,
+		        scroller:       true,
 				"language": {
 		            "lengthMenu": "Mostrar _MENU_ resultados por página",
 		            "zeroRecords": "No fueron encontrados resultados.",
@@ -119,6 +123,7 @@
 			$("#clientTable_wrapper .row").first().find(".col-sm-6").first().append($("#clientTable").parents(".ibox:first").find(".ibox-title"));
 			
 			$("#clientTable_length").remove();
+			$("#clientTable thead").remove();
 		});
 		
 		function clickSolicitud(cursoId, alumnoId, docenteId, tipoNotif) {

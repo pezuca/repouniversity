@@ -69,6 +69,10 @@ $(document).ready(function() {
 		"processing" : false,
 		"serverSide" : false,
 		"pagingType": "full_numbers",
+        deferRender:    true,
+        scrollY:        280,
+        scrollCollapse: false,
+        scroller:       true,
 		"language": {
             "lengthMenu": "Mostrar _MENU_ resultados por página",
             "zeroRecords": "No fueron encontrados resultados.",
@@ -103,6 +107,7 @@ $(document).ready(function() {
 	$("#listaParametros_wrapper .row").first().find(".col-sm-6").first().append($("#listaParametros").parents(".ibox:first").find(".ibox-title"));
 	
 	$("#listaParametros_length").remove();
+	$("#listaParametros thead").remove();
 		
 	$("#editarUsuarioParametroDialog").dialog({
 		resizable: false,

@@ -23,7 +23,7 @@
 			
 			<tag:breadcrumb label="Home"/>
 			
-			<div class="wrapper wrapper-content animated fadeInRight pre-scrollable">
+			<div class="wrapper wrapper-content animated fadeInRight ">
 
 			</div>
 <%-- 			<%@include file="../components/footer.jsp"%> --%>

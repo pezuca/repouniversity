@@ -90,6 +90,10 @@ $(document).ready(function() {
 		"processing" : false,
 		"serverSide" : false,
 		"pagingType": "full_numbers",
+        deferRender:    true,
+        scrollY:        280,
+        scrollCollapse: false,
+        scroller:       true,
 		"language": {
             "lengthMenu": "Mostrar _MENU_ resultados por página",
             "zeroRecords": "No fueron encontrados resultados.",
@@ -117,6 +121,7 @@ $(document).ready(function() {
 	});
 	$("#listaArchivos_wrapper .row").first().find(".col-sm-6").first().append($("#listaArchivos").parents(".ibox:first").find(".ibox-title"));
 	$("#listaArchivos_length").remove();
+	$("#listaArchivos thead").remove();
 	
 	listaArchivos.column(1).visible(false);
 	listaArchivos.column(3).visible(false);

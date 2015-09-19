@@ -4,6 +4,10 @@ $(document).ready(function() {
 		"processing" : false,
 		"serverSide" : false,
 		"pagingType": "full_numbers",
+        deferRender:    true,
+        scrollY:        280,
+        scrollCollapse: false,
+        scroller:       true,
 		"language": {
             "lengthMenu": "Mostrar _MENU_ resultados por página",
             "zeroRecords": "No fueron encontrados resultados.",
@@ -44,6 +48,7 @@ $(document).ready(function() {
 	$("#notificaciones_wrapper").first().find(".col-sm-6").first().append($("#notificaciones").parents(".ibox:first").find(".ibox-title"));
 	
 	$("#notificaciones_length").remove();
+	$("#notificaciones thead").remove();
 	
 	if($("input[name=rolName]").val() == 'docente') {
 		$(".DTTT_container").first().append("<a id='aceptarTodo' data-toggle='modal' class='btn btn-outline btn-primary'><i class='fa fa-upload'></i> Aceptar</a><a id='rechazarTodo' data-toggle='modal' class='btn btn-outline btn-danger'><i class='fa fa-upload'></i> Rechazar</a>");				

@@ -138,6 +138,10 @@ $(document).ready(function() {
 		"processing" : false,
 		"serverSide" : false,
 		"pagingType": "full_numbers",
+        deferRender:    true,
+        scrollY:        280,
+        scrollCollapse: false,
+        scroller:       true,
 		"language": {
             "lengthMenu": "Mostrar _MENU_ resultados por página",
             "zeroRecords": "No fueron encontrados resultados.",
@@ -170,6 +174,7 @@ $(document).ready(function() {
 	$("#cursosGrupos_wrapper .row").first().find(".col-sm-6").first().append($("#cursosGrupos").parents(".ibox:first").find(".ibox-title"));
 
 	$("#cursosGrupos_length").remove();
+	$("#cursosGrupos thead").remove();
 	
 	$("#crearGrupoDialog").dialog({
 		resizable: false,

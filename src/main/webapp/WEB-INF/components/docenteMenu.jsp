@@ -33,14 +33,13 @@
                  <ul class="nav nav-second-level">
 	                <li><a href="/repouniversity/docente/notificaciones?bread=Notificaciones-1">Mis notificaciones</a></li>
                     <li><a href="/repouniversity/verArchivos?bread=Ver archivos-1">Mis archivos</a></li>
-                    <li><a href="/repouniversity/logArchivos/verLogArchivos?bread=Ver log archivos-1">Log archivos</a></li>        
+                    <li><a class= ${activeTab eq 'verLogArchivo' ? 'active':''} href="/repouniversity/logArchivos/verLogArchivos?bread=Ver log archivos-1">Log archivos</a></li>        
 				</ul>
              </li>
              <li class="${activeTab eq 'verUsuarioParametro' ? 'active':''}">
                  <a id="miscursos"><i class="fa fa-cog"></i> <span class="nav-label">Configuracion</span> <span class="fa arrow"></span></a>
                  <ul class="nav nav-second-level">
                      <li><a href="/repouniversity/usuario/misParametros?bread=Ver Parametros-1">Parametros</a></li>
-                                   
                  </ul>
              </li>
              <li class="${activeTab eq 'Busqueda' ? 'active':''}"><a class="busqueda" href="/repouniversity/busquedaAvanzada?bread=Busqueda avanzada-1"><i
